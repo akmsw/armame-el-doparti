@@ -1075,7 +1075,7 @@ public class FramesManager extends JFrame
     //Método encargado de mostrar los créditos con el botón 'chichaButton'
     private void chicha()
     {
-    	line = "<html>FIESTA DE FULBITO " + getSoftwareVersion() + "<p><p>    Créditos<p>TODO: ©AkamaiSoftware";
+    	line = "<html>FIESTA DE FULBITO " + getSoftwareVersion() + "<p><p>    Créditos<p>©AkamaiSoftware";
     	
     	JOptionPane.showMessageDialog(null,line,"Créditos",JOptionPane.PLAIN_MESSAGE,creditsIcon);
     }
