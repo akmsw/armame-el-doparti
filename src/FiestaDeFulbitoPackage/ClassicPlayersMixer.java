@@ -11,9 +11,9 @@ public class ClassicPlayersMixer
 	private HashMap<String,Player> team1,team2;
 	private Random randomGenerator;
 	
-	//M�todos p�blicos
+	//Métodos públicos
 	
-	//Constructor. Inicializa los HashMaps donde ser�n almacenados los jugadores, e inicializa el generador de n�meros Random
+	//Constructor. Inicializa los HashMaps donde serán almacenados los jugadores, e inicializa el generador de números Random
 	public ClassicPlayersMixer()
 	{
 		team1 = new HashMap<String,Player>();
@@ -22,7 +22,7 @@ public class ClassicPlayersMixer
 		randomGenerator = new Random();
 	}
 	
-	//M�todo encargado de mezclar y distribuir los jugadores utilizando el m�todo privado 'forCycle'
+	//Método encargado de mezclar y distribuir los jugadores utilizando el método privado 'forCycle'
 	public void mixAndDistribute(ArrayList<Player> playersList, int maximumSetSize, Position position)
     {
 		forCycle(1,playersList,maximumSetSize,position);
@@ -32,23 +32,23 @@ public class ClassicPlayersMixer
 	//Getters
 	public HashMap<String,Player> getTeam(int i)
 	{
-		if(i!=1 && i!=2) throw new IllegalArgumentException("Argumento inv�lido. Elija equipo '1' o equipo '2'.");
+		if(i!=1 && i!=2) throw new IllegalArgumentException("Argumento inválido. Elija equipo '1' o equipo '2'.");
 		else if(i==1) return team1;
 		else return team2;
 	}
 	
-	//M�todos privados
+	//Métodos privados
 	
-	//M�todo encargado de mezclar y distribuir los jugadores
+	//Método encargado de mezclar y distribuir los jugadores
 	private void forCycle(int team, ArrayList<Player> playersList, int maximumSetSize, Position position)
 	{
-		int index; //Variable cuyo valor ser� asignado con el generador Random y servir� para tomar un jugador de forma aleatoria de los sets
+		int index; //Variable cuyo valor será asignado con el generador Random y servirá para tomar un jugador de forma aleatoria de los sets
 		
-		switch(team) //S�lo es posible armar dos equipos. En caso de querer asignar jugadores a un equipo de n�mero mayor o igual a 3 o menor a 1, se lanzar� una excepci�n de argumento inv�lido
+		switch(team) //Sólo es posible armar dos equipos. En caso de querer asignar jugadores a un equipo de número mayor o igual a 3 o menor a 1, se lanzará una excepción de argumento inválido
 		{
-			case 1: //En caso de llenar el equipo 1...
+			case 1: //En caso de llenar el equipo 1
 			{
-				for(int i=0; i<maximumSetSize/2; i++) //Se iterar� sobre la variable 'i' desde su valor inicial '0' hasta el valor '(maximumSetSize/2)-1', quedando en evidencia que la mitad de jugadores ir� para un equipo y la otra mitad para el otro
+				for(int i=0; i<maximumSetSize/2; i++) //Se iterará sobre la variable 'i' desde su valor inicial '0' hasta el valor '(maximumSetSize/2)-1', quedando en evidencia que la mitad de jugadores irá para un equipo y la otra mitad para el otro
 		        {
 		        	index = randomGenerator.nextInt(playersList.size());
 		            
@@ -74,7 +74,7 @@ public class ClassicPlayersMixer
 				break;
 			}
 			
-			default: throw new IllegalArgumentException("El n�mero de equipo no es v�lido.");
+			default: throw new IllegalArgumentException("El número de equipo no es válido.");
 		}
 	}
 }

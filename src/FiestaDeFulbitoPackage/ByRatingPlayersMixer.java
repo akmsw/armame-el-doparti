@@ -14,9 +14,9 @@ public class ByRatingPlayersMixer
 	private Random randomGenerator;
 	private int team1Rating,team2Rating,partialSum1,partialSum2,partialSum3,partialSum4,partialSum5,partialSum6,partialSum7,partialSum8,partialSum9,partialSum10,partialSum11,partialSum12,diff1,diff2,diff3,diff4,diff5,diff6,bestDiff,index;
 	
-	//M�todos p�blicos
+	//Métodos públicos
 	
-	//Constructor. Inicializa los HashMaps donde ser�n almacenados los jugadores, inicializa variables auxiliares e inicializa el generador de n�meros Random
+	//Constructor. Inicializa los HashMaps donde serán almacenados los jugadores, inicializa variables auxiliares e inicializa el generador de números aleatorios
 	public ByRatingPlayersMixer()
 	{
 		team1 = new HashMap<String,Player>();
@@ -32,10 +32,10 @@ public class ByRatingPlayersMixer
 		randomGenerator = new Random();
 	}
 	
-	//M�todo encargado de mezclar y distribuir los jugadores entre los dos equipos de forma equitativa en base a los puntajes
+	//Método encargado de mezclar y distribuir los jugadores entre los dos equipos de forma equitativa en base a los puntajes
 	public void mixAndDistribute(ArrayList<Player> WCSet, ArrayList<Player> CDSet,ArrayList<Player> LDSet,ArrayList<Player> MFSet,ArrayList<Player> FWSet)
 	{
-		//Reparto aleatorio de comodines...
+		//Reparto aleatorio de comodines
 		index = randomGenerator.nextInt(2);
 		
 		if(index==0)
@@ -55,11 +55,11 @@ public class ByRatingPlayersMixer
 			team2Rating += WCSet.get(0).getRating();
 		}
 		
-		//Reparto de jugadores que est�n en sets cuyo tama�o es 2...
+		//Reparto de jugadores que están en sets cuyo tamaño es 2
 		mixBinarySets(CDSet);
 		mixBinarySets(FWSet);
 		
-		///Reparto de jugadores que est�n en sets cuyo tama�o es 4...
+		///Reparto de jugadores que están en sets cuyo tamaño es 4
 		mixBigSets(LDSet);
 		mixBigSets(MFSet);
 	}
@@ -72,20 +72,17 @@ public class ByRatingPlayersMixer
 		else return team2;
 	}
 	
-	//M�todos privados
+	//Métodos privados
 	
-	//M�todo encargado de setear en '0' las variables auxiliares utilizadas
-	
+	//Método encargado de retornar el puntaje de un equipo
 	public int getTeamRating(int i)
 	{
-		if(i!=1 && i!=2) throw new IllegalArgumentException("Argumento inv�lido. Elija equipo '1' o equipo '2'.");
+		if(i!=1 && i!=2) throw new IllegalArgumentException("Argumento inválido. Elija equipo '1' o equipo '2'.");
 		else if(i==1) return team1Rating;
 		else return team2Rating;
 	}
 	
-	//M�todos privados
-	
-	//M�todo encargado de setear en 0 las variables auxiliares
+	//Método encargado de setear en 0 las variables auxiliares
 	private void clearAuxVariables()
 	{
 		partialSum1 = 0;
@@ -109,10 +106,10 @@ public class ByRatingPlayersMixer
 		diff6 = 0;
 	}
 	
-	//M�todo encargado de repartir entre los dos equipos los jugadores de sets cuyo tama�o sea 2 en base a los puntajes
+	//Método encargado de repartir entre los dos equipos los jugadores de sets cuyo tamaño sea 2 en base a los puntajes
 	private void mixBinarySets(ArrayList<Player> Set)
 	{
-		//Comparaci�n de las dos posibles sumas de puntuaci�n y reparto de jugadores en base a la que genere una menor diferencia...
+		//Comparación de las dos posibles sumas de puntuación y reparto de jugadores en base a la que genere una menor diferencia
 		partialSum1 = team1Rating + Set.get(0).getRating();
 		partialSum2 = team2Rating + Set.get(1).getRating();
 		
@@ -125,11 +122,11 @@ public class ByRatingPlayersMixer
 		
 		if(diff1>diff2)
 		{
-			//Asignaci�n de jugadores...
+			//Asignación de jugadores
 			team1.put(Set.get(1).getPosition().toString() + " #1",Set.get(1));
 			team2.put(Set.get(0).getPosition().toString() + " #1",Set.get(0));
 			
-			//Incremento de los puntajes de los equipos...
+			//Incremento de los puntajes de los equipos
 			team1Rating += Set.get(1).getRating();
 			team2Rating += Set.get(0).getRating();
 		}
@@ -145,13 +142,13 @@ public class ByRatingPlayersMixer
 		clearAuxVariables();
 	}
 	
-	//M�todo encargado de mezclar y distribuir los jugadores que pertenezcan a sets de tama�o igual a 4
+	//Método encargado de mezclar y distribuir los jugadores que pertenezcan a sets de tamaño igual a 4
 	private void mixBigSets(ArrayList<Player> Set)
 	{
 		/*
 		   Posibles combinaciones: 4!/(2!*(4-2)!) = (4 2) = 4C2 = 6
 		   
-		   Gr�ficamente, con cuatro jugadores (A, B, C, y D) las combinaciones posibles tomando de a dos jugadores para cada equipo, sin repetir jugadores, son:
+		   Gráficamente, con cuatro jugadores (A, B, C, y D) las combinaciones posibles tomando de a dos jugadores para cada equipo, sin repetir jugadores, son:
 		   
 		   		EQ. 1	|	EQ. 2
 		   		------------------
@@ -165,7 +162,7 @@ public class ByRatingPlayersMixer
 		   Donde A = Set.get(0), ... , D = Set.get(3)
 		 */
 		
-		//Sumas parciales en el equipo 1...
+		//Sumas parciales en el equipo 1
 		partialSum1 = team1Rating + Set.get(0).getRating() + Set.get(1).getRating();  //A	B
 		partialSum2 = team1Rating + Set.get(0).getRating() + Set.get(2).getRating();  //A	C
 		partialSum3 = team1Rating + Set.get(0).getRating() + Set.get(3).getRating();  //A	D
@@ -173,7 +170,7 @@ public class ByRatingPlayersMixer
 		partialSum5 = team1Rating + Set.get(1).getRating() + Set.get(3).getRating();  //B	D
 		partialSum6 = team1Rating + Set.get(2).getRating() + Set.get(3).getRating();  //C	D
 		
-		//Sumas parciales en el equipo 2...
+		//Sumas parciales en el equipo 2
 		partialSum7 = team2Rating + Set.get(2).getRating() + Set.get(3).getRating();  //C	D
 		partialSum8 = team2Rating + Set.get(1).getRating() + Set.get(3).getRating();  //B	D
 		partialSum9 = team2Rating + Set.get(1).getRating() + Set.get(2).getRating();  //B	C
@@ -181,7 +178,7 @@ public class ByRatingPlayersMixer
 		partialSum11 = team2Rating + Set.get(0).getRating() + Set.get(2).getRating(); //A	C
 		partialSum12 = team2Rating + Set.get(0).getRating() + Set.get(1).getRating(); //A	B
 		
-		//C�lculo de diferencias parciales...
+		//Cálculo de diferencias parciales
 		diff1 = java.lang.Math.abs(partialSum1-partialSum7);
 		diff2 = java.lang.Math.abs(partialSum2-partialSum8);
 		diff3 = java.lang.Math.abs(partialSum3-partialSum9);
@@ -189,7 +186,7 @@ public class ByRatingPlayersMixer
 		diff5 = java.lang.Math.abs(partialSum5-partialSum11);
 		diff6 = java.lang.Math.abs(partialSum6-partialSum12);
 		
-		//Se agregan las diferencias calculadas a la lista de diferencias...
+		//Se agregan las diferencias calculadas a la lista de diferencias
 		differences.add(diff1);
 		differences.add(diff2);
 		differences.add(diff3);
@@ -197,20 +194,20 @@ public class ByRatingPlayersMixer
 		differences.add(diff5);
 		differences.add(diff6);
 		
-		//Se obtiene el �ndice de la menor diferencia posible...
+		//Se obtiene el índice de la menor diferencia posible
 		bestDiff = differences.indexOf(Collections.min(differences));
 		
-		//Se reparten los jugadores en base a la menor diferencia posible...
+		//Se reparten los jugadores en base a la menor diferencia posible
 		if(differences.get(bestDiff)==diff1)
 		{
-			//Asignaci�n de jugadores...
+			//Asignación de jugadores
 			team1.put(Set.get(0).getPosition().toString() + " #1",Set.get(0));
 			team1.put(Set.get(1).getPosition().toString() + " #2",Set.get(1));
 			
 			team2.put(Set.get(2).getPosition().toString() + " #1",Set.get(2));
 			team2.put(Set.get(3).getPosition().toString() + " #2",Set.get(3));
 			
-			//Incremento de los puntajes de los equipos...
+			//Incremento de los puntajes de los equipos
 			team1Rating += Set.get(0).getRating() + Set.get(1).getRating();
 			team2Rating += Set.get(2).getRating() + Set.get(3).getRating();
 		}

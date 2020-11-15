@@ -79,6 +79,7 @@ public class FramesManager extends JFrame
 		screenSize = screen.getScreenSize();
 		
 		screenHeight = screenSize.height;
+
 		screenWidth = screenSize.width;
     }
     
@@ -122,9 +123,7 @@ public class FramesManager extends JFrame
     private void setResizableVisibleAndIcon(JFrame frame)
     {
 		frame.setResizable(false);
-		
 		frame.setIconImage(frameIcon);
-		
 		frame.setVisible(true);
     }
     
@@ -133,7 +132,7 @@ public class FramesManager extends JFrame
     {
     	switch(frameType)
     	{
-    		case "MAIN": //Si es la ventana principal...
+    		case "MAIN": //Si es la ventana principal
     		{
     			mainPanel = new JPanel();
     	    	
@@ -154,7 +153,7 @@ public class FramesManager extends JFrame
     			break;
     		}
     		
-    		case "MIX": //Si es la ventana donde se ingresan y mezclan jugadores...
+    		case "MIX": //Si es la ventana donde se ingresan y mezclan jugadores
     		{
     			startButton.setEnabled(false);
 
@@ -190,7 +189,7 @@ public class FramesManager extends JFrame
     {
     	switch(frameType)
     	{
-	    	case "MAIN": //Si es la ventana principal, se agregan los botones de comienzo, salida y el botón 'chichaButton'...
+	    	case "MAIN": //Si es la ventana principal, se agregan los botones de comienzo, salida y el botón 'chichaButton'
 	    	{
 	    		chichaButton = new JButton();
 	    		chichaButton.setBounds(600,400,100,100);
@@ -216,7 +215,7 @@ public class FramesManager extends JFrame
 	    		break;
 	    	}
 	    	
-	    	case "MIX": //Si es la ventana donde se ingresan y mezclan jugadores, se agregan los botones de cada posición, de cancelación, de reseteo y de mezcla...
+	    	case "MIX": //Si es la ventana donde se ingresan y mezclan jugadores, se agregan los botones de cada posición, de cancelación, de reseteo y de mezcla
 	    	{
 	    		cancelMixButton = new JButton("Cancelar");
 	    		resetMixButton = new JButton("Resetear jugadores");
@@ -242,11 +241,12 @@ public class FramesManager extends JFrame
 	    		mixFrameButtons.add(cancelMixButton);
 	    		mixFrameButtons.add(resetMixButton);
 	    		
-	    		setFrameActionListeners(mixFrameButtons,"MIX"); //Se setean los oyentes de acción respectivos...
+	    		setFrameActionListeners(mixFrameButtons,"MIX"); //Se setean los oyentes de acción respectivos
 	    		
 	    		setBackgroundAndForeground(mixFrameButtons); //Y se setean los colores de los botones especiales
 	    		
-	    		for(JButton registeredButton : mixFrameButtons) panel.add(registeredButton);
+				for(JButton registeredButton : mixFrameButtons)
+					panel.add(registeredButton);
 	    		
 	    		break;
 	    	}
@@ -257,17 +257,17 @@ public class FramesManager extends JFrame
     private void setBackgroundAndForeground(ArrayList<JButton> buttons)
     {
     	for(JButton button : buttons)
-    		if(button.getText().equals("Cancelar") || button.getText().equals("Resetear jugadores") || button.getText().equals("Salir")) //A los botones de cancelación y de reseteo, se los pinta de fondo rojo con letras blancas...
+    		if(button.getText().equals("Cancelar") || button.getText().equals("Resetear jugadores") || button.getText().equals("Salir")) //A los botones de cancelación y de reseteo, se los pinta de fondo rojo con letras blancas
     		{
     			button.setBackground(Color.RED);
 	    		button.setForeground(Color.WHITE);
     		}
-    		else if(button.getText().equals("Mezclar")) //Al botón de mezcla se lo pinta de fondo verde con letras blancas...
+    		else if(button.getText().equals("Mezclar")) //Al botón de mezcla se lo pinta de fondo verde con letras blancas
     		{
     			button.setBackground(new Color(15,120,0));
 	    		button.setForeground(Color.WHITE);
     		}
-    		else if(button.getText().equals("Rehacer") || button.getText().equals("Rehacer ")) //Al botón de rehacer se lo pinta de fondo azul con letras blancas...
+    		else if(button.getText().equals("Rehacer") || button.getText().equals("Rehacer ")) //Al botón de rehacer se lo pinta de fondo azul con letras blancas
     		{
     			button.setBackground(Color.BLUE);
 	    		button.setForeground(Color.WHITE);
@@ -342,7 +342,7 @@ public class FramesManager extends JFrame
     {
     	switch(playerType)
     	{
-    		case WILDCARD: //Si se selecciona el set de comodines...
+    		case WILDCARD: //Si se selecciona el set de comodines
     		{
     			if(isEmptySet(Position.WILDCARD)) //Si el set está vacío, se ingresan los nombres de los jugadores cuyo nombre no sea nulo, vacío, con caracteres del tipo ' ', no esté repetido o cuya longitud no sea mayor a 12 caracteres
     			{
@@ -350,7 +350,8 @@ public class FramesManager extends JFrame
         			{
     					String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del comodín #" + (i+1),"Agregando comodines",0,WCMix,null,null);
         				
-        				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del comodín #" + (i+1),"Agregando comodines",0,WCMix,null,null);
+						while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+							name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del comodín #" + (i+1),"Agregando comodines",0,WCMix,null,null);
         				
         				String playerName = name.trim().replace(" ","_").toUpperCase();
         				
@@ -359,11 +360,11 @@ public class FramesManager extends JFrame
         				modifyLabel2(enteredPlayersNamesList,playerName); //Se agregan los nombres ingresados a la etiqueta de la ventana donde se ingresan y mezclan jugadores
         			}
     			}
-    			else //Si el set no está vacío...
+    			else //Si el set no está vacío
     			{
     				int choice = JOptionPane.showConfirmDialog(mixFrame,"El set de comodines está lleno. ¿Vaciarlo y reingresar comodines?","Set lleno",2);
     				
-    				if(choice==0) //Si se desea reingresar los jugadores respectivos...
+    				if(choice==0) //Si se desea reingresar los jugadores respectivos
     				{
     					modifyLabel1(enteredPlayersNamesList,WCSet); //Se borran los jugadores de esta posición tanto de los sets como de la etiqueta de la ventana donde se ingresan y mezclan jugadores
     					
@@ -371,7 +372,8 @@ public class FramesManager extends JFrame
             			{
             				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del comodín #" + (i+1),"Agregando comodines",0,WCMix,null,null);
             				
-            				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del comodín #" + (i+1),"Agregando comodines",0,WCMix,null,null);
+							while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+								name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del comodín #" + (i+1),"Agregando comodines",0,WCMix,null,null);
             				
             				String playerName = name.trim().replace(" ","_").toUpperCase();
             				
@@ -385,12 +387,13 @@ public class FramesManager extends JFrame
     				else break; //Si no se desea reingresar los jugadores respectivos, el programa no hace nada
     			}
     			
-    			if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4) { startMixButton.setEnabled(true); } //Si todos los sets están llenos, se habilita el botón para setear los puntajes de los jugadores y armar los equipos
+				if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4)	//Si todos los sets están llenos, se habilita el botón para setear los puntajes de los jugadores y armar los equipos
+					startMixButton.setEnabled(true);
     			
     			break;
     		}
     		
-    		//Mismo principio de funcionamiento para todos los jugadores de las demás posiciones...
+    		//Mismo principio de funcionamiento para todos los jugadores de las demás posiciones
     		case CENTRALDEFENDER:
     		{
     			if(isEmptySet(Position.CENTRALDEFENDER))
@@ -399,7 +402,8 @@ public class FramesManager extends JFrame
         			{
         				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del defensor central #" + (i+1),"Agregando defensores centrales",0,CDMix,null,null);
         				
-        				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del defensor central #" + (i+1),"Agregando defensores centrales",0,CDMix,null,null);
+						while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+							name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del defensor central #" + (i+1),"Agregando defensores centrales",0,CDMix,null,null);
         				
         				String playerName = name.trim().replace(" ","_").toUpperCase();
         				
@@ -420,7 +424,8 @@ public class FramesManager extends JFrame
             			{
             				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del defensor central #" + (i+1),"Agregando defensores centrales",0,CDMix,null,null);
             				
-            				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del defensor central #" + (i+1),"Agregando defensores centrales",0,CDMix,null,null);
+							while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+								name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del defensor central #" + (i+1),"Agregando defensores centrales",0,CDMix,null,null);
             				
             				String playerName = name.trim().replace(" ","_").toUpperCase();
             				
@@ -432,7 +437,8 @@ public class FramesManager extends JFrame
     				else break;
     			}
     			
-    			if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4) { startMixButton.setEnabled(true); }
+				if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4)
+					startMixButton.setEnabled(true);
     			
     			break;
     		}
@@ -445,7 +451,8 @@ public class FramesManager extends JFrame
         			{
         				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del defensor lateral #" + (i+1),"Agregando defensores laterales",0,LDMix,null,null);
         				
-        				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del defensor lateral #" + (i+1),"Agregando defensores laterales",0,LDMix,null,null);
+						while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+							name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del defensor lateral #" + (i+1),"Agregando defensores laterales",0,LDMix,null,null);
         				
         				String playerName = name.trim().replace(" ","_").toUpperCase();
         				
@@ -466,7 +473,8 @@ public class FramesManager extends JFrame
             			{
             				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del defensor lateral #" + (i+1),"Agregando defensores laterales",0,LDMix,null,null);
             				
-            				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del defensor lateral #" + (i+1),"Agregando defensores laterales",0,LDMix,null,null);
+							while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+								name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del defensor lateral #" + (i+1),"Agregando defensores laterales",0,LDMix,null,null);
             				
             				String playerName = name.trim().replace(" ","_").toUpperCase();
             				
@@ -478,7 +486,8 @@ public class FramesManager extends JFrame
     				else break;
     			}
     			
-    			if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4) { startMixButton.setEnabled(true); }
+				if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4)
+					startMixButton.setEnabled(true);
     			
     			break;
     		}
@@ -491,7 +500,8 @@ public class FramesManager extends JFrame
         			{
         				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del mediocampista #" + (i+1),"Agregando mediocampistas",0,MMix,null,null);
         				
-        				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del mediocampista #" + (i+1),"Agregando mediocampistas",0,MMix,null,null);
+						while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+							name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del mediocampista #" + (i+1),"Agregando mediocampistas",0,MMix,null,null);
         				
         				String playerName = name.trim().replace(" ","_").toUpperCase();
         				
@@ -512,7 +522,8 @@ public class FramesManager extends JFrame
             			{
             				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del mediocampista #" + (i+1),"Agregando mediocampistas",0,MMix,null,null);
             				
-            				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del mediocampista #" + (i+1),"Agregando mediocampistas",0,MMix,null,null);
+							while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+								name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del mediocampista #" + (i+1),"Agregando mediocampistas",0,MMix,null,null);
             				
             				String playerName = name.trim().replace(" ","_").toUpperCase();
             				
@@ -524,7 +535,8 @@ public class FramesManager extends JFrame
     				else break;
     			}
     			
-    			if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4) { startMixButton.setEnabled(true); }
+				if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4)
+					startMixButton.setEnabled(true);
     			
     			break;
     		}
@@ -537,7 +549,8 @@ public class FramesManager extends JFrame
         			{
         				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del delantero #" + (i+1),"Agregando delanteros",0,FMix,null,null);
         				
-        				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del delantero #" + (i+1),"Agregando delanteros",0,FMix,null,null);
+						while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+							name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del delantero #" + (i+1),"Agregando delanteros",0,FMix,null,null);
         				
         				String playerName = name.trim().replace(" ","_").toUpperCase();
         				
@@ -558,7 +571,8 @@ public class FramesManager extends JFrame
             			{
             				String name = (String)JOptionPane.showInputDialog(null,"Ingrese el nombre del delantero #" + (i+1),"Agregando delanteros",0,FMix,null,null);
             				
-            				while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name)) name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del delantero #" + (i+1),"Agregando delanteros",0,FMix,null,null);
+							while(name.equals(null) || name.equals("") || name.length()>12 || alreadyExists(setsList,name) || isEmptyString(name))
+								name = (String)JOptionPane.showInputDialog(null,"El nombre no puede ser vacío, nulo, estar repetido o tener más de 12 caracteres. Reingrese el nombre del delantero #" + (i+1),"Agregando delanteros",0,FMix,null,null);
             				
             				String playerName = name.trim().replace(" ","_").toUpperCase();
             				
@@ -569,7 +583,8 @@ public class FramesManager extends JFrame
     				}
     			}
     			
-    			if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4) { startMixButton.setEnabled(true); }
+				if(WCSet.size()==2 && CDSet.size()==2 && LDSet.size()==4 && MFSet.size()==4)
+					startMixButton.setEnabled(true);
     			
     			break;
     		}
@@ -596,7 +611,8 @@ public class FramesManager extends JFrame
     private void modifyLabel1(ArrayList<String> enteredPlayersNamesList, ArrayList<Player> set)
     {
     	for(Player player : set)
-			if(enteredPlayersNamesList.contains(player.getName())) enteredPlayersNamesList.remove(player.getName());
+			if(enteredPlayersNamesList.contains(player.getName()))
+				enteredPlayersNamesList.remove(player.getName());
     	
     	set.clear();
     	
@@ -685,7 +701,9 @@ public class FramesManager extends JFrame
     private boolean alreadyExists(ArrayList<ArrayList<Player>> list, String name)
     {
     	for(ArrayList<Player> listIndex : list)
-	    	for(Player registeredPlayer : listIndex) if(name.trim().replace(" ","_").toUpperCase().equals(registeredPlayer.getName())) return true;
+			for(Player registeredPlayer : listIndex)
+				if(name.trim().replace(" ","_").toUpperCase().equals(registeredPlayer.getName()))
+					return true;
     	
     	return false;
     }
@@ -693,23 +711,23 @@ public class FramesManager extends JFrame
     //Método encargado de mezclar y distribuir los jugadores en dos equipos
     private void startClassicMix()
     {
-    	classicPlayersMixer = new ClassicPlayersMixer(); //Se inicializa el mezclador de jugadores...
+    	classicPlayersMixer = new ClassicPlayersMixer(); //Se inicializa el mezclador de jugadores
     	
-    	//Resumen de acciones a realizar...
+    	//Resumen de acciones a realizar
     	actionsResume1();
 		
 		remixButton1 = new JButton("Rehacer");
 		
 		mixFrameButtons.add(remixButton1);
 		
-		//Se mezclan y se distribuyen los jugadores de cada set...
+		//Se mezclan y se distribuyen los jugadores de cada set
 		classicPlayersMixer.mixAndDistribute(WCSetCOPY,2,Position.WILDCARD);
 		classicPlayersMixer.mixAndDistribute(CDSetCOPY,2,Position.CENTRALDEFENDER);
 		classicPlayersMixer.mixAndDistribute(LDSetCOPY,4,Position.LATERALDEFENDER);
 		classicPlayersMixer.mixAndDistribute(MFSetCOPY,4,Position.MIDFIELDER);
 		classicPlayersMixer.mixAndDistribute(FWSetCOPY,2,Position.FORWARD);
 		
-		//Se colocan en orden los nombres de los jugadores del equipo 1...
+		//Se colocan en orden los nombres de los jugadores del equipo 1
 		WCT1.setText(classicPlayersMixer.getTeam(1).get("WILDCARD #1").getName());
 		CDT1.setText(classicPlayersMixer.getTeam(1).get("CENTRALDEFENDER #1").getName());
 		LD1T1.setText(classicPlayersMixer.getTeam(1).get("LATERALDEFENDER #1").getName());
@@ -718,7 +736,7 @@ public class FramesManager extends JFrame
 		M2T1.setText(classicPlayersMixer.getTeam(1).get("MIDFIELDER #2").getName());
 		FWT1.setText(classicPlayersMixer.getTeam(1).get("FORWARD #1").getName());
 		
-		//Se colocan en orden los nombres de los jugadores del equipo 2...
+		//Se colocan en orden los nombres de los jugadores del equipo 2
 		WCT2.setText(classicPlayersMixer.getTeam(2).get("WILDCARD #1").getName());
 		CDT2.setText(classicPlayersMixer.getTeam(2).get("CENTRALDEFENDER #1").getName());
 		LD1T2.setText(classicPlayersMixer.getTeam(2).get("LATERALDEFENDER #1").getName());
@@ -727,23 +745,23 @@ public class FramesManager extends JFrame
 		M2T2.setText(classicPlayersMixer.getTeam(2).get("MIDFIELDER #2").getName());
 		FWT2.setText(classicPlayersMixer.getTeam(2).get("FORWARD #1").getName());
 		
-		//Resumen de acciones a realizar...
+		//Resumen de acciones a realizar
 		actionsResume2();
 		
 		buttons.add(remixButton1);
 		
-		//Retoques finales de la creación de la ventana de resultados...
+		//Retoques finales de la creación de la ventana de resultados
 		finishFrameCreation();
     }
     
     //Método encargado de mezclar y distribuir los jugadores en dos equipos en base a los puntajes
     private void startByRatingMix()
     {
-    	ratePlayers(); //Primero se setean las puntuaciones de cada jugador...
+    	ratePlayers(); //Primero se setean las puntuaciones de cada jugador
     	
     	byRatingPlayersMixer = new ByRatingPlayersMixer();
     	
-    	//Resumen de acciones a realizar...
+    	//Resumen de acciones a realizar
     	actionsResume1();
 		
 		remixButton2 = new JButton("Rehacer ");
@@ -756,10 +774,10 @@ public class FramesManager extends JFrame
 		
 		ratingLabel.setBounds(10,10,200,370);
 		
-		//Se mezclan en base a los puntajes...
+		//Se mezclan en base a los puntajes
 		byRatingPlayersMixer.mixAndDistribute(WCSetCOPY,CDSetCOPY,LDSetCOPY,MFSetCOPY,FWSetCOPY);
 		
-		//Se colocan en orden los nombres de los jugadores del equipo 1 junto con la puntuación general del equipo...
+		//Se colocan en orden los nombres de los jugadores del equipo 1 junto con la puntuación general del equipo
 		WCT1.setText(byRatingPlayersMixer.getTeam(1).get("WILDCARD #1").getName());
 		CDT1.setText(byRatingPlayersMixer.getTeam(1).get("CENTRALDEFENDER #1").getName());
 		LD1T1.setText(byRatingPlayersMixer.getTeam(1).get("LATERALDEFENDER #1").getName());
@@ -769,7 +787,7 @@ public class FramesManager extends JFrame
 		FWT1.setText(byRatingPlayersMixer.getTeam(1).get("FORWARD #1").getName());
 		ratingT1.setText(String.valueOf(byRatingPlayersMixer.getTeamRating(1)));
 		
-		//Se colocan en orden los nombres de los jugadores del equipo 2...
+		//Se colocan en orden los nombres de los jugadores del equipo 2
 		WCT2.setText(byRatingPlayersMixer.getTeam(2).get("WILDCARD #1").getName());
 		CDT2.setText(byRatingPlayersMixer.getTeam(2).get("CENTRALDEFENDER #1").getName());
 		LD1T2.setText(byRatingPlayersMixer.getTeam(2).get("LATERALDEFENDER #1").getName());
@@ -779,7 +797,7 @@ public class FramesManager extends JFrame
 		FWT2.setText(byRatingPlayersMixer.getTeam(2).get("FORWARD #1").getName());
 		ratingT2.setText(String.valueOf(byRatingPlayersMixer.getTeamRating(2)));
 		
-		//Resumen de acciones a realizar...
+		//Resumen de acciones a realizar
 		actionsResume2();
 		
 		ratingT1.setForeground(Color.RED);
@@ -794,7 +812,7 @@ public class FramesManager extends JFrame
 		
 		buttons.add(remixButton2);
 		
-		//Retoques finales de la creación de la ventana de resultados...
+		//Retoques finales de la creación de la ventana de resultados
 		finishFrameCreation();
     }
     
@@ -803,17 +821,17 @@ public class FramesManager extends JFrame
     {
     	switch(frameType)
     	{
-    		case "MIX FRAME": //Si se quiere cerrar la ventana donde se ingresan y mezclan jugadores...
+    		case "MIX FRAME": //Si se quiere cerrar la ventana donde se ingresan y mezclan jugadores
     		{
-    			clearSets(); //Se vacían los sets...
+    			clearSets(); //Se vacían los sets
     			
-    			mixFrame.setVisible(false); //Se cierra la ventana respectiva...
+    			mixFrame.setVisible(false); //Se cierra la ventana respectiva
     			startButton.setEnabled(true); //Se habilita el botón 'Comenzar'
     			
     			break;
     		}
     		
-    		case "RESULT FRAME": //Si se quiere cerrar la ventana donde se muestran los equipos armados...
+    		case "RESULT FRAME": //Si se quiere cerrar la ventana donde se muestran los equipos armados
     		{
     			resultFrame.setVisible(false); //Se cierra la ventana respectiva
     			
@@ -825,7 +843,8 @@ public class FramesManager extends JFrame
     //Método encargado de vaciar los sets de jugadores, de deshabilitar el botón de mezcla y de vaciar la etiqueta utilizada en la ventana donde se ingresan y mezclan jugadores
     private void clearSets()
     {
-    	for(ArrayList<Player> registeredArray : setsList) registeredArray.clear();
+		for(ArrayList<Player> registeredArray : setsList)
+			registeredArray.clear();
     	
     	startMixButton.setEnabled(false);
     	
@@ -837,7 +856,8 @@ public class FramesManager extends JFrame
 	{
 		ArrayList<Player> copiedSet = new ArrayList<Player>();
 		
-		for(Player playerRegistered : copySet) copiedSet.add(playerRegistered);
+		for(Player playerRegistered : copySet)
+			copiedSet.add(playerRegistered);
 	
 		return copiedSet;
 	}
@@ -916,7 +936,7 @@ public class FramesManager extends JFrame
     //Método encargado de setear el color de las etiquetas de la ventana de resultados
     private void setLabelsColors()
     {
-    	//Se colorean de rojo los nombes de los jugadores del equipo 1...
+    	//Se colorean de rojo los nombes de los jugadores del equipo 1
 		WCT1.setForeground(Color.RED);
 		CDT1.setForeground(Color.RED);
 		LD1T1.setForeground(Color.RED);
@@ -925,7 +945,7 @@ public class FramesManager extends JFrame
 		M2T1.setForeground(Color.RED);
 		FWT1.setForeground(Color.RED);
 		
-		//Se colorean de azul los nombes de los jugadores del equipo 2...
+		//Se colorean de azul los nombes de los jugadores del equipo 2
 		WCT2.setForeground(Color.BLUE);
 		CDT2.setForeground(Color.BLUE);
 		LD1T2.setForeground(Color.BLUE);
@@ -938,7 +958,7 @@ public class FramesManager extends JFrame
     //Método encargado de ubicar las etiquetas donde corresponde en la ventana de resultados
     private void setLabelsBounds()
     {
-    	//Se ubican en su lugar los nombres de los jugadores del equipo 1...
+    	//Se ubican en su lugar los nombres de los jugadores del equipo 1
 		WCT1.setBounds(72,10,200,90);
 		CDT1.setBounds(72,10,200,130);
 		LD1T1.setBounds(72,10,200,170);
@@ -947,7 +967,7 @@ public class FramesManager extends JFrame
 		M2T1.setBounds(72,10,200,290);
 		FWT1.setBounds(72,10,200,330);
 		
-		//Se ubican en su lugar los nombres de los jugadores del equipo 2...
+		//Se ubican en su lugar los nombres de los jugadores del equipo 2
 		WCT2.setBounds(180,10,200,90);
 		CDT2.setBounds(180,10,300,130);
 		LD1T2.setBounds(180,10,300,170);
@@ -960,7 +980,7 @@ public class FramesManager extends JFrame
     //Método encargado de agregar las etiquetas al panel central de la ventana de resultados
     private void addLabels()
     {
-    	//Se agregan al panel central las etiquetas creadas luego de haber seteado el layout correspondiente...
+    	//Se agregan al panel central las etiquetas creadas luego de haber seteado el layout correspondiente
     	centerResultPanel.setLayout(null);
     	
     	centerResultPanel.add(T1Label);
@@ -991,7 +1011,7 @@ public class FramesManager extends JFrame
     //Método encargado de setear los layouts de los paneles para la ventana de resultados
     private void setLayouts()
     {
-    	//Se setean los layouts del panel de resultados...
+    	//Se setean los layouts del panel de resultados
     	southResultPanel.setLayout(new FlowLayout());
     	resultPanel.setLayout(new BorderLayout());
     	
@@ -1007,12 +1027,12 @@ public class FramesManager extends JFrame
     {
     	setBackgroundAndForeground(buttons);
 		
-		setFrameActionListeners(buttons,"START"); //Seteo de los oyentes de acción de los botones de la ventana respectiva...
+		setFrameActionListeners(buttons,"START"); //Seteo de los oyentes de acción de los botones de la ventana respectiva
 		
-		for(JButton registeredButton : buttons) southResultPanel.add(registeredButton);
+		for(JButton registeredButton : buttons)
+			southResultPanel.add(registeredButton);
 		
 		resultFrame.getContentPane().add(resultPanel);
-		
 		resultFrame.setBounds((screenWidth/4)+190,(screenHeight/4)+10,300,280);
 
 		setResizableVisibleAndIcon(resultFrame); //Se establece como visible la ventana ya finalizada
@@ -1021,32 +1041,32 @@ public class FramesManager extends JFrame
     //Resumen de acciones a realizar a la hora de crear la ventana de resultados
     private void actionsResume1()
     {
-    	//Se clonan los sets...
+    	//Se clonan los sets
     	cloneSets();
 		
-		//Se crea la ventana de resultados...
+		//Se crea la ventana de resultados
 		createFrameAndButtons();
 		
-		//Se crean los paneles y etiquetas a utilizar...
+		//Se crean los paneles y etiquetas a utilizar
 		createPanelsAndLabels();
 		
-		//Se setean las dimensiones y colores de cada etiqueta creada...
+		//Se setean las dimensiones y colores de cada etiqueta creada
 		setLabelsDimensionsAndColors();
     }
     
     //Resumen de acciones a realizar a la hora de crear la ventana de resultados
     private void actionsResume2()
     {
-    	//Se colorean las etiquetas con nombres...
+    	//Se colorean las etiquetas con nombres
     	setLabelsColors();
     	
-    	//Se ubican en su lugar los nombres de los jugadores...
+    	//Se ubican en su lugar los nombres de los jugadores
     	setLabelsBounds();
     	
-    	//Se agregan al panel central las etiquetas creadas...
+    	//Se agregan al panel central las etiquetas creadas
     	addLabels();
     	
-    	//Se setean los layouts del panel de resultados...
+    	//Se setean los layouts del panel de resultados
     	setLayouts();
     }
     
