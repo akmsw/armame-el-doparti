@@ -11,5 +11,5 @@
  * Se excluye la posición de arquero y es reemplazada por 'WILDCARD' por pedido del cliente.
  */
 public enum Position {
-    WILDCARD, CENTRALDEFENDER, LATERALDEFENDER, MIDFIELDER, FORWARD
+    CENTRALDEFENDER, LATERALDEFENDER, MIDFIELDER, FORWARD, WILDCARD
 }

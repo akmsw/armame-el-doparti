@@ -10,25 +10,38 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
 
     //Campos privados.
-    private static int playersAmount;
-    private static ArrayList<String> vector;
+    private static ArrayList<String> data;
 
     public static void main(String[] args) {
         Scanner monitorScan = new Scanner(System.in);
         
-        vector = new ArrayList<String>();
+        data = new ArrayList<String>();
+
+        HashMap<Position, Integer> playersMap = new HashMap<Position, Integer>();
 
         System.out.print("Ingrese la cantidad de jugadores por equipo: ");
         
-        playersAmount = monitorScan.nextInt();
+        int playersAmount = monitorScan.nextInt();
 
         try {
-            printFileInfo(String.valueOf(playersAmount));
+            collectData(String.valueOf(playersAmount));
+
+            int index = 0;
+            
+            for (Position position : Position.values()) {
+                playersMap.put(position, Integer.parseInt(data.get(index)));
+                index++;
+            }
+
+            data.clear();
+
+            playersMap.forEach((key, value) -> System.out.println("POSICIÓN " + key + ": " + value));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,13 +65,13 @@ public class Main {
      * 
      * @throws IOException  Si el archivo no existe.
      */
-    private static void printFileInfo(String fileName) throws IOException {
+    private static void collectData(String fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("useful/FDF_F" + fileName + ".PDA"))) {
             String line;
 
             while ((line = br.readLine()) != null)
                 if (line.matches("(C|L|M|F|W).>+.[0-9]"))
-                    vector.add(line.replaceAll("[A-Z].>+.", ""));
+                    data.add(line.replaceAll("[A-Z].>+.", ""));
          }
     }
 }
