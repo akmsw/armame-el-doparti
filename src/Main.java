@@ -1,3 +1,4 @@
+
 /**
  * @author Bonino, Francisco Ignacio.
  * 
@@ -11,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Scanner;
 
 public class Main {
@@ -22,9 +23,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner monitorScan = new Scanner(System.in);
 
-        data = new ArrayList<String>();
+        data = new ArrayList<>();
 
-        HashMap<Position, Integer> playersMap = new HashMap<Position, Integer>();
+        EnumMap<Position, Integer> playersMap = new EnumMap<>(Position.class);
 
         System.out.print("Ingrese la cantidad de jugadores por equipo: ");
 
