@@ -1,14 +1,14 @@
 /**
- * @author  Bonino, Francisco Ignacio.s
+ * @author Bonino, Francisco Ignacio.s
  * 
  * @version 1.0.0
  * 
- * @since   15/02/2021
+ * @since 15/02/2021
  */
 
 public class Player {
-    
-    //Campos privados.
+
+    // Campos privados.
     private int rating;
     private String name;
     private Position position;
@@ -16,69 +16,75 @@ public class Player {
     /**
      * Constructor.
      * 
-     * @param   name        El nombre del jugador.
-     * @param   position    La posición del jugador.
+     * @param name     El nombre del jugador.
+     * @param position La posición del jugador.
      */
     public Player(String name, Position position) {
         setName(name);
         setPosition(position);
     }
 
-    //----------------------------------------Métodos públicos---------------------------------
+    // ----------------------------------------Métodos públicos---------------------------------
 
-    //----------------------------------------Getters------------------------------------------
+    // ----------------------------------------Getters------------------------------------------
 
     /**
-     * @return  El nombre del jugador.
+     * @return El nombre del jugador.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return  El puntaje asignado al jugador.
+     * @return El puntaje asignado al jugador.
      */
     public int getRating() {
         return rating;
     }
 
     /**
-     * @return  La posición del jugador.
+     * @return La posición del jugador.
      */
     public Position getPosition() {
         return position;
     }
 
-    //----------------------------------------Setters------------------------------------------
+    // ----------------------------------------Setters------------------------------------------
 
     /**
      * En este método se setea el nombre del jugador.
      * 
-     * @param name  El nombre del jugador.
+     * @param name El nombre del jugador.
      * 
-     * @throws  IllegalArgumentException    Si el nombre pasado por argumento es nulo.
+     * @throws IllegalArgumentException Si el nombre pasado por argumento es nulo.
      */
     public void setName(String name) throws IllegalArgumentException {
-        if(name.equals("") || name.length() > 12) throw new IllegalArgumentException("El nombre del jugador no puede ser nulo o tener más de 12 caracteres.");
-		else this.name = name;
+        if (name.equals("") || name.length() > 12)
+            throw new IllegalArgumentException("El nombre del jugador no puede ser nulo o tener más de 12 caracteres.");
+        else
+            this.name = name;
     }
 
     /**
      * En este método se setea el puntaje del jugador.
      * 
-     * @param rating    El puntaje del jugador.
+     * @param rating El puntaje del jugador.
      * 
-     * @throws  IllegalArgumentException    Si el puntaje pasado por argumento es menor a 1 o mayor a 4.
+     * @throws IllegalArgumentException Si el puntaje pasado por argumento es menor
+     *                                  a 1 o mayor a 4.
      */
     public void setRating(int rating) {
-        if(rating <= 0 || rating >= 5) throw new IllegalArgumentException("No es posible asignar como puntaje un número menor a 1 o un número mayor a 4. Reingrese el puntaje del jugador.");
-		else this.rating = rating;
+        if (rating <= 0 || rating >= 5)
+            throw new IllegalArgumentException(
+                    "No es posible asignar como puntaje un número menor a 1 o un número mayor a 4. Reingrese el puntaje del jugador.");
+        else
+            this.rating = rating;
     }
 
     /**
      * En este método se setea la posición del jugador.
      * 
-     * @param position  La posición del jugador.
+     * @param position La posición del jugador.
      */
     public void setPosition(Position position) {
         this.position = position;

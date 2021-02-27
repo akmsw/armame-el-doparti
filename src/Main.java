@@ -52,7 +52,7 @@ public class Main {
         monitorScan.close();
     }
 
-    //----------------------------------------Métodos privados---------------------------------
+    // ----------------------------------------Métodos privados---------------------------------
 
     /**
      * Este método rescata la cantidad de jugadores para cada posición por equipo

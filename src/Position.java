@@ -7,8 +7,8 @@
  */
 
 /**
- * Enum con las posibles posiciones para un jugador.
- * Se excluye la posición de arquero y es reemplazada por 'WILDCARD' por pedido del cliente.
+ * Enum con las posibles posiciones para un jugador. Se excluye la posición de
+ * arquero y es reemplazada por 'WILDCARD' por pedido del cliente.
  */
 public enum Position {
     CENTRALDEFENDER, LATERALDEFENDER, MIDFIELDER, FORWARD, WILDCARD
