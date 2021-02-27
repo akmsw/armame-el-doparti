@@ -22,17 +22,20 @@ public class MyLogger {
     /**
      * Constructor.
      * 
-     * Aquí se construye el objeto logger que se encargará de escribir en un archivo plano de texto
-     * información útil que será utilizada por el algoritmo desarrollado en C.
+     * Aquí se construye el objeto logger que se encargará de escribir en un archivo
+     * plano de texto información útil que será utilizada por el algoritmo
+     * desarrollado en C.
      * 
-     * @param fileName  Nombre del archivo log a crear.
+     * @param fileName Nombre del archivo log a crear.
      * 
-     * @throws IOException  En caso de ocurrir un error en la creación del archivo donde se escribirá la información.
+     * @throws IOException En caso de ocurrir un error en la creación del archivo
+     *                     donde se escribirá la información.
      */
     public MyLogger(String fileName) throws IOException {
         file = new File(fileName);
 
-        if(!file.createNewFile()) throw new IOException("LOG ALREADY CREATED");
+        if (!file.createNewFile())
+            throw new IOException("LOG ALREADY CREATED");
 
         SimpleFormatter formatter = new SimpleFormatter();
 

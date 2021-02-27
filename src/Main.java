@@ -20,11 +20,11 @@ public class Main {
     private static ArrayList<String> data;
 
     public static void main(String[] args) {
+        EnumMap<Position, Integer> playersMap = new EnumMap<>(Position.class);
+
         Scanner monitorScan = new Scanner(System.in);
 
         data = new ArrayList<>();
-
-        EnumMap<Position, Integer> playersMap = new EnumMap<>(Position.class);
 
         System.out.print("Ingrese la cantidad de jugadores por equipo: ");
 
@@ -40,9 +40,11 @@ public class Main {
                 index++;
             }
 
+            playersMap.forEach((key, value) -> System.out.println("POSICIÓN " + key + ": " + value));
+
             data.clear();
 
-            playersMap.forEach((key, value) -> System.out.println("POSICIÓN " + key + ": " + value));
+            MyLogger log = new MyLogger("DISTRO.PDA");
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
@@ -51,7 +53,8 @@ public class Main {
         monitorScan.close();
     }
 
-    // ----------------------------------------Métodos privados---------------------------------
+    // ----------------------------------------Métodos
+    // privados---------------------------------
 
     /**
      * Este método rescata la cantidad de jugadores para cada posición por equipo
