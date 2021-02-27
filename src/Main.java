@@ -19,10 +19,15 @@ public class Main {
     // Campos privados.
     private static ArrayList<String> data;
 
+    /**
+     * Método principal.
+     * 
+     * Aquí se instancia y ejecuta todo el programa.
+     */
     public static void main(String[] args) {
-        EnumMap<Position, Integer> playersAmountMap = new EnumMap<>(Position.class);
-
         Scanner monitorScan = new Scanner(System.in);
+
+        EnumMap<Position, Integer> playersAmountMap = new EnumMap<>(Position.class);
 
         data = new ArrayList<>();
 
@@ -44,7 +49,7 @@ public class Main {
 
             data.clear();
 
-            MyLogger log = new MyLogger("DISTRO.PDA");
+            MyLogger log = new MyLogger("useful/DISTRO.PDA");
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
