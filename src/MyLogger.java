@@ -22,13 +22,10 @@ public class MyLogger {
     /**
      * Constructor.
      * 
-     * Aquí se construye el hilo logger que se encargará de mostrar en pantalla las estadísticas
-     * de ejecución del programa, y de despertar a los hilos que queden encolados una vez que
-     * se haya llegado a la condición de corte para evitar deadlocks.
+     * Aquí se construye el objeto logger que se encargará de escribir en un archivo plano de texto
+     * información útil que será utilizada por el algoritmo desarrollado en C.
      * 
      * @param fileName  Nombre del archivo log a crear.
-     * @param pNet      Red de Petri del sistema para chequear la condición de corte del programa.
-     * @param monitor   Monitor controlador del sistema
      * 
      * @throws IOException  En caso de ocurrir un error en la creación del archivo donde se escribirá la información.
      */
