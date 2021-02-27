@@ -71,7 +71,7 @@ public class Main {
             String line;
 
             while ((line = br.readLine()) != null)
-                if (line.matches("(C|L|M|F|W).>+.[0-9]"))
+                if (line.matches("[CLMFW].>+.[0-9]"))
                     data.add(line.replaceAll("[A-Z].>+.", ""));
         }
     }
