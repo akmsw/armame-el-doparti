@@ -6,7 +6,7 @@
  * @since   15/02/2021
  */
 
-public abstract class Player {
+public class Player {
     
     //Campos privados.
     private int rating;
@@ -19,31 +19,33 @@ public abstract class Player {
      * @param   name        El nombre del jugador.
      * @param   position    La posición del jugador.
      */
-    protected Player(String name, Position position) {
+    public Player(String name, Position position) {
         setName(name);
         setPosition(position);
     }
+
+    //----------------------------------------Métodos públicos---------------------------------
 
     //----------------------------------------Getters------------------------------------------
 
     /**
      * @return  El nombre del jugador.
      */
-    private String getName() {
+    public String getName() {
         return name;
     }
 
     /**
      * @return  El puntaje asignado al jugador.
      */
-    private int getRating() {
+    public int getRating() {
         return rating;
     }
 
     /**
      * @return  La posición del jugador.
      */
-    private Position getPosition() {
+    public Position getPosition() {
         return position;
     }
 

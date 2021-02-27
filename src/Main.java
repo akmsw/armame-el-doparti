@@ -51,6 +51,8 @@ public class Main {
         monitorScan.close();
     }
 
+    //----------------------------------------Métodos privados---------------------------------
+
     /**
      * Este método rescata la cantidad de jugadores para cada posición por equipo
      * mediante expresiones regulares.
