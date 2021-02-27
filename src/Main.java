@@ -32,7 +32,7 @@ public class Main {
         int playersAmount = monitorScan.nextInt();
 
         try {
-            collectData(String.valueOf(playersAmount));
+            collectPDData(String.valueOf(playersAmount));
 
             int index = 0;
 
@@ -58,7 +58,7 @@ public class Main {
      * Este método rescata la cantidad de jugadores para cada posición por equipo
      * mediante expresiones regulares.
      * 
-     * (C|L|M|F|W).>+.[0-9] : Matchea las líneas que comiencen con C, L, M, F, ó W,
+     * [CLMFW].>+.[0-9] : Matchea las líneas que comiencen con C, L, M, F, ó W,
      * estén seguidas por al menos un caracter >, y luego tengan algún número.
      * 
      * [A-Z].>+. : Matchea el trozo de la línea que no es un número.
@@ -67,7 +67,7 @@ public class Main {
      * 
      * @throws IOException Si el archivo no existe.
      */
-    private static void collectData(String fileName) throws IOException {
+    private static void collectPDData(String fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("useful/FDF_F" + fileName + ".PDA"))) {
             String line;
 
