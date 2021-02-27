@@ -31,6 +31,7 @@ Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribu
 
 ### Mejoras [WIP]
 
+- Implementación de expresiones regulares para alivianar procesos de búsqueda.
 - Se deja el trabajo pesado de distribución de jugadores a un archivo en lenguaje de programación de bajo nivel (C).
 - Se logró prescindir de ciertas clases que eran innecesarias.
 - Se refactorizaron métodos y clases completas.
