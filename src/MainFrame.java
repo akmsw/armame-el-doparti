@@ -6,15 +6,21 @@
  * @since 27/02/2021
  */
 
+import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
+
+    // Campos privados
+    private Toolkit toolkit;
+    private JPanel panel;
 
     /**
      * Constructor.
@@ -33,7 +39,7 @@ public class MainFrame extends JFrame {
      * @param   frameTitle  Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        toolkit = Toolkit.getDefaultToolkit();
 
         ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
 
@@ -46,8 +52,11 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setBounds(0, 0, bgWidth, bgHeight);
+        panel.setLayout(null);
+
+        addButtons(panel);
 
         JLabel bgLabel = new JLabel("", bgImage, JLabel.CENTER);
         bgLabel.setBounds(0, 0, bgWidth, bgHeight);
@@ -55,5 +64,29 @@ public class MainFrame extends JFrame {
         panel.add(bgLabel);
 
         add(panel);
+    }
+
+    /**
+     * @param   panel   Panel del frame donde se colocarán los botones.
+     */
+    private void addButtons(JPanel panel) {
+        JButton startButton = new JButton("Comenzar");
+        JButton exitButton = new JButton("Salir");
+        JButton chichaButton = new JButton();
+
+        ImageIcon chichaImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/chicha.jpg")));
+
+        startButton.setBounds(100, 300, 100, 50);
+        startButton.setEnabled(true);
+
+        exitButton.setBounds(100, 400, 100, 50);
+        exitButton.setEnabled(true);
+
+        chichaButton.setBounds(600, 400, 92, 94);
+        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+
+        panel.add(startButton);
+        panel.add(exitButton);
+        panel.add(chichaButton);
     }
 }
