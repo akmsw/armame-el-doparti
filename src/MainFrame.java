@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame implements ActionListener {
+public class MainFrame extends JFrame {
 
     // Campos privados
     private Toolkit toolkit;
@@ -34,6 +34,8 @@ public class MainFrame extends JFrame implements ActionListener {
         setVisible(true);
         setResizable(false);
     }
+
+    // ----------------------------------------Métodos privados---------------------------------
 
     /**
      * Este método se encarga de inicializar los elementos básicos de la ventana
@@ -87,7 +89,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         chichaButton.setBounds(600, 400, 92, 94);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+        chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -97,32 +99,33 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * TODO doc
+     * Este método se encarga de añadir el handler de eventos a cada botón.
      */
     private void addActionListeners() {
-        ActionListener exitActionListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        };
+        ActionHandler eventHandler = new ActionHandler();
 
-        ActionListener chichaActionListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("CHICHA BUTTON PULSADO");
-            }
-        };
+        startButton.addActionListener(eventHandler);
+        exitButton.addActionListener(eventHandler);
+        chichaButton.addActionListener(eventHandler);
+    }
 
-        ActionListener startActionListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    /**
+     * Clase privada para lidiar con los eventos de los botones.
+     */
+    private class ActionHandler implements ActionListener {
+
+        /**
+         * Override para indicar qué hacer en base a cada boton pulsado.
+         * 
+         * @param   e   Evento ocurrido (botón pulsado).
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == startButton)
                 System.out.println("START BUTTON PULSADO");
-            }
-        };
-
-        startButton.addActionListener(startActionListener);
-        exitButton.addActionListener(exitActionListener);
-        chichaButton.addActionListener(chichaActionListener);
+            else if (e.getSource() == chichaButton)
+                System.out.println("CHICHA BUTTON PULSADO");
+            else System.exit(0);
+        }
     }
 }
