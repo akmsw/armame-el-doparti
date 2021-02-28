@@ -43,7 +43,7 @@ public class Main {
 
         int playersAmount = monitorScan.nextInt();
 
-        try {
+        /*try {
             MyLogger log = new MyLogger("useful/DISTRO.PDA");
 
             collectPDData(String.valueOf(playersAmount));
@@ -69,11 +69,13 @@ public class Main {
             printSet(Position.LATERALDEFENDER, LDSet);
             printSet(Position.MIDFIELDER, MFSet);
             printSet(Position.FORWARD, FWSet);
-            printSet(Position.WILDCARD, WCSet);
-        } catch (IOException e) {
+            printSet(Position.WILDCARD, WCSet);*/
+
+            MainFrame frame = new MainFrame();
+        /*} catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
-        }
+        }*/
 
         monitorScan.close();
     }

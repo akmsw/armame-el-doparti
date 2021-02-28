@@ -11,13 +11,13 @@ import java.io.IOException;
 
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 public class MyLogger {
     private File file;
     private FileHandler handler;
-    private Logger logger;
+    //private Logger logger;
 
     /**
      * Constructor.
