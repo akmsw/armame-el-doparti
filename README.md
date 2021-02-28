@@ -33,7 +33,7 @@ Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribu
 
 - Implementación de expresiones regulares para alivianar procesos de búsqueda.
 - Se arreglaron partes del código hardcodeadas que condicionaban la GUI y el algoritmo de distribución.
-- Se deja el trabajo pesado de distribución de jugadores a un archivo en lenguaje de programación de bajo nivel (C).
-- Se logró prescindir de ciertas clases que eran innecesarias.
+- Se deja el trabajo pesado de distribución de jugadores a un archivo en lenguaje de programación de bajo nivel (C) para incrementar la velocidad.
+- Se logró un nivel de abstracción mayor que permitió prescindir de clases y métodos que no eran imprescindibles.
 - Se refactorizaron métodos y clases completas.
 - Arreglo de bugs de la GUI.
