@@ -75,8 +75,7 @@ public class Player {
      */
     public void setRating(int rating) {
         if (rating <= 0 || rating >= 5)
-            throw new IllegalArgumentException(
-                    "No es posible asignar como puntaje un número menor a 1 o un número mayor a 4. Reingrese el puntaje del jugador.");
+            throw new IllegalArgumentException("No es posible asignar como puntaje un número menor a 1 o mayor a 4. Reingrese el puntaje del jugador.");
         else
             this.rating = rating;
     }

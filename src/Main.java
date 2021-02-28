@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class Main {
 
     // Campos privados.
+    private static final String version = "v3.0";
     private static ArrayList<String> data;
     private static ArrayList<Player> CDSet, LDSet, MFSet, FWSet, WCSet;
     private static EnumMap<Position, Integer> playersAmountMap;
@@ -39,11 +40,11 @@ public class Main {
         FWSet = new ArrayList<>();
         WCSet = new ArrayList<>();
 
-        System.out.print("Ingrese la cantidad de jugadores por equipo: ");
+        /*System.out.print("Ingrese la cantidad de jugadores por equipo: ");
 
         int playersAmount = monitorScan.nextInt();
 
-        /*try {
+        try {
             MyLogger log = new MyLogger("useful/DISTRO.PDA");
 
             collectPDData(String.valueOf(playersAmount));
@@ -71,7 +72,7 @@ public class Main {
             printSet(Position.FORWARD, FWSet);
             printSet(Position.WILDCARD, WCSet);*/
 
-            MainFrame frame = new MainFrame();
+            MainFrame frame = new MainFrame("Fiesta de Fulbito " + version);
         /*} catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
@@ -110,6 +111,7 @@ public class Main {
      * 
      * @param   playerType  Posición del jugador (para mostrar al usuario).
      * @param   position    Posición del jugador.
+     * @param   set         Arreglo a llenar.
      */
     private static void fillSet(String playerType, Position position, ArrayList<Player> set) {
         String playerName;

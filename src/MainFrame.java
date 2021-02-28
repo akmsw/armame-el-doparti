@@ -7,33 +7,53 @@
  */
 
 import java.awt.Toolkit;
-// import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
-    // Campos privados.
-    Toolkit screen;
-    // Dimension screenSize;
-    ImageIcon bgImage;
-    // int screenHeight, screenWidth; // Alto y ancho de la pantalla, respectivamente.
-    int bgHeight, bgWidth; // Alto y ancho de la imagen de fondo, respectivamente.
+    /**
+     * Constructor.
+     */
+    public MainFrame(String frameTitle) {
+        initializeComponents(frameTitle);
 
-    public MainFrame() {
-        screen = Toolkit.getDefaultToolkit();
-
-        bgImage = new ImageIcon(screen.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
-
-        bgHeight = bgImage.getIconHeight();
-        bgWidth = bgImage.getIconHeight();
-
-        setSize(bgWidth, bgHeight);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
+    }
+
+    /**
+     * Este método se encarga de inicializar los elementos básicos
+     * de la ventana principal.
+     * 
+     * @param   frameTitle  Título de la ventana.
+     */
+    private void initializeComponents(String frameTitle) {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+        ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
+
+        int bgWidth = bgImage.getIconWidth();
+        int bgHeight = bgImage.getIconHeight();
+
+        setSize(bgWidth, bgHeight);
+        setLocationRelativeTo(null);
+        setTitle(frameTitle);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+
+        JPanel panel = new JPanel();
+        panel.setBounds(0, 0, bgWidth, bgHeight);
+
+        JLabel bgLabel = new JLabel("", bgImage, JLabel.CENTER);
+        bgLabel.setBounds(0, 0, bgWidth, bgHeight);
+
+        panel.add(bgLabel);
+
+        add(panel);
     }
 }
