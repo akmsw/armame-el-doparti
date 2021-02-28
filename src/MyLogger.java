@@ -34,8 +34,8 @@ public class MyLogger {
     public MyLogger(String fileName) throws IOException {
         file = new File(fileName);
 
-        if (!file.createNewFile())
-            throw new IOException("LOG ALREADY CREATED");
+        if(!file.exists())
+            file.createNewFile();
 
         SimpleFormatter formatter = new SimpleFormatter();
 
