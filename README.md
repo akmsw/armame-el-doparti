@@ -23,9 +23,9 @@ Para comenzar, se necesitarán 14 posibles jugadores. La distribución utilizada
   - **Delanteros**: 1
   - **Comodines***: 1
 
-Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo "Comodín" podrá ocupar la posición de Arquero, o intercambiar con cualquier otro jugador que prefiera atajar.
+Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo "Comodín" podrá ocupar la posición de *Arquero*, o intercambiar con cualquier otro jugador que prefiera atajar.
 
-Una vez ingresados los nombres de todos los jugadores a repartir en cada posición para ambos equipos, se podrá seleccionar si distribuirlos de manera aleatoria, o en base a una puntuación. Si se elige la segunda opción, le será solicitado al usuario una puntuación de 1 (malo) a 4 (excelente) para cada jugador ingresado. Finalmente, se repartirán los jugadores de la manera más equitativa posible.
+Una vez ingresados los nombres de todos los jugadores a repartir en cada posición para ambos equipos, se podrá seleccionar si distribuirlos de manera aleatoria, o en base a una puntuación. Si se elige la segunda opción, le será solicitado al usuario una puntuación de 1 ***(malo)*** a 4 ***(excelente)*** para cada jugador ingresado. Finalmente, se repartirán los jugadores de la manera más equitativa posible.
 
 Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribución será única. Si se decide distribuirlos de manera aleatoria, se podrán redistribuir tantas veces como se quiera hasta estar conforme.
 
