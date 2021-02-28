@@ -44,8 +44,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private void initializeComponents(String frameTitle) {
         toolkit = Toolkit.getDefaultToolkit();
 
-        ImageIcon bgImage = new ImageIcon(
-                toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
+        ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
 
         int bgWidth = bgImage.getIconWidth();
         int bgHeight = bgImage.getIconHeight();
@@ -88,7 +87,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         chichaButton.setBounds(600, 400, 92, 94);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-        chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
