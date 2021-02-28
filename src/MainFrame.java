@@ -25,11 +25,6 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         screen = Toolkit.getDefaultToolkit();
 
-        screenSize = screen.getScreenSize();
-
-        screenHeight = screenSize.height;
-        screenWidth = screenSize.width;
-
         bgImage = new ImageIcon(screen.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
 
         bgHeight = bgImage.getIconHeight();
