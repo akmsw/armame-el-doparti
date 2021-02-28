@@ -7,7 +7,7 @@
  */
 
 import java.awt.Toolkit;
-import java.awt.Dimension;
+// import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,9 +17,9 @@ public class MainFrame extends JFrame {
 
     // Campos privados.
     Toolkit screen;
-    Dimension screenSize;
+    // Dimension screenSize;
     ImageIcon bgImage;
-    int screenHeight, screenWidth; // Alto y ancho de la pantalla, respectivamente.
+    // int screenHeight, screenWidth; // Alto y ancho de la pantalla, respectivamente.
     int bgHeight, bgWidth; // Alto y ancho de la imagen de fondo, respectivamente.
 
     public MainFrame() {
