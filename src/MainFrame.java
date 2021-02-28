@@ -8,6 +8,8 @@
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -16,11 +18,12 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ActionListener {
 
     // Campos privados
     private Toolkit toolkit;
     private JPanel panel;
+    private JButton startButton, exitButton, chichaButton;
 
     /**
      * Constructor.
@@ -33,15 +36,16 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de inicializar los elementos básicos
-     * de la ventana principal.
+     * Este método se encarga de inicializar los elementos básicos de la ventana
+     * principal.
      * 
-     * @param   frameTitle  Título de la ventana.
+     * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
         toolkit = Toolkit.getDefaultToolkit();
 
-        ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
+        ImageIcon bgImage = new ImageIcon(
+                toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
 
         int bgWidth = bgImage.getIconWidth();
         int bgHeight = bgImage.getIconHeight();
@@ -67,12 +71,12 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * @param   panel   Panel del frame donde se colocarán los botones.
+     * @param panel Panel del frame donde se colocarán los botones.
      */
     private void addButtons(JPanel panel) {
-        JButton startButton = new JButton("Comenzar");
-        JButton exitButton = new JButton("Salir");
-        JButton chichaButton = new JButton();
+        startButton = new JButton("Comenzar");
+        exitButton = new JButton("Salir");
+        chichaButton = new JButton();
 
         ImageIcon chichaImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/chicha.jpg")));
 
@@ -83,10 +87,43 @@ public class MainFrame extends JFrame {
         exitButton.setEnabled(true);
 
         chichaButton.setBounds(600, 400, 92, 94);
-        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
+        chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+
+        addActionListeners();
 
         panel.add(startButton);
         panel.add(exitButton);
         panel.add(chichaButton);
+    }
+
+    /**
+     * TODO doc
+     */
+    private void addActionListeners() {
+        ActionListener exitActionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        };
+
+        ActionListener chichaActionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CHICHA BUTTON PULSADO");
+            }
+        };
+
+        ActionListener startActionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("START BUTTON PULSADO");
+            }
+        };
+
+        startButton.addActionListener(startActionListener);
+        exitButton.addActionListener(exitActionListener);
+        chichaButton.addActionListener(chichaActionListener);
     }
 }
