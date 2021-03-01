@@ -17,7 +17,7 @@ public class MixFrame extends JFrame {
      * Constructor.
      * Aquí se crea la ventana de mezcla.
      */
-    public MixFrame() {
+    public MixFrame(int playersAmount) {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
