@@ -29,10 +29,15 @@ public class MainFrame extends JFrame {
 
     /**
      * Constructor.
+     * 
+     * @param   frameTitle  Título a mostrar en la ventana principal.
+     * @param   version     Versión del software.
      */
     public MainFrame(String frameTitle, String version) {
         this.version = version;
+
         initializeComponents(frameTitle);
+
         setVisible(true);
         setResizable(false);
     }
@@ -135,6 +140,8 @@ public class MainFrame extends JFrame {
         if (button.isEnabled()) button.setEnabled(false);
         else button.setEnabled(true);
     }
+
+    // ----------------------------------------Clases privadas----------------------------------
 
     /**
      * Clase privada para lidiar con los eventos de los botones.
