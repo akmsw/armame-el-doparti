@@ -6,22 +6,22 @@
  * @since 15/02/2021
  */
 
-import java.io.BufferedReader;
+/*import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.Scanner;
+import java.util.Scanner;*/
 
 public class Main {
 
     // Campos privados.
     private static final String version = "v3.0";
-    private static ArrayList<String> data;
+    /*private static ArrayList<String> data;
     private static ArrayList<Player> CDSet, LDSet, MFSet, FWSet, WCSet;
     private static EnumMap<Position, Integer> playersAmountMap;
-    private static Scanner monitorScan;
+    private static Scanner monitorScan;*/
 
     /**
      * Método principal.
@@ -29,7 +29,7 @@ public class Main {
      * Aquí se instancia y ejecuta todo el programa.
      */
     public static void main(String[] args) {
-        monitorScan = new Scanner(System.in);
+        /*monitorScan = new Scanner(System.in);
 
         playersAmountMap = new EnumMap<>(Position.class);
 
@@ -40,7 +40,7 @@ public class Main {
         FWSet = new ArrayList<>();
         WCSet = new ArrayList<>();
 
-        /*System.out.print("Ingrese la cantidad de jugadores por equipo: ");
+        //System.out.print("Ingrese la cantidad de jugadores por equipo: ");
 
         int playersAmount = monitorScan.nextInt();
 
@@ -78,7 +78,7 @@ public class Main {
             System.exit(-1);
         }*/
 
-        monitorScan.close();
+        //monitorScan.close();
     }
 
     // ----------------------------------------Métodos privados---------------------------------
@@ -96,7 +96,7 @@ public class Main {
      * 
      * @throws  IOException Si el archivo no existe.
      */
-    private static void collectPDData(String fileName) throws IOException {
+    /*private static void collectPDData(String fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("useful/FDF_F" + fileName + ".PDA"))) {
             String line;
 
@@ -104,7 +104,7 @@ public class Main {
                 if (line.matches("[CLMFW].>+.[0-9]"))
                     data.add(line.replaceAll("[A-Z].>+.", ""));
         }
-    }
+    }*/
 
     /**
      * Este método se encarga de rellenar un arreglo con un tipo de jugador específico.
@@ -113,7 +113,7 @@ public class Main {
      * @param   position    Posición del jugador.
      * @param   set         Arreglo a llenar.
      */
-    private static void fillSet(String playerType, Position position, ArrayList<Player> set) {
+    /*private static void fillSet(String playerType, Position position, ArrayList<Player> set) {
         String playerName;
 
         for (int i = 0; i < playersAmountMap.get(position); i++) {
@@ -123,7 +123,7 @@ public class Main {
 
             set.add(new Player(playerName, position));
         }
-    }
+    }*/
 
     /**
      * Este método se encarga de mostrar en pantalla un arreglo específico.
@@ -131,9 +131,9 @@ public class Main {
      * @param   position    Tipo de jugador.
      * @param   set         Arreglo a mostrar.
      */
-    private static void printSet(Position position, ArrayList<Player> set) {
+    /*private static void printSet(Position position, ArrayList<Player> set) {
         for (Player player : set) {
             System.out.println("JUGADOR " + position + ": " + player.getName());
         }
-    }
+    }*/
 }
