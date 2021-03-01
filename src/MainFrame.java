@@ -25,14 +25,16 @@ import javax.swing.JButton;
 public class MainFrame extends JFrame {
 
     // Campos privados
-    private String version;
-    private Toolkit toolkit;
+    private String version; // Versión del programa.
+    private Toolkit toolkit; // Recurso para obtener información gráfica del (y para el) software.
     private JPanel panel;
     private JButton startButton, exitButton, chichaButton;
-    private MixFrame mixFrame;
+    private MixFrame mixFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
 
     /**
      * Constructor.
+     * Aquí se instancia todo lo relativo a la ventana principal,
+     * como sus botones, las imágenes y los handlers de eventos.
      * 
      * @param   frameTitle  Título a mostrar en la ventana principal.
      * @param   version     Versión del software.
@@ -49,10 +51,10 @@ public class MainFrame extends JFrame {
     // ----------------------------------------Métodos privados---------------------------------
 
     /**
-     * Este método se encarga de inicializar los elementos básicos de la ventana
-     * principal.
+     * Este método se encarga de inicializar los botones y la imagen de fondo
+     * de la ventana principal.
      * 
-     * @param frameTitle Título de la ventana.
+     * @param   frameTitle  Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
         toolkit = Toolkit.getDefaultToolkit();
@@ -83,7 +85,10 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * @param panel Panel del frame donde se colocarán los botones.
+     * Este método se encarga de agregar todos los botones necesarios
+     * en la ventana principal.
+     * 
+     * @param   panel   Panel de la ventana principal donde se colocarán los botones.
      */
     private void addButtons(JPanel panel) {
         startButton = new JButton("Comenzar");
@@ -186,6 +191,12 @@ public class MainFrame extends JFrame {
      */
     private class WindowEventsHandler extends WindowAdapter {
 
+        /**
+         * Este método se encarga de togglear el estado
+         * de los botones del frame principal.
+         * 
+         * @param   e   Evento de ventana.
+         */
         @Override
         public void windowOpened(WindowEvent e) {
             toggleButton(startButton);
@@ -193,6 +204,13 @@ public class MainFrame extends JFrame {
             toggleButton(exitButton);
         }
 
+        /**
+         * Este método se encarga de togglear el
+         * estado de los botones del frame principal
+         * y hacer invisible el frame creado al
+         * pulsar el botón de "Comenzar".
+         * @param   e   Evento de ventana.
+         */
         @Override
         public void windowClosing(WindowEvent e) {
             toggleButton(startButton);

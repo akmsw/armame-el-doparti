@@ -14,6 +14,7 @@ public class MixFrame extends JFrame {
 
     /**
      * Constructor.
+     * Aquí se crea la ventana de mezcla.
      */
     public MixFrame() {
         setSize(200, 200);
