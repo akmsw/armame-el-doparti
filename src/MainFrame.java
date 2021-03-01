@@ -167,9 +167,7 @@ public class MainFrame extends JFrame {
                     mixFrame.addWindowListener(new WindowEventsHandler());
                 }
             }
-            else if (e.getSource() == chichaButton) {
-                chicha(version);
-            }
+            else if (e.getSource() == chichaButton) chicha(version);
             else System.exit(0);
         }
 
