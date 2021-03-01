@@ -115,38 +115,14 @@ public class MainFrame extends JFrame {
         chichaButton.addActionListener(eventHandler);
     }
 
-    /**
-     * Este método se encarga de desplegar los créditos del programa.
-     * 
-     * @param   version Versión del software.
-     */
-    private void chicha(String version) {
-        ImageIcon creditsIcon = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
-        
-        creditsIcon = new ImageIcon(creditsIcon.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
-
-    	String line = "<html>FIESTA DE FULBITO " + version + "<p><p>   Créditos<p> ©AkamaiSoftware";
-    	
-    	JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, creditsIcon);
-    }
-
-    /**
-     * Este método se encarga de togglear el estado de un JButton.
-     * Si el botón está activo, se lo desactiva; y viceversa.
-     * 
-     * @param   button  Botón a togglear.
-     */
-    private void toggleButton(JButton button) {
-        if (button.isEnabled()) button.setEnabled(false);
-        else button.setEnabled(true);
-    }
-
     // ----------------------------------------Clases privadas----------------------------------
 
     /**
      * Clase privada para lidiar con los eventos de los botones.
      */
     private class ActionHandler implements ActionListener {
+
+        // ----------------------------------------Métodos públicos---------------------------------
 
         /**
          * Override para indicar qué hacer en base a cada boton pulsado.
@@ -170,6 +146,34 @@ public class MainFrame extends JFrame {
                 toggleButton(exitButton);
             }
             else System.exit(0);
+        }
+
+        // ----------------------------------------Métodos privados---------------------------------
+
+        /**
+         * Este método se encarga de togglear el estado de un JButton.
+         * Si el botón está activo, se lo desactiva; y viceversa.
+         * 
+         * @param   button  Botón a togglear.
+         */
+        private void toggleButton(JButton button) {
+            if (button.isEnabled()) button.setEnabled(false);
+            else button.setEnabled(true);
+        }
+    
+        /**
+         * Este método se encarga de desplegar los créditos del programa.
+         * 
+         * @param   version Versión del software.
+         */
+        private void chicha(String version) {
+            ImageIcon creditsIcon = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
+            
+            creditsIcon = new ImageIcon(creditsIcon.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
+
+            String line = "<html>FIESTA DE FULBITO " + version + "<p><p>   Créditos<p> ©AkamaiSoftware";
+            
+            JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, creditsIcon);
         }
     }
 }
