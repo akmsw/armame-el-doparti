@@ -16,10 +16,10 @@ public class MixFrame extends JFrame {
      * Constructor.
      */
     public MixFrame() {
-        setSize(100, 100);
+        setSize(200, 200);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("MixFrame");
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setVisible(true);
         setResizable(false);
     }

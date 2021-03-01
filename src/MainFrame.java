@@ -147,13 +147,9 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == startButton) {
-                toggleButton(startButton);
-                toggleButton(chichaButton);
-                toggleButton(exitButton);
+                WindowEventHandler windowEventHandler = new WindowEventHandler();
 
                 mixFrame = new MixFrame();
-
-                WindowEventHandler windowEventHandler = new WindowEventHandler();
 
                 mixFrame.addWindowListener(windowEventHandler);
             }
@@ -181,7 +177,7 @@ public class MainFrame extends JFrame {
             
             creditsIcon = new ImageIcon(creditsIcon.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
-            String line = "<html>FIESTA DE FULBITO " + version + "<p><p>   Créditos<p> ©AkamaiSoftware";
+            String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
             
             JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, creditsIcon);
         }
@@ -194,8 +190,9 @@ public class MainFrame extends JFrame {
 
         @Override
         public void windowOpened(WindowEvent e) {
-            // TODO Auto-generated method stub
-
+            toggleButton(startButton);
+            toggleButton(chichaButton);
+            toggleButton(exitButton);
         }
 
         @Override
@@ -203,6 +200,7 @@ public class MainFrame extends JFrame {
             toggleButton(startButton);
             toggleButton(chichaButton);
             toggleButton(exitButton);
+
             mixFrame.setVisible(false);
         }
 
