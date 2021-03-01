@@ -10,10 +10,13 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -26,6 +29,7 @@ public class MainFrame extends JFrame {
     private Toolkit toolkit;
     private JPanel panel;
     private JButton startButton, exitButton, chichaButton;
+    private MixFrame mixFrame;
 
     /**
      * Constructor.
@@ -105,10 +109,21 @@ public class MainFrame extends JFrame {
     }
 
     /**
+     * Este método se encarga de togglear el estado de un JButton.
+     * Si el botón está activo, se lo desactiva; y viceversa.
+     * 
+     * @param   button  Botón a togglear.
+     */
+    private void toggleButton(JButton button) {
+        if (button.isEnabled()) button.setEnabled(false);
+        else button.setEnabled(true);
+    }
+
+    /**
      * Este método se encarga de añadir el handler de eventos a cada botón.
      */
     private void addActionListeners() {
-        ActionHandler eventHandler = new ActionHandler();
+        EventsHandler eventHandler = new EventsHandler();
 
         startButton.addActionListener(eventHandler);
         exitButton.addActionListener(eventHandler);
@@ -120,7 +135,7 @@ public class MainFrame extends JFrame {
     /**
      * Clase privada para lidiar con los eventos de los botones.
      */
-    private class ActionHandler implements ActionListener {
+    private class EventsHandler implements ActionListener {
 
         // ----------------------------------------Métodos públicos---------------------------------
 
@@ -132,16 +147,22 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == startButton) {
+                toggleButton(startButton);
                 toggleButton(chichaButton);
                 toggleButton(exitButton);
-                System.out.println("START BUTTON PULSADO");
-                toggleButton(chichaButton);
-                toggleButton(exitButton);
+
+                mixFrame = new MixFrame();
+
+                WindowEventHandler windowEventHandler = new WindowEventHandler();
+
+                mixFrame.addWindowListener(windowEventHandler);
             }
             else if (e.getSource() == chichaButton) {
                 toggleButton(startButton);
                 toggleButton(exitButton);
+
                 chicha(version);
+
                 toggleButton(startButton);
                 toggleButton(exitButton);
             }
@@ -149,17 +170,6 @@ public class MainFrame extends JFrame {
         }
 
         // ----------------------------------------Métodos privados---------------------------------
-
-        /**
-         * Este método se encarga de togglear el estado de un JButton.
-         * Si el botón está activo, se lo desactiva; y viceversa.
-         * 
-         * @param   button  Botón a togglear.
-         */
-        private void toggleButton(JButton button) {
-            if (button.isEnabled()) button.setEnabled(false);
-            else button.setEnabled(true);
-        }
     
         /**
          * Este método se encarga de desplegar los créditos del programa.
@@ -174,6 +184,51 @@ public class MainFrame extends JFrame {
             String line = "<html>FIESTA DE FULBITO " + version + "<p><p>   Créditos<p> ©AkamaiSoftware";
             
             JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, creditsIcon);
+        }
+    }
+
+    /**
+     * Clase privada para lidiar con los eventos de las ventanas.
+     */
+    private class WindowEventHandler implements WindowListener {
+
+        @Override
+        public void windowOpened(WindowEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            toggleButton(startButton);
+            toggleButton(chichaButton);
+            toggleButton(exitButton);
+            mixFrame.setVisible(false);
+        }
+
+        @Override
+        public void windowClosed(WindowEvent e) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void windowIconified(WindowEvent e) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void windowDeiconified(WindowEvent e) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void windowActivated(WindowEvent e) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+            // TODO Auto-generated method stub
         }
     }
 }
