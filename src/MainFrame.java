@@ -29,6 +29,7 @@ public class MainFrame extends JFrame {
     private JPanel panel;
     private JButton startButton, exitButton, chichaButton;
     private MixFrame mixFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
+    private ImageIcon icon;
 
     /**
      * Constructor.
@@ -59,6 +60,8 @@ public class MainFrame extends JFrame {
         toolkit = Toolkit.getDefaultToolkit();
 
         ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
+        
+        icon = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
 
         int bgWidth = bgImage.getIconWidth();
         int bgHeight = bgImage.getIconHeight();
@@ -68,6 +71,7 @@ public class MainFrame extends JFrame {
         setTitle(frameTitle);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        setIconImage(icon.getImage());
 
         panel = new JPanel();
         panel.setBounds(0, 0, bgWidth, bgHeight);
@@ -156,13 +160,7 @@ public class MainFrame extends JFrame {
                 mixFrame.addWindowListener(new WindowEventsHandler());
             }
             else if (e.getSource() == chichaButton) {
-                toggleButton(startButton);
-                toggleButton(exitButton);
-
                 chicha(version);
-
-                toggleButton(startButton);
-                toggleButton(exitButton);
             }
             else System.exit(0);
         }
@@ -175,13 +173,11 @@ public class MainFrame extends JFrame {
          * @param   version Versión del software.
          */
         private void chicha(String version) {
-            ImageIcon creditsIcon = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
-            
-            creditsIcon = new ImageIcon(creditsIcon.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
+            icon = new ImageIcon(icon.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
             String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
             
-            JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, creditsIcon);
+            JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, icon);
         }
     }
 
