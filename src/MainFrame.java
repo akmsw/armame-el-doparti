@@ -147,11 +147,9 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == startButton) {
-                WindowEventsHandler WindowEventsHandler = new WindowEventsHandler();
-
                 mixFrame = new MixFrame();
 
-                mixFrame.addWindowListener(WindowEventsHandler);
+                mixFrame.addWindowListener(new WindowEventsHandler());
             }
             else if (e.getSource() == chichaButton) {
                 toggleButton(startButton);
