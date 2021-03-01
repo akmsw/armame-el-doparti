@@ -158,7 +158,7 @@ public class MainFrame extends JFrame {
             if (e.getSource() == startButton) {
                 String[] options = {"7", "8"};
 
-                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Cantidad de jugadores", 2,
+                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Antes de empezar...", 2,
                                                                  JOptionPane.QUESTION_MESSAGE, smallIcon, options, options[0]);
 
                 if (playersAmount != JOptionPane.CLOSED_OPTION) {
