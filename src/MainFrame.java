@@ -10,8 +10,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -147,11 +147,11 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == startButton) {
-                WindowEventHandler windowEventHandler = new WindowEventHandler();
+                WindowEventsHandler WindowEventsHandler = new WindowEventsHandler();
 
                 mixFrame = new MixFrame();
 
-                mixFrame.addWindowListener(windowEventHandler);
+                mixFrame.addWindowListener(WindowEventsHandler);
             }
             else if (e.getSource() == chichaButton) {
                 toggleButton(startButton);
@@ -186,7 +186,7 @@ public class MainFrame extends JFrame {
     /**
      * Clase privada para lidiar con los eventos de las ventanas.
      */
-    private class WindowEventHandler implements WindowListener {
+    private class WindowEventsHandler extends WindowAdapter {
 
         @Override
         public void windowOpened(WindowEvent e) {
@@ -202,31 +202,6 @@ public class MainFrame extends JFrame {
             toggleButton(exitButton);
 
             mixFrame.setVisible(false);
-        }
-
-        @Override
-        public void windowClosed(WindowEvent e) {
-            // TODO Auto-generated method stub
-        }
-
-        @Override
-        public void windowIconified(WindowEvent e) {
-            // TODO Auto-generated method stub
-        }
-
-        @Override
-        public void windowDeiconified(WindowEvent e) {
-            // TODO Auto-generated method stub
-        }
-
-        @Override
-        public void windowActivated(WindowEvent e) {
-            // TODO Auto-generated method stub
-        }
-
-        @Override
-        public void windowDeactivated(WindowEvent e) {
-            // TODO Auto-generated method stub
         }
     }
 }
