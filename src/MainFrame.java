@@ -15,12 +15,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
     // Campos privados
+    private String version;
     private Toolkit toolkit;
     private JPanel panel;
     private JButton startButton, exitButton, chichaButton;
@@ -28,9 +30,9 @@ public class MainFrame extends JFrame {
     /**
      * Constructor.
      */
-    public MainFrame(String frameTitle) {
+    public MainFrame(String frameTitle, String version) {
+        this.version = version;
         initializeComponents(frameTitle);
-
         setVisible(true);
         setResizable(false);
     }
@@ -88,8 +90,7 @@ public class MainFrame extends JFrame {
         exitButton.setEnabled(true);
 
         chichaButton.setBounds(600, 400, 92, 94);
-        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-        chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(), chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -110,6 +111,32 @@ public class MainFrame extends JFrame {
     }
 
     /**
+     * Este método se encarga de desplegar los créditos del programa.
+     * 
+     * @param   version Versión del software.
+     */
+    private void chicha(String version) {
+        ImageIcon creditsIcon = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
+        
+        creditsIcon = new ImageIcon(creditsIcon.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
+
+    	String line = "<html>FIESTA DE FULBITO " + version + "<p><p>   Créditos<p> ©AkamaiSoftware";
+    	
+    	JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, creditsIcon);
+    }
+
+    /**
+     * Este método se encarga de togglear el estado de un JButton.
+     * Si el botón está activo, se lo desactiva; y viceversa.
+     * 
+     * @param   button  Botón a togglear.
+     */
+    private void toggleButton(JButton button) {
+        if (button.isEnabled()) button.setEnabled(false);
+        else button.setEnabled(true);
+    }
+
+    /**
      * Clase privada para lidiar con los eventos de los botones.
      */
     private class ActionHandler implements ActionListener {
@@ -121,10 +148,20 @@ public class MainFrame extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == startButton)
+            if (e.getSource() == startButton) {
+                toggleButton(chichaButton);
+                toggleButton(exitButton);
                 System.out.println("START BUTTON PULSADO");
-            else if (e.getSource() == chichaButton)
-                System.out.println("CHICHA BUTTON PULSADO");
+                toggleButton(chichaButton);
+                toggleButton(exitButton);
+            }
+            else if (e.getSource() == chichaButton) {
+                toggleButton(startButton);
+                toggleButton(exitButton);
+                chicha(version);
+                toggleButton(startButton);
+                toggleButton(exitButton);
+            }
             else System.exit(0);
         }
     }

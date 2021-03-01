@@ -72,7 +72,7 @@ public class Main {
             printSet(Position.FORWARD, FWSet);
             printSet(Position.WILDCARD, WCSet);*/
 
-            MainFrame frame = new MainFrame("Fiesta de Fulbito " + version);
+            MainFrame frame = new MainFrame("Fiesta de Fulbito ", version);
         /*} catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
