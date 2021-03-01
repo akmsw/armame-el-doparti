@@ -159,7 +159,7 @@ public class MainFrame extends JFrame {
                 String[] options = {"7", "8"};
 
                 int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Cantidad de jugadores", 2,
-                                                                JOptionPane.QUESTION_MESSAGE, smallIcon, options, options[0]);
+                                                                 JOptionPane.QUESTION_MESSAGE, smallIcon, options, options[0]);
 
                 if (playersAmount != JOptionPane.CLOSED_OPTION) {
                     mixFrame = new MixFrame(playersAmount);
