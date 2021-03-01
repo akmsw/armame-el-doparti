@@ -6,6 +6,7 @@
  * @since 28/02/2021
  */
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
@@ -13,15 +14,17 @@ public class MixFrame extends JFrame {
 
     // Campos privados.
     private int playersAmount;
+    private ImageIcon icon;
 
     /**
      * Constructor.
      * Aquí se crea la ventana de mezcla.
      */
-    public MixFrame(int playersAmount) {
+    public MixFrame(int playersAmount, ImageIcon icon) {
         this.playersAmount = playersAmount;
+        this.icon = icon;
 
-        initializeComponents("Ingreso de jugadores");
+        initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
 
         setVisible(true);
     }
@@ -39,5 +42,6 @@ public class MixFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle(frameTitle);
         setResizable(false);
+        setIconImage(icon.getImage());
     }
 }

@@ -26,10 +26,10 @@ public class MainFrame extends JFrame {
     // Campos privados
     private String version; // Versión del programa.
     private Toolkit toolkit; // Recurso para obtener información gráfica del (y para el) software.
-    private JPanel panel;
-    private JButton startButton, exitButton, chichaButton;
+    private JPanel panel; // Panel de la ventana principal.
+    private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
     private MixFrame mixFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
-    private ImageIcon icon, smallIcon;
+    private ImageIcon icon, smallIcon; // Iconos utilizados para las ventanas.
 
     /**
      * Constructor.
@@ -162,7 +162,7 @@ public class MainFrame extends JFrame {
                                                                  JOptionPane.QUESTION_MESSAGE, smallIcon, options, options[0]);
 
                 if (playersAmount != JOptionPane.CLOSED_OPTION) {
-                    mixFrame = new MixFrame(playersAmount);
+                    mixFrame = new MixFrame((playersAmount + 7), icon);
 
                     mixFrame.addWindowListener(new WindowEventsHandler());
                 }
