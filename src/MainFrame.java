@@ -32,12 +32,11 @@ public class MainFrame extends JFrame {
     private ImageIcon icon, smallIcon; // Iconos utilizados para las ventanas.
 
     /**
-     * Constructor.
-     * Aquí se instancia todo lo relativo a la ventana principal,
-     * como sus botones, las imágenes y los handlers de eventos.
+     * Constructor. Aquí se instancia todo lo relativo a la ventana principal, como
+     * sus botones, las imágenes y los handlers de eventos.
      * 
-     * @param   frameTitle  Título a mostrar en la ventana principal.
-     * @param   version     Versión del software.
+     * @param frameTitle Título a mostrar en la ventana principal.
+     * @param version    Versión del software.
      */
     public MainFrame(String frameTitle, String version) {
         this.version = version;
@@ -50,16 +49,17 @@ public class MainFrame extends JFrame {
     // ----------------------------------------Métodos privados---------------------------------
 
     /**
-     * Este método se encarga de inicializar los botones y la imagen de fondo
-     * de la ventana principal.
+     * Este método se encarga de inicializar los botones y la imagen de fondo de la
+     * ventana principal.
      * 
-     * @param   frameTitle  Título de la ventana.
+     * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
         toolkit = Toolkit.getDefaultToolkit();
 
-        ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
-        
+        ImageIcon bgImage = new ImageIcon(
+                toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
+
         icon = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
         smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
@@ -89,10 +89,10 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de agregar todos los botones necesarios
-     * en la ventana principal.
+     * Este método se encarga de agregar todos los botones necesarios en la ventana
+     * principal.
      * 
-     * @param   panel   Panel de la ventana principal donde se colocarán los botones.
+     * @param panel Panel de la ventana principal donde se colocarán los botones.
      */
     private void addButtons(JPanel panel) {
         startButton = new JButton("Comenzar");
@@ -118,14 +118,16 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de togglear el estado de un JButton.
-     * Si el botón está activo, se lo desactiva; y viceversa.
+     * Este método se encarga de togglear el estado de un JButton. Si el botón está
+     * activo, se lo desactiva; y viceversa.
      * 
-     * @param   button  Botón a togglear.
+     * @param button Botón a togglear.
      */
     private void toggleButton(JButton button) {
-        if (button.isEnabled()) button.setEnabled(false);
-        else button.setEnabled(true);
+        if (button.isEnabled())
+            button.setEnabled(false);
+        else
+            button.setEnabled(true);
     }
 
     /**
@@ -151,12 +153,12 @@ public class MainFrame extends JFrame {
         /**
          * Override para indicar qué hacer en base a cada boton pulsado.
          * 
-         * @param   e   Evento ocurrido (botón pulsado).
+         * @param e Evento ocurrido (botón pulsado).
          */
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == startButton) {
-                String[] options = {"7", "8"};
+                String[] options = { "7", "8" };
 
                 int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Antes de empezar...", 2,
                                                                  JOptionPane.QUESTION_MESSAGE, smallIcon, options, options[0]);
@@ -166,21 +168,22 @@ public class MainFrame extends JFrame {
 
                     mixFrame.addWindowListener(new WindowEventsHandler());
                 }
-            }
-            else if (e.getSource() == chichaButton) chicha(version);
-            else System.exit(0);
+            } else if (e.getSource() == chichaButton)
+                chicha(version);
+            else
+                System.exit(0);
         }
 
         // ----------------------------------------Métodos privados---------------------------------
-    
+
         /**
          * Este método se encarga de desplegar los créditos del programa.
          * 
-         * @param   version Versión del software.
+         * @param version Versión del software.
          */
         private void chicha(String version) {
             String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
-            
+
             JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIcon);
         }
     }
@@ -191,10 +194,10 @@ public class MainFrame extends JFrame {
     private class WindowEventsHandler extends WindowAdapter {
 
         /**
-         * Este método se encarga de togglear el estado
-         * de los botones del frame principal.
+         * Este método se encarga de togglear el estado de los botones del frame
+         * principal.
          * 
-         * @param   e   Evento de ventana.
+         * @param e Evento de ventana.
          */
         @Override
         public void windowOpened(WindowEvent e) {
@@ -206,11 +209,10 @@ public class MainFrame extends JFrame {
         }
 
         /**
-         * Este método se encarga de togglear el
-         * estado de los botones del frame principal
-         * y hacer invisible el frame creado al
-         * pulsar el botón de "Comenzar".
-         * @param   e   Evento de ventana.
+         * Este método se encarga de togglear el estado de los botones del frame
+         * principal y hacer invisible el frame creado al pulsar el botón de "Comenzar".
+         * 
+         * @param e Evento de ventana.
          */
         @Override
         public void windowClosing(WindowEvent e) {

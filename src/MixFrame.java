@@ -17,8 +17,7 @@ public class MixFrame extends JFrame {
     private ImageIcon icon;
 
     /**
-     * Constructor.
-     * Aquí se crea la ventana de mezcla.
+     * Constructor. Aquí se crea la ventana de mezcla.
      */
     public MixFrame(int playersAmount, ImageIcon icon) {
         this.playersAmount = playersAmount;
@@ -32,9 +31,10 @@ public class MixFrame extends JFrame {
     // ----------------------------------------Métodos privados---------------------------------
 
     /**
-     * Este método se encarga de inicializar los componentes de la ventana de comienzo.
+     * Este método se encarga de inicializar los componentes de la ventana de
+     * comienzo.
      * 
-     * @param   frameTitle  Título de la ventana.
+     * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
         setSize(400, 400);
