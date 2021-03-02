@@ -161,6 +161,8 @@ public class MixFrame extends JFrame implements ActionListener {
      * 
      * @param   position        Posición a buscar en el EnumMap.
      * @param   textFieldSet    Arreglo de campos de texto para cada posición.
+     * @param   playersSet      Arreglo de jugadores donde se almacenarán los
+     *                          nombres ingresados en los campos de texto.
      */
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, ArrayList<Player> playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
@@ -176,14 +178,19 @@ public class MixFrame extends JFrame implements ActionListener {
                  * @param   e   Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
+                    JTextField auxTF = (JTextField)e.getSource();
+
+                    for (int i = 0; i < textFieldSet.size(); i++)
+                        if(auxTF == textFieldSet.get(i)) {
+                            System.out.println(position + " text field #" + (i + 1));
+                            break;
+                        }
+
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
-                    if (name.length() == 0 || name.length() > 12 || isEmptyString(name))
-                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío o tener más de 12 caracteres",
+                    if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
+                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
                                                       "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-                    else if (alreadyExists(playersSet, name))
-                        JOptionPane.showMessageDialog(null, "¡Ya hay un jugador con ese nombre!",
-                                                        "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else playersSet.add(new Player(name, position));
                 }
             });
@@ -214,15 +221,34 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * @param list
-     * @param name
-     * @return
+     * Este método se encarga de chequear si un nombre está repetido
+     * en un arreglo de jugadores.
+     * 
+     * @param   name        Nombre a chequear.
+     * 
+     * @return  Si hay algún jugador con el mismo nombre.
      */
-    private boolean alreadyExists(ArrayList<Player> playersSet, String name)
+    private boolean alreadyExists(String name)
     {
-    	for(Player player : playersSet)
+    	for(Player player : setCD)
 			if(name.equals(player.getName()))
 				return true;
+        
+        for(Player player : setLD)
+			if(name.equals(player.getName()))
+				return true;
+        
+        for(Player player : setMF)
+            if(name.equals(player.getName()))
+                return true;
+
+        for(Player player : setFW)
+            if(name.equals(player.getName()))
+                return true;
+        
+        for(Player player : setWC)
+            if(name.equals(player.getName()))
+                return true;
     	
     	return false;
     }
