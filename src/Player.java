@@ -55,29 +55,18 @@ public class Player {
      * En este método se setea el nombre del jugador.
      * 
      * @param name El nombre del jugador.
-     * 
-     * @throws IllegalArgumentException Si el nombre pasado por argumento es nulo.
      */
-    public void setName(String name) throws IllegalArgumentException {
-        if (name.equals("") || name.length() > 12)
-            throw new IllegalArgumentException("El nombre del jugador no puede ser nulo o tener más de 12 caracteres.");
-        else
-            this.name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
      * En este método se setea el puntaje del jugador.
      * 
      * @param rating El puntaje del jugador.
-     * 
-     * @throws IllegalArgumentException Si el puntaje pasado por argumento es menor
-     *                                  a 1 o mayor a 4.
      */
     public void setRating(int rating) {
-        if (rating <= 0 || rating >= 5)
-            throw new IllegalArgumentException("No es posible asignar como puntaje un número menor a 1 o mayor a 4. Reingrese el puntaje del jugador.");
-        else
-            this.rating = rating;
+        this.rating = rating;
     }
 
     /**

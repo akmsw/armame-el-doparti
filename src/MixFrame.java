@@ -178,7 +178,7 @@ public class MixFrame extends JFrame implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
-                    if (name.length() == 0 || name.length() > 12 || isEmptyString(name))
+                    if (/*name.length() == 0 ||*/ name.length() > 12 || isEmptyString(name))
                         JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío o tener más de 12 caracteres",
                                                       "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else if (alreadyExists(playersSet, name))
