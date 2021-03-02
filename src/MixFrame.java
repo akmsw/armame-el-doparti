@@ -183,7 +183,7 @@ public class MixFrame extends JFrame implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
                     JTextField auxTF = (JTextField)e.getSource();
 
-                    int index;
+                    int index; // Índice que indica el campo de texto donde se ingresó el nombre. 
 
                     for (index = 0; index < textFieldSet.size(); index++)
                         if(auxTF == textFieldSet.get(index)) break;
