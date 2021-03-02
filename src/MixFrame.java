@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,13 +29,14 @@ public class MixFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
-    private static final int frameHeight = 344; // Alto de la ventana.
+    private static final int frameHeight = 345; // Alto de la ventana.
     private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el menú desplegable.
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
     // Campos privados.
     private ImageIcon icon; // Icono para la ventana.
     private JPanel panel; // Panel para la ventana de mezcla.
+    private JButton mixButton; // Botón para mezclar jugadores.
     private JComboBox<String> comboBox; // Menú desplegable.
     private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
@@ -133,6 +135,14 @@ public class MixFrame extends JFrame implements ActionListener {
         addTextFields(Position.WILDCARD, textFieldWC, setWC);
 
         addComboBox();
+
+        mixButton = new JButton("Mezclar");
+
+        mixButton.setBounds(215, 269, 100, 30);
+        mixButton.setEnabled(false);
+        mixButton.setVisible(true);
+
+        panel.add(mixButton);
 
         add(panel);
     }
