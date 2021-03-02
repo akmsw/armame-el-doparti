@@ -16,8 +16,10 @@ import java.util.Scanner;*/
 
 public class Main {
 
-    // Campos privados.
+    // Constantes privadas.
     private static final String version = "v3.0";
+
+    // Campos privados.
     /*private static ArrayList<String> data;
     private static ArrayList<Player> CDSet, LDSet, MFSet, FWSet, WCSet;
     private static EnumMap<Position, Integer> playersAmountMap;

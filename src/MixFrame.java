@@ -1,3 +1,4 @@
+
 /**
  * @author Bonino, Francisco Ignacio.
  * 
@@ -6,15 +7,27 @@
  * @since 28/02/2021
  */
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class MixFrame extends JFrame {
+public class MixFrame extends JFrame implements ActionListener {
+
+    // Constantes privadas.
+    private static final int frameWidth = 400;
+    private static final int frameHeight = 400;
+    private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales",
+                                              "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
     // Campos privados.
     private int playersAmount;
     private ImageIcon icon;
+    private JPanel panel;
 
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
@@ -43,5 +56,54 @@ public class MixFrame extends JFrame {
         setTitle(frameTitle);
         setResizable(false);
         setIconImage(icon.getImage());
+
+        panel = new JPanel();
+        panel.setBounds(0, 0, frameWidth, frameHeight);
+        panel.setLayout(null);
+
+        addComboBox();
+
+        add(panel);
+    }
+
+    /**
+     * Este método se encarga de agregar la lista desplegable
+     * al frame, y setear el handler de eventos a la misma.
+     */
+    private void addComboBox() {
+        JComboBox comboBox = new JComboBox(options);
+
+        comboBox.setBounds(5, 5, 200, 30);
+        comboBox.addActionListener(this);
+
+        updateOutput(comboBox.getSelectedItem().toString()); // Para que se muestre el output correspondiente
+                                                             // al estado inicial del JComboBox.
+
+        panel.add(comboBox);
+    }
+
+    /**
+     * Handler para los eventos ocurridos de la lista desplegable.
+     * Se trata la fuente del evento ocurrido como un JComboBox y
+     * se trata como un String el item seleccionado en el mismo
+     * para pasarlo al método updateOutput.
+     * 
+     * @param   e   Evento ocurrido (item seleccionado).
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String text = (String)((JComboBox)e.getSource()).getSelectedItem();
+
+        updateOutput(text);
+    }
+
+    /**
+     * Este método se encarga de actualizar la salida en base
+     * al evento ocurrido con la lista desplegable.
+     * 
+     * @param   text    Opción seleccionada del arreglo de Strings 'options'.
+     */
+    private void updateOutput(String text) {
+        System.out.println(text);
     }
 }
