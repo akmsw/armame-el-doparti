@@ -29,16 +29,16 @@ public class MixFrame extends JFrame implements ActionListener {
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
     private static final int frameHeight = 344; // Alto de la ventana.
-    private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales",
+    private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el menú desplegable.
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
     // Campos privados.
-    private ImageIcon icon;
-    private JPanel panel;
-    private JComboBox<String> comboBox;
-    private ArrayList<String> data;
-    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC;
-    private EnumMap<Position, Integer> playersAmountMap;
+    private ImageIcon icon; // Icono para la ventana.
+    private JPanel panel; // Panel para la ventana de mezcla.
+    private JComboBox<String> comboBox; // Menú desplegable.
+    private ArrayList<String> data; // Arreglo de strings que contiene las cantidad de jugadores por cada posición.
+    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
+    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
 
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
