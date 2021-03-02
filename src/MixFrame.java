@@ -180,18 +180,27 @@ public class MixFrame extends JFrame implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
                     JTextField auxTF = (JTextField)e.getSource();
 
-                    for (int i = 0; i < textFieldSet.size(); i++)
-                        if(auxTF == textFieldSet.get(i)) {
-                            System.out.println(position + " text field #" + (i + 1));
-                            break;
-                        }
+                    int index;
+
+                    for (index = 0; index < textFieldSet.size(); index++)
+                        if(auxTF == textFieldSet.get(index)) break;
+                        
+                    System.out.println("INDEX: " + index);
 
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
                                                       "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-                    else playersSet.add(new Player(name, position));
+                    else if (index >= playersSet.size()) playersSet.add(new Player(name, position));
+                    else {
+                        playersSet.remove(index);
+                        playersSet.add(new Player(name, position));
+                    }
+
+                    System.out.println(position + " ARRAY");
+                    
+                    playersSet.forEach((p) -> System.out.println(p.getName()));
                 }
             });
 
