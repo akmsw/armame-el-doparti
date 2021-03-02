@@ -64,8 +64,6 @@ public class MixFrame extends JFrame implements ActionListener {
 
         collectPDData(playersAmount);
 
-        playersAmountMap.forEach((key, value) -> System.out.println("POSICIÓN " + key + ": " + value));
-
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
 
         setVisible(true);
@@ -184,8 +182,6 @@ public class MixFrame extends JFrame implements ActionListener {
 
                     for (index = 0; index < textFieldSet.size(); index++)
                         if(auxTF == textFieldSet.get(index)) break;
-                        
-                    System.out.println("INDEX: " + index);
 
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
@@ -197,10 +193,6 @@ public class MixFrame extends JFrame implements ActionListener {
                         playersSet.remove(index);
                         playersSet.add(new Player(name, position));
                     }
-
-                    System.out.println(position + " ARRAY");
-                    
-                    playersSet.forEach((p) -> System.out.println(p.getName()));
                 }
             });
 
