@@ -37,6 +37,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private ImageIcon icon;
     private JPanel panel;
     private JComboBox<String> comboBox;
+    private JTextField textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC;
     private static ArrayList<String> data;
     private static EnumMap<Position, Integer> playersAmountMap;
 
@@ -113,6 +114,20 @@ public class MixFrame extends JFrame implements ActionListener {
         panel.setBounds(0, 0, frameWidth, frameHeight);
         panel.setLayout(null);
 
+        textFieldCD = new JTextField("Central Defender");
+        textFieldCD.setBounds(5, 40, 200, 30);
+        textFieldCD.setVisible(false);
+        panel.add(textFieldCD);
+
+        textFieldLD = new JTextField("Lateral Defender");
+        textFieldLD.setBounds(5, 40, 200, 30);
+        textFieldLD.setVisible(false);
+        panel.add(textFieldLD);
+
+        textFieldMF = new JTextField();
+        textFieldFW = new JTextField();
+        textFieldWC = new JTextField();
+
         addComboBox();
 
         add(panel);
@@ -163,7 +178,7 @@ public class MixFrame extends JFrame implements ActionListener {
             }
 
             case "Agregar defensores laterales": {
-                System.out.println("DL");
+                System.out.println("LD");
                 break;
             }
 
