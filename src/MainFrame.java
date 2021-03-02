@@ -6,13 +6,14 @@
  * @since 27/02/2021
  */
 
+import java.io.IOException;
+
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -84,7 +85,7 @@ public class MainFrame extends JFrame {
         addButtons(panel);
 
         JLabel bgLabel = new JLabel("", bgImage, JLabel.CENTER);
-        
+
         bgLabel.setBounds(0, 0, bgWidth, bgHeight);
 
         panel.add(bgLabel);
