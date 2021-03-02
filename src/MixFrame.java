@@ -42,20 +42,17 @@ public class MixFrame extends JFrame implements ActionListener {
 
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
+     * 
+     * @throws IOException
      */
-    public MixFrame(int playersAmount, ImageIcon icon) {
+    public MixFrame(int playersAmount, ImageIcon icon) throws IOException {
         this.icon = icon;
 
         playersAmountMap = new EnumMap<>(Position.class);
 
         data = new ArrayList<>();
 
-        try {
-            collectPDData(String.valueOf(playersAmount));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
+        collectPDData(String.valueOf(playersAmount));
 
         int index = 0;
 

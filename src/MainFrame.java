@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -52,12 +53,13 @@ public class MainFrame extends JFrame {
      * Este método se encarga de inicializar los botones y la imagen de fondo de la
      * ventana principal.
      * 
-     * @param   frameTitle  Título de la ventana.
+     * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
         toolkit = Toolkit.getDefaultToolkit();
 
-        ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
+        ImageIcon bgImage = new ImageIcon(
+                toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
 
         icon = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
         smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -91,7 +93,7 @@ public class MainFrame extends JFrame {
      * Este método se encarga de agregar todos los botones necesarios en la ventana
      * principal.
      * 
-     * @param   panel   Panel de la ventana principal donde se colocarán los botones.
+     * @param panel Panel de la ventana principal donde se colocarán los botones.
      */
     private void addButtons(JPanel panel) {
         startButton = new JButton("Comenzar");
@@ -107,7 +109,8 @@ public class MainFrame extends JFrame {
         exitButton.setEnabled(true);
 
         chichaButton.setBounds(600, 400, 92, 94);
-        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(), chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
+                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -120,7 +123,7 @@ public class MainFrame extends JFrame {
      * Este método se encarga de togglear el estado de un JButton. Si el botón está
      * activo, se lo desactiva; y viceversa.
      * 
-     * @param   button  Botón a togglear.
+     * @param button Botón a togglear.
      */
     private void toggleButton(JButton button) {
         if (button.isEnabled())
@@ -140,7 +143,8 @@ public class MainFrame extends JFrame {
         chichaButton.addActionListener(eventHandler);
     }
 
-    // ----------------------------------------Clases privadas----------------------------------
+    // ----------------------------------------Clases
+    // privadas----------------------------------
 
     /**
      * Clase privada para lidiar con los eventos de los botones.
@@ -152,18 +156,23 @@ public class MainFrame extends JFrame {
         /**
          * Override para indicar qué hacer en base a cada boton pulsado.
          * 
-         * @param   e   Evento ocurrido (botón pulsado).
+         * @param e Evento ocurrido (botón pulsado).
          */
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == startButton) {
                 String[] options = { "7", "8" };
 
-                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Antes de empezar...", 2,
-                                                                 JOptionPane.QUESTION_MESSAGE, smallIcon, options, options[0]);
+                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
+                        "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIcon, options, options[0]);
 
                 if (playersAmount != JOptionPane.CLOSED_OPTION) {
-                    mixFrame = new MixFrame((playersAmount + 7), icon);
+                    try {
+                        mixFrame = new MixFrame((playersAmount + 7), icon);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        System.exit(-1);
+                    }
 
                     mixFrame.addWindowListener(new WindowEventsHandler());
                 }
