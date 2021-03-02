@@ -29,11 +29,11 @@ Una vez ingresados los nombres de todos los jugadores a repartir en cada posici�
 
 Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribución será única. Si se decide distribuirlos de manera aleatoria, se podrán redistribuir tantas veces como se quiera hasta estar conforme.
 
-### Mejoras [WIP]
+### Mejoras
 
 - Implementación de expresiones regulares para alivianar procesos de búsqueda.
 - Se arreglaron partes del código hardcodeadas que condicionaban la GUI y el algoritmo de distribución.
-- Se deja el trabajo pesado de distribución de jugadores a un archivo en lenguaje de programación de bajo nivel (C) para incrementar la velocidad.
-- Se logró un nivel de abstracción mayor que permitió prescindir de clases y métodos que no eran imprescindibles.
+- Se logró un nivel de abstracción mayor que permitió prescindir de clases y métodos que no eran vitales.
+- Se lograron mejoras significativas en la modularización del código, mejorando la velocidad de ejecución del programa.
 - Se refactorizaron métodos y clases completas.
 - Arreglo de bugs de la GUI.
