@@ -8,6 +8,8 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -27,6 +29,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private int playersAmount;
     private ImageIcon icon;
     private JPanel panel;
+    private JComboBox<String> comboBox;
 
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
@@ -70,7 +73,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * al frame, y setear el handler de eventos a la misma.
      */
     private void addComboBox() {
-        JComboBox comboBox = new JComboBox(options);
+        comboBox = new JComboBox<>(options);
 
         comboBox.setBounds(5, 5, 200, 30);
         comboBox.addActionListener(this);
@@ -104,5 +107,33 @@ public class MixFrame extends JFrame implements ActionListener {
      */
     private void updateOutput(String text) {
         System.out.println(text);
+    }
+
+    // ----------------------------------------Clases privadas----------------------------------
+
+    /**
+     * Clase privada para lidiar con los eventos de las ventanas.
+     */
+    private class WindowEventsHandler extends WindowAdapter {
+
+        /**
+         * 
+         * 
+         * @param   e   Evento de ventana.
+         */
+        @Override
+        public void windowOpened(WindowEvent e) {
+            // TODO.
+        }
+
+        /**
+         * 
+         * 
+         * @param   e   Evento de ventana.
+         */
+        @Override
+        public void windowClosing(WindowEvent e) {
+            // TODO.
+        }
     }
 }

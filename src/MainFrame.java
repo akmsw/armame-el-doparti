@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
      * Este método se encarga de inicializar los botones y la imagen de fondo de la
      * ventana principal.
      * 
-     * @param frameTitle Título de la ventana.
+     * @param   frameTitle  Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
         toolkit = Toolkit.getDefaultToolkit();
@@ -91,7 +91,7 @@ public class MainFrame extends JFrame {
      * Este método se encarga de agregar todos los botones necesarios en la ventana
      * principal.
      * 
-     * @param panel Panel de la ventana principal donde se colocarán los botones.
+     * @param   panel   Panel de la ventana principal donde se colocarán los botones.
      */
     private void addButtons(JPanel panel) {
         startButton = new JButton("Comenzar");
@@ -120,7 +120,7 @@ public class MainFrame extends JFrame {
      * Este método se encarga de togglear el estado de un JButton. Si el botón está
      * activo, se lo desactiva; y viceversa.
      * 
-     * @param button Botón a togglear.
+     * @param   button  Botón a togglear.
      */
     private void toggleButton(JButton button) {
         if (button.isEnabled())
@@ -152,7 +152,7 @@ public class MainFrame extends JFrame {
         /**
          * Override para indicar qué hacer en base a cada boton pulsado.
          * 
-         * @param e Evento ocurrido (botón pulsado).
+         * @param   e   Evento ocurrido (botón pulsado).
          */
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -169,8 +169,7 @@ public class MainFrame extends JFrame {
                 }
             } else if (e.getSource() == chichaButton)
                 chicha(version);
-            else
-                System.exit(0);
+            else System.exit(0);
         }
 
         // ----------------------------------------Métodos privados---------------------------------
@@ -178,7 +177,7 @@ public class MainFrame extends JFrame {
         /**
          * Este método se encarga de desplegar los créditos del programa.
          * 
-         * @param version Versión del software.
+         * @param   version Versión del software.
          */
         private void chicha(String version) {
             String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
@@ -196,7 +195,7 @@ public class MainFrame extends JFrame {
          * Este método se encarga de togglear el estado de los botones del frame
          * principal.
          * 
-         * @param e Evento de ventana.
+         * @param   e   Evento de ventana.
          */
         @Override
         public void windowOpened(WindowEvent e) {
@@ -211,7 +210,7 @@ public class MainFrame extends JFrame {
          * Este método se encarga de togglear el estado de los botones del frame
          * principal y hacer invisible el frame creado al pulsar el botón de "Comenzar".
          * 
-         * @param e Evento de ventana.
+         * @param   e   Evento de ventana.
          */
         @Override
         public void windowClosing(WindowEvent e) {
