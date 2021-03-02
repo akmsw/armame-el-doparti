@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ActionListener {
 
     // Campos privados
     private String version; // Versión del programa.
@@ -137,62 +137,52 @@ public class MainFrame extends JFrame {
      * Este método se encarga de añadir el handler de eventos a cada botón.
      */
     private void addActionListeners() {
-        EventsHandler eventHandler = new EventsHandler();
+        startButton.addActionListener(this);
+        exitButton.addActionListener(this);
+        chichaButton.addActionListener(this);
+    }
+    
+    /**
+     * Este método se encarga de desplegar los créditos del programa.
+     * 
+     * @param   version Versión del software.
+     */
+    private void chicha(String version) {
+        String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
 
-        startButton.addActionListener(eventHandler);
-        exitButton.addActionListener(eventHandler);
-        chichaButton.addActionListener(eventHandler);
+        JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
+    }
+
+    // ----------------------------------------Métodos públicos---------------------------------
+
+    /**
+     * Override para indicar qué hacer en base a cada boton pulsado.
+     * 
+     * @param e Evento ocurrido (botón pulsado).
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == startButton) {
+            String[] options = { "7", "8" };
+
+            int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Antes de empezar...",
+                                                                2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
+
+            if (playersAmount != JOptionPane.CLOSED_OPTION) {
+                try {
+                    mixFrame = new MixFrame((playersAmount + 7), iconBall);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    System.exit(-1);
+                }
+
+                mixFrame.addWindowListener(new WindowEventsHandler());
+            }
+        } else if (e.getSource() == chichaButton) chicha(version);
+        else System.exit(0);
     }
 
     // ----------------------------------------Clases privadas----------------------------------
-
-    /**
-     * Clase privada para lidiar con los eventos de los botones.
-     */
-    private class EventsHandler implements ActionListener {
-
-        // ----------------------------------------Métodos públicos---------------------------------
-
-        /**
-         * Override para indicar qué hacer en base a cada boton pulsado.
-         * 
-         * @param e Evento ocurrido (botón pulsado).
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == startButton) {
-                String[] options = { "7", "8" };
-
-                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Antes de empezar...",
-                                                                 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
-
-                if (playersAmount != JOptionPane.CLOSED_OPTION) {
-                    try {
-                        mixFrame = new MixFrame((playersAmount + 7), iconBall);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        System.exit(-1);
-                    }
-
-                    mixFrame.addWindowListener(new WindowEventsHandler());
-                }
-            } else if (e.getSource() == chichaButton) chicha(version);
-            else System.exit(0);
-        }
-
-        // ----------------------------------------Métodos privados---------------------------------
-
-        /**
-         * Este método se encarga de desplegar los créditos del programa.
-         * 
-         * @param   version Versión del software.
-         */
-        private void chicha(String version) {
-            String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
-
-            JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
-        }
-    }
 
     /**
      * Clase privada para lidiar con los eventos de las ventanas.
