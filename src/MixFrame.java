@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -159,11 +160,40 @@ public class MixFrame extends JFrame implements ActionListener {
 
             aux.setBounds(5, (45 * (i + 1)), 201, 30);
 
+            aux.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    String text = aux.getText();
+
+                    if (text.length() == 0 || text.length() > 12 || isEmptyString(text))
+                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío o tener más de 12 caracteres",
+                                                      "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                    else System.out.println(text.trim().toUpperCase());
+                }
+            });
+
             textFieldSet.add(aux);
         }
 
         for (JTextField textField : textFieldSet)
             panel.add(textField);
+    }
+
+    /**
+     * Indica si una cadena está vacía o no.
+     * Si la cadena está compuesta por caracteres
+     * en blanco (espacios), se la tomará como vacía.
+     * 
+     * @param   string    Cadena a analizar
+     * 
+     * @return  Si la cadena está vacía o no.
+     */
+    private boolean isEmptyString(String string) {
+    	char[] charArray = string.toCharArray();
+    	
+    	for (int i = 0; i < charArray.length; i++)
+    		if (charArray[i] != ' ') return false;
+    	
+    	return true;
     }
 
     /**
