@@ -49,8 +49,6 @@ public class MixFrame extends JFrame implements ActionListener {
 
         playersAmountMap = new EnumMap<>(Position.class);
 
-        //data = new ArrayList<>();
-
         textFieldCD = new ArrayList<>();
         textFieldLD = new ArrayList<>();
         textFieldMF = new ArrayList<>();
