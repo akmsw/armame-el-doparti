@@ -66,8 +66,8 @@ public class MainFrame extends JFrame {
         iconAKMSW = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/AKMSW_icon.png")));
         smallIconAKMSW = new ImageIcon(iconAKMSW.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
-        int bgWidth = bgImage.getIconWidth();
-        int bgHeight = bgImage.getIconHeight();
+        int bgWidth = bgImage.getIconWidth(); // Ancho de la imagen de fondo.
+        int bgHeight = bgImage.getIconHeight(); // Alto de la imagen de fondo.
 
         setSize(bgWidth, bgHeight);
         setLocationRelativeTo(null);
