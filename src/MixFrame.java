@@ -36,7 +36,6 @@ public class MixFrame extends JFrame implements ActionListener {
     private ImageIcon icon; // Icono para la ventana.
     private JPanel panel; // Panel para la ventana de mezcla.
     private JComboBox<String> comboBox; // Menú desplegable.
-    private ArrayList<String> data; // Arreglo de strings que contiene las cantidad de jugadores por cada posición.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
 
@@ -50,7 +49,7 @@ public class MixFrame extends JFrame implements ActionListener {
 
         playersAmountMap = new EnumMap<>(Position.class);
 
-        data = new ArrayList<>();
+        //data = new ArrayList<>();
 
         textFieldCD = new ArrayList<>();
         textFieldLD = new ArrayList<>();
@@ -60,17 +59,7 @@ public class MixFrame extends JFrame implements ActionListener {
 
         collectPDData(playersAmount);
 
-        int index = 0;
-
-        for (Position position : Position.values()) {
-            playersAmountMap.put(position, Integer.parseInt(data.get(index)));
-
-            index++;
-        }
-
         playersAmountMap.forEach((key, value) -> System.out.println("POSICIÓN " + key + ": " + value));
-
-        data.clear();
 
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
 
@@ -95,10 +84,13 @@ public class MixFrame extends JFrame implements ActionListener {
     private void collectPDData(int fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("useful/FDF_F" + fileName + ".PDA"))) {
             String line;
+            int index = 0;
 
             while ((line = br.readLine()) != null)
-                if (line.matches("[CLMFW].>+.[0-9]"))
-                    data.add(line.replaceAll("[A-Z].>+.", ""));
+                if (line.matches("[CLMFW].>+.[0-9]")) {
+                    playersAmountMap.put(Position.values()[index], Integer.parseInt(line.replaceAll("[A-Z].>+.", "")));
+                    index++;
+                }
         }
     }
 
