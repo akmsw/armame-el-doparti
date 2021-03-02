@@ -36,6 +36,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private ImageIcon icon; // Icono para la ventana.
     private JPanel panel; // Panel para la ventana de mezcla.
     private JComboBox<String> comboBox; // Menú desplegable.
+    private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
 
@@ -54,6 +55,12 @@ public class MixFrame extends JFrame implements ActionListener {
         textFieldMF = new ArrayList<>();
         textFieldFW = new ArrayList<>();
         textFieldWC = new ArrayList<>();
+
+        setCD = new ArrayList<>();
+        setLD = new ArrayList<>();
+        setMF = new ArrayList<>();
+        setFW = new ArrayList<>();
+        setWC = new ArrayList<>();
 
         collectPDData(playersAmount);
 
@@ -121,11 +128,11 @@ public class MixFrame extends JFrame implements ActionListener {
         panel.setBounds(0, 0, frameWidth, frameHeight);
         panel.setLayout(null);
         
-        addTextFields(Position.CENTRALDEFENDER, textFieldCD);
-        addTextFields(Position.LATERALDEFENDER, textFieldLD);
-        addTextFields(Position.MIDFIELDER, textFieldMF);
-        addTextFields(Position.FORWARD, textFieldFW);
-        addTextFields(Position.WILDCARD, textFieldWC);
+        addTextFields(Position.CENTRALDEFENDER, textFieldCD, setCD);
+        addTextFields(Position.LATERALDEFENDER, textFieldLD, setLD);
+        addTextFields(Position.MIDFIELDER, textFieldMF, setMF);
+        addTextFields(Position.FORWARD, textFieldFW, setFW);
+        addTextFields(Position.WILDCARD, textFieldWC, setWC);
 
         addComboBox();
 
@@ -155,7 +162,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * @param   position        Posición a buscar en el EnumMap.
      * @param   textFieldSet    Arreglo de campos de texto para cada posición.
      */
-    private void addTextFields(Position position, ArrayList<JTextField> textFieldSet) {
+    private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, ArrayList<Player> playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
             JTextField aux = new JTextField(position + " #" + (i + 1));
 
@@ -169,12 +176,15 @@ public class MixFrame extends JFrame implements ActionListener {
                  * @param   e   Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
-                    String text = aux.getText();
+                    String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
-                    if (text.length() == 0 || text.length() > 12 || isEmptyString(text))
+                    if (name.length() == 0 || name.length() > 12 || isEmptyString(name))
                         JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío o tener más de 12 caracteres",
                                                       "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-                    else System.out.println(text.trim().toUpperCase().replaceAll(" ", "_"));
+                    else if (alreadyExists(playersSet, name))
+                        JOptionPane.showMessageDialog(null, "¡Ya hay un jugador con ese nombre!",
+                                                        "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                    else playersSet.add(new Player(name, position));
                 }
             });
 
@@ -201,6 +211,20 @@ public class MixFrame extends JFrame implements ActionListener {
     		if (charArray[i] != ' ') return false;
     	
     	return true;
+    }
+
+    /**
+     * @param list
+     * @param name
+     * @return
+     */
+    private boolean alreadyExists(ArrayList<Player> playersSet, String name)
+    {
+    	for(Player player : playersSet)
+			if(name.equals(player.getName()))
+				return true;
+    	
+    	return false;
     }
 
     /**
