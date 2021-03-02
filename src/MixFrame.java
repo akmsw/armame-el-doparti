@@ -75,6 +75,17 @@ public class MixFrame extends JFrame implements ActionListener {
      * 
      * [A-Z].>+. : Matchea el trozo de la línea que no es un número.
      * 
+     *                          ¡¡¡IMPORTANTE!!!
+     * 
+     * Si los archivos .PDA son modificados en cuanto a orden de las líneas
+     * importantes (C >> NÚMERO, etc.), se debe tener en cuenta que
+     * Position.values()[index] confía en que lo hallado se corresponde con
+     * el orden en el que están declarados los valores en el enum Position.
+     * Idem, si se cambian de orden los valores del enum Position, se deberá
+     * tener en cuenta que Position.values()[index] confía en el orden en el
+     * que se leerán los datos de los archivos .PDA y, por consiguiente, se
+     * deberá rever el orden de las líneas importantes de dichos archivos.
+     * 
      * @param   fileName    Nombre del archivo a buscar.
      * 
      * @throws  IOException Si el archivo no existe.
