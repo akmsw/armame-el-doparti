@@ -21,7 +21,7 @@ Para comenzar, se necesitarán 14 posibles jugadores. La distribución utilizada
   - **Defensores laterales**: 2
   - **Mediocampistas**: 3
   - **Delanteros**: 1
-  - **Comodines***: 1
+  - **Comodines**: 1
 
 Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo "Comodín" podrá ocupar la posición de *Arquero*, o intercambiar con cualquier otro jugador que prefiera atajar.
 
