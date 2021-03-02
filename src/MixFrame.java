@@ -43,7 +43,7 @@ public class MixFrame extends JFrame implements ActionListener {
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
      * 
-     * @throws IOException
+     * @throws  IOException Cuando hay un error de lectura en los archivos PDA.
      */
     public MixFrame(int playersAmount, ImageIcon icon) throws IOException {
         this.icon = icon;
