@@ -84,6 +84,7 @@ public class MainFrame extends JFrame {
         addButtons(panel);
 
         JLabel bgLabel = new JLabel("", bgImage, JLabel.CENTER);
+        
         bgLabel.setBounds(0, 0, bgWidth, bgHeight);
 
         panel.add(bgLabel);
@@ -127,10 +128,8 @@ public class MainFrame extends JFrame {
      * @param button Botón a togglear.
      */
     private void toggleButton(JButton button) {
-        if (button.isEnabled())
-            button.setEnabled(false);
-        else
-            button.setEnabled(true);
+        if (button.isEnabled()) button.setEnabled(false);
+        else button.setEnabled(true);
     }
 
     /**
@@ -176,8 +175,7 @@ public class MainFrame extends JFrame {
 
                     mixFrame.addWindowListener(new WindowEventsHandler());
                 }
-            } else if (e.getSource() == chichaButton)
-                chicha(version);
+            } else if (e.getSource() == chichaButton) chicha(version);
             else System.exit(0);
         }
 
