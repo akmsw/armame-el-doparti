@@ -171,7 +171,12 @@ public class MixFrame extends JFrame implements ActionListener {
             aux.addActionListener(new ActionListener() {
                 /**
                  * En este método se evalúa que el string ingresado
-                 * como nombre de jugador sea válido. 
+                 * como nombre de jugador sea válido.
+                 * Una vez validado, se chequea según el campo de
+                 * texto si tal jugador está en el arreglo correspondiente
+                 * o no. Si lo está, se lo reemplaza por un nuevo jugador
+                 * con el nombre cambiado. Si no está, simplemente se crea
+                 * un nuevo jugador con el nombre ingresado.
                  * 
                  * @param   e   Evento ocurrido (nombre ingresado).
                  */
