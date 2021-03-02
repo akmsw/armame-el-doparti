@@ -34,7 +34,6 @@ public class MixFrame extends JFrame implements ActionListener {
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
     // Campos privados.
-    private int playersAmount;
     private ImageIcon icon;
     private JPanel panel;
     private JComboBox<String> comboBox;
@@ -45,7 +44,6 @@ public class MixFrame extends JFrame implements ActionListener {
      * Constructor. Aquí se crea la ventana de mezcla.
      */
     public MixFrame(int playersAmount, ImageIcon icon) {
-        this.playersAmount = playersAmount;
         this.icon = icon;
 
         playersAmountMap = new EnumMap<>(Position.class);
