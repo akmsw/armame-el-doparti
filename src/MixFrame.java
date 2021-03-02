@@ -18,11 +18,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.sound.midi.SysexMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class MixFrame extends JFrame implements ActionListener {
@@ -52,7 +52,7 @@ public class MixFrame extends JFrame implements ActionListener {
 
         data = new ArrayList<>();
 
-        collectPDData(String.valueOf(playersAmount));
+        collectPDData(playersAmount);
 
         int index = 0;
 
@@ -85,7 +85,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * 
      * @throws  IOException Si el archivo no existe.
      */
-    private static void collectPDData(String fileName) throws IOException {
+    private static void collectPDData(int fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("useful/FDF_F" + fileName + ".PDA"))) {
             String line;
 
@@ -156,7 +156,32 @@ public class MixFrame extends JFrame implements ActionListener {
      * @param   text    Opción seleccionada del arreglo de Strings 'options'.
      */
     private void updateOutput(String text) {
-        System.out.println(text);
+        switch (text) {
+            case "Agregar defensores centrales": {
+                System.out.println("DC");
+                break;
+            }
+
+            case "Agregar defensores laterales": {
+                System.out.println("DL");
+                break;
+            }
+
+            case "Agregar mediocampistas": {
+                System.out.println("MF");
+                break;
+            }
+
+            case "Agregar delanteros": {
+                System.out.println("FW");
+                break;
+            }
+
+            default: {
+                System.out.println("WC");
+                break;
+            }
+        }
     }
 
     // ----------------------------------------Clases privadas----------------------------------
