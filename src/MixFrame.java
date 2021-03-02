@@ -103,8 +103,8 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de inicializar los componentes de la ventana de
-     * comienzo.
+     * Este método se encarga de inicializar los componentes
+     * de la ventana de mezcla.
      * 
      * @param frameTitle Título de la ventana.
      */
@@ -161,6 +161,12 @@ public class MixFrame extends JFrame implements ActionListener {
             aux.setBounds(5, (45 * (i + 1)), 201, 30);
 
             aux.addActionListener(new ActionListener() {
+                /**
+                 * En este método se evalúa que el string ingresado
+                 * como nombre de jugador sea válido. 
+                 * 
+                 * @param   e   Evento ocurrido (nombre ingresado).
+                 */
                 public void actionPerformed(ActionEvent e) {
                     String text = aux.getText();
 
