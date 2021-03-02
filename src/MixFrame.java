@@ -94,7 +94,7 @@ public class MixFrame extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        String text = (String)((JComboBox)e.getSource()).getSelectedItem();
+        String text = (String)((JComboBox<?>)e.getSource()).getSelectedItem();
 
         updateOutput(text);
     }
