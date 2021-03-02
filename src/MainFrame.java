@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
     private JPanel panel; // Panel de la ventana principal.
     private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
     private MixFrame mixFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
-    private ImageIcon icon, smallIcon; // Iconos utilizados para las ventanas.
+    private ImageIcon iconBall, smallIconBall, iconAKMSW, smallIconAKMSW; // Iconos utilizados para las ventanas.
 
     /**
      * Constructor. Aquí se instancia todo lo relativo a la ventana principal, como
@@ -58,11 +58,13 @@ public class MainFrame extends JFrame {
     private void initializeComponents(String frameTitle) {
         toolkit = Toolkit.getDefaultToolkit();
 
-        ImageIcon bgImage = new ImageIcon(
-                toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
+        ImageIcon bgImage = new ImageIcon( toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
 
-        icon = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
-        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        iconBall = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
+        smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
+        iconAKMSW = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/AKMSW_icon.png")));
+        smallIconAKMSW = new ImageIcon(iconAKMSW.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
         int bgWidth = bgImage.getIconWidth();
         int bgHeight = bgImage.getIconHeight();
@@ -72,7 +74,7 @@ public class MainFrame extends JFrame {
         setTitle(frameTitle);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        setIconImage(icon.getImage());
+        setIconImage(iconBall.getImage());
         setResizable(false);
 
         panel = new JPanel();
@@ -164,11 +166,11 @@ public class MainFrame extends JFrame {
                 String[] options = { "7", "8" };
 
                 int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                        "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIcon, options, options[0]);
+                        "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
 
                 if (playersAmount != JOptionPane.CLOSED_OPTION) {
                     try {
-                        mixFrame = new MixFrame((playersAmount + 7), icon);
+                        mixFrame = new MixFrame((playersAmount + 7), iconBall);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                         System.exit(-1);
@@ -191,7 +193,7 @@ public class MainFrame extends JFrame {
         private void chicha(String version) {
             String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
 
-            JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIcon);
+            JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
         }
     }
 

@@ -28,8 +28,8 @@ import javax.swing.JTextField;
 public class MixFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
-    private static final int frameWidth = 400;
-    private static final int frameHeight = 400;
+    private static final int frameWidth = 400; // Ancho de la ventana.
+    private static final int frameHeight = 200; // Alto de la ventana.
     private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales",
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
@@ -115,12 +115,12 @@ public class MixFrame extends JFrame implements ActionListener {
         panel.setLayout(null);
 
         textFieldCD = new JTextField("Central Defender");
-        textFieldCD.setBounds(5, 40, 200, 30);
+        textFieldCD.setBounds(5, 40, 201, 30);
         textFieldCD.setVisible(false);
         panel.add(textFieldCD);
 
         textFieldLD = new JTextField("Lateral Defender");
-        textFieldLD.setBounds(5, 40, 200, 30);
+        textFieldLD.setBounds(5, 40, 201, 30);
         textFieldLD.setVisible(false);
         panel.add(textFieldLD);
 
@@ -173,12 +173,14 @@ public class MixFrame extends JFrame implements ActionListener {
     private void updateOutput(String text) {
         switch (text) {
             case "Agregar defensores centrales": {
-                System.out.println("DC");
+                textFieldCD.setVisible(true);
+                textFieldLD.setVisible(false);
                 break;
             }
 
             case "Agregar defensores laterales": {
-                System.out.println("LD");
+                textFieldCD.setVisible(false);
+                textFieldLD.setVisible(true);
                 break;
             }
 
