@@ -28,8 +28,8 @@ import javax.swing.JTextField;
 public class MixFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
-    private static final int frameWidth = 400; // Ancho de la ventana.
-    private static final int frameHeight = 200; // Alto de la ventana.
+    private static final int frameWidth = 450; // Ancho de la ventana.
+    private static final int frameHeight = 344; // Alto de la ventana.
     private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales",
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
@@ -37,9 +37,9 @@ public class MixFrame extends JFrame implements ActionListener {
     private ImageIcon icon;
     private JPanel panel;
     private JComboBox<String> comboBox;
-    private JTextField textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC;
-    private static ArrayList<String> data;
-    private static EnumMap<Position, Integer> playersAmountMap;
+    private ArrayList<String> data;
+    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC;
+    private EnumMap<Position, Integer> playersAmountMap;
 
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
@@ -53,12 +53,19 @@ public class MixFrame extends JFrame implements ActionListener {
 
         data = new ArrayList<>();
 
+        textFieldCD = new ArrayList<>();
+        textFieldLD = new ArrayList<>();
+        textFieldMF = new ArrayList<>();
+        textFieldFW = new ArrayList<>();
+        textFieldWC = new ArrayList<>();
+
         collectPDData(playersAmount);
 
         int index = 0;
 
         for (Position position : Position.values()) {
             playersAmountMap.put(position, Integer.parseInt(data.get(index)));
+
             index++;
         }
 
@@ -86,7 +93,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * 
      * @throws  IOException Si el archivo no existe.
      */
-    private static void collectPDData(int fileName) throws IOException {
+    private void collectPDData(int fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("useful/FDF_F" + fileName + ".PDA"))) {
             String line;
 
@@ -103,7 +110,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
-        setSize(400, 400);
+        setSize(frameWidth, frameHeight);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle(frameTitle);
@@ -113,20 +120,12 @@ public class MixFrame extends JFrame implements ActionListener {
         panel = new JPanel();
         panel.setBounds(0, 0, frameWidth, frameHeight);
         panel.setLayout(null);
-
-        textFieldCD = new JTextField("Central Defender");
-        textFieldCD.setBounds(5, 40, 201, 30);
-        textFieldCD.setVisible(false);
-        panel.add(textFieldCD);
-
-        textFieldLD = new JTextField("Lateral Defender");
-        textFieldLD.setBounds(5, 40, 201, 30);
-        textFieldLD.setVisible(false);
-        panel.add(textFieldLD);
-
-        textFieldMF = new JTextField();
-        textFieldFW = new JTextField();
-        textFieldWC = new JTextField();
+        
+        addTextFields(Position.CENTRALDEFENDER, textFieldCD);
+        addTextFields(Position.LATERALDEFENDER, textFieldLD);
+        addTextFields(Position.MIDFIELDER, textFieldMF);
+        addTextFields(Position.FORWARD, textFieldFW);
+        addTextFields(Position.WILDCARD, textFieldWC);
 
         addComboBox();
 
@@ -150,6 +149,26 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
+     * Este método se encarga de crear, almacenar y configurar
+     * los campos de texto correspondientes a cada posición.
+     * 
+     * @param   position        Posición a buscar en el EnumMap.
+     * @param   textFieldSet    Arreglo de campos de texto para cada posición.
+     */
+    private void addTextFields(Position position, ArrayList<JTextField> textFieldSet) {
+        for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
+            JTextField aux = new JTextField(position + " #" + (i + 1));
+
+            aux.setBounds(5, (45 * (i + 1)), 201, 30);
+
+            textFieldSet.add(aux);
+        }
+
+        for (JTextField textField : textFieldSet)
+            panel.add(textField);
+    }
+
+    /**
      * Handler para los eventos ocurridos de la lista desplegable.
      * Se trata la fuente del evento ocurrido como un JComboBox y
      * se trata como un String el item seleccionado en el mismo
@@ -159,73 +178,66 @@ public class MixFrame extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        String text = (String)((JComboBox<?>)e.getSource()).getSelectedItem();
-
-        updateOutput(text);
+        updateOutput((String)((JComboBox<?>)e.getSource()).getSelectedItem());
     }
 
     /**
-     * Este método se encarga de actualizar la salida en base
-     * al evento ocurrido con la lista desplegable.
+     * Este método se encarga de actualizar lo mostrado en la
+     * ventana en base al item seleccionado en la lista desplegable.
      * 
      * @param   text    Opción seleccionada del arreglo de Strings 'options'.
      */
     private void updateOutput(String text) {
         switch (text) {
             case "Agregar defensores centrales": {
-                textFieldCD.setVisible(true);
-                textFieldLD.setVisible(false);
+                textFieldCD.forEach((tf) -> tf.setVisible(true));
+                textFieldLD.forEach((tf) -> tf.setVisible(false));
+                textFieldMF.forEach((tf) -> tf.setVisible(false));
+                textFieldFW.forEach((tf) -> tf.setVisible(false));
+                textFieldWC.forEach((tf) -> tf.setVisible(false));
+                
                 break;
             }
 
             case "Agregar defensores laterales": {
-                textFieldCD.setVisible(false);
-                textFieldLD.setVisible(true);
+                textFieldCD.forEach((tf) -> tf.setVisible(false));
+                textFieldLD.forEach((tf) -> tf.setVisible(true));
+                textFieldMF.forEach((tf) -> tf.setVisible(false));
+                textFieldFW.forEach((tf) -> tf.setVisible(false));
+                textFieldWC.forEach((tf) -> tf.setVisible(false));
+
                 break;
             }
 
             case "Agregar mediocampistas": {
-                System.out.println("MF");
+                textFieldCD.forEach((tf) -> tf.setVisible(false));
+                textFieldLD.forEach((tf) -> tf.setVisible(false));
+                textFieldMF.forEach((tf) -> tf.setVisible(true));
+                textFieldFW.forEach((tf) -> tf.setVisible(false));
+                textFieldWC.forEach((tf) -> tf.setVisible(false));
+
                 break;
             }
 
             case "Agregar delanteros": {
-                System.out.println("FW");
+                textFieldCD.forEach((tf) -> tf.setVisible(false));
+                textFieldLD.forEach((tf) -> tf.setVisible(false));
+                textFieldMF.forEach((tf) -> tf.setVisible(false));
+                textFieldFW.forEach((tf) -> tf.setVisible(true));
+                textFieldWC.forEach((tf) -> tf.setVisible(false));
+                
                 break;
             }
 
             default: {
-                System.out.println("WC");
+                textFieldCD.forEach((tf) -> tf.setVisible(false));
+                textFieldLD.forEach((tf) -> tf.setVisible(false));
+                textFieldMF.forEach((tf) -> tf.setVisible(false));
+                textFieldFW.forEach((tf) -> tf.setVisible(false));
+                textFieldWC.forEach((tf) -> tf.setVisible(true));
+                
                 break;
             }
-        }
-    }
-
-    // ----------------------------------------Clases privadas----------------------------------
-
-    /**
-     * Clase privada para lidiar con los eventos de las ventanas.
-     */
-    private class WindowEventsHandler extends WindowAdapter {
-
-        /**
-         * 
-         * 
-         * @param   e   Evento de ventana.
-         */
-        @Override
-        public void windowOpened(WindowEvent e) {
-            // TODO.
-        }
-
-        /**
-         * 
-         * 
-         * @param   e   Evento de ventana.
-         */
-        @Override
-        public void windowClosing(WindowEvent e) {
-            // TODO.
         }
     }
 }
