@@ -111,8 +111,7 @@ public class MainFrame extends JFrame {
         exitButton.setEnabled(true);
 
         chichaButton.setBounds(600, 400, 92, 94);
-        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(), chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -145,8 +144,7 @@ public class MainFrame extends JFrame {
         chichaButton.addActionListener(eventHandler);
     }
 
-    // ----------------------------------------Clases
-    // privadas----------------------------------
+    // ----------------------------------------Clases privadas----------------------------------
 
     /**
      * Clase privada para lidiar con los eventos de los botones.
@@ -165,8 +163,8 @@ public class MainFrame extends JFrame {
             if (e.getSource() == startButton) {
                 String[] options = { "7", "8" };
 
-                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                        "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
+                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Antes de empezar...",
+                                                                 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
 
                 if (playersAmount != JOptionPane.CLOSED_OPTION) {
                     try {
