@@ -224,8 +224,6 @@ public class MixFrame extends JFrame implements ActionListener {
                         playersSet.removeIf(p -> p.getName().equals(previousName));
                         playersSet.add(new Player(name, position));
                     }
-
-
                 }
             });
 
@@ -255,8 +253,6 @@ public class MixFrame extends JFrame implements ActionListener {
         for (JTextField textField : textFieldSet)
             panel.add(textField);
     }
-
-
 
     /**
      * Indica si una cadena está vacía o no.
