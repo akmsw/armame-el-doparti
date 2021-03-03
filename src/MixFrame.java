@@ -223,7 +223,7 @@ public class MixFrame extends JFrame implements ActionListener {
                  * @param   e   Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
-                    JTextField auxTF = (JTextField) e.getSource();
+                    JTextField auxTF = (JTextField)e.getSource();
 
                     for (index = 0; index < textFieldSet.size(); index++)
                         if (auxTF == textFieldSet.get(index))
@@ -343,51 +343,51 @@ public class MixFrame extends JFrame implements ActionListener {
     private void updateOutput(String text) {
         switch (text) {
             case "Agregar defensores centrales": {
-                textFieldCD.forEach((tf) -> tf.setVisible(true));
-                textFieldLD.forEach((tf) -> tf.setVisible(false));
-                textFieldMF.forEach((tf) -> tf.setVisible(false));
-                textFieldFW.forEach((tf) -> tf.setVisible(false));
-                textFieldWC.forEach((tf) -> tf.setVisible(false));
+                textFieldCD.forEach(tf -> tf.setVisible(true));
+                textFieldLD.forEach(tf -> tf.setVisible(false));
+                textFieldMF.forEach(tf -> tf.setVisible(false));
+                textFieldFW.forEach(tf -> tf.setVisible(false));
+                textFieldWC.forEach(tf -> tf.setVisible(false));
                 
                 break;
             }
 
             case "Agregar defensores laterales": {
-                textFieldCD.forEach((tf) -> tf.setVisible(false));
-                textFieldLD.forEach((tf) -> tf.setVisible(true));
-                textFieldMF.forEach((tf) -> tf.setVisible(false));
-                textFieldFW.forEach((tf) -> tf.setVisible(false));
-                textFieldWC.forEach((tf) -> tf.setVisible(false));
+                textFieldCD.forEach(tf -> tf.setVisible(false));
+                textFieldLD.forEach(tf -> tf.setVisible(true));
+                textFieldMF.forEach(tf -> tf.setVisible(false));
+                textFieldFW.forEach(tf -> tf.setVisible(false));
+                textFieldWC.forEach(tf -> tf.setVisible(false));
 
                 break;
             }
 
             case "Agregar mediocampistas": {
-                textFieldCD.forEach((tf) -> tf.setVisible(false));
-                textFieldLD.forEach((tf) -> tf.setVisible(false));
-                textFieldMF.forEach((tf) -> tf.setVisible(true));
-                textFieldFW.forEach((tf) -> tf.setVisible(false));
-                textFieldWC.forEach((tf) -> tf.setVisible(false));
+                textFieldCD.forEach(tf -> tf.setVisible(false));
+                textFieldLD.forEach(tf -> tf.setVisible(false));
+                textFieldMF.forEach(tf -> tf.setVisible(true));
+                textFieldFW.forEach(tf -> tf.setVisible(false));
+                textFieldWC.forEach(tf -> tf.setVisible(false));
 
                 break;
             }
 
             case "Agregar delanteros": {
-                textFieldCD.forEach((tf) -> tf.setVisible(false));
-                textFieldLD.forEach((tf) -> tf.setVisible(false));
-                textFieldMF.forEach((tf) -> tf.setVisible(false));
-                textFieldFW.forEach((tf) -> tf.setVisible(true));
-                textFieldWC.forEach((tf) -> tf.setVisible(false));
+                textFieldCD.forEach(tf -> tf.setVisible(false));
+                textFieldLD.forEach(tf -> tf.setVisible(false));
+                textFieldMF.forEach(tf -> tf.setVisible(false));
+                textFieldFW.forEach(tf -> tf.setVisible(true));
+                textFieldWC.forEach(tf -> tf.setVisible(false));
                 
                 break;
             }
 
             default: {
-                textFieldCD.forEach((tf) -> tf.setVisible(false));
-                textFieldLD.forEach((tf) -> tf.setVisible(false));
-                textFieldMF.forEach((tf) -> tf.setVisible(false));
-                textFieldFW.forEach((tf) -> tf.setVisible(false));
-                textFieldWC.forEach((tf) -> tf.setVisible(true));
+                textFieldCD.forEach(tf -> tf.setVisible(false));
+                textFieldLD.forEach(tf -> tf.setVisible(false));
+                textFieldMF.forEach(tf -> tf.setVisible(false));
+                textFieldFW.forEach(tf -> tf.setVisible(false));
+                textFieldWC.forEach(tf -> tf.setVisible(true));
                 
                 break;
             }
