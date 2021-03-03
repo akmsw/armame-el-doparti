@@ -230,8 +230,6 @@ public class MixFrame extends JFrame implements ActionListener {
                  * @param   e   Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("TRIGGER");
-
                     JTextField auxTF = (JTextField)e.getSource();
 
                     for (index = 0; index < textFieldSet.size(); index++)
@@ -248,12 +246,12 @@ public class MixFrame extends JFrame implements ActionListener {
                     else if (index >= playersSet.size()) {
                         System.out.println("VOY A AGREGAR NUEVO JUGADOR");
                         playersSet.add(new Player(name, position));
-                        uploadTextArea();
+                        updateTextArea();
                     }
                     else if (playersSet.removeIf(p -> p.getName().equals(previousName))) {
                         System.out.println("VOY A QUITAR UN JUGADOR EXISTENTE");
                         playersSet.add(new Player(name, position));
-                        uploadTextArea();
+                        updateTextArea();
                     }
 
                     System.out.println(position + " ARRAY");
@@ -276,6 +274,7 @@ public class MixFrame extends JFrame implements ActionListener {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     previousName = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                    
                 }
             });
 
@@ -340,7 +339,7 @@ public class MixFrame extends JFrame implements ActionListener {
     /**
      * 
      */
-    private void uploadTextArea() {
+    private void updateTextArea() {
         textArea.setText(null);
 
         setCD.forEach(p -> textArea.append(p.getName() + "\n"));
