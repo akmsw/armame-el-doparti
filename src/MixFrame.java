@@ -216,7 +216,7 @@ public class MixFrame extends JFrame implements ActionListener {
                  * nuevo jugador con el nombre cambiado. Si no está, simplemente se crea un
                  * nuevo jugador con el nombre ingresado.
                  * 
-                 * @param e Evento ocurrido (nombre ingresado).
+                 * @param   e   Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
                     JTextField auxTF = (JTextField) e.getSource();
@@ -230,9 +230,8 @@ public class MixFrame extends JFrame implements ActionListener {
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
-                        JOptionPane.showMessageDialog(null,
-                                "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
-                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
+                                                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else if (index >= playersSet.size())
                         playersSet.add(new Player(name, position));
                     else {
