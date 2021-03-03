@@ -15,6 +15,8 @@ import java.io.IOException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,22 +32,29 @@ public class MixFrame extends JFrame implements ActionListener {
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
     private static final int frameHeight = 345; // Alto de la ventana.
-    private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el menú desplegable.
-                                              "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
+    private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales", // Opciones
+                                                                                                              // para el
+                                                                                                              // menú
+                                                                                                              // desplegable.
+            "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
     // Campos privados.
     private ImageIcon icon; // Icono para la ventana.
     private JPanel panel; // Panel para la ventana de mezcla.
     private JButton mixButton; // Botón para mezclar jugadores.
+    private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
     private JComboBox<String> comboBox; // Menú desplegable.
     private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
-    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
-    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
+    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
+                                                                                                   // de texto para
+                                                                                                   // ingresar nombres.
+    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos
+                                                         // jugadores por posición por equipo).
 
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
      * 
-     * @throws  IOException Cuando hay un error de lectura en los archivos PDA.
+     * @throws IOException Cuando hay un error de lectura en los archivos PDA.
      */
     public MixFrame(int playersAmount, ImageIcon icon) throws IOException {
         this.icon = icon;
@@ -71,7 +80,8 @@ public class MixFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // ----------------------------------------Métodos privados---------------------------------
+    // ----------------------------------------Métodos
+    // privados---------------------------------
 
     /**
      * Este método rescata la cantidad de jugadores para cada posición por equipo
@@ -82,20 +92,20 @@ public class MixFrame extends JFrame implements ActionListener {
      * 
      * [A-Z].>+. : Matchea el trozo de la línea que no es un número.
      * 
-     *                          ¡¡¡IMPORTANTE!!!
+     * ¡¡¡IMPORTANTE!!!
      * 
      * Si los archivos .PDA son modificados en cuanto a orden de las líneas
      * importantes (C >> NÚMERO, etc.), se debe tener en cuenta que
-     * Position.values()[index] confía en que lo hallado se corresponde con
-     * el orden en el que están declarados los valores en el enum Position.
-     * Idem, si se cambian de orden los valores del enum Position, se deberá
-     * tener en cuenta que Position.values()[index] confía en el orden en el
-     * que se leerán los datos de los archivos .PDA y, por consiguiente, se
-     * deberá rever el orden de las líneas importantes de dichos archivos.
+     * Position.values()[index] confía en que lo hallado se corresponde con el orden
+     * en el que están declarados los valores en el enum Position. Idem, si se
+     * cambian de orden los valores del enum Position, se deberá tener en cuenta que
+     * Position.values()[index] confía en el orden en el que se leerán los datos de
+     * los archivos .PDA y, por consiguiente, se deberá rever el orden de las líneas
+     * importantes de dichos archivos.
      * 
-     * @param   fileName    Nombre del archivo a buscar.
+     * @param fileName Nombre del archivo a buscar.
      * 
-     * @throws  IOException Si el archivo no existe.
+     * @throws IOException Si el archivo no existe.
      */
     private void collectPDData(int fileName) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("useful/FDF_F" + fileName + ".PDA"))) {
@@ -111,8 +121,8 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de inicializar los componentes
-     * de la ventana de mezcla.
+     * Este método se encarga de inicializar los componentes de la ventana de
+     * mezcla.
      * 
      * @param frameTitle Título de la ventana.
      */
@@ -127,7 +137,7 @@ public class MixFrame extends JFrame implements ActionListener {
         panel = new JPanel();
         panel.setBounds(0, 0, frameWidth, frameHeight);
         panel.setLayout(null);
-        
+
         addTextFields(Position.CENTRALDEFENDER, textFieldCD, setCD);
         addTextFields(Position.LATERALDEFENDER, textFieldLD, setLD);
         addTextFields(Position.MIDFIELDER, textFieldMF, setMF);
@@ -148,8 +158,8 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar la lista desplegable
-     * al frame, y setear el handler de eventos a la misma.
+     * Este método se encarga de agregar la lista desplegable al frame, y setear el
+     * handler de eventos a la misma.
      */
     private void addComboBox() {
         comboBox = new JComboBox<>(options);
@@ -164,51 +174,79 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de crear, almacenar y configurar
-     * los campos de texto correspondientes a cada posición.
+     * Este método se encarga de crear, almacenar y configurar los campos de texto
+     * correspondientes a cada posición.
      * 
-     * @param   position        Posición a buscar en el EnumMap.
-     * @param   textFieldSet    Arreglo de campos de texto para cada posición.
-     * @param   playersSet      Arreglo de jugadores donde se almacenarán los
-     *                          nombres ingresados en los campos de texto.
+     * @param position     Posición a buscar en el EnumMap.
+     * @param textFieldSet Arreglo de campos de texto para cada posición.
+     * @param playersSet   Arreglo de jugadores donde se almacenarán los nombres
+     *                     ingresados en los campos de texto.
      */
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, ArrayList<Player> playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
-            JTextField aux = new JTextField(position + " #" + (i + 1));
+            JTextField aux = new JTextField();
 
             aux.setBounds(5, (45 * (i + 1)), 201, 30);
 
             aux.addActionListener(new ActionListener() {
+                int index; // Índice que indica el campo de texto donde se ingresó el nombre.
+
                 /**
-                 * En este método se evalúa que el string ingresado
-                 * como nombre de jugador sea válido.
-                 * Una vez validado, se chequea según el campo de
-                 * texto si tal jugador está en el arreglo correspondiente
-                 * o no. Si lo está, se lo reemplaza por un nuevo jugador
-                 * con el nombre cambiado. Si no está, simplemente se crea
-                 * un nuevo jugador con el nombre ingresado.
+                 * En este método se evalúa que el string ingresado como nombre de jugador sea
+                 * válido. Una vez validado, se chequea según el campo de texto si tal jugador
+                 * está en el arreglo correspondiente o no. Si lo está, se lo reemplaza por un
+                 * nuevo jugador con el nombre cambiado. Si no está, simplemente se crea un
+                 * nuevo jugador con el nombre ingresado.
                  * 
-                 * @param   e   Evento ocurrido (nombre ingresado).
+                 * @param e Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
-                    JTextField auxTF = (JTextField)e.getSource();
-
-                    int index; // Índice que indica el campo de texto donde se ingresó el nombre. 
+                    JTextField auxTF = (JTextField) e.getSource();
 
                     for (index = 0; index < textFieldSet.size(); index++)
-                        if(auxTF == textFieldSet.get(index)) break;
+                        if (auxTF == textFieldSet.get(index))
+                            break;
 
-                    String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                    String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_"); // Nombre sin espacios ni al
+                                                                                           // principio ni al fin,
+                                                                                           // en mayúsculas, y cualquier
+                                                                                           // espacio intermedio
+                                                                                           // reemplazado por un guión
+                                                                                           // bajo.
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
-                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
-                                                      "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-                    else if (index >= playersSet.size()) playersSet.add(new Player(name, position));
+                        JOptionPane.showMessageDialog(null,
+                                "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
+                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                    else if (index >= playersSet.size())
+                        playersSet.add(new Player(name, position));
                     else {
-                        playersSet.remove(index);
+                        playersSet.removeIf(p -> p.getName().equals(previousName));
                         playersSet.add(new Player(name, position));
                     }
+
+
                 }
+            });
+
+            aux.addFocusListener(new FocusListener() {
+                /**
+                 * Este método se encarga de servir como handle
+                 * en los eventos en los que el foco cambie de
+                 * componente en componente, ya sea por clicks,
+                 * TABs o algún otro evento de la misma índole.
+                 */
+				@Override
+				public void focusGained(FocusEvent e) {
+					previousName = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+				}
+
+                /**
+                 * Método sin implementación.
+                 * Se declara por meras exigencias de la interfaz.
+                 */
+				@Override
+				public void focusLost(FocusEvent e) { }
             });
 
             textFieldSet.add(aux);
@@ -217,6 +255,8 @@ public class MixFrame extends JFrame implements ActionListener {
         for (JTextField textField : textFieldSet)
             panel.add(textField);
     }
+
+
 
     /**
      * Indica si una cadena está vacía o no.
