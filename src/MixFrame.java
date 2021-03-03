@@ -1,4 +1,8 @@
 /**
+ * Clase correspondiente a la ventana de ingreso
+ * de nombres de jugadores y mezcla de los mismos
+ * para el sorteo de los equipos.
+ * 
  * @author Bonino, Francisco Ignacio.
  * 
  * @version 1.0.0
@@ -20,8 +24,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;

@@ -1,4 +1,6 @@
 /**
+ * Clase principal, sólo para inicialización del programa.
+ * 
  * @author Bonino, Francisco Ignacio.
  * 
  * @version 1.0.0

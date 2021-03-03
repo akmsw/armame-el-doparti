@@ -1,4 +1,7 @@
 /**
+ * Clase correspondiente a la ventana del
+ * menú principal del programa.
+ * 
  * @author Bonino, Francisco Ignacio.
  * 
  * @version 1.0.0
