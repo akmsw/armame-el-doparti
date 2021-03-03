@@ -15,8 +15,10 @@ import java.io.IOException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,11 +34,8 @@ public class MixFrame extends JFrame implements ActionListener {
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
     private static final int frameHeight = 345; // Alto de la ventana.
-    private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales", // Opciones
-                                                                                                              // para el
-                                                                                                              // menú
-                                                                                                              // desplegable.
-            "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
+    private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales", // Opciones para el menú desplegable.
+                                              "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
     // Campos privados.
     private ImageIcon icon; // Icono para la ventana.
@@ -45,11 +44,9 @@ public class MixFrame extends JFrame implements ActionListener {
     private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
     private JComboBox<String> comboBox; // Menú desplegable.
     private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
-    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
-                                                                                                   // de texto para
-                                                                                                   // ingresar nombres.
-    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos
-                                                         // jugadores por posición por equipo).
+    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
+    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico
+                                                         // (cuántos jugadores por posición por equipo).
 
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
@@ -80,8 +77,7 @@ public class MixFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // ----------------------------------------Métodos
-    // privados---------------------------------
+    // ----------------------------------------Métodos privados---------------------------------
 
     /**
      * Este método rescata la cantidad de jugadores para cada posición por equipo
@@ -227,24 +223,36 @@ public class MixFrame extends JFrame implements ActionListener {
                 }
             });
 
-            aux.addFocusListener(new FocusListener() {
+            aux.addMouseListener(new MouseAdapter() {
                 /**
                  * Este método se encarga de servir como handle
                  * en los eventos en los que el foco cambie de
-                 * componente en componente, ya sea por clicks,
-                 * TABs o algún otro evento de la misma índole.
+                 * componente en componente por medio de eventos
+                 * de mouse como clicks o selección de texto.
+                 * Este método entra en juego cuando el foco no
+                 * cambia pero el texto del campo se selecciona
+                 * para cambiarlo.
+                 * 
+                 * @param   e   Evento (cambio de foco).
                  */
-				@Override
-				public void focusGained(FocusEvent e) {
-					previousName = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
-				}
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    previousName = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                }
+            });
 
+            aux.addFocusListener(new FocusAdapter() {
                 /**
-                 * Método sin implementación.
-                 * Se declara por meras exigencias de la interfaz.
+                 * Este método se encarga de servir como handle
+                 * en los eventos en los que el foco cambie de
+                 * componente en componente por medio de TABs.
+                 * 
+                 * @param   e   Evento (cambio de foco).
                  */
-				@Override
-				public void focusLost(FocusEvent e) { }
+                @Override
+                public void focusGained(final FocusEvent e) {
+                    previousName = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                }
             });
 
             textFieldSet.add(aux);
