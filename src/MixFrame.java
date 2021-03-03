@@ -12,7 +12,6 @@ import java.util.EnumMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -20,12 +19,14 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
@@ -43,6 +44,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private JButton mixButton; // Botón para mezclar jugadores.
     private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
     private JComboBox<String> comboBox; // Menú desplegable.
+    private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
     private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico
@@ -142,13 +144,9 @@ public class MixFrame extends JFrame implements ActionListener {
 
         addComboBox();
 
-        mixButton = new JButton("Mezclar");
+        addButtons();
 
-        mixButton.setBounds(215, 269, 100, 30);
-        mixButton.setEnabled(false);
-        mixButton.setVisible(true);
-
-        panel.add(mixButton);
+        addTextArea();
 
         add(panel);
     }
@@ -167,6 +165,30 @@ public class MixFrame extends JFrame implements ActionListener {
                                                              // al estado inicial del JComboBox.
 
         panel.add(comboBox);
+    }
+
+    /**
+     * Este método se encarga de añadir al panel
+     * los botones pertenecientes a este frame.
+     */
+    private void addButtons() {
+        mixButton = new JButton("Mezclar");
+
+        mixButton.setBounds(215, 269, 100, 30);
+        mixButton.setEnabled(false);
+        mixButton.setVisible(true);
+
+        panel.add(mixButton);
+    }
+
+    private void addTextArea() {
+        textArea = new JTextArea();
+
+        textArea.setBounds(215, 5, 100, 250);
+        textArea.setBorder(BorderFactory.createBevelBorder(1));
+        textArea.setVisible(true);
+
+        panel.add(textArea);
     }
 
     /**
