@@ -254,13 +254,13 @@ public class MixFrame extends JFrame implements ActionListener {
                                              // en caso de no cambiar el foco ni de usar TAB / mouse para cambiar
                                              // el nombre del jugador ingresado en el mismo campo de texto.
                         updateTextArea();
-                        //checkMix();
+                        checkSizes();
                     }
                     else if (playersSet.removeIf(p -> p.getName().equals(previousName))) {
                         playersSet.add(new Player(name, position));
                         previousName = name; // Ídem al else-if superior.
                         updateTextArea();
-                        //checkMix();
+                        checkSizes();
                     }
                 }
             });
@@ -304,13 +304,18 @@ public class MixFrame extends JFrame implements ActionListener {
             panel.add(textField);
     }
 
-    private void checkMix() {
-        /*if (setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2) &&
-            setCD.size() == (playersAmountMap.get(Position.LATERALDEFENDER) * 2) &&
-            setCD.size() == (playersAmountMap.get(Position.MIDFIELDER) * 2) &&
-            setCD.size() == (playersAmountMap.get(Position.FORWARD) * 2) &&
-            setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2) &&
-            )*/
+    /**
+     * Este método se encarga de chequear si la cantidad
+     * de jugadores ingresados es 14 para poder habilitar
+     * el botón de "Mezclar".
+     */
+    private void checkSizes() {
+        if (setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2) &&
+            setLD.size() == (playersAmountMap.get(Position.LATERALDEFENDER) * 2) &&
+            setMF.size() == (playersAmountMap.get(Position.MIDFIELDER) * 2) &&
+            setFW.size() == (playersAmountMap.get(Position.FORWARD) * 2) &&
+            setWC.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2))
+            mixButton.setEnabled(true);
     }
 
     /**
