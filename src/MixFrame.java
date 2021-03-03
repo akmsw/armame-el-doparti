@@ -287,27 +287,13 @@ public class MixFrame extends JFrame implements ActionListener {
      */
     private boolean alreadyExists(String name)
     {
-    	for(Player player : setCD)
-			if(name.equals(player.getName()))
-				return true;
-        
-        for(Player player : setLD)
-			if(name.equals(player.getName()))
-				return true;
-        
-        for(Player player : setMF)
-            if(name.equals(player.getName()))
-                return true;
-
-        for(Player player : setFW)
-            if(name.equals(player.getName()))
-                return true;
-        
-        for(Player player : setWC)
-            if(name.equals(player.getName()))
-                return true;
-    	
-    	return false;
+        if ((setCD.stream().filter(p -> p.getName().equals(name)).count() != 0) ||
+            (setLD.stream().filter(p -> p.getName().equals(name)).count() != 0) ||
+            (setMF.stream().filter(p -> p.getName().equals(name)).count() != 0) ||
+            (setFW.stream().filter(p -> p.getName().equals(name)).count() != 0) ||
+            (setWC.stream().filter(p -> p.getName().equals(name)).count() != 0))
+            return true;
+        else return false;
     }
 
     /**
