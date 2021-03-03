@@ -203,12 +203,9 @@ public class MixFrame extends JFrame implements ActionListener {
                         if (auxTF == textFieldSet.get(index))
                             break;
 
-                    String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_"); // Nombre sin espacios ni al
-                                                                                           // principio ni al fin,
-                                                                                           // en mayúsculas, y cualquier
-                                                                                           // espacio intermedio
-                                                                                           // reemplazado por un guión
-                                                                                           // bajo.
+                    // Nombre sin espacios ni al principio ni al fin, en mayúsculas,
+                    // y cualquier espacio intermedio es reemplazado por un guión bajo.
+                    String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null,
