@@ -45,6 +45,7 @@ public class MixFrame extends JFrame implements ActionListener {
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
     // Campos privados.
+    private int counter;
     private ImageIcon icon; // Icono para la ventana.
     private JPanel panel; // Panel para la ventana de mezcla.
     private JButton mixButton; // Botón para mezclar jugadores.
@@ -182,7 +183,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private void addButtons() {
         mixButton = new JButton("Mezclar");
 
-        mixButton.setBounds(215, 274, 100, 30);
+        mixButton.setBounds(220, 274, 100, 30);
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
 
@@ -198,7 +199,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private void addTextArea() {
         textArea = new JTextArea();
 
-        textArea.setBounds(215, 5, 100, 260);
+        textArea.setBounds(215, 5, 110, 260);
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         textArea.setVisible(true);
@@ -253,11 +254,13 @@ public class MixFrame extends JFrame implements ActionListener {
                                              // en caso de no cambiar el foco ni de usar TAB / mouse para cambiar
                                              // el nombre del jugador ingresado en el mismo campo de texto.
                         updateTextArea();
+                        //checkMix();
                     }
                     else if (playersSet.removeIf(p -> p.getName().equals(previousName))) {
                         playersSet.add(new Player(name, position));
                         previousName = name; // Ídem al else-if superior.
                         updateTextArea();
+                        //checkMix();
                     }
                 }
             });
@@ -301,6 +304,15 @@ public class MixFrame extends JFrame implements ActionListener {
             panel.add(textField);
     }
 
+    private void checkMix() {
+        /*if (setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2) &&
+            setCD.size() == (playersAmountMap.get(Position.LATERALDEFENDER) * 2) &&
+            setCD.size() == (playersAmountMap.get(Position.MIDFIELDER) * 2) &&
+            setCD.size() == (playersAmountMap.get(Position.FORWARD) * 2) &&
+            setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2) &&
+            )*/
+    }
+
     /**
      * Indica si una cadena está vacía o no.
      * Si la cadena está compuesta por caracteres
@@ -342,13 +354,15 @@ public class MixFrame extends JFrame implements ActionListener {
      * 
      */
     private void updateTextArea() {
+        counter = 0;
+
         textArea.setText(null);
 
-        setCD.forEach(p -> textArea.append(p.getName() + "\n"));
-        setLD.forEach(p -> textArea.append(p.getName() + "\n"));
-        setMF.forEach(p -> textArea.append(p.getName() + "\n"));
-        setFW.forEach(p -> textArea.append(p.getName() + "\n"));
-        setWC.forEach(p -> textArea.append(p.getName() + "\n"));
+        setCD.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
+        setLD.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
+        setMF.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
+        setFW.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
+        setWC.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
     }
 
     /**
