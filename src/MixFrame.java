@@ -20,6 +20,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -244,18 +246,17 @@ public class MixFrame extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
                                                             "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else if (index >= playersSet.size()) {
-                        System.out.println("VOY A AGREGAR NUEVO JUGADOR");
                         playersSet.add(new Player(name, position));
+                        previousName = name; // Se setea como nombre previo el nombre del jugador recién ingresado
+                                             // en caso de no cambiar el foco ni de usar TAB / mouse para cambiar
+                                             // el nombre del jugador ingresado en el mismo campo de texto.
                         updateTextArea();
                     }
                     else if (playersSet.removeIf(p -> p.getName().equals(previousName))) {
-                        System.out.println("VOY A QUITAR UN JUGADOR EXISTENTE");
                         playersSet.add(new Player(name, position));
+                        previousName = name; // Ídem al else-if superior.
                         updateTextArea();
                     }
-
-                    System.out.println(position + " ARRAY");
-                    playersSet.forEach(p -> System.out.println(p.getName()));
                 }
             });
 
@@ -274,7 +275,6 @@ public class MixFrame extends JFrame implements ActionListener {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     previousName = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
-                    
                 }
             });
 
