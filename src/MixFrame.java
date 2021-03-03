@@ -36,7 +36,7 @@ public class MixFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
-    private static final int frameHeight = 345; // Alto de la ventana.
+    private static final int frameHeight = 350; // Alto de la ventana.
     private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales", // Opciones para el menú desplegable.
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
@@ -178,18 +178,25 @@ public class MixFrame extends JFrame implements ActionListener {
     private void addButtons() {
         mixButton = new JButton("Mezclar");
 
-        mixButton.setBounds(215, 269, 100, 30);
+        mixButton.setBounds(215, 274, 100, 30);
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
 
         panel.add(mixButton);
     }
 
+    /**
+     * Este método se encarga de añadir al panel
+     * el campo de texto de sólo lectura donde
+     * se mostrarán los nombres de jugadores
+     * ingresados por el usuario.
+     */
     private void addTextArea() {
         textArea = new JTextArea();
 
-        textArea.setBounds(215, 5, 100, 250);
+        textArea.setBounds(215, 5, 100, 260);
         textArea.setBorder(BorderFactory.createBevelBorder(1));
+        textArea.setEditable(false);
         textArea.setVisible(true);
 
         panel.add(textArea);
@@ -223,6 +230,8 @@ public class MixFrame extends JFrame implements ActionListener {
                  * @param   e   Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
+                    System.out.println("TRIGGER");
+
                     JTextField auxTF = (JTextField)e.getSource();
 
                     for (index = 0; index < textFieldSet.size(); index++)
@@ -236,12 +245,19 @@ public class MixFrame extends JFrame implements ActionListener {
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
                                                             "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-                    else if (index >= playersSet.size())
+                    else if (index >= playersSet.size()) {
+                        System.out.println("VOY A AGREGAR NUEVO JUGADOR");
                         playersSet.add(new Player(name, position));
-                    else {
-                        playersSet.removeIf(p -> p.getName().equals(previousName));
-                        playersSet.add(new Player(name, position));
+                        uploadTextArea();
                     }
+                    else if (playersSet.removeIf(p -> p.getName().equals(previousName))) {
+                        System.out.println("VOY A QUITAR UN JUGADOR EXISTENTE");
+                        playersSet.add(new Player(name, position));
+                        uploadTextArea();
+                    }
+
+                    System.out.println(position + " ARRAY");
+                    playersSet.forEach(p -> System.out.println(p.getName()));
                 }
             });
 
@@ -319,6 +335,19 @@ public class MixFrame extends JFrame implements ActionListener {
             (setWC.stream().filter(p -> p.getName().equals(name)).count() != 0))
             return true;
         else return false;
+    }
+
+    /**
+     * 
+     */
+    private void uploadTextArea() {
+        textArea.setText(null);
+
+        setCD.forEach(p -> textArea.append(p.getName() + "\n"));
+        setLD.forEach(p -> textArea.append(p.getName() + "\n"));
+        setMF.forEach(p -> textArea.append(p.getName() + "\n"));
+        setFW.forEach(p -> textArea.append(p.getName() + "\n"));
+        setWC.forEach(p -> textArea.append(p.getName() + "\n"));
     }
 
     /**
