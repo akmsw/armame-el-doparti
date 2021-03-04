@@ -269,9 +269,8 @@ public class MixFrame extends JFrame implements ActionListener {
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
-                        JOptionPane.showMessageDialog(null,
-                                "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
-                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
+                                                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else if (index >= playersSet.size()) {
                         playersSet.add(new Player(name, position));
                         previousName = name; // Se setea como nombre previo el nombre del jugador recién ingresado
