@@ -391,18 +391,22 @@ public class MixFrame extends JFrame implements ActionListener {
             textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
             counter++;
         });
+
         setLD.forEach(p -> {
             textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
             counter++;
         });
+
         setMF.forEach(p -> {
             textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
             counter++;
         });
+
         setFW.forEach(p -> {
             textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
             counter++;
         });
+        
         setWC.forEach(p -> {
             textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
             counter++;
