@@ -54,15 +54,15 @@ public class MainFrame extends JFrame implements ActionListener {
     // ----------------------------------------Métodos privados---------------------------------
 
     /**
-     * Este método se encarga de inicializar los botones y la imagen de fondo de la
-     * ventana principal.
+     * Este método se encarga de inicializar los botones y
+     * la imagen de fondo de la ventana principal.
      * 
      * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
         toolkit = Toolkit.getDefaultToolkit();
 
-        ImageIcon bgImage = new ImageIcon( toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
+        ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
 
         iconBall = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -97,8 +97,8 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar todos los botones necesarios en la ventana
-     * principal.
+     * Este método se encarga de agregar todos los botones
+     * necesarios en la ventana principal.
      * 
      * @param panel Panel de la ventana principal donde se colocarán los botones.
      */
@@ -116,7 +116,8 @@ public class MainFrame extends JFrame implements ActionListener {
         exitButton.setEnabled(true);
 
         chichaButton.setBounds(600, 400, 92, 94);
-        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(), chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
+                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -126,14 +127,16 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de togglear el estado de un JButton. Si el botón está
-     * activo, se lo desactiva; y viceversa.
+     * Este método se encarga de togglear el estado de un JButton.
+     * Si el botón está activo, se lo desactiva; y viceversa.
      * 
      * @param button Botón a togglear.
      */
     private void toggleButton(JButton button) {
-        if (button.isEnabled()) button.setEnabled(false);
-        else button.setEnabled(true);
+        if (button.isEnabled())
+            button.setEnabled(false);
+        else
+            button.setEnabled(true);
     }
 
     /**
@@ -144,11 +147,11 @@ public class MainFrame extends JFrame implements ActionListener {
         exitButton.addActionListener(this);
         chichaButton.addActionListener(this);
     }
-    
+
     /**
      * Este método se encarga de desplegar los créditos del programa.
      * 
-     * @param   version Versión del software.
+     * @param version Versión del software.
      */
     private void chicha(String version) {
         String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
@@ -168,8 +171,9 @@ public class MainFrame extends JFrame implements ActionListener {
         if (e.getSource() == startButton) {
             String[] options = { "7", "8" };
 
-            int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo", "Antes de empezar...",
-                                                                2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
+            int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
+                                                             "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
+                                                             smallIconBall, options, options[0]);
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
@@ -181,8 +185,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
                 mixFrame.addWindowListener(new WindowEventsHandler());
             }
-        } else if (e.getSource() == chichaButton) chicha(version);
-        else System.exit(0);
+        } else if (e.getSource() == chichaButton)
+            chicha(version);
+        else
+            System.exit(0);
     }
 
     // ----------------------------------------Clases privadas----------------------------------
@@ -193,10 +199,10 @@ public class MainFrame extends JFrame implements ActionListener {
     private class WindowEventsHandler extends WindowAdapter {
 
         /**
-         * Este método se encarga de togglear el estado de los botones del frame
-         * principal.
+         * Este método se encarga de togglear el estado
+         * de los botones del frame principal.
          * 
-         * @param   e   Evento de ventana.
+         * @param e Evento de ventana.
          */
         @Override
         public void windowOpened(WindowEvent e) {
@@ -204,14 +210,15 @@ public class MainFrame extends JFrame implements ActionListener {
             toggleButton(chichaButton);
             toggleButton(exitButton);
 
-            setVisible(false); // Main frame visible.
+            setVisible(false);
         }
 
         /**
-         * Este método se encarga de togglear el estado de los botones del frame
-         * principal y hacer invisible el frame creado al pulsar el botón de "Comenzar".
+         * Este método se encarga de togglear el estado 
+         * de los botones del frame principal y hacer
+         * invisible el frame creado al pulsar el botón "Comenzar".
          * 
-         * @param   e   Evento de ventana.
+         * @param e Evento de ventana.
          */
         @Override
         public void windowClosing(WindowEvent e) {
@@ -221,7 +228,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
             mixFrame.setVisible(false);
 
-            setVisible(true); // Main frame visible.
+            setVisible(true);
         }
     }
 }

@@ -1,4 +1,3 @@
-
 /**
  * Clase correspondiente a la ventana de ingreso
  * de nombres de jugadores y mezcla de los mismos
@@ -43,12 +42,13 @@ public class MixFrame extends JFrame implements ActionListener {
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
     private static final int frameHeight = 350; // Alto de la ventana.
-    private static final String[] optionsComboBox = { "Agregar defensores centrales", "Agregar defensores laterales", // Opciones para el menú desplegable.
-                                              "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
-    private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" };
+    private static final String[] optionsComboBox = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el
+                                                      "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" }; // menú desplegable 
+    private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de jugadores.
+
     // Campos privados.
-    private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados hasta el momento.
-    private ImageIcon icon, smallIcon; // Icono para la ventana.
+    private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
+    private ImageIcon icon, smallIcon; // Iconos para las ventanas.
     private JPanel panel; // Panel para la ventana de mezcla.
     private JButton mixButton; // Botón para mezclar jugadores.
     private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
@@ -56,8 +56,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
     private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
-    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico
-                                                         // (cuántos jugadores por posición por equipo).
+    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
 
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
@@ -179,8 +178,8 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de añadir al panel
-     * los botones pertenecientes a este frame.
+     * Este método se encarga de añadir al panel los botones pertenecientes a este
+     * frame.
      */
     private void addButtons() {
         smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -192,14 +191,17 @@ public class MixFrame extends JFrame implements ActionListener {
 
         mixButton.addActionListener(new ActionListener() {
             /**
-             * Este método se encarga de tomar el criterio
+             * Este método se encarga de tomar el criterio 
              * de búsqueda especificado por el usuario.
+             * 
+             * @param e Evento (criterio elegido).
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione el criterio de distribución de jugadores", "Antes de continuar...",
-                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
-                
+                int playersAmount = JOptionPane.showOptionDialog(null,
+                        "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
+                        JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
+
                 if (playersAmount == JOptionPane.CLOSED_OPTION) {
                     System.out.println("VENTANA CERRADA");
                 } else if (playersAmount == 0) {
@@ -214,10 +216,8 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de añadir al panel
-     * el campo de texto de sólo lectura donde
-     * se mostrarán los nombres de jugadores
-     * ingresados por el usuario.
+     * Este método se encarga de añadir al panel el campo de texto de sólo lectura
+     * donde se mostrarán los nombres de jugadores ingresados por el usuario.
      */
     private void addTextArea() {
         textArea = new JTextArea();
@@ -255,10 +255,10 @@ public class MixFrame extends JFrame implements ActionListener {
                  * nuevo jugador con el nombre cambiado. Si no está, simplemente se crea un
                  * nuevo jugador con el nombre ingresado.
                  * 
-                 * @param   e   Evento ocurrido (nombre ingresado).
+                 * @param e Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
-                    JTextField auxTF = (JTextField)e.getSource();
+                    JTextField auxTF = (JTextField) e.getSource();
 
                     for (index = 0; index < textFieldSet.size(); index++)
                         if (auxTF == textFieldSet.get(index))
@@ -269,8 +269,9 @@ public class MixFrame extends JFrame implements ActionListener {
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
-                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
-                                                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                        JOptionPane.showMessageDialog(null,
+                                "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
+                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else if (index >= playersSet.size()) {
                         playersSet.add(new Player(name, position));
                         previousName = name; // Se setea como nombre previo el nombre del jugador recién ingresado
@@ -290,15 +291,12 @@ public class MixFrame extends JFrame implements ActionListener {
 
             aux.addMouseListener(new MouseAdapter() {
                 /**
-                 * Este método se encarga de servir como handle
-                 * en los eventos en los que el foco cambie de
-                 * componente en componente por medio de eventos
-                 * de mouse como clicks o selección de texto.
-                 * Este método entra en juego cuando el foco no
-                 * cambia pero el texto del campo se selecciona
-                 * para cambiarlo.
+                 * Este método se encarga de servir como handle en los eventos en los que el
+                 * foco cambie de componente en componente por medio de eventos de mouse como
+                 * clicks o selección de texto. Este método entra en juego cuando el foco no
+                 * cambia pero el texto del campo se selecciona para cambiarlo.
                  * 
-                 * @param   e   Evento (cambio de foco).
+                 * @param e Evento de mouse (cambio de foco).
                  */
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -308,11 +306,10 @@ public class MixFrame extends JFrame implements ActionListener {
 
             aux.addFocusListener(new FocusAdapter() {
                 /**
-                 * Este método se encarga de servir como handle
-                 * en los eventos en los que el foco cambie de
-                 * componente en componente por medio de TABs.
+                 * Este método se encarga de servir como handle en los eventos en los que el
+                 * foco cambie de componente en componente por medio de TABs.
                  * 
-                 * @param   e   Evento (cambio de foco).
+                 * @param e Evento de cambio de foco.
                  */
                 @Override
                 public void focusGained(final FocusEvent e) {
@@ -328,89 +325,108 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de chequear si la cantidad
-     * de jugadores ingresados es 14 para poder habilitar
-     * el botón de "Mezclar".
+     * Este método se encarga de chequear si la cantidad de jugadores ingresados es
+     * 14 para poder habilitar el botón de "Mezclar".
      */
     private void checkSizes() {
-        if (setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2) &&
-            setLD.size() == (playersAmountMap.get(Position.LATERALDEFENDER) * 2) &&
-            setMF.size() == (playersAmountMap.get(Position.MIDFIELDER) * 2) &&
-            setFW.size() == (playersAmountMap.get(Position.FORWARD) * 2) &&
-            setWC.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2))
+        if (setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)
+            && setLD.size() == (playersAmountMap.get(Position.LATERALDEFENDER) * 2)
+            && setMF.size() == (playersAmountMap.get(Position.MIDFIELDER) * 2)
+            && setFW.size() == (playersAmountMap.get(Position.FORWARD) * 2)
+            && setWC.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2))
             mixButton.setEnabled(true);
     }
 
     /**
-     * Indica si una cadena está vacía o no.
-     * Si la cadena está compuesta por caracteres
-     * en blanco (espacios), se la tomará como vacía.
+     * Indica si una cadena está vacía o no. Si la cadena está compuesta por
+     * caracteres en blanco (espacios), se la tomará como vacía.
      * 
-     * @param   string    Cadena a analizar
+     * @param string Cadena a analizar
      * 
-     * @return  Si la cadena está vacía o no.
+     * @return Si la cadena está vacía o no.
      */
     private boolean isEmptyString(String string) {
-    	char[] charArray = string.toCharArray();
-    	
-    	for (int i = 0; i < charArray.length; i++)
-    		if (charArray[i] != ' ') return false;
-    	
-    	return true;
+        char[] charArray = string.toCharArray();
+
+        for (int i = 0; i < charArray.length; i++)
+            if (charArray[i] != ' ')
+                return false;
+
+        return true;
     }
 
     /**
-     * Este método se encarga de chequear si un nombre está repetido
-     * en un arreglo de jugadores.
+     * Este método se encarga de chequear si un nombre está repetido en un arreglo
+     * de jugadores.
      * 
-     * @param   name        Nombre a chequear.
+     * @param name Nombre a chequear.
      * 
-     * @return  Si hay algún jugador con el mismo nombre.
+     * @return Si hay algún jugador con el mismo nombre.
      */
-    private boolean alreadyExists(String name)
-    {
-        if ((setCD.stream().filter(p -> p.getName().equals(name)).count() != 0) ||
-            (setLD.stream().filter(p -> p.getName().equals(name)).count() != 0) ||
-            (setMF.stream().filter(p -> p.getName().equals(name)).count() != 0) ||
-            (setFW.stream().filter(p -> p.getName().equals(name)).count() != 0) ||
-            (setWC.stream().filter(p -> p.getName().equals(name)).count() != 0))
+    private boolean alreadyExists(String name) {
+        if ((setCD.stream().filter(p -> p.getName().equals(name)).count() != 0)
+            || (setLD.stream().filter(p -> p.getName().equals(name)).count() != 0)
+            || (setMF.stream().filter(p -> p.getName().equals(name)).count() != 0)
+            || (setFW.stream().filter(p -> p.getName().equals(name)).count() != 0)
+            || (setWC.stream().filter(p -> p.getName().equals(name)).count() != 0))
             return true;
-        else return false;
+        else
+            return false;
     }
 
     /**
-     * 
+     * Este método se encarga de actualizar el texto
+     * mostrado en el campo de sólo lectura.
+     * Se muestran los jugadores ingresados en el orden
+     * en el que estén posicionados en sus respectivos arreglos.
+     * El orden en el que se muestran es:
+     * Defensores centrales > Defensores laterales
+     * > Mediocampistas > Delanteros > Comodines.
      */
     private void updateTextArea() {
         counter = 0;
 
         textArea.setText(null);
 
-        setCD.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
-        setLD.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
-        setMF.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
-        setFW.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
-        setWC.forEach(p -> { textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n"); counter++; });
+        setCD.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+        setLD.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+        setMF.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+        setFW.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+        setWC.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
     }
 
     /**
-     * Handler para los eventos ocurridos de la lista desplegable.
-     * Se trata la fuente del evento ocurrido como un JComboBox y
-     * se trata como un String el item seleccionado en el mismo
-     * para pasarlo al método updateOutput.
+     * Handler para los eventos ocurridos de la lista desplegable. Se trata la
+     * fuente del evento ocurrido como un JComboBox y se trata como un String el
+     * item seleccionado en el mismo para pasarlo al método updateOutput.
      * 
-     * @param   e   Evento ocurrido (item seleccionado).
+     * @param e Evento ocurrido (item seleccionado).
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        updateOutput((String)((JComboBox<?>)e.getSource()).getSelectedItem());
+        updateOutput((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
     }
 
     /**
-     * Este método se encarga de actualizar lo mostrado en la
-     * ventana en base al item seleccionado en la lista desplegable.
+     * Este método se encarga de actualizar lo mostrado en la ventana en base al
+     * item seleccionado en la lista desplegable.
      * 
-     * @param   text    Opción seleccionada del arreglo de Strings 'optionsComboBox'.
+     * @param text Opción seleccionada del arreglo de Strings 'optionsComboBox'.
      */
     private void updateOutput(String text) {
         switch (text) {
@@ -420,7 +436,7 @@ public class MixFrame extends JFrame implements ActionListener {
                 textFieldMF.forEach(tf -> tf.setVisible(false));
                 textFieldFW.forEach(tf -> tf.setVisible(false));
                 textFieldWC.forEach(tf -> tf.setVisible(false));
-                
+
                 break;
             }
 
@@ -450,7 +466,7 @@ public class MixFrame extends JFrame implements ActionListener {
                 textFieldMF.forEach(tf -> tf.setVisible(false));
                 textFieldFW.forEach(tf -> tf.setVisible(true));
                 textFieldWC.forEach(tf -> tf.setVisible(false));
-                
+
                 break;
             }
 
@@ -460,7 +476,7 @@ public class MixFrame extends JFrame implements ActionListener {
                 textFieldMF.forEach(tf -> tf.setVisible(false));
                 textFieldFW.forEach(tf -> tf.setVisible(false));
                 textFieldWC.forEach(tf -> tf.setVisible(true));
-                
+
                 break;
             }
         }
