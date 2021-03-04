@@ -21,6 +21,6 @@ public class Main {
     public static void main(String[] args) {
         MainFrame mainFrame = new MainFrame("Fiesta de Fulbito ", version);
 
-        mainFrame.begin();
+        mainFrame.setVisible(true);
     }
 }

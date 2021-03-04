@@ -160,15 +160,6 @@ public class MainFrame extends JFrame implements ActionListener {
     // ----------------------------------------Métodos públicos---------------------------------
 
     /**
-     * Este método se encarga de comenzar
-     * el programa simplemente haciendo
-     * visible la ventana principal.
-     */
-    public void begin() {
-        setVisible(true);
-    }
-
-    /**
      * Override para indicar qué hacer en base a cada boton pulsado.
      * 
      * @param e Evento ocurrido (botón pulsado).
