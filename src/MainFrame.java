@@ -44,11 +44,9 @@ public class MainFrame extends JFrame implements ActionListener {
      * @param version    Versión del software.
      */
     public MainFrame(String frameTitle, String version) {
-        this.version = version;
-
         initializeComponents(frameTitle);
 
-        setVisible(true);
+        this.version = version;
     }
 
     // ----------------------------------------Métodos privados---------------------------------
@@ -160,6 +158,15 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     // ----------------------------------------Métodos públicos---------------------------------
+
+    /**
+     * Este método se encarga de comenzar
+     * el programa simplemente haciendo
+     * visible la ventana principal.
+     */
+    public void begin() {
+        setVisible(true);
+    }
 
     /**
      * Override para indicar qué hacer en base a cada boton pulsado.
