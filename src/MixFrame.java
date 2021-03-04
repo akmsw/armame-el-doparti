@@ -45,7 +45,7 @@ public class MixFrame extends JFrame implements ActionListener {
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
 
     // Campos privados.
-    private int counter;
+    private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados hasta el momento.
     private ImageIcon icon; // Icono para la ventana.
     private JPanel panel; // Panel para la ventana de mezcla.
     private JButton mixButton; // Botón para mezclar jugadores.
@@ -255,8 +255,8 @@ public class MixFrame extends JFrame implements ActionListener {
                                              // el nombre del jugador ingresado en el mismo campo de texto.
                         updateTextArea();
                         checkSizes();
-                    }
-                    else if (playersSet.removeIf(p -> p.getName().equals(previousName))) {
+                    } else {
+                        playersSet.removeIf(p -> p.getName().equals(previousName));
                         playersSet.add(new Player(name, position));
                         previousName = name; // Ídem al else-if superior.
                         updateTextArea();
