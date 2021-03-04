@@ -1,3 +1,4 @@
+
 /**
  * Clase correspondiente a la ventana de ingreso
  * de nombres de jugadores y mezcla de los mismos
@@ -18,6 +19,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -26,6 +28,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -41,12 +44,12 @@ public class MixFrame extends JFrame implements ActionListener {
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
     private static final int frameHeight = 350; // Alto de la ventana.
-    private static final String[] options = { "Agregar defensores centrales", "Agregar defensores laterales", // Opciones para el menú desplegable.
+    private static final String[] optionsComboBox = { "Agregar defensores centrales", "Agregar defensores laterales", // Opciones para el menú desplegable.
                                               "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
-
+    private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" };
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados hasta el momento.
-    private ImageIcon icon; // Icono para la ventana.
+    private ImageIcon icon, smallIcon; // Icono para la ventana.
     private JPanel panel; // Panel para la ventana de mezcla.
     private JButton mixButton; // Botón para mezclar jugadores.
     private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
@@ -165,7 +168,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * handler de eventos a la misma.
      */
     private void addComboBox() {
-        comboBox = new JComboBox<>(options);
+        comboBox = new JComboBox<>(optionsComboBox);
 
         comboBox.setBounds(5, 5, 200, 30);
         comboBox.addActionListener(this);
@@ -181,11 +184,32 @@ public class MixFrame extends JFrame implements ActionListener {
      * los botones pertenecientes a este frame.
      */
     private void addButtons() {
+        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         mixButton = new JButton("Mezclar");
 
         mixButton.setBounds(220, 274, 100, 30);
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
+
+        mixButton.addActionListener(new ActionListener() {
+            /**
+             * Este método se encarga de tomar el criterio
+             * de búsqueda especificado por el usuario.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione el criterio de distribución de jugadores", "Antes de continuar...",
+                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
+                
+                if (playersAmount == JOptionPane.CLOSED_OPTION) {
+                    System.out.println("VENTANA CERRADA");
+                } else if (playersAmount == 0) {
+                    System.out.println("MEZCLA ALEATORIA");
+                } else {
+                    System.out.println("MEZCLA POR PUNTAJES");
+                }
+            }
+        });
 
         panel.add(mixButton);
     }
@@ -387,7 +411,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * Este método se encarga de actualizar lo mostrado en la
      * ventana en base al item seleccionado en la lista desplegable.
      * 
-     * @param   text    Opción seleccionada del arreglo de Strings 'options'.
+     * @param   text    Opción seleccionada del arreglo de Strings 'optionsComboBox'.
      */
     private void updateOutput(String text) {
         switch (text) {
