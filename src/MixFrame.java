@@ -31,6 +31,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -49,6 +50,8 @@ public class MixFrame extends JFrame implements ActionListener {
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
     private ImageIcon icon, smallIcon; // Iconos para las ventanas.
+    private ImageIcon cdIcon, ldIcon, mfIcon, fwIcon, wcIcon; // Imágenes para cada posición.
+    private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel;
     private JPanel panel; // Panel para la ventana de mezcla.
     private JButton mixButton; // Botón para mezclar jugadores.
     private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
@@ -79,6 +82,29 @@ public class MixFrame extends JFrame implements ActionListener {
         setMF = new ArrayList<>();
         setFW = new ArrayList<>();
         setWC = new ArrayList<>();
+
+        cdIcon = new ImageIcon("graphics/cd.jpg");
+        ldIcon = new ImageIcon("graphics/ld.jpg");
+        mfIcon = new ImageIcon("graphics/mf.jpg");
+        fwIcon = new ImageIcon("graphics/fw.jpg");
+        wcIcon = new ImageIcon("graphics/wc.jpg");
+
+        cdLabel = new JLabel();
+        cdLabel.setIcon(cdIcon);
+        cdLabel.setLocation(200, 200);
+        cdLabel.setVisible(true);
+
+        ldLabel = new JLabel();
+        ldLabel.setIcon(ldIcon);
+
+        mfLabel = new JLabel();
+        mfLabel.setIcon(mfIcon);
+
+        fwLabel = new JLabel();
+        fwLabel.setIcon(fwIcon);
+
+        wcLabel = new JLabel();
+        wcLabel.setIcon(wcIcon);
 
         collectPDData(playersAmount);
 
@@ -155,6 +181,8 @@ public class MixFrame extends JFrame implements ActionListener {
         addButtons();
 
         addTextArea();
+
+        panel.add(cdLabel);
 
         panel.setBackground(new Color(200, 200, 200));
 
@@ -273,16 +301,22 @@ public class MixFrame extends JFrame implements ActionListener {
                                                             "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else if (index >= playersSet.size()) {
                         playersSet.add(new Player(name, position));
+                        
                         previousName = name; // Se setea como nombre previo el nombre del jugador recién ingresado
                                              // en caso de no cambiar el foco ni de usar TAB / mouse para cambiar
                                              // el nombre del jugador ingresado en el mismo campo de texto.
+                        
                         updateTextArea();
+                        
                         checkSizes();
                     } else {
                         playersSet.removeIf(p -> p.getName().equals(previousName));
                         playersSet.add(new Player(name, position));
+
                         previousName = name; // Ídem al else-if superior.
+                        
                         updateTextArea();
+                        
                         checkSizes();
                     }
                 }
@@ -406,7 +440,7 @@ public class MixFrame extends JFrame implements ActionListener {
             textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
             counter++;
         });
-        
+
         setWC.forEach(p -> {
             textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
             counter++;
