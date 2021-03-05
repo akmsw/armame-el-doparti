@@ -50,8 +50,7 @@ public class MixFrame extends JFrame implements ActionListener {
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
     private ImageIcon icon, smallIcon; // Iconos para las ventanas.
-    private ImageIcon cdIcon, ldIcon, mfIcon, fwIcon, wcIcon; // Imágenes para cada posición.
-    private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel;
+    private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private JPanel panel; // Panel para la ventana de mezcla.
     private JButton mixButton; // Botón para mezclar jugadores.
     private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
@@ -82,29 +81,6 @@ public class MixFrame extends JFrame implements ActionListener {
         setMF = new ArrayList<>();
         setFW = new ArrayList<>();
         setWC = new ArrayList<>();
-
-        cdIcon = new ImageIcon("graphics/cd.jpg");
-        ldIcon = new ImageIcon("graphics/ld.jpg");
-        mfIcon = new ImageIcon("graphics/mf.jpg");
-        fwIcon = new ImageIcon("graphics/fw.jpg");
-        wcIcon = new ImageIcon("graphics/wc.jpg");
-
-        cdLabel = new JLabel();
-        cdLabel.setIcon(cdIcon);
-        cdLabel.setLocation(200, 200);
-        cdLabel.setVisible(true);
-
-        ldLabel = new JLabel();
-        ldLabel.setIcon(ldIcon);
-
-        mfLabel = new JLabel();
-        mfLabel.setIcon(mfIcon);
-
-        fwLabel = new JLabel();
-        fwLabel.setIcon(fwIcon);
-
-        wcLabel = new JLabel();
-        wcLabel.setIcon(wcIcon);
 
         collectPDData(playersAmount);
 
@@ -176,13 +152,13 @@ public class MixFrame extends JFrame implements ActionListener {
         addTextFields(Position.FORWARD, textFieldFW, setFW);
         addTextFields(Position.WILDCARD, textFieldWC, setWC);
 
+        addImages();
+
         addComboBox();
 
         addButtons();
 
         addTextArea();
-
-        panel.add(cdLabel);
 
         panel.setBackground(new Color(200, 200, 200));
 
@@ -358,6 +334,40 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
+     * Este método se encarga de agregar al panel
+     * las imágenes correspondientes a cada posición
+     * cuya visibilidad se toggleará en base al
+     * item seleccionado en la lista desplegable.
+     */
+    private void addImages() {
+        cdLabel = new JLabel(new ImageIcon("src/graphics/cd.jpg"));
+        cdLabel.setBounds(337, 100, 85, 85);
+        cdLabel.setVisible(false);
+
+        ldLabel = new JLabel(new ImageIcon("src/graphics/ld.jpg"));
+        ldLabel.setBounds(337, 100, 85, 85);
+        ldLabel.setVisible(false);
+
+        mfLabel = new JLabel(new ImageIcon("src/graphics/mf.jpg"));
+        mfLabel.setBounds(337, 100, 85, 85);
+        mfLabel.setVisible(false);
+
+        fwLabel = new JLabel(new ImageIcon("src/graphics/fw.jpg"));
+        fwLabel.setBounds(337, 100, 85, 85);
+        fwLabel.setVisible(false);
+
+        wcLabel = new JLabel(new ImageIcon("src/graphics/wc.jpg"));
+        wcLabel.setBounds(337, 100, 85, 85);
+        wcLabel.setVisible(false);
+
+        panel.add(cdLabel);
+        panel.add(ldLabel);
+        panel.add(mfLabel);
+        panel.add(fwLabel);
+        panel.add(wcLabel);
+    }
+
+    /**
      * Este método se encarga de chequear si la cantidad de jugadores ingresados es
      * 14 para poder habilitar el botón de "Mezclar".
      */
@@ -474,6 +484,12 @@ public class MixFrame extends JFrame implements ActionListener {
                 textFieldFW.forEach(tf -> tf.setVisible(false));
                 textFieldWC.forEach(tf -> tf.setVisible(false));
 
+                cdLabel.setVisible(true);
+                ldLabel.setVisible(false);
+                mfLabel.setVisible(false);
+                fwLabel.setVisible(false);
+                wcLabel.setVisible(false);
+
                 break;
             }
 
@@ -483,6 +499,12 @@ public class MixFrame extends JFrame implements ActionListener {
                 textFieldMF.forEach(tf -> tf.setVisible(false));
                 textFieldFW.forEach(tf -> tf.setVisible(false));
                 textFieldWC.forEach(tf -> tf.setVisible(false));
+
+                cdLabel.setVisible(false);
+                ldLabel.setVisible(true);
+                mfLabel.setVisible(false);
+                fwLabel.setVisible(false);
+                wcLabel.setVisible(false);
 
                 break;
             }
@@ -494,6 +516,12 @@ public class MixFrame extends JFrame implements ActionListener {
                 textFieldFW.forEach(tf -> tf.setVisible(false));
                 textFieldWC.forEach(tf -> tf.setVisible(false));
 
+                cdLabel.setVisible(false);
+                ldLabel.setVisible(false);
+                mfLabel.setVisible(true);
+                fwLabel.setVisible(false);
+                wcLabel.setVisible(false);
+
                 break;
             }
 
@@ -504,6 +532,12 @@ public class MixFrame extends JFrame implements ActionListener {
                 textFieldFW.forEach(tf -> tf.setVisible(true));
                 textFieldWC.forEach(tf -> tf.setVisible(false));
 
+                cdLabel.setVisible(false);
+                ldLabel.setVisible(false);
+                mfLabel.setVisible(false);
+                fwLabel.setVisible(true);
+                wcLabel.setVisible(false);
+
                 break;
             }
 
@@ -513,6 +547,12 @@ public class MixFrame extends JFrame implements ActionListener {
                 textFieldMF.forEach(tf -> tf.setVisible(false));
                 textFieldFW.forEach(tf -> tf.setVisible(false));
                 textFieldWC.forEach(tf -> tf.setVisible(true));
+
+                cdLabel.setVisible(false);
+                ldLabel.setVisible(false);
+                mfLabel.setVisible(false);
+                fwLabel.setVisible(false);
+                wcLabel.setVisible(true);
 
                 break;
             }
