@@ -22,10 +22,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -52,9 +48,8 @@ public class MixFrame extends JFrame implements ActionListener {
 
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
-    private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
-    private ArrayList<Player> setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada posición.
+    private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada posición.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private ImageIcon icon, smallIcon; // Iconos para las ventanas.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
@@ -79,13 +74,28 @@ public class MixFrame extends JFrame implements ActionListener {
         textFieldFW = new ArrayList<>();
         textFieldWC = new ArrayList<>();
 
-        setCD = new ArrayList<>();
-        setLD = new ArrayList<>();
-        setMF = new ArrayList<>();
-        setFW = new ArrayList<>();
-        setWC = new ArrayList<>();
-
         collectPDData(playersAmount);
+
+        setCD = new Player[(int) (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)];
+        setLD = new Player[(int) (playersAmountMap.get(Position.LATERALDEFENDER) * 2)];
+        setMF = new Player[(int) (playersAmountMap.get(Position.MIDFIELDER) * 2)];
+        setFW = new Player[(int) (playersAmountMap.get(Position.FORWARD) * 2)];
+        setWC = new Player[(int) (playersAmountMap.get(Position.WILDCARD) * 2)];
+
+        for (int i = 0; i < setCD.length; i++)
+            setCD[i] = new Player("", Position.CENTRALDEFENDER);
+
+        for (int i = 0; i < setLD.length; i++)
+            setLD[i] = new Player("", Position.LATERALDEFENDER);
+        
+        for (int i = 0; i < setMF.length; i++)
+            setMF[i] = new Player("", Position.MIDFIELDER);
+    
+        for (int i = 0; i < setFW.length; i++)
+            setFW[i] = new Player("", Position.FORWARD);
+        
+        for (int i = 0; i < setWC.length; i++)
+            setWC[i] = new Player("", Position.WILDCARD);
 
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
 
@@ -268,6 +278,8 @@ public class MixFrame extends JFrame implements ActionListener {
         textArea.setVisible(true);
 
         panel.add(textArea);
+
+        updateTextArea();
     }
 
     /**
@@ -279,7 +291,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * @param playersSet   Arreglo de jugadores donde se almacenarán los nombres
      *                     ingresados en los campos de texto.
      */
-    private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, ArrayList<Player> playersSet) {
+    private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, Player[] playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
             JTextField aux = new JTextField();
 
@@ -298,7 +310,7 @@ public class MixFrame extends JFrame implements ActionListener {
                  * @param e Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
-                    JTextField auxTF = (JTextField)e.getSource();
+                    JTextField auxTF = (JTextField) e.getSource();
 
                     for (index = 0; index < textFieldSet.size(); index++)
                         if (auxTF == textFieldSet.get(index))
@@ -308,63 +320,16 @@ public class MixFrame extends JFrame implements ActionListener {
                     // y cualquier espacio intermedio es reemplazado por un guión bajo.
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
-                    if (name.length() == 0 || name.equals("") || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
+                    if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
                                                             "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-                    else if (index >= playersSet.size()) {
-                        playersSet.add(new Player(name, position));
-                        
-                        previousName = name; // Se setea como nombre previo el nombre del jugador recién ingresado
-                                             // en caso de no cambiar el foco ni de usar TAB / mouse para cambiar
-                                             // el nombre del jugador ingresado en el mismo campo de texto.
+                    else {
+                        playersSet[index].setName(name);
                         
                         updateTextArea();
-                        
-                        checkSizes();
-                    } else {
-                        playersSet.removeIf(p -> p.getName().equals(previousName));
-                        playersSet.add(new Player(name, position));
-
-                        previousName = name; // Ídem al else-if superior.
-                        
-                        updateTextArea();
-                        
-                        checkSizes();
+                            
+                        mixButton.setEnabled(checkMixButton());
                     }
-                }
-            });
-
-            aux.addMouseListener(new MouseAdapter() {
-                /**
-                 * Este método se encarga de servir como handle en los eventos en los que el
-                 * foco cambie de componente en componente por medio de eventos de mouse como
-                 * clicks o selección de texto. Este método entra en juego cuando el foco no
-                 * cambia pero el texto del campo se selecciona para cambiarlo.
-                 * 
-                 * @param e Evento de mouse (cambio de foco).
-                 */
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    String auxString = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
-                    
-                    if (!auxString.equals(""))
-                        previousName = auxString;
-                }
-            });
-
-            aux.addFocusListener(new FocusAdapter() {
-                /**
-                 * Este método se encarga de servir como handle en los eventos en los que el
-                 * foco cambie de componente en componente por medio de TABs.
-                 * 
-                 * @param e Evento de cambio de foco.
-                 */
-                @Override
-                public void focusGained(final FocusEvent e) {
-                    String auxString = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
-                    
-                    if (!auxString.equals(""))
-                        previousName = auxString;
                 }
             });
 
@@ -492,14 +457,28 @@ public class MixFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        if ((setCD.stream().filter(p -> p.getName().equals(name)).count() != 0)
-            || (setLD.stream().filter(p -> p.getName().equals(name)).count() != 0)
-            || (setMF.stream().filter(p -> p.getName().equals(name)).count() != 0)
-            || (setFW.stream().filter(p -> p.getName().equals(name)).count() != 0)
-            || (setWC.stream().filter(p -> p.getName().equals(name)).count() != 0))
-            return true;
-        else
-            return false;
+        for (Player player : setCD)
+            if (player.getName().equals(name))
+                return true;
+        
+        for (Player player : setLD)
+            if (player.getName().equals(name))
+                return true;
+
+        
+        for (Player player : setMF)
+            if (player.getName().equals(name))
+                return true;
+            
+        for (Player player : setFW)
+            if (player.getName().equals(name))
+                return true;
+
+        for (Player player : setWC)
+            if (player.getName().equals(name))
+                return true;
+        
+        return false;
     }
 
     /**
@@ -516,43 +495,59 @@ public class MixFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        setCD.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+        for (int i = 0; i < setCD.length; i++) {
+            textArea.append(" " + (counter + 1) + ". " + setCD[i].getName() + "\n");
             counter++;
-        });
+        }
 
-        setLD.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+        for (int i = 0; i < setLD.length; i++) {
+            textArea.append(" " + (counter + 1) + ". " + setLD[i].getName() + "\n");
             counter++;
-        });
+        }
 
-        setMF.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+        for (int i = 0; i < setMF.length; i++) {
+            textArea.append(" " + (counter + 1) + ". " + setMF[i].getName() + "\n");
             counter++;
-        });
+        }
 
-        setFW.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+        for (int i = 0; i < setFW.length; i++) {
+            textArea.append(" " + (counter + 1) + ". " + setFW[i].getName() + "\n");
             counter++;
-        });
+        }
 
-        setWC.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+        for (int i = 0; i < setWC.length; i++) {
+            textArea.append(" " + (counter + 1) + ". " + setWC[i].getName() + "\n");
             counter++;
-        });
+        }
     }
 
     /**
      * Este método se encarga de chequear si la cantidad de jugadores ingresados es
      * 14 para poder habilitar el botón de "Mezclar".
      */
-    private void checkSizes() {
-        if (setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)
-            && setLD.size() == (playersAmountMap.get(Position.LATERALDEFENDER) * 2)
-            && setMF.size() == (playersAmountMap.get(Position.MIDFIELDER) * 2)
-            && setFW.size() == (playersAmountMap.get(Position.FORWARD) * 2)
-            && setWC.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2))
-            mixButton.setEnabled(true);
+    private boolean checkMixButton() {
+
+        for (int i = 0; i < setCD.length; i++) 
+            if (setCD[i].getName().equals(""))
+                return false;
+        
+        for (int i = 0; i < setLD.length; i++) 
+            if (setLD[i].getName().equals(""))
+                return false;
+
+        for (int i = 0; i < setMF.length; i++) 
+            if (setMF[i].getName().equals(""))
+                return false;
+
+        for (int i = 0; i < setFW.length; i++) 
+            if (setFW[i].getName().equals(""))
+                return false;
+
+        for (int i = 0; i < setWC.length; i++) 
+            if (setWC[i].getName().equals(""))
+                return false;
+        
+        return true;
     }
 
     /**
