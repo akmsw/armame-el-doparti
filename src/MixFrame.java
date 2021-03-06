@@ -44,7 +44,7 @@ public class MixFrame extends JFrame implements ActionListener {
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
     private static final int frameHeight = 350; // Alto de la ventana.
-    private static final String imagesURL = "src/graphics/";
+    private static final String imagesPath = "src/graphics/"; // Carpeta donde buscar las imágenes.
     private static final String[] optionsComboBox = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el
                                                       "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" }; // menú desplegable 
     private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de jugadores.
@@ -54,7 +54,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
     private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
-    private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
+    private ArrayList<Player> setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada posición.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private ImageIcon icon, smallIcon; // Iconos para las ventanas.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
@@ -175,23 +175,23 @@ public class MixFrame extends JFrame implements ActionListener {
      * item seleccionado en la lista desplegable.
      */
     private void addImages() {
-        cdLabel = new JLabel(new ImageIcon(imagesURL + "cd.jpg"));
+        cdLabel = new JLabel(new ImageIcon(imagesPath + "cd.jpg"));
         cdLabel.setBounds(labelPosition);
         cdLabel.setVisible(false);
 
-        ldLabel = new JLabel(new ImageIcon(imagesURL + "ld.jpg"));
+        ldLabel = new JLabel(new ImageIcon(imagesPath + "ld.jpg"));
         ldLabel.setBounds(labelPosition);
         ldLabel.setVisible(false);
 
-        mfLabel = new JLabel(new ImageIcon(imagesURL + "mf.jpg"));
+        mfLabel = new JLabel(new ImageIcon(imagesPath + "mf.jpg"));
         mfLabel.setBounds(labelPosition);
         mfLabel.setVisible(false);
 
-        fwLabel = new JLabel(new ImageIcon(imagesURL + "fw.jpg"));
+        fwLabel = new JLabel(new ImageIcon(imagesPath + "fw.jpg"));
         fwLabel.setBounds(labelPosition);
         fwLabel.setVisible(false);
 
-        wcLabel = new JLabel(new ImageIcon(imagesURL + "wc.jpg"));
+        wcLabel = new JLabel(new ImageIcon(imagesPath + "wc.jpg"));
         wcLabel.setBounds(labelPosition);
         wcLabel.setVisible(false);
 
