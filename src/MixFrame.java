@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -43,9 +44,11 @@ public class MixFrame extends JFrame implements ActionListener {
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
     private static final int frameHeight = 350; // Alto de la ventana.
+    private static final String imagesURL = "src/graphics/";
     private static final String[] optionsComboBox = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el
                                                       "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" }; // menú desplegable 
     private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de jugadores.
+    private static final Rectangle labelPosition = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las imágenes.
 
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
@@ -166,6 +169,40 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
+     * Este método se encarga de agregar al panel
+     * las imágenes correspondientes a cada posición
+     * cuya visibilidad se toggleará en base al
+     * item seleccionado en la lista desplegable.
+     */
+    private void addImages() {
+        cdLabel = new JLabel(new ImageIcon(imagesURL + "cd.jpg"));
+        cdLabel.setBounds(labelPosition);
+        cdLabel.setVisible(false);
+
+        ldLabel = new JLabel(new ImageIcon(imagesURL + "ld.jpg"));
+        ldLabel.setBounds(labelPosition);
+        ldLabel.setVisible(false);
+
+        mfLabel = new JLabel(new ImageIcon(imagesURL + "mf.jpg"));
+        mfLabel.setBounds(labelPosition);
+        mfLabel.setVisible(false);
+
+        fwLabel = new JLabel(new ImageIcon(imagesURL + "fw.jpg"));
+        fwLabel.setBounds(labelPosition);
+        fwLabel.setVisible(false);
+
+        wcLabel = new JLabel(new ImageIcon(imagesURL + "wc.jpg"));
+        wcLabel.setBounds(labelPosition);
+        wcLabel.setVisible(false);
+
+        panel.add(cdLabel);
+        panel.add(ldLabel);
+        panel.add(mfLabel);
+        panel.add(fwLabel);
+        panel.add(wcLabel);
+    }
+
+    /**
      * Este método se encarga de agregar la lista desplegable al frame, y setear el
      * handler de eventos a la misma.
      */
@@ -180,6 +217,7 @@ public class MixFrame extends JFrame implements ActionListener {
 
         panel.add(comboBox);
     }
+    
 
     /**
      * Este método se encarga de añadir al panel los botones pertenecientes a este
@@ -332,142 +370,6 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar al panel
-     * las imágenes correspondientes a cada posición
-     * cuya visibilidad se toggleará en base al
-     * item seleccionado en la lista desplegable.
-     */
-    private void addImages() {
-        cdLabel = new JLabel(new ImageIcon("src/graphics/cd.jpg"));
-        cdLabel.setBounds(341, 100, 85, 85);
-        cdLabel.setVisible(false);
-
-        ldLabel = new JLabel(new ImageIcon("src/graphics/ld.jpg"));
-        ldLabel.setBounds(341, 100, 85, 85);
-        ldLabel.setVisible(false);
-
-        mfLabel = new JLabel(new ImageIcon("src/graphics/mf.jpg"));
-        mfLabel.setBounds(341, 100, 85, 85);
-        mfLabel.setVisible(false);
-
-        fwLabel = new JLabel(new ImageIcon("src/graphics/fw.jpg"));
-        fwLabel.setBounds(341, 100, 85, 85);
-        fwLabel.setVisible(false);
-
-        wcLabel = new JLabel(new ImageIcon("src/graphics/wc.jpg"));
-        wcLabel.setBounds(341, 100, 85, 85);
-        wcLabel.setVisible(false);
-
-        panel.add(cdLabel);
-        panel.add(ldLabel);
-        panel.add(mfLabel);
-        panel.add(fwLabel);
-        panel.add(wcLabel);
-    }
-
-    /**
-     * Este método se encarga de chequear si la cantidad de jugadores ingresados es
-     * 14 para poder habilitar el botón de "Mezclar".
-     */
-    private void checkSizes() {
-        if (setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)
-            && setLD.size() == (playersAmountMap.get(Position.LATERALDEFENDER) * 2)
-            && setMF.size() == (playersAmountMap.get(Position.MIDFIELDER) * 2)
-            && setFW.size() == (playersAmountMap.get(Position.FORWARD) * 2)
-            && setWC.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2))
-            mixButton.setEnabled(true);
-    }
-
-    /**
-     * Indica si una cadena está vacía o no. Si la cadena está compuesta por
-     * caracteres en blanco (espacios), se la tomará como vacía.
-     * 
-     * @param string Cadena a analizar
-     * 
-     * @return Si la cadena está vacía o no.
-     */
-    private boolean isEmptyString(String string) {
-        char[] charArray = string.toCharArray();
-
-        for (int i = 0; i < charArray.length; i++)
-            if (charArray[i] != ' ')
-                return false;
-
-        return true;
-    }
-
-    /**
-     * Este método se encarga de chequear si un nombre está repetido en un arreglo
-     * de jugadores.
-     * 
-     * @param name Nombre a chequear.
-     * 
-     * @return Si hay algún jugador con el mismo nombre.
-     */
-    private boolean alreadyExists(String name) {
-        if ((setCD.stream().filter(p -> p.getName().equals(name)).count() != 0)
-            || (setLD.stream().filter(p -> p.getName().equals(name)).count() != 0)
-            || (setMF.stream().filter(p -> p.getName().equals(name)).count() != 0)
-            || (setFW.stream().filter(p -> p.getName().equals(name)).count() != 0)
-            || (setWC.stream().filter(p -> p.getName().equals(name)).count() != 0))
-            return true;
-        else
-            return false;
-    }
-
-    /**
-     * Este método se encarga de actualizar el texto
-     * mostrado en el campo de sólo lectura.
-     * Se muestran los jugadores ingresados en el orden
-     * en el que estén posicionados en sus respectivos arreglos.
-     * El orden en el que se muestran es:
-     * Defensores centrales > Defensores laterales
-     * > Mediocampistas > Delanteros > Comodines.
-     */
-    private void updateTextArea() {
-        counter = 0;
-
-        textArea.setText(null);
-
-        setCD.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
-            counter++;
-        });
-
-        setLD.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
-            counter++;
-        });
-
-        setMF.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
-            counter++;
-        });
-
-        setFW.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
-            counter++;
-        });
-
-        setWC.forEach(p -> {
-            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
-            counter++;
-        });
-    }
-
-    /**
-     * Handler para los eventos ocurridos de la lista desplegable. Se trata la
-     * fuente del evento ocurrido como un JComboBox y se trata como un String el
-     * item seleccionado en el mismo para pasarlo al método updateOutput.
-     * 
-     * @param e Evento ocurrido (item seleccionado).
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        updateOutput((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
-    }
-
-    /**
      * Este método se encarga de actualizar lo mostrado en la ventana en base al
      * item seleccionado en la lista desplegable.
      * 
@@ -555,5 +457,107 @@ public class MixFrame extends JFrame implements ActionListener {
                 break;
             }
         }
+    }
+
+    /**
+     * Indica si una cadena está vacía o no. Si la cadena está compuesta por
+     * caracteres en blanco (espacios), se la tomará como vacía.
+     * 
+     * @param string Cadena a analizar
+     * 
+     * @return Si la cadena está vacía o no.
+     */
+    private boolean isEmptyString(String string) {
+        char[] charArray = string.toCharArray();
+
+        for (int i = 0; i < charArray.length; i++)
+            if (charArray[i] != ' ')
+                return false;
+
+        return true;
+    }
+
+    /**
+     * Este método se encarga de chequear si un nombre está repetido en un arreglo
+     * de jugadores.
+     * 
+     * @param name Nombre a chequear.
+     * 
+     * @return Si hay algún jugador con el mismo nombre.
+     */
+    private boolean alreadyExists(String name) {
+        if ((setCD.stream().filter(p -> p.getName().equals(name)).count() != 0)
+            || (setLD.stream().filter(p -> p.getName().equals(name)).count() != 0)
+            || (setMF.stream().filter(p -> p.getName().equals(name)).count() != 0)
+            || (setFW.stream().filter(p -> p.getName().equals(name)).count() != 0)
+            || (setWC.stream().filter(p -> p.getName().equals(name)).count() != 0))
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Este método se encarga de actualizar el texto
+     * mostrado en el campo de sólo lectura.
+     * Se muestran los jugadores ingresados en el orden
+     * en el que estén posicionados en sus respectivos arreglos.
+     * El orden en el que se muestran es:
+     * Defensores centrales > Defensores laterales
+     * > Mediocampistas > Delanteros > Comodines.
+     */
+    private void updateTextArea() {
+        counter = 0;
+
+        textArea.setText(null);
+
+        setCD.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+
+        setLD.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+
+        setMF.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+
+        setFW.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+
+        setWC.forEach(p -> {
+            textArea.append(" " + (counter + 1) + ". " + p.getName() + "\n");
+            counter++;
+        });
+    }
+
+    /**
+     * Este método se encarga de chequear si la cantidad de jugadores ingresados es
+     * 14 para poder habilitar el botón de "Mezclar".
+     */
+    private void checkSizes() {
+        if (setCD.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)
+            && setLD.size() == (playersAmountMap.get(Position.LATERALDEFENDER) * 2)
+            && setMF.size() == (playersAmountMap.get(Position.MIDFIELDER) * 2)
+            && setFW.size() == (playersAmountMap.get(Position.FORWARD) * 2)
+            && setWC.size() == (playersAmountMap.get(Position.CENTRALDEFENDER) * 2))
+            mixButton.setEnabled(true);
+    }
+
+    /**
+     * Handler para los eventos ocurridos de la lista desplegable. Se trata la
+     * fuente del evento ocurrido como un JComboBox y se trata como un String el
+     * item seleccionado en el mismo para pasarlo al método updateOutput.
+     * 
+     * @param e Evento ocurrido (item seleccionado).
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        updateOutput((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
     }
 }
