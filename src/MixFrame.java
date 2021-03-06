@@ -11,8 +11,9 @@
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
-
+import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
     private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada posición.
+    private List<Player[]> sets; // Lista con los arreglos de jugadores para reducir líneas de código en ciertos métodos.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private ImageIcon icon, smallIcon; // Iconos para las ventanas.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
@@ -96,6 +98,8 @@ public class MixFrame extends JFrame implements ActionListener {
         
         for (int i = 0; i < setWC.length; i++)
             setWC[i] = new Player("", Position.WILDCARD);
+        
+        sets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
 
@@ -179,110 +183,6 @@ public class MixFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar al panel
-     * las imágenes correspondientes a cada posición
-     * cuya visibilidad se toggleará en base al
-     * item seleccionado en la lista desplegable.
-     */
-    private void addImages() {
-        cdLabel = new JLabel(new ImageIcon(imagesPath + "cd.jpg"));
-        cdLabel.setBounds(labelPosition);
-        cdLabel.setVisible(false);
-
-        ldLabel = new JLabel(new ImageIcon(imagesPath + "ld.jpg"));
-        ldLabel.setBounds(labelPosition);
-        ldLabel.setVisible(false);
-
-        mfLabel = new JLabel(new ImageIcon(imagesPath + "mf.jpg"));
-        mfLabel.setBounds(labelPosition);
-        mfLabel.setVisible(false);
-
-        fwLabel = new JLabel(new ImageIcon(imagesPath + "fw.jpg"));
-        fwLabel.setBounds(labelPosition);
-        fwLabel.setVisible(false);
-
-        wcLabel = new JLabel(new ImageIcon(imagesPath + "wc.jpg"));
-        wcLabel.setBounds(labelPosition);
-        wcLabel.setVisible(false);
-
-        panel.add(cdLabel);
-        panel.add(ldLabel);
-        panel.add(mfLabel);
-        panel.add(fwLabel);
-        panel.add(wcLabel);
-    }
-
-    /**
-     * Este método se encarga de agregar la lista desplegable al frame, y setear el
-     * handler de eventos a la misma.
-     */
-    private void addComboBox() {
-        comboBox = new JComboBox<>(optionsComboBox);
-
-        comboBox.setBounds(5, 5, 200, 30);
-        comboBox.addActionListener(this);
-
-        updateOutput(comboBox.getSelectedItem().toString()); // Para que se muestre el output correspondiente
-                                                             // al estado inicial del JComboBox.
-
-        panel.add(comboBox);
-    }
-    
-
-    /**
-     * Este método se encarga de añadir al panel los botones pertenecientes a este
-     * frame.
-     */
-    private void addButtons() {
-        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        mixButton = new JButton("Mezclar");
-
-        mixButton.setBounds(224, 274, 100, 30);
-        mixButton.setEnabled(false);
-        mixButton.setVisible(true);
-
-        mixButton.addActionListener(new ActionListener() {
-            /**
-             * Este método se encarga de tomar el criterio 
-             * de búsqueda especificado por el usuario.
-             * 
-             * @param e Evento (criterio elegido).
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int playersAmount = JOptionPane.showOptionDialog(null,
-                        "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                        JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
-
-                if (playersAmount == 0) {
-                    System.out.println("MEZCLA ALEATORIA");
-                } else if(playersAmount != JOptionPane.CLOSED_OPTION) {
-                    System.out.println("MEZCLA POR PUNTAJES");
-                }
-            }
-        });
-
-        panel.add(mixButton);
-    }
-
-    /**
-     * Este método se encarga de añadir al panel el campo de texto de sólo lectura
-     * donde se mostrarán los nombres de jugadores ingresados por el usuario.
-     */
-    private void addTextArea() {
-        textArea = new JTextArea();
-
-        textArea.setBounds(215, 5, 118, 260);
-        textArea.setBorder(BorderFactory.createBevelBorder(1));
-        textArea.setEditable(false);
-        textArea.setVisible(true);
-
-        panel.add(textArea);
-
-        updateTextArea();
-    }
-
-    /**
      * Este método se encarga de crear, almacenar y configurar los campos de texto
      * correspondientes a cada posición.
      * 
@@ -338,6 +238,108 @@ public class MixFrame extends JFrame implements ActionListener {
 
         for (JTextField textField : textFieldSet)
             panel.add(textField);
+    }
+
+    /**
+     * Este método se encarga de agregar al panel
+     * las imágenes correspondientes a cada posición
+     * cuya visibilidad se toggleará en base al
+     * item seleccionado en la lista desplegable.
+     */
+    private void addImages() {
+        cdLabel = new JLabel(new ImageIcon(imagesPath + "cd.jpg"));
+        cdLabel.setBounds(labelPosition);
+        cdLabel.setVisible(false);
+
+        ldLabel = new JLabel(new ImageIcon(imagesPath + "ld.jpg"));
+        ldLabel.setBounds(labelPosition);
+        ldLabel.setVisible(false);
+
+        mfLabel = new JLabel(new ImageIcon(imagesPath + "mf.jpg"));
+        mfLabel.setBounds(labelPosition);
+        mfLabel.setVisible(false);
+
+        fwLabel = new JLabel(new ImageIcon(imagesPath + "fw.jpg"));
+        fwLabel.setBounds(labelPosition);
+        fwLabel.setVisible(false);
+
+        wcLabel = new JLabel(new ImageIcon(imagesPath + "wc.jpg"));
+        wcLabel.setBounds(labelPosition);
+        wcLabel.setVisible(false);
+
+        panel.add(cdLabel);
+        panel.add(ldLabel);
+        panel.add(mfLabel);
+        panel.add(fwLabel);
+        panel.add(wcLabel);
+    }
+
+    /**
+     * Este método se encarga de agregar la lista desplegable al frame, y setear el
+     * handler de eventos a la misma.
+     */
+    private void addComboBox() {
+        comboBox = new JComboBox<>(optionsComboBox);
+
+        comboBox.setBounds(5, 5, 200, 30);
+        comboBox.addActionListener(this);
+
+        updateOutput(comboBox.getSelectedItem().toString()); // Para que se muestre el output correspondiente
+                                                             // al estado inicial del JComboBox.
+
+        panel.add(comboBox);
+    }
+
+    /**
+     * Este método se encarga de añadir al panel los botones pertenecientes a este
+     * frame.
+     */
+    private void addButtons() {
+        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        mixButton = new JButton("Mezclar");
+
+        mixButton.setBounds(224, 274, 100, 30);
+        mixButton.setEnabled(false);
+        mixButton.setVisible(true);
+
+        mixButton.addActionListener(new ActionListener() {
+            /**
+             * Este método se encarga de tomar el criterio 
+             * de búsqueda especificado por el usuario.
+             * 
+             * @param e Evento (criterio elegido).
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione el criterio de distribución de jugadores", "Antes de continuar...",
+                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
+
+                if (playersAmount == 0) {
+                    System.out.println("MEZCLA ALEATORIA");
+                } else if(playersAmount != JOptionPane.CLOSED_OPTION) {
+                    System.out.println("MEZCLA POR PUNTAJES");
+                }
+            }
+        });
+
+        panel.add(mixButton);
+    }
+
+    /**
+     * Este método se encarga de añadir al panel el campo de texto de sólo lectura
+     * donde se mostrarán los nombres de jugadores ingresados por el usuario.
+     */
+    private void addTextArea() {
+        textArea = new JTextArea();
+
+        textArea.setBounds(215, 5, 118, 260);
+        textArea.setBorder(BorderFactory.createBevelBorder(1));
+        textArea.setEditable(false);
+        textArea.setVisible(true);
+
+        panel.add(textArea);
+
+        updateTextArea();
     }
 
     /**
@@ -457,26 +459,10 @@ public class MixFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        for (Player player : setCD)
-            if (player.getName().equals(name))
-                return true;
-        
-        for (Player player : setLD)
-            if (player.getName().equals(name))
-                return true;
-
-        
-        for (Player player : setMF)
-            if (player.getName().equals(name))
-                return true;
-            
-        for (Player player : setFW)
-            if (player.getName().equals(name))
-                return true;
-
-        for (Player player : setWC)
-            if (player.getName().equals(name))
-                return true;
+        for(Player[] set : sets)
+            for(Player player : set)
+                if (player.getName().equals(name))
+                    return false;
         
         return false;
     }
@@ -495,30 +481,11 @@ public class MixFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (int i = 0; i < setCD.length; i++) {
-            textArea.append(" " + (counter + 1) + ". " + setCD[i].getName() + "\n");
-            counter++;
-        }
-
-        for (int i = 0; i < setLD.length; i++) {
-            textArea.append(" " + (counter + 1) + ". " + setLD[i].getName() + "\n");
-            counter++;
-        }
-
-        for (int i = 0; i < setMF.length; i++) {
-            textArea.append(" " + (counter + 1) + ". " + setMF[i].getName() + "\n");
-            counter++;
-        }
-
-        for (int i = 0; i < setFW.length; i++) {
-            textArea.append(" " + (counter + 1) + ". " + setFW[i].getName() + "\n");
-            counter++;
-        }
-
-        for (int i = 0; i < setWC.length; i++) {
-            textArea.append(" " + (counter + 1) + ". " + setWC[i].getName() + "\n");
-            counter++;
-        }
+        for(Player[] set : sets)
+            for(Player player : set) {
+                textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
+                counter++;
+            }
     }
 
     /**
@@ -526,26 +493,10 @@ public class MixFrame extends JFrame implements ActionListener {
      * 14 para poder habilitar el botón de "Mezclar".
      */
     private boolean checkMixButton() {
-
-        for (int i = 0; i < setCD.length; i++) 
-            if (setCD[i].getName().equals(""))
-                return false;
-        
-        for (int i = 0; i < setLD.length; i++) 
-            if (setLD[i].getName().equals(""))
-                return false;
-
-        for (int i = 0; i < setMF.length; i++) 
-            if (setMF[i].getName().equals(""))
-                return false;
-
-        for (int i = 0; i < setFW.length; i++) 
-            if (setFW[i].getName().equals(""))
-                return false;
-
-        for (int i = 0; i < setWC.length; i++) 
-            if (setWC[i].getName().equals(""))
-                return false;
+        for(Player[] set : sets)
+            for(Player player : set)
+                if (player.getName().equals(""))
+                    return false;
         
         return true;
     }
