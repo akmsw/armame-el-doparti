@@ -189,7 +189,7 @@ public class MixFrame extends JFrame implements ActionListener {
         smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         mixButton = new JButton("Mezclar");
 
-        mixButton.setBounds(220, 274, 100, 30);
+        mixButton.setBounds(224, 274, 100, 30);
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
 
