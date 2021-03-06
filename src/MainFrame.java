@@ -12,7 +12,6 @@
 import java.io.IOException;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -28,13 +27,15 @@ import javax.swing.JButton;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
 
+    // Constantes privadas.
+    private static final String imagesURL = "src/graphics/";
+
     // Campos privados
     private String version; // Versión del programa.    
     private ImageIcon iconBall, smallIconBall, iconAKMSW, smallIconAKMSW; // Iconos utilizados para las ventanas.
     private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
     private JPanel panel; // Panel de la ventana principal.    
     private MixFrame mixFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
-    private Toolkit toolkit; // Recurso para obtener información gráfica del (y para el) software.
 
     /**
      * Constructor. Aquí se instancia todo lo relativo a la ventana principal, como
@@ -58,14 +59,12 @@ public class MainFrame extends JFrame implements ActionListener {
      * @param frameTitle Título de la ventana.
      */
     private void initializeComponents() {
-        toolkit = Toolkit.getDefaultToolkit();
+        ImageIcon bgImage = new ImageIcon(imagesURL + "backgroundImage.png");
 
-        ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
-
-        iconBall = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/myIcon.png")));
+        iconBall = new ImageIcon(imagesURL + "myIcon.png");
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
-        iconAKMSW = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/AKMSW_icon.png")));
+        iconAKMSW = new ImageIcon(imagesURL + "AKMSW_icon.png");
         smallIconAKMSW = new ImageIcon(iconAKMSW.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
         int bgWidth = bgImage.getIconWidth(); // Ancho de la imagen de fondo.
@@ -105,7 +104,7 @@ public class MainFrame extends JFrame implements ActionListener {
         exitButton = new JButton("Salir");
         chichaButton = new JButton();
 
-        ImageIcon chichaImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/chicha.jpg")));
+        ImageIcon chichaImage = new ImageIcon(imagesURL + "chicha.jpg");
 
         startButton.setBounds(100, 300, 100, 50);
         startButton.setEnabled(true);
@@ -115,7 +114,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         chichaButton.setBounds(600, 400, 92, 94);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+                                           chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
