@@ -19,7 +19,7 @@ public class Main {
      * Aquí se instancia y ejecuta todo el programa.
      */
     public static void main(String[] args) {
-        MainFrame mainFrame = new MainFrame("Fiesta de Fulbito ", version);
+        MainFrame mainFrame = new MainFrame(version);
 
         mainFrame.setVisible(true);
     }

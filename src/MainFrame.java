@@ -43,10 +43,10 @@ public class MainFrame extends JFrame implements ActionListener {
      * @param frameTitle Título a mostrar en la ventana principal.
      * @param version    Versión del software.
      */
-    public MainFrame(String frameTitle, String version) {
-        initializeComponents(frameTitle);
-
+    public MainFrame(String version) {
         this.version = version;
+
+        initializeComponents();
     }
 
     // ----------------------------------------Métodos privados---------------------------------
@@ -57,7 +57,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * 
      * @param frameTitle Título de la ventana.
      */
-    private void initializeComponents(String frameTitle) {
+    private void initializeComponents() {
         toolkit = Toolkit.getDefaultToolkit();
 
         ImageIcon bgImage = new ImageIcon(toolkit.getImage(this.getClass().getResource("/graphics/backgroundImage.png")));
@@ -73,7 +73,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setSize(bgWidth, bgHeight);
         setLocationRelativeTo(null);
-        setTitle(frameTitle);
+        setTitle("Fiesta de fulbito " + version);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setIconImage(iconBall.getImage());

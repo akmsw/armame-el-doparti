@@ -226,7 +226,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private void addTextArea() {
         textArea = new JTextArea();
 
-        textArea.setBounds(215, 5, 110, 260);
+        textArea.setBounds(215, 5, 118, 260);
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         textArea.setVisible(true);
@@ -341,23 +341,23 @@ public class MixFrame extends JFrame implements ActionListener {
      */
     private void addImages() {
         cdLabel = new JLabel(new ImageIcon("src/graphics/cd.jpg"));
-        cdLabel.setBounds(337, 100, 85, 85);
+        cdLabel.setBounds(341, 100, 85, 85);
         cdLabel.setVisible(false);
 
         ldLabel = new JLabel(new ImageIcon("src/graphics/ld.jpg"));
-        ldLabel.setBounds(337, 100, 85, 85);
+        ldLabel.setBounds(341, 100, 85, 85);
         ldLabel.setVisible(false);
 
         mfLabel = new JLabel(new ImageIcon("src/graphics/mf.jpg"));
-        mfLabel.setBounds(337, 100, 85, 85);
+        mfLabel.setBounds(341, 100, 85, 85);
         mfLabel.setVisible(false);
 
         fwLabel = new JLabel(new ImageIcon("src/graphics/fw.jpg"));
-        fwLabel.setBounds(337, 100, 85, 85);
+        fwLabel.setBounds(341, 100, 85, 85);
         fwLabel.setVisible(false);
 
         wcLabel = new JLabel(new ImageIcon("src/graphics/wc.jpg"));
-        wcLabel.setBounds(337, 100, 85, 85);
+        wcLabel.setBounds(341, 100, 85, 85);
         wcLabel.setVisible(false);
 
         panel.add(cdLabel);
