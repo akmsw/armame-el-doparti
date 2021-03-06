@@ -10,12 +10,22 @@
  * @since 06/03/2021
  */
 
+import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class ResultFrame extends JFrame {
 
-    public ResultFrame(int distribution, ImageIcon icon) {
+    // Campos privados.
+    private static final int CENTRALDEFENDER = 0; //
+    private static final int LATERALDEFENDER = 1; //
+    private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
+    private static final int FORWARD = 3;         // a cada array de jugadores.
+    private static final int WILDCARD = 4;        //
+
+    public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets) {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -25,7 +35,32 @@ public class ResultFrame extends JFrame {
         else
             setTitle("MEZCLA POR PUNTAJES");
 
+        System.out.println(sets.get(0)[0].getPosition());
+        System.out.println(sets.get(1)[0].getPosition());
+        System.out.println(sets.get(2)[0].getPosition());
+        System.out.println(sets.get(3)[0].getPosition());
+        System.out.println(sets.get(4)[0].getPosition());
+
         setResizable(false);
         setIconImage(icon.getImage());
+    }
+
+    // ----------------------------------------Métodos privados---------------------------------
+
+    /**
+     * Este método se encarga de armar los equipos
+     * de manera completamente aleatoria.
+     */
+    private void randomMix() {
+        //TODO.
+    }
+
+    /**
+     * Este método se encarga de armar los equipos
+     * en base a las puntuaciones asignadas a los
+     * jugadores.
+     */
+    private void ratingMix() {
+        //TODO.
     }
 }

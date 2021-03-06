@@ -316,7 +316,7 @@ public class MixFrame extends JFrame implements ActionListener {
                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
-                    resultFrame = new ResultFrame(distribution, icon);
+                    resultFrame = new ResultFrame(distribution, icon, sets);
 
                     resultFrame.addWindowListener(new WindowEventsHandler());
                     resultFrame.setVisible(true);
