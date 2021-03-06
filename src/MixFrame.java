@@ -464,7 +464,7 @@ public class MixFrame extends JFrame implements ActionListener {
         for(Player[] set : sets)
             for(Player player : set)
                 if (player.getName().equals(name))
-                    return false;
+                    return true;
         
         return false;
     }

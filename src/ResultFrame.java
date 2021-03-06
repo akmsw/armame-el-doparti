@@ -29,20 +29,13 @@ public class ResultFrame extends JFrame {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setIconImage(icon.getImage());
 
         if (distribution == 0)
             randomMix();
         else
             ratingMix();
-
-        System.out.println(sets.get(0)[0].getPosition());
-        System.out.println(sets.get(1)[0].getPosition());
-        System.out.println(sets.get(2)[0].getPosition());
-        System.out.println(sets.get(3)[0].getPosition());
-        System.out.println(sets.get(4)[0].getPosition());
-
-        setResizable(false);
-        setIconImage(icon.getImage());
     }
 
     // ----------------------------------------Métodos privados---------------------------------

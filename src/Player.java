@@ -23,7 +23,8 @@ public class Player {
      */
     public Player(String name, Position position) {
         setName(name);
-        setPosition(position);
+
+        this.position = position;
     }
 
     // ----------------------------------------Métodos públicos---------------------------------
@@ -69,14 +70,5 @@ public class Player {
      */
     public void setRating(int rating) {
         this.rating = rating;
-    }
-
-    /**
-     * En este método se setea la posición del jugador.
-     * 
-     * @param position La posición del jugador.
-     */
-    public void setPosition(Position position) {
-        this.position = position;
     }
 }
