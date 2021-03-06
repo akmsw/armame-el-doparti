@@ -298,7 +298,7 @@ public class MixFrame extends JFrame implements ActionListener {
                  * @param e Evento ocurrido (nombre ingresado).
                  */
                 public void actionPerformed(ActionEvent e) {
-                    JTextField auxTF = (JTextField) e.getSource();
+                    JTextField auxTF = (JTextField)e.getSource();
 
                     for (index = 0; index < textFieldSet.size(); index++)
                         if (auxTF == textFieldSet.get(index))
@@ -308,7 +308,7 @@ public class MixFrame extends JFrame implements ActionListener {
                     // y cualquier espacio intermedio es reemplazado por un guión bajo.
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
-                    if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
+                    if (name.length() == 0 || name.equals("") || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
                                                             "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else if (index >= playersSet.size()) {
@@ -345,7 +345,10 @@ public class MixFrame extends JFrame implements ActionListener {
                  */
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    previousName = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                    String auxString = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                    
+                    if (!auxString.equals(""))
+                        previousName = auxString;
                 }
             });
 
@@ -358,7 +361,10 @@ public class MixFrame extends JFrame implements ActionListener {
                  */
                 @Override
                 public void focusGained(final FocusEvent e) {
-                    previousName = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                    String auxString = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                    
+                    if (!auxString.equals(""))
+                        previousName = auxString;
                 }
             });
 
