@@ -52,17 +52,17 @@ public class MixFrame extends JFrame implements ActionListener {
 
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
+    private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
+    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
+    private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
+    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private ImageIcon icon, smallIcon; // Iconos para las ventanas.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
-    private JPanel panel; // Panel para la ventana de mezcla.
-    private JButton mixButton; // Botón para mezclar jugadores.
-    private String previousName; // Variable auxiliar para eliminar ciertos jugadores.
-    private JComboBox<String> comboBox; // Menú desplegable.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
-    private ArrayList<Player> setCD, setLD, setMF, setFW, setWC;
-    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
-    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
-
+    private JButton mixButton; // Botón para mezclar jugadores.
+    private JComboBox<String> comboBox; // Menú desplegable.
+    private JPanel panel; // Panel para la ventana de mezcla.
+    
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
      * 

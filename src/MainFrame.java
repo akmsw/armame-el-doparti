@@ -29,12 +29,12 @@ import javax.swing.JButton;
 public class MainFrame extends JFrame implements ActionListener {
 
     // Campos privados
-    private String version; // Versión del programa.
-    private Toolkit toolkit; // Recurso para obtener información gráfica del (y para el) software.
-    private JPanel panel; // Panel de la ventana principal.
-    private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
-    private MixFrame mixFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
+    private String version; // Versión del programa.    
     private ImageIcon iconBall, smallIconBall, iconAKMSW, smallIconAKMSW; // Iconos utilizados para las ventanas.
+    private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
+    private JPanel panel; // Panel de la ventana principal.    
+    private MixFrame mixFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
+    private Toolkit toolkit; // Recurso para obtener información gráfica del (y para el) software.
 
     /**
      * Constructor. Aquí se instancia todo lo relativo a la ventana principal, como
