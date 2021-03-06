@@ -23,6 +23,8 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -59,6 +61,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private JButton mixButton; // Botón para mezclar jugadores.
     private JComboBox<String> comboBox; // Menú desplegable.
     private JPanel panel; // Panel para la ventana de mezcla.
+    private ResultFrame resultFrame;
     
     /**
      * Constructor. Aquí se crea la ventana de mezcla.
@@ -102,8 +105,6 @@ public class MixFrame extends JFrame implements ActionListener {
         sets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
-
-        setVisible(true);
     }
 
     // ----------------------------------------Métodos privados---------------------------------
@@ -311,13 +312,14 @@ public class MixFrame extends JFrame implements ActionListener {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione el criterio de distribución de jugadores", "Antes de continuar...",
-                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
+                int distribution = JOptionPane.showOptionDialog(null, "Seleccione el criterio de distribución de jugadores", "Antes de continuar...",
+                                                                   2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
 
-                if (playersAmount == 0) {
-                    System.out.println("MEZCLA ALEATORIA");
-                } else if(playersAmount != JOptionPane.CLOSED_OPTION) {
-                    System.out.println("MEZCLA POR PUNTAJES");
+                if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
+                    resultFrame = new ResultFrame(distribution, icon);
+
+                    resultFrame.addWindowListener(new WindowEventsHandler());
+                    resultFrame.setVisible(true);
                 }
             }
         });
@@ -482,10 +484,11 @@ public class MixFrame extends JFrame implements ActionListener {
         textArea.setText(null);
 
         for(Player[] set : sets)
-            for(Player player : set) {
-                textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
-                counter++;
-            }
+            for(Player player : set)
+                if (!player.getName().equals("")) {
+                    textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
+                    counter++;
+                }
     }
 
     /**
@@ -511,5 +514,35 @@ public class MixFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         updateOutput((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
+    }
+
+    // ----------------------------------------Clases privadas----------------------------------
+
+    /**
+     * Clase privada para lidiar con los eventos de las ventanas.
+     */
+    private class WindowEventsHandler extends WindowAdapter {
+
+        /**
+         * Este método se encarga de hacer invisible
+         * la ventana de mezcla.
+         * 
+         * @param e Evento de ventana.
+         */
+        @Override
+        public void windowOpened(WindowEvent e) {
+            setVisible(false);
+        }
+
+        /**
+         * Este método se encarga de hacer visible
+         * la ventana de mezcla.
+         * 
+         * @param e Evento de ventana.
+         */
+        @Override
+        public void windowClosing(WindowEvent e) {
+            setVisible(true);
+        }
     }
 }

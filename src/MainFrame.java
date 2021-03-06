@@ -124,19 +124,6 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de togglear el estado de un JButton.
-     * Si el botón está activo, se lo desactiva; y viceversa.
-     * 
-     * @param button Botón a togglear.
-     */
-    private void toggleButton(JButton button) {
-        if (button.isEnabled())
-            button.setEnabled(false);
-        else
-            button.setEnabled(true);
-    }
-
-    /**
      * Este método se encarga de añadir el handler de eventos a cada botón.
      */
     private void addActionListeners() {
@@ -175,6 +162,8 @@ public class MainFrame extends JFrame implements ActionListener {
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
                     mixFrame = new MixFrame((playersAmount + 7), iconBall);
+
+                    mixFrame.setVisible(true);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                     System.exit(-1);
@@ -196,35 +185,24 @@ public class MainFrame extends JFrame implements ActionListener {
     private class WindowEventsHandler extends WindowAdapter {
 
         /**
-         * Este método se encarga de togglear el estado
-         * de los botones del frame principal.
+         * Este método se encarga de hacer invisible
+         * la ventana principal.
          * 
          * @param e Evento de ventana.
          */
         @Override
         public void windowOpened(WindowEvent e) {
-            toggleButton(startButton);
-            toggleButton(chichaButton);
-            toggleButton(exitButton);
-
             setVisible(false);
         }
 
         /**
-         * Este método se encarga de togglear el estado 
-         * de los botones del frame principal y hacer
-         * invisible el frame creado al pulsar el botón "Comenzar".
+         * Este método se encarga de hacer visible
+         * la ventana principal.
          * 
          * @param e Evento de ventana.
          */
         @Override
         public void windowClosing(WindowEvent e) {
-            toggleButton(startButton);
-            toggleButton(chichaButton);
-            toggleButton(exitButton);
-
-            mixFrame.setVisible(false);
-
             setVisible(true);
         }
     }
