@@ -14,16 +14,20 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class ResultFrame extends JFrame {
 
-    // Campos privados.
+    // Constantes privadas.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
     private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
     private static final int FORWARD = 3;         // a cada array de jugadores.
     private static final int WILDCARD = 4;        //
+
+    // Campos privados.
+    private JLabel team1, team2;
 
     public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets) {
         setSize(400, 400);
