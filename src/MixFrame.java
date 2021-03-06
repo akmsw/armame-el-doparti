@@ -206,11 +206,9 @@ public class MixFrame extends JFrame implements ActionListener {
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
                         JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
 
-                if (playersAmount == JOptionPane.CLOSED_OPTION) {
-                    System.out.println("VENTANA CERRADA");
-                } else if (playersAmount == 0) {
+                if (playersAmount == 0) {
                     System.out.println("MEZCLA ALEATORIA");
-                } else {
+                } else if(playersAmount != JOptionPane.CLOSED_OPTION) {
                     System.out.println("MEZCLA POR PUNTAJES");
                 }
             }
