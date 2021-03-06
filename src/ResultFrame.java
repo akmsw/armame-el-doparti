@@ -31,9 +31,9 @@ public class ResultFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         if (distribution == 0)
-            setTitle("MEZCLA ALEATORIA");
+            randomMix();
         else
-            setTitle("MEZCLA POR PUNTAJES");
+            ratingMix();
 
         System.out.println(sets.get(0)[0].getPosition());
         System.out.println(sets.get(1)[0].getPosition());
@@ -52,7 +52,7 @@ public class ResultFrame extends JFrame {
      * de manera completamente aleatoria.
      */
     private void randomMix() {
-        //TODO.
+        setTitle("MEZCLA ALEATORIA");
     }
 
     /**
@@ -61,6 +61,6 @@ public class ResultFrame extends JFrame {
      * jugadores.
      */
     private void ratingMix() {
-        //TODO.
+        setTitle("MEZCLA POR PUNTAJES");
     }
 }
