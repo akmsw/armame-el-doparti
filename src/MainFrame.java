@@ -106,10 +106,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
         ImageIcon chichaImage = new ImageIcon(imagesPath + "chicha.jpg");
 
-        startButton.setBounds(100, 300, 100, 50);
+        startButton.setBounds(100, 300, 105, 50);
         startButton.setEnabled(true);
 
-        exitButton.setBounds(100, 400, 100, 50);
+        exitButton.setBounds(100, 400, 105, 50);
         exitButton.setEnabled(true);
 
         chichaButton.setBounds(600, 400, 92, 94);
