@@ -87,20 +87,11 @@ public class MixFrame extends JFrame implements ActionListener {
         setFW = new Player[(int) (playersAmountMap.get(Position.FORWARD) * 2)];
         setWC = new Player[(int) (playersAmountMap.get(Position.WILDCARD) * 2)];
 
-        for (int i = 0; i < setCD.length; i++)
-            setCD[i] = new Player("", Position.CENTRALDEFENDER);
-
-        for (int i = 0; i < setLD.length; i++)
-            setLD[i] = new Player("", Position.LATERALDEFENDER);
-        
-        for (int i = 0; i < setMF.length; i++)
-            setMF[i] = new Player("", Position.MIDFIELDER);
-    
-        for (int i = 0; i < setFW.length; i++)
-            setFW[i] = new Player("", Position.FORWARD);
-        
-        for (int i = 0; i < setWC.length; i++)
-            setWC[i] = new Player("", Position.WILDCARD);
+        initializeSet(setCD, Position.CENTRALDEFENDER);
+        initializeSet(setLD, Position.LATERALDEFENDER);
+        initializeSet(setMF, Position.MIDFIELDER);
+        initializeSet(setFW, Position.FORWARD);
+        initializeSet(setWC, Position.WILDCARD);
         
         sets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
@@ -144,6 +135,18 @@ public class MixFrame extends JFrame implements ActionListener {
                     index++;
                 }
         }
+    }
+
+    /**
+     * Este método inicializa el conjunto de jugadores recibido
+     * con jugadores sin nombre y la posición recibida.
+     * 
+     * @param set Arreglo de jugadores a inicializar.
+     * @param position Posición de los jugadores del arreglo.
+     */
+    private void initializeSet(Player[] set, Position position) {
+        for (int i = 0; i < set.length; i++)
+            set[i] = new Player("", position);
     }
 
     /**
