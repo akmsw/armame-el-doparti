@@ -23,7 +23,7 @@ Para comenzar, se necesitarán 14 posibles jugadores. La distribución utilizada
   - **Delanteros**: 1
   - **Comodines**: 1
 
-Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo "Comodín" podrá ocupar la posición de *Arquero*, o intercambiar con cualquier otro jugador que prefiera atajar.
+Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo *Comodín* podrá ocupar la posición de *Arquero*, o intercambiar con cualquier otro jugador que prefiera atajar.
 
 Una vez ingresados los nombres de todos los jugadores a repartir en cada posición para ambos equipos, se podrá seleccionar si distribuirlos de manera aleatoria, o en base a una puntuación. Si se elige la segunda opción, le será solicitado al usuario una puntuación de 1 ***(malo)*** a 4 ***(excelente)*** para cada jugador ingresado. Finalmente, se repartirán los jugadores de la manera más equitativa posible.
 
@@ -44,4 +44,4 @@ Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de
 - Se logró un nivel de abstracción mayor que permitió prescindir de clases y métodos que no eran vitales.
 - Se lograron mejoras significativas en la modularización del código, mejorando la velocidad de ejecución del programa.
 - Se refactorizaron métodos y clases completas.
-- Arreglo de bugs de la GUI.
+- Arreglo de importantes bugs de la GUI.
