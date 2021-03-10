@@ -29,12 +29,14 @@ public class ResultFrame extends JFrame {
     // Campos privados.
     private JLabel team1, team2;
 
-    public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets) {
+    public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets, boolean anchor) {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setIconImage(icon.getImage());
+        
+        System.out.println("ANCHOR: " + anchor);
 
         if (distribution == 0)
             randomMix();

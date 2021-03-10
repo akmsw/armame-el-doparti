@@ -29,6 +29,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,12 +43,13 @@ public class MixFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
-    private static final int frameHeight = 350; // Alto de la ventana.
+    private static final int frameHeight = 380; // Alto de la ventana.
     private static final String imagesPath = "src/graphics/"; // Carpeta donde buscar las imágenes.
     private static final String[] optionsComboBox = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el
                                                       "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" }; // menú desplegable 
     private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de jugadores.
     private static final Rectangle labelPosition = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las imágenes.
+    private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana de mezcla.
 
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
@@ -59,6 +61,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
     private JButton mixButton; // Botón para mezclar jugadores.
+    private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
     private JComboBox<String> comboBox; // Menú desplegable.
     private JPanel panel; // Panel para la ventana de mezcla.
     private ResultFrame resultFrame;
@@ -173,6 +176,8 @@ public class MixFrame extends JFrame implements ActionListener {
         addTextFields(Position.FORWARD, textFieldFW, setFW);
         addTextFields(Position.WILDCARD, textFieldWC, setWC);
 
+        addCheckBox();
+
         addImages();
 
         addComboBox();
@@ -181,7 +186,7 @@ public class MixFrame extends JFrame implements ActionListener {
 
         addTextArea();
 
-        panel.setBackground(new Color(200, 200, 200));
+        panel.setBackground(bgColor);
 
         add(panel);
     }
@@ -319,7 +324,7 @@ public class MixFrame extends JFrame implements ActionListener {
                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
-                    resultFrame = new ResultFrame(distribution, icon, sets);
+                    resultFrame = new ResultFrame(distribution, icon, sets, anchor.isSelected());
 
                     resultFrame.addWindowListener(new WindowEventsHandler());
                     resultFrame.setVisible(true);
@@ -506,6 +511,23 @@ public class MixFrame extends JFrame implements ActionListener {
         
         return true;
     }
+
+    /**
+     * Este método se encarga de agregar el checkbox
+     * de anclaje de jugadores a un mismo equipo en
+     * el panel del frame.
+     */
+    private void addCheckBox() {
+        anchor = new JCheckBox("Anclar jugadores", false);
+
+        anchor.setBounds(214, 310, 122, 20);
+        anchor.setBackground(bgColor);
+        anchor.setVisible(true);
+
+        panel.add(anchor);
+    }
+
+    // ----------------------------------------Métodos públicos---------------------------------
 
     /**
      * Handler para los eventos ocurridos de la lista desplegable. Se trata la
