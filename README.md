@@ -29,6 +29,14 @@ Una vez ingresados los nombres de todos los jugadores a repartir en cada posici�
 
 Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribución será única. Si se decide distribuirlos de manera aleatoria, se podrán redistribuir tantas veces como se quiera hasta estar conforme.
 
+## Nuevas funcionalidades
+
+El usuario ahora podrá anclar jugadores a un mismo equipo. El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 (y no más de 6) jugadores seleccionados por el usuario deberán pertenecer al mismo equipo.
+
+Para esto, se proporciona un checkbox rotulado con el texto "Anclar jugadores" en la ventana de ingreso de nombres. Si el usuario tilda este checkbox, y luego de seleccionar el método de distribución de jugadores, se le presentará una ventana en la que habrá una lista con todos los nombres de los jugadores ingresados y su respectivo checkbox. Los jugadores cuyo checkbox esté tildado serán anclados al mismo equipo.
+
+Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo.
+
 ### Mejoras
 
 - Implementación de expresiones regulares para alivianar procesos de búsqueda.
