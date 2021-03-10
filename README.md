@@ -15,7 +15,7 @@ Para comenzar, se necesitarán 14 posibles jugadores. La distribución utilizada
   - **Defensores laterales**: 2
   - **Mediocampistas**: 2
   - **Delanteros**: 1
-  - **Comodines***: 1
+  - **Comodines**: 1
 - Si cada equipo consta de 8 jugadores, la distribución será:
   - **Defensores centrales**: 1
   - **Defensores laterales**: 2
@@ -37,7 +37,7 @@ Para esto, se proporciona un checkbox rotulado con el texto "Anclar jugadores" e
 
 Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo.
 
-### Mejoras
+## Mejoras
 
 - Implementación de expresiones regulares para alivianar procesos de búsqueda.
 - Se arreglaron partes del código hardcodeadas que condicionaban la GUI y el algoritmo de distribución.
