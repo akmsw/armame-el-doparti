@@ -43,7 +43,7 @@ public class MixFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
-    private static final int frameHeight = 380; // Alto de la ventana.
+    private static final int frameHeight = 375; // Alto de la ventana.
     private static final String imagesPath = "src/graphics/"; // Carpeta donde buscar las imágenes.
     private static final String[] optionsComboBox = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el
                                                       "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" }; // menú desplegable 
