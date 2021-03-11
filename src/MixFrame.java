@@ -520,7 +520,7 @@ public class MixFrame extends JFrame implements ActionListener {
     private void addCheckBox() {
         anchor = new JCheckBox("Anclar jugadores", false);
 
-        anchor.setBounds(214, 310, 122, 20);
+        anchor.setBounds(212, 310, 122, 20);
         anchor.setBackground(bgColor);
         anchor.setVisible(true);
 
