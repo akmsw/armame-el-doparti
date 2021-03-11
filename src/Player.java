@@ -11,6 +11,7 @@
 public class Player {
 
     // Campos privados.
+    private boolean anchor;
     private int rating;
     private String name;
     private Position position;
@@ -23,6 +24,8 @@ public class Player {
      */
     public Player(String name, Position position) {
         setName(name);
+        setRating(0);
+        setAnchor(false);
 
         this.position = position;
     }
@@ -52,6 +55,13 @@ public class Player {
         return position;
     }
 
+    /**
+     * @return Si el jugador está anclado a un equipo.
+     */
+    public boolean isAnchored() {
+        return anchor;
+    }
+
     // ----------------------------------------Setters------------------------------------------
 
     /**
@@ -70,5 +80,14 @@ public class Player {
      */
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    /**
+     * En este método se setea el estado de anclaje del jugador.
+     * 
+     * @param anchor Si el jugador está anclado a un equipo.
+     */
+    public void setAnchor(boolean anchor) {
+        this.anchor = anchor;
     }
 }

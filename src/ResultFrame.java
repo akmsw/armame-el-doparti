@@ -36,7 +36,10 @@ public class ResultFrame extends JFrame {
         setResizable(false);
         setIconImage(icon.getImage());
         
-        System.out.println("ANCHOR: " + anchor);
+        if (anchor)
+            System.out.println("ANCHOR TRUE");
+        else
+            System.out.println("ANCHOR FALSE");
 
         if (distribution == 0)
             randomMix();
