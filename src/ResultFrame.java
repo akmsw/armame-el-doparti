@@ -10,11 +10,16 @@
  * @since 06/03/2021
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class ResultFrame extends JFrame {
@@ -27,19 +32,34 @@ public class ResultFrame extends JFrame {
     private static final int WILDCARD = 4;        //
 
     // Campos privados.
+    private ImageIcon icon;
     private JLabel team1, team2;
+    private List<Player[]> sets;
+    private List<JCheckBox> checkboxes;
 
+    /**
+     * Constructor.
+     * Aquí se crea la ventana de resultados, la cual
+     * también creará una ventana de anclaje de jugadores
+     * si es necesario.
+     * 
+     * @param distribution Tipo de distribución elegida.
+     * @param icon Ícono para la ventana.
+     * @param sets Conjuntos de jugadores a mezclar.
+     * @param anchor Si hay jugadores que deben anclarse o no.
+     */
     public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets, boolean anchor) {
+        this.icon = icon;
+        this.sets = sets;
+
+        if (anchor)
+            playersAnchor();
+
         setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setIconImage(icon.getImage());
-        
-        if (anchor)
-            System.out.println("ANCHOR TRUE");
-        else
-            System.out.println("ANCHOR FALSE");
 
         if (distribution == 0)
             randomMix();
@@ -48,6 +68,74 @@ public class ResultFrame extends JFrame {
     }
 
     // ----------------------------------------Métodos privados---------------------------------
+
+    /**
+     * Este método crea la ventana de anclaje de jugadores.
+     * 
+     * @param playersAmount La cantidad de jugadores por equipo.
+     */
+    private void playersAnchor() {
+        JFrame anchorFrame = new JFrame("Anclaje de jugadores");
+        JPanel anchorPanel = new JPanel();
+
+        checkboxes = new ArrayList<>();
+
+        anchorPanel.setLayout(new MigLayout());
+
+        for (Player[] players : sets)
+            for (Player player : players)
+                checkboxes.add(new JCheckBox(player.getName()));
+        
+        int aux = 0;
+
+        for (int i = 0; i < sets.size(); i++) {
+            anchorPanel.add(new JLabel(groupName(Position.values()[i])), "wrap");
+
+            for (int j = 0; j < sets.get(i).length; j++) {
+                if ((j % 2) != 0)
+                    anchorPanel.add(checkboxes.get(aux), "span");
+                else
+                    anchorPanel.add(checkboxes.get(aux));
+                
+                aux++;
+            }
+        }
+
+        anchorFrame.setSize(300, 375);
+        anchorFrame.setLocationRelativeTo(null);
+        anchorFrame.setIconImage(icon.getImage());
+        anchorFrame.add(anchorPanel);
+        anchorFrame.setResizable(false);
+        anchorFrame.setVisible(true);
+    }
+
+    /**
+     * Este método ayuda a mostrar al usuario
+     * las posiciones de los jugadores de manera
+     * más amigable.
+     * 
+     * @param position Posición del jugador (directo del enum).
+     * 
+     * @return Posición en formato user-friendly.
+     */
+    private String groupName(Position position) {
+        switch (position) {
+            case CENTRALDEFENDER:
+                return "DEFENSORES CENTRALES";
+
+            case LATERALDEFENDER:
+                return "DEFENSORES LATERALES";
+
+            case MIDFIELDER:
+                return "MEDIOCAMPISTAS";
+
+            case FORWARD:
+                return "DELANTEROS";
+        
+            default:
+                return "COMODINES";
+        }
+    }
 
     /**
      * Este método se encarga de armar los equipos
