@@ -48,12 +48,9 @@ public class ResultFrame extends JFrame {
      * @param sets Conjuntos de jugadores a mezclar.
      * @param anchor Si hay jugadores que deben anclarse o no.
      */
-    public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets, boolean anchor) {
+    public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets) {
         this.icon = icon;
         this.sets = sets;
-
-        if (anchor)
-            playersAnchor();
 
         setSize(400, 400);
         setLocationRelativeTo(null);

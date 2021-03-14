@@ -35,7 +35,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private ImageIcon iconBall, smallIconBall, iconAKMSW, smallIconAKMSW; // Iconos utilizados para las ventanas.
     private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
     private JPanel panel; // Panel de la ventana principal.    
-    private MixFrame mixFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
+    private InputFrame inputFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
 
     /**
      * Constructor. Aquí se instancia todo lo relativo a la ventana principal, como
@@ -161,15 +161,15 @@ public class MainFrame extends JFrame implements ActionListener {
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
-                    mixFrame = new MixFrame((playersAmount + 7), iconBall);
+                    inputFrame = new InputFrame((playersAmount + 7), iconBall);
 
-                    mixFrame.setVisible(true);
+                    inputFrame.setVisible(true);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                     System.exit(-1);
                 }
 
-                mixFrame.addWindowListener(new WindowEventsHandler());
+                inputFrame.addWindowListener(new WindowEventsHandler());
             }
         } else if (e.getSource() == chichaButton)
             chicha(version);

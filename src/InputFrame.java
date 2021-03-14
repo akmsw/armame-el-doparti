@@ -31,6 +31,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -39,7 +40,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class MixFrame extends JFrame implements ActionListener {
+public class InputFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
     private static final int frameWidth = 450; // Ancho de la ventana.
@@ -71,7 +72,7 @@ public class MixFrame extends JFrame implements ActionListener {
      * 
      * @throws IOException Cuando hay un error de lectura en los archivos PDA.
      */
-    public MixFrame(int playersAmount, ImageIcon icon) throws IOException {
+    public InputFrame(int playersAmount, ImageIcon icon) throws IOException {
         this.icon = icon;
 
         playersAmountMap = new EnumMap<>(Position.class);
@@ -324,7 +325,22 @@ public class MixFrame extends JFrame implements ActionListener {
                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
-                    resultFrame = new ResultFrame(distribution, icon, sets, anchor.isSelected());
+                    if (anchor.isSelected()) {
+                        JDialog anchorDialog = new JDialog(InputFrame.this, true);
+                        JPanel anchorPanel = new JPanel();
+
+                        anchorPanel.setLayout(null);
+
+                        anchorDialog.setTitle("Anclaje de jugadores");
+                        anchorDialog.setSize(300, 375);
+                        anchorDialog.setLocationRelativeTo(null);
+                        anchorDialog.setIconImage(icon.getImage());
+                        anchorDialog.add(anchorPanel);
+                        anchorDialog.setResizable(false);
+                        anchorDialog.setVisible(true);
+                    }
+
+                    resultFrame = new ResultFrame(distribution, icon, sets);
 
                     resultFrame.addWindowListener(new WindowEventsHandler());
                     resultFrame.setVisible(true);
