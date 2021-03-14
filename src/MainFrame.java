@@ -59,9 +59,9 @@ public class MainFrame extends JFrame implements ActionListener {
      * @param frameTitle Título de la ventana.
      */
     private void initializeComponents() {
-        ImageIcon bgImage = new ImageIcon(imagesPath + "backgroundImage.png");
+        ImageIcon bgImage = new ImageIcon(imagesPath + "bg.png");
 
-        iconBall = new ImageIcon(imagesPath + "myIcon.png");
+        iconBall = new ImageIcon(imagesPath + "icon.png");
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
         iconAKMSW = new ImageIcon(imagesPath + "AKMSW_icon.png");
