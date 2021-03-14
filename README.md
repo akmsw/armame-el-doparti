@@ -1,5 +1,3 @@
-![akmsw](https://user-images.githubusercontent.com/66426042/111087590-32e10000-8501-11eb-80d6-d0cb83c5cb72.png)
-
 # Fiesta de fulbito v3.0
 ```
 Fecha de release: TBD.
@@ -10,7 +8,6 @@ Este programa ofrece una intuitiva y rápida manera de generar equipos para part
 ## Modo de uso
 
 El usuario podrá generar sus equipos ingresando los nombres de los jugadores a sortear en cada posición.
-Para comenzar, se necesitarán 14 posibles jugadores. La distribución utilizada para cada equipo dependerá de la cantidad de jugadores por equipo.
 
 - Si cada equipo consta de 7 jugadores, la distribución será:
   - **Defensores centrales**: 1
@@ -25,19 +22,19 @@ Para comenzar, se necesitarán 14 posibles jugadores. La distribución utilizada
   - **Delanteros**: 1
   - **Comodines**: 1
 
-Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo *Comodín* podrá ocupar la posición de *Arquero*, o intercambiar con cualquier otro jugador que prefiera atajar.
+Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo *Comodín* podrá ocupar la posición de *Arquero* o intercambiar con cualquier otro jugador que prefiera atajar.
 
-Una vez ingresados los nombres de todos los jugadores a repartir en cada posición para ambos equipos, se podrá seleccionar si distribuirlos de manera aleatoria, o en base a una puntuación. Si se elige la segunda opción, le será solicitado al usuario una puntuación de 1 ***(malo)*** a 4 ***(excelente)*** para cada jugador ingresado. Finalmente, se repartirán los jugadores de la manera más equitativa posible.
+Una vez ingresados los nombres de todos los jugadores a repartir en cada posición para ambos equipos, se podrá seleccionar si distribuirlos de manera aleatoria, o en base a una puntuación. Si se elige la segunda opción, le será solicitado al usuario una puntuación de 1 ***(mal jugador)*** a 4 ***(excelente jugador)*** para cada jugador ingresado. Finalmente, se armarán los equipos de la manera más equitativa posible.
 
-Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribución será única. Si se decide distribuirlos de manera aleatoria, se podrán redistribuir tantas veces como se quiera hasta estar conforme.
+Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribución óptima será única. Si se decide distribuirlos de manera aleatoria, se podrán redistribuir tantas veces como se quiera hasta estar conforme.
 
 ## Nuevas funcionalidades
 
-El usuario ahora podrá anclar jugadores a un mismo equipo. El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 (y no más de 6) jugadores seleccionados por el usuario deberán pertenecer al mismo equipo.
+El usuario ahora podrá anclar jugadores a un mismo equipo. El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 jugadores seleccionados por el usuario deberán pertenecer al mismo equipo. El número máximo posible de jugadores a anclar a un equipo será 6 (si se opta por "fútbol 7") ó 7 (si se opta por fútbol 8).  
 
-Para esto, se proporciona un checkbox rotulado con el texto "Anclar jugadores" en la ventana de ingreso de nombres. Si el usuario tilda este checkbox, y luego de seleccionar el método de distribución de jugadores, se le presentará una ventana en la que habrá una lista con todos los nombres de los jugadores ingresados y su respectivo checkbox. Los jugadores cuyo checkbox esté tildado serán anclados al mismo equipo.
+Para esto, se proporciona un checkbox rotulado con el texto "Anclar jugadores" en la ventana de ingreso de nombres. Si el usuario tilda este checkbox, y luego de seleccionar el método de distribución de jugadores, se le presentará una ventana en la que habrá una lista con todos los nombres ingresados y su respectivo checkbox. Los jugadores cuyo checkbox esté tildado serán anclados al mismo equipo.
 
-Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo.
+Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (si se anclan todos los mediocampistas para un mismo equipo, el otro equipo no tendrá mediocampistas y esto no es posible).
 
 ## Mejoras
 
