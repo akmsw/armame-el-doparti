@@ -3,7 +3,7 @@
 Fecha de release: TBD.
 ```
 
-Este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de fútbol 7 y fútbol 8.
+Este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de "fútbol 7" y "fútbol 8".
 
 ## Modo de uso
 
@@ -30,9 +30,9 @@ Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribu
 
 ## Nuevas funcionalidades
 
-El usuario ahora podrá anclar jugadores a un mismo equipo. El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 jugadores seleccionados por el usuario deberán pertenecer al mismo equipo. El número máximo posible de jugadores a anclar a un equipo será 6 (si se opta por "fútbol 7") ó 7 (si se opta por fútbol 8).  
+El usuario ahora podrá anclar jugadores. El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 jugadores seleccionados por el usuario deberán pertenecer al mismo equipo. El número máximo posible de jugadores a anclar será 6 (si se opta por "fútbol 7") ó 7 (si se opta por "fútbol 8").  
 
-Para esto, se proporciona un checkbox rotulado con el texto "Anclar jugadores" en la ventana de ingreso de nombres. Si el usuario tilda este checkbox, y luego de seleccionar el método de distribución de jugadores, se le presentará una ventana en la que habrá una lista con todos los nombres ingresados y su respectivo checkbox. Los jugadores cuyo checkbox esté tildado serán anclados al mismo equipo.
+Para esto, se proporciona un checkbox rotulado con el texto "*Anclar jugadores*" en la ventana de ingreso de nombres. Si el usuario tilda este checkbox, y luego de seleccionar el método de distribución de jugadores, se le presentará una ventana en la que habrá una lista con todos los nombres ingresados y su respectivo checkbox. Los jugadores cuyo checkbox esté tildado serán anclados al mismo equipo.
 
 Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (si se anclan todos los mediocampistas para un mismo equipo, el otro equipo no tendrá mediocampistas y esto no es posible).
 
