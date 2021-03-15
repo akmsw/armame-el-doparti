@@ -53,6 +53,11 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de jugadores.
     private static final Rectangle labelPosition = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las imágenes.
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana de mezcla.
+    private static final int CENTRALDEFENDER = 0; //
+    private static final int LATERALDEFENDER = 1; //
+    private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
+    private static final int FORWARD = 3;         // a cada array de jugadores.
+    private static final int WILDCARD = 4;        //
 
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
@@ -329,57 +334,9 @@ public class InputFrame extends JFrame implements ActionListener {
                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
-                    if (anchor.isSelected()) {
-                        anchorDialog = new JDialog(InputFrame.this, true);
-                        JPanel anchorPanel = new JPanel();
-                        JButton cancelButton = new JButton("Cancelar");
-                        JButton okButton = new JButton("Aceptar");
-
-                        cancelButton.addActionListener(new ActionListener() {
-                            /**
-                             * Este método hace invisible la ventana de anclaje
-                             * si el usuario desea cancelar la operación.
-                             * 
-                             * @param e Evento de click.
-                             */
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                anchorDialog.setVisible(false);
-                            }
-                        });
-
-                        okButton.addActionListener(new ActionListener() {
-                            /**
-                             * Este evento hace invisible la ventana de anclaje
-                             * cuando el usuario hizo los anclajes deseados y
-                             * está listo para distribuir los jugadores.
-                             * 
-                             * @param e Evento de click.
-                             */
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                anchorDialog.setVisible(false);
-
-                                resultFrame = new ResultFrame(distribution, icon, sets);
-
-                                resultFrame.addWindowListener(new WindowEventsHandler());
-                                resultFrame.setVisible(true);
-                            }
-                        });
-
-                        anchorPanel.setLayout(new MigLayout());
-                        anchorPanel.add(cancelButton);
-                        anchorPanel.add(okButton, "wrap");
-
-                        anchorDialog.setTitle("Anclaje de jugadores");
-                        anchorDialog.setSize(300, 415);
-                        anchorDialog.setLocationRelativeTo(null);
-                        anchorDialog.setIconImage(icon.getImage());
-                        anchorDialog.add(anchorPanel);
-                        anchorDialog.setResizable(false);
-                        anchorDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        anchorDialog.setVisible(true);
-                    } else {
+                    if (anchor.isSelected())
+                        playersAnchorage(distribution);
+                    else {
                         resultFrame = new ResultFrame(distribution, icon, sets);
 
                         resultFrame.addWindowListener(new WindowEventsHandler());
@@ -582,6 +539,114 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor.setVisible(true);
 
         panel.add(anchor);
+    }
+
+    /**
+     * Este método se encarga de manejar la GUI y los
+     * eventos correspondientes al anclaje de jugadores.
+     * 
+     * @param distribution Tipo de distribución elegida por el usuario.
+     */
+    private void playersAnchorage(int distribution) {
+        anchorDialog = new JDialog(InputFrame.this, true);
+
+        JPanel anchorPanel = new JPanel();
+        JButton cancelButton = new JButton("Cancelar");
+        JButton okButton = new JButton("Aceptar");
+
+        ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los jugadores ingresados separados por posición.
+
+        cdCB = new ArrayList<>();
+        ldCB = new ArrayList<>();
+        mfCB = new ArrayList<>();
+        fwCB = new ArrayList<>();
+        wcCB = new ArrayList<>();
+
+        cancelButton.addActionListener(new ActionListener() {
+            /**
+             * Este método hace invisible la ventana de anclaje
+             * si el usuario desea cancelar la operación.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                anchorDialog.setVisible(false);
+            }
+        });
+
+        okButton.addActionListener(new ActionListener() {
+            /**
+             * Este evento hace invisible la ventana de anclaje
+             * cuando el usuario hizo los anclajes deseados y
+             * está listo para distribuir los jugadores.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                anchorDialog.setVisible(false);
+
+                resultFrame = new ResultFrame(distribution, icon, sets);
+
+                resultFrame.addWindowListener(new WindowEventsHandler());
+                resultFrame.setVisible(true);
+            }
+        });
+
+        fillCBSet(sets.get(CENTRALDEFENDER), cdCB);
+        fillCBSet(sets.get(LATERALDEFENDER), ldCB);
+        fillCBSet(sets.get(MIDFIELDER), mfCB);
+        fillCBSet(sets.get(FORWARD), fwCB);
+        fillCBSet(sets.get(WILDCARD), wcCB);
+
+        anchorPanel.setLayout(new MigLayout("wrap 2"));
+
+        addCBSet(anchorPanel, cdCB, "DEFENSORES CENTRALES");
+        addCBSet(anchorPanel, ldCB, "DEFENSORES LATERALES");
+        addCBSet(anchorPanel, mfCB, "MEDIOCAMPISTAS");
+        addCBSet(anchorPanel, fwCB, "DELANTEROS");
+        addCBSet(anchorPanel, wcCB, "COMODINES");
+
+        anchorPanel.add(cancelButton);
+        anchorPanel.add(okButton);
+
+        anchorDialog.setTitle("Anclaje de jugadores");
+        anchorDialog.setSize(300, 407);
+        anchorDialog.setLocationRelativeTo(null);
+        anchorDialog.setIconImage(icon.getImage());
+        anchorDialog.add(anchorPanel);
+        anchorDialog.setResizable(false);
+        anchorDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        anchorDialog.setVisible(true);
+    }
+
+    /**
+     * Este método se encarga de llenar los arreglos de checkboxes
+     * correspondientes a cada posición.
+     * 
+     * @param playersSet Conjunto de jugadores de donde obtener los nombres.
+     * @param cbSet Conjunto de checkboxes a llenar.
+     */
+    private void fillCBSet(Player[] playersSet, ArrayList<JCheckBox> cbSet) {
+        for (Player player : playersSet)
+            cbSet.add(new JCheckBox(player.getName()));
+    }
+
+    /**
+     * Este método se encarga de colocar en el panel los checkboxes
+     * correspondiente a cada posición junto con una etiqueta que los
+     * distinga.
+     * 
+     * @param panel Panel donde se colocarán los checkboxes.
+     * @param cbSet Conjunto de checkboxes a colocar.
+     * @param title Texto de la etiqueta de acompañamiento.
+     */
+    private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
+        panel.add(new JLabel(title), "wrap");
+
+        for (JCheckBox cb : cbSet)
+            panel.add(cb);
     }
 
     // ----------------------------------------Métodos públicos---------------------------------
