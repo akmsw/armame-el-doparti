@@ -9,6 +9,8 @@ Este programa ofrece una intuitiva y rápida manera de generar equipos para part
 
 El usuario podrá generar sus equipos ingresando los nombres de los jugadores a sortear en cada posición.
 
+Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo *Comodín* podrá ocupar la posición de *Arquero* o intercambiar con cualquier otro jugador que prefiera atajar.
+
 - Si cada equipo consta de 7 jugadores, la distribución será:
   - **Defensores centrales**: 1
   - **Defensores laterales**: 2
@@ -21,8 +23,6 @@ El usuario podrá generar sus equipos ingresando los nombres de los jugadores a 
   - **Mediocampistas**: 3
   - **Delanteros**: 1
   - **Comodines**: 1
-
-Un requisito de desarrollo fue no incluir la posición *"Arquero"* y reemplazarla por *"Comodín"*. El jugador de tipo *Comodín* podrá ocupar la posición de *Arquero* o intercambiar con cualquier otro jugador que prefiera atajar.
 
 Una vez ingresados los nombres de todos los jugadores a repartir en cada posición para ambos equipos, se podrá seleccionar si distribuirlos de manera aleatoria, o en base a una puntuación. Si se elige la segunda opción, le será solicitado al usuario una puntuación de 1 ***(mal jugador)*** a 4 ***(excelente jugador)*** para cada jugador ingresado. Finalmente, se armarán los equipos de la manera más equitativa posible.
 
