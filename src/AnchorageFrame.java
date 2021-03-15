@@ -75,7 +75,11 @@ public class AnchorageFrame extends JFrame {
     // ----------------------------------------Métodos privados---------------------------------
 
     /**
+     * Este método se encarga de inicializar los componentes de la ventana de
+     * anclaje.
      * 
+     * @param icon Ícono para la ventana.
+     * @param distribution Tipo de distribución elegida.
      */
     private void initializeComponents(ImageIcon icon, int distribution) {
         fillCBSet(sets.get(CENTRALDEFENDER), cdCB);
