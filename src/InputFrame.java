@@ -77,7 +77,10 @@ public class InputFrame extends JFrame implements ActionListener {
     private ResultFrame resultFrame;
     
     /**
-     * Constructor. Aquí se crea la ventana de mezcla.
+     * Se crea la ventana de mezcla.
+     * 
+     * @param playersAmount Cantidad de jugadores por equipo.
+     * @param icon Ícono para la ventana.
      * 
      * @throws IOException Cuando hay un error de lectura en los archivos PDA.
      */

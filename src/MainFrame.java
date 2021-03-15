@@ -38,11 +38,10 @@ public class MainFrame extends JFrame implements ActionListener {
     private InputFrame inputFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
 
     /**
-     * Constructor. Aquí se instancia todo lo relativo a la ventana principal, como
-     * sus botones, las imágenes y los handlers de eventos.
+     * Se crea la ventana principal.
      * 
      * @param frameTitle Título a mostrar en la ventana principal.
-     * @param version    Versión del software.
+     * @param version Versión del software.
      */
     public MainFrame(String version) {
         this.version = version;
@@ -166,6 +165,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     inputFrame.setVisible(true);
                 } catch (IOException ex) {
                     ex.printStackTrace();
+                    
                     System.exit(-1);
                 }
 

@@ -26,10 +26,7 @@ public class ResultFrame extends JFrame {
     private List<Player[]> sets;
 
     /**
-     * Constructor.
-     * Aquí se crea la ventana de resultados, la cual
-     * también creará una ventana de anclaje de jugadores
-     * si es necesario.
+     * Se crea la ventana de resultados.
      * 
      * @param distribution Tipo de distribución elegida.
      * @param icon Ícono para la ventana.
