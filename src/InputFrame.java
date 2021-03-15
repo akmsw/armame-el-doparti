@@ -78,27 +78,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         playersAmountMap = new EnumMap<>(Position.class);
 
-        textFieldCD = new ArrayList<>();
-        textFieldLD = new ArrayList<>();
-        textFieldMF = new ArrayList<>();
-        textFieldFW = new ArrayList<>();
-        textFieldWC = new ArrayList<>();
-
         collectPDData(playersAmount);
-
-        setCD = new Player[(int) (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)];
-        setLD = new Player[(int) (playersAmountMap.get(Position.LATERALDEFENDER) * 2)];
-        setMF = new Player[(int) (playersAmountMap.get(Position.MIDFIELDER) * 2)];
-        setFW = new Player[(int) (playersAmountMap.get(Position.FORWARD) * 2)];
-        setWC = new Player[(int) (playersAmountMap.get(Position.WILDCARD) * 2)];
-
-        initializeSet(setCD, Position.CENTRALDEFENDER);
-        initializeSet(setLD, Position.LATERALDEFENDER);
-        initializeSet(setMF, Position.MIDFIELDER);
-        initializeSet(setFW, Position.FORWARD);
-        initializeSet(setWC, Position.WILDCARD);
-        
-        sets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
     }
@@ -161,6 +141,26 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
+        textFieldCD = new ArrayList<>();
+        textFieldLD = new ArrayList<>();
+        textFieldMF = new ArrayList<>();
+        textFieldFW = new ArrayList<>();
+        textFieldWC = new ArrayList<>();
+
+        setCD = new Player[(int) (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)];
+        setLD = new Player[(int) (playersAmountMap.get(Position.LATERALDEFENDER) * 2)];
+        setMF = new Player[(int) (playersAmountMap.get(Position.MIDFIELDER) * 2)];
+        setFW = new Player[(int) (playersAmountMap.get(Position.FORWARD) * 2)];
+        setWC = new Player[(int) (playersAmountMap.get(Position.WILDCARD) * 2)];
+
+        initializeSet(setCD, Position.CENTRALDEFENDER);
+        initializeSet(setLD, Position.LATERALDEFENDER);
+        initializeSet(setMF, Position.MIDFIELDER);
+        initializeSet(setFW, Position.FORWARD);
+        initializeSet(setWC, Position.WILDCARD);
+        
+        sets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
+
         setSize(frameWidth, frameHeight);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -180,7 +180,17 @@ public class InputFrame extends JFrame implements ActionListener {
 
         addAnchorCheckBox();
 
-        addImages();
+        cdLabel = new JLabel();
+        ldLabel = new JLabel();
+        mfLabel = new JLabel();
+        fwLabel = new JLabel();
+        wcLabel = new JLabel();
+
+        addImages(cdLabel, "cd.jpg", panel);
+        addImages(ldLabel, "ld.jpg", panel);
+        addImages(mfLabel, "mf.jpg", panel);
+        addImages(fwLabel, "fw.jpg", panel);
+        addImages(wcLabel, "wc.jpg", panel);
 
         addComboBox();
 
@@ -257,32 +267,12 @@ public class InputFrame extends JFrame implements ActionListener {
      * cuya visibilidad se toggleará en base al
      * item seleccionado en la lista desplegable.
      */
-    private void addImages() {
-        cdLabel = new JLabel(new ImageIcon(imagesPath + "cd.jpg"));
-        cdLabel.setBounds(labelPosition);
-        cdLabel.setVisible(false);
+    private void addImages(JLabel label, String fileName, JPanel panel) {
+        label.setIcon(new ImageIcon(imagesPath + fileName));
+        label.setBounds(labelPosition);
+        label.setVisible(true);
 
-        ldLabel = new JLabel(new ImageIcon(imagesPath + "ld.jpg"));
-        ldLabel.setBounds(labelPosition);
-        ldLabel.setVisible(false);
-
-        mfLabel = new JLabel(new ImageIcon(imagesPath + "mf.jpg"));
-        mfLabel.setBounds(labelPosition);
-        mfLabel.setVisible(false);
-
-        fwLabel = new JLabel(new ImageIcon(imagesPath + "fw.jpg"));
-        fwLabel.setBounds(labelPosition);
-        fwLabel.setVisible(false);
-
-        wcLabel = new JLabel(new ImageIcon(imagesPath + "wc.jpg"));
-        wcLabel.setBounds(labelPosition);
-        wcLabel.setVisible(false);
-
-        panel.add(cdLabel);
-        panel.add(ldLabel);
-        panel.add(mfLabel);
-        panel.add(fwLabel);
-        panel.add(wcLabel);
+        panel.add(label);
     }
 
     /**
