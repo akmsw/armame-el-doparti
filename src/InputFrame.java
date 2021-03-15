@@ -31,16 +31,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class InputFrame extends JFrame implements ActionListener {
@@ -54,11 +50,6 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de jugadores.
     private static final Rectangle labelPosition = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las imágenes.
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana de mezcla.
-    private static final int CENTRALDEFENDER = 0; //
-    private static final int LATERALDEFENDER = 1; //
-    private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
-    private static final int FORWARD = 3;         // a cada array de jugadores.
-    private static final int WILDCARD = 4;        //
 
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
@@ -73,8 +64,8 @@ public class InputFrame extends JFrame implements ActionListener {
     private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
     private JComboBox<String> comboBox; // Menú desplegable.
     private JPanel panel; // Panel para la ventana de mezcla.
-    private JDialog anchorDialog; // Ventana de diálogo para el anclaje de jugadores.
-    private ResultFrame resultFrame;
+    private AnchorageFrame anchorageFrame; // Ventana de anclaje de jugadores.
+    private ResultFrame resultFrame; // Ventana de resultados.
     
     /**
      * Se crea la ventana de mezcla.
@@ -243,7 +234,8 @@ public class InputFrame extends JFrame implements ActionListener {
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
-                        errorMsg("El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido");
+                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
+                                                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
                         playersSet[index].setName(name);
                         
@@ -305,8 +297,7 @@ public class InputFrame extends JFrame implements ActionListener {
         comboBox.setBounds(5, 5, 200, 30);
         comboBox.addActionListener(this);
 
-        updateOutput(comboBox.getSelectedItem().toString()); // Para que se muestre el output correspondiente
-                                                             // al estado inicial del JComboBox.
+        updateOutput(comboBox.getSelectedItem().toString()); // Se muestra el output correspondiente al estado inicial del JComboBox.
 
         panel.add(comboBox);
     }
@@ -336,8 +327,12 @@ public class InputFrame extends JFrame implements ActionListener {
                                                                    2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
-                    if (anchor.isSelected())
-                        playersAnchorage(distribution);
+                    if (anchor.isSelected()) {
+                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.sets, distribution);
+
+                        anchorageFrame.addWindowListener(new WindowEventsHandler());
+                        anchorageFrame.setVisible(true);
+                    }
                     else {
                         resultFrame = new ResultFrame(distribution, icon, sets);
 
@@ -516,8 +511,9 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de chequear si la cantidad de jugadores ingresados es
-     * 14 para poder habilitar el botón de "Mezclar".
+     * Este método se encarga de chequear si se han ingresado
+     * los nombres de todos los jugadores para habilitar el
+     * botón de mezcla.
      */
     private boolean checkMixButton() {
         for(Player[] set : sets)
@@ -541,217 +537,6 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor.setVisible(true);
 
         panel.add(anchor);
-    }
-
-    /**
-     * Este método se encarga de manejar la GUI y los
-     * eventos correspondientes al anclaje de jugadores.
-     * 
-     * @param distribution Tipo de distribución elegida por el usuario.
-     */
-    private void playersAnchorage(int distribution) {
-        int anchorMax = 5;
-
-        anchorDialog = new JDialog(InputFrame.this, true);
-
-        JPanel anchorPanel = new JPanel();
-        JButton cancelButton = new JButton("Cancelar");
-        JButton okButton = new JButton("Aceptar");
-
-        ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los jugadores ingresados separados por posición.
-
-        cdCB = new ArrayList<>();
-        ldCB = new ArrayList<>();
-        mfCB = new ArrayList<>();
-        fwCB = new ArrayList<>();
-        wcCB = new ArrayList<>();
-
-        cancelButton.addActionListener(new ActionListener() {
-            /**
-             * Este método hace invisible la ventana de anclaje
-             * si el usuario desea cancelar la operación.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                anchorDialog.setVisible(false);
-            }
-        });
-
-        okButton.addActionListener(new ActionListener() {
-            /**
-             * Este evento hace las validaciones de datos necesarias
-             * y, si todo se cumple, hace invisible la ventana de anclaje
-             * cuando el usuario hizo los anclajes deseados y
-             * está listo para distribuir los jugadores.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setAnchors(cdCB, sets.get(CENTRALDEFENDER), 1);
-                setAnchors(ldCB, sets.get(LATERALDEFENDER), 1);
-                setAnchors(mfCB, sets.get(MIDFIELDER), 1);
-                setAnchors(fwCB, sets.get(FORWARD), 1);
-                setAnchors(wcCB, sets.get(WILDCARD), 1);
-
-                if (!checkTotalAnchors(anchorMax))
-                    errorMsg("No pueden haber más de " + anchorMax + " jugadores en un mismo anclaje.");
-                else if (!(fullAnchored(sets.get(CENTRALDEFENDER)) &&
-                           fullAnchored(sets.get(LATERALDEFENDER)) &&
-                           fullAnchored(sets.get(MIDFIELDER)) &&
-                           fullAnchored(sets.get(FORWARD)) &&
-                           fullAnchored(sets.get(WILDCARD))))
-                    errorMsg("Ningún conjunto de jugadores puede tener más de la mitad de sus integrantes anclados.");
-                else
-                    anchorDialog.setVisible(false);
-
-                resultFrame = new ResultFrame(distribution, icon, sets);
-
-                resultFrame.addWindowListener(new WindowEventsHandler());
-                resultFrame.setVisible(true);
-            }
-        });
-
-        fillCBSet(sets.get(CENTRALDEFENDER), cdCB);
-        fillCBSet(sets.get(LATERALDEFENDER), ldCB);
-        fillCBSet(sets.get(MIDFIELDER), mfCB);
-        fillCBSet(sets.get(FORWARD), fwCB);
-        fillCBSet(sets.get(WILDCARD), wcCB);
-
-        anchorPanel.setLayout(new MigLayout("wrap 2"));
-
-        addCBSet(anchorPanel, cdCB, "DEFENSORES CENTRALES");
-        addCBSet(anchorPanel, ldCB, "DEFENSORES LATERALES");
-        addCBSet(anchorPanel, mfCB, "MEDIOCAMPISTAS");
-        addCBSet(anchorPanel, fwCB, "DELANTEROS");
-        addCBSet(anchorPanel, wcCB, "COMODINES");
-
-        anchorPanel.add(okButton);
-        anchorPanel.add(cancelButton);
-
-        anchorDialog.setTitle("Anclaje de jugadores");
-        anchorDialog.setSize(300, 432);
-        anchorDialog.setLocationRelativeTo(null);
-        anchorDialog.setIconImage(icon.getImage());
-        anchorDialog.add(anchorPanel);
-        anchorDialog.setResizable(false);
-        anchorDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        anchorDialog.setVisible(true);
-    }
-
-    /**
-     * Este método se encarga de llenar los arreglos de checkboxes
-     * correspondientes a cada posición.
-     * 
-     * @param playersSet Conjunto de jugadores de donde obtener los nombres.
-     * @param cbSet Conjunto de checkboxes a llenar.
-     */
-    private void fillCBSet(Player[] playersSet, ArrayList<JCheckBox> cbSet) {
-        for (Player player : playersSet)
-            cbSet.add(new JCheckBox(player.getName()));
-    }
-
-    /**
-     * Este método se encarga de colocar en el panel los checkboxes
-     * correspondiente a cada posición junto con una etiqueta que los
-     * distinga.
-     * 
-     * @param panel Panel donde se colocarán los checkboxes.
-     * @param cbSet Conjunto de checkboxes a colocar.
-     * @param title Texto de la etiqueta de acompañamiento.
-     */
-    private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
-        panel.add(new JLabel(title), "wrap");
-
-        for (JCheckBox cb : cbSet)
-            panel.add(cb);
-        
-        panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
-    }
-
-    /**
-     * Este método se encarga de setear el número
-     * de anclaje correspondiente a cada jugador
-     * cuya checkbox haya sido tildada.
-     * 
-     * @param cbSet Arreglo de checkboxes a chequear.
-     * @param playersSet Arreglo de jugadores correspondiente
-     *                   al arreglo de checkboxes
-     * @param anchorageNum Número de anclaje del jugador.
-     */
-    private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet, int anchorageNum) {
-        for (int i = 0; i < cbSet.size(); i++)
-            for (int j = 0; j < playersSet.length; j++)
-                if (playersSet[j].getName().equals(cbSet.get(i).getText())) {
-                    if (cbSet.get(i).isSelected())
-                        playersSet[j].setAnchor(anchorageNum);
-                    else
-                        playersSet[j].setAnchor(0);
-                }
-    }
-
-    /**
-     * Este método se encarga de verificar que el arreglo
-     * de jugadores recibido por parámetro no tenga más
-     * de la mitad de jugadores anclados.
-     * 
-     * @param playersSet Arreglo de jugadores con anclaje a verificar.
-     * @return Si el arreglo tiene más de la mitad de los jugadores anclados.
-     */
-    private boolean fullAnchored(Player[] playersSet) {
-        int count = 0;
-
-        for (int i = 0; i < playersSet.length; i++)
-            if (playersSet[i].getAnchor() != 0)
-                count++;
-        
-        return count <= (playersSet.length / 2);
-    }
-
-    /**
-     * Este método se encarga de verificar que no se sobrepase
-     * la cantidad máxima de anclajes posibles.
-     * 
-     * @param anchorMax Máxima cantidad posible de jugadores a anclar.
-     * 
-     * @return Si el límite de anclajes fue sobrepasado.
-     */
-    private boolean checkTotalAnchors(int anchorMax) {
-        int anchored = 0;
-
-        for (int i = 0; i < sets.get(CENTRALDEFENDER).length; i++)
-            if (sets.get(CENTRALDEFENDER)[i].getAnchor() != 0)
-                anchored++;
-        
-        for (int i = 0; i < sets.get(LATERALDEFENDER).length; i++)
-            if (sets.get(LATERALDEFENDER)[i].getAnchor() != 0)
-                anchored++;
-
-        for (int i = 0; i < sets.get(MIDFIELDER).length; i++)
-            if (sets.get(MIDFIELDER)[i].getAnchor() != 0)
-                anchored++;
-        
-        for (int i = 0; i < sets.get(FORWARD).length; i++)
-            if (sets.get(FORWARD)[i].getAnchor() != 0)
-                anchored++;
-        
-        for (int i = 0; i < sets.get(WILDCARD).length; i++)
-            if (sets.get(WILDCARD)[i].getAnchor() != 0)
-                anchored++;
-        
-        return anchored <= anchorMax;
-    }
-
-    /**
-     * Este método se encarga de crear una ventana de error
-     * con un texto personalizado.
-     * 
-     * @param errorText Texto de error a mostrar en la ventana.
-     */
-    private void errorMsg(String errorText) {
-        JOptionPane.showMessageDialog(null, errorText, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
     }
 
     // ----------------------------------------Métodos públicos---------------------------------
@@ -794,7 +579,6 @@ public class InputFrame extends JFrame implements ActionListener {
          */
         @Override
         public void windowClosing(WindowEvent e) {
-            anchorDialog.setVisible(false); // La ventana de anclaje se hace invisible si se cierra la ventana de resultados.
             setVisible(true); // La ventana de inputs se hace visible si se cierra la ventana de resultados.
         }
     }
