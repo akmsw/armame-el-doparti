@@ -3,7 +3,7 @@
  * 
  * @author Bonino, Francisco Ignacio.s
  * 
- * @version 1.0.0
+ * @version 1.1.0
  * 
  * @since 15/02/2021
  */
@@ -16,9 +16,9 @@ public class Player {
     private Position position;
 
     /**
-     * Constructor.
+     * Se crea un jugador básico con los parámetros recibidos.
      * 
-     * @param name     El nombre del jugador.
+     * @param name El nombre del jugador.
      * @param position La posición del jugador.
      */
     public Player(String name, Position position) {
@@ -78,7 +78,7 @@ public class Player {
     }
 
     /**
-     * @param anchor Equipo al que está anclado el jugador.
+     * @param anchor Número de anclaje correspondiente.
      */
     public void setAnchor(int anchor) {
         this.anchor = anchor;
