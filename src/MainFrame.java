@@ -192,7 +192,7 @@ public class MainFrame extends JFrame implements ActionListener {
          */
         @Override
         public void windowOpened(WindowEvent e) {
-            setVisible(false);
+            setVisible(false); // La ventana principal se hace invisible si se abre la ventana de inputs.
         }
 
         /**
@@ -203,7 +203,7 @@ public class MainFrame extends JFrame implements ActionListener {
          */
         @Override
         public void windowClosing(WindowEvent e) {
-            setVisible(true);
+            setVisible(true); // La ventana principal se hace visible si se cierra la ventana de inputs.
         }
     }
 }

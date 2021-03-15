@@ -10,16 +10,12 @@
  * @since 06/03/2021
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class ResultFrame extends JFrame {
@@ -32,10 +28,8 @@ public class ResultFrame extends JFrame {
     private static final int WILDCARD = 4;        //
 
     // Campos privados.
-    private ImageIcon icon;
     private JLabel team1, team2;
     private List<Player[]> sets;
-    private List<JCheckBox> checkboxes;
 
     /**
      * Constructor.
@@ -46,10 +40,8 @@ public class ResultFrame extends JFrame {
      * @param distribution Tipo de distribución elegida.
      * @param icon Ícono para la ventana.
      * @param sets Conjuntos de jugadores a mezclar.
-     * @param anchor Si hay jugadores que deben anclarse o no.
      */
     public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets) {
-        this.icon = icon;
         this.sets = sets;
 
         setSize(400, 400);
@@ -71,10 +63,7 @@ public class ResultFrame extends JFrame {
      * 
      * @param playersAmount La cantidad de jugadores por equipo.
      */
-    private void playersAnchor() {
-        JFrame anchorFrame = new JFrame("Anclaje de jugadores");
-        JPanel anchorPanel = new JPanel();
-
+    /*private void playersAnchor() {
         checkboxes = new ArrayList<>();
 
         anchorPanel.setLayout(new MigLayout());
@@ -97,14 +86,7 @@ public class ResultFrame extends JFrame {
                 aux++;
             }
         }
-
-        anchorFrame.setSize(300, 375);
-        anchorFrame.setLocationRelativeTo(null);
-        anchorFrame.setIconImage(icon.getImage());
-        anchorFrame.add(anchorPanel);
-        anchorFrame.setResizable(false);
-        anchorFrame.setVisible(true);
-    }
+    }*/
 
     /**
      * Este método ayuda a mostrar al usuario

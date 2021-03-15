@@ -39,6 +39,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import net.miginfocom.swing.MigLayout;
+
 @SuppressWarnings("serial")
 public class InputFrame extends JFrame implements ActionListener {
 
@@ -65,6 +67,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
     private JComboBox<String> comboBox; // Menú desplegable.
     private JPanel panel; // Panel para la ventana de mezcla.
+    private JDialog anchorDialog; // Ventana de diálogo para el anclaje de jugadores.
     private ResultFrame resultFrame;
     
     /**
@@ -177,7 +180,7 @@ public class InputFrame extends JFrame implements ActionListener {
         addTextFields(Position.FORWARD, textFieldFW, setFW);
         addTextFields(Position.WILDCARD, textFieldWC, setWC);
 
-        addCheckBox();
+        addAnchorCheckBox();
 
         addImages();
 
@@ -311,11 +314,12 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton.setBounds(224, 274, 100, 30);
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
-
         mixButton.addActionListener(new ActionListener() {
             /**
              * Este método se encarga de tomar el criterio 
              * de búsqueda especificado por el usuario.
+             * Además, se chequea si se deben anclar
+             * jugadores y se trabaja en base a eso.
              * 
              * @param e Evento (criterio elegido).
              */
@@ -326,24 +330,61 @@ public class InputFrame extends JFrame implements ActionListener {
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        JDialog anchorDialog = new JDialog(InputFrame.this, true);
+                        anchorDialog = new JDialog(InputFrame.this, true);
                         JPanel anchorPanel = new JPanel();
+                        JButton cancelButton = new JButton("Cancelar");
+                        JButton okButton = new JButton("Aceptar");
 
-                        anchorPanel.setLayout(null);
+                        cancelButton.addActionListener(new ActionListener() {
+                            /**
+                             * Este método hace invisible la ventana de anclaje
+                             * si el usuario desea cancelar la operación.
+                             * 
+                             * @param e Evento de click.
+                             */
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                anchorDialog.setVisible(false);
+                            }
+                        });
+
+                        okButton.addActionListener(new ActionListener() {
+                            /**
+                             * Este evento hace invisible la ventana de anclaje
+                             * cuando el usuario hizo los anclajes deseados y
+                             * está listo para distribuir los jugadores.
+                             * 
+                             * @param e Evento de click.
+                             */
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                anchorDialog.setVisible(false);
+
+                                resultFrame = new ResultFrame(distribution, icon, sets);
+
+                                resultFrame.addWindowListener(new WindowEventsHandler());
+                                resultFrame.setVisible(true);
+                            }
+                        });
+
+                        anchorPanel.setLayout(new MigLayout());
+                        anchorPanel.add(cancelButton);
+                        anchorPanel.add(okButton, "wrap");
 
                         anchorDialog.setTitle("Anclaje de jugadores");
-                        anchorDialog.setSize(300, 375);
+                        anchorDialog.setSize(300, 415);
                         anchorDialog.setLocationRelativeTo(null);
                         anchorDialog.setIconImage(icon.getImage());
                         anchorDialog.add(anchorPanel);
                         anchorDialog.setResizable(false);
+                        anchorDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         anchorDialog.setVisible(true);
+                    } else {
+                        resultFrame = new ResultFrame(distribution, icon, sets);
+
+                        resultFrame.addWindowListener(new WindowEventsHandler());
+                        resultFrame.setVisible(true);
                     }
-
-                    resultFrame = new ResultFrame(distribution, icon, sets);
-
-                    resultFrame.addWindowListener(new WindowEventsHandler());
-                    resultFrame.setVisible(true);
                 }
             }
         });
@@ -533,7 +574,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * de anclaje de jugadores a un mismo equipo en
      * el panel del frame.
      */
-    private void addCheckBox() {
+    private void addAnchorCheckBox() {
         anchor = new JCheckBox("Anclar jugadores", false);
 
         anchor.setBounds(212, 310, 122, 20);
@@ -572,7 +613,7 @@ public class InputFrame extends JFrame implements ActionListener {
          */
         @Override
         public void windowOpened(WindowEvent e) {
-            setVisible(false);
+            setVisible(false); // La ventana de inputs se hace invisible si se abre la ventana de resultados.
         }
 
         /**
@@ -583,7 +624,8 @@ public class InputFrame extends JFrame implements ActionListener {
          */
         @Override
         public void windowClosing(WindowEvent e) {
-            setVisible(true);
+            anchorDialog.setVisible(false); // La ventana de anclaje se hace invisible si se cierra la ventana de resultados.
+            setVisible(true); // La ventana de inputs se hace visible si se cierra la ventana de resultados.
         }
     }
 }
