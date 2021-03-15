@@ -5,7 +5,7 @@
  * 
  * @author Bonino, Francisco Ignacio.
  * 
- * @version 1.0.0
+ * @version 2.0.0
  * 
  * @since 28/02/2021
  */
