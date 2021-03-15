@@ -63,7 +63,7 @@ public class MainFrame extends JFrame implements ActionListener {
         iconBall = new ImageIcon(imagesPath + "icon.png");
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
-        iconAKMSW = new ImageIcon(imagesPath + "AKMSW_icon.png");
+        iconAKMSW = new ImageIcon(imagesPath + "akmsw_icon.png");
         smallIconAKMSW = new ImageIcon(iconAKMSW.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
         int bgWidth = bgImage.getIconWidth(); // Ancho de la imagen de fondo.
