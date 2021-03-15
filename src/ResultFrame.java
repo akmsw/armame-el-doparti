@@ -23,7 +23,7 @@ public class ResultFrame extends JFrame {
     // Campos privados.
     private JPanel resultPanel;
     // private JLabel team1, team2;
-    private List<Player[]> sets;
+    // private List<Player[]> sets;
 
     /**
      * Se crea la ventana de resultados.
@@ -33,7 +33,7 @@ public class ResultFrame extends JFrame {
      * @param sets Conjuntos de jugadores a mezclar.
      */
     public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets) {
-        this.sets = sets;
+        //this.sets = sets;
 
         setSize(400, 400);
         setLocationRelativeTo(null);

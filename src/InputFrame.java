@@ -47,7 +47,7 @@ public class InputFrame extends JFrame implements ActionListener {
                                                       "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" }; // menú desplegable 
     private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de jugadores.
     private static final Rectangle labelPosition = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las imágenes.
-    private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana de mezcla.
+    private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.

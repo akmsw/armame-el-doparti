@@ -11,10 +11,13 @@
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.Color;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -30,7 +34,7 @@ import net.miginfocom.swing.MigLayout;
 public class AnchorageFrame extends JFrame {
     
     // Constantes privadas.
-    private static final int frameWidth = 300; // Ancho de la ventana.
+    private static final int frameWidth = 345; // Ancho de la ventana.
     private static final int frameHeight = 432; // Alto de la ventana.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
@@ -38,13 +42,14 @@ public class AnchorageFrame extends JFrame {
     private static final int FORWARD = 3;         // a cada array de jugadores.
     private static final int WILDCARD = 4;        //
     private static final String frameTitle = "Anclaje de jugadores";
+    private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
     private int maxAnchor = 5; // Máxima cantidad de jugadores por anclaje.
     private List<Player[]> sets;
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los jugadores ingresados separados por posición.
     private JFrame inputFrame;
-    private JPanel anchoragePanel;
+    private JPanel masterPanel, leftPanel, rightPanel;
     private JButton okButton;
     private ResultFrame resultFrame;
 
@@ -57,9 +62,12 @@ public class AnchorageFrame extends JFrame {
         this.sets = sets;
         this.inputFrame = inputFrame;
 
-        anchoragePanel = new JPanel();
+        masterPanel = new JPanel(new BorderLayout());
+        leftPanel = new JPanel();
+        rightPanel = new JPanel();
 
-        anchoragePanel.setLayout(new MigLayout("wrap 2"));
+        leftPanel.setLayout(new MigLayout("wrap 2"));
+        rightPanel.setLayout(new MigLayout());
 
         okButton = new JButton("Aceptar");
 
@@ -88,11 +96,11 @@ public class AnchorageFrame extends JFrame {
         fillCBSet(sets.get(FORWARD), fwCB);
         fillCBSet(sets.get(WILDCARD), wcCB);
 
-        addCBSet(anchoragePanel, cdCB, "DEFENSORES CENTRALES");
-        addCBSet(anchoragePanel, ldCB, "DEFENSORES LATERALES");
-        addCBSet(anchoragePanel, mfCB, "MEDIOCAMPISTAS");
-        addCBSet(anchoragePanel, fwCB, "DELANTEROS");
-        addCBSet(anchoragePanel, wcCB, "COMODINES");
+        addCBSet(leftPanel, cdCB, "DEFENSORES CENTRALES");
+        addCBSet(leftPanel, ldCB, "DEFENSORES LATERALES");
+        addCBSet(leftPanel, mfCB, "MEDIOCAMPISTAS");
+        addCBSet(leftPanel, fwCB, "DELANTEROS");
+        addCBSet(leftPanel, wcCB, "COMODINES");
 
         okButton.addActionListener(new ActionListener() {
             /**
@@ -130,13 +138,27 @@ public class AnchorageFrame extends JFrame {
             }
         });
 
-        anchoragePanel.add(okButton, "growx, span");
+        leftPanel.add(okButton, "growx, span");
+        leftPanel.setBackground(bgColor);
+
+        JTextArea textArea = new JTextArea();
+
+        textArea.setBorder(BorderFactory.createBevelBorder(1));
+        textArea.setEditable(false);
+        textArea.setVisible(true);
+
+        rightPanel.add(textArea, "w 125!, h 300!");
+        rightPanel.setBackground(bgColor);
+
+        masterPanel.add(leftPanel, BorderLayout.WEST);
+        masterPanel.add(rightPanel, BorderLayout.EAST);
+        masterPanel.setBackground(bgColor);
 
         setTitle(frameTitle);
         setSize(frameWidth, frameHeight);
         setLocationRelativeTo(null);
         setIconImage(icon.getImage());
-        add(anchoragePanel);
+        add(masterPanel);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -164,10 +186,16 @@ public class AnchorageFrame extends JFrame {
     private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
         panel.add(new JLabel(title), "wrap");
 
-        for (JCheckBox cb : cbSet)
+        for (JCheckBox cb : cbSet) {
+            cb.setBackground(bgColor);
             panel.add(cb);
+        }
+
+        JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
+
+        line.setBackground(bgColor);
         
-        panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
+        panel.add(line, "growx, span");
     }
 
     /**
