@@ -133,10 +133,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /**
      * Este método se encarga de desplegar los créditos del programa.
-     * 
-     * @param version Versión del software.
      */
-    private void chicha(String version) {
+    private void chicha() {
         String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
 
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
@@ -172,7 +170,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 inputFrame.addWindowListener(new WindowEventsHandler());
             }
         } else if (e.getSource() == chichaButton)
-            chicha(version);
+            chicha();
         else
             System.exit(0);
     }
