@@ -616,7 +616,7 @@ public class InputFrame extends JFrame implements ActionListener {
         anchorPanel.add(cancelButton);
 
         anchorDialog.setTitle("Anclaje de jugadores");
-        anchorDialog.setSize(300, 407);
+        anchorDialog.setSize(300, 432);
         anchorDialog.setLocationRelativeTo(null);
         anchorDialog.setIconImage(icon.getImage());
         anchorDialog.add(anchorPanel);
