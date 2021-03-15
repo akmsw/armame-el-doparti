@@ -186,11 +186,11 @@ public class InputFrame extends JFrame implements ActionListener {
         fwLabel = new JLabel();
         wcLabel = new JLabel();
 
-        addImages(cdLabel, "cd.jpg", panel);
-        addImages(ldLabel, "ld.jpg", panel);
-        addImages(mfLabel, "mf.jpg", panel);
-        addImages(fwLabel, "fw.jpg", panel);
-        addImages(wcLabel, "wc.jpg", panel);
+        addImage(cdLabel, "cd.jpg", panel);
+        addImage(ldLabel, "ld.jpg", panel);
+        addImage(mfLabel, "mf.jpg", panel);
+        addImage(fwLabel, "fw.jpg", panel);
+        addImage(wcLabel, "wc.jpg", panel);
 
         addComboBox();
 
@@ -267,7 +267,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * cuya visibilidad se toggleará en base al
      * item seleccionado en la lista desplegable.
      */
-    private void addImages(JLabel label, String fileName, JPanel panel) {
+    private void addImage(JLabel label, String fileName, JPanel panel) {
         label.setIcon(new ImageIcon(imagesPath + fileName));
         label.setBounds(labelPosition);
         label.setVisible(true);
