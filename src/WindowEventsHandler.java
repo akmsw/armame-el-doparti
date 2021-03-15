@@ -18,9 +18,15 @@ public class WindowEventsHandler extends WindowAdapter {
     // Campos privados.
     JFrame frame;
     
+    /**
+     * Se construye el handler de eventos de ventana.
+     * 
+     * @param frame Ventana cuya visibilidad será toggleada
+     */
     public WindowEventsHandler(JFrame frame) {
         this.frame = frame;
     }
+    
     /**
      * Este método se encarga de hacer invisible
      * la ventana que debe quedar en segundo plano.
