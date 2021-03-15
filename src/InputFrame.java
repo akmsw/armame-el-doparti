@@ -208,10 +208,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método se encarga de crear, almacenar y configurar los campos de texto
      * correspondientes a cada posición.
      * 
-     * @param position     Posición a buscar en el EnumMap.
+     * @param position Posición a buscar en el EnumMap.
      * @param textFieldSet Arreglo de campos de texto para cada posición.
-     * @param playersSet   Arreglo de jugadores donde se almacenarán los nombres
-     *                     ingresados en los campos de texto.
+     * @param playersSet Arreglo de jugadores donde se almacenarán los nombres
+     *                   ingresados en los campos de texto.
      */
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, Player[] playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
@@ -243,8 +243,7 @@ public class InputFrame extends JFrame implements ActionListener {
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
-                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
-                                                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                        errorMsg("El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido");
                     else {
                         playersSet[index].setName(name);
                         
@@ -313,8 +312,7 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de añadir al panel los botones pertenecientes a este
-     * frame.
+     * Este método se encarga de añadir los botones al panel.
      */
     private void addButtons() {
         smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -552,6 +550,8 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param distribution Tipo de distribución elegida por el usuario.
      */
     private void playersAnchorage(int distribution) {
+        int anchorMax = 5;
+
         anchorDialog = new JDialog(InputFrame.this, true);
 
         JPanel anchorPanel = new JPanel();
@@ -581,7 +581,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
         okButton.addActionListener(new ActionListener() {
             /**
-             * Este evento hace invisible la ventana de anclaje
+             * Este evento hace las validaciones de datos necesarias
+             * y, si todo se cumple, hace invisible la ventana de anclaje
              * cuando el usuario hizo los anclajes deseados y
              * está listo para distribuir los jugadores.
              * 
@@ -595,18 +596,21 @@ public class InputFrame extends JFrame implements ActionListener {
                 setAnchors(fwCB, sets.get(FORWARD), 1);
                 setAnchors(wcCB, sets.get(WILDCARD), 1);
 
-                checkAnchors(sets.get(CENTRALDEFENDER));
-                checkAnchors(sets.get(LATERALDEFENDER));
-                checkAnchors(sets.get(MIDFIELDER));
-                checkAnchors(sets.get(FORWARD));
-                checkAnchors(sets.get(WILDCARD));
+                if (!checkTotalAnchors(anchorMax))
+                    errorMsg("No pueden haber más de " + anchorMax + " jugadores en un mismo anclaje.");
+                else if (!(fullAnchored(sets.get(CENTRALDEFENDER)) &&
+                           fullAnchored(sets.get(LATERALDEFENDER)) &&
+                           fullAnchored(sets.get(MIDFIELDER)) &&
+                           fullAnchored(sets.get(FORWARD)) &&
+                           fullAnchored(sets.get(WILDCARD))))
+                    errorMsg("Ningún conjunto de jugadores puede tener más de la mitad de sus integrantes anclados.");
+                else
+                    anchorDialog.setVisible(false);
 
-                anchorDialog.setVisible(false);
-
-                /*resultFrame = new ResultFrame(distribution, icon, sets);
+                resultFrame = new ResultFrame(distribution, icon, sets);
 
                 resultFrame.addWindowListener(new WindowEventsHandler());
-                resultFrame.setVisible(true);*/
+                resultFrame.setVisible(true);
             }
         });
 
@@ -679,18 +683,75 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet, int anchorageNum) {
         for (int i = 0; i < cbSet.size(); i++)
-            if (cbSet.get(i).isSelected())
-                for (int j = 0; j < playersSet.length; j++)
-                    if (playersSet[j].getName().equals(cbSet.get(i).getText())) {
+            for (int j = 0; j < playersSet.length; j++)
+                if (playersSet[j].getName().equals(cbSet.get(i).getText())) {
+                    if (cbSet.get(i).isSelected())
                         playersSet[j].setAnchor(anchorageNum);
-                        break;
-                    }
+                    else
+                        playersSet[j].setAnchor(0);
+                }
     }
 
-    private void checkAnchors(Player[] playersSet) {
+    /**
+     * Este método se encarga de verificar que el arreglo
+     * de jugadores recibido por parámetro no tenga más
+     * de la mitad de jugadores anclados.
+     * 
+     * @param playersSet Arreglo de jugadores con anclaje a verificar.
+     * @return Si el arreglo tiene más de la mitad de los jugadores anclados.
+     */
+    private boolean fullAnchored(Player[] playersSet) {
+        int count = 0;
+
         for (int i = 0; i < playersSet.length; i++)
             if (playersSet[i].getAnchor() != 0)
-                System.out.println(playersSet[i].getName() + " HAS ANCHOR = " + playersSet[i].getAnchor());
+                count++;
+        
+        return count <= (playersSet.length / 2);
+    }
+
+    /**
+     * Este método se encarga de verificar que no se sobrepase
+     * la cantidad máxima de anclajes posibles.
+     * 
+     * @param anchorMax Máxima cantidad posible de jugadores a anclar.
+     * 
+     * @return Si el límite de anclajes fue sobrepasado.
+     */
+    private boolean checkTotalAnchors(int anchorMax) {
+        int anchored = 0;
+
+        for (int i = 0; i < sets.get(CENTRALDEFENDER).length; i++)
+            if (sets.get(CENTRALDEFENDER)[i].getAnchor() != 0)
+                anchored++;
+        
+        for (int i = 0; i < sets.get(LATERALDEFENDER).length; i++)
+            if (sets.get(LATERALDEFENDER)[i].getAnchor() != 0)
+                anchored++;
+
+        for (int i = 0; i < sets.get(MIDFIELDER).length; i++)
+            if (sets.get(MIDFIELDER)[i].getAnchor() != 0)
+                anchored++;
+        
+        for (int i = 0; i < sets.get(FORWARD).length; i++)
+            if (sets.get(FORWARD)[i].getAnchor() != 0)
+                anchored++;
+        
+        for (int i = 0; i < sets.get(WILDCARD).length; i++)
+            if (sets.get(WILDCARD)[i].getAnchor() != 0)
+                anchored++;
+        
+        return anchored <= anchorMax;
+    }
+
+    /**
+     * Este método se encarga de crear una ventana de error
+     * con un texto personalizado.
+     * 
+     * @param errorText Texto de error a mostrar en la ventana.
+     */
+    private void errorMsg(String errorText) {
+        JOptionPane.showMessageDialog(null, errorText, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
     }
 
     // ----------------------------------------Métodos públicos---------------------------------
