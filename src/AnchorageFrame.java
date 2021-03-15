@@ -119,13 +119,14 @@ public class AnchorageFrame extends JFrame {
                            fullAnchored(sets.get(FORWARD)) &&
                            fullAnchored(sets.get(WILDCARD))))
                     errorMsg("Ningún conjunto de jugadores puede tener más de la mitad de sus integrantes anclados.");
-                else
+                else {
                     setVisible(false);
 
-                resultFrame = new ResultFrame(distribution, icon, sets);
+                    resultFrame = new ResultFrame(distribution, icon, sets);
 
-                resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
-                resultFrame.setVisible(true);
+                    resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
+                    resultFrame.setVisible(true);
+                }
             }
         });
 
