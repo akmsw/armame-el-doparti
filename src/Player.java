@@ -57,7 +57,7 @@ public class Player {
     /**
      * @return A qué equipo está anclado el jugador.
      */
-    public int isAnchored() {
+    public int getAnchor() {
         return anchor;
     }
 

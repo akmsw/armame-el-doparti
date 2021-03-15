@@ -589,12 +589,24 @@ public class InputFrame extends JFrame implements ActionListener {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                setAnchors(cdCB, sets.get(CENTRALDEFENDER), 1);
+                setAnchors(ldCB, sets.get(LATERALDEFENDER), 1);
+                setAnchors(mfCB, sets.get(MIDFIELDER), 1);
+                setAnchors(fwCB, sets.get(FORWARD), 1);
+                setAnchors(wcCB, sets.get(WILDCARD), 1);
+
+                checkAnchors(sets.get(CENTRALDEFENDER));
+                checkAnchors(sets.get(LATERALDEFENDER));
+                checkAnchors(sets.get(MIDFIELDER));
+                checkAnchors(sets.get(FORWARD));
+                checkAnchors(sets.get(WILDCARD));
+
                 anchorDialog.setVisible(false);
 
-                resultFrame = new ResultFrame(distribution, icon, sets);
+                /*resultFrame = new ResultFrame(distribution, icon, sets);
 
                 resultFrame.addWindowListener(new WindowEventsHandler());
-                resultFrame.setVisible(true);
+                resultFrame.setVisible(true);*/
             }
         });
 
@@ -653,6 +665,32 @@ public class InputFrame extends JFrame implements ActionListener {
             panel.add(cb);
         
         panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
+    }
+
+    /**
+     * Este método se encarga de setear el número
+     * de anclaje correspondiente a cada jugador
+     * cuya checkbox haya sido tildada.
+     * 
+     * @param cbSet Arreglo de checkboxes a chequear.
+     * @param playersSet Arreglo de jugadores correspondiente
+     *                   al arreglo de checkboxes
+     * @param anchorageNum Número de anclaje del jugador.
+     */
+    private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet, int anchorageNum) {
+        for (int i = 0; i < cbSet.size(); i++)
+            if (cbSet.get(i).isSelected())
+                for (int j = 0; j < playersSet.length; j++)
+                    if (playersSet[j].getName().equals(cbSet.get(i).getText())) {
+                        playersSet[j].setAnchor(anchorageNum);
+                        break;
+                    }
+    }
+
+    private void checkAnchors(Player[] playersSet) {
+        for (int i = 0; i < playersSet.length; i++)
+            if (playersSet[i].getAnchor() != 0)
+                System.out.println(playersSet[i].getName() + " HAS ANCHOR = " + playersSet[i].getAnchor());
     }
 
     // ----------------------------------------Métodos públicos---------------------------------
