@@ -36,6 +36,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -608,8 +609,8 @@ public class InputFrame extends JFrame implements ActionListener {
         addCBSet(anchorPanel, fwCB, "DELANTEROS");
         addCBSet(anchorPanel, wcCB, "COMODINES");
 
-        anchorPanel.add(cancelButton);
         anchorPanel.add(okButton);
+        anchorPanel.add(cancelButton);
 
         anchorDialog.setTitle("Anclaje de jugadores");
         anchorDialog.setSize(300, 407);
@@ -647,6 +648,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
         for (JCheckBox cb : cbSet)
             panel.add(cb);
+        
+        panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
     }
 
     // ----------------------------------------Métodos públicos---------------------------------
