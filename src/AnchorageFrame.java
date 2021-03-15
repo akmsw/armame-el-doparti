@@ -14,8 +14,6 @@ import java.util.List;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,6 +43,7 @@ public class AnchorageFrame extends JFrame {
     private int maxAnchor = 5; // Máxima cantidad de jugadores por anclaje.
     private List<Player[]> sets;
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los jugadores ingresados separados por posición.
+    private JFrame inputFrame;
     private JPanel anchoragePanel;
     private JButton okButton;
     private ResultFrame resultFrame;
@@ -54,8 +53,9 @@ public class AnchorageFrame extends JFrame {
      * 
      * @param icon Ícono para la ventana.
      */
-    public AnchorageFrame(ImageIcon icon, List<Player[]> sets, int distribution) {
+    public AnchorageFrame(ImageIcon icon, List<Player[]> sets, int distribution, JFrame inputFrame) {
         this.sets = sets;
+        this.inputFrame = inputFrame;
 
         anchoragePanel = new JPanel();
 
@@ -120,7 +120,7 @@ public class AnchorageFrame extends JFrame {
 
                 resultFrame = new ResultFrame(distribution, icon, sets);
 
-                resultFrame.addWindowListener(new WindowEventsHandler());
+                resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
                 resultFrame.setVisible(true);
             }
         });
@@ -246,33 +246,5 @@ public class AnchorageFrame extends JFrame {
      */
     private void errorMsg(String errorText) {
         JOptionPane.showMessageDialog(null, errorText, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-    }
-
-    // ----------------------------------------Clases privadas----------------------------------
-
-    /**
-     * Clase privada para lidiar con los eventos de las ventanas.
-     */
-    private class WindowEventsHandler extends WindowAdapter {
-
-        /**
-         * TODO.
-         * 
-         * @param e Evento de ventana.
-         */
-        @Override
-        public void windowOpened(WindowEvent e) {
-            // TODO.
-        }
-
-        /**
-         * TODO.
-         * 
-         * @param e Evento de ventana.
-         */
-        @Override
-        public void windowClosing(WindowEvent e) {
-            // TODO.
-        }
     }
 }

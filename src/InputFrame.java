@@ -23,8 +23,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -328,15 +326,15 @@ public class InputFrame extends JFrame implements ActionListener {
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.sets, distribution);
+                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.sets, distribution, InputFrame.this);
 
-                        anchorageFrame.addWindowListener(new WindowEventsHandler());
+                        anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);
                     }
                     else {
                         resultFrame = new ResultFrame(distribution, icon, sets);
 
-                        resultFrame.addWindowListener(new WindowEventsHandler());
+                        resultFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         resultFrame.setVisible(true);
                     }
                 }
@@ -551,35 +549,5 @@ public class InputFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         updateOutput((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
-    }
-
-    // ----------------------------------------Clases privadas----------------------------------
-
-    /**
-     * Clase privada para lidiar con los eventos de las ventanas.
-     */
-    private class WindowEventsHandler extends WindowAdapter {
-
-        /**
-         * Este método se encarga de hacer invisible
-         * la ventana de mezcla.
-         * 
-         * @param e Evento de ventana.
-         */
-        @Override
-        public void windowOpened(WindowEvent e) {
-            setVisible(false); // La ventana de inputs se hace invisible si se abre la ventana de resultados.
-        }
-
-        /**
-         * Este método se encarga de hacer visible
-         * la ventana de mezcla.
-         * 
-         * @param e Evento de ventana.
-         */
-        @Override
-        public void windowClosing(WindowEvent e) {
-            setVisible(true); // La ventana de inputs se hace visible si se cierra la ventana de resultados.
-        }
     }
 }
