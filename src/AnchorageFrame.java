@@ -147,7 +147,7 @@ public class AnchorageFrame extends JFrame {
         textArea.setEditable(false);
         textArea.setVisible(true);
 
-        rightPanel.add(textArea, "w 125!, h 300!");
+        rightPanel.add(textArea, "w 112::125, h 300!");
         rightPanel.setBackground(bgColor);
 
         masterPanel.add(leftPanel, BorderLayout.WEST);
@@ -184,11 +184,11 @@ public class AnchorageFrame extends JFrame {
      * @param title Texto de la etiqueta de acompañamiento.
      */
     private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
-        panel.add(new JLabel(title), "wrap");
+        panel.add(new JLabel(title), "span");
 
         for (JCheckBox cb : cbSet) {
             cb.setBackground(bgColor);
-            panel.add(cb);
+            panel.add(cb, "align center");
         }
 
         JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
