@@ -34,7 +34,7 @@ import net.miginfocom.swing.MigLayout;
 public class AnchorageFrame extends JFrame {
     
     // Constantes privadas.
-    private static final int frameWidth = 345; // Ancho de la ventana.
+    private static final int frameWidth = 374; // Ancho de la ventana.
     private static final int frameHeight = 432; // Alto de la ventana.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
@@ -50,7 +50,8 @@ public class AnchorageFrame extends JFrame {
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los jugadores ingresados separados por posición.
     private JFrame inputFrame;
     private JPanel masterPanel, leftPanel, rightPanel;
-    private JButton okButton;
+    private JButton okButton, newAnchorage, deleteAnchorage, clearAnchorages;
+    private JTextArea textArea;
     private ResultFrame resultFrame;
 
     /**
@@ -141,13 +142,20 @@ public class AnchorageFrame extends JFrame {
         leftPanel.add(okButton, "growx, span");
         leftPanel.setBackground(bgColor);
 
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         textArea.setVisible(true);
 
-        rightPanel.add(textArea, "w 112::125, h 300!");
+        newAnchorage = new JButton("Nuevo anclaje");
+        deleteAnchorage = new JButton("Borrar anclaje");
+        clearAnchorages = new JButton("Limpiar anclajes");
+
+        rightPanel.add(textArea, "w 112::125, h 289!, span");
+        rightPanel.add(newAnchorage, "span");
+        rightPanel.add(deleteAnchorage, "span");
+        rightPanel.add(clearAnchorages);
         rightPanel.setBackground(bgColor);
 
         masterPanel.add(leftPanel, BorderLayout.WEST);
