@@ -46,13 +46,14 @@ public class AnchorageFrame extends JFrame {
 
     // Campos privados.
     private int maxAnchor = 5; // Máxima cantidad de jugadores por anclaje.
-    private List<Player[]> sets;
+    private int anchorageNum = 1; // Número de anclaje.
+    private List<Player[]> sets; // Arreglo con los todos los jugadores.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los jugadores ingresados separados por posición.
-    private JFrame inputFrame;
-    private JPanel masterPanel, leftPanel, rightPanel;
-    private JButton okButton, newAnchorage, deleteAnchorage, clearAnchorages;
-    private JTextArea textArea;
-    private ResultFrame resultFrame;
+    private JFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
+    private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de anclajes.
+    private JButton okButton, newAnchorage, deleteAnchorage, clearAnchorages; // Botones de la ventana de anclajes.
+    private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
+    private ResultFrame resultFrame; // Ventana de resultados.
 
     /**
      * Creación de la ventana de anclajes.
@@ -114,13 +115,13 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                setAnchors(cdCB, sets.get(CENTRALDEFENDER), 1);
-                setAnchors(ldCB, sets.get(LATERALDEFENDER), 1);
-                setAnchors(mfCB, sets.get(MIDFIELDER), 1);
-                setAnchors(fwCB, sets.get(FORWARD), 1);
-                setAnchors(wcCB, sets.get(WILDCARD), 1);
+                setAnchors(cdCB, sets.get(CENTRALDEFENDER), anchorageNum);
+                setAnchors(ldCB, sets.get(LATERALDEFENDER), anchorageNum);
+                setAnchors(mfCB, sets.get(MIDFIELDER), anchorageNum);
+                setAnchors(fwCB, sets.get(FORWARD), anchorageNum);
+                setAnchors(wcCB, sets.get(WILDCARD), anchorageNum);
 
-                if (!checkTotalAnchors(maxAnchor))
+                if (!checkTotalAnchors())
                     errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
                 else if (!(fullAnchored(sets.get(CENTRALDEFENDER)) &&
                            fullAnchored(sets.get(LATERALDEFENDER)) &&
@@ -146,6 +147,7 @@ public class AnchorageFrame extends JFrame {
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
+        textArea.append("123456789ABC");
         textArea.setVisible(true);
 
         newAnchorage = new JButton("Nuevo anclaje");
@@ -196,6 +198,20 @@ public class AnchorageFrame extends JFrame {
 
         for (JCheckBox cb : cbSet) {
             cb.setBackground(bgColor);
+            cb.addActionListener(new ActionListener() {
+                /**
+                 * Este evento modela el comportamiento al
+                 * togglear la selección de cualquier JCheckBox
+                 * que haya en la ventana de anclajes.
+                 * 
+                 * @param e Toggle de selección.
+                 */
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    textArea.append("\n" + cb.getText() + ">" + cb.isSelected());
+                }
+            });
+
             panel.add(cb, "align left");
         }
 
@@ -233,6 +249,7 @@ public class AnchorageFrame extends JFrame {
      * de la mitad de jugadores anclados.
      * 
      * @param playersSet Arreglo de jugadores con anclaje a verificar.
+     * 
      * @return Si el arreglo tiene más de la mitad de los jugadores anclados.
      */
     private boolean fullAnchored(Player[] playersSet) {
@@ -246,14 +263,10 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de verificar que no se sobrepase
-     * la cantidad máxima de anclajes posibles.
-     * 
-     * @param maxAnchor Máxima cantidad posible de jugadores a anclar.
-     * 
-     * @return Si el límite de anclajes fue sobrepasado.
+     * @return Si el límite de jugadores posibles en un mismo
+     *         anclaje fue sobrepasado.
      */
-    private boolean checkTotalAnchors(int maxAnchor) {
+    private boolean checkTotalAnchors() {
         int anchored = 0;
 
         for (int i = 0; i < sets.get(CENTRALDEFENDER).length; i++)
