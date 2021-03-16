@@ -12,9 +12,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,8 +40,6 @@ public class AnchorageFrame extends JFrame {
     private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
     private static final int FORWARD = 3;         // a cada array de jugadores.
     private static final int WILDCARD = 4;        //
-    private static final Dimension preferredDimension = new Dimension(frameWidth, frameHeight);
-    private static final Dimension minimumDimension = new Dimension(325, frameHeight);
     private static final String frameTitle = "Anclaje de jugadores";
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
@@ -68,7 +64,7 @@ public class AnchorageFrame extends JFrame {
         this.sets = sets;
         this.inputFrame = inputFrame;
 
-        masterPanel = new JPanel(new BorderLayout());
+        masterPanel = new JPanel(new MigLayout("wrap 2"));
         leftPanel = new JPanel();
         rightPanel = new JPanel();
 
@@ -164,20 +160,19 @@ public class AnchorageFrame extends JFrame {
         rightPanel.add(clearAnchorages, "growx");
         rightPanel.setBackground(bgColor);
 
-        masterPanel.add(leftPanel, BorderLayout.WEST);
-        masterPanel.add(rightPanel, BorderLayout.EAST);
+        masterPanel.add(leftPanel, "west");
+        masterPanel.add(rightPanel, "center, grow");
         masterPanel.setBackground(bgColor);
 
         setTitle(frameTitle);
-        setPreferredSize(preferredDimension);
-        setMinimumSize(minimumDimension);
-        // setSize(frameWidth, frameHeight);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(frameWidth, frameHeight);
         setLocationRelativeTo(null);
         setIconImage(icon.getImage());
         add(masterPanel);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+
     /**
      * Este método se encarga de llenar los arreglos de checkboxes
      * correspondientes a cada posición.
