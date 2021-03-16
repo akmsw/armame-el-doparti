@@ -14,6 +14,7 @@ import java.util.List;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,6 +42,8 @@ public class AnchorageFrame extends JFrame {
     private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
     private static final int FORWARD = 3;         // a cada array de jugadores.
     private static final int WILDCARD = 4;        //
+    private static final Dimension preferredDimension = new Dimension(frameWidth, frameHeight);
+    private static final Dimension minimumDimension = new Dimension(325, frameHeight);
     private static final String frameTitle = "Anclaje de jugadores";
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
@@ -54,6 +57,7 @@ public class AnchorageFrame extends JFrame {
     private JButton okButton, newAnchorage, deleteAnchorage, clearAnchorages; // Botones de la ventana de anclajes.
     private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
     private ResultFrame resultFrame; // Ventana de resultados.
+    
 
     /**
      * Creación de la ventana de anclajes.
@@ -165,7 +169,9 @@ public class AnchorageFrame extends JFrame {
         masterPanel.setBackground(bgColor);
 
         setTitle(frameTitle);
-        setSize(frameWidth, frameHeight);
+        setPreferredSize(preferredDimension);
+        setMinimumSize(minimumDimension);
+        // setSize(frameWidth, frameHeight);
         setLocationRelativeTo(null);
         setIconImage(icon.getImage());
         add(masterPanel);
