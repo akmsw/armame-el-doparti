@@ -34,7 +34,7 @@ import net.miginfocom.swing.MigLayout;
 public class AnchorageFrame extends JFrame {
     
     // Constantes privadas.
-    private static final int frameWidth = 374; // Ancho de la ventana.
+    private static final int frameWidth = 402; // Ancho de la ventana.
     private static final int frameHeight = 432; // Alto de la ventana.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
@@ -152,10 +152,10 @@ public class AnchorageFrame extends JFrame {
         deleteAnchorage = new JButton("Borrar anclaje");
         clearAnchorages = new JButton("Limpiar anclajes");
 
-        rightPanel.add(textArea, "w 112::125, h 289!, span");
-        rightPanel.add(newAnchorage, "span");
-        rightPanel.add(deleteAnchorage, "span");
-        rightPanel.add(clearAnchorages);
+        rightPanel.add(textArea, "w 128::141, h 289!, span");
+        rightPanel.add(newAnchorage, "growx, span");
+        rightPanel.add(deleteAnchorage, "growx, span");
+        rightPanel.add(clearAnchorages, "growx");
         rightPanel.setBackground(bgColor);
 
         masterPanel.add(leftPanel, BorderLayout.WEST);
@@ -196,7 +196,7 @@ public class AnchorageFrame extends JFrame {
 
         for (JCheckBox cb : cbSet) {
             cb.setBackground(bgColor);
-            panel.add(cb, "align center");
+            panel.add(cb, "align left");
         }
 
         JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
