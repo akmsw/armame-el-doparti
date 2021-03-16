@@ -31,15 +31,15 @@ import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class AnchorageFrame extends JFrame {
-    
+
     // Constantes privadas.
     private static final int frameWidth = 402; // Ancho de la ventana.
     private static final int frameHeight = 432; // Alto de la ventana.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
-    private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
-    private static final int FORWARD = 3;         // a cada array de jugadores.
-    private static final int WILDCARD = 4;        //
+    private static final int MIDFIELDER = 2; // Índices del arreglo 'sets' correspondientes
+    private static final int FORWARD = 3;    // a cada array de jugadores.
+    private static final int WILDCARD = 4;   //
     private static final String frameTitle = "Anclaje de jugadores";
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
@@ -47,13 +47,14 @@ public class AnchorageFrame extends JFrame {
     private int maxAnchor = 5; // Máxima cantidad de jugadores por anclaje.
     private int anchorageNum = 1; // Número de anclaje.
     private List<Player[]> sets; // Arreglo con los todos los jugadores.
-    private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los jugadores ingresados separados por posición.
+    private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los
+                                                               // jugadores ingresados separados por posición.
     private JFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
-    private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de anclajes.
+    private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de
+                                                       // anclajes.
     private JButton okButton, newAnchorage, deleteAnchorage, clearAnchorages; // Botones de la ventana de anclajes.
     private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
     private ResultFrame resultFrame; // Ventana de resultados.
-    
 
     /**
      * Creación de la ventana de anclajes.
@@ -88,7 +89,7 @@ public class AnchorageFrame extends JFrame {
      * Este método se encarga de inicializar los componentes de la ventana de
      * anclaje.
      * 
-     * @param icon Ícono para la ventana.
+     * @param icon         Ícono para la ventana.
      * @param distribution Tipo de distribución elegida.
      */
     private void initializeComponents(ImageIcon icon, int distribution) {
@@ -106,10 +107,9 @@ public class AnchorageFrame extends JFrame {
 
         okButton.addActionListener(new ActionListener() {
             /**
-             * Este evento hace las validaciones de datos necesarias
-             * y, si todo se cumple, hace invisible la ventana de anclaje
-             * cuando el usuario hizo los anclajes deseados y
-             * está listo para distribuir los jugadores.
+             * Este evento hace las validaciones de datos necesarias y, si todo se cumple,
+             * hace invisible la ventana de anclaje cuando el usuario hizo los anclajes
+             * deseados y está listo para distribuir los jugadores.
              * 
              * @param e Evento de click.
              */
@@ -123,11 +123,9 @@ public class AnchorageFrame extends JFrame {
 
                 if (!checkTotalAnchors())
                     errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
-                else if (!(fullAnchored(sets.get(CENTRALDEFENDER)) &&
-                           fullAnchored(sets.get(LATERALDEFENDER)) &&
-                           fullAnchored(sets.get(MIDFIELDER)) &&
-                           fullAnchored(sets.get(FORWARD)) &&
-                           fullAnchored(sets.get(WILDCARD))))
+                else if (!(fullAnchored(sets.get(CENTRALDEFENDER)) && fullAnchored(sets.get(LATERALDEFENDER))
+                        && fullAnchored(sets.get(MIDFIELDER)) && fullAnchored(sets.get(FORWARD))
+                        && fullAnchored(sets.get(WILDCARD))))
                     errorMsg("Ningún conjunto de jugadores puede tener más de la mitad de sus integrantes anclados.");
                 else {
                     setVisible(false);
@@ -174,11 +172,11 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de llenar los arreglos de checkboxes
-     * correspondientes a cada posición.
+     * Este método se encarga de llenar los arreglos de checkboxes correspondientes
+     * a cada posición.
      * 
      * @param playersSet Conjunto de jugadores de donde obtener los nombres.
-     * @param cbSet Conjunto de checkboxes a llenar.
+     * @param cbSet      Conjunto de checkboxes a llenar.
      */
     private void fillCBSet(Player[] playersSet, ArrayList<JCheckBox> cbSet) {
         for (Player player : playersSet)
@@ -186,9 +184,8 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de colocar en el panel los checkboxes
-     * correspondiente a cada posición junto con una etiqueta que los
-     * distinga.
+     * Este método se encarga de colocar en el panel los checkboxes correspondiente
+     * a cada posición junto con una etiqueta que los distinga.
      * 
      * @param panel Panel donde se colocarán los checkboxes.
      * @param cbSet Conjunto de checkboxes a colocar.
@@ -201,9 +198,8 @@ public class AnchorageFrame extends JFrame {
             cb.setBackground(bgColor);
             cb.addActionListener(new ActionListener() {
                 /**
-                 * Este evento modela el comportamiento al
-                 * togglear la selección de cualquier JCheckBox
-                 * que haya en la ventana de anclajes.
+                 * Este evento modela el comportamiento al togglear la selección de cualquier
+                 * JCheckBox que haya en la ventana de anclajes.
                  * 
                  * @param e Toggle de selección.
                  */
@@ -219,18 +215,17 @@ public class AnchorageFrame extends JFrame {
         JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
 
         line.setBackground(bgColor);
-        
+
         panel.add(line, "growx, span");
     }
 
     /**
-     * Este método se encarga de setear el número
-     * de anclaje correspondiente a cada jugador
-     * cuya checkbox haya sido tildada.
+     * Este método se encarga de setear el número de anclaje correspondiente a cada
+     * jugador cuya checkbox haya sido tildada.
      * 
-     * @param cbSet Arreglo de checkboxes a chequear.
-     * @param playersSet Arreglo de jugadores correspondiente
-     *                   al arreglo de checkboxes
+     * @param cbSet        Arreglo de checkboxes a chequear.
+     * @param playersSet   Arreglo de jugadores correspondiente al arreglo de
+     *                     checkboxes
      * @param anchorageNum Número de anclaje del jugador.
      */
     private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet, int anchorageNum) {
@@ -245,9 +240,8 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de verificar que el arreglo
-     * de jugadores recibido por parámetro no tenga más
-     * de la mitad de jugadores anclados.
+     * Este método se encarga de verificar que el arreglo de jugadores recibido por
+     * parámetro no tenga más de la mitad de jugadores anclados.
      * 
      * @param playersSet Arreglo de jugadores con anclaje a verificar.
      * 
@@ -259,13 +253,13 @@ public class AnchorageFrame extends JFrame {
         for (int i = 0; i < playersSet.length; i++)
             if (playersSet[i].getAnchor() != 0)
                 count++;
-        
+
         return count <= (playersSet.length / 2);
     }
 
     /**
-     * @return Si el límite de jugadores posibles en un mismo
-     *         anclaje fue sobrepasado.
+     * @return Si el límite de jugadores posibles en un mismo anclaje fue
+     *         sobrepasado.
      */
     private boolean checkTotalAnchors() {
         int anchored = 0;
@@ -273,7 +267,7 @@ public class AnchorageFrame extends JFrame {
         for (int i = 0; i < sets.get(CENTRALDEFENDER).length; i++)
             if (sets.get(CENTRALDEFENDER)[i].getAnchor() != 0)
                 anchored++;
-        
+
         for (int i = 0; i < sets.get(LATERALDEFENDER).length; i++)
             if (sets.get(LATERALDEFENDER)[i].getAnchor() != 0)
                 anchored++;
@@ -281,21 +275,21 @@ public class AnchorageFrame extends JFrame {
         for (int i = 0; i < sets.get(MIDFIELDER).length; i++)
             if (sets.get(MIDFIELDER)[i].getAnchor() != 0)
                 anchored++;
-        
+
         for (int i = 0; i < sets.get(FORWARD).length; i++)
             if (sets.get(FORWARD)[i].getAnchor() != 0)
                 anchored++;
-        
+
         for (int i = 0; i < sets.get(WILDCARD).length; i++)
             if (sets.get(WILDCARD)[i].getAnchor() != 0)
                 anchored++;
-        
+
         return anchored <= maxAnchor;
     }
 
     /**
-     * Este método se encarga de crear una ventana de error
-     * con un texto personalizado.
+     * Este método se encarga de crear una ventana de error con un texto
+     * personalizado.
      * 
      * @param errorText Texto de error a mostrar en la ventana.
      */
