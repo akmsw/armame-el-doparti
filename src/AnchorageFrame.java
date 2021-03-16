@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -154,23 +155,23 @@ public class AnchorageFrame extends JFrame {
         deleteAnchorage = new JButton("Borrar anclaje");
         clearAnchorages = new JButton("Limpiar anclajes");
 
-        rightPanel.add(textArea, "w 128::141, h 289!, span");
+        rightPanel.add(textArea, "w 128:213:213, h 289!, span");
         rightPanel.add(newAnchorage, "growx, span");
         rightPanel.add(deleteAnchorage, "growx, span");
         rightPanel.add(clearAnchorages, "growx");
         rightPanel.setBackground(bgColor);
 
         masterPanel.add(leftPanel, "west");
-        masterPanel.add(rightPanel, "center, grow");
+        masterPanel.add(rightPanel, "center, growx, span");
         masterPanel.setBackground(bgColor);
 
+        setSize(frameWidth, frameHeight);
         setTitle(frameTitle);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(frameWidth, frameHeight);
-        setLocationRelativeTo(null);
         setIconImage(icon.getImage());
         add(masterPanel);
         setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
