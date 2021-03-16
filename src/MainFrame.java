@@ -31,17 +31,17 @@ public class MainFrame extends JFrame implements ActionListener {
     private static final String imagesPath = "src/graphics/"; // Carpeta donde buscar las imágenes.
 
     // Campos privados
-    private String version; // Versión del programa.    
+    private String version; // Versión del programa.
     private ImageIcon iconBall, smallIconBall, iconAKMSW, smallIconAKMSW; // Iconos utilizados para las ventanas.
     private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
-    private JPanel panel; // Panel de la ventana principal.    
+    private JPanel panel; // Panel de la ventana principal.
     private InputFrame inputFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
 
     /**
      * Se crea la ventana principal.
      * 
      * @param frameTitle Título a mostrar en la ventana principal.
-     * @param version Versión del software.
+     * @param version    Versión del software.
      */
     public MainFrame(String version) {
         this.version = version;
@@ -52,8 +52,8 @@ public class MainFrame extends JFrame implements ActionListener {
     // ----------------------------------------Métodos privados---------------------------------
 
     /**
-     * Este método se encarga de inicializar los botones y
-     * la imagen de fondo de la ventana principal.
+     * Este método se encarga de inicializar los botones y la imagen de fondo de la
+     * ventana principal.
      * 
      * @param frameTitle Título de la ventana.
      */
@@ -93,10 +93,10 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar todos los botones
-     * necesarios en la ventana principal.
+     * Este método se encarga de agregar todos los botones necesarios en la ventana
+     * principal.
      * 
-     * @param panel Panel de la ventana principal donde se colocarán los botones.
+     * @param panel Panel donde se colocarán los botones.
      */
     private void addButtons(JPanel panel) {
         startButton = new JButton("Comenzar");
@@ -113,7 +113,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         chichaButton.setBounds(600, 400, 92, 94);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-                                           chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -140,7 +140,8 @@ public class MainFrame extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }
 
-    // ----------------------------------------Métodos públicos---------------------------------
+    // ----------------------------------------Métodos
+    // públicos---------------------------------
 
     /**
      * Override para indicar qué hacer en base a cada boton pulsado.
@@ -153,8 +154,7 @@ public class MainFrame extends JFrame implements ActionListener {
             String[] options = { "7", "8" };
 
             int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                                                             "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                                             smallIconBall, options, options[0]);
+                    "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
@@ -163,7 +163,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     inputFrame.setVisible(true);
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                    
+
                     System.exit(-1);
                 }
 
@@ -183,8 +183,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private class WindowEventsHandler extends WindowAdapter {
 
         /**
-         * Este método se encarga de hacer invisible
-         * la ventana principal.
+         * Este método se encarga de hacer invisible la ventana principal.
          * 
          * @param e Evento de ventana.
          */
@@ -194,8 +193,7 @@ public class MainFrame extends JFrame implements ActionListener {
         }
 
         /**
-         * Este método se encarga de hacer visible
-         * la ventana principal.
+         * Este método se encarga de hacer visible la ventana principal.
          * 
          * @param e Evento de ventana.
          */

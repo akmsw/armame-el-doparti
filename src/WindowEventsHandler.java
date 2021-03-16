@@ -17,7 +17,7 @@ public class WindowEventsHandler extends WindowAdapter {
 
     // Campos privados.
     JFrame frame;
-    
+
     /**
      * Se construye el handler de eventos de ventana.
      * 
@@ -26,10 +26,13 @@ public class WindowEventsHandler extends WindowAdapter {
     public WindowEventsHandler(JFrame frame) {
         this.frame = frame;
     }
-    
+
+    // ----------------------------------------Métodos
+    // públicos---------------------------------
+
     /**
-     * Este método se encarga de hacer invisible
-     * la ventana que debe quedar en segundo plano.
+     * Este método se encarga de hacer invisible la ventana que debe quedar en
+     * segundo plano.
      * 
      * @param e Evento de ventana.
      */
@@ -39,8 +42,8 @@ public class WindowEventsHandler extends WindowAdapter {
     }
 
     /**
-     * Este método se encarga de hacer visible la
-     * ventana que debe quedar en primer plano.
+     * Este método se encarga de hacer visible la ventana que debe quedar en primer
+     * plano.
      * 
      * @param e Evento de ventana.
      */

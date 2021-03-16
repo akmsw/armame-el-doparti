@@ -18,7 +18,7 @@ public class Player {
     /**
      * Se crea un jugador básico con los parámetros recibidos.
      * 
-     * @param name El nombre del jugador.
+     * @param name     El nombre del jugador.
      * @param position La posición del jugador.
      */
     public Player(String name, Position position) {

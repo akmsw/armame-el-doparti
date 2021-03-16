@@ -29,11 +29,11 @@ public class ResultFrame extends JFrame {
      * Se crea la ventana de resultados.
      * 
      * @param distribution Tipo de distribución elegida.
-     * @param icon Ícono para la ventana.
-     * @param sets Conjuntos de jugadores a mezclar.
+     * @param icon         Ícono para la ventana.
+     * @param sets         Conjuntos de jugadores a mezclar.
      */
     public ResultFrame(int distribution, ImageIcon icon, List<Player[]> sets) {
-        //this.sets = sets;
+        // this.sets = sets;
 
         setSize(400, 400);
         setLocationRelativeTo(null);
@@ -47,24 +47,23 @@ public class ResultFrame extends JFrame {
             randomMix();
         else
             ratingMix();
-        
+
         add(resultPanel);
     }
 
     // ----------------------------------------Métodos privados---------------------------------
 
     /**
-     * Este método se encarga de armar los equipos
-     * de manera completamente aleatoria.
+     * Este método se encarga de armar los equipos de manera completamente
+     * aleatoria.
      */
     private void randomMix() {
         setTitle("MEZCLA ALEATORIA");
     }
 
     /**
-     * Este método se encarga de armar los equipos
-     * en base a las puntuaciones asignadas a los
-     * jugadores.
+     * Este método se encarga de armar los equipos en base a las puntuaciones
+     * asignadas a los jugadores.
      */
     private void ratingMix() {
         setTitle("MEZCLA POR PUNTAJES");

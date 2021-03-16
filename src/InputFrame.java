@@ -43,18 +43,28 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final int frameWidth = 450; // Ancho de la ventana.
     private static final int frameHeight = 375; // Alto de la ventana.
     private static final String imagesPath = "src/graphics/"; // Carpeta donde buscar las imágenes.
-    private static final String[] optionsComboBox = { "Agregar defensores centrales", "Agregar defensores laterales",        // Opciones para el
-                                                      "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" }; // menú desplegable 
-    private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de jugadores.
-    private static final Rectangle labelPosition = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las imágenes.
+    private static final String[] optionsComboBox = { "Agregar defensores centrales", // Opciones para el menú desplegable.
+                                                      "Agregar defensores laterales",
+                                                      "Agregar mediocampistas",
+                                                      "Agregar delanteros",
+                                                      "Agregar comodines" };
+    private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
+                                                                                     // jugadores.
+    private static final Rectangle labelPosition = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las
+                                                                                    // imágenes.
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
     private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
-    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos de texto para ingresar nombres.
-    private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada posición.
-    private List<Player[]> sets; // Lista con los arreglos de jugadores para reducir líneas de código en ciertos métodos.
-    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
+    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
+                                                                                                   // de texto para
+                                                                                                   // ingresar nombres.
+    private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada
+                                                        // posición.
+    private List<Player[]> sets; // Lista con los arreglos de jugadores para reducir líneas de código en ciertos
+                                 // métodos.
+    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos
+                                                         // jugadores por posición por equipo).
     private ImageIcon icon, smallIcon; // Iconos para las ventanas.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
@@ -64,12 +74,12 @@ public class InputFrame extends JFrame implements ActionListener {
     private JPanel panel; // Panel para la ventana de mezcla.
     private AnchorageFrame anchorageFrame; // Ventana de anclaje de jugadores.
     private ResultFrame resultFrame; // Ventana de resultados.
-    
+
     /**
      * Se crea la ventana de mezcla.
      * 
      * @param playersAmount Cantidad de jugadores por equipo.
-     * @param icon Ícono para la ventana.
+     * @param icon          Ícono para la ventana.
      * 
      * @throws IOException Cuando hay un error de lectura en los archivos PDA.
      */
@@ -123,10 +133,10 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método inicializa el conjunto de jugadores recibido
-     * con jugadores sin nombre y la posición recibida.
+     * Este método inicializa el conjunto de jugadores recibido con jugadores sin
+     * nombre y la posición recibida.
      * 
-     * @param set Arreglo de jugadores a inicializar.
+     * @param set      Arreglo de jugadores a inicializar.
      * @param position Posición de los jugadores del arreglo.
      */
     private void initializeSet(Player[] set, Position position) {
@@ -158,7 +168,7 @@ public class InputFrame extends JFrame implements ActionListener {
         initializeSet(setMF, Position.MIDFIELDER);
         initializeSet(setFW, Position.FORWARD);
         initializeSet(setWC, Position.WILDCARD);
-        
+
         sets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
         setSize(frameWidth, frameHeight);
@@ -207,10 +217,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método se encarga de crear, almacenar y configurar los campos de texto
      * correspondientes a cada posición.
      * 
-     * @param position Posición a buscar en el EnumMap.
+     * @param position     Posición a buscar en el EnumMap.
      * @param textFieldSet Arreglo de campos de texto para cada posición.
-     * @param playersSet Arreglo de jugadores donde se almacenarán los nombres
-     *                   ingresados en los campos de texto.
+     * @param playersSet   Arreglo de jugadores donde se almacenarán los nombres
+     *                     ingresados en los campos de texto.
      */
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, Player[] playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
@@ -242,13 +252,14 @@ public class InputFrame extends JFrame implements ActionListener {
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
-                        JOptionPane.showMessageDialog(null, "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
-                                                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                        JOptionPane.showMessageDialog(null,
+                                "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
+                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
                         playersSet[index].setName(name);
-                        
+
                         updateTextArea();
-                            
+
                         mixButton.setEnabled(checkMixButton());
                     }
                 }
@@ -262,10 +273,13 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar al panel
-     * las imágenes correspondientes a cada posición
-     * cuya visibilidad se toggleará en base al
-     * item seleccionado en la lista desplegable.
+     * Este método se encarga de agregar al panel las imágenes correspondientes a
+     * cada posición cuya visibilidad se toggleará en base al item seleccionado en
+     * la lista desplegable.
+     * 
+     * @param label    Etiqueta donde se seteará la imagen.
+     * @param fileName Nombre del archivo a buscar.
+     * @param panel    Panel donde se agregará la imagen.
      */
     private void addImage(JLabel label, String fileName, JPanel panel) {
         label.setIcon(new ImageIcon(imagesPath + fileName));
@@ -285,7 +299,8 @@ public class InputFrame extends JFrame implements ActionListener {
         comboBox.setBounds(5, 5, 200, 30);
         comboBox.addActionListener(this);
 
-        updateOutput(comboBox.getSelectedItem().toString()); // Se muestra el output correspondiente al estado inicial del JComboBox.
+        updateOutput(comboBox.getSelectedItem().toString()); // Se muestra el output correspondiente al estado inicial
+                                                             // del JComboBox.
 
         panel.add(comboBox);
     }
@@ -302,26 +317,26 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton.setVisible(true);
         mixButton.addActionListener(new ActionListener() {
             /**
-             * Este método se encarga de tomar el criterio 
-             * de búsqueda especificado por el usuario.
-             * Además, se chequea si se deben anclar
-             * jugadores y se trabaja en base a eso.
+             * Este método se encarga de tomar el criterio de búsqueda especificado por el
+             * usuario. Además, se chequea si se deben anclar jugadores y se trabaja en base
+             * a eso.
              * 
              * @param e Evento (criterio elegido).
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                int distribution = JOptionPane.showOptionDialog(null, "Seleccione el criterio de distribución de jugadores", "Antes de continuar...",
-                                                                   2, JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
+                int distribution = JOptionPane.showOptionDialog(null,
+                        "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
+                        JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.sets, distribution, InputFrame.this);
+                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.sets, distribution,
+                                InputFrame.this);
 
                         anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);
-                    }
-                    else {
+                    } else {
                         resultFrame = new ResultFrame(distribution, icon, sets);
 
                         resultFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
@@ -359,85 +374,85 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     private void updateOutput(String text) {
         switch (text) {
-            case "Agregar defensores centrales": {
-                textFieldCD.forEach(tf -> tf.setVisible(true));
-                textFieldLD.forEach(tf -> tf.setVisible(false));
-                textFieldMF.forEach(tf -> tf.setVisible(false));
-                textFieldFW.forEach(tf -> tf.setVisible(false));
-                textFieldWC.forEach(tf -> tf.setVisible(false));
+        case "Agregar defensores centrales": {
+            textFieldCD.forEach(tf -> tf.setVisible(true));
+            textFieldLD.forEach(tf -> tf.setVisible(false));
+            textFieldMF.forEach(tf -> tf.setVisible(false));
+            textFieldFW.forEach(tf -> tf.setVisible(false));
+            textFieldWC.forEach(tf -> tf.setVisible(false));
 
-                cdLabel.setVisible(true);
-                ldLabel.setVisible(false);
-                mfLabel.setVisible(false);
-                fwLabel.setVisible(false);
-                wcLabel.setVisible(false);
+            cdLabel.setVisible(true);
+            ldLabel.setVisible(false);
+            mfLabel.setVisible(false);
+            fwLabel.setVisible(false);
+            wcLabel.setVisible(false);
 
-                break;
-            }
+            break;
+        }
 
-            case "Agregar defensores laterales": {
-                textFieldCD.forEach(tf -> tf.setVisible(false));
-                textFieldLD.forEach(tf -> tf.setVisible(true));
-                textFieldMF.forEach(tf -> tf.setVisible(false));
-                textFieldFW.forEach(tf -> tf.setVisible(false));
-                textFieldWC.forEach(tf -> tf.setVisible(false));
+        case "Agregar defensores laterales": {
+            textFieldCD.forEach(tf -> tf.setVisible(false));
+            textFieldLD.forEach(tf -> tf.setVisible(true));
+            textFieldMF.forEach(tf -> tf.setVisible(false));
+            textFieldFW.forEach(tf -> tf.setVisible(false));
+            textFieldWC.forEach(tf -> tf.setVisible(false));
 
-                cdLabel.setVisible(false);
-                ldLabel.setVisible(true);
-                mfLabel.setVisible(false);
-                fwLabel.setVisible(false);
-                wcLabel.setVisible(false);
+            cdLabel.setVisible(false);
+            ldLabel.setVisible(true);
+            mfLabel.setVisible(false);
+            fwLabel.setVisible(false);
+            wcLabel.setVisible(false);
 
-                break;
-            }
+            break;
+        }
 
-            case "Agregar mediocampistas": {
-                textFieldCD.forEach(tf -> tf.setVisible(false));
-                textFieldLD.forEach(tf -> tf.setVisible(false));
-                textFieldMF.forEach(tf -> tf.setVisible(true));
-                textFieldFW.forEach(tf -> tf.setVisible(false));
-                textFieldWC.forEach(tf -> tf.setVisible(false));
+        case "Agregar mediocampistas": {
+            textFieldCD.forEach(tf -> tf.setVisible(false));
+            textFieldLD.forEach(tf -> tf.setVisible(false));
+            textFieldMF.forEach(tf -> tf.setVisible(true));
+            textFieldFW.forEach(tf -> tf.setVisible(false));
+            textFieldWC.forEach(tf -> tf.setVisible(false));
 
-                cdLabel.setVisible(false);
-                ldLabel.setVisible(false);
-                mfLabel.setVisible(true);
-                fwLabel.setVisible(false);
-                wcLabel.setVisible(false);
+            cdLabel.setVisible(false);
+            ldLabel.setVisible(false);
+            mfLabel.setVisible(true);
+            fwLabel.setVisible(false);
+            wcLabel.setVisible(false);
 
-                break;
-            }
+            break;
+        }
 
-            case "Agregar delanteros": {
-                textFieldCD.forEach(tf -> tf.setVisible(false));
-                textFieldLD.forEach(tf -> tf.setVisible(false));
-                textFieldMF.forEach(tf -> tf.setVisible(false));
-                textFieldFW.forEach(tf -> tf.setVisible(true));
-                textFieldWC.forEach(tf -> tf.setVisible(false));
+        case "Agregar delanteros": {
+            textFieldCD.forEach(tf -> tf.setVisible(false));
+            textFieldLD.forEach(tf -> tf.setVisible(false));
+            textFieldMF.forEach(tf -> tf.setVisible(false));
+            textFieldFW.forEach(tf -> tf.setVisible(true));
+            textFieldWC.forEach(tf -> tf.setVisible(false));
 
-                cdLabel.setVisible(false);
-                ldLabel.setVisible(false);
-                mfLabel.setVisible(false);
-                fwLabel.setVisible(true);
-                wcLabel.setVisible(false);
+            cdLabel.setVisible(false);
+            ldLabel.setVisible(false);
+            mfLabel.setVisible(false);
+            fwLabel.setVisible(true);
+            wcLabel.setVisible(false);
 
-                break;
-            }
+            break;
+        }
 
-            default: {
-                textFieldCD.forEach(tf -> tf.setVisible(false));
-                textFieldLD.forEach(tf -> tf.setVisible(false));
-                textFieldMF.forEach(tf -> tf.setVisible(false));
-                textFieldFW.forEach(tf -> tf.setVisible(false));
-                textFieldWC.forEach(tf -> tf.setVisible(true));
+        default: {
+            textFieldCD.forEach(tf -> tf.setVisible(false));
+            textFieldLD.forEach(tf -> tf.setVisible(false));
+            textFieldMF.forEach(tf -> tf.setVisible(false));
+            textFieldFW.forEach(tf -> tf.setVisible(false));
+            textFieldWC.forEach(tf -> tf.setVisible(true));
 
-                cdLabel.setVisible(false);
-                ldLabel.setVisible(false);
-                mfLabel.setVisible(false);
-                fwLabel.setVisible(false);
-                wcLabel.setVisible(true);
+            cdLabel.setVisible(false);
+            ldLabel.setVisible(false);
+            mfLabel.setVisible(false);
+            fwLabel.setVisible(false);
+            wcLabel.setVisible(true);
 
-                break;
-            }
+            break;
+        }
         }
     }
 
@@ -468,30 +483,28 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        for(Player[] set : sets)
-            for(Player player : set)
+        for (Player[] set : sets)
+            for (Player player : set)
                 if (player.getName().equals(name))
                     return true;
-        
+
         return false;
     }
 
     /**
-     * Este método se encarga de actualizar el texto
-     * mostrado en el campo de sólo lectura.
-     * Se muestran los jugadores ingresados en el orden
-     * en el que estén posicionados en sus respectivos arreglos.
-     * El orden en el que se muestran es:
-     * Defensores centrales > Defensores laterales
-     * > Mediocampistas > Delanteros > Comodines.
+     * Este método se encarga de actualizar el texto mostrado en el campo de sólo
+     * lectura. Se muestran los jugadores ingresados en el orden en el que estén
+     * posicionados en sus respectivos arreglos. El orden en el que se muestran es:
+     * Defensores centrales > Defensores laterales > Mediocampistas > Delanteros >
+     * Comodines.
      */
     private void updateTextArea() {
         counter = 0;
 
         textArea.setText(null);
 
-        for(Player[] set : sets)
-            for(Player player : set)
+        for (Player[] set : sets)
+            for (Player player : set)
                 if (!player.getName().equals("")) {
                     textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
                     counter++;
@@ -499,23 +512,21 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de chequear si se han ingresado
-     * los nombres de todos los jugadores para habilitar el
-     * botón de mezcla.
+     * Este método se encarga de chequear si se han ingresado los nombres de todos
+     * los jugadores para habilitar el botón de mezcla.
      */
     private boolean checkMixButton() {
-        for(Player[] set : sets)
-            for(Player player : set)
+        for (Player[] set : sets)
+            for (Player player : set)
                 if (player.getName().equals(""))
                     return false;
-        
+
         return true;
     }
 
     /**
-     * Este método se encarga de agregar el checkbox
-     * de anclaje de jugadores a un mismo equipo en
-     * el panel del frame.
+     * Este método se encarga de agregar el checkbox de anclaje de jugadores a un
+     * mismo equipo en el panel del frame.
      */
     private void addAnchorCheckBox() {
         anchor = new JCheckBox("Anclar jugadores", false);
