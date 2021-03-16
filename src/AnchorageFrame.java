@@ -11,11 +11,11 @@
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
