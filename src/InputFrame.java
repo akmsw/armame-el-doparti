@@ -55,7 +55,6 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
-    private int counter; // Contador para el área de texto donde se muestran los jugadores ingresados.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
                                                                                                    // de texto para
                                                                                                    // ingresar nombres.
@@ -499,7 +498,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * Comodines.
      */
     private void updateTextArea() {
-        counter = 0;
+        int counter = 0;
 
         textArea.setText(null);
 
