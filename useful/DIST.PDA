@@ -1,13 +1,13 @@
-//	THIS FILE DISPLAYS THE PLAYERS
-//	DISTRIBUTION ON EACH TEAM.
-//
-//	MODIFYING THIS FILE IS DANGEROUS
-//	IF YOU DON'T KNOW WHAT YOU'RE DOING.
-//
-//	ONLY YOU WILL BE RESPONSIBLE FOR
-//	THE CONSEQUENCES OF MODIFYING THIS FILE.
-//	
-//	©	AKAMAISOFTWARE	2021
+This file displays the players
+distribution on each team.
+
+//////////////////////////////////////////////
+//	MODIFYING THIS FILE IS DANGEROUS        //
+//	IF YOU DON'T KNOW WHAT YOU'RE DOING.    //
+//                                          //
+//	ONLY YOU WILL BE RESPONSIBLE FOR        //
+//  THE CONSEQUENCES OF MODIFYING THIS FILE.//
+//////////////////////////////////////////////
 
 7C	>>	1
 7L	>>	2
@@ -20,3 +20,5 @@
 8M	>>	3
 8F	>>	1
 8W	>>	1
+
+©	AkamaiSoftware  2021
