@@ -268,8 +268,8 @@ public class InputFrame extends JFrame implements ActionListener {
             textFieldSet.add(aux);
         }
 
-        for (JTextField textField : textFieldSet)
-            panel.add(textField);
+        for (int i = 0; i < textFieldSet.size(); i++)
+            panel.add(textFieldSet.get(i));
     }
 
     /**
@@ -483,9 +483,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        for (Player[] set : playersSets)
-            for (Player player : set)
-                if (player.getName().equals(name))
+        for (int i = 0; i < playersSets.size(); i++)
+            for (int j = 0; j < playersSets.get(i).length; j++)
+                if(playersSets.get(i)[j].getName().equals(name))
                     return true;
 
         return false;
@@ -503,10 +503,10 @@ public class InputFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (Player[] set : playersSets)
-            for (Player player : set)
-                if (!player.getName().equals("")) {
-                    textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
+        for (int i = 0; i < playersSets.size(); i++)
+            for (int j = 0; j < playersSets.get(i).length; j++)
+                if(!playersSets.get(i)[j].getName().equals("")) {
+                    textArea.append(" " + (counter + 1) + ". " + playersSets.get(i)[j].getName() + "\n");
                     counter++;
                 }
     }
@@ -516,9 +516,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * los jugadores para habilitar el botón de mezcla.
      */
     private boolean checkMixButton() {
-        for (Player[] set : playersSets)
-            for (Player player : set)
-                if (player.getName().equals(""))
+        for (int i = 0; i < playersSets.size(); i++)
+            for (int j = 0; j < playersSets.get(i).length; j++)
+                if(playersSets.get(i)[j].getName().equals(""))
                     return false;
 
         return true;
