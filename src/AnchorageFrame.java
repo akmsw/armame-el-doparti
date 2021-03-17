@@ -37,9 +37,9 @@ public class AnchorageFrame extends JFrame {
     private static final int frameHeight = 432; // Alto de la ventana.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
-    private static final int MIDFIELDER = 2; // Índices del arreglo 'sets' correspondientes
-    private static final int FORWARD = 3;    // a cada array de jugadores.
-    private static final int WILDCARD = 4;   //
+    private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
+    private static final int FORWARD = 3;         // a cada array de jugadores.
+    private static final int WILDCARD = 4;        //
     private static final String frameTitle = "Anclaje de jugadores";
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
