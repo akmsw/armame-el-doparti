@@ -61,8 +61,8 @@ public class InputFrame extends JFrame implements ActionListener {
                                                                                                    // ingresar nombres.
     private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada
                                                         // posición.
-    private List<Player[]> sets; // Lista con los arreglos de jugadores para reducir líneas de código en ciertos
-                                 // métodos.
+    private List<Player[]> playersSets; // Lista con los arreglos de jugadores para reducir líneas de código en ciertos
+                                        // métodos.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos
                                                          // jugadores por posición por equipo).
     private ImageIcon icon, smallIcon; // Iconos para las ventanas.
@@ -99,34 +99,34 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método rescata la cantidad de jugadores para cada posición por equipo
      * mediante expresiones regulares.
      * 
-     * [CLMFW].>+.[0-9] : Matchea las líneas que comiencen con C, L, M, F, ó W,
-     * estén seguidas por al menos un caracter >, y luego tengan algún número.
+     * X[CLMFW].>+.[0-9] : Matchea las líneas que comiencen con la cantidad de jugadores por equipo,
+     * seguido por C, L, M, F, ó W, seguido por al menos un caracter '>', y luego tengan algún número.
      * 
-     * [A-Z].>+. : Matchea el trozo de la línea que no es un número.
+     * [0-9][A-Z].>+. : Matchea el trozo de la línea que no es un número que nos interese.
      * 
      * ¡¡¡IMPORTANTE!!!
      * 
-     * Si los archivos .PDA son modificados en cuanto a orden de las líneas
+     * Si el archivo .PDA es modificado en cuanto a orden de las líneas
      * importantes (C >> NÚMERO, etc.), se debe tener en cuenta que
      * Position.values()[index] confía en que lo hallado se corresponde con el orden
      * en el que están declarados los valores en el enum Position. Idem, si se
      * cambian de orden los valores del enum Position, se deberá tener en cuenta que
-     * Position.values()[index] confía en el orden en el que se leerán los datos de
-     * los archivos .PDA y, por consiguiente, se deberá rever el orden de las líneas
+     * Position.values()[index] confía en el orden en el que se leerán los datos del
+     * archivo .PDA y, por consiguiente, se deberá rever el orden de las líneas
      * importantes de dichos archivos.
      * 
-     * @param fileName Nombre del archivo a buscar.
+     * @param playersAmount Cantidad de jugadores por equipo.
      * 
      * @throws IOException Si el archivo no existe.
      */
-    private void collectPDData(int fileName) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader("useful/FDF_F" + fileName + ".PDA"))) {
+    private void collectPDData(int playersAmount) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader("useful/DIST.PDA"))) {
             String line;
             int index = 0;
 
             while ((line = br.readLine()) != null)
-                if (line.matches("[CLMFW].>+.[0-9]")) {
-                    playersAmountMap.put(Position.values()[index], Integer.parseInt(line.replaceAll("[A-Z].>+.", "")));
+                if (line.matches(playersAmount + "[CLMFW].>+.[0-9]")) {
+                    playersAmountMap.put(Position.values()[index], Integer.parseInt(line.replaceAll("[0-9][A-Z].>+.", "")));
                     index++;
                 }
         }
@@ -169,7 +169,7 @@ public class InputFrame extends JFrame implements ActionListener {
         initializeSet(setFW, Position.FORWARD);
         initializeSet(setWC, Position.WILDCARD);
 
-        sets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
+        playersSets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
         setSize(frameWidth, frameHeight);
         setLocationRelativeTo(null);
@@ -331,13 +331,13 @@ public class InputFrame extends JFrame implements ActionListener {
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.sets, distribution,
+                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.playersSets, distribution,
                                 InputFrame.this);
 
                         anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);
                     } else {
-                        resultFrame = new ResultFrame(distribution, icon, sets);
+                        resultFrame = new ResultFrame(distribution, icon, playersSets);
 
                         resultFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         resultFrame.setVisible(true);
@@ -483,7 +483,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        for (Player[] set : sets)
+        for (Player[] set : playersSets)
             for (Player player : set)
                 if (player.getName().equals(name))
                     return true;
@@ -503,7 +503,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (Player[] set : sets)
+        for (Player[] set : playersSets)
             for (Player player : set)
                 if (!player.getName().equals("")) {
                     textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
@@ -516,7 +516,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * los jugadores para habilitar el botón de mezcla.
      */
     private boolean checkMixButton() {
-        for (Player[] set : sets)
+        for (Player[] set : playersSets)
             for (Player player : set)
                 if (player.getName().equals(""))
                     return false;

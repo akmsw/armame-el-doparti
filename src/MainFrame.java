@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -113,7 +111,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         chichaButton.setBounds(600, 400, 92, 94);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+                             chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -140,8 +138,7 @@ public class MainFrame extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }
 
-    // ----------------------------------------Métodos
-    // públicos---------------------------------
+    // ----------------------------------------Métodos públicos---------------------------------
 
     /**
      * Override para indicar qué hacer en base a cada boton pulsado.
@@ -154,7 +151,8 @@ public class MainFrame extends JFrame implements ActionListener {
             String[] options = { "7", "8" };
 
             int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                    "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
+                                                             "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
+                                                             smallIconBall, options, options[0]);
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
@@ -167,39 +165,11 @@ public class MainFrame extends JFrame implements ActionListener {
                     System.exit(-1);
                 }
 
-                inputFrame.addWindowListener(new WindowEventsHandler());
+                inputFrame.addWindowListener(new WindowEventsHandler(MainFrame.this));
             }
         } else if (e.getSource() == chichaButton)
             chicha();
         else
             System.exit(0);
-    }
-
-    // ----------------------------------------Clases privadas----------------------------------
-
-    /**
-     * Clase privada para lidiar con los eventos de las ventanas.
-     */
-    private class WindowEventsHandler extends WindowAdapter {
-
-        /**
-         * Este método se encarga de hacer invisible la ventana principal.
-         * 
-         * @param e Evento de ventana.
-         */
-        @Override
-        public void windowOpened(WindowEvent e) {
-            setVisible(false); // La ventana principal se hace invisible si se abre la ventana de inputs.
-        }
-
-        /**
-         * Este método se encarga de hacer visible la ventana principal.
-         * 
-         * @param e Evento de ventana.
-         */
-        @Override
-        public void windowClosing(WindowEvent e) {
-            setVisible(true); // La ventana principal se hace visible si se cierra la ventana de inputs.
-        }
     }
 }
