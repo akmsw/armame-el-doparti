@@ -35,6 +35,7 @@ public class AnchorageFrame extends JFrame {
     // Constantes privadas.
     private static final int frameWidth = 402; // Ancho de la ventana.
     private static final int frameHeight = 432; // Alto de la ventana.
+    private static final int maxAnchor = 5; // Máxima cantidad de jugadores por anclaje.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
     private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
@@ -44,9 +45,9 @@ public class AnchorageFrame extends JFrame {
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
-    private int maxAnchor = 5; // Máxima cantidad de jugadores por anclaje.
+    private int anchored; // Número de jugadores anclados.
     private int anchorageNum = 1; // Número de anclaje.
-    private List<Player[]> sets; // Arreglo con los todos los jugadores.
+    private List<Player[]> playersSet; // Arreglo con los todos los jugadores.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los
                                                                // jugadores ingresados separados por posición.
     private JFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
@@ -59,10 +60,13 @@ public class AnchorageFrame extends JFrame {
     /**
      * Creación de la ventana de anclajes.
      * 
-     * @param icon Ícono para la ventana.
+     * @param icon         Ícono para la ventana.
+     * @param sets         Conjunto de jugadores.
+     * @param distribution Distribución de jugadores elegida.
+     * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
     public AnchorageFrame(ImageIcon icon, List<Player[]> sets, int distribution, JFrame inputFrame) {
-        this.sets = sets;
+        this.playersSet = sets;
         this.inputFrame = inputFrame;
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
@@ -93,11 +97,11 @@ public class AnchorageFrame extends JFrame {
      * @param distribution Tipo de distribución elegida.
      */
     private void initializeComponents(ImageIcon icon, int distribution) {
-        fillCBSet(sets.get(CENTRALDEFENDER), cdCB);
-        fillCBSet(sets.get(LATERALDEFENDER), ldCB);
-        fillCBSet(sets.get(MIDFIELDER), mfCB);
-        fillCBSet(sets.get(FORWARD), fwCB);
-        fillCBSet(sets.get(WILDCARD), wcCB);
+        fillCBSet(playersSet.get(CENTRALDEFENDER), cdCB);
+        fillCBSet(playersSet.get(LATERALDEFENDER), ldCB);
+        fillCBSet(playersSet.get(MIDFIELDER), mfCB);
+        fillCBSet(playersSet.get(FORWARD), fwCB);
+        fillCBSet(playersSet.get(WILDCARD), wcCB);
 
         addCBSet(leftPanel, cdCB, "DEFENSORES CENTRALES");
         addCBSet(leftPanel, ldCB, "DEFENSORES LATERALES");
@@ -115,22 +119,22 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                setAnchors(cdCB, sets.get(CENTRALDEFENDER), anchorageNum);
-                setAnchors(ldCB, sets.get(LATERALDEFENDER), anchorageNum);
-                setAnchors(mfCB, sets.get(MIDFIELDER), anchorageNum);
-                setAnchors(fwCB, sets.get(FORWARD), anchorageNum);
-                setAnchors(wcCB, sets.get(WILDCARD), anchorageNum);
+                setAnchors(cdCB, playersSet.get(CENTRALDEFENDER), anchorageNum);
+                setAnchors(ldCB, playersSet.get(LATERALDEFENDER), anchorageNum);
+                setAnchors(mfCB, playersSet.get(MIDFIELDER), anchorageNum);
+                setAnchors(fwCB, playersSet.get(FORWARD), anchorageNum);
+                setAnchors(wcCB, playersSet.get(WILDCARD), anchorageNum);
 
                 if (!checkTotalAnchors())
                     errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
-                else if (!(fullAnchored(sets.get(CENTRALDEFENDER)) && fullAnchored(sets.get(LATERALDEFENDER))
-                        && fullAnchored(sets.get(MIDFIELDER)) && fullAnchored(sets.get(FORWARD))
-                        && fullAnchored(sets.get(WILDCARD))))
+                else if (!(fullAnchored(playersSet.get(CENTRALDEFENDER)) && fullAnchored(playersSet.get(LATERALDEFENDER))
+                        && fullAnchored(playersSet.get(MIDFIELDER)) && fullAnchored(playersSet.get(FORWARD))
+                        && fullAnchored(playersSet.get(WILDCARD))))
                     errorMsg("Ningún conjunto de jugadores puede tener más de la mitad de sus integrantes anclados.");
                 else {
                     setVisible(false);
 
-                    resultFrame = new ResultFrame(distribution, icon, sets);
+                    resultFrame = new ResultFrame(distribution, icon, playersSet);
 
                     resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
                     resultFrame.setVisible(true);
@@ -145,7 +149,7 @@ public class AnchorageFrame extends JFrame {
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
-        textArea.append("123456789ABC");
+        textArea.append(" ----- ANCLAJE #" + anchorageNum + " -----");
         textArea.setVisible(true);
 
         newAnchorage = new JButton("Nuevo anclaje");
@@ -229,6 +233,7 @@ public class AnchorageFrame extends JFrame {
      * @param anchorageNum Número de anclaje del jugador.
      */
     private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet, int anchorageNum) {
+
         for (int i = 0; i < cbSet.size(); i++)
             for (int j = 0; j < playersSet.length; j++)
                 if (playersSet[j].getName().equals(cbSet.get(i).getText())) {
@@ -262,27 +267,13 @@ public class AnchorageFrame extends JFrame {
      *         sobrepasado.
      */
     private boolean checkTotalAnchors() {
-        int anchored = 0;
+        anchored = 0;
 
-        for (int i = 0; i < sets.get(CENTRALDEFENDER).length; i++)
-            if (sets.get(CENTRALDEFENDER)[i].getAnchor() != 0)
-                anchored++;
-
-        for (int i = 0; i < sets.get(LATERALDEFENDER).length; i++)
-            if (sets.get(LATERALDEFENDER)[i].getAnchor() != 0)
-                anchored++;
-
-        for (int i = 0; i < sets.get(MIDFIELDER).length; i++)
-            if (sets.get(MIDFIELDER)[i].getAnchor() != 0)
-                anchored++;
-
-        for (int i = 0; i < sets.get(FORWARD).length; i++)
-            if (sets.get(FORWARD)[i].getAnchor() != 0)
-                anchored++;
-
-        for (int i = 0; i < sets.get(WILDCARD).length; i++)
-            if (sets.get(WILDCARD)[i].getAnchor() != 0)
-                anchored++;
+        playersSet.forEach(pset -> {
+            for (int i = 0; i < pset.length; i++)
+                if (pset[i].getAnchor() != 0)
+                    anchored++;
+        });
 
         return anchored <= maxAnchor;
     }
