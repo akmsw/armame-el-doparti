@@ -109,7 +109,7 @@ public class MainFrame extends JFrame implements ActionListener {
         exitButton.setBounds(100, 400, 105, 50);
         exitButton.setEnabled(true);
 
-        chichaButton.setBounds(600, 400, 92, 94);
+        chichaButton.setBounds(600, 400, 92, 93);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
                              chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
