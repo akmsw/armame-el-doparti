@@ -127,9 +127,9 @@ public class AnchorageFrame extends JFrame {
 
                 if (!checkTotalAnchors())
                     errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
-                else if (!(fullAnchored(playersSet.get(CENTRALDEFENDER)) && fullAnchored(playersSet.get(LATERALDEFENDER))
-                        && fullAnchored(playersSet.get(MIDFIELDER)) && fullAnchored(playersSet.get(FORWARD))
-                        && fullAnchored(playersSet.get(WILDCARD))))
+                else if (!(validAnchorage(playersSet.get(CENTRALDEFENDER)) && validAnchorage(playersSet.get(LATERALDEFENDER))
+                        && validAnchorage(playersSet.get(MIDFIELDER)) && validAnchorage(playersSet.get(FORWARD))
+                        && validAnchorage(playersSet.get(WILDCARD))))
                     errorMsg("Ningún conjunto de jugadores puede tener más de la mitad de sus integrantes anclados.");
                 else {
                     setVisible(false);
@@ -245,14 +245,11 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de verificar que el arreglo de jugadores recibido por
-     * parámetro no tenga más de la mitad de jugadores anclados.
-     * 
      * @param playersSet Arreglo de jugadores con anclaje a verificar.
      * 
-     * @return Si el arreglo tiene más de la mitad de los jugadores anclados.
+     * @return Si el arreglo tiene una cantidad válida de jugadores anclados.
      */
-    private boolean fullAnchored(Player[] playersSet) {
+    private boolean validAnchorage(Player[] playersSet) {
         int count = 0;
 
         for (int i = 0; i < playersSet.length; i++)
