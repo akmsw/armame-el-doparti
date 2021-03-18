@@ -53,7 +53,7 @@ public class AnchorageFrame extends JFrame {
     private JFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
     private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de
                                                        // anclajes.
-    private JButton okButton, newAnchorage, deleteAnchorage, clearAnchorages; // Botones de la ventana de anclajes.
+    private JButton okButton, newAnchorage, clearAnchorages; // Botones de la ventana de anclajes.
     private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
     private ResultFrame resultFrame; // Ventana de resultados.
 
@@ -119,26 +119,19 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                setAnchors(cdCB, playersSet.get(CENTRALDEFENDER), anchorageNum);
-                setAnchors(ldCB, playersSet.get(LATERALDEFENDER), anchorageNum);
-                setAnchors(mfCB, playersSet.get(MIDFIELDER), anchorageNum);
-                setAnchors(fwCB, playersSet.get(FORWARD), anchorageNum);
-                setAnchors(wcCB, playersSet.get(WILDCARD), anchorageNum);
-
-                if (!checkTotalAnchors())
-                    errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
-                else if (!(validAnchorage(playersSet.get(CENTRALDEFENDER)) && validAnchorage(playersSet.get(LATERALDEFENDER))
-                        && validAnchorage(playersSet.get(MIDFIELDER)) && validAnchorage(playersSet.get(FORWARD))
-                        && validAnchorage(playersSet.get(WILDCARD))))
-                    errorMsg("Ningún conjunto de jugadores puede tener más de la mitad de sus integrantes anclados.");
-                else {
-                    setVisible(false);
-
-                    resultFrame = new ResultFrame(distribution, icon, playersSet);
-
-                    resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
-                    resultFrame.setVisible(true);
+                for (int i = 0; i < anchorageNum; i++) {
+                    if (!checkTotalAnchors(i + 1)) {
+                        errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
+                        return;
+                    }
                 }
+
+                setVisible(false);
+
+                resultFrame = new ResultFrame(distribution, icon, playersSet);
+
+                resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
+                resultFrame.setVisible(true);
             }
         });
 
@@ -152,13 +145,46 @@ public class AnchorageFrame extends JFrame {
         textArea.append(" ----- ANCLAJE #" + anchorageNum + " -----");
         textArea.setVisible(true);
 
-        newAnchorage = new JButton("Nuevo anclaje");
-        deleteAnchorage = new JButton("Borrar anclaje");
+        newAnchorage = new JButton("Anclar");
+
+        newAnchorage.addActionListener(new ActionListener() {
+            /**
+             * Este método se encarga de anclar los jugadores cuya
+             * checkbox está tildada.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setAnchors(cdCB, playersSet.get(CENTRALDEFENDER), anchorageNum);
+                setAnchors(ldCB, playersSet.get(LATERALDEFENDER), anchorageNum);
+                setAnchors(mfCB, playersSet.get(MIDFIELDER), anchorageNum);
+                setAnchors(fwCB, playersSet.get(FORWARD), anchorageNum);
+                setAnchors(wcCB, playersSet.get(WILDCARD), anchorageNum);
+
+                anchorageNum++;
+
+                textArea.append("\n\n" + " ----- ANCLAJE #" + anchorageNum + " -----");
+            }
+        });
+        
         clearAnchorages = new JButton("Limpiar anclajes");
+
+        clearAnchorages.addActionListener(new ActionListener() {
+            /**
+             * Este método se encarga de borrar todos los anclajes
+             * que se hayan generado.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO
+            }
+        });
 
         rightPanel.add(textArea, "w 128:213:213, h 289!, span");
         rightPanel.add(newAnchorage, "growx, span");
-        rightPanel.add(deleteAnchorage, "growx, span");
         rightPanel.add(clearAnchorages, "growx");
         rightPanel.setBackground(bgColor);
 
@@ -200,19 +226,7 @@ public class AnchorageFrame extends JFrame {
 
         for (JCheckBox cb : cbSet) {
             cb.setBackground(bgColor);
-            cb.addActionListener(new ActionListener() {
-                /**
-                 * Este evento modela el comportamiento al togglear la selección de cualquier
-                 * JCheckBox que haya en la ventana de anclajes.
-                 * 
-                 * @param e Toggle de selección.
-                 */
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    textArea.append("\n" + cb.getText() + ">" + cb.isSelected());
-                }
-            });
-
+            
             panel.add(cb, "align left");
         }
 
@@ -233,42 +247,24 @@ public class AnchorageFrame extends JFrame {
      * @param anchorageNum Número de anclaje del jugador.
      */
     private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet, int anchorageNum) {
-
         for (int i = 0; i < cbSet.size(); i++)
             for (int j = 0; j < playersSet.length; j++)
-                if (playersSet[j].getName().equals(cbSet.get(i).getText())) {
-                    if (cbSet.get(i).isSelected())
-                        playersSet[j].setAnchor(anchorageNum);
-                    else
-                        playersSet[j].setAnchor(0);
-                }
-    }
-
-    /**
-     * @param playersSet Arreglo de jugadores con anclaje a verificar.
-     * 
-     * @return Si el arreglo tiene una cantidad válida de jugadores anclados.
-     */
-    private boolean validAnchorage(Player[] playersSet) {
-        int count = 0;
-
-        for (int i = 0; i < playersSet.length; i++)
-            if (playersSet[i].getAnchor() != 0)
-                count++;
-
-        return count <= (playersSet.length / 2);
+                if (playersSet[j].getName().equals(cbSet.get(i).getText()) && cbSet.get(i).isSelected()) {
+                    playersSet[j].setAnchor(anchorageNum);
+                    textArea.append("\n " + playersSet[j].getName());
+                } 
     }
 
     /**
      * @return Si el límite de jugadores posibles en un mismo anclaje fue
      *         sobrepasado.
      */
-    private boolean checkTotalAnchors() {
+    private boolean checkTotalAnchors(int anchorageNum) {
         anchored = 0;
 
         playersSet.forEach(pset -> {
             for (int i = 0; i < pset.length; i++)
-                if (pset[i].getAnchor() != 0)
+                if (pset[i].getAnchor() == anchorageNum)
                     anchored++;
         });
 
