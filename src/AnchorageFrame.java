@@ -50,6 +50,7 @@ public class AnchorageFrame extends JFrame {
     private List<Player[]> playersSet; // Arreglo con los todos los jugadores.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los
                                                                // jugadores ingresados separados por posición.
+    private ArrayList<ArrayList<JCheckBox>> cbSets; // Arreglo de arreglos de checkboxes de los jugadores.
     private JFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
     private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de
                                                        // anclajes.
@@ -76,13 +77,21 @@ public class AnchorageFrame extends JFrame {
         leftPanel.setLayout(new MigLayout("wrap 2"));
         rightPanel.setLayout(new MigLayout());
 
-        okButton = new JButton("Aceptar");
+        okButton = new JButton("Finalizar");
 
         cdCB = new ArrayList<>();
         ldCB = new ArrayList<>();
         mfCB = new ArrayList<>();
         fwCB = new ArrayList<>();
         wcCB = new ArrayList<>();
+
+        cbSets = new ArrayList<>();
+
+        cbSets.add(cdCB);
+        cbSets.add(ldCB);
+        cbSets.add(mfCB);
+        cbSets.add(fwCB);
+        cbSets.add(wcCB);
 
         initializeComponents(icon, distribution);
     }
@@ -119,13 +128,6 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < anchorageNum; i++) {
-                    if (!checkTotalAnchors(i + 1)) {
-                        errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
-                        return;
-                    }
-                }
-
                 setVisible(false);
 
                 resultFrame = new ResultFrame(distribution, icon, playersSet);
@@ -156,6 +158,11 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (!checkAnchorages()) {
+                    errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
+                    return;
+                }
+
                 setAnchors(cdCB, playersSet.get(CENTRALDEFENDER), anchorageNum);
                 setAnchors(ldCB, playersSet.get(LATERALDEFENDER), anchorageNum);
                 setAnchors(mfCB, playersSet.get(MIDFIELDER), anchorageNum);
@@ -259,14 +266,13 @@ public class AnchorageFrame extends JFrame {
      * @return Si el límite de jugadores posibles en un mismo anclaje fue
      *         sobrepasado.
      */
-    private boolean checkTotalAnchors(int anchorageNum) {
+    private boolean checkAnchorages() {
         anchored = 0;
 
-        playersSet.forEach(pset -> {
-            for (int i = 0; i < pset.length; i++)
-                if (pset[i].getAnchor() == anchorageNum)
+        for (ArrayList<JCheckBox> cbset : cbSets)
+            for (JCheckBox cb : cbset)
+                if (cb.isSelected())
                     anchored++;
-        });
 
         return anchored <= maxAnchor;
     }
