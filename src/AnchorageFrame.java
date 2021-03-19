@@ -47,7 +47,6 @@ public class AnchorageFrame extends JFrame {
 
     // Campos privados.
     private int counter; // Contador de jugadores anclados.
-    private int anchored; // Número de jugadores anclados.
     private int anchorageNum = 1; // Número de anclaje.
     private List<Player[]> playersSet; // Arreglo con los todos los jugadores.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los
@@ -282,7 +281,7 @@ public class AnchorageFrame extends JFrame {
      *         sobrepasado.
      */
     private boolean checkAnchorages() {
-        anchored = 0;
+        int anchored = 0;
 
         for (ArrayList<JCheckBox> cbset : cbSets)
             for (JCheckBox cb : cbset)
