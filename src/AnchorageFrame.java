@@ -24,6 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 
@@ -45,6 +46,7 @@ public class AnchorageFrame extends JFrame {
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
+    private int counter; // Contador de jugadores anclados.
     private int anchored; // Número de jugadores anclados.
     private int anchorageNum = 1; // Número de anclaje.
     private List<Player[]> playersSet; // Arreglo con los todos los jugadores.
@@ -56,6 +58,7 @@ public class AnchorageFrame extends JFrame {
                                                        // anclajes.
     private JButton okButton, newAnchorage, clearAnchorages; // Botones de la ventana de anclajes.
     private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
+    private JScrollPane scrollPane; // Scrollpane para el área de texto.
     private ResultFrame resultFrame; // Ventana de resultados.
 
     /**
@@ -147,6 +150,8 @@ public class AnchorageFrame extends JFrame {
         textArea.append(" ----- ANCLAJE #" + anchorageNum + " -----");
         textArea.setVisible(true);
 
+        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
         newAnchorage = new JButton("Anclar");
 
         newAnchorage.addActionListener(new ActionListener() {
@@ -163,11 +168,13 @@ public class AnchorageFrame extends JFrame {
                     return;
                 }
 
-                setAnchors(cdCB, playersSet.get(CENTRALDEFENDER), anchorageNum);
-                setAnchors(ldCB, playersSet.get(LATERALDEFENDER), anchorageNum);
-                setAnchors(mfCB, playersSet.get(MIDFIELDER), anchorageNum);
-                setAnchors(fwCB, playersSet.get(FORWARD), anchorageNum);
-                setAnchors(wcCB, playersSet.get(WILDCARD), anchorageNum);
+                counter = 0;
+
+                setAnchors(cdCB, playersSet.get(CENTRALDEFENDER));
+                setAnchors(ldCB, playersSet.get(LATERALDEFENDER));
+                setAnchors(mfCB, playersSet.get(MIDFIELDER));
+                setAnchors(fwCB, playersSet.get(FORWARD));
+                setAnchors(wcCB, playersSet.get(WILDCARD));
 
                 anchorageNum++;
 
@@ -186,12 +193,18 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
+                anchorageNum = 0;
+
+                setAnchors(cdCB, playersSet.get(CENTRALDEFENDER));
+                setAnchors(ldCB, playersSet.get(LATERALDEFENDER));
+                setAnchors(mfCB, playersSet.get(MIDFIELDER));
+                setAnchors(fwCB, playersSet.get(FORWARD));
+                setAnchors(wcCB, playersSet.get(WILDCARD));
             }
         });
 
-        rightPanel.add(textArea, "w 128:213:213, h 289!, span");
-        rightPanel.add(newAnchorage, "growx, span");
+        rightPanel.add(scrollPane, "w 128:213:213, h 289!, growy, wrap");
+        rightPanel.add(newAnchorage, "growx, wrap");
         rightPanel.add(clearAnchorages, "growx");
         rightPanel.setBackground(bgColor);
 
@@ -251,15 +264,17 @@ public class AnchorageFrame extends JFrame {
      * @param cbSet        Arreglo de checkboxes a chequear.
      * @param playersSet   Arreglo de jugadores correspondiente al arreglo de
      *                     checkboxes
-     * @param anchorageNum Número de anclaje del jugador.
      */
-    private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet, int anchorageNum) {
-        for (int i = 0; i < cbSet.size(); i++)
-            for (int j = 0; j < playersSet.length; j++)
-                if (playersSet[j].getName().equals(cbSet.get(i).getText()) && cbSet.get(i).isSelected()) {
-                    playersSet[j].setAnchor(anchorageNum);
-                    textArea.append("\n " + playersSet[j].getName());
-                } 
+    private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet) {
+        for (Player player : playersSet)
+            for (JCheckBox cb : cbSet)
+                if(cb.getText().equals(player.getName()) && cb.isSelected()) {
+                    player.setAnchor(anchorageNum);
+
+                    counter++;
+
+                    textArea.append("\n " + counter + ". " + player.getName());
+                }
     }
 
     /**
