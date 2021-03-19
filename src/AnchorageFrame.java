@@ -164,7 +164,7 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!checkAnchorages()) {
-                    errorMsg("No pueden haber más de " + maxAnchor + " jugadores en un mismo anclaje.");
+                    errorMsg("No pueden haber más de " + maxAnchor + " ni menos de 2 jugadores en un mismo anclaje.");
                     return;
                 }
 
@@ -289,7 +289,7 @@ public class AnchorageFrame extends JFrame {
                 if (cb.isSelected())
                     anchored++;
 
-        return anchored <= maxAnchor;
+        return (anchored <= maxAnchor) && (anchored > 2);
     }
 
     /**
