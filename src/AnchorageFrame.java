@@ -269,7 +269,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si la cantidad de jugadores es al menos 2 y no más de 5.
+     * @return Si la cantidad de jugadores en el anclaje es al menos 2 y no más de 5.
      */
     private boolean checkAnchorages() {
         int anchored = 0;
