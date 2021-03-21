@@ -258,9 +258,8 @@ public class AnchorageFrame extends JFrame {
      * Este método se encarga de setear el número de anclaje correspondiente a cada
      * jugador cuya checkbox haya sido tildada.
      * 
-     * @param cbSet        Arreglo de checkboxes a chequear.
-     * @param pSet   Arreglo de jugadores correspondiente al arreglo de
-     *                     checkboxes
+     * @param cbSet Arreglo de checkboxes a chequear.
+     * @param pSet  Arreglo de jugadores correspondiente al arreglo de checkboxes
      */
     private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] pSet) {
         for (Player player : pSet)
@@ -270,8 +269,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si el límite de jugadores posibles en un mismo anclaje fue
-     *         sobrepasado.
+     * @return Si la cantidad de jugadores es al menos 2 y no más de 5.
      */
     private boolean checkAnchorages() {
         int anchored = 0;
