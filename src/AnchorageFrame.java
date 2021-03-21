@@ -46,8 +46,7 @@ public class AnchorageFrame extends JFrame {
     private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
-    private int counter; // Contador de jugadores anclados.
-    private int anchorageNum = 1; // Número de anclaje.
+    private int anchorageNum = 0; // Número de anclaje.
     private List<Player[]> playersSet; // Arreglo con los todos los jugadores.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los
                                                                // jugadores ingresados separados por posición.
@@ -146,7 +145,6 @@ public class AnchorageFrame extends JFrame {
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
-        textArea.append(" ----- ANCLAJE #" + anchorageNum + " -----");
         textArea.setVisible(true);
 
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -167,7 +165,7 @@ public class AnchorageFrame extends JFrame {
                     return;
                 }
 
-                counter = 0;
+                anchorageNum++;
 
                 setAnchors(cdCB, playersSet.get(CENTRALDEFENDER));
                 setAnchors(ldCB, playersSet.get(LATERALDEFENDER));
@@ -175,9 +173,7 @@ public class AnchorageFrame extends JFrame {
                 setAnchors(fwCB, playersSet.get(FORWARD));
                 setAnchors(wcCB, playersSet.get(WILDCARD));
 
-                anchorageNum++;
-
-                textArea.append("\n\n" + " ----- ANCLAJE #" + anchorageNum + " -----");
+                updateTextArea();
             }
         });
         
@@ -199,6 +195,8 @@ public class AnchorageFrame extends JFrame {
                 setAnchors(mfCB, playersSet.get(MIDFIELDER));
                 setAnchors(fwCB, playersSet.get(FORWARD));
                 setAnchors(wcCB, playersSet.get(WILDCARD));
+
+                textArea.setText("");
             }
         });
 
@@ -261,19 +259,14 @@ public class AnchorageFrame extends JFrame {
      * jugador cuya checkbox haya sido tildada.
      * 
      * @param cbSet        Arreglo de checkboxes a chequear.
-     * @param playersSet   Arreglo de jugadores correspondiente al arreglo de
+     * @param pSet   Arreglo de jugadores correspondiente al arreglo de
      *                     checkboxes
      */
-    private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] playersSet) {
-        for (Player player : playersSet)
+    private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] pSet) {
+        for (Player player : pSet)
             for (JCheckBox cb : cbSet)
-                if(cb.getText().equals(player.getName()) && cb.isSelected()) {
+                if(cb.getText().equals(player.getName()) && cb.isSelected())
                     player.setAnchor(anchorageNum);
-
-                    counter++;
-
-                    textArea.append("\n " + counter + ". " + player.getName());
-                }
     }
 
     /**
@@ -288,7 +281,31 @@ public class AnchorageFrame extends JFrame {
                 if (cb.isSelected())
                     anchored++;
 
-        return (anchored <= maxAnchor) && (anchored > 2);
+        return (anchored <= maxAnchor) && (anchored >= 2);
+    }
+
+    /**
+     * Este método se encarga de actualizar el área de texto
+     * mostrando la cantidad de anclajes y los jugadores
+     * anclados a los mismos.
+     */
+    private void updateTextArea() {
+        textArea.setText("");
+
+        for (int i = 0; i < anchorageNum; i++) {
+            int counter = 0;
+
+            textArea.append(" ----- ANCLAJE #" + (i + 1) + " -----\n");
+
+            for (Player[] pSet : playersSet)
+                for (Player player : pSet)
+                    if (player.getAnchor() == (i + 1)) {
+                        textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
+                        counter++;
+                    }
+            
+            textArea.append("\n");
+        }
     }
 
     /**
