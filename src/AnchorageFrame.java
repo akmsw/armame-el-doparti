@@ -34,16 +34,16 @@ import net.miginfocom.swing.MigLayout;
 public class AnchorageFrame extends JFrame {
 
     // Constantes privadas.
-    private static final int frameWidth = 402; // Ancho de la ventana.
-    private static final int frameHeight = 432; // Alto de la ventana.
-    private static final int maxAnchor = 5; // Máxima cantidad de jugadores por anclaje.
+    private static final int FRAME_WIDTH = 402; // Ancho de la ventana.
+    private static final int FRAME_HEIGHT = 432; // Alto de la ventana.
+    private static final int MAX_ANCHOR = 5; // Máxima cantidad de jugadores por anclaje.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
     private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
     private static final int FORWARD = 3;         // a cada array de jugadores.
     private static final int WILDCARD = 4;        //
-    private static final String frameTitle = "Anclaje de jugadores";
-    private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
+    private static final String FRAME_TITLE = "Anclaje de jugadores";
+    private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
     private int anchorageNum = 0; // Número de anclaje.
@@ -54,7 +54,7 @@ public class AnchorageFrame extends JFrame {
     private JFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
     private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de
                                                        // anclajes.
-    private JButton okButton, newAnchorage, clearAnchorages; // Botones de la ventana de anclajes.
+    private JButton okButton, newAnchorage, clearAnchorages, deleteAnchorage, deleteLastAnchorage; // Botones de la ventana de anclajes.
     private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
     private JScrollPane scrollPane; // Scrollpane para el área de texto.
     private ResultFrame resultFrame; // Ventana de resultados.
@@ -139,7 +139,7 @@ public class AnchorageFrame extends JFrame {
         });
 
         leftPanel.add(okButton, "growx, span");
-        leftPanel.setBackground(bgColor);
+        leftPanel.setBackground(BG_COLOR);
 
         textArea = new JTextArea();
 
@@ -161,7 +161,7 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!checkAnchorages()) {
-                    errorMsg("No pueden haber más de " + maxAnchor + " ni menos de 2 jugadores en un mismo anclaje.");
+                    errorMsg("No pueden haber más de " + MAX_ANCHOR + " ni menos de 2 jugadores en un mismo anclaje.");
                     return;
                 }
 
@@ -174,6 +174,30 @@ public class AnchorageFrame extends JFrame {
                 setAnchors(wcCB, playersSet.get(WILDCARD));
 
                 updateTextArea();
+            }
+        });
+
+        deleteAnchorage = new JButton("Borrar un anclaje");
+
+        deleteAnchorage.addActionListener(new ActionListener() {
+            /**
+             * 
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO.
+            }
+        });
+
+        deleteLastAnchorage = new JButton("Borrar último anclaje");
+
+        deleteLastAnchorage.addActionListener(new ActionListener() {
+            /**
+             * 
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO.
             }
         });
         
@@ -200,17 +224,19 @@ public class AnchorageFrame extends JFrame {
             }
         });
 
-        rightPanel.add(scrollPane, "w 128:213:213, h 289!, growy, wrap");
+        rightPanel.add(scrollPane, "w 128:213:213, h 260:289:289, growy, wrap");
         rightPanel.add(newAnchorage, "growx, wrap");
+        rightPanel.add(deleteAnchorage, "growx, wrap");
+        rightPanel.add(deleteLastAnchorage, "growx, wrap");
         rightPanel.add(clearAnchorages, "growx");
-        rightPanel.setBackground(bgColor);
+        rightPanel.setBackground(BG_COLOR);
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "center, growx, span");
-        masterPanel.setBackground(bgColor);
+        masterPanel.setBackground(BG_COLOR);
 
-        setSize(frameWidth, frameHeight);
-        setTitle(frameTitle);
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        setTitle(FRAME_TITLE);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setIconImage(icon.getImage());
         add(masterPanel);
@@ -242,14 +268,14 @@ public class AnchorageFrame extends JFrame {
         panel.add(new JLabel(title), "span");
 
         for (JCheckBox cb : cbSet) {
-            cb.setBackground(bgColor);
+            cb.setBackground(BG_COLOR);
             
             panel.add(cb, "align left");
         }
 
         JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
 
-        line.setBackground(bgColor);
+        line.setBackground(BG_COLOR);
 
         panel.add(line, "growx, span");
     }
@@ -295,7 +321,7 @@ public class AnchorageFrame extends JFrame {
                 if (cb.isSelected())
                     anchored++;
 
-        return ((anchored <= maxAnchor) && (anchored >= 2));
+        return ((anchored <= MAX_ANCHOR) && (anchored >= 2));
     }
 
     /**

@@ -11,7 +11,7 @@
 public class Main {
 
     // Constantes privadas.
-    private static final String version = "v3.0";
+    private static final String VERSION = "v3.0";
 
     /**
      * Método principal.
@@ -19,7 +19,7 @@ public class Main {
      * Aquí se instancia y ejecuta todo el programa.
      */
     public static void main(String[] args) {
-        MainFrame mainFrame = new MainFrame(version);
+        MainFrame mainFrame = new MainFrame(VERSION);
 
         mainFrame.setVisible(true);
     }

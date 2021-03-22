@@ -41,19 +41,20 @@ import javax.swing.JTextField;
 public class InputFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
-    private static final int frameWidth = 450; // Ancho de la ventana.
-    private static final int frameHeight = 375; // Alto de la ventana.
-    private static final String imagesPath = "src/graphics/"; // Carpeta donde buscar las imágenes.
-    private static final String[] optionsComboBox = { "Agregar defensores centrales", // Opciones para el menú desplegable.
-                                                      "Agregar defensores laterales",
-                                                      "Agregar mediocampistas",
-                                                      "Agregar delanteros",
-                                                      "Agregar comodines" };
-    private static final String[] optionsMix = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
+    private static final int FRAME_WIDTH = 450; // Ancho de la ventana.
+    private static final int FRAME_HEIGHT = 375; // Alto de la ventana.
+    private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
+    private static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
+    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú desplegable.
+                                                       "Agregar defensores laterales",
+                                                       "Agregar mediocampistas",
+                                                       "Agregar delanteros",
+                                                       "Agregar comodines" };
+    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
                                                                                      // jugadores.
-    private static final Rectangle labelPosition = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las
+    private static final Rectangle LABEL_POS = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las
                                                                                     // imágenes.
-    private static final Color bgColor = new Color(200, 200, 200); // Color de fondo de la ventana.
+    private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
@@ -171,7 +172,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         playersSets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
-        setSize(frameWidth, frameHeight);
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle(frameTitle);
@@ -179,7 +180,7 @@ public class InputFrame extends JFrame implements ActionListener {
         setIconImage(icon.getImage());
 
         panel = new JPanel();
-        panel.setBounds(0, 0, frameWidth, frameHeight);
+        panel.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
         panel.setLayout(null);
 
         addTextFields(Position.CENTRALDEFENDER, textFieldCD, setCD);
@@ -208,7 +209,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         addTextArea();
 
-        panel.setBackground(bgColor);
+        panel.setBackground(BG_COLOR);
 
         add(panel);
     }
@@ -251,9 +252,9 @@ public class InputFrame extends JFrame implements ActionListener {
                     // y cualquier espacio intermedio es reemplazado por un guión bajo.
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
-                    if (name.length() == 0 || name.length() > 12 || isEmptyString(name) || alreadyExists(name))
+                    if (name.length() == 0 || name.length() > MAX_NAME_LEN || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null,
-                                "El nombre del jugador no puede estar vacío, tener más de 12 caracteres o estar repetido",
+                                "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN + " caracteres o estar repetido",
                                 "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
                         playersSet[index].setName(name);
@@ -282,8 +283,8 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param panel    Panel donde se agregará la imagen.
      */
     private void addImage(JLabel label, String fileName, JPanel panel) {
-        label.setIcon(new ImageIcon(imagesPath + fileName));
-        label.setBounds(labelPosition);
+        label.setIcon(new ImageIcon(IMG_PATH + fileName));
+        label.setBounds(LABEL_POS);
         label.setVisible(true);
 
         panel.add(label);
@@ -294,7 +295,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * handler de eventos a la misma.
      */
     private void addComboBox() {
-        comboBox = new JComboBox<>(optionsComboBox);
+        comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
 
         comboBox.setBounds(5, 5, 200, 30);
         comboBox.addActionListener(this);
@@ -327,7 +328,7 @@ public class InputFrame extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 int distribution = JOptionPane.showOptionDialog(null,
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                        JOptionPane.QUESTION_MESSAGE, smallIcon, optionsMix, optionsMix[0]);
+                        JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
@@ -370,7 +371,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método se encarga de actualizar lo mostrado en la ventana en base al
      * item seleccionado en la lista desplegable.
      * 
-     * @param text Opción seleccionada del arreglo de Strings 'optionsComboBox'.
+     * @param text Opción seleccionada del arreglo de Strings 'OPTIONS_COMBOBOX'.
      */
     private void updateOutput(String text) {
         switch (text) {
@@ -532,7 +533,7 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor = new JCheckBox("Anclar jugadores", false);
 
         anchor.setBounds(212, 310, 122, 20);
-        anchor.setBackground(bgColor);
+        anchor.setBackground(BG_COLOR);
         anchor.setVisible(true);
 
         panel.add(anchor);
