@@ -263,11 +263,11 @@ public class AnchorageFrame extends JFrame {
      * quedarán visibles y deseleccionadas. 
      * 
      * @param cbSet Arreglo de checkboxes a chequear.
-     * @param pSet  Arreglo de jugadores correspondiente al arreglo de checkboxes
+     * @param pSet  Arreglo de jugadores correspondiente al arreglo de checkboxes.
      */
     private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] pSet) {
         for (Player player : pSet)
-            for (JCheckBox cb : cbSet)
+            for (JCheckBox cb : cbSet) {
                 if (anchorageNum != 0) {
                     if(cb.getText().equals(player.getName()) && cb.isSelected()) {
                         player.setAnchor(anchorageNum);
@@ -281,6 +281,7 @@ public class AnchorageFrame extends JFrame {
                     cb.setSelected(false);
                     cb.setVisible(true);
                 }
+            }
     }
 
     /**
@@ -294,7 +295,7 @@ public class AnchorageFrame extends JFrame {
                 if (cb.isSelected())
                     anchored++;
 
-        return (anchored <= maxAnchor) && (anchored >= 2);
+        return ((anchored <= maxAnchor) && (anchored >= 2));
     }
 
     /**
