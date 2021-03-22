@@ -72,11 +72,8 @@ public class AnchorageFrame extends JFrame {
         this.inputFrame = inputFrame;
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
-        leftPanel = new JPanel();
-        rightPanel = new JPanel();
-
-        leftPanel.setLayout(new MigLayout("wrap 2"));
-        rightPanel.setLayout(new MigLayout());
+        leftPanel = new JPanel(new MigLayout("wrap 2"));
+        rightPanel = new JPanel(new MigLayout());
 
         cdCB = new ArrayList<>();
         ldCB = new ArrayList<>();
