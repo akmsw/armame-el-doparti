@@ -196,7 +196,7 @@ public class AnchorageFrame extends JFrame {
                 setAnchors(fwCB, playersSet.get(FORWARD));
                 setAnchors(wcCB, playersSet.get(WILDCARD));
 
-                textArea.setText("");
+                updateTextArea();
             }
         });
 
@@ -256,7 +256,11 @@ public class AnchorageFrame extends JFrame {
 
     /**
      * Este método se encarga de setear el número de anclaje correspondiente a cada
-     * jugador cuya checkbox haya sido tildada.
+     * jugador. Luego, se deseleccionan estas checkboxes y se las hace invisibles
+     * para evitar que dos o más anclajes contengan uno o más jugadores iguales.
+     * En caso de que el campo 'anchorageNum' sea 0 (se han querido limpiar los anclajes),
+     * se resetearán los números de anclaje de cada jugador y todas las checkboxes
+     * quedarán visibles y deseleccionadas. 
      * 
      * @param cbSet Arreglo de checkboxes a chequear.
      * @param pSet  Arreglo de jugadores correspondiente al arreglo de checkboxes
