@@ -193,11 +193,23 @@ public class AnchorageFrame extends JFrame {
 
         deleteLastAnchorage.addActionListener(new ActionListener() {
             /**
-             * 
+             * Este método se encarga de borrar
+             * el último anclaje realizado.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO.
+                anchorageNum--;
+
+                for (ArrayList<JCheckBox> cbSet : cbSets)
+                    for (JCheckBox cb : cbSet)
+                        for (Player[] playerSet : playersSet)
+                            for (Player player : playerSet)
+                                if (cb.getText().equals(player.getName()) && (player.getAnchor() == (anchorageNum + 1))) {
+                                    player.setAnchor(0);
+                                    cb.setVisible(true);
+                                }
+                
+                updateTextArea();
             }
         });
         
