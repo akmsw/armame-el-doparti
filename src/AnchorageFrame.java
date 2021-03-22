@@ -264,8 +264,19 @@ public class AnchorageFrame extends JFrame {
     private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] pSet) {
         for (Player player : pSet)
             for (JCheckBox cb : cbSet)
-                if(cb.getText().equals(player.getName()) && cb.isSelected())
+                if (anchorageNum != 0) {
+                    if(cb.getText().equals(player.getName()) && cb.isSelected()) {
+                        player.setAnchor(anchorageNum);
+
+                        cb.setSelected(false);
+                        cb.setVisible(false);
+                    }
+                } else {
                     player.setAnchor(anchorageNum);
+
+                    cb.setSelected(false);
+                    cb.setVisible(true);
+                }
     }
 
     /**
