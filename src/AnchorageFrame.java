@@ -78,8 +78,6 @@ public class AnchorageFrame extends JFrame {
         leftPanel.setLayout(new MigLayout("wrap 2"));
         rightPanel.setLayout(new MigLayout());
 
-        okButton = new JButton("Finalizar");
-
         cdCB = new ArrayList<>();
         ldCB = new ArrayList<>();
         mfCB = new ArrayList<>();
@@ -118,6 +116,8 @@ public class AnchorageFrame extends JFrame {
         addCBSet(leftPanel, mfCB, "MEDIOCAMPISTAS");
         addCBSet(leftPanel, fwCB, "DELANTEROS");
         addCBSet(leftPanel, wcCB, "COMODINES");
+
+        okButton = new JButton("Finalizar");
 
         okButton.addActionListener(new ActionListener() {
             /**
