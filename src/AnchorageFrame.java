@@ -39,7 +39,7 @@ public class AnchorageFrame extends JFrame {
     private static final int MAX_ANCHOR = 5; // Máxima cantidad de jugadores por anclaje.
     private static final int CENTRALDEFENDER = 0; //
     private static final int LATERALDEFENDER = 1; //
-    private static final int MIDFIELDER = 2;      // Índices del arreglo 'sets' correspondientes
+    private static final int MIDFIELDER = 2;      // Índices del arreglo 'playersSets' correspondientes
     private static final int FORWARD = 3;         // a cada array de jugadores.
     private static final int WILDCARD = 4;        //
     private static final String FRAME_TITLE = "Anclaje de jugadores";
@@ -67,8 +67,8 @@ public class AnchorageFrame extends JFrame {
      * @param distribution Distribución de jugadores elegida.
      * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
-    public AnchorageFrame(ImageIcon icon, List<Player[]> sets, int distribution, JFrame inputFrame) {
-        this.playersSets = sets;
+    public AnchorageFrame(ImageIcon icon, List<Player[]> playersSets, int distribution, JFrame inputFrame) {
+        this.playersSets = playersSets;
         this.inputFrame = inputFrame;
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
