@@ -47,7 +47,7 @@ public class AnchorageFrame extends JFrame {
 
     // Campos privados.
     private int anchorageNum = 0; // Número de anclaje.
-    private List<Player[]> playersSet; // Arreglo con los todos los jugadores.
+    private List<Player[]> playersSets; // Arreglo con los todos los jugadores.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los
                                                                // jugadores ingresados separados por posición.
     private ArrayList<ArrayList<JCheckBox>> cbSets; // Arreglo de arreglos de checkboxes de los jugadores.
@@ -68,7 +68,7 @@ public class AnchorageFrame extends JFrame {
      * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
     public AnchorageFrame(ImageIcon icon, List<Player[]> sets, int distribution, JFrame inputFrame) {
-        this.playersSet = sets;
+        this.playersSets = sets;
         this.inputFrame = inputFrame;
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
@@ -107,11 +107,11 @@ public class AnchorageFrame extends JFrame {
      * @param distribution Tipo de distribución elegida.
      */
     private void initializeComponents(ImageIcon icon, int distribution) {
-        fillCBSet(playersSet.get(CENTRALDEFENDER), cdCB);
-        fillCBSet(playersSet.get(LATERALDEFENDER), ldCB);
-        fillCBSet(playersSet.get(MIDFIELDER), mfCB);
-        fillCBSet(playersSet.get(FORWARD), fwCB);
-        fillCBSet(playersSet.get(WILDCARD), wcCB);
+        fillCBSet(playersSets.get(CENTRALDEFENDER), cdCB);
+        fillCBSet(playersSets.get(LATERALDEFENDER), ldCB);
+        fillCBSet(playersSets.get(MIDFIELDER), mfCB);
+        fillCBSet(playersSets.get(FORWARD), fwCB);
+        fillCBSet(playersSets.get(WILDCARD), wcCB);
 
         addCBSet(leftPanel, cdCB, "DEFENSORES CENTRALES");
         addCBSet(leftPanel, ldCB, "DEFENSORES LATERALES");
@@ -131,7 +131,7 @@ public class AnchorageFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
 
-                resultFrame = new ResultFrame(distribution, icon, playersSet);
+                resultFrame = new ResultFrame(distribution, icon, playersSets);
 
                 resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
                 resultFrame.setVisible(true);
@@ -167,11 +167,11 @@ public class AnchorageFrame extends JFrame {
 
                 anchorageNum++;
 
-                setAnchors(cdCB, playersSet.get(CENTRALDEFENDER));
-                setAnchors(ldCB, playersSet.get(LATERALDEFENDER));
-                setAnchors(mfCB, playersSet.get(MIDFIELDER));
-                setAnchors(fwCB, playersSet.get(FORWARD));
-                setAnchors(wcCB, playersSet.get(WILDCARD));
+                setAnchors(cdCB, playersSets.get(CENTRALDEFENDER));
+                setAnchors(ldCB, playersSets.get(LATERALDEFENDER));
+                setAnchors(mfCB, playersSets.get(MIDFIELDER));
+                setAnchors(fwCB, playersSets.get(FORWARD));
+                setAnchors(wcCB, playersSets.get(WILDCARD));
 
                 updateTextArea();
             }
@@ -200,14 +200,11 @@ public class AnchorageFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 anchorageNum--;
 
-                for (ArrayList<JCheckBox> cbSet : cbSets)
-                    for (JCheckBox cb : cbSet)
-                        for (Player[] playerSet : playersSet)
-                            for (Player player : playerSet)
-                                if (cb.getText().equals(player.getName()) && (player.getAnchor() == (anchorageNum + 1))) {
-                                    player.setAnchor(0);
-                                    cb.setVisible(true);
-                                }
+                deleteLast(playersSets.get(CENTRALDEFENDER), cdCB);
+                deleteLast(playersSets.get(LATERALDEFENDER), ldCB);
+                deleteLast(playersSets.get(MIDFIELDER), mfCB);
+                deleteLast(playersSets.get(FORWARD), fwCB);
+                deleteLast(playersSets.get(WILDCARD), wcCB);
                 
                 updateTextArea();
             }
@@ -226,11 +223,11 @@ public class AnchorageFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 anchorageNum = 0;
 
-                setAnchors(cdCB, playersSet.get(CENTRALDEFENDER));
-                setAnchors(ldCB, playersSet.get(LATERALDEFENDER));
-                setAnchors(mfCB, playersSet.get(MIDFIELDER));
-                setAnchors(fwCB, playersSet.get(FORWARD));
-                setAnchors(wcCB, playersSet.get(WILDCARD));
+                setAnchors(cdCB, playersSets.get(CENTRALDEFENDER));
+                setAnchors(ldCB, playersSets.get(LATERALDEFENDER));
+                setAnchors(mfCB, playersSets.get(MIDFIELDER));
+                setAnchors(fwCB, playersSets.get(FORWARD));
+                setAnchors(wcCB, playersSets.get(WILDCARD));
 
                 updateTextArea();
             }
@@ -254,6 +251,23 @@ public class AnchorageFrame extends JFrame {
         add(masterPanel);
         setResizable(false);
         setLocationRelativeTo(null);
+    }
+
+    /**
+     * Este método se encarga de borrar los jugadores
+     * correspondientes al último anclaje que estén
+     * en el grupo de jugadores pasado por parámetro.
+     * 
+     * @param playersSet Arreglo de jugadores.
+     * @param cbSet      Arreglo de checkboxes.
+     */
+    private void deleteLast(Player[] playersSet, ArrayList<JCheckBox> cbSet) {
+        for (JCheckBox cb : cbSet)
+            for (Player player : playersSet)
+                if (cb.getText().equals(player.getName()) && (player.getAnchor() == (anchorageNum + 1))) {
+                    player.setAnchor(0);
+                    cb.setVisible(true);
+                }
     }
 
     /**
@@ -349,7 +363,7 @@ public class AnchorageFrame extends JFrame {
 
             textArea.append(" ----- ANCLAJE #" + (i + 1) + " -----\n");
 
-            for (Player[] pSet : playersSet)
+            for (Player[] pSet : playersSets)
                 for (Player player : pSet)
                     if (player.getAnchor() == (i + 1)) {
                         textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
