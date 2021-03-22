@@ -244,6 +244,8 @@ public class AnchorageFrame extends JFrame {
         masterPanel.add(rightPanel, "center, growx, span");
         masterPanel.setBackground(BG_COLOR);
 
+        updateTextArea();
+
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setTitle(FRAME_TITLE);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -351,6 +353,26 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
+     * Este método se encarga de togglear
+     * los botones del panel derecho de la ventana.
+     */
+    private void toggleButtons() {
+        if (anchorageNum > 0 && anchorageNum < 2) {
+            deleteAnchorage.setEnabled(false);
+            deleteLastAnchorage.setEnabled(true);
+            clearAnchorages.setEnabled(true);
+        } else if (anchorageNum >= 2) {
+            deleteAnchorage.setEnabled(true);
+            deleteLastAnchorage.setEnabled(true);
+            clearAnchorages.setEnabled(true);
+        } else {
+            deleteAnchorage.setEnabled(false);
+            deleteLastAnchorage.setEnabled(false);
+            clearAnchorages.setEnabled(false);
+        }
+    }
+
+    /**
      * Este método se encarga de actualizar el área de texto
      * mostrando la cantidad de anclajes y los jugadores
      * anclados a los mismos.
@@ -372,6 +394,8 @@ public class AnchorageFrame extends JFrame {
             
             textArea.append("\n");
         }
+
+        toggleButtons();
     }
 
     /**
