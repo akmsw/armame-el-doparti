@@ -63,8 +63,7 @@ public class AnchorageFrame extends JFrame {
      * Creación de la ventana de anclajes.
      * 
      * @param icon         Ícono para la ventana.
-     * @param smallIcon    Ícono para los cuadros de diálogo.
-     * @param sets         Conjunto de jugadores.
+     * @param playersSets  Conjunto de jugadores.
      * @param distribution Distribución de jugadores elegida.
      * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
@@ -321,10 +320,8 @@ public class AnchorageFrame extends JFrame {
      * @return Si el anclaje posee más de la mitad de algún conjunto de jugadores.
      */
     private boolean isValidAnchorage() {
-        int anchor;
-
         for (ArrayList<JCheckBox> cbSet : cbSets) {
-            anchor = 0;
+            int anchor = 0;
 
             for (JCheckBox cb : cbSet)
                 if(cb.isSelected())
