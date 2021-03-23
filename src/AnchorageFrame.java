@@ -37,11 +37,6 @@ public class AnchorageFrame extends JFrame {
     private static final int FRAME_WIDTH = 402; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 432; // Alto de la ventana.
     private static final int MAX_ANCHOR = 5; // Máxima cantidad de jugadores por anclaje.
-    private static final int CENTRALDEFENDER = 0; //
-    private static final int LATERALDEFENDER = 1; //
-    private static final int MIDFIELDER = 2;      // Índices del arreglo 'playersSets' correspondientes
-    private static final int FORWARD = 3;         // a cada array de jugadores.
-    private static final int WILDCARD = 4;        //
     private static final String FRAME_TITLE = "Anclaje de jugadores";
     private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
@@ -102,11 +97,8 @@ public class AnchorageFrame extends JFrame {
      * @param distribution Tipo de distribución elegida.
      */
     private void initializeComponents(int distribution) {
-        fillCBSet(playersSets.get(CENTRALDEFENDER), cdCB);
-        fillCBSet(playersSets.get(LATERALDEFENDER), ldCB);
-        fillCBSet(playersSets.get(MIDFIELDER), mfCB);
-        fillCBSet(playersSets.get(FORWARD), fwCB);
-        fillCBSet(playersSets.get(WILDCARD), wcCB);
+        for (int i = 0; i < cbSets.size(); i++)
+            fillCBSet(playersSets.get(i), cbSets.get(i));
 
         addCBSet(leftPanel, cdCB, "DEFENSORES CENTRALES");
         addCBSet(leftPanel, ldCB, "DEFENSORES LATERALES");
@@ -164,11 +156,8 @@ public class AnchorageFrame extends JFrame {
 
                 anchorageNum++;
 
-                setAnchors(cdCB, playersSets.get(CENTRALDEFENDER));
-                setAnchors(ldCB, playersSets.get(LATERALDEFENDER));
-                setAnchors(mfCB, playersSets.get(MIDFIELDER));
-                setAnchors(fwCB, playersSets.get(FORWARD));
-                setAnchors(wcCB, playersSets.get(WILDCARD));
+                for (int i = 0; i < cbSets.size(); i++)
+                    setAnchors(cbSets.get(i), playersSets.get(i));
 
                 updateTextArea();
             }
@@ -193,20 +182,14 @@ public class AnchorageFrame extends JFrame {
                              2, JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_DELETE, OPTIONS_DELETE[0]) + 1; // + 1 para compensar índice del arreglo.
                 
                 //Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'.
-                changeAnchor(playersSets.get(CENTRALDEFENDER), cdCB, anchor, 0);
-                changeAnchor(playersSets.get(LATERALDEFENDER), ldCB, anchor, 0);
-                changeAnchor(playersSets.get(MIDFIELDER), mfCB, anchor, 0);
-                changeAnchor(playersSets.get(FORWARD), fwCB, anchor, 0);
-                changeAnchor(playersSets.get(WILDCARD), wcCB, anchor, 0);
+                for (int i = 0; i < cbSets.size(); i++)
+                    changeAnchor(playersSets.get(i), cbSets.get(i), anchor, 0);
 
                 // A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
                 // les decremento en 1 su número de anclaje.
                 for (int i = (anchor + 1); i <= anchorageNum; i++) {
-                    changeAnchor(playersSets.get(CENTRALDEFENDER), cdCB, i, (i - 1));
-                    changeAnchor(playersSets.get(LATERALDEFENDER), ldCB, i, (i - 1));
-                    changeAnchor(playersSets.get(MIDFIELDER), mfCB, i, (i - 1));
-                    changeAnchor(playersSets.get(FORWARD), fwCB, i, (i - 1));
-                    changeAnchor(playersSets.get(WILDCARD), wcCB, i, (i - 1));
+                    for (int j = 0; j < cbSets.size(); j++)
+                        changeAnchor(playersSets.get(j), cbSets.get(j), i, (i - 1));
                 }
 
                 anchorageNum--;
@@ -224,11 +207,8 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeAnchor(playersSets.get(CENTRALDEFENDER), cdCB, anchorageNum, 0);
-                changeAnchor(playersSets.get(LATERALDEFENDER), ldCB, anchorageNum, 0);
-                changeAnchor(playersSets.get(MIDFIELDER), mfCB, anchorageNum, 0);
-                changeAnchor(playersSets.get(FORWARD), fwCB, anchorageNum, 0);
-                changeAnchor(playersSets.get(WILDCARD), wcCB, anchorageNum, 0);
+                for (int i = 0; i < cbSets.size(); i++)
+                    changeAnchor(playersSets.get(i), cbSets.get(i), anchorageNum, 0);
 
                 anchorageNum--;
                 
@@ -249,11 +229,8 @@ public class AnchorageFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 anchorageNum = 0;
 
-                setAnchors(cdCB, playersSets.get(CENTRALDEFENDER));
-                setAnchors(ldCB, playersSets.get(LATERALDEFENDER));
-                setAnchors(mfCB, playersSets.get(MIDFIELDER));
-                setAnchors(fwCB, playersSets.get(FORWARD));
-                setAnchors(wcCB, playersSets.get(WILDCARD));
+                for (int i = 0; i < cbSets.size(); i++)
+                    setAnchors(cbSets.get(i), playersSets.get(i));
 
                 updateTextArea();
             }
