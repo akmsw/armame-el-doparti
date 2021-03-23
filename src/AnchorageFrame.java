@@ -48,16 +48,15 @@ public class AnchorageFrame extends JFrame {
     // Campos privados.
     private int anchorageNum = 0; // Número de anclaje.
     private List<Player[]> playersSets; // Arreglo con los todos los jugadores.
-    private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes correspondientes a los
-                                                               // jugadores ingresados separados por posición.
+    private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes de los jugadores separados por posición.
     private ArrayList<ArrayList<JCheckBox>> cbSets; // Arreglo de arreglos de checkboxes de los jugadores.
     private JFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
-    private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de
-                                                       // anclajes.
+    private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de anclajes.
     private JButton okButton, newAnchorage, clearAnchorages, deleteAnchorage, deleteLastAnchorage; // Botones de la ventana de anclajes.
     private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
     private JScrollPane scrollPane; // Scrollpane para el área de texto.
     private ResultFrame resultFrame; // Ventana de resultados.
+    private ImageIcon icon, smallIcon;
 
     /**
      * Creación de la ventana de anclajes.
@@ -67,9 +66,11 @@ public class AnchorageFrame extends JFrame {
      * @param distribution Distribución de jugadores elegida.
      * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
-    public AnchorageFrame(ImageIcon icon, List<Player[]> playersSets, int distribution, JFrame inputFrame) {
+    public AnchorageFrame(ImageIcon icon, ImageIcon smallIcon, List<Player[]> playersSets, int distribution, JFrame inputFrame) {
         this.playersSets = playersSets;
         this.inputFrame = inputFrame;
+        this.icon = icon;
+        this.smallIcon = smallIcon;
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
         leftPanel = new JPanel(new MigLayout("wrap 2"));
@@ -89,7 +90,7 @@ public class AnchorageFrame extends JFrame {
         cbSets.add(fwCB);
         cbSets.add(wcCB);
 
-        initializeComponents(icon, distribution);
+        initializeComponents(distribution);
     }
 
     // ----------------------------------------Métodos privados---------------------------------
@@ -98,10 +99,9 @@ public class AnchorageFrame extends JFrame {
      * Este método se encarga de inicializar los componentes de la ventana de
      * anclaje.
      * 
-     * @param icon         Ícono para la ventana.
      * @param distribution Tipo de distribución elegida.
      */
-    private void initializeComponents(ImageIcon icon, int distribution) {
+    private void initializeComponents(int distribution) {
         fillCBSet(playersSets.get(CENTRALDEFENDER), cdCB);
         fillCBSet(playersSets.get(LATERALDEFENDER), ldCB);
         fillCBSet(playersSets.get(MIDFIELDER), mfCB);
@@ -178,11 +178,40 @@ public class AnchorageFrame extends JFrame {
 
         deleteAnchorage.addActionListener(new ActionListener() {
             /**
-             * 
+             * Este método se encarga de borrar
+             * un anclaje en específico señalado por
+             * el usuario.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO.
+                String[] OPTIONS_DELETE = new String[anchorageNum];
+
+                for (int i = 0; i < anchorageNum; i++)
+                    OPTIONS_DELETE[i] = Integer.toString(i + 1);
+
+                int anchor = JOptionPane.showOptionDialog(null, "Seleccione qué anclaje desea borrar", "Antes de continuar...",
+                             2, JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_DELETE, OPTIONS_DELETE[0]) + 1; // + 1 para compensar índice del arreglo.
+                
+                //Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'.
+                changeAnchor(playersSets.get(CENTRALDEFENDER), cdCB, anchor, 0);
+                changeAnchor(playersSets.get(LATERALDEFENDER), ldCB, anchor, 0);
+                changeAnchor(playersSets.get(MIDFIELDER), mfCB, anchor, 0);
+                changeAnchor(playersSets.get(FORWARD), fwCB, anchor, 0);
+                changeAnchor(playersSets.get(WILDCARD), wcCB, anchor, 0);
+
+                // A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
+                // les decremento en 1 su número de anclaje.
+                for (int i = (anchor + 1); i <= anchorageNum; i++) {
+                    changeAnchor(playersSets.get(CENTRALDEFENDER), cdCB, i, (i - 1));
+                    changeAnchor(playersSets.get(LATERALDEFENDER), ldCB, i, (i - 1));
+                    changeAnchor(playersSets.get(MIDFIELDER), mfCB, i, (i - 1));
+                    changeAnchor(playersSets.get(FORWARD), fwCB, i, (i - 1));
+                    changeAnchor(playersSets.get(WILDCARD), wcCB, i, (i - 1));
+                }
+
+                anchorageNum--;
+
+                updateTextArea();
             }
         });
 
@@ -195,13 +224,13 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                anchorageNum--;
+                changeAnchor(playersSets.get(CENTRALDEFENDER), cdCB, anchorageNum, 0);
+                changeAnchor(playersSets.get(LATERALDEFENDER), ldCB, anchorageNum, 0);
+                changeAnchor(playersSets.get(MIDFIELDER), mfCB, anchorageNum, 0);
+                changeAnchor(playersSets.get(FORWARD), fwCB, anchorageNum, 0);
+                changeAnchor(playersSets.get(WILDCARD), wcCB, anchorageNum, 0);
 
-                deleteLast(playersSets.get(CENTRALDEFENDER), cdCB);
-                deleteLast(playersSets.get(LATERALDEFENDER), ldCB);
-                deleteLast(playersSets.get(MIDFIELDER), mfCB);
-                deleteLast(playersSets.get(FORWARD), fwCB);
-                deleteLast(playersSets.get(WILDCARD), wcCB);
+                anchorageNum--;
                 
                 updateTextArea();
             }
@@ -253,19 +282,22 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de borrar los jugadores
-     * correspondientes al último anclaje que estén
-     * en el grupo de jugadores pasado por parámetro.
+     * Este método se encarga de cambiar el número de anclaje
+     * de los jugadores.
      * 
-     * @param playersSet Arreglo de jugadores.
-     * @param cbSet      Arreglo de checkboxes.
+     * @param playersSet  Conjunto de jugadores a recorrer.
+     * @param cbSet       Conjunto de checkboxes a recorrer.
+     * @param target      Anclaje a reemplazar.
+     * @param replacement Nuevo anclaje a setear.
      */
-    private void deleteLast(Player[] playersSet, ArrayList<JCheckBox> cbSet) {
+    private void changeAnchor(Player[] playersSet, ArrayList<JCheckBox> cbSet, int target, int replacement) {
         for (JCheckBox cb : cbSet)
             for (Player player : playersSet)
-                if (cb.getText().equals(player.getName()) && (player.getAnchor() == (anchorageNum + 1))) {
-                    player.setAnchor(0);
-                    cb.setVisible(true);
+                if (cb.getText().equals(player.getName()) && (player.getAnchor() == target)) {
+                    player.setAnchor(replacement);
+
+                    if (replacement == 0)
+                        cb.setVisible(true);
                 }
     }
 
@@ -377,15 +409,15 @@ public class AnchorageFrame extends JFrame {
     private void updateTextArea() {
         textArea.setText("");
 
-        for (int i = 0; i < anchorageNum; i++) {
-            int counter = 0;
+        for (int i = 1; i <= anchorageNum; i++) {
+            int counter = 1;
 
-            textArea.append(" ----- ANCLAJE #" + (i + 1) + " -----\n");
+            textArea.append(" ----- ANCLAJE #" + i + " -----\n");
 
             for (Player[] pSet : playersSets)
                 for (Player player : pSet)
-                    if (player.getAnchor() == (i + 1)) {
-                        textArea.append(" " + (counter + 1) + ". " + player.getName() + "\n");
+                    if (player.getAnchor() == i) {
+                        textArea.append(" " + counter + ". " + player.getName() + "\n");
                         counter++;
                     }
             

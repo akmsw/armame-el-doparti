@@ -332,8 +332,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.playersSets, distribution,
-                                InputFrame.this);
+                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.smallIcon, InputFrame.this.playersSets, distribution,
+                                                            InputFrame.this);
 
                         anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);
