@@ -157,8 +157,11 @@ public class AnchorageFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!checkAnchorages()) {
-                    errorMsg("No pueden haber más de " + MAX_ANCHOR + " ni menos de 2 jugadores en un mismo anclaje.");
+                if (!validChecksAmount()) {
+                    errorMsg("No puede haber más de " + MAX_ANCHOR + " ni menos de 2 jugadores en un mismo anclaje.");
+                    return;
+                } else if (!isValidAnchorage()) {
+                    errorMsg("No puede haber más de la mitad de jugadores de una misma posición en un mismo anclaje.");
                     return;
                 }
 
@@ -303,7 +306,7 @@ public class AnchorageFrame extends JFrame {
     /**
      * @return Si la cantidad de jugadores anclados es al menos 2 y no más de 5.
      */
-    private boolean checkAnchorages() {
+    private boolean validChecksAmount() {
         int anchored = 0;
 
         for (ArrayList<JCheckBox> cbset : cbSets)
@@ -312,6 +315,26 @@ public class AnchorageFrame extends JFrame {
                     anchored++;
 
         return ((anchored <= MAX_ANCHOR) && (anchored >= 2));
+    }
+
+    /**
+     * @return Si el anclaje posee más de la mitad de algún conjunto de jugadores.
+     */
+    private boolean isValidAnchorage() {
+        int anchor;
+
+        for (ArrayList<JCheckBox> cbSet : cbSets) {
+            anchor = 0;
+
+            for (JCheckBox cb : cbSet)
+                if(cb.isSelected())
+                    anchor++;
+            
+            if (anchor > (cbSet.size() / 2))
+                return false;
+        }
+
+        return true;
     }
 
     /**
