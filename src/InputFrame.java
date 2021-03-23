@@ -326,14 +326,13 @@ public class InputFrame extends JFrame implements ActionListener {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                int distribution = JOptionPane.showOptionDialog(null,
-                        "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                        JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
+                int distribution = JOptionPane.showOptionDialog(null, "Seleccione el criterio de distribución de jugadores",
+                                                                "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
+                                                                smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon, InputFrame.this.smallIcon, InputFrame.this.playersSets, distribution,
-                                                            InputFrame.this);
+                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon,InputFrame.this.playersSets, distribution, InputFrame.this);
 
                         anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);

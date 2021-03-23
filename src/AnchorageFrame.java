@@ -13,6 +13,7 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,16 +63,17 @@ public class AnchorageFrame extends JFrame {
      * Creación de la ventana de anclajes.
      * 
      * @param icon         Ícono para la ventana.
+     * @param smallIcon    Ícono para los cuadros de diálogo.
      * @param sets         Conjunto de jugadores.
      * @param distribution Distribución de jugadores elegida.
      * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
-    public AnchorageFrame(ImageIcon icon, ImageIcon smallIcon, List<Player[]> playersSets, int distribution,
-            JFrame inputFrame) {
+    public AnchorageFrame(ImageIcon icon, List<Player[]> playersSets, int distribution, JFrame inputFrame) {
         this.playersSets = playersSets;
         this.inputFrame = inputFrame;
         this.icon = icon;
-        this.smallIcon = smallIcon;
+
+        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
         leftPanel = new JPanel(new MigLayout("wrap 2"));
@@ -183,9 +185,10 @@ public class AnchorageFrame extends JFrame {
                 for (int i = 0; i < anchorageNum; i++)
                     OPTIONS_DELETE[i] = Integer.toString(i + 1);
 
-                int anchor = JOptionPane.showOptionDialog(null, "Seleccione qué anclaje desea borrar", "Antes de continuar...",
-                                                             2, JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_DELETE,
-                                                          OPTIONS_DELETE[0]) + 1; // + 1 para compensar índice del arreglo.
+                int anchor = JOptionPane.showOptionDialog(null, "Seleccione qué anclaje desea borrar",
+                                                          "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
+                                                          smallIcon, OPTIONS_DELETE, OPTIONS_DELETE[0]) + 1;
+                                                          // + 1 para compensar índice del arreglo.
 
                 // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'.
                 for (int i = 0; i < cbSets.size(); i++)
@@ -262,25 +265,6 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de cambiar el número de anclaje de los jugadores.
-     * 
-     * @param playersSet  Conjunto de jugadores a recorrer.
-     * @param cbSet       Conjunto de checkboxes a recorrer.
-     * @param target      Anclaje a reemplazar.
-     * @param replacement Nuevo anclaje a setear.
-     */
-    private void changeAnchor(Player[] playersSet, ArrayList<JCheckBox> cbSet, int target, int replacement) {
-        for (JCheckBox cb : cbSet)
-            for (Player player : playersSet)
-                if (cb.getText().equals(player.getName()) && (player.getAnchor() == target)) {
-                    player.setAnchor(replacement);
-
-                    if (replacement == 0)
-                        cb.setVisible(true);
-                }
-    }
-
-    /**
      * Este método se encarga de llenar los arreglos de checkboxes correspondientes
      * a cada posición.
      * 
@@ -317,6 +301,30 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
+     * @return Si la cantidad de jugadores anclados es al menos 2 y no más de 5.
+     */
+    private boolean checkAnchorages() {
+        int anchored = 0;
+
+        for (ArrayList<JCheckBox> cbset : cbSets)
+            for (JCheckBox cb : cbset)
+                if (cb.isSelected())
+                    anchored++;
+
+        return ((anchored <= MAX_ANCHOR) && (anchored >= 2));
+    }
+
+    /**
+     * Este método se encarga de crear una ventana de error con un texto
+     * personalizado.
+     * 
+     * @param errorText Texto de error a mostrar en la ventana.
+     */
+    private void errorMsg(String errorText) {
+        JOptionPane.showMessageDialog(null, errorText, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+    }
+
+    /**
      * Este método se encarga de setear el número de anclaje correspondiente a cada
      * jugador. Luego, se deseleccionan estas checkboxes y se las hace invisibles
      * para evitar que dos o más anclajes contengan uno o más jugadores iguales. En
@@ -347,41 +355,6 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si la cantidad de jugadores en el anclaje es al menos 2 y no más de
-     *         5.
-     */
-    private boolean checkAnchorages() {
-        int anchored = 0;
-
-        for (ArrayList<JCheckBox> cbset : cbSets)
-            for (JCheckBox cb : cbset)
-                if (cb.isSelected())
-                    anchored++;
-
-        return ((anchored <= MAX_ANCHOR) && (anchored >= 2));
-    }
-
-    /**
-     * Este método se encarga de togglear los botones del panel derecho de la
-     * ventana.
-     */
-    private void toggleButtons() {
-        if (anchorageNum > 0 && anchorageNum < 2) {
-            deleteAnchorage.setEnabled(false);
-            deleteLastAnchorage.setEnabled(true);
-            clearAnchorages.setEnabled(true);
-        } else if (anchorageNum >= 2) {
-            deleteAnchorage.setEnabled(true);
-            deleteLastAnchorage.setEnabled(true);
-            clearAnchorages.setEnabled(true);
-        } else {
-            deleteAnchorage.setEnabled(false);
-            deleteLastAnchorage.setEnabled(false);
-            clearAnchorages.setEnabled(false);
-        }
-    }
-
-    /**
      * Este método se encarga de actualizar el área de texto mostrando la cantidad
      * de anclajes y los jugadores anclados a los mismos.
      */
@@ -407,12 +380,41 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de crear una ventana de error con un texto
-     * personalizado.
-     * 
-     * @param errorText Texto de error a mostrar en la ventana.
+     * Este método se encarga de togglear los botones del panel derecho de la
+     * ventana.
      */
-    private void errorMsg(String errorText) {
-        JOptionPane.showMessageDialog(null, errorText, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+    private void toggleButtons() {
+        if (anchorageNum > 0 && anchorageNum < 2) {
+            deleteAnchorage.setEnabled(false);
+            deleteLastAnchorage.setEnabled(true);
+            clearAnchorages.setEnabled(true);
+        } else if (anchorageNum >= 2) {
+            deleteAnchorage.setEnabled(true);
+            deleteLastAnchorage.setEnabled(true);
+            clearAnchorages.setEnabled(true);
+        } else {
+            deleteAnchorage.setEnabled(false);
+            deleteLastAnchorage.setEnabled(false);
+            clearAnchorages.setEnabled(false);
+        }
+    }
+
+    /**
+     * Este método se encarga de cambiar el número de anclaje de los jugadores.
+     * 
+     * @param playersSet  Conjunto de jugadores a recorrer.
+     * @param cbSet       Conjunto de checkboxes a recorrer.
+     * @param target      Anclaje a reemplazar.
+     * @param replacement Nuevo anclaje a setear.
+     */
+    private void changeAnchor(Player[] playersSet, ArrayList<JCheckBox> cbSet, int target, int replacement) {
+        for (JCheckBox cb : cbSet)
+            for (Player player : playersSet)
+                if (cb.getText().equals(player.getName()) && (player.getAnchor() == target)) {
+                    player.setAnchor(replacement);
+
+                    if (replacement == 0)
+                        cb.setVisible(true);
+                }
     }
 }
