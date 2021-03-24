@@ -59,12 +59,4 @@ public class ResultFrame extends JFrame {
     private void randomMix() {
         setTitle("MEZCLA ALEATORIA");
     }
-
-    /**
-     * Este método se encarga de armar los equipos en base a las puntuaciones
-     * asignadas a los jugadores.
-     */
-    private void ratingMix() {
-        setTitle("MEZCLA POR PUNTAJES");
-    }
 }
