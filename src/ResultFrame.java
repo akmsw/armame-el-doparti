@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 public class ResultFrame extends JFrame {
 
     // Campos privados.
-    private JPanel resultPanel;
+    private JPanel panel;
 
     /**
      * Se crea la ventana de resultados.
@@ -36,14 +36,18 @@ public class ResultFrame extends JFrame {
         setResizable(false);
         setIconImage(icon.getImage());
 
-        resultPanel = new JPanel();
+        panel = new JPanel();
 
         if (distribution == 0)
             randomMix();
-        else
-            ratingMix();
+        else {
+            RatingFrame ratingFrame = new RatingFrame();
 
-        add(resultPanel);
+            ratingFrame.addWindowListener(new WindowEventsHandler(this));
+            ratingFrame.setVisible(true);
+        }
+
+        add(panel);
     }
 
     // ----------------------------------------Métodos privados---------------------------------
