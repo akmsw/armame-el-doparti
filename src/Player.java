@@ -55,7 +55,7 @@ public class Player {
     }
 
     /**
-     * @return A qué equipo está anclado el jugador.
+     * @return Número de anclaje correspondiente.
      */
     public int getAnchor() {
         return anchor;

@@ -16,19 +16,18 @@ import javax.swing.JFrame;
 public class WindowEventsHandler extends WindowAdapter {
 
     // Campos privados.
-    JFrame frame;
+    JFrame frame; // Ventana cuya visibilidad será toggleada.
 
     /**
-     * Se construye el handler de eventos de ventana.
+     * Constructor del handler de eventos de ventana.
      * 
-     * @param frame Ventana cuya visibilidad será toggleada
+     * @param frame Ventana cuya visibilidad será toggleada.
      */
     public WindowEventsHandler(JFrame frame) {
         this.frame = frame;
     }
 
-    // ----------------------------------------Métodos
-    // públicos---------------------------------
+    // ----------------------------------------Métodos públicos---------------------------------
 
     /**
      * Este método se encarga de hacer invisible la ventana que debe quedar en

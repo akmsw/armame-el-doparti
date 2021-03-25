@@ -1,7 +1,6 @@
 /**
  * Clase correspondiente a la ventana de resultados
- * en base a los jugadores ingresados y el criterio
- * de distribución elegido por el usuario.
+ * de distribución de jugadores.
  * 
  * @author Bonino, Francisco Ignacio.
  * 
@@ -20,9 +19,15 @@ public class ResultFrame extends JFrame {
     private JPanel panel;
 
     /**
-     * Se crea la ventana de resultados.
+     * Creación de la ventana de resultados.
      */
     public ResultFrame() {
+        initializeComponents();
+    }
+
+    // ----------------------------------------Métodos privados---------------------------------
+
+    private void initializeComponents() {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -42,8 +47,6 @@ public class ResultFrame extends JFrame {
 
         add(panel);
     }
-
-    // ----------------------------------------Métodos privados---------------------------------
 
     /**
      * Este método se encarga de armar los equipos de manera completamente

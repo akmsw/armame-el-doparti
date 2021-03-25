@@ -5,7 +5,7 @@
  * 
  * @author Bonino, Francisco Ignacio.
  * 
- * @version 2.0.0
+ * @version 1.0.0
  * 
  * @since 28/02/2021
  */
@@ -45,15 +45,13 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final int FRAME_HEIGHT = 375; // Alto de la ventana.
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
     private static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
-    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú desplegable.
-                                                       "Agregar defensores laterales",
-                                                       "Agregar mediocampistas",
-                                                       "Agregar delanteros",
-                                                       "Agregar comodines" };
+    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú
+                                                                                       // desplegable.
+            "Agregar defensores laterales", "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
-                                                                                     // jugadores.
+                                                                                      // jugadores.
     private static final Rectangle LABEL_POS = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las
-                                                                                    // imágenes.
+                                                                                // imágenes.
     private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos públicos.
@@ -63,22 +61,19 @@ public class InputFrame extends JFrame implements ActionListener {
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
                                                                                                    // de texto para
                                                                                                    // ingresar nombres.
-    private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada
-                                                        // posición.
+    private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos
                                                          // jugadores por posición por equipo).
-    private ImageIcon smallIcon; // Iconos para las ventanas.
+    private ImageIcon smallIcon; // Ícono para la ventana.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
-    private JButton mixButton; // Botón para mezclar jugadores.
+    private JButton mixButton;
     private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
     private JComboBox<String> comboBox; // Menú desplegable.
-    private JPanel panel; // Panel para la ventana de mezcla.
-    private AnchorageFrame anchorageFrame; // Ventana de anclaje de jugadores.
-    private ResultFrame resultFrame; // Ventana de resultados.
+    private JPanel panel;
 
     /**
-     * Se crea la ventana de mezcla.
+     * Creación de la ventana de mezcla.
      * 
      * @param playersAmount Cantidad de jugadores por equipo.
      * 
@@ -98,21 +93,22 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método rescata la cantidad de jugadores para cada posición por equipo
      * mediante expresiones regulares.
      * 
-     * X[CLMFW].>+.[0-9] : Matchea las líneas que comiencen con la cantidad de jugadores por equipo,
-     * seguido por C, L, M, F, ó W, seguido por al menos un caracter '>', y luego tengan algún número.
+     * X[CLMFW].>+.[0-9] : Matchea las líneas que comiencen con la cantidad de
+     * jugadores por equipo, seguido por C, L, M, F, ó W, seguido por al menos un
+     * caracter '>', y luego tengan algún número.
      * 
-     * [0-9][A-Z].>+. : Matchea el trozo de la línea que no es un número que nos interese.
+     * [0-9][A-Z].>+. : Matchea el trozo de la línea, que no sea un número, que nos
+     * interesa.
      * 
      * ¡¡¡IMPORTANTE!!!
      * 
-     * Si el archivo .PDA es modificado en cuanto a orden de las líneas
-     * importantes (C >> NÚMERO, etc.), se debe tener en cuenta que
-     * Position.values()[index] confía en que lo hallado se corresponde con el orden
-     * en el que están declarados los valores en el enum Position. Idem, si se
-     * cambian de orden los valores del enum Position, se deberá tener en cuenta que
-     * Position.values()[index] confía en el orden en el que se leerán los datos del
-     * archivo .PDA y, por consiguiente, se deberá rever el orden de las líneas
-     * importantes de dichos archivos.
+     * Si el archivo .PDA es modificado en cuanto a orden de las líneas importantes,
+     * se debe tener en cuenta que Position.values()[index] confía en que lo hallado
+     * se corresponde con el orden en el que están declarados los valores en el enum
+     * Position. Idem, si se cambian de orden los valores del enum Position, se
+     * deberá tener en cuenta que Position.values()[index] confía en el orden en el
+     * que se leerán los datos del archivo .PDA y, por consiguiente, se deberá rever
+     * el orden de las líneas importantes de dichos archivos.
      * 
      * @param playersAmount Cantidad de jugadores por equipo.
      * 
@@ -125,7 +121,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
             while ((line = br.readLine()) != null)
                 if (line.matches(playersAmount + "[CLMFW].>+.[0-9]")) {
-                    playersAmountMap.put(Position.values()[index], Integer.parseInt(line.replaceAll("[0-9][A-Z].>+.", "")));
+                    playersAmountMap.put(Position.values()[index],
+                            Integer.parseInt(line.replaceAll("[0-9][A-Z].>+.", "")));
                     index++;
                 }
         }
@@ -133,7 +130,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     /**
      * Este método inicializa el conjunto de jugadores recibido con jugadores sin
-     * nombre y la posición recibida.
+     * nombre y con la posición recibida.
      * 
      * @param set      Arreglo de jugadores a inicializar.
      * @param position Posición de los jugadores del arreglo.
@@ -200,11 +197,8 @@ public class InputFrame extends JFrame implements ActionListener {
         addImage(mfLabel, "mf.jpg", panel);
         addImage(fwLabel, "fw.jpg", panel);
         addImage(wcLabel, "wc.jpg", panel);
-
         addComboBox();
-
         addButtons();
-
         addTextArea();
 
         panel.setBackground(BG_COLOR);
@@ -231,11 +225,9 @@ public class InputFrame extends JFrame implements ActionListener {
                 int index; // Índice que indica el campo de texto donde se ingresó el nombre.
 
                 /**
-                 * En este método se evalúa que el string ingresado como nombre de jugador sea
-                 * válido. Una vez validado, se chequea según el campo de texto si tal jugador
-                 * está en el arreglo correspondiente o no. Si lo está, se lo reemplaza por un
-                 * nuevo jugador con el nombre cambiado. Si no está, simplemente se crea un
-                 * nuevo jugador con el nombre ingresado.
+                 * En este método se evalúa que la cadena ingresada como nombre de jugador sea
+                 * válida. Una vez validada, se setea la cadena como el nombre del jugador
+                 * correspondiente a tal campo de texto.
                  * 
                  * @param e Evento ocurrido (nombre ingresado).
                  */
@@ -252,8 +244,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
                     if (name.length() == 0 || name.length() > MAX_NAME_LEN || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null,
-                                "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN + " caracteres o estar repetido",
-                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                        "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN + " caracteres o estar repetido",
+                                        "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
                         playersSet[index].setName(name);
 
@@ -273,7 +265,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     /**
      * Este método se encarga de agregar al panel las imágenes correspondientes a
-     * cada posición cuya visibilidad se toggleará en base al item seleccionado en
+     * cada posición cuya visibilidad se toggleará en base al ítem seleccionado en
      * la lista desplegable.
      * 
      * @param label    Etiqueta donde se seteará la imagen.
@@ -324,18 +316,18 @@ public class InputFrame extends JFrame implements ActionListener {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                int distribution = JOptionPane.showOptionDialog(null, "Seleccione el criterio de distribución de jugadores",
-                                                                "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                                                smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
+                int distribution = JOptionPane.showOptionDialog(null,
+                        "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
+                        JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        anchorageFrame = new AnchorageFrame(distribution, InputFrame.this);
+                        AnchorageFrame anchorageFrame = new AnchorageFrame(distribution, InputFrame.this);
 
                         anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);
                     } else {
-                        resultFrame = new ResultFrame();
+                        ResultFrame resultFrame = new ResultFrame();
 
                         resultFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         resultFrame.setVisible(true);
@@ -349,7 +341,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
     /**
      * Este método se encarga de añadir al panel el campo de texto de sólo lectura
-     * donde se mostrarán los nombres de jugadores ingresados por el usuario.
+     * donde se mostrarán en tiempo real los nombres de jugadores ingresados por el
+     * usuario.
      */
     private void addTextArea() {
         textArea = new JTextArea();
@@ -366,7 +359,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
     /**
      * Este método se encarga de actualizar lo mostrado en la ventana en base al
-     * item seleccionado en la lista desplegable.
+     * ítem seleccionado en la lista desplegable. Se togglea la visibilidad de las
+     * imágenes y de los campos de texto de ingreso de jugadores.
      * 
      * @param text Opción seleccionada del arreglo de Strings 'OPTIONS_COMBOBOX'.
      */
@@ -483,7 +477,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private boolean alreadyExists(String name) {
         for (int i = 0; i < playersSets.size(); i++)
             for (int j = 0; j < playersSets.get(i).length; j++)
-                if(playersSets.get(i)[j].getName().equals(name))
+                if (playersSets.get(i)[j].getName().equals(name))
                     return true;
 
         return false;
@@ -503,7 +497,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         for (int i = 0; i < playersSets.size(); i++)
             for (int j = 0; j < playersSets.get(i).length; j++)
-                if(!playersSets.get(i)[j].getName().equals("")) {
+                if (!playersSets.get(i)[j].getName().equals("")) {
                     textArea.append(" " + (counter + 1) + ". " + playersSets.get(i)[j].getName() + "\n");
                     counter++;
                 }
@@ -516,15 +510,15 @@ public class InputFrame extends JFrame implements ActionListener {
     private boolean checkMixButton() {
         for (int i = 0; i < playersSets.size(); i++)
             for (int j = 0; j < playersSets.get(i).length; j++)
-                if(playersSets.get(i)[j].getName().equals(""))
+                if (playersSets.get(i)[j].getName().equals(""))
                     return false;
 
         return true;
     }
 
     /**
-     * Este método se encarga de agregar el checkbox de anclaje de jugadores a un
-     * mismo equipo en el panel del frame.
+     * Este método se encarga de agregar el checkbox de anclaje de jugadores en el
+     * panel del frame.
      */
     private void addAnchorCheckBox() {
         anchor = new JCheckBox("Anclar jugadores", false);
@@ -541,9 +535,9 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * Handler para los eventos ocurridos de la lista desplegable. Se trata la
      * fuente del evento ocurrido como un JComboBox y se trata como un String el
-     * item seleccionado en el mismo para pasarlo al método updateOutput.
+     * ítem seleccionado en el mismo para pasarlo al método updateOutput.
      * 
-     * @param e Evento ocurrido (item seleccionado).
+     * @param e Evento ocurrido (ítem seleccionado).
      */
     @Override
     public void actionPerformed(ActionEvent e) {

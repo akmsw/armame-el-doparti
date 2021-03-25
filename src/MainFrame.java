@@ -29,13 +29,12 @@ public class MainFrame extends JFrame implements ActionListener {
     private static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
 
     // Campos públicos.
-    public static ImageIcon iconBall;
-    
+    public static ImageIcon iconBall; // Ícono para la ventana.
+
     // Campos privados.
-    private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW; // Iconos utilizados para las ventanas.
-    private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
-    private JPanel panel; // Panel de la ventana principal.
-    private InputFrame inputFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
+    private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW; // Íconos utilizados para la ventana.
+    private JButton startButton, exitButton, chichaButton;
+    private JPanel panel;
 
     /**
      * Se crea la ventana principal.
@@ -111,7 +110,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         chichaButton.setBounds(600, 400, 92, 93);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-                                           chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -138,7 +137,8 @@ public class MainFrame extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }
 
-    // ----------------------------------------Métodos públicos---------------------------------
+    // ----------------------------------------Métodos
+    // públicos---------------------------------
 
     /**
      * Override para indicar qué hacer en base a cada boton pulsado.
@@ -151,21 +151,20 @@ public class MainFrame extends JFrame implements ActionListener {
             String[] options = { "7", "8" };
 
             int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                                                             "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                                             smallIconBall, options, options[0]);
+                    "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
-                    inputFrame = new InputFrame(playersAmount + 7); // + 7 para compensar el índice de la selección.
+                    InputFrame inputFrame = new InputFrame(playersAmount + 7); // + 7 para compensar el índice de la
+                                                                               // selección.
 
                     inputFrame.setVisible(true);
+                    inputFrame.addWindowListener(new WindowEventsHandler(MainFrame.this));
                 } catch (IOException ex) {
                     ex.printStackTrace();
 
                     System.exit(-1);
                 }
-
-                inputFrame.addWindowListener(new WindowEventsHandler(MainFrame.this));
             }
         } else if (e.getSource() == chichaButton)
             chicha();

@@ -24,13 +24,12 @@ import net.miginfocom.swing.MigLayout;
 public class RatingFrame extends JFrame {
 
     // Campos privados.
-    // private List<Player[]> playersSets;
     private JPanel masterPanel, leftPanel, rightPanel, southPanel;
     private JButton finish, cancel;
     private ArrayList<JSpinner> spinners; // Arreglo de spinners de los jugadores.
 
     /**
-     * Constructor.
+     * Creación de la ventana de ingreso de puntajes.
      */
     public RatingFrame() {
         initializeComponents();
@@ -55,7 +54,7 @@ public class RatingFrame extends JFrame {
 
         for (int i = 0; i < 14; i++)
             spinners.add(new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
-        
+
         for (int i = 0; i < (spinners.size() / 2); i++) {
             leftPanel.add(new JLabel("TEXTO " + (i + 1)));
             leftPanel.add(spinners.get(i), "wrap");
