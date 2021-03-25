@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.awt.Image;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -42,9 +41,11 @@ public class AnchorageFrame extends JFrame {
     private static final String FRAME_TITLE = "Anclaje de jugadores";
     private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
+    // Campos públicos.
+    public static int distribution; // Distribución de jugadores elegida.
+
     // Campos privados.
     private int anchorageNum = 0; // Número de anclaje.
-    private List<Player[]> playersSets; // Arreglo con los todos los jugadores.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes de los jugadores separados por
                                                                // posición.
     private ArrayList<ArrayList<JCheckBox>> cbSets; // Arreglo de arreglos de checkboxes de los jugadores.
@@ -57,22 +58,20 @@ public class AnchorageFrame extends JFrame {
     private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
     private JScrollPane scrollPane; // Scrollpane para el área de texto.
     private ResultFrame resultFrame; // Ventana de resultados.
-    private ImageIcon icon, smallIcon;
+    private ImageIcon smallIcon; // Íconos para la ventana.
 
     /**
      * Creación de la ventana de anclajes.
      * 
-     * @param icon         Ícono para la ventana.
-     * @param playersSets  Conjunto de jugadores.
      * @param distribution Distribución de jugadores elegida.
      * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
-    public AnchorageFrame(ImageIcon icon, List<Player[]> playersSets, int distribution, JFrame inputFrame) {
-        this.playersSets = playersSets;
-        this.inputFrame = inputFrame;
-        this.icon = icon;
+    public AnchorageFrame(int distribution, JFrame inputFrame) {
+        AnchorageFrame.distribution = distribution;
 
-        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        this.inputFrame = inputFrame;
+
+        smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
         leftPanel = new JPanel(new MigLayout("wrap 2"));
@@ -105,7 +104,7 @@ public class AnchorageFrame extends JFrame {
      */
     private void initializeComponents(int distribution) {
         for (int i = 0; i < cbSets.size(); i++)
-            fillCBSet(playersSets.get(i), cbSets.get(i));
+            fillCBSet(InputFrame.playersSets.get(i), cbSets.get(i));
 
         addCBSet(leftPanel, cdCB, "DEFENSORES CENTRALES");
         addCBSet(leftPanel, ldCB, "DEFENSORES LATERALES");
@@ -127,7 +126,7 @@ public class AnchorageFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
 
-                resultFrame = new ResultFrame(distribution, icon, playersSets);
+                resultFrame = new ResultFrame();
 
                 resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
                 resultFrame.setVisible(true);
@@ -167,7 +166,7 @@ public class AnchorageFrame extends JFrame {
                 anchorageNum++;
 
                 for (int i = 0; i < cbSets.size(); i++)
-                    setAnchors(cbSets.get(i), playersSets.get(i));
+                    setAnchors(cbSets.get(i), InputFrame.playersSets.get(i));
 
                 updateTextArea();
             }
@@ -194,13 +193,13 @@ public class AnchorageFrame extends JFrame {
 
                 // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'.
                 for (int i = 0; i < cbSets.size(); i++)
-                    changeAnchor(playersSets.get(i), cbSets.get(i), anchor, 0);
+                    changeAnchor(InputFrame.playersSets.get(i), cbSets.get(i), anchor, 0);
 
                 // A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
                 // les decremento en 1 su número de anclaje.
                 for (int i = (anchor + 1); i <= anchorageNum; i++)
                     for (int j = 0; j < cbSets.size(); j++)
-                        changeAnchor(playersSets.get(j), cbSets.get(j), i, (i - 1));
+                        changeAnchor(InputFrame.playersSets.get(j), cbSets.get(j), i, (i - 1));
 
                 anchorageNum--;
 
@@ -217,7 +216,7 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < cbSets.size(); i++)
-                    changeAnchor(playersSets.get(i), cbSets.get(i), anchorageNum, 0);
+                    changeAnchor(InputFrame.playersSets.get(i), cbSets.get(i), anchorageNum, 0);
 
                 anchorageNum--;
 
@@ -238,7 +237,7 @@ public class AnchorageFrame extends JFrame {
                 anchorageNum = 0;
 
                 for (int i = 0; i < cbSets.size(); i++)
-                    setAnchors(cbSets.get(i), playersSets.get(i));
+                    setAnchors(cbSets.get(i), InputFrame.playersSets.get(i));
 
                 updateTextArea();
             }
@@ -260,7 +259,7 @@ public class AnchorageFrame extends JFrame {
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setTitle(FRAME_TITLE);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setIconImage(icon.getImage());
+        setIconImage(MainFrame.iconBall.getImage());
         add(masterPanel);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -386,7 +385,7 @@ public class AnchorageFrame extends JFrame {
 
             textArea.append(" ----- ANCLAJE #" + i + " -----\n");
 
-            for (Player[] pSet : playersSets)
+            for (Player[] pSet : InputFrame.playersSets)
                 for (Player player : pSet)
                     if (player.getAnchor() == i) {
                         textArea.append(" " + counter + ". " + player.getName() + "\n");

@@ -56,17 +56,18 @@ public class InputFrame extends JFrame implements ActionListener {
                                                                                     // imágenes.
     private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
+    // Campos públicos.
+    public static List<Player[]> playersSets; // Lista con los arreglos de jugadores.
+
     // Campos privados.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
                                                                                                    // de texto para
                                                                                                    // ingresar nombres.
     private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores de cada
                                                         // posición.
-    private List<Player[]> playersSets; // Lista con los arreglos de jugadores para reducir líneas de código en ciertos
-                                        // métodos.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico (cuántos
                                                          // jugadores por posición por equipo).
-    private ImageIcon icon, smallIcon; // Iconos para las ventanas.
+    private ImageIcon smallIcon; // Iconos para las ventanas.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
     private JButton mixButton; // Botón para mezclar jugadores.
@@ -80,13 +81,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * Se crea la ventana de mezcla.
      * 
      * @param playersAmount Cantidad de jugadores por equipo.
-     * @param icon          Ícono para la ventana.
      * 
      * @throws IOException Cuando hay un error de lectura en los archivos PDA.
      */
-    public InputFrame(int playersAmount, ImageIcon icon) throws IOException {
-        this.icon = icon;
-
+    public InputFrame(int playersAmount) throws IOException {
         playersAmountMap = new EnumMap<>(Position.class);
 
         collectPDData(playersAmount);
@@ -177,7 +175,7 @@ public class InputFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle(frameTitle);
         setResizable(false);
-        setIconImage(icon.getImage());
+        setIconImage(MainFrame.iconBall.getImage());
 
         panel = new JPanel();
         panel.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
@@ -310,7 +308,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método se encarga de añadir los botones al panel.
      */
     private void addButtons() {
-        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         mixButton = new JButton("Mezclar");
 
         mixButton.setBounds(224, 274, 100, 30);
@@ -332,12 +330,12 @@ public class InputFrame extends JFrame implements ActionListener {
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        anchorageFrame = new AnchorageFrame(InputFrame.this.icon,InputFrame.this.playersSets, distribution, InputFrame.this);
+                        anchorageFrame = new AnchorageFrame(distribution, InputFrame.this);
 
                         anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);
                     } else {
-                        resultFrame = new ResultFrame(distribution, icon, playersSets);
+                        resultFrame = new ResultFrame();
 
                         resultFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         resultFrame.setVisible(true);

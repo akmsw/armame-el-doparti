@@ -28,9 +28,11 @@ public class MainFrame extends JFrame implements ActionListener {
     // Constantes privadas.
     private static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
 
-    // Campos privados
-    private String version; // Versión del programa.
-    private ImageIcon iconBall, smallIconBall, iconAKMSW, smallIconAKMSW; // Iconos utilizados para las ventanas.
+    // Campos públicos.
+    public static ImageIcon iconBall;
+    
+    // Campos privados.
+    private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW; // Iconos utilizados para las ventanas.
     private JButton startButton, exitButton, chichaButton; // Botones de la ventana principal.
     private JPanel panel; // Panel de la ventana principal.
     private InputFrame inputFrame; // Ventana mostrada al pulsar el botón de "Comenzar".
@@ -41,9 +43,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * @param frameTitle Título a mostrar en la ventana principal.
      * @param version    Versión del software.
      */
-    public MainFrame(String version) {
-        this.version = version;
-
+    public MainFrame() {
         initializeComponents();
     }
 
@@ -69,7 +69,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setSize(bgWidth, bgHeight);
         setLocationRelativeTo(null);
-        setTitle("Fiesta de fulbito " + version);
+        setTitle("Fiesta de fulbito " + Main.VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setIconImage(iconBall.getImage());
@@ -133,7 +133,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * Este método se encarga de desplegar los créditos del programa.
      */
     private void chicha() {
-        String line = "<html>FIESTA DE FULBITO " + version + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
+        String line = "<html>FIESTA DE FULBITO " + Main.VERSION + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
 
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }
@@ -156,7 +156,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
-                    inputFrame = new InputFrame((playersAmount + 7), iconBall);
+                    inputFrame = new InputFrame(playersAmount + 7); // + 7 para compensar el índice de la selección.
 
                     inputFrame.setVisible(true);
                 } catch (IOException ex) {
