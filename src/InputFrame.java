@@ -45,9 +45,11 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final int FRAME_HEIGHT = 375; // Alto de la ventana.
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
     private static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
-    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú
-                                                                                       // desplegable.
-            "Agregar defensores laterales", "Agregar mediocampistas", "Agregar delanteros", "Agregar comodines" };
+    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú desplegable.
+                                                       "Agregar defensores laterales",
+                                                       "Agregar mediocampistas",
+                                                       "Agregar delanteros",
+                                                       "Agregar comodines" };
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
                                                                                       // jugadores.
     private static final Rectangle LABEL_POS = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las
