@@ -9,14 +9,14 @@
  * @since 06/03/2021
  */
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+// import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
+// import javax.swing.JSpinner;
+// import javax.swing.SpinnerNumberModel;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -26,7 +26,7 @@ public class RatingFrame extends JFrame {
     // Campos privados.
     private JPanel masterPanel, leftPanel, rightPanel, southPanel;
     private JButton finish, cancel;
-    private ArrayList<JSpinner> spinners; // Arreglo de spinners de los jugadores.
+    // private ArrayList<JSpinner> spinners; // Arreglo de spinners de los jugadores.
 
     /**
      * Creación de la ventana de ingreso de puntajes.
@@ -50,9 +50,9 @@ public class RatingFrame extends JFrame {
         finish = new JButton("Finalizar");
         cancel = new JButton("Cancelar");
 
-        spinners = new ArrayList<>();
+        // spinners = new ArrayList<>();
 
-        for (int i = 0; i < 14; i++)
+        /*for (int i = 0; i < 14; i++)
             spinners.add(new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
         for (int i = 0; i < (spinners.size() / 2); i++) {
@@ -63,7 +63,7 @@ public class RatingFrame extends JFrame {
         for (int i = (spinners.size() / 2); i < spinners.size(); i++) {
             rightPanel.add(new JLabel("TEXTO " + (i + 1)));
             rightPanel.add(spinners.get(i));
-        }
+        }*/
 
         southPanel.add(finish, "growx");
         southPanel.add(cancel, "growx");
@@ -74,6 +74,8 @@ public class RatingFrame extends JFrame {
 
         add(masterPanel);
         setResizable(false);
+        setTitle("Puntuaciones");
+        setIconImage(MainFrame.iconBall.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);

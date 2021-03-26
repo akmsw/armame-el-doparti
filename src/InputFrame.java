@@ -57,6 +57,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos públicos.
+    public static int distribution;
     public static List<Player[]> playersSets; // Lista con los arreglos de jugadores.
 
     // Campos privados.
@@ -318,13 +319,13 @@ public class InputFrame extends JFrame implements ActionListener {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                int distribution = JOptionPane.showOptionDialog(null,
+                InputFrame.distribution = JOptionPane.showOptionDialog(null,
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
                         JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
                 if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
                     if (anchor.isSelected()) {
-                        AnchorageFrame anchorageFrame = new AnchorageFrame(distribution, InputFrame.this);
+                        AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this);
 
                         anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);

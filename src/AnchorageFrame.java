@@ -40,9 +40,6 @@ public class AnchorageFrame extends JFrame {
     private static final String FRAME_TITLE = "Anclaje de jugadores";
     private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
-    // Campos públicos.
-    public static int distribution; // Distribución de jugadores elegida.
-
     // Campos privados.
     private int anchorageNum = 0; // Número de anclaje.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes de los jugadores separados por
@@ -61,12 +58,9 @@ public class AnchorageFrame extends JFrame {
     /**
      * Creación de la ventana de anclajes.
      * 
-     * @param distribution Distribución de jugadores elegida.
      * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
-    public AnchorageFrame(int distribution, JFrame inputFrame) {
-        AnchorageFrame.distribution = distribution;
-
+    public AnchorageFrame(JFrame inputFrame) {
         this.inputFrame = inputFrame;
 
         smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -89,7 +83,7 @@ public class AnchorageFrame extends JFrame {
         cbSets.add(fwCB);
         cbSets.add(wcCB);
 
-        initializeComponents(distribution);
+        initializeComponents();
     }
 
     // ----------------------------------------Métodos privados---------------------------------
@@ -97,10 +91,8 @@ public class AnchorageFrame extends JFrame {
     /**
      * Este método se encarga de inicializar los componentes de la ventana de
      * anclaje.
-     * 
-     * @param distribution Tipo de distribución elegida.
      */
-    private void initializeComponents(int distribution) {
+    private void initializeComponents() {
         for (int i = 0; i < cbSets.size(); i++)
             fillCBSet(InputFrame.playersSets.get(i), cbSets.get(i));
 
@@ -141,7 +133,7 @@ public class AnchorageFrame extends JFrame {
         textArea.setVisible(true);
 
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         newAnchorage = new JButton("Anclar");
 

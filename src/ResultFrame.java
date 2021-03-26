@@ -36,7 +36,7 @@ public class ResultFrame extends JFrame {
 
         panel = new JPanel();
 
-        if (AnchorageFrame.distribution == 0)
+        if (InputFrame.distribution == 0)
             randomMix();
         else {
             RatingFrame ratingFrame = new RatingFrame();
