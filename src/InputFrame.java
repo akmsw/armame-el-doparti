@@ -100,7 +100,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * jugadores por equipo, seguido por C, L, M, F, ó W, seguido por al menos un
      * caracter '>', y luego tengan algún número.
      * 
-     * [0-9][A-Z].>+. : Matchea el trozo de la línea, que no sea un número, que nos
+     * [0-9][A-Z].>+. : Matchea el trozo de la línea que no sea un número que nos
      * interesa.
      * 
      * ¡¡¡IMPORTANTE!!!
