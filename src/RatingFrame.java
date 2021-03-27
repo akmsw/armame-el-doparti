@@ -43,7 +43,7 @@ public class RatingFrame extends JFrame {
      */
     private void initializeComponents() {
         masterPanel = new JPanel(new MigLayout());
-        leftPanel = new JPanel(new MigLayout("wrap 2"));
+        leftPanel = new JPanel(new MigLayout("wrap 2")); // add gapx?
         rightPanel = new JPanel(new MigLayout("wrap 2"));
         southPanel = new JPanel(new MigLayout());
 
