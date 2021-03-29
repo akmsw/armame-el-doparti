@@ -253,15 +253,6 @@ public class AnchorageFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private void deleteLast() {
-        for (int i = 0; i < cbSets.size(); i++)
-            changeAnchor(InputFrame.playersSets.get(i), cbSets.get(i), anchorageNum, 0);
-
-        anchorageNum--;
-
-        updateTextArea();
-    }
-
     /**
      * Este método se encarga de llenar los arreglos de checkboxes correspondientes
      * a cada posición.
@@ -369,6 +360,18 @@ public class AnchorageFrame extends JFrame {
                     cb.setVisible(true);
                 }
             }
+    }
+
+    /**
+     * Este método se encarga de borrar el último anclaje realizado.
+     */
+    private void deleteLast() {
+        for (int i = 0; i < cbSets.size(); i++)
+            changeAnchor(InputFrame.playersSets.get(i), cbSets.get(i), anchorageNum, 0);
+
+        anchorageNum--;
+
+        updateTextArea();
     }
 
     /**
