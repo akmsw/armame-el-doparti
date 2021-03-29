@@ -137,8 +137,7 @@ public class MainFrame extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }
 
-    // ----------------------------------------Métodos
-    // públicos---------------------------------
+    // ----------------------------------------Métodos públicos---------------------------------
 
     /**
      * Override para indicar qué hacer en base a cada boton pulsado.
