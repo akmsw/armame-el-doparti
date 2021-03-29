@@ -110,7 +110,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         chichaButton.setBounds(600, 400, 92, 93);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-                chichaButton.getHeight(), Image.SCALE_SMOOTH)));
+        chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
         addActionListeners();
 
@@ -150,12 +150,11 @@ public class MainFrame extends JFrame implements ActionListener {
             String[] options = { "7", "8" };
 
             int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                    "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
+                        "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
-                    InputFrame inputFrame = new InputFrame(playersAmount + 7); // + 7 para compensar el índice de la
-                                                                               // selección.
+                    InputFrame inputFrame = new InputFrame(playersAmount + 7); // + 7 para compensar el índice de la selección.
 
                     inputFrame.setVisible(true);
                     inputFrame.addWindowListener(new WindowEventsHandler(MainFrame.this));
