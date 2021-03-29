@@ -9,6 +9,7 @@
  * @since 06/03/2021
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -27,6 +28,7 @@ public class RatingFrame extends JFrame {
     // Campos privados.
     private JPanel masterPanel, centerPanel, southPanel;
     private JButton finishButton, cancelButton;
+    private ArrayList<String> positions;
     private HashMap<Player, JSpinner> spinnersMap; // Mapa que asocia a cada jugador un JSpinner.
 
     /**
@@ -42,8 +44,18 @@ public class RatingFrame extends JFrame {
 
         spinnersMap = new HashMap<>();
 
+        positions = new ArrayList<>();
+
+        positions.add("DEFENSORES CENTRALES");
+        positions.add("DEFENSORES LATERALES");
+        positions.add("MEDIOCAMPISTAS");
+        positions.add("DELANTEROS");
+        positions.add("COMODINES");
+
+        int index = 0;
+
         for (Player[] playersSet : InputFrame.playersSets) {
-            centerPanel.add(new JLabel(playersSet[0].getPosition().toString()), "span");
+            centerPanel.add(new JLabel(positions.get(index)), "span");
             centerPanel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
 
             for (Player player : playersSet) {
@@ -52,9 +64,11 @@ public class RatingFrame extends JFrame {
                 centerPanel.add(new JLabel(player.getName()));
                 centerPanel.add(spinnersMap.get(player));
             }
+
+            index++;
         }
 
-        southPanel.add(finishButton, "w 112:214:214, growx, wrap");
+        southPanel.add(finishButton, "w 147:147:214, growx, wrap");
         southPanel.add(cancelButton, "growx, wrap");
 
         masterPanel.add(southPanel, "south");
