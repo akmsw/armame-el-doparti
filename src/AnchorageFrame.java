@@ -42,7 +42,8 @@ public class AnchorageFrame extends JFrame {
     private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
-    private int anchorageNum = 0; // Número de anclaje.
+    private int anchorageNum; // Número de anclaje.
+    private int playersAnchored; // Cantidad de jugadores anclados.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes de los jugadores separados por
                                                                // posición.
     private ArrayList<ArrayList<JCheckBox>> cbSets; // Arreglo de arreglos de checkboxes de los jugadores.
@@ -83,6 +84,9 @@ public class AnchorageFrame extends JFrame {
         cbSets.add(mfCB);
         cbSets.add(fwCB);
         cbSets.add(wcCB);
+
+        anchorageNum = 0;
+        playersAnchored = 0;
 
         initializeComponents();
     }
@@ -350,6 +354,8 @@ public class AnchorageFrame extends JFrame {
                     if (cb.getText().equals(player.getName()) && cb.isSelected()) {
                         player.setAnchor(anchorageNum);
 
+                        playersAnchored++;
+
                         cb.setSelected(false);
                         cb.setVisible(false);
                     }
@@ -417,6 +423,9 @@ public class AnchorageFrame extends JFrame {
             deleteLastAnchorage.setEnabled(false);
             clearAnchorages.setEnabled(false);
         }
+
+        /*if ((MAX_ANCHOR_TOTAL - playersAnchored) < 2)
+            newAnchorage.setEnabled(false);*/
     }
 
     /**
@@ -433,8 +442,11 @@ public class AnchorageFrame extends JFrame {
                 if (cb.getText().equals(player.getName()) && (player.getAnchor() == target)) {
                     player.setAnchor(replacement);
 
-                    if (replacement == 0)
+                    if (replacement == 0) {
                         cb.setVisible(true);
+
+                        playersAnchored--;
+                    }
                 }
     }
 }
