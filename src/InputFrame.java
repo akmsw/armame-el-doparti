@@ -57,7 +57,8 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos públicos.
-    public static int distribution;
+    public static int distribution; // Tipo de distribución de jugadores elegida.
+    public static int playersAmount; // Cantidad de jugadores por equipo.
     public static List<Player[]> playersSets; // Lista con los arreglos de jugadores.
 
     // Campos privados.
@@ -83,6 +84,8 @@ public class InputFrame extends JFrame implements ActionListener {
      * @throws IOException Cuando hay un error de lectura en los archivos PDA.
      */
     public InputFrame(int playersAmount) throws IOException {
+        InputFrame.playersAmount = playersAmount;
+
         playersAmountMap = new EnumMap<>(Position.class);
 
         collectPDData(playersAmount);
