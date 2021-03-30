@@ -33,6 +33,9 @@ import net.miginfocom.swing.MigLayout;
 @SuppressWarnings("serial")
 public class AnchorageFrame extends JFrame {
 
+    // Campos públicos.
+    public static ArrayList<String> positions; // Arreglo con los strings de las posiciones de los jugadores.
+
     // Constantes privadas.
     private static final int FRAME_WIDTH = 402; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 432; // Alto de la ventana.
@@ -77,6 +80,14 @@ public class AnchorageFrame extends JFrame {
         fwCB = new ArrayList<>();
         wcCB = new ArrayList<>();
 
+        positions = new ArrayList<>();
+
+        positions.add("DEFENSORES CENTRALES");
+        positions.add("DEFENSORES LATERALES");
+        positions.add("MEDIOCAMPISTAS");
+        positions.add("DELANTEROS");
+        positions.add("COMODINES");
+
         cbSets = new ArrayList<>();
 
         cbSets.add(cdCB);
@@ -98,14 +109,19 @@ public class AnchorageFrame extends JFrame {
      * anclaje.
      */
     private void initializeComponents() {
-        for (int i = 0; i < cbSets.size(); i++)
+        for (int i = 0; i < cbSets.size(); i++) {
             fillCBSet(InputFrame.playersSets.get(i), cbSets.get(i));
+            addCBSet(leftPanel, cbSets.get(i), positions.get(i));
+        }
+        
+        /*for (int i = 0; i < cbSets.size(); i++)
+            addCBSet(leftPanel, cbSets.get(i), RatingFrame.positions.get(i));
 
         addCBSet(leftPanel, cdCB, "DEFENSORES CENTRALES");
         addCBSet(leftPanel, ldCB, "DEFENSORES LATERALES");
         addCBSet(leftPanel, mfCB, "MEDIOCAMPISTAS");
         addCBSet(leftPanel, fwCB, "DELANTEROS");
-        addCBSet(leftPanel, wcCB, "COMODINES");
+        addCBSet(leftPanel, wcCB, "COMODINES");*/
 
         okButton = new JButton("Finalizar");
 
