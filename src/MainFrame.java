@@ -38,9 +38,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /**
      * Se crea la ventana principal.
-     * 
-     * @param frameTitle Título a mostrar en la ventana principal.
-     * @param version    Versión del software.
      */
     public MainFrame() {
         initializeComponents();
@@ -51,8 +48,6 @@ public class MainFrame extends JFrame implements ActionListener {
     /**
      * Este método se encarga de inicializar los botones y la imagen de fondo de la
      * ventana principal.
-     * 
-     * @param frameTitle Título de la ventana.
      */
     private void initializeComponents() {
         ImageIcon bgImage = new ImageIcon(IMG_PATH + "bg.png");
@@ -78,7 +73,7 @@ public class MainFrame extends JFrame implements ActionListener {
         panel.setBounds(0, 0, bgWidth, bgHeight);
         panel.setLayout(null);
 
-        addButtons(panel);
+        addButtons();
 
         JLabel bgLabel = new JLabel("", bgImage, JLabel.CENTER);
 
@@ -92,10 +87,8 @@ public class MainFrame extends JFrame implements ActionListener {
     /**
      * Este método se encarga de agregar todos los botones necesarios en la ventana
      * principal.
-     * 
-     * @param panel Panel donde se colocarán los botones.
      */
-    private void addButtons(JPanel panel) {
+    private void addButtons() {
         startButton = new JButton("Comenzar");
         exitButton = new JButton("Salir");
         chichaButton = new JButton();
