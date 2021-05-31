@@ -372,85 +372,85 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     private void updateOutput(String text) {
         switch (text) {
-        case "Agregar defensores centrales": {
-            textFieldCD.forEach(tf -> tf.setVisible(true));
-            textFieldLD.forEach(tf -> tf.setVisible(false));
-            textFieldMF.forEach(tf -> tf.setVisible(false));
-            textFieldFW.forEach(tf -> tf.setVisible(false));
-            textFieldWC.forEach(tf -> tf.setVisible(false));
+            case "Agregar defensores centrales": {
+                textFieldCD.forEach(tf -> tf.setVisible(true));
+                textFieldLD.forEach(tf -> tf.setVisible(false));
+                textFieldMF.forEach(tf -> tf.setVisible(false));
+                textFieldFW.forEach(tf -> tf.setVisible(false));
+                textFieldWC.forEach(tf -> tf.setVisible(false));
 
-            cdLabel.setVisible(true);
-            ldLabel.setVisible(false);
-            mfLabel.setVisible(false);
-            fwLabel.setVisible(false);
-            wcLabel.setVisible(false);
+                cdLabel.setVisible(true);
+                ldLabel.setVisible(false);
+                mfLabel.setVisible(false);
+                fwLabel.setVisible(false);
+                wcLabel.setVisible(false);
 
-            break;
-        }
+                break;
+            }
 
-        case "Agregar defensores laterales": {
-            textFieldCD.forEach(tf -> tf.setVisible(false));
-            textFieldLD.forEach(tf -> tf.setVisible(true));
-            textFieldMF.forEach(tf -> tf.setVisible(false));
-            textFieldFW.forEach(tf -> tf.setVisible(false));
-            textFieldWC.forEach(tf -> tf.setVisible(false));
+            case "Agregar defensores laterales": {
+                textFieldCD.forEach(tf -> tf.setVisible(false));
+                textFieldLD.forEach(tf -> tf.setVisible(true));
+                textFieldMF.forEach(tf -> tf.setVisible(false));
+                textFieldFW.forEach(tf -> tf.setVisible(false));
+                textFieldWC.forEach(tf -> tf.setVisible(false));
 
-            cdLabel.setVisible(false);
-            ldLabel.setVisible(true);
-            mfLabel.setVisible(false);
-            fwLabel.setVisible(false);
-            wcLabel.setVisible(false);
+                cdLabel.setVisible(false);
+                ldLabel.setVisible(true);
+                mfLabel.setVisible(false);
+                fwLabel.setVisible(false);
+                wcLabel.setVisible(false);
 
-            break;
-        }
+                break;
+            }
 
-        case "Agregar mediocampistas": {
-            textFieldCD.forEach(tf -> tf.setVisible(false));
-            textFieldLD.forEach(tf -> tf.setVisible(false));
-            textFieldMF.forEach(tf -> tf.setVisible(true));
-            textFieldFW.forEach(tf -> tf.setVisible(false));
-            textFieldWC.forEach(tf -> tf.setVisible(false));
+            case "Agregar mediocampistas": {
+                textFieldCD.forEach(tf -> tf.setVisible(false));
+                textFieldLD.forEach(tf -> tf.setVisible(false));
+                textFieldMF.forEach(tf -> tf.setVisible(true));
+                textFieldFW.forEach(tf -> tf.setVisible(false));
+                textFieldWC.forEach(tf -> tf.setVisible(false));
 
-            cdLabel.setVisible(false);
-            ldLabel.setVisible(false);
-            mfLabel.setVisible(true);
-            fwLabel.setVisible(false);
-            wcLabel.setVisible(false);
+                cdLabel.setVisible(false);
+                ldLabel.setVisible(false);
+                mfLabel.setVisible(true);
+                fwLabel.setVisible(false);
+                wcLabel.setVisible(false);
 
-            break;
-        }
+                break;
+            }
 
-        case "Agregar delanteros": {
-            textFieldCD.forEach(tf -> tf.setVisible(false));
-            textFieldLD.forEach(tf -> tf.setVisible(false));
-            textFieldMF.forEach(tf -> tf.setVisible(false));
-            textFieldFW.forEach(tf -> tf.setVisible(true));
-            textFieldWC.forEach(tf -> tf.setVisible(false));
+            case "Agregar delanteros": {
+                textFieldCD.forEach(tf -> tf.setVisible(false));
+                textFieldLD.forEach(tf -> tf.setVisible(false));
+                textFieldMF.forEach(tf -> tf.setVisible(false));
+                textFieldFW.forEach(tf -> tf.setVisible(true));
+                textFieldWC.forEach(tf -> tf.setVisible(false));
 
-            cdLabel.setVisible(false);
-            ldLabel.setVisible(false);
-            mfLabel.setVisible(false);
-            fwLabel.setVisible(true);
-            wcLabel.setVisible(false);
+                cdLabel.setVisible(false);
+                ldLabel.setVisible(false);
+                mfLabel.setVisible(false);
+                fwLabel.setVisible(true);
+                wcLabel.setVisible(false);
 
-            break;
-        }
+                break;
+            }
 
-        default: {
-            textFieldCD.forEach(tf -> tf.setVisible(false));
-            textFieldLD.forEach(tf -> tf.setVisible(false));
-            textFieldMF.forEach(tf -> tf.setVisible(false));
-            textFieldFW.forEach(tf -> tf.setVisible(false));
-            textFieldWC.forEach(tf -> tf.setVisible(true));
+            default: {
+                textFieldCD.forEach(tf -> tf.setVisible(false));
+                textFieldLD.forEach(tf -> tf.setVisible(false));
+                textFieldMF.forEach(tf -> tf.setVisible(false));
+                textFieldFW.forEach(tf -> tf.setVisible(false));
+                textFieldWC.forEach(tf -> tf.setVisible(true));
 
-            cdLabel.setVisible(false);
-            ldLabel.setVisible(false);
-            mfLabel.setVisible(false);
-            fwLabel.setVisible(false);
-            wcLabel.setVisible(true);
+                cdLabel.setVisible(false);
+                ldLabel.setVisible(false);
+                mfLabel.setVisible(false);
+                fwLabel.setVisible(false);
+                wcLabel.setVisible(true);
 
-            break;
-        }
+                break;
+            }
         }
     }
 

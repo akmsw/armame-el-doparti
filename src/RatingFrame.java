@@ -9,6 +9,8 @@
  * @since 06/03/2021
  */
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -38,7 +40,22 @@ public class RatingFrame extends JFrame {
         masterPanel = new JPanel(new MigLayout());
 
         finishButton = new JButton("Finalizar");
+
+        finishButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+            }
+        });
+
         cancelButton = new JButton("Cancelar");
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO.
+            }            
+        });
 
         spinnersMap = new HashMap<>();
 

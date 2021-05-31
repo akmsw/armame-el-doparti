@@ -113,15 +113,6 @@ public class AnchorageFrame extends JFrame {
             fillCBSet(InputFrame.playersSets.get(i), cbSets.get(i));
             addCBSet(leftPanel, cbSets.get(i), positions.get(i));
         }
-        
-        /*for (int i = 0; i < cbSets.size(); i++)
-            addCBSet(leftPanel, cbSets.get(i), RatingFrame.positions.get(i));
-
-        addCBSet(leftPanel, cdCB, "DEFENSORES CENTRALES");
-        addCBSet(leftPanel, ldCB, "DEFENSORES LATERALES");
-        addCBSet(leftPanel, mfCB, "MEDIOCAMPISTAS");
-        addCBSet(leftPanel, fwCB, "DELANTEROS");
-        addCBSet(leftPanel, wcCB, "COMODINES");*/
 
         okButton = new JButton("Finalizar");
 
