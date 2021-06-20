@@ -63,7 +63,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setSize(bgWidth, bgHeight);
         setLocationRelativeTo(null);
-        setTitle("Fiesta de fulbito " + Main.VERSION);
+        setTitle(Main.PROGRAM_TITLE + Main.VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setIconImage(iconBall.getImage());
@@ -105,7 +105,9 @@ public class MainFrame extends JFrame implements ActionListener {
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
                                            chichaButton.getHeight(), Image.SCALE_SMOOTH)));
 
-        addActionListeners();
+        startButton.addActionListener(this);
+        exitButton.addActionListener(this);
+        chichaButton.addActionListener(this);
 
         panel.add(startButton);
         panel.add(exitButton);
@@ -113,19 +115,10 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de añadir el handler de eventos a cada botón.
-     */
-    private void addActionListeners() {
-        startButton.addActionListener(this);
-        exitButton.addActionListener(this);
-        chichaButton.addActionListener(this);
-    }
-
-    /**
      * Este método se encarga de desplegar los créditos del programa.
      */
     private void chicha() {
-        String line = "<html>FIESTA DE FULBITO " + Main.VERSION + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
+        String line = "<html>" + Main.PROGRAM_TITLE + " " + Main.VERSION + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
 
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }

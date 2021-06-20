@@ -12,6 +12,7 @@ public class Main {
 
     // Constantes públicas.
     public static final String VERSION = "v3.0";
+    public static final String PROGRAM_TITLE = "Fiesta de fulbito";
 
     /**
      * Método principal.
