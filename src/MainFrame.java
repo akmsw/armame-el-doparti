@@ -63,7 +63,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setSize(bgWidth, bgHeight);
         setLocationRelativeTo(null);
-        setTitle(Main.PROGRAM_TITLE + Main.PROGRAM_VERSION);
+        setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setIconImage(iconBall.getImage());
