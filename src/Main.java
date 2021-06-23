@@ -11,8 +11,8 @@
 public class Main {
 
     // Constantes públicas.
-    public static final String VERSION = "v3.0";
-    public static final String PROGRAM_TITLE = "Fiesta de fulbito";
+    public static final String PROGRAM_TITLE = "Armame el doparti";
+    public static final String PROGRAM_VERSION = "v3.0";
 
     /**
      * Método principal.

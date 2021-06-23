@@ -63,7 +63,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setSize(bgWidth, bgHeight);
         setLocationRelativeTo(null);
-        setTitle(Main.PROGRAM_TITLE + Main.VERSION);
+        setTitle(Main.PROGRAM_TITLE + Main.PROGRAM_VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setIconImage(iconBall.getImage());
@@ -118,7 +118,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * Este método se encarga de desplegar los créditos del programa.
      */
     private void chicha() {
-        String line = "<html>" + Main.PROGRAM_TITLE + " " + Main.VERSION + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
+        String line = "<html>" + Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
 
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }
