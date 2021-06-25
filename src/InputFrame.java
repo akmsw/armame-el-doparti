@@ -10,7 +10,6 @@
  * @since 28/02/2021
  */
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -54,7 +53,7 @@ public class InputFrame extends JFrame implements ActionListener {
                                                                                       // jugadores.
     private static final Rectangle LABEL_POS = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las
                                                                                 // imágenes.
-    private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
+    
 
     // Campos públicos.
     public static int distribution; // Tipo de distribución de jugadores elegida.
@@ -207,7 +206,7 @@ public class InputFrame extends JFrame implements ActionListener {
         addButtons();
         addTextArea();
 
-        panel.setBackground(BG_COLOR);
+        panel.setBackground(Main.FRAMES_BG_COLOR);
 
         add(panel);
     }
@@ -530,7 +529,7 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor = new JCheckBox("Anclar jugadores", false);
 
         anchor.setBounds(212, 310, 122, 20);
-        anchor.setBackground(BG_COLOR);
+        anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
 
         panel.add(anchor);

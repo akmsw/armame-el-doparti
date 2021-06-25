@@ -9,7 +9,6 @@
  * @since 15/03/2021
  */
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Image;
@@ -42,7 +41,6 @@ public class AnchorageFrame extends JFrame {
     private static final int MAX_ANCHOR_TEAM = InputFrame.playersAmount - 1; // Máxima cantidad de jugadores por anclaje.
     private static final int MAX_ANCHOR_TOTAL = 2 * MAX_ANCHOR_TEAM; // Máxima cantidad de jugadores anclados en total.
     private static final String FRAME_TITLE = "Anclaje de jugadores";
-    private static final Color BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
 
     // Campos privados.
     private int anchorageNum; // Número de anclaje.
@@ -136,7 +134,7 @@ public class AnchorageFrame extends JFrame {
         });
 
         leftPanel.add(okButton, "growx, span");
-        leftPanel.setBackground(BG_COLOR);
+        leftPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         textArea = new JTextArea();
 
@@ -257,11 +255,11 @@ public class AnchorageFrame extends JFrame {
         rightPanel.add(deleteAnchorage, "growx, wrap");
         rightPanel.add(deleteLastAnchorage, "growx, wrap");
         rightPanel.add(clearAnchorages, "growx");
-        rightPanel.setBackground(BG_COLOR);
+        rightPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "center, growx, span");
-        masterPanel.setBackground(BG_COLOR);
+        masterPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         updateTextArea();
 
@@ -298,14 +296,14 @@ public class AnchorageFrame extends JFrame {
         panel.add(new JLabel(title), "span");
 
         for (JCheckBox cb : cbSet) {
-            cb.setBackground(BG_COLOR);
+            cb.setBackground(Main.FRAMES_BG_COLOR);
 
             panel.add(cb, "align left");
         }
 
         JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
 
-        line.setBackground(BG_COLOR);
+        line.setBackground(Main.FRAMES_BG_COLOR);
 
         panel.add(line, "growx, span");
     }
