@@ -16,7 +16,7 @@ public class Main {
     public static final String PROGRAM_TITLE = "Armame el doparti";
     public static final String PROGRAM_VERSION = "v3.0";
     public static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
-    public static final Color FRAMES_BG_COLOR = new Color(200, 200, 200); // Color de fondo de la ventana.
+    public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas.
     
     /**
      * Método principal.

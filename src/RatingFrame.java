@@ -74,8 +74,8 @@ public class RatingFrame extends JFrame {
             index++;
         }
 
-        southPanel.add(finishButton, "w 147:147:214, growx, wrap");
-        southPanel.add(cancelButton, "growx, wrap");
+        southPanel.add(finishButton, "w 147:214:214, growx, wrap");
+        southPanel.add(cancelButton, "w 147:214:214, growx, wrap");
 
         masterPanel.add(southPanel, "south");
         masterPanel.add(centerPanel, "center, growx, span");
