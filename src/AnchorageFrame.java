@@ -442,8 +442,22 @@ public class AnchorageFrame extends JFrame {
             clearAnchorages.setEnabled(false);
         }
 
-        /*if ((MAX_ANCHOR_TOTAL - playersAnchored) < 2)
-            newAnchorage.setEnabled(false);*/
+        if ((MAX_ANCHOR_TOTAL - playersAnchored) < 2) {
+            newAnchorage.setEnabled(false);
+
+            for (ArrayList<JCheckBox> cbs : cbSets)
+                for (JCheckBox cb : cbs)
+                    if(cb.isEnabled())
+                        cb.setEnabled(false);
+        }
+        else {
+            newAnchorage.setEnabled(true);
+
+            for (ArrayList<JCheckBox> cbs : cbSets)
+                for (JCheckBox cb : cbs)
+                    if(!cb.isEnabled() && !cb.isSelected())
+                        cb.setEnabled(true);
+        }
     }
 
     /**
