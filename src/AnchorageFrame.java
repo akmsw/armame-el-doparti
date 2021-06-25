@@ -339,6 +339,8 @@ public class AnchorageFrame extends JFrame {
     /**
      * @return Si la cantidad de jugadores anclados en total no supera el
      *         máximo permitido.
+     * 
+     * @param playersToAnchor Cantidad de jugadores que se intenta anclar.
      */
     private boolean validAnchorageAmount(int playersToAnchor) {
         return (playersAnchored + playersToAnchor) <= MAX_ANCHOR_TOTAL;
@@ -424,8 +426,9 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de togglear los botones del panel derecho de la
-     * ventana.
+     * Este método se encarga de togglear los botones del panel
+     * derecho de la ventana y los checkboxes del panel izquierdo
+     * de la ventana.
      */
     private void toggleButtons() {
         if (anchorageNum > 0 && anchorageNum < 2) {
