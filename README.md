@@ -38,6 +38,7 @@ Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de
 
 ## Mejoras
 
+- GUI mucho más cómoda, intuitiva y agradable que en versiones anteriores.
 - Implementación de expresiones regulares para alivianar procesos de búsqueda.
 - Se arreglaron partes del código hardcodeadas que condicionaban la GUI y el algoritmo de distribución.
 - Se logró un nivel de abstracción mayor que permitió prescindir de clases y métodos que no eran vitales.
