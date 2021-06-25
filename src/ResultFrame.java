@@ -12,7 +12,6 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
 public class ResultFrame extends JFrame {
 
     // Campos privados.

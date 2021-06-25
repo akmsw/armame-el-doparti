@@ -36,7 +36,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-@SuppressWarnings("serial")
 public class InputFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.

@@ -29,7 +29,6 @@ import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
 
-@SuppressWarnings("serial")
 public class AnchorageFrame extends JFrame {
 
     // Campos públicos.

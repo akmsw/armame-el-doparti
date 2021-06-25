@@ -22,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
-@SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
 
     // Campos públicos.

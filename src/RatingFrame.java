@@ -23,7 +23,6 @@ import javax.swing.SpinnerNumberModel;
 
 import net.miginfocom.swing.MigLayout;
 
-@SuppressWarnings("serial")
 public class RatingFrame extends JFrame {
 
     // Campos privados.
