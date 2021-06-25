@@ -61,7 +61,7 @@ public class RatingFrame extends JFrame {
         int index = 0;
 
         for (Player[] playersSet : InputFrame.playersSets) {
-            centerPanel.add(new JLabel(AnchorageFrame.positions.get(index)), "span");
+            centerPanel.add(new JLabel(Main.positions.get(index)), "span");
             centerPanel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
 
             for (Player player : playersSet) {
@@ -74,8 +74,11 @@ public class RatingFrame extends JFrame {
             index++;
         }
 
+        centerPanel.setBackground(Main.FRAMES_BG_COLOR);
+
         southPanel.add(finishButton, "w 147:214:214, growx, wrap");
         southPanel.add(cancelButton, "w 147:214:214, growx, wrap");
+        southPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         masterPanel.add(southPanel, "south");
         masterPanel.add(centerPanel, "center, growx, span");

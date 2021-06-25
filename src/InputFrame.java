@@ -321,7 +321,7 @@ public class InputFrame extends JFrame implements ActionListener {
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
                         JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
-                if (distribution == 0 || (distribution != JOptionPane.CLOSED_OPTION)) {
+                if (distribution != JOptionPane.CLOSED_OPTION) {
                     if (anchor.isSelected()) {
                         AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this);
 

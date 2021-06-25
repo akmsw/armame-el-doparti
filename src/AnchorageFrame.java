@@ -31,8 +31,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class AnchorageFrame extends JFrame {
 
-    // Campos públicos.
-    public static ArrayList<String> positions; // Arreglo con los strings de las posiciones de los jugadores.
+
 
     // Constantes privadas.
     private static final int FRAME_WIDTH = 402; // Ancho de la ventana.
@@ -77,14 +76,6 @@ public class AnchorageFrame extends JFrame {
         fwCB = new ArrayList<>();
         wcCB = new ArrayList<>();
 
-        positions = new ArrayList<>();
-
-        positions.add("DEFENSORES CENTRALES");
-        positions.add("DEFENSORES LATERALES");
-        positions.add("MEDIOCAMPISTAS");
-        positions.add("DELANTEROS");
-        positions.add("COMODINES");
-
         cbSets = new ArrayList<>();
 
         cbSets.add(cdCB);
@@ -108,7 +99,7 @@ public class AnchorageFrame extends JFrame {
     private void initializeComponents() {
         for (int i = 0; i < cbSets.size(); i++) {
             fillCBSet(InputFrame.playersSets.get(i), cbSets.get(i));
-            addCBSet(leftPanel, cbSets.get(i), positions.get(i));
+            addCBSet(leftPanel, cbSets.get(i), Main.positions.get(i));
         }
 
         okButton = new JButton("Finalizar");
