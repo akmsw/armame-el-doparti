@@ -25,9 +25,6 @@ import javax.swing.JButton;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
 
-    // Constantes privadas.
-    private static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
-
     // Campos públicos.
     public static ImageIcon iconBall; // Ícono para la ventana.
 
@@ -50,12 +47,12 @@ public class MainFrame extends JFrame implements ActionListener {
      * ventana principal.
      */
     private void initializeComponents() {
-        ImageIcon bgImage = new ImageIcon(IMG_PATH + "bg.png");
+        ImageIcon bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
 
-        iconBall = new ImageIcon(IMG_PATH + "icon.png");
+        iconBall = new ImageIcon(Main.IMG_PATH + "icon.png");
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
-        iconAKMSW = new ImageIcon(IMG_PATH + "akmsw.png");
+        iconAKMSW = new ImageIcon(Main.IMG_PATH + "akmsw.png");
         smallIconAKMSW = new ImageIcon(iconAKMSW.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
         int bgWidth = bgImage.getIconWidth(); // Ancho de la imagen de fondo.
@@ -93,7 +90,7 @@ public class MainFrame extends JFrame implements ActionListener {
         exitButton = new JButton("Salir");
         chichaButton = new JButton();
 
-        ImageIcon chichaImage = new ImageIcon(IMG_PATH + "chicha.jpg");
+        ImageIcon chichaImage = new ImageIcon(Main.IMG_PATH + "chicha.jpg");
 
         startButton.setBounds(100, 300, 105, 50);
         startButton.setEnabled(true);
