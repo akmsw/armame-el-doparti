@@ -42,5 +42,5 @@ Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de
 - Se arreglaron partes del código hardcodeadas que condicionaban la GUI y el algoritmo de distribución.
 - Se logró un nivel de abstracción mayor que permitió prescindir de clases y métodos que no eran vitales.
 - Se lograron mejoras significativas en la modularización del código, mejorando la velocidad de ejecución del programa.
-- Se refactorizaron métodos y clases completas.
+- Se refactorizaron métodos y clases completas, favoreciendo enormemente la mantenibilidad del código.
 - Arreglo de importantes bugs de la GUI.
