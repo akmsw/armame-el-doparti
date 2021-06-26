@@ -27,7 +27,7 @@ public class RatingFrame extends JFrame {
 
     // Campos privados.
     private JPanel masterPanel, centerPanel, southPanel;
-    private JButton finishButton, cancelButton;
+    private JButton finishButton;
     private HashMap<Player, JSpinner> spinnersMap; // Mapa que asocia a cada jugador un JSpinner.
 
     /**
@@ -45,15 +45,6 @@ public class RatingFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO.
             }
-        });
-
-        cancelButton = new JButton("Cancelar");
-
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO.
-            }            
         });
 
         spinnersMap = new HashMap<>();
@@ -77,7 +68,6 @@ public class RatingFrame extends JFrame {
         centerPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         southPanel.add(finishButton, "w 147:214:214, growx, wrap");
-        southPanel.add(cancelButton, "w 147:214:214, growx, wrap");
         southPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         masterPanel.add(southPanel, "south");

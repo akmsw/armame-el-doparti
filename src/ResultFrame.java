@@ -60,5 +60,10 @@ public class ResultFrame extends JFrame {
      */
     private void ratingMix() {
         setTitle("MEZCLA POR PUNTAJES");
+
+        RatingFrame ratingFrame = new RatingFrame();
+
+        ratingFrame.addWindowListener(new WindowEventsHandler(ResultFrame.this));
+        ratingFrame.setVisible(true);
     }
 }
