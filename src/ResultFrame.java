@@ -26,6 +26,9 @@ public class ResultFrame extends JFrame {
 
     // ----------------------------------------Métodos privados---------------------------------
 
+    /**
+     * Este método inicializa los componentes de la ventana de resultados.
+     */
     private void initializeComponents() {
         setSize(400, 400);
         setLocationRelativeTo(null);
@@ -37,12 +40,8 @@ public class ResultFrame extends JFrame {
 
         if (InputFrame.distribution == 0)
             randomMix();
-        else {
-            RatingFrame ratingFrame = new RatingFrame();
-
-            ratingFrame.addWindowListener(new WindowEventsHandler(this));
-            ratingFrame.setVisible(true);
-        }
+        else
+            ratingMix();
 
         add(panel);
     }
@@ -53,5 +52,13 @@ public class ResultFrame extends JFrame {
      */
     private void randomMix() {
         setTitle("MEZCLA ALEATORIA");
+    }
+
+    /**
+     * Este método se encarga de armar los equipos de la manera más
+     * equitativa en base a las puntuaciones seteadas a los jugadores.
+     */
+    private void ratingMix() {
+        setTitle("MEZCLA POR PUNTAJES");
     }
 }
