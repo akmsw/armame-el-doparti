@@ -18,6 +18,9 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -47,6 +50,9 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void initializeComponents() {
         ImageIcon bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
+        ImageIcon chichaImage = new ImageIcon(Main.IMG_PATH + "chicha.jpg");
+
+        JLabel bgLabel = new JLabel("", bgImage, JLabel.CENTER);
 
         iconBall = new ImageIcon(Main.IMG_PATH + "icon.png");
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -54,60 +60,34 @@ public class MainFrame extends JFrame implements ActionListener {
         iconAKMSW = new ImageIcon(Main.IMG_PATH + "akmsw.png");
         smallIconAKMSW = new ImageIcon(iconAKMSW.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
-        int bgWidth = bgImage.getIconWidth(); // Ancho de la imagen de fondo.
-        int bgHeight = bgImage.getIconHeight(); // Alto de la imagen de fondo.
-
-        setSize(bgWidth, bgHeight);
-        setLocationRelativeTo(null);
-        setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
-        setIconImage(iconBall.getImage());
-        setResizable(false);
-
-        panel = new JPanel();
-        panel.setBounds(0, 0, bgWidth, bgHeight);
-        panel.setLayout(null);
-
-        addButtons();
-
-        JLabel bgLabel = new JLabel("", bgImage, JLabel.CENTER);
-
-        bgLabel.setBounds(0, 0, bgWidth, bgHeight);
-
-        panel.add(bgLabel);
-
-        add(panel);
-    }
-
-    /**
-     * Este método se encarga de agregar todos los botones necesarios en la ventana
-     * principal.
-     */
-    private void addButtons() {
         startButton = new JButton("Comenzar");
-        exitButton = new JButton("Salir");
-        chichaButton = new JButton();
-
-        ImageIcon chichaImage = new ImageIcon(Main.IMG_PATH + "chicha.jpg");
-
-        startButton.setBounds(100, 300, 105, 50);
         startButton.setEnabled(true);
-
-        exitButton.setBounds(100, 400, 105, 50);
-        exitButton.setEnabled(true);
-
-        chichaButton.setBounds(600, 400, 92, 93);
-        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(chichaButton.getWidth(),
-                                           chichaButton.getHeight(), Image.SCALE_SMOOTH)));
-
         startButton.addActionListener(this);
+
+        exitButton = new JButton("Salir");
+        exitButton.setEnabled(true);
         exitButton.addActionListener(this);
+
+        chichaButton = new JButton();
+        chichaButton.setEnabled(true);
+        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(73, 80, Image.SCALE_SMOOTH)));
         chichaButton.addActionListener(this);
 
-        panel.add(startButton);
-        panel.add(exitButton);
-        panel.add(chichaButton);
+        panel = new JPanel(new MigLayout("wrap"));
+
+        panel.add(bgLabel, "growx");
+        panel.add(startButton, "growx");
+        panel.add(exitButton, "growx");
+        panel.add(chichaButton, "align center, span");
+        panel.setBackground(Main.FRAMES_BG_COLOR);
+
+        add(panel);
+        setResizable(false);
+        setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setIconImage(iconBall.getImage());   
+        pack();
+        setLocationRelativeTo(null);
     }
 
     /**
