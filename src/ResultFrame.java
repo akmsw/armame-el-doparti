@@ -12,6 +12,8 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import net.miginfocom.swing.MigLayout;
+
 public class ResultFrame extends JFrame {
 
     // Campos privados.
@@ -22,6 +24,11 @@ public class ResultFrame extends JFrame {
      */
     public ResultFrame() {
         initializeComponents();
+
+        if (InputFrame.distribution == 0)
+            randomMix();
+        else
+            ratingMix();
     }
 
     // ----------------------------------------Métodos privados---------------------------------
@@ -36,15 +43,9 @@ public class ResultFrame extends JFrame {
         setResizable(false);
         setIconImage(MainFrame.iconBall.getImage());
 
-        panel = new JPanel();
-
-        if (InputFrame.distribution == 0)
-            randomMix();
-        else
-            ratingMix();
-
+        panel = new JPanel(new MigLayout("wrap"));
+        
         add(panel);
-        setVisible(true);
     }
 
     /**

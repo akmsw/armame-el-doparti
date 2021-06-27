@@ -355,6 +355,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        
         scrollPane.setBounds(215, 5, 118, 260);
 
         panel.add(scrollPane);
