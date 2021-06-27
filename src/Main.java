@@ -20,9 +20,7 @@ import javax.swing.plaf.FontUIResource;
 public class Main {
 
     // Constantes privadas.
-    private static final FontUIResource PROGRAM_FONT = new FontUIResource("Noto Sans", Font.PLAIN, 13); // Fuente utilizada para el programa.
     private static final Color SELECT_NOTIF_FRAME_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas de selección/notificación.
-    private static float decreasedFontSize = 12;
 
     // Constantes públicas.
     public static final String PROGRAM_TITLE = "Armame el doparti";
@@ -30,8 +28,8 @@ public class Main {
     public static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas.
     public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74); // Color de fondo de las ventanas.
-    public static final Color DISABLED_BUTTONS_BG_COLOR = new Color(242, 202, 119); // Color de fondo de las ventanas desabilitadas.
-    public static final Font PROGRAM_FONT_SMALL = PROGRAM_FONT.deriveFont(decreasedFontSize);
+    public static final FontUIResource PROGRAM_FONT = new FontUIResource("Noto Sans", Font.PLAIN, 13); // Fuente utilizada para el programa.
+    public static final float decreasedFontSize = 12;
 
     // Campos públicos.
     public static ArrayList<String> positions; // Arreglo con los strings de las posiciones de los jugadores.   
