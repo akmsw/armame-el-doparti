@@ -32,7 +32,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // Campos privados.
     private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW, bgImage, chichaImage; // Íconos utilizados para la ventana.
-    private JButton startButton, exitButton, chichaButton; // Botones del menú principal.
+    private JButton startButton, chichaButton; // Botones del menú principal.
     private JLabel bgLabel; // Etiqueta para la imagen de fondo.
     private JPanel panel;
 
@@ -65,10 +65,6 @@ public class MainFrame extends JFrame implements ActionListener {
         startButton.setEnabled(true);
         startButton.addActionListener(this);
 
-        exitButton = new JButton("Salir");
-        exitButton.setEnabled(true);
-        exitButton.addActionListener(this);
-
         chichaButton = new JButton();
         chichaButton.setEnabled(true);
         chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(73, 80, Image.SCALE_SMOOTH)));
@@ -78,7 +74,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
         panel.add(bgLabel, "growx");
         panel.add(startButton, "growx");
-        panel.add(exitButton, "growx");
         panel.add(chichaButton, "align center, span");
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
@@ -123,7 +118,6 @@ public class MainFrame extends JFrame implements ActionListener {
                     inputFrame.addWindowListener(new WindowEventsHandler(MainFrame.this));
                 } catch (IOException ex) {
                     ex.printStackTrace();
-
                     System.exit(-1);
                 }
             }

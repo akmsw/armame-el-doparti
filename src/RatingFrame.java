@@ -86,6 +86,7 @@ public class RatingFrame extends JFrame {
         setTitle("Puntuaciones");
         setIconImage(MainFrame.iconBall.getImage());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        pack();
         setLocationRelativeTo(null);
     }
 }

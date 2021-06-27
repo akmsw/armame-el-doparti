@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -41,7 +42,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     // Constantes privadas.
     private static final int FRAME_WIDTH = 450; // Ancho de la ventana.
-    private static final int FRAME_HEIGHT = 375; // Alto de la ventana.
+    private static final int FRAME_HEIGHT = 411; // Alto de la ventana.
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
     private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú desplegable.
                                                        "Agregar defensores laterales",
@@ -67,7 +68,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private ImageIcon smallIcon; // Ícono para la ventana.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
-    private JButton mixButton;
+    private JButton mixButton, backButton;
     private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
     private JComboBox<String> comboBox; // Menú desplegable.
     private JPanel panel;
@@ -305,6 +306,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addButtons() {
         smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         mixButton = new JButton("Mezclar");
+        backButton = new JButton("Atrás");
 
         mixButton.setBounds(224, 274, 100, 30);
         mixButton.setEnabled(false);
@@ -330,6 +332,8 @@ public class InputFrame extends JFrame implements ActionListener {
                         anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);
                     } else {
+                        setVisible(false);
+
                         ResultFrame resultFrame = new ResultFrame();
 
                         resultFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
@@ -338,7 +342,24 @@ public class InputFrame extends JFrame implements ActionListener {
             }
         });
 
+        backButton.setBounds(224, 310, 100, 30);
+        backButton.setEnabled(true);
+        backButton.setVisible(true);
+        backButton.addActionListener(new ActionListener() {
+            /**
+             * Este método envía un evento de cierre de ventana para togglear
+             * la visibilidad de las ventanas mediante el WindowEventsHandler.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InputFrame.this.dispatchEvent(new WindowEvent(InputFrame.this, WindowEvent.WINDOW_CLOSING));
+            }
+        });
+
         panel.add(mixButton);
+        panel.add(backButton);
     }
 
     /**
@@ -529,7 +550,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addAnchorCheckBox() {
         anchor = new JCheckBox("Anclar jugadores", false);
 
-        anchor.setBounds(212, 310, 122, 20);
+        anchor.setBounds(212, 346, 122, 20);
         anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.decreasedFontSize));
         anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
