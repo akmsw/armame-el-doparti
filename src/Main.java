@@ -12,6 +12,8 @@ import java.awt.Color;
 
 import java.util.ArrayList;
 
+import javax.swing.UIManager;
+
 public class Main {
 
     // Constantes públicas.
@@ -20,13 +22,19 @@ public class Main {
     public static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas.
     public static ArrayList<String> positions; // Arreglo con los strings de las posiciones de los jugadores.
+
+    // Constantes privadas.
+    public static final Color OPTIONPANE_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas.
     
     /**
      * Método principal.
      * 
      * Aquí se instancia y ejecuta todo el programa.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {        
+        UIManager.put("OptionPane.background", OPTIONPANE_BG_COLOR);
+        UIManager.put("Panel.background", OPTIONPANE_BG_COLOR);
+
         positions = new ArrayList<>();
 
         positions.add("DEFENSORES CENTRALES");

@@ -31,8 +31,9 @@ public class MainFrame extends JFrame implements ActionListener {
     public static ImageIcon iconBall; // Ícono para la ventana.
 
     // Campos privados.
-    private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW; // Íconos utilizados para la ventana.
-    private JButton startButton, exitButton, chichaButton;
+    private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW, bgImage, chichaImage; // Íconos utilizados para la ventana.
+    private JButton startButton, exitButton, chichaButton; // Botones del menú principal.
+    private JLabel bgLabel; // Etiqueta para la imagen de fondo.
     private JPanel panel;
 
     /**
@@ -49,10 +50,10 @@ public class MainFrame extends JFrame implements ActionListener {
      * ventana principal.
      */
     private void initializeComponents() {
-        ImageIcon bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
-        ImageIcon chichaImage = new ImageIcon(Main.IMG_PATH + "chicha.jpg");
+        bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
+        chichaImage = new ImageIcon(Main.IMG_PATH + "chicha.jpg");
 
-        JLabel bgLabel = new JLabel("", bgImage, JLabel.CENTER);
+        bgLabel = new JLabel("", bgImage, JLabel.CENTER);
 
         iconBall = new ImageIcon(Main.IMG_PATH + "icon.png");
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
