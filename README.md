@@ -5,7 +5,7 @@ Release date: Q4 2021 / Q1 2022.
 
 Este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de fútbol con 7 u 8 jugadores por equipo.
 
-> **Sistema operativo recomendado:** *`Microsoft Windows`*.
+> Sistema operativo recomendado: `Microsoft Windows`.
 
 ## Modo de uso
 
