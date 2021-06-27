@@ -119,7 +119,6 @@ public class AnchorageFrame extends JFrame {
                 ResultFrame resultFrame = new ResultFrame();
 
                 resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
-                resultFrame.setVisible(true);
             }
         });
 

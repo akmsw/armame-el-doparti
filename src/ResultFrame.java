@@ -44,6 +44,7 @@ public class ResultFrame extends JFrame {
             ratingMix();
 
         add(panel);
+        setVisible(true);
     }
 
     /**
@@ -52,6 +53,7 @@ public class ResultFrame extends JFrame {
      */
     private void randomMix() {
         setTitle("MEZCLA ALEATORIA");
+        setVisible(true);
     }
 
     /**

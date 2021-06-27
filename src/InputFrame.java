@@ -33,6 +33,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -70,6 +71,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
     private JComboBox<String> comboBox; // Menú desplegable.
     private JPanel panel;
+    private JScrollPane scrollPane;
 
     /**
      * Creación de la ventana de mezcla.
@@ -331,7 +333,6 @@ public class InputFrame extends JFrame implements ActionListener {
                         ResultFrame resultFrame = new ResultFrame();
 
                         resultFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
-                        resultFrame.setVisible(true);
                     }
                 }
             }
@@ -348,12 +349,15 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addTextArea() {
         textArea = new JTextArea();
 
-        textArea.setBounds(215, 5, 118, 260);
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         textArea.setVisible(true);
 
-        panel.add(textArea);
+        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBounds(215, 5, 118, 260);
+
+        panel.add(scrollPane);
 
         updateTextArea();
     }
