@@ -43,6 +43,12 @@ public class RatingFrame extends JFrame {
         finishButton = new JButton("Finalizar");
 
         finishButton.addActionListener(new ActionListener() {
+            /**
+             * Este método envía un evento de cierre de ventana para togglear
+             * la visibilidad de las ventanas mediante el WindowEventsHandler.
+             * 
+             * @param e Evento de click.
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 RatingFrame.this.dispatchEvent(new WindowEvent(RatingFrame.this, WindowEvent.WINDOW_CLOSING));
