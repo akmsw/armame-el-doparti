@@ -258,6 +258,7 @@ public class AnchorageFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setIconImage(MainFrame.iconBall.getImage());
         add(masterPanel);
+        pack();
         setResizable(false);
         setLocationRelativeTo(null);
     }
