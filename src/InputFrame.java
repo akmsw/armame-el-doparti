@@ -525,6 +525,7 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor = new JCheckBox("Anclar jugadores", false);
 
         anchor.setBounds(212, 310, 122, 20);
+        anchor.setFont(Main.PROGRAM_FONT_SMALL);
         anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
 
