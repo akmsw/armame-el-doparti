@@ -112,10 +112,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
-                    InputFrame inputFrame = new InputFrame(playersAmount + 7); // + 7 para compensar el índice de la selección.
+                    InputFrame inputFrame = new InputFrame(MainFrame.this, playersAmount + 7); // + 7 para compensar el índice de la selección.
 
                     inputFrame.setVisible(true);
-                    inputFrame.addWindowListener(new WindowEventsHandler(MainFrame.this));
+                    MainFrame.this.setVisible(false);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                     System.exit(-1);

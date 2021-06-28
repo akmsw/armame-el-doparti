@@ -14,7 +14,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -73,6 +72,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private JComboBox<String> comboBox; // Menú desplegable.
     private JPanel panel;
     private JScrollPane scrollPane;
+    private JFrame previousFrame;
 
     /**
      * Creación de la ventana de mezcla.
@@ -81,7 +81,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * 
      * @throws IOException Cuando hay un error de lectura en los archivos PDA.
      */
-    public InputFrame(int playersAmount) throws IOException {
+    public InputFrame(JFrame previousFrame, int playersAmount) throws IOException {
+        this.previousFrame = previousFrame;
+
         InputFrame.playersAmount = playersAmount;
 
         playersAmountMap = new EnumMap<>(Position.class);
@@ -173,7 +175,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(frameTitle);
         setResizable(false);
         setIconImage(MainFrame.iconBall.getImage());
@@ -329,15 +331,14 @@ public class InputFrame extends JFrame implements ActionListener {
                     if (anchor.isSelected()) {
                         AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this);
 
-                        anchorageFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
                         anchorageFrame.setVisible(true);
                     } else {
-                        setVisible(false);
+                        ResultFrame resultFrame = new ResultFrame(InputFrame.this);
 
-                        ResultFrame resultFrame = new ResultFrame();
-
-                        resultFrame.addWindowListener(new WindowEventsHandler(InputFrame.this));
+                        resultFrame.setVisible(true);
                     }
+
+                    InputFrame.this.setVisible(false);
                 }
             }
         });
@@ -347,14 +348,14 @@ public class InputFrame extends JFrame implements ActionListener {
         backButton.setVisible(true);
         backButton.addActionListener(new ActionListener() {
             /**
-             * Este método envía un evento de cierre de ventana para togglear
-             * la visibilidad de las ventanas mediante el WindowEventsHandler.
+             * Este método togglea la visibilidad de las ventanas.
              * 
              * @param e Evento de click.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                InputFrame.this.dispatchEvent(new WindowEvent(InputFrame.this, WindowEvent.WINDOW_CLOSING));
+                InputFrame.this.setVisible(false);
+                previousFrame.setVisible(true);
             }
         });
 
@@ -525,7 +526,11 @@ public class InputFrame extends JFrame implements ActionListener {
         for (int i = 0; i < playersSets.size(); i++)
             for (int j = 0; j < playersSets.get(i).length; j++)
                 if (!playersSets.get(i)[j].getName().equals("")) {
-                    textArea.append(" " + (counter + 1) + ". " + playersSets.get(i)[j].getName() + "\n");
+                    if (i == 0 && j == 0)
+                        textArea.append(" " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
+                    else
+                        textArea.append("\n " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
+                    
                     counter++;
                 }
     }

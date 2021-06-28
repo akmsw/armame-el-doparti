@@ -46,12 +46,12 @@ public class AnchorageFrame extends JFrame {
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes de los jugadores separados por
                                                                // posición.
     private ArrayList<ArrayList<JCheckBox>> cbSets; // Arreglo de arreglos de checkboxes de los jugadores.
-    private JFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
+    private JFrame previousFrame; // Frame de inputs cuya visibilidad será toggleada.
     private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de
                                                        // anclajes.
-    private JButton okButton, newAnchorage, clearAnchorages, deleteAnchorage, deleteLastAnchorage; // Botones de la
-                                                                                                   // ventana de
-                                                                                                   // anclajes.
+    private JButton okButton, backButton,
+                    newAnchorage, clearAnchorages,
+                    deleteAnchorage, deleteLastAnchorage; // Botones de la ventana de anclajes.
     private JTextArea textArea; // Área de texto donde se mostrarán los anclajes en tiempo real.
     private JScrollPane scrollPane; // Scrollpane para el área de texto.
     private ImageIcon smallIcon; // Íconos para la ventana.
@@ -59,10 +59,10 @@ public class AnchorageFrame extends JFrame {
     /**
      * Creación de la ventana de anclajes.
      * 
-     * @param inputFrame   Ventana cuya visibilidad será toggleada.
+     * @param previousFrame   Ventana cuya visibilidad será toggleada.
      */
-    public AnchorageFrame(JFrame inputFrame) {
-        this.inputFrame = inputFrame;
+    public AnchorageFrame(JFrame previousFrame) {
+        this.previousFrame = previousFrame;
 
         smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
@@ -106,23 +106,46 @@ public class AnchorageFrame extends JFrame {
 
         okButton.addActionListener(new ActionListener() {
             /**
-             * Este evento hace las validaciones de datos necesarias y, si todo se cumple,
-             * hace invisible la ventana de anclaje cuando el usuario hizo los anclajes
-             * deseados y está listo para distribuir los jugadores.
+             * Este método hace invisible la ventana de anclaje cuando el usuario hizo los anclajes
+             * deseados y está listo para distribuir los jugadores. Se crea, además, la ventana
+             * de resultados.
              * 
              * @param e Evento de click.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                for (ArrayList<JCheckBox> cbSet : cbSets)
+                    for (JCheckBox cb : cbSet)
+                        if(cb.isSelected() && cb.isVisible())
+                            cb.setSelected(false);
+                
+                ResultFrame resultFrame = new ResultFrame(AnchorageFrame.this);
 
-                ResultFrame resultFrame = new ResultFrame();
+                resultFrame.setFocusable(true);
 
-                resultFrame.addWindowListener(new WindowEventsHandler(inputFrame));
+                AnchorageFrame.this.setVisible(false);
+            }
+        });
+
+        backButton = new JButton("Atrás");
+
+        backButton.addActionListener(new ActionListener() {
+            /**
+             * Este método togglea la visibilidad de las ventanas.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearAnchorages();
+
+                previousFrame.setVisible(true);
+                AnchorageFrame.this.setVisible(false);
             }
         });
 
         leftPanel.add(okButton, "growx, span");
+        leftPanel.add(backButton, "growx, span");
         leftPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         textArea = new JTextArea();
@@ -232,14 +255,11 @@ public class AnchorageFrame extends JFrame {
              * @param e Evento de click.
              */
             public void actionPerformed(ActionEvent e) {
-                int lim = anchorageNum;
-
-                for (int i = 0; i < lim; i++)
-                    deleteLast();
+                clearAnchorages();
             }
         });
 
-        rightPanel.add(scrollPane, "w 128:213:213, h 260:289:289, growy, wrap");
+        rightPanel.add(scrollPane, "w 128:213:213, h 311!, growy, wrap");
         rightPanel.add(newAnchorage, "growx, wrap");
         rightPanel.add(deleteAnchorage, "growx, wrap");
         rightPanel.add(deleteLastAnchorage, "growx, wrap");
@@ -254,12 +274,20 @@ public class AnchorageFrame extends JFrame {
 
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setTitle(FRAME_TITLE);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(MainFrame.iconBall.getImage());
         add(masterPanel);
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
+    }
+
+    /**
+     * Este método se encarga de borrar todos los anclajes que se hayan generado.
+     */
+    private void clearAnchorages() {
+        for (int i = 0; i < anchorageNum; i++)
+            deleteLast();
     }
 
     /**

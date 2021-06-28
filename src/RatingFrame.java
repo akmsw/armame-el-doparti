@@ -11,7 +11,6 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import java.util.HashMap;
 
@@ -29,29 +28,44 @@ public class RatingFrame extends JFrame {
 
     // Campos privados.
     private JPanel masterPanel, centerPanel, southPanel;
-    private JButton finishButton;
+    private JButton finishButton, backButton;
     private HashMap<Player, JSpinner> spinnersMap; // Mapa que asocia a cada jugador un JSpinner.
 
     /**
      * Creación de la ventana de ingreso de puntajes.
      */
-    public RatingFrame() {
+    public RatingFrame(JFrame previousFrame) {
         centerPanel = new JPanel(new MigLayout("wrap 4"));
         southPanel = new JPanel(new MigLayout("wrap"));
         masterPanel = new JPanel(new MigLayout());
 
         finishButton = new JButton("Finalizar");
+        backButton = new JButton("Atrás");
 
         finishButton.addActionListener(new ActionListener() {
             /**
-             * Este método envía un evento de cierre de ventana para togglear
-             * la visibilidad de las ventanas mediante el WindowEventsHandler.
+             * Este método envía togglear la visibilidad de las ventanas.
              * 
              * @param e Evento de click.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                RatingFrame.this.dispatchEvent(new WindowEvent(RatingFrame.this, WindowEvent.WINDOW_CLOSING));
+                //TODO.
+            }
+        });
+
+        backButton.setEnabled(true);
+        backButton.setVisible(true);
+        backButton.addActionListener(new ActionListener() {
+            /**
+             * Este método togglea la visibilidad de las ventanas.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RatingFrame.this.setVisible(false);
+                previousFrame.setVisible(true);
             }
         });
 
@@ -76,6 +90,7 @@ public class RatingFrame extends JFrame {
         centerPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         southPanel.add(finishButton, "w 147:214:214, growx, wrap");
+        southPanel.add(backButton, "w 147:214:214, growx, wrap");
         southPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         masterPanel.add(southPanel, "south");
@@ -85,7 +100,7 @@ public class RatingFrame extends JFrame {
         setResizable(false);
         setTitle("Puntuaciones");
         setIconImage(MainFrame.iconBall.getImage());
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
     }
