@@ -39,6 +39,11 @@ import javax.swing.JTextField;
 
 public class InputFrame extends JFrame implements ActionListener {
 
+    // Campos públicos.
+    public static int distribution; // Tipo de distribución de jugadores elegida.
+    public static int playersAmount; // Cantidad de jugadores por equipo.
+    public static List<Player[]> playersSets; // Lista con los arreglos de jugadores.
+
     // Constantes privadas.
     private static final int FRAME_WIDTH = 450; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 411; // Alto de la ventana.
@@ -51,12 +56,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
                                                                                       // jugadores.
     private static final Rectangle LABEL_POS = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las imágenes.
-
-    // Campos públicos.
-    public static int distribution; // Tipo de distribución de jugadores elegida.
-    public static int playersAmount; // Cantidad de jugadores por equipo.
-    public static List<Player[]> playersSets; // Lista con los arreglos de jugadores.
-
+    
     // Campos privados.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
                                                                                                    // de texto para

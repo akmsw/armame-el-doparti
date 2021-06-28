@@ -123,6 +123,13 @@ public class AnchorageFrame extends JFrame {
                 ResultFrame resultFrame = new ResultFrame(AnchorageFrame.this);
 
                 AnchorageFrame.this.setVisible(false);
+
+                // TEST PARA CORROBORAR ANCLAJES (NO BORRAR).
+                System.out.println("-------------------------------------------------------");
+
+                for (int i = 0; i < InputFrame.playersSets.size(); i++)
+                    for (int j = 0; j < InputFrame.playersSets.get(i).length; j++)
+                        System.out.println("JUGADOR " + InputFrame.playersSets.get(i)[j].getName() + " > ANCHOR = " + InputFrame.playersSets.get(i)[j].getAnchor());
             }
         });
 

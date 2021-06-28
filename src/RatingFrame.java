@@ -52,7 +52,14 @@ public class RatingFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO.
+                spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
+
+                // TEST PARA CORROBORAR ANCLAJES (NO BORRAR).
+                System.out.println("##############################################");
+
+                for (int i = 0; i < InputFrame.playersSets.size(); i++)
+                    for (int j = 0; j < InputFrame.playersSets.get(i).length; j++)
+                        System.out.println("JUGADOR " + InputFrame.playersSets.get(i)[j].getName() + " > RATING = " + InputFrame.playersSets.get(i)[j].getRating());
             }
         });
 
