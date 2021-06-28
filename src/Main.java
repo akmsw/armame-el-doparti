@@ -67,8 +67,10 @@ public class Main {
         UIManager.put("Button.focus", BUTTONS_BG_COLOR);
         UIManager.put("ToggleButton.focus", BUTTONS_BG_COLOR);
         UIManager.put("CheckBox.focus", FRAMES_BG_COLOR);
+        UIManager.put("CheckBox.background", FRAMES_BG_COLOR);
         UIManager.put("ComboBox.focus", Color.WHITE);
-
+        UIManager.put("Separator.background", FRAMES_BG_COLOR);
+        
         setUIFont(PROGRAM_FONT);
     }
 

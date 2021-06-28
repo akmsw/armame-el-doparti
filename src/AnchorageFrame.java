@@ -11,6 +11,7 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.awt.Image;
 
 import java.util.ArrayList;
@@ -315,17 +316,16 @@ public class AnchorageFrame extends JFrame {
      * @param title Texto de la etiqueta de acompañamiento.
      */
     private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
-        panel.add(new JLabel(title), "span");
+        JLabel label = new JLabel(title);
 
-        for (JCheckBox cb : cbSet) {
-            cb.setBackground(Main.FRAMES_BG_COLOR);
+        label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
 
+        panel.add(label, "span");
+
+        for (JCheckBox cb : cbSet)
             panel.add(cb, "align left");
-        }
 
         JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
-
-        line.setBackground(Main.FRAMES_BG_COLOR);
 
         panel.add(line, "growx, span");
     }

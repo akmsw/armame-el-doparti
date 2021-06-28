@@ -11,6 +11,7 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import java.util.HashMap;
 
@@ -60,7 +61,11 @@ public class RatingFrame extends JFrame {
         int index = 0;
 
         for (Player[] playersSet : InputFrame.playersSets) {
-            centerPanel.add(new JLabel(Main.positions.get(index)), "span");
+            JLabel label = new JLabel(Main.positions.get(index));
+
+            label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
+
+            centerPanel.add(label, "span");
             centerPanel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
 
             for (Player player : playersSet) {
