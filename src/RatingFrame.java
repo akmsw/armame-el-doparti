@@ -28,7 +28,7 @@ import net.miginfocom.swing.MigLayout;
 public class RatingFrame extends JFrame {
 
     // Campos privados.
-    private JPanel masterPanel, centerPanel, southPanel;
+    private JPanel panel;
     private JButton finishButton;
     private BackButton backButton;
     private HashMap<Player, JSpinner> spinnersMap; // Mapa que asocia a cada jugador un JSpinner.
@@ -37,9 +37,7 @@ public class RatingFrame extends JFrame {
      * Creación de la ventana de ingreso de puntajes.
      */
     public RatingFrame(JFrame previousFrame) {
-        centerPanel = new JPanel(new MigLayout("wrap 4"));
-        southPanel = new JPanel(new MigLayout("wrap"));
-        masterPanel = new JPanel(new MigLayout());
+        panel = new JPanel(new MigLayout("wrap 4"));
 
         finishButton = new JButton("Finalizar");
         backButton = new BackButton(RatingFrame.this, previousFrame);
@@ -72,29 +70,25 @@ public class RatingFrame extends JFrame {
 
             label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
 
-            centerPanel.add(label, "span");
-            centerPanel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
+            panel.add(label, "wrap");
+            panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
 
             for (Player player : playersSet) {
                 spinnersMap.put(player, new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
-                centerPanel.add(new JLabel(player.getName()));
-                centerPanel.add(spinnersMap.get(player));
+                panel.add(new JLabel(player.getName()));
+                panel.add(spinnersMap.get(player));
             }
 
             index++;
         }
 
-        centerPanel.setBackground(Main.FRAMES_BG_COLOR);
+        panel.setBackground(Main.FRAMES_BG_COLOR);
 
-        southPanel.add(finishButton, "w 147:214:214, growx, wrap");
-        southPanel.add(backButton, "w 147:214:214, growx, wrap");
-        southPanel.setBackground(Main.FRAMES_BG_COLOR);
+        panel.add(finishButton, "growx, wrap");
+        panel.add(backButton, "growx");
 
-        masterPanel.add(southPanel, "south");
-        masterPanel.add(centerPanel, "center, growx, span");
-
-        add(masterPanel);
+        add(panel);
         setResizable(false);
         setTitle("Puntuaciones");
         setIconImage(MainFrame.iconBall.getImage());
