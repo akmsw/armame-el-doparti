@@ -10,18 +10,22 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Rectangle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
- public class BackButton extends JButton {
+public class BackButton extends JButton {
+
+    // Campos privados.
+    private static final Rectangle BACKBUTTON_BOUNDS = new Rectangle(224, 310, 100, 30);
 
     // Constructor.
     public BackButton(JFrame currentFrame, JFrame previousFrame) {
         setText("Atrás");
         setEnabled(true);
         setVisible(true);
-        setBounds(224, 310, 100, 30);
+        setBounds(BACKBUTTON_BOUNDS);
 
         addActionListener(new ActionListener() {
             /**
