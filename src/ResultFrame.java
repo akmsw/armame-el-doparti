@@ -9,6 +9,10 @@
  * @since 06/03/2021
  */
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,6 +23,7 @@ public class ResultFrame extends JFrame {
     // Campos privados.
     private JPanel panel;
     private JFrame previousFrame;
+    private JButton mainMenuButton;
     private BackButton backButton;
 
     /**
@@ -51,9 +56,29 @@ public class ResultFrame extends JFrame {
 
         backButton.setBounds(0, 0, 100, 30);
 
+        mainMenuButton = new JButton("Volver al menú principal");
+
+        mainMenuButton.addActionListener(new ActionListener() {
+            /**
+             * Este método devuelve al usuario al menú principal
+             * de la aplicación, eliminando la ventana de resultados.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ResultFrame.this.dispose();
+
+                MainFrame mainFrame = new MainFrame();
+
+                mainFrame.setVisible(true);
+            }
+        });
+
         panel = new JPanel(new MigLayout("wrap"));
 
         panel.add(backButton, "growx");
+        panel.add(mainMenuButton, "growx");
         
         add(panel);
     }
