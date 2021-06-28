@@ -3,7 +3,7 @@
 ![cover_img](https://user-images.githubusercontent.com/66426042/123534140-5830fd00-d6f1-11eb-8efc-ab0822087b31.png)
 
 ```
-Release date: Q4 2021 / Q1 2022.
+Release date: TBD.
 ```
 
 Este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de fútbol con 7 u 8 jugadores por equipo.
