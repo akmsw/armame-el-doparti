@@ -31,8 +31,6 @@ import net.miginfocom.swing.MigLayout;
 
 public class AnchorageFrame extends JFrame {
 
-
-
     // Constantes privadas.
     private static final int FRAME_WIDTH = 402; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 432; // Alto de la ventana.
@@ -108,11 +106,13 @@ public class AnchorageFrame extends JFrame {
             /**
              * Este método hace invisible la ventana de anclaje cuando el usuario hizo los anclajes
              * deseados y está listo para distribuir los jugadores. Se crea, además, la ventana
-             * de resultados.
+             * de resultados. Se destildan aquellos checkboxes que hayan quedado seleccionados sin
+             * anclarse.
              * 
              * @param e Evento de click.
              */
             @Override
+            @SuppressWarnings("unused")
             public void actionPerformed(ActionEvent e) {
                 for (ArrayList<JCheckBox> cbSet : cbSets)
                     for (JCheckBox cb : cbSet)
@@ -120,8 +120,6 @@ public class AnchorageFrame extends JFrame {
                             cb.setSelected(false);
                 
                 ResultFrame resultFrame = new ResultFrame(AnchorageFrame.this);
-
-                resultFrame.setFocusable(true);
 
                 AnchorageFrame.this.setVisible(false);
             }
@@ -132,6 +130,8 @@ public class AnchorageFrame extends JFrame {
         backButton.addActionListener(new ActionListener() {
             /**
              * Este método togglea la visibilidad de las ventanas.
+             * Se sobreescribe para eliminar todos los anclajes
+             * hechos en caso de querer retroceder.
              * 
              * @param e Evento de click.
              */

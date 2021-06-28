@@ -67,12 +67,13 @@ public class InputFrame extends JFrame implements ActionListener {
     private ImageIcon smallIcon; // Ícono para la ventana.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
-    private JButton mixButton, backButton;
+    private JButton mixButton;
     private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
     private JComboBox<String> comboBox; // Menú desplegable.
     private JPanel panel;
     private JScrollPane scrollPane;
     private JFrame previousFrame;
+    private BackButton backButton;
 
     /**
      * Creación de la ventana de mezcla.
@@ -308,7 +309,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addButtons() {
         smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         mixButton = new JButton("Mezclar");
-        backButton = new JButton("Atrás");
+        backButton = new BackButton(InputFrame.this, previousFrame);
 
         mixButton.setBounds(224, 274, 100, 30);
         mixButton.setEnabled(false);
@@ -340,22 +341,6 @@ public class InputFrame extends JFrame implements ActionListener {
 
                     InputFrame.this.setVisible(false);
                 }
-            }
-        });
-
-        backButton.setBounds(224, 310, 100, 30);
-        backButton.setEnabled(true);
-        backButton.setVisible(true);
-        backButton.addActionListener(new ActionListener() {
-            /**
-             * Este método togglea la visibilidad de las ventanas.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                InputFrame.this.setVisible(false);
-                previousFrame.setVisible(true);
             }
         });
 

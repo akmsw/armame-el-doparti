@@ -28,7 +28,8 @@ public class RatingFrame extends JFrame {
 
     // Campos privados.
     private JPanel masterPanel, centerPanel, southPanel;
-    private JButton finishButton, backButton;
+    private JButton finishButton;
+    private BackButton backButton;
     private HashMap<Player, JSpinner> spinnersMap; // Mapa que asocia a cada jugador un JSpinner.
 
     /**
@@ -40,7 +41,7 @@ public class RatingFrame extends JFrame {
         masterPanel = new JPanel(new MigLayout());
 
         finishButton = new JButton("Finalizar");
-        backButton = new JButton("Atrás");
+        backButton = new BackButton(RatingFrame.this, previousFrame);
 
         finishButton.addActionListener(new ActionListener() {
             /**
@@ -51,21 +52,6 @@ public class RatingFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO.
-            }
-        });
-
-        backButton.setEnabled(true);
-        backButton.setVisible(true);
-        backButton.addActionListener(new ActionListener() {
-            /**
-             * Este método togglea la visibilidad de las ventanas.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                RatingFrame.this.setVisible(false);
-                previousFrame.setVisible(true);
             }
         });
 
