@@ -220,7 +220,7 @@ public class AnchorageFrame extends JFrame {
                 if ((anchor - 1) != JOptionPane.CLOSED_OPTION) {
                     // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'.
                     for (int i = 0; i < cbSets.size(); i++)
-                    changeAnchor(InputFrame.playersSets.get(i), cbSets.get(i), anchor, 0);
+                        changeAnchor(InputFrame.playersSets.get(i), cbSets.get(i), anchor, 0);
 
                     // A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
                     // les decremento en 1 su número de anclaje.
