@@ -35,8 +35,8 @@ public class AnchorageFrame extends JFrame {
     // Constantes privadas.
     private static final int FRAME_WIDTH = 402; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 432; // Alto de la ventana.
-    private static final int MAX_ANCHOR_TEAM = InputFrame.playersAmount - 1; // Máxima cantidad de jugadores por anclaje.
-    private static final int MAX_ANCHOR_TOTAL = 2 * MAX_ANCHOR_TEAM; // Máxima cantidad de jugadores anclados en total.
+    private static final int MAX_ANCHOR = InputFrame.playersAmount - 1; // Máxima cantidad de jugadores por anclaje.
+    private static final int MAX_ANCHOR_TOTAL = 2 * MAX_ANCHOR; // Máxima cantidad de jugadores anclados en total.
     private static final String FRAME_TITLE = "Anclaje de jugadores";
 
     // Campos privados.
@@ -163,10 +163,10 @@ public class AnchorageFrame extends JFrame {
         newAnchorage.addActionListener(new ActionListener() {
             /**
              * Este método se encarga de anclar los jugadores cuya checkbox está tildada.
-             * Sólo se permitirán hacer anclajes de entre 2 y 5 jugadores. No se podrán
-             * hacer anclajes que tengan más de la mitad de jugadores de una misma posición,
-             * ya que en ese caso el otro equipo no tendrá la misma cantidad de jugadores en
-             * dicha posición.
+             * Sólo se permitirán hacer anclajes de no menos de 2 y no más de MAX_ANCHOR jugadores.
+             * No se podrán hacer anclajes que tengan más de la mitad de jugadores de
+             * una misma posición, ya que en ese caso el otro equipo no tendrá la misma cantidad
+             * de jugadores en dicha posición.
              * 
              * @param e Evento de click.
              */
@@ -180,7 +180,7 @@ public class AnchorageFrame extends JFrame {
                             anchored++;
                 
                 if (!validChecksAmount(anchored)) {
-                    errorMsg("No puede haber más de " + MAX_ANCHOR_TEAM + " ni menos de 2 jugadores en un mismo anclaje.");
+                    errorMsg("No puede haber más de " + MAX_ANCHOR + " ni menos de 2 jugadores en un mismo anclaje.");
                     return;
                 } else if (!isValidAnchorage()) {
                     errorMsg("No puede haber más de la mitad de jugadores de una misma posición en un mismo anclaje.");
@@ -331,10 +331,13 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si la cantidad de jugadores anclados es al menos 2 y no más de 5.
+     * @return Si la cantidad de jugadores anclados es al menos 2 y
+     *         no más de MAX_ANCHOR.
+     * 
+     * @param anchored Cantidad de jugadores que se intenta anclar.
      */
     private boolean validChecksAmount(int anchored) {
-        return ((anchored <= MAX_ANCHOR_TEAM) && (anchored >= 2));
+        return ((anchored <= MAX_ANCHOR) && (anchored >= 2));
     }
 
     /**

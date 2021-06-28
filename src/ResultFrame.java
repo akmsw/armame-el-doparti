@@ -67,11 +67,11 @@ public class ResultFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                ResultFrame.this.dispose();
-
                 MainFrame mainFrame = new MainFrame();
 
                 mainFrame.setVisible(true);
+                
+                ResultFrame.this.dispose();
             }
         });
 
