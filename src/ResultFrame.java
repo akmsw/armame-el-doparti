@@ -32,8 +32,6 @@ public class ResultFrame extends JFrame {
     public ResultFrame(JFrame previousFrame) {
         this.previousFrame = previousFrame;
 
-        initializeComponents();
-
         if (InputFrame.distribution == 0)
             randomMix();
         else
@@ -90,6 +88,7 @@ public class ResultFrame extends JFrame {
     private void randomMix() {
         setTitle("MEZCLA ALEATORIA");
         setVisible(true);
+        initializeComponents();
     }
 
     /**
@@ -97,8 +96,8 @@ public class ResultFrame extends JFrame {
      * equitativa en base a las puntuaciones seteadas a los jugadores.
      */
     private void ratingMix() {
-        setVisible(false);
         setTitle("MEZCLA POR PUNTAJES");
+        setVisible(false);
 
         RatingFrame ratingFrame = new RatingFrame(previousFrame);
 
