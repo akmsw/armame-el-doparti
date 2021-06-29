@@ -45,7 +45,7 @@ public class InputFrame extends JFrame implements ActionListener {
     public static List<Player[]> playersSets; // Lista con los arreglos de jugadores.
 
     // Constantes privadas.
-    private static final int FRAME_WIDTH = 450; // Ancho de la ventana.
+    private static final int FRAME_WIDTH = 482; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 411; // Alto de la ventana.
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
     private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú desplegable.
@@ -55,8 +55,8 @@ public class InputFrame extends JFrame implements ActionListener {
                                                        "Agregar comodines" };
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
                                                                                       // jugadores.
-    private static final Rectangle LABEL_POS = new Rectangle(341, 100, 85, 85); // Dimensión y posición para las imágenes.
-    
+    private static final Rectangle LABEL_POS = new Rectangle(373, 100, 85, 85); // Dimensión y posición para las imágenes.
+
     // Campos privados.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
                                                                                                    // de texto para
@@ -323,6 +323,7 @@ public class InputFrame extends JFrame implements ActionListener {
              * @param e Evento (criterio elegido).
              */
             @Override
+            @SuppressWarnings("unused")
             public void actionPerformed(ActionEvent e) {
                 InputFrame.distribution = JOptionPane.showOptionDialog(null,
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
@@ -336,7 +337,7 @@ public class InputFrame extends JFrame implements ActionListener {
                     } else {
                         ResultFrame resultFrame = new ResultFrame(InputFrame.this);
 
-                        resultFrame.setVisible(true);
+                        //resultFrame.setVisible(true);
                     }
 
                     InputFrame.this.setVisible(false);
@@ -360,10 +361,10 @@ public class InputFrame extends JFrame implements ActionListener {
         textArea.setEditable(false);
         textArea.setVisible(true);
 
-        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        scrollPane.setBounds(215, 5, 118, 260);
+        scrollPane.setBounds(215, 5, 150, 260);
 
         panel.add(scrollPane);
 
@@ -541,7 +542,7 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor = new JCheckBox("Anclar jugadores", false);
 
         anchor.setBounds(212, 346, 122, 20);
-        anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.decreasedFontSize));
+        anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.ChBFontSize));
         anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
 

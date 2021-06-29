@@ -25,11 +25,11 @@ public class Main {
     // Constantes públicas.
     public static final String PROGRAM_TITLE = "Armame el doparti";
     public static final String PROGRAM_VERSION = "v3.0";
+    public static final FontUIResource PROGRAM_FONT = new FontUIResource("Noto Sans", Font.PLAIN, 13); // Fuente utilizada para el programa.
     public static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas.
     public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74); // Color de fondo de las ventanas.
-    public static final FontUIResource PROGRAM_FONT = new FontUIResource("Noto Sans", Font.PLAIN, 13); // Fuente utilizada para el programa.
-    public static final float decreasedFontSize = 12;
+    public static final float ChBFontSize = 12; // Tamaño de fuente para los checkboxes necesarios.
 
     // Campos públicos.
     public static ArrayList<String> positions; // Arreglo con los strings de las posiciones de los jugadores.   

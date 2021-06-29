@@ -162,7 +162,7 @@ public class AnchorageFrame extends JFrame {
         textArea.setEditable(false);
         textArea.setVisible(true);
 
-        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         newAnchorage = new JButton("Anclar");

@@ -31,8 +31,8 @@ public class MainFrame extends JFrame implements ActionListener {
     public static ImageIcon iconBall; // Ícono para la ventana.
 
     // Campos privados.
-    private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW, bgImage, chichaImage; // Íconos utilizados para la ventana.
-    private JButton startButton, helpButton, chichaButton; // Botones del menú principal.
+    private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW, bgImage, chImg; // Íconos utilizados para la ventana.
+    private JButton startButton, helpButton, chButton; // Botones del menú principal.
     private JLabel bgLabel; // Etiqueta para la imagen de fondo.
     private JPanel panel;
 
@@ -51,7 +51,7 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void initializeComponents() {
         bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
-        chichaImage = new ImageIcon(Main.IMG_PATH + "chicha.jpg");
+        chImg = new ImageIcon(Main.IMG_PATH + "chicha.jpg");
 
         bgLabel = new JLabel("", bgImage, JLabel.CENTER);
 
@@ -69,17 +69,17 @@ public class MainFrame extends JFrame implements ActionListener {
         helpButton.setEnabled(true);
         helpButton.addActionListener(this);
 
-        chichaButton = new JButton();
-        chichaButton.setEnabled(true);
-        chichaButton.setIcon(new ImageIcon(chichaImage.getImage().getScaledInstance(73, 80, Image.SCALE_SMOOTH)));
-        chichaButton.addActionListener(this);
+        chButton = new JButton();
+        chButton.setEnabled(true);
+        chButton.setIcon(new ImageIcon(chImg.getImage().getScaledInstance(73, 80, Image.SCALE_SMOOTH)));
+        chButton.addActionListener(this);
 
         panel = new JPanel(new MigLayout("wrap"));
 
         panel.add(bgLabel, "growx");
         panel.add(startButton, "growx");
         panel.add(helpButton, "growx");
-        panel.add(chichaButton, "align center, span");
+        panel.add(chButton, "align center");
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
         add(panel);
@@ -133,7 +133,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     System.exit(-1);
                 }
             }
-        } else if (e.getSource() == chichaButton)
+        } else if (e.getSource() == chButton)
             chicha();
         else if (e.getSource() == helpButton)
             help();

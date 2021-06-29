@@ -37,7 +37,9 @@ public class RatingFrame extends JFrame {
      * Creación de la ventana de ingreso de puntajes.
      */
     public RatingFrame(JFrame previousFrame) {
-        panel = new JPanel(new MigLayout("wrap 4"));
+        panel = new JPanel(new MigLayout());
+
+        panel.setBackground(Main.FRAMES_BG_COLOR);
 
         finishButton = new JButton("Finalizar");
         backButton = new BackButton(RatingFrame.this, previousFrame);
@@ -63,30 +65,28 @@ public class RatingFrame extends JFrame {
 
         spinnersMap = new HashMap<>();
 
-        int index = 0;
-
-        for (Player[] playersSet : InputFrame.playersSets) {
-            JLabel label = new JLabel(Main.positions.get(index));
+        for (int i = 0; i < InputFrame.playersSets.size(); i++) {
+            JLabel label = new JLabel(Main.positions.get(i));
 
             label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
 
-            panel.add(label, "wrap");
+            panel.add(label, "span");
             panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
 
-            for (Player player : playersSet) {
-                spinnersMap.put(player, new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
+            for (int j = 0; j < InputFrame.playersSets.get(i).length; j++) {
+                spinnersMap.put(InputFrame.playersSets.get(i)[j], new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
-                panel.add(new JLabel(player.getName()));
-                panel.add(spinnersMap.get(player));
+                panel.add(new JLabel(InputFrame.playersSets.get(i)[j].getName()), "split 2");
+
+                if (j % 2 != 0)
+                    panel.add(spinnersMap.get(InputFrame.playersSets.get(i)[j]), "wrap");
+                else
+                    panel.add(spinnersMap.get(InputFrame.playersSets.get(i)[j]));
             }
-
-            index++;
         }
 
-        panel.setBackground(Main.FRAMES_BG_COLOR);
-
-        panel.add(finishButton, "growx, wrap");
-        panel.add(backButton, "growx");
+        panel.add(finishButton, "growx, span");
+        panel.add(backButton, "growx, span");
 
         add(panel);
         setResizable(false);
