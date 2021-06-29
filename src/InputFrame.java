@@ -45,7 +45,7 @@ public class InputFrame extends JFrame implements ActionListener {
     public static List<Player[]> playersSets; // Lista con los arreglos de jugadores.
 
     // Constantes privadas.
-    private static final int FRAME_WIDTH = 482; // Ancho de la ventana.
+    private static final int FRAME_WIDTH = 483; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 411; // Alto de la ventana.
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
     private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú desplegable.
@@ -55,7 +55,7 @@ public class InputFrame extends JFrame implements ActionListener {
                                                        "Agregar comodines" };
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
                                                                                       // jugadores.
-    private static final Rectangle LABEL_POS = new Rectangle(373, 100, 85, 85); // Dimensión y posición para las imágenes.
+    private static final Rectangle LABEL_POS = new Rectangle(374, 100, 85, 85); // Dimensión y posición para las imágenes.
 
     // Campos privados.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
@@ -311,7 +311,9 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton = new JButton("Mezclar");
         backButton = new BackButton(InputFrame.this, previousFrame);
 
-        mixButton.setBounds(224, 274, 100, 30);
+        backButton.setBounds(240, 310, 101, 30);
+
+        mixButton.setBounds(240, 274, 100, 30);
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
         mixButton.addActionListener(new ActionListener() {
@@ -541,7 +543,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addAnchorCheckBox() {
         anchor = new JCheckBox("Anclar jugadores", false);
 
-        anchor.setBounds(212, 346, 122, 20);
+        anchor.setBounds(225, 346, 122, 20);
         anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.ChBFontSize));
         anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
