@@ -1,5 +1,6 @@
 /**
- * Clase principal, sólo para inicialización del programa.
+ * Clase principal, sólo para inicialización del programa
+ * y declaración de campos útiles.
  * 
  * @author Bonino, Francisco Ignacio.
  * 
@@ -28,8 +29,8 @@ public class Main {
     public static final FontUIResource PROGRAM_FONT = new FontUIResource("Noto Sans", Font.PLAIN, 13); // Fuente utilizada para el programa.
     public static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas.
-    public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74); // Color de fondo de las ventanas.
-    public static final float ChBFontSize = 12; // Tamaño de fuente para los checkboxes necesarios.
+    public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74); // Color de fondo de los botones.
+    public static final float CB_FONT_SIZE = 12; // Tamaño de fuente para los checkboxes necesarios.
 
     // Campos públicos.
     public static ArrayList<String> positions; // Arreglo con los strings de las posiciones de los jugadores.   
@@ -77,8 +78,7 @@ public class Main {
     /**
      * Este método se encarga de setear la fuente utilizada para el programa.
      * 
-     * @param f Fuente a utilizar. Debe estar incluida en el paquete standard
-     *          del sistema operativo Windows.
+     * @param f Fuente a utilizar.
      */
     private static void setUIFont (FontUIResource f) {
         Enumeration<Object> keys = UIManager.getDefaults().keys();
