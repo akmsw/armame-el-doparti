@@ -76,16 +76,16 @@ public class RatingFrame extends JFrame {
             for (int j = 0; j < InputFrame.playersSets.get(i).length; j++) {
                 spinnersMap.put(InputFrame.playersSets.get(i)[j], new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
-                panel.add(new JLabel(InputFrame.playersSets.get(i)[j].getName()), "growx");
+                panel.add(new JLabel(InputFrame.playersSets.get(i)[j].getName()), "pushx");
 
                 if (j % 2 != 0)
-                    panel.add(spinnersMap.get(InputFrame.playersSets.get(i)[j]), "growx, wrap");
+                    panel.add(spinnersMap.get(InputFrame.playersSets.get(i)[j]), "wrap");
                 else
-                    panel.add(spinnersMap.get(InputFrame.playersSets.get(i)[j]), "growx");
+                    panel.add(spinnersMap.get(InputFrame.playersSets.get(i)[j]));
             }
         }
 
-        panel.add(finishButton, "growx, span, w 230!");
+        panel.add(finishButton, "growx, span, w 230::");
         panel.add(backButton, "growx, span");
 
         add(panel);
