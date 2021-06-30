@@ -1,5 +1,5 @@
 ---
-name: Sugerencia / modificación
+name: Sugerencias, cambios
 about: Sugerí una nueva funcionalidad o una modificación al software
 title: "[ENH]"
 labels: enhancement
