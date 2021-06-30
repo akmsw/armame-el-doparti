@@ -35,17 +35,16 @@ public class AnchorageFrame extends JFrame {
     // Constantes privadas.
     private static final int FRAME_WIDTH = 402; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 432; // Alto de la ventana.
-    private static final int MAX_ANCHOR = InputFrame.playersAmount - 1; // Máxima cantidad de jugadores por anclaje.
-    private static final int MAX_ANCHOR_TOTAL = 2 * MAX_ANCHOR; // Máxima cantidad de jugadores anclados en total.
     private static final String FRAME_TITLE = "Anclaje de jugadores";
 
     // Campos privados.
     private int anchorageNum; // Número de anclaje.
     private int playersAnchored; // Cantidad de jugadores anclados.
+    private int MAX_ANCHOR; // Máxima cantidad de jugadores por anclaje.
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB; // Arreglos de checkboxes de los jugadores separados por
                                                                // posición.
     private ArrayList<ArrayList<JCheckBox>> cbSets; // Arreglo de arreglos de checkboxes de los jugadores.
-    private JFrame previousFrame; // Frame de inputs cuya visibilidad será toggleada.
+    private InputFrame inputFrame; // Frame de inputs cuya visibilidad será toggleada.
     private JPanel masterPanel, leftPanel, rightPanel; // Paneles contenedores de los componentes de la ventana de
                                                        // anclajes.
     private JButton okButton, backButton,
@@ -58,10 +57,12 @@ public class AnchorageFrame extends JFrame {
     /**
      * Creación de la ventana de anclajes.
      * 
-     * @param previousFrame   Ventana cuya visibilidad será toggleada.
+     * @param inputFrame   Ventana cuya visibilidad será toggleada.
      */
-    public AnchorageFrame(JFrame previousFrame) {
-        this.previousFrame = previousFrame;
+    public AnchorageFrame(InputFrame inputFrame, int playersAmount) {
+        this.inputFrame = inputFrame;
+
+        MAX_ANCHOR = playersAmount - 1;
 
         smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
@@ -97,7 +98,7 @@ public class AnchorageFrame extends JFrame {
      */
     private void initializeComponents() {
         for (int i = 0; i < cbSets.size(); i++) {
-            fillCBSet(InputFrame.playersSets.get(i), cbSets.get(i));
+            fillCBSet(inputFrame.getPlayersSets().get(i), cbSets.get(i));
             addCBSet(leftPanel, cbSets.get(i), Main.positions.get(i));
         }
 
@@ -120,7 +121,7 @@ public class AnchorageFrame extends JFrame {
                         if(cb.isSelected() && cb.isVisible())
                             cb.setSelected(false);
                 
-                ResultFrame resultFrame = new ResultFrame(AnchorageFrame.this);
+                ResultFrame resultFrame = new ResultFrame(inputFrame, AnchorageFrame.this);
 
                 AnchorageFrame.this.setVisible(false);
 
@@ -144,7 +145,7 @@ public class AnchorageFrame extends JFrame {
 
                 anchoragesTest();
 
-                previousFrame.setVisible(true);
+                inputFrame.setVisible(true);
                 AnchorageFrame.this.dispose();
             }
         });
@@ -190,14 +191,14 @@ public class AnchorageFrame extends JFrame {
                     errorMsg("No puede haber más de la mitad de jugadores de una misma posición en un mismo anclaje.");
                     return;
                 } else if (!validAnchorageAmount(anchored)) {
-                    errorMsg("No puede haber más de " + MAX_ANCHOR_TOTAL + " jugadores anclados en total.");
+                    errorMsg("No puede haber más de " + (2 * MAX_ANCHOR) + " jugadores anclados en total.");
                     return;
                 }
 
                 anchorageNum++;
 
                 for (int i = 0; i < cbSets.size(); i++)
-                    setAnchors(cbSets.get(i), InputFrame.playersSets.get(i));
+                    setAnchors(cbSets.get(i), inputFrame.getPlayersSets().get(i));
                 
                 anchoragesTest();
 
@@ -226,13 +227,13 @@ public class AnchorageFrame extends JFrame {
                 if ((anchor - 1) != JOptionPane.CLOSED_OPTION) {
                     // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'.
                     for (int i = 0; i < cbSets.size(); i++)
-                        changeAnchor(InputFrame.playersSets.get(i), cbSets.get(i), anchor, 0);
+                        changeAnchor(inputFrame.getPlayersSets().get(i), cbSets.get(i), anchor, 0);
 
                     // A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
                     // les decremento en 1 su número de anclaje.
                     for (int i = (anchor + 1); i <= anchorageNum; i++)
                         for (int j = 0; j < cbSets.size(); j++)
-                            changeAnchor(InputFrame.playersSets.get(j), cbSets.get(j), i, (i - 1));
+                            changeAnchor(inputFrame.getPlayersSets().get(j), cbSets.get(j), i, (i - 1));
 
                     anchorageNum--;
 
@@ -373,7 +374,7 @@ public class AnchorageFrame extends JFrame {
      * @param playersToAnchor Cantidad de jugadores que se intenta anclar.
      */
     private boolean validAnchorageAmount(int playersToAnchor) {
-        return (playersAnchored + playersToAnchor) <= MAX_ANCHOR_TOTAL;
+        return ((playersAnchored + playersToAnchor) <= (2 * MAX_ANCHOR));
     }
 
     /**
@@ -423,7 +424,7 @@ public class AnchorageFrame extends JFrame {
      */
     private void deleteLast() {
         for (int i = 0; i < cbSets.size(); i++)
-            changeAnchor(InputFrame.playersSets.get(i), cbSets.get(i), anchorageNum, 0);
+            changeAnchor(inputFrame.getPlayersSets().get(i), cbSets.get(i), anchorageNum, 0);
 
         anchorageNum--;
 
@@ -442,7 +443,7 @@ public class AnchorageFrame extends JFrame {
 
             textArea.append(" ----- ANCLAJE #" + i + " -----\n");
 
-            for (Player[] pSet : InputFrame.playersSets)
+            for (Player[] pSet : inputFrame.getPlayersSets())
                 for (Player player : pSet)
                     if (player.getAnchor() == i) {
                         textArea.append(" " + counter + ". " + player.getName() + "\n");
@@ -475,7 +476,7 @@ public class AnchorageFrame extends JFrame {
             clearAnchorages.setEnabled(false);
         }
 
-        if ((MAX_ANCHOR_TOTAL - playersAnchored) < 2) {
+        if (((2 * MAX_ANCHOR) - playersAnchored) < 2) {
             newAnchorage.setEnabled(false);
 
             for (ArrayList<JCheckBox> cbs : cbSets)
@@ -521,8 +522,8 @@ public class AnchorageFrame extends JFrame {
     private void anchoragesTest() {
         System.out.println("-------------------------------------------------------");
 
-        for (int i = 0; i < InputFrame.playersSets.size(); i++)
-            for (int j = 0; j < InputFrame.playersSets.get(i).length; j++)
-                System.out.println("JUGADOR " + InputFrame.playersSets.get(i)[j].getName() + " > ANCHOR = " + InputFrame.playersSets.get(i)[j].getAnchor());
+        for (int i = 0; i < inputFrame.getPlayersSets().size(); i++)
+            for (int j = 0; j < inputFrame.getPlayersSets().get(i).length; j++)
+                System.out.println("JUGADOR " + inputFrame.getPlayersSets().get(i)[j].getName() + " > ANCHOR = " + inputFrame.getPlayersSets().get(i)[j].getAnchor());
     }
 }

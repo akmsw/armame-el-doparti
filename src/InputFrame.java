@@ -40,9 +40,9 @@ import javax.swing.JTextField;
 public class InputFrame extends JFrame implements ActionListener {
 
     // Campos públicos.
-    public static int distribution; // Tipo de distribución de jugadores elegida.
-    public static int playersAmount; // Cantidad de jugadores por equipo.
-    public static List<Player[]> playersSets; // Lista con los arreglos de jugadores.
+    public int distribution; // Tipo de distribución de jugadores elegida.
+    public int playersAmount; // Cantidad de jugadores por equipo.
+    public List<Player[]> playersSets; // Lista con los arreglos de jugadores.
 
     // Constantes privadas.
     private static final int FRAME_WIDTH = 483; // Ancho de la ventana.
@@ -85,7 +85,7 @@ public class InputFrame extends JFrame implements ActionListener {
     public InputFrame(JFrame previousFrame, int playersAmount) throws IOException {
         this.previousFrame = previousFrame;
 
-        InputFrame.playersAmount = playersAmount;
+        this.playersAmount = playersAmount;
 
         playersAmountMap = new EnumMap<>(Position.class);
 
@@ -327,19 +327,17 @@ public class InputFrame extends JFrame implements ActionListener {
             @Override
             @SuppressWarnings("unused")
             public void actionPerformed(ActionEvent e) {
-                InputFrame.distribution = JOptionPane.showOptionDialog(null,
+                    distribution = JOptionPane.showOptionDialog(null,
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
                         JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
                 if (distribution != JOptionPane.CLOSED_OPTION) {
                     if (anchor.isSelected()) {
-                        AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this);
+                        AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this, playersAmount);
 
                         anchorageFrame.setVisible(true);
                     } else {
-                        ResultFrame resultFrame = new ResultFrame(InputFrame.this);
-
-                        //resultFrame.setVisible(true);
+                        ResultFrame resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
                     }
 
                     InputFrame.this.setVisible(false);
@@ -563,5 +561,26 @@ public class InputFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         updateOutput((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
+    }
+
+    /**
+     * @return La cantidad de jugadores por equipo.
+     */
+    public int getPlayersAmount() {
+        return playersAmount;
+    }
+
+    /**
+     * @return El tipo de distribución de jugadores elegida.
+     */
+    public int getDistribution() {
+        return distribution;
+    }
+
+    /**
+     * @return La lista con los arreglos de jugadores.
+     */
+    public List<Player[]> getPlayersSets() {
+        return playersSets;
     }
 }

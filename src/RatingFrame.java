@@ -32,11 +32,14 @@ public class RatingFrame extends JFrame {
     private JButton finishButton;
     private BackButton backButton;
     private HashMap<Player, JSpinner> spinnersMap; // Mapa que asocia a cada jugador un JSpinner.
+    private InputFrame inputFrame;
 
     /**
      * Creación de la ventana de ingreso de puntajes.
      */
-    public RatingFrame(JFrame previousFrame) {
+    public RatingFrame(InputFrame inputFrame, JFrame previousFrame) {
+        this.inputFrame = inputFrame;
+
         panel = new JPanel(new MigLayout());
 
         panel.setBackground(Main.FRAMES_BG_COLOR);
@@ -60,7 +63,7 @@ public class RatingFrame extends JFrame {
 
         spinnersMap = new HashMap<>();
 
-        for (int i = 0; i < InputFrame.playersSets.size(); i++) {
+        for (int i = 0; i < inputFrame.getPlayersSets().size(); i++) {
             JLabel label = new JLabel(Main.positions.get(i));
 
             label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
@@ -68,15 +71,15 @@ public class RatingFrame extends JFrame {
             panel.add(label, "span");
             panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
 
-            for (int j = 0; j < InputFrame.playersSets.get(i).length; j++) {
-                spinnersMap.put(InputFrame.playersSets.get(i)[j], new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
+            for (int j = 0; j < inputFrame.getPlayersSets().get(i).length; j++) {
+                spinnersMap.put(inputFrame.getPlayersSets().get(i)[j], new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
-                panel.add(new JLabel(InputFrame.playersSets.get(i)[j].getName()), "pushx");
+                panel.add(new JLabel(inputFrame.getPlayersSets().get(i)[j].getName()), "pushx");
 
                 if (j % 2 != 0)
-                    panel.add(spinnersMap.get(InputFrame.playersSets.get(i)[j]), "wrap");
+                    panel.add(spinnersMap.get(inputFrame.getPlayersSets().get(i)[j]), "wrap");
                 else
-                    panel.add(spinnersMap.get(InputFrame.playersSets.get(i)[j]));
+                    panel.add(spinnersMap.get(inputFrame.getPlayersSets().get(i)[j]));
             }
         }
 
@@ -98,8 +101,8 @@ public class RatingFrame extends JFrame {
     private void ratingsTest() {
         System.out.println("##############################################");
 
-        for (int i = 0; i < InputFrame.playersSets.size(); i++)
-            for (int j = 0; j < InputFrame.playersSets.get(i).length; j++)
-                System.out.println("JUGADOR " + InputFrame.playersSets.get(i)[j].getName() + " > RATING = " + InputFrame.playersSets.get(i)[j].getRating());
+        for (int i = 0; i < inputFrame.getPlayersSets().size(); i++)
+            for (int j = 0; j < inputFrame.getPlayersSets().get(i).length; j++)
+                System.out.println("JUGADOR " + inputFrame.getPlayersSets().get(i)[j].getName() + " > RATING = " + inputFrame.getPlayersSets().get(i)[j].getRating());
     }
 }

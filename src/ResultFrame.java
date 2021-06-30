@@ -25,14 +25,16 @@ public class ResultFrame extends JFrame {
     private JFrame previousFrame;
     private JButton mainMenuButton;
     private BackButton backButton;
+    private InputFrame inputFrame;
 
     /**
      * Creación de la ventana de resultados.
      */
-    public ResultFrame(JFrame previousFrame) {
+    public ResultFrame(InputFrame inputFrame, JFrame previousFrame) {
+        this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
 
-        if (InputFrame.distribution == 0)
+        if (inputFrame.getDistribution() == 0)
             randomMix();
         else
             ratingMix();
@@ -99,7 +101,7 @@ public class ResultFrame extends JFrame {
         setTitle("MEZCLA POR PUNTAJES");
         setVisible(false);
 
-        RatingFrame ratingFrame = new RatingFrame(previousFrame);
+        RatingFrame ratingFrame = new RatingFrame(inputFrame, previousFrame);
 
         ratingFrame.setVisible(true);
     }
