@@ -29,7 +29,12 @@ public class BackButton extends JButton {
 
         addActionListener(new ActionListener() {
             /**
-             * Este método togglea la visibilidad de las ventanas.
+             * Este método togglea la visibilidad de la ventana anterior,
+             * eliminando la ventana actual para evitar múltiples
+             * instancias de una misma ventana con distintas
+             * visibilidades. Esto podría llevar a corrupción de
+             * datos y a mantener información inutilizada en memoria
+             * (e.g.: JFrames duplicados donde uno es visible y otro no).
              * 
              * @param e Evento de click.
              */
