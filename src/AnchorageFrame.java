@@ -327,7 +327,7 @@ public class AnchorageFrame extends JFrame {
         panel.add(label, "span");
 
         for (JCheckBox cb : cbSet)
-            panel.add(cb, "align left");
+            panel.add(cb, "align left, pushx");
 
         JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
 
