@@ -294,12 +294,9 @@ public class AnchorageFrame extends JFrame {
      * Este método se encarga de borrar todos los anclajes que se hayan generado.
      */
     private void clearAnchorages() {
-        int lim = anchorageNum; // Almaceno el valor de 'anchorageNum' porque por cada vuelta
-                                // de 'deletLast', su valor disminuye. No puede usarse por lo
-                                // tanto como límite superior del bucle 'for'.
-
-        for (int i = 0; i < lim; i++)
+        do {
             deleteLast();
+        } while (anchorageNum > 0);
     }
 
     /**
