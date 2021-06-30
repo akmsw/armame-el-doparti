@@ -148,7 +148,7 @@ public class AnchorageFrame extends JFrame {
                 clearAnchorages();
 
                 previousFrame.setVisible(true);
-                AnchorageFrame.this.setVisible(false);
+                AnchorageFrame.this.dispose();
             }
         });
 
