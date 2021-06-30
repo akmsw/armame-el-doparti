@@ -54,12 +54,7 @@ public class RatingFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
 
-                // TEST PARA CORROBORAR ANCLAJES (NO BORRAR).
-                System.out.println("##############################################");
-
-                for (int i = 0; i < InputFrame.playersSets.size(); i++)
-                    for (int j = 0; j < InputFrame.playersSets.get(i).length; j++)
-                        System.out.println("JUGADOR " + InputFrame.playersSets.get(i)[j].getName() + " > RATING = " + InputFrame.playersSets.get(i)[j].getRating());
+                ratingsTest();
             }
         });
 
@@ -95,5 +90,16 @@ public class RatingFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
+    }
+
+    /**
+     * Método de prueba para testear que los puntajes se hayan asignado correctamente.
+     */
+    private void ratingsTest() {
+        System.out.println("##############################################");
+
+        for (int i = 0; i < InputFrame.playersSets.size(); i++)
+            for (int j = 0; j < InputFrame.playersSets.get(i).length; j++)
+                System.out.println("JUGADOR " + InputFrame.playersSets.get(i)[j].getName() + " > RATING = " + InputFrame.playersSets.get(i)[j].getRating());
     }
 }

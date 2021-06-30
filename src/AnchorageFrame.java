@@ -124,12 +124,7 @@ public class AnchorageFrame extends JFrame {
 
                 AnchorageFrame.this.setVisible(false);
 
-                // TEST PARA CORROBORAR ANCLAJES (NO BORRAR).
-                System.out.println("-------------------------------------------------------");
-
-                for (int i = 0; i < InputFrame.playersSets.size(); i++)
-                    for (int j = 0; j < InputFrame.playersSets.get(i).length; j++)
-                        System.out.println("JUGADOR " + InputFrame.playersSets.get(i)[j].getName() + " > ANCHOR = " + InputFrame.playersSets.get(i)[j].getAnchor());
+                anchoragesTest();
             }
         });
 
@@ -146,6 +141,8 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearAnchorages();
+
+                anchoragesTest();
 
                 previousFrame.setVisible(true);
                 AnchorageFrame.this.dispose();
@@ -201,6 +198,8 @@ public class AnchorageFrame extends JFrame {
 
                 for (int i = 0; i < cbSets.size(); i++)
                     setAnchors(cbSets.get(i), InputFrame.playersSets.get(i));
+                
+                anchoragesTest();
 
                 updateTextArea();
             }
@@ -238,6 +237,8 @@ public class AnchorageFrame extends JFrame {
                     anchorageNum--;
 
                     updateTextArea();
+
+                    anchoragesTest();
                 }
             }
         });
@@ -251,6 +252,7 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 deleteLast();
+                anchoragesTest();
             }
         });
 
@@ -264,6 +266,7 @@ public class AnchorageFrame extends JFrame {
              */
             public void actionPerformed(ActionEvent e) {
                 clearAnchorages();
+                anchoragesTest();
             }
         });
 
@@ -510,5 +513,16 @@ public class AnchorageFrame extends JFrame {
                         playersAnchored--;
                     }
                 }
+    }
+
+    /**
+     * Método de prueba para testear que los puntajes se hayan asignado correctamente.
+     */
+    private void anchoragesTest() {
+        System.out.println("-------------------------------------------------------");
+
+        for (int i = 0; i < InputFrame.playersSets.size(); i++)
+            for (int j = 0; j < InputFrame.playersSets.get(i).length; j++)
+                System.out.println("JUGADOR " + InputFrame.playersSets.get(i)[j].getName() + " > ANCHOR = " + InputFrame.playersSets.get(i)[j].getAnchor());
     }
 }
