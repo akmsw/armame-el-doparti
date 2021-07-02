@@ -61,11 +61,13 @@ public class InputFrame extends JFrame implements ActionListener {
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
                                                                                                    // de texto para
                                                                                                    // ingresar nombres.
+    private ArrayList<ArrayList<JTextField>> textFields; // Lista con los arreglos de campos de texto para ingresar nombres.
     private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores.
     private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico
                                                          // (cuántos jugadores por posición por equipo).
     private ImageIcon smallIcon; // Ícono para la ventana.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
+    private ArrayList<JLabel> labels; // Arreglo con las imágenes de cada posición.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
     private JButton mixButton;
     private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
@@ -159,6 +161,8 @@ public class InputFrame extends JFrame implements ActionListener {
         textFieldMF = new ArrayList<>();
         textFieldFW = new ArrayList<>();
         textFieldWC = new ArrayList<>();
+        textFields = new ArrayList<>();
+        labels = new ArrayList<>();
 
         setCD = new Player[(int) (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)];
         setLD = new Player[(int) (playersAmountMap.get(Position.LATERALDEFENDER) * 2)];
@@ -171,6 +175,12 @@ public class InputFrame extends JFrame implements ActionListener {
         initializeSet(setMF, Position.MIDFIELDER);
         initializeSet(setFW, Position.FORWARD);
         initializeSet(setWC, Position.WILDCARD);
+
+        textFields.add(textFieldCD);
+        textFields.add(textFieldLD);
+        textFields.add(textFieldMF);
+        textFields.add(textFieldFW);
+        textFields.add(textFieldWC);
 
         playersSets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
@@ -198,6 +208,12 @@ public class InputFrame extends JFrame implements ActionListener {
         mfLabel = new JLabel();
         fwLabel = new JLabel();
         wcLabel = new JLabel();
+
+        labels.add(cdLabel);
+        labels.add(ldLabel);
+        labels.add(mfLabel);
+        labels.add(fwLabel);
+        labels.add(wcLabel);
 
         addImage(cdLabel, "cd.jpg", panel);
         addImage(ldLabel, "ld.jpg", panel);
@@ -381,19 +397,14 @@ public class InputFrame extends JFrame implements ActionListener {
     private void updateOutput(String text) {
         for (int i = 0; i < OPTIONS_COMBOBOX.length; i++)
             if (text.equals(OPTIONS_COMBOBOX[i])) {
-                final int index = i;
-
-                textFieldCD.forEach(tf -> tf.setVisible(index == 0));
-                textFieldLD.forEach(tf -> tf.setVisible(index == 1));
-                textFieldMF.forEach(tf -> tf.setVisible(index == 2));
-                textFieldFW.forEach(tf -> tf.setVisible(index == 3));
-                textFieldWC.forEach(tf -> tf.setVisible(index == 4));
-
-                cdLabel.setVisible(index == 0);
-                ldLabel.setVisible(index == 1);
-                mfLabel.setVisible(index == 2);
-                fwLabel.setVisible(index == 3);
-                wcLabel.setVisible(index == 4);
+                for (int j = 0; j < textFields.size(); j++) {
+                    final int i2 = i;
+                    final int j2 = j;
+                    textFields.get(j).forEach(tf -> tf.setVisible(j2 == i2));
+                }
+                
+                for (int k = 0; k < labels.size(); k++)
+                    labels.get(k).setVisible(i == k);
 
                 return;
             }
