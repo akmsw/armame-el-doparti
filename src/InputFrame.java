@@ -379,87 +379,24 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param text Opción seleccionada del arreglo de Strings 'OPTIONS_COMBOBOX'.
      */
     private void updateOutput(String text) {
-        switch (text) {
-            case "Agregar defensores centrales": {
-                textFieldCD.forEach(tf -> tf.setVisible(true));
-                textFieldLD.forEach(tf -> tf.setVisible(false));
-                textFieldMF.forEach(tf -> tf.setVisible(false));
-                textFieldFW.forEach(tf -> tf.setVisible(false));
-                textFieldWC.forEach(tf -> tf.setVisible(false));
+        for (int i = 0; i < OPTIONS_COMBOBOX.length; i++)
+            if (text.equals(OPTIONS_COMBOBOX[i])) {
+                final int index = i;
 
-                cdLabel.setVisible(true);
-                ldLabel.setVisible(false);
-                mfLabel.setVisible(false);
-                fwLabel.setVisible(false);
-                wcLabel.setVisible(false);
+                textFieldCD.forEach(tf -> tf.setVisible(index == 0));
+                textFieldLD.forEach(tf -> tf.setVisible(index == 1));
+                textFieldMF.forEach(tf -> tf.setVisible(index == 2));
+                textFieldFW.forEach(tf -> tf.setVisible(index == 3));
+                textFieldWC.forEach(tf -> tf.setVisible(index == 4));
 
-                break;
+                cdLabel.setVisible(index == 0);
+                ldLabel.setVisible(index == 1);
+                mfLabel.setVisible(index == 2);
+                fwLabel.setVisible(index == 3);
+                wcLabel.setVisible(index == 4);
+
+                return;
             }
-
-            case "Agregar defensores laterales": {
-                textFieldCD.forEach(tf -> tf.setVisible(false));
-                textFieldLD.forEach(tf -> tf.setVisible(true));
-                textFieldMF.forEach(tf -> tf.setVisible(false));
-                textFieldFW.forEach(tf -> tf.setVisible(false));
-                textFieldWC.forEach(tf -> tf.setVisible(false));
-
-                cdLabel.setVisible(false);
-                ldLabel.setVisible(true);
-                mfLabel.setVisible(false);
-                fwLabel.setVisible(false);
-                wcLabel.setVisible(false);
-
-                break;
-            }
-
-            case "Agregar mediocampistas": {
-                textFieldCD.forEach(tf -> tf.setVisible(false));
-                textFieldLD.forEach(tf -> tf.setVisible(false));
-                textFieldMF.forEach(tf -> tf.setVisible(true));
-                textFieldFW.forEach(tf -> tf.setVisible(false));
-                textFieldWC.forEach(tf -> tf.setVisible(false));
-
-                cdLabel.setVisible(false);
-                ldLabel.setVisible(false);
-                mfLabel.setVisible(true);
-                fwLabel.setVisible(false);
-                wcLabel.setVisible(false);
-
-                break;
-            }
-
-            case "Agregar delanteros": {
-                textFieldCD.forEach(tf -> tf.setVisible(false));
-                textFieldLD.forEach(tf -> tf.setVisible(false));
-                textFieldMF.forEach(tf -> tf.setVisible(false));
-                textFieldFW.forEach(tf -> tf.setVisible(true));
-                textFieldWC.forEach(tf -> tf.setVisible(false));
-
-                cdLabel.setVisible(false);
-                ldLabel.setVisible(false);
-                mfLabel.setVisible(false);
-                fwLabel.setVisible(true);
-                wcLabel.setVisible(false);
-
-                break;
-            }
-
-            default: {
-                textFieldCD.forEach(tf -> tf.setVisible(false));
-                textFieldLD.forEach(tf -> tf.setVisible(false));
-                textFieldMF.forEach(tf -> tf.setVisible(false));
-                textFieldFW.forEach(tf -> tf.setVisible(false));
-                textFieldWC.forEach(tf -> tf.setVisible(true));
-
-                cdLabel.setVisible(false);
-                ldLabel.setVisible(false);
-                mfLabel.setVisible(false);
-                fwLabel.setVisible(false);
-                wcLabel.setVisible(true);
-
-                break;
-            }
-        }
     }
 
     /**
