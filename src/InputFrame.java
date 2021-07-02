@@ -100,12 +100,12 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método rescata la cantidad de jugadores para cada posición por equipo
      * mediante expresiones regulares.
      * 
-     * X[CLMFW].>+.[0-9] : Matchea las líneas que comiencen con la cantidad de
-     * jugadores por equipo, seguido por C, L, M, F, ó W, seguido por al menos un
-     * caracter '>', y luego tengan algún número.
+     * [CLMFW].+>.+ : Matchea las líneas que comiencen con C, L, M, F, ó W,
+     * seguido por al menos un caracter '>' (esta regex busca las líneas que
+     * nos importan en el archivo .PDA).
      * 
-     * [0-9][A-Z].>+. : Matchea el trozo de la línea que no sea un número que nos
-     * interesa.
+     * (?!(?<=X)\\d). : Matchea el trozo de la línea que no sea un número que nos
+     * interesa (el número que nos interesa ocuparía el lugar de la X).
      * 
      * ¡¡¡IMPORTANTE!!!
      * 
@@ -127,9 +127,9 @@ public class InputFrame extends JFrame implements ActionListener {
             int index = 0;
 
             while ((line = br.readLine()) != null)
-                if (line.matches(playersAmount + "[CLMFW].>+.[0-9]")) {
+                if (line.matches("[CLMFW].+>.+")) {
                     playersAmountMap.put(Position.values()[index],
-                                         Integer.parseInt(line.replaceAll("[0-9][A-Z].>+.", "")));
+                                         Integer.parseInt(line.replaceAll("(?!(?<=" + playersAmount +  ")\\d).", "")));
                     index++;
                 }
         }
