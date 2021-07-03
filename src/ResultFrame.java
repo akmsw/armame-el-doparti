@@ -29,6 +29,10 @@ public class ResultFrame extends JFrame {
 
     /**
      * Creación de la ventana de resultados.
+     * 
+     * @param inputFrame La ventana de ingreso de datos, de la cual se obtendrá
+     *                   información importante.
+     * @param previousFrame La ventana fuente que crea la ventana ResultFrame.
      */
     public ResultFrame(InputFrame inputFrame, JFrame previousFrame) {
         this.inputFrame = inputFrame;
@@ -99,7 +103,6 @@ public class ResultFrame extends JFrame {
      */
     private void ratingMix() {
         setTitle("MEZCLA POR PUNTAJES");
-        setVisible(false);
 
         RatingFrame ratingFrame = new RatingFrame(inputFrame, previousFrame);
 
