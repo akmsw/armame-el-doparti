@@ -11,7 +11,7 @@ assignees: akmsw
 Escribí acá una descripción concisa y clara sobre el bug.
 
 **¿Cómo sucedió?**
-Listá acá los pasos que diste para dar con eel problema, en el siguiente formato de ejemplo:
+Listá acá los pasos que diste para dar con el problema, en el siguiente formato de ejemplo:
 1. Ir a '...'
 2. Click en '....'
 3. Hacer '....'
