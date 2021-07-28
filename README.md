@@ -8,7 +8,7 @@
 
 Este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de fútbol con 7 u 8 jugadores por equipo.
 
-## Modo de uso 📝
+## 📝 Modo de uso
 
 El usuario podrá generar sus equipos ingresando los nombres de los jugadores a sortear en cada posición.
 
@@ -31,7 +31,7 @@ Una vez ingresados los nombres de todos los jugadores a repartir en cada posici�
 
 Claramente, si los jugadores se reparten en base a sus puntuaciones, la distribución óptima será única. Si se decide distribuirlos de manera aleatoria, se podrán redistribuir tantas veces como se quiera hasta estar conforme.
 
-## Nuevas funcionalidades ⭐
+## ⭐ Nuevas funcionalidades
 
 El usuario ahora podrá anclar jugadores 🔗. El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 jugadores seleccionados por el usuario deberán pertenecer al mismo equipo. El número máximo posible de jugadores a anclar será 6 (si se opta por *fútbol 7*) ó 7 (si se opta por *fútbol 8*).  
 
@@ -39,7 +39,7 @@ Para esto, se proporciona un checkbox rotulado con el texto "*Anclar jugadores*"
 
 Por obvias razones no se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (si se anclan todos los mediocampistas para un mismo equipo, el otro equipo no tendrá mediocampistas y esto no es posible).
 
-## Mejoras 🔧
+## 🔧 Mejoras
 
 - ✔️ GUI mucho más cómoda, intuitiva y agradable que en versiones anteriores.
 - ✔️ Implementación de expresiones regulares para alivianar procesos de búsqueda.
