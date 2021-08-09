@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "C:\\Program Files\\Java\\jdk-16.0.1\\lib\\jama-1.0.3.jar",
+        "C:\\Program Files\\Java\\jdk-16.0.1\\lib\\junit-1.6.0.jar",
+        "C:\\Program Files\\Java\\jdk-16.0.1\\lib\\miglayout-core-11.0.jar",
+        "C:\\Program Files\\Java\\jdk-16.0.1\\lib\\miglayout-swing-11.0.jar",
+        "/usr/java/jdk-16.0.2/lib/miglayout-core-11.0.jar",
+        "/usr/java/jdk-16.0.2/lib/miglayout-swing-11.0.jar"
+    ]
+}
