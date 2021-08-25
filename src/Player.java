@@ -1,7 +1,7 @@
 /**
  * Clase representativa de los jugadores.
  * 
- * @author Bonino, Francisco Ignacio.s
+ * @author Bonino, Francisco Ignacio.
  * 
  * @version 1.1.0
  * 
