@@ -36,7 +36,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel panel;
 
     /**
-     * Se crea la ventana principal.
+     * Constructor de la ventana principal.
      */
     public MainFrame() {
         initializeComponents();
@@ -94,7 +94,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * Este método se encarga de desplegar los créditos del programa.
      */
     private void chicha() {
-        String line = "<html>" + Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION + "<p><p>    Créditos<p>©AkamaiSoftware - 2021";
+        String line = "<html>" + Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION + "<p><p>   ©akmsw";
 
         JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }
@@ -126,9 +126,11 @@ public class MainFrame extends JFrame implements ActionListener {
                     InputFrame inputFrame = new InputFrame(MainFrame.this, playersAmount + 7); // + 7 para compensar el índice de la selección.
 
                     inputFrame.setVisible(true);
+
                     MainFrame.this.setVisible(false);
                 } catch (IOException ex) {
                     ex.printStackTrace();
+
                     System.exit(-1);
                 }
             }

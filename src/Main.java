@@ -39,6 +39,8 @@ public class Main {
      * Método principal.
      * 
      * Aquí se instancia y ejecuta todo el programa.
+     * 
+     * @param args Argumentos para ejecutar el programa.
      */
     public static void main(String[] args) {       
         setGUIProperties();

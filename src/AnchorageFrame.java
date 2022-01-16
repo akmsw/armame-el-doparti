@@ -57,7 +57,7 @@ public class AnchorageFrame extends JFrame {
     /**
      * Creación de la ventana de anclajes.
      * 
-     * @param inputFrame   Ventana cuya visibilidad será toggleada.
+     * @param inputFrame Ventana cuya visibilidad será toggleada.
      */
     public AnchorageFrame(InputFrame inputFrame, int playersAmount) {
         this.inputFrame = inputFrame;
@@ -212,6 +212,8 @@ public class AnchorageFrame extends JFrame {
             /**
              * Este método se encarga de borrar un anclaje en específico señalado por el
              * usuario.
+             * 
+             * @param e Evento de click.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -229,8 +231,10 @@ public class AnchorageFrame extends JFrame {
                     for (int i = 0; i < cbSets.size(); i++)
                         changeAnchor(inputFrame.getPlayersSets().get(i), cbSets.get(i), anchor, 0);
 
-                    // A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
-                    // les decremento en 1 su número de anclaje.
+                    /*
+                        A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
+                        les decremento en 1 su número de anclaje.
+                    */
                     for (int i = (anchor + 1); i <= anchorageNum; i++)
                         for (int j = 0; j < cbSets.size(); j++)
                             changeAnchor(inputFrame.getPlayersSets().get(j), cbSets.get(j), i, (i - 1));
@@ -249,6 +253,8 @@ public class AnchorageFrame extends JFrame {
         deleteLastAnchorage.addActionListener(new ActionListener() {
             /**
              * Este método se encarga de borrar el último anclaje realizado.
+             * 
+             * @param e Evento de click.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -308,7 +314,7 @@ public class AnchorageFrame extends JFrame {
      * a cada posición.
      * 
      * @param playersSet Conjunto de jugadores de donde obtener los nombres.
-     * @param cbSet      Conjunto de checkboxes a llenar.
+     * @param cbSet Conjunto de checkboxes a llenar.
      */
     private void fillCBSet(Player[] playersSet, ArrayList<JCheckBox> cbSet) {
         for (Player player : playersSet)
@@ -498,8 +504,8 @@ public class AnchorageFrame extends JFrame {
      * Este método se encarga de cambiar el número de anclaje de los jugadores.
      * 
      * @param playersSet  Conjunto de jugadores a recorrer.
-     * @param cbSet       Conjunto de checkboxes a recorrer.
-     * @param target      Anclaje a reemplazar.
+     * @param cbSet Conjunto de checkboxes a recorrer.
+     * @param target Anclaje a reemplazar.
      * @param replacement Nuevo anclaje a setear.
      */
     private void changeAnchor(Player[] playersSet, ArrayList<JCheckBox> cbSet, int target, int replacement) {

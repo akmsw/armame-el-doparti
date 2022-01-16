@@ -20,7 +20,12 @@ public class BackButton extends JButton {
     // Campos privados.
     private static final Rectangle BACKBUTTON_BOUNDS = new Rectangle(224, 310, 100, 30);
 
-    // Constructor.
+    /**
+     * Constructor del botón para navegar hacia atrás entre ventanas.
+     * 
+     * @param currentFrame Ventana donde está colocado el botón.
+     * @param previousFrame Ventana a la que regresar cuando se pulse el botón.
+     */
     public BackButton(JFrame currentFrame, JFrame previousFrame) {
         setText("Atrás");
         setEnabled(true);

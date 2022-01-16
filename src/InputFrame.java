@@ -86,7 +86,6 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     public InputFrame(JFrame previousFrame, int playersAmount) throws IOException {
         this.previousFrame = previousFrame;
-
         this.playersAmount = playersAmount;
 
         playersAmountMap = new EnumMap<>(Position.class);
@@ -126,6 +125,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private void collectPDData(int playersAmount) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("useful/DIST.PDA"))) {
             String line;
+
             int index = 0;
 
             while ((line = br.readLine()) != null)
@@ -141,7 +141,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método inicializa el conjunto de jugadores recibido con jugadores sin
      * nombre y con la posición recibida.
      * 
-     * @param set      Arreglo de jugadores a inicializar.
+     * @param set Arreglo de jugadores a inicializar.
      * @param position Posición de los jugadores del arreglo.
      */
     private void initializeSet(Player[] set, Position position) {
@@ -233,17 +233,16 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método se encarga de crear, almacenar y configurar los campos de texto
      * correspondientes a cada posición.
      * 
-     * @param position     Posición a buscar en el EnumMap.
+     * @param position Posición a buscar en el EnumMap.
      * @param textFieldSet Arreglo de campos de texto para cada posición.
-     * @param playersSet   Arreglo de jugadores donde se almacenarán los nombres
-     *                     ingresados en los campos de texto.
+     * @param playersSet Arreglo de jugadores donde se almacenarán los nombres
+     *                   ingresados en los campos de texto.
      */
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, Player[] playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
             JTextField aux = new JTextField();
 
             aux.setBounds(5, (45 * (i + 1)), 201, 30);
-
             aux.addActionListener(new ActionListener() {
                 int index; // Índice que indica el campo de texto donde se ingresó el nombre.
 
@@ -291,9 +290,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * cada posición cuya visibilidad se toggleará en base al ítem seleccionado en
      * la lista desplegable.
      * 
-     * @param label    Etiqueta donde se seteará la imagen.
+     * @param label Etiqueta donde se seteará la imagen.
      * @param fileName Nombre del archivo a buscar.
-     * @param panel    Panel donde se agregará la imagen.
+     * @param panel Panel donde se agregará la imagen.
      */
     private void addImage(JLabel label, String fileName, JPanel panel) {
         label.setIcon(new ImageIcon(Main.IMG_PATH + fileName));
@@ -313,14 +312,17 @@ public class InputFrame extends JFrame implements ActionListener {
         comboBox.setBounds(5, 5, 200, 30);
         comboBox.addActionListener(this);
 
-        updateOutput(comboBox.getSelectedItem().toString()); // Se muestra el output correspondiente al estado inicial
-                                                             // del JComboBox.
+        /*
+            Se muestra el output correspondiente
+            al estado inicial del JComboBox.
+        */
+        updateOutput(comboBox.getSelectedItem().toString());
 
         panel.add(comboBox);
     }
 
     /**
-     * Este método se encarga de añadir los botones al panel.
+     * Este método se encarga de añadir los botones al panel de ingreso de jugadores.
      */
     private void addButtons() {
         smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -400,6 +402,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 for (int j = 0; j < textFields.size(); j++) {
                     final int i2 = i;
                     final int j2 = j;
+                    
                     textFields.get(j).forEach(tf -> tf.setVisible(j2 == i2));
                 }
                 
