@@ -22,8 +22,8 @@ public class Main {
 
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
-    private static final Color SELECT_NOTIF_FRAME_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas
-                                                                                       // de selección/notificación.
+    // Color de fondo de las ventanas de selección/notificación.
+    private static final Color SELECT_NOTIF_FRAME_BG_COLOR = new Color(176, 189, 162);
 
     /* ---------------------------------------- Constantes públicas ------------------------------ */
 
