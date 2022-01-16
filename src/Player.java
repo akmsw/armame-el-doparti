@@ -3,14 +3,15 @@
  * 
  * @author Bonino, Francisco Ignacio.
  * 
- * @version 1.1.0
+ * @version 3.0.0
  * 
  * @since 15/02/2021
  */
 
 public class Player {
 
-    // Campos privados.
+    /* ---------------------------------------- Campos privados ---------------------------------- */
+
     private int rating, anchor;
     private String name;
     private Position position;
@@ -29,9 +30,9 @@ public class Player {
         this.position = position;
     }
 
-    // ----------------------------------------Métodos públicos---------------------------------
+    /* ---------------------------------------- Métodos públicos --------------------------------- */
 
-    // ----------------------------------------Getters------------------------------------------
+    /* ---------------------------------------- Getters ------------------------------------------ */
 
     /**
      * @return El nombre del jugador.
@@ -61,7 +62,7 @@ public class Player {
         return anchor;
     }
 
-    // ----------------------------------------Setters------------------------------------------
+    /* ---------------------------------------- Setters ------------------------------------------ */
 
     /**
      * @param name El nombre del jugador.

@@ -3,7 +3,7 @@
  * 
  * @author Bonino, Francisco Ignacio.
  * 
- * @version 1.0.0
+ * @version 3.0.0
  * 
  * @since 27/06/2021
  */
@@ -17,13 +17,14 @@ import javax.swing.JFrame;
 
 public class BackButton extends JButton {
 
-    // Campos privados.
+    /* ---------------------------------------- Campos privados ---------------------------------- */
+    
     private static final Rectangle BACKBUTTON_BOUNDS = new Rectangle(224, 310, 100, 30);
 
     /**
      * Constructor del botón para navegar hacia atrás entre ventanas.
      * 
-     * @param currentFrame Ventana donde está colocado el botón.
+     * @param currentFrame  Ventana donde está colocado el botón.
      * @param previousFrame Ventana a la que regresar cuando se pulse el botón.
      */
     public BackButton(JFrame currentFrame, JFrame previousFrame) {

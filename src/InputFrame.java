@@ -5,7 +5,7 @@
  * 
  * @author Bonino, Francisco Ignacio.
  * 
- * @version 1.0.0
+ * @version 3.0.0
  * 
  * @since 28/02/2021
  */
@@ -39,32 +39,23 @@ import javax.swing.JTextField;
 
 public class InputFrame extends JFrame implements ActionListener {
 
-    // Campos públicos.
-    public int distribution; // Tipo de distribución de jugadores elegida.
-    public int playersAmount; // Cantidad de jugadores por equipo.
-    public List<Player[]> playersSets; // Lista con los arreglos de jugadores.
+    /* ---------------------------------------- Constantes privadas ------------------------------ */
 
-    // Constantes privadas.
     private static final int FRAME_WIDTH = 483; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 411; // Alto de la ventana.
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
-    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales", // Opciones para el menú desplegable.
-                                                       "Agregar defensores laterales",
-                                                       "Agregar mediocampistas",
-                                                       "Agregar delanteros",
-                                                       "Agregar comodines" };
-    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" }; // Opciones de distribución de
-                                                                                      // jugadores.
-    private static final Rectangle LABEL_POS = new Rectangle(374, 100, 85, 85); // Dimensión y posición para las imágenes.
 
-    // Campos privados.
-    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC; // Arreglos de campos
-                                                                                                   // de texto para
-                                                                                                   // ingresar nombres.
-    private ArrayList<ArrayList<JTextField>> textFields; // Lista con los arreglos de campos de texto para ingresar nombres.
+    /* ---------------------------------------- Campos privados  ---------------------------------- */
+
+    // Arreglos de campos de texto para ingresar nombres.
+    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC;
+
+    // Lista con los arreglos de campos de texto para ingresar nombres.
+    private ArrayList<ArrayList<JTextField>> textFields;
     private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores.
-    private EnumMap<Position, Integer> playersAmountMap; // Mapa que asocia a cada posición un valor numérico
-                                                         // (cuántos jugadores por posición por equipo).
+
+    // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
+    private EnumMap<Position, Integer> playersAmountMap;
     private ImageIcon smallIcon; // Ícono para la ventana.
     private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private ArrayList<JLabel> labels; // Arreglo con las imágenes de cada posición.
@@ -77,8 +68,27 @@ public class InputFrame extends JFrame implements ActionListener {
     private JFrame previousFrame;
     private BackButton backButton;
 
+    /* ---------------------------------------- Campos públicos ---------------------------------- */
+
+    public int distribution; // Tipo de distribución de jugadores elegida.
+    public int playersAmount; // Cantidad de jugadores por equipo.
+    public List<Player[]> playersSets; // Lista con los arreglos de jugadores.
+
+    // Opciones para el menú desplegable.
+    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
+                                                       "Agregar defensores laterales",
+                                                       "Agregar mediocampistas",
+                                                       "Agregar delanteros",
+                                                       "Agregar comodines" };
+
+    // Opciones de distribución de jugadores.
+    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
+
+    // Dimensión y posición para las imágenes.
+    private static final Rectangle LABEL_POS = new Rectangle(374, 100, 85, 85);
+
     /**
-     * Creación de la ventana de mezcla.
+     * Constructor de la ventana de mezcla.
      * 
      * @param playersAmount Cantidad de jugadores por equipo.
      * 
@@ -91,11 +101,10 @@ public class InputFrame extends JFrame implements ActionListener {
         playersAmountMap = new EnumMap<>(Position.class);
 
         collectPDData(playersAmount);
-
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
     }
 
-    // ----------------------------------------Métodos privados---------------------------------
+    /* ---------------------------------------- Métodos privados --------------------------------- */
 
     /**
      * Este método rescata la cantidad de jugadores para cada posición por equipo
@@ -131,7 +140,7 @@ public class InputFrame extends JFrame implements ActionListener {
             while ((line = br.readLine()) != null)
                 if (line.matches("[CLMFW].+>.+")) {
                     playersAmountMap.put(Position.values()[index],
-                                         Integer.parseInt(line.replaceAll("(?!(?<=" + playersAmount +  ")\\d).", "")));
+                            Integer.parseInt(line.replaceAll("(?!(?<=" + playersAmount + ")\\d).", "")));
                     index++;
                 }
         }
@@ -141,7 +150,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método inicializa el conjunto de jugadores recibido con jugadores sin
      * nombre y con la posición recibida.
      * 
-     * @param set Arreglo de jugadores a inicializar.
+     * @param set      Arreglo de jugadores a inicializar.
      * @param position Posición de los jugadores del arreglo.
      */
     private void initializeSet(Player[] set, Position position) {
@@ -233,10 +242,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método se encarga de crear, almacenar y configurar los campos de texto
      * correspondientes a cada posición.
      * 
-     * @param position Posición a buscar en el EnumMap.
+     * @param position     Posición a buscar en el EnumMap.
      * @param textFieldSet Arreglo de campos de texto para cada posición.
-     * @param playersSet Arreglo de jugadores donde se almacenarán los nombres
-     *                   ingresados en los campos de texto.
+     * @param playersSet   Arreglo de jugadores donde se almacenarán los nombres
+     *                     ingresados en los campos de texto.
      */
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, Player[] playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
@@ -264,10 +273,11 @@ public class InputFrame extends JFrame implements ActionListener {
                     // y cualquier espacio intermedio es reemplazado por un guión bajo.
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
-                    if (name.length() == 0 || name.length() > MAX_NAME_LEN || isEmptyString(name) || alreadyExists(name))
+                    if (name.length() == 0 || name.length() > MAX_NAME_LEN
+                        || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null,
-                                        "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN + " caracteres o estar repetido",
-                                        "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
+                                + " caracteres o estar repetido",  "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
                         playersSet[index].setName(name);
 
@@ -290,9 +300,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * cada posición cuya visibilidad se toggleará en base al ítem seleccionado en
      * la lista desplegable.
      * 
-     * @param label Etiqueta donde se seteará la imagen.
+     * @param label    Etiqueta donde se seteará la imagen.
      * @param fileName Nombre del archivo a buscar.
-     * @param panel Panel donde se agregará la imagen.
+     * @param panel    Panel donde se agregará la imagen.
      */
     private void addImage(JLabel label, String fileName, JPanel panel) {
         label.setIcon(new ImageIcon(Main.IMG_PATH + fileName));
@@ -303,8 +313,8 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar la lista desplegable al frame, y setear el
-     * handler de eventos a la misma.
+     * Este método se encarga de agregar la lista desplegable al frame,
+     * y setear el handler de eventos a la misma.
      */
     private void addComboBox() {
         comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
@@ -312,17 +322,15 @@ public class InputFrame extends JFrame implements ActionListener {
         comboBox.setBounds(5, 5, 200, 30);
         comboBox.addActionListener(this);
 
-        /*
-            Se muestra el output correspondiente
-            al estado inicial del JComboBox.
-        */
+        // Se muestra el output correspondiente al estado inicial del JComboBox.
         updateOutput(comboBox.getSelectedItem().toString());
 
         panel.add(comboBox);
     }
 
     /**
-     * Este método se encarga de añadir los botones al panel de ingreso de jugadores.
+     * Este método se encarga de añadir los botones
+     * al panel de ingreso de jugadores.
      */
     private void addButtons() {
         smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -334,6 +342,7 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton.setBounds(240, 274, 100, 30);
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
+
         mixButton.addActionListener(new ActionListener() {
             /**
              * Este método se encarga de tomar el criterio de búsqueda especificado por el
@@ -345,7 +354,7 @@ public class InputFrame extends JFrame implements ActionListener {
             @Override
             @SuppressWarnings("unused")
             public void actionPerformed(ActionEvent e) {
-                    distribution = JOptionPane.showOptionDialog(null,
+                distribution = JOptionPane.showOptionDialog(null,
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
                         JOptionPane.QUESTION_MESSAGE, smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
@@ -381,7 +390,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        
+
         scrollPane.setBounds(215, 5, 150, 260);
 
         panel.add(scrollPane);
@@ -402,10 +411,10 @@ public class InputFrame extends JFrame implements ActionListener {
                 for (int j = 0; j < textFields.size(); j++) {
                     final int i2 = i;
                     final int j2 = j;
-                    
+
                     textFields.get(j).forEach(tf -> tf.setVisible(j2 == i2));
                 }
-                
+
                 for (int k = 0; k < labels.size(); k++)
                     labels.get(k).setVisible(i == k);
 
@@ -467,7 +476,7 @@ public class InputFrame extends JFrame implements ActionListener {
                         textArea.append(" " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
                     else
                         textArea.append("\n " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
-                    
+
                     counter++;
                 }
     }
@@ -500,7 +509,7 @@ public class InputFrame extends JFrame implements ActionListener {
         panel.add(anchor);
     }
 
-    // ----------------------------------------Métodos públicos---------------------------------
+    /* ---------------------------------------- Métodos públicos --------------------------------- */
 
     /**
      * Handler para los eventos ocurridos de la lista desplegable. Se trata la

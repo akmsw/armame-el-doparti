@@ -4,7 +4,7 @@
  * 
  * @author Bonino, Francisco Ignacio.
  * 
- * @version 1.0.0
+ * @version 3.0.0
  * 
  * @since 06/03/2021
  */
@@ -27,7 +27,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class RatingFrame extends JFrame {
 
-    // Campos privados.
+    /* ---------------------------------------- Campos privados  ---------------------------------- */
+
     private JPanel panel;
     private JButton finishButton;
     private BackButton backButton;
@@ -37,8 +38,8 @@ public class RatingFrame extends JFrame {
     /**
      * Creación de la ventana de ingreso de puntajes.
      * 
-     * @param inputFrame La ventana de ingreso de datos, de la cual se obtendrá
-     *                   información importante.
+     * @param inputFrame    La ventana de ingreso de datos, de la cual se obtendrá
+     *                      información importante.
      * @param previousFrame La ventana fuente que crea la ventana RatingFrame.
      */
     public RatingFrame(InputFrame inputFrame, JFrame previousFrame) {
@@ -76,7 +77,8 @@ public class RatingFrame extends JFrame {
             panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
 
             for (int j = 0; j < inputFrame.getPlayersSets().get(i).length; j++) {
-                spinnersMap.put(inputFrame.getPlayersSets().get(i)[j], new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
+                spinnersMap.put(inputFrame.getPlayersSets().get(i)[j],
+                        new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
                 panel.add(new JLabel(inputFrame.getPlayersSets().get(i)[j].getName()), "pushx");
 
@@ -91,22 +93,27 @@ public class RatingFrame extends JFrame {
         panel.add(backButton, "growx, span");
 
         add(panel);
+
         setResizable(false);
         setTitle("Puntuaciones");
         setIconImage(MainFrame.iconBall.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         pack();
+
         setLocationRelativeTo(null);
     }
 
     /**
-     * Método de prueba para testear que los puntajes se hayan asignado correctamente.
+     * Método de prueba para testear que los puntajes se hayan asignado
+     * correctamente.
      */
     private void ratingsTest() {
         System.out.println("##############################################");
 
         for (int i = 0; i < inputFrame.getPlayersSets().size(); i++)
             for (int j = 0; j < inputFrame.getPlayersSets().get(i).length; j++)
-                System.out.println("JUGADOR " + inputFrame.getPlayersSets().get(i)[j].getName() + " > RATING = " + inputFrame.getPlayersSets().get(i)[j].getRating());
+                System.out.println("JUGADOR " + inputFrame.getPlayersSets().get(i)[j].getName() + " > RATING = "
+                        + inputFrame.getPlayersSets().get(i)[j].getRating());
     }
 }

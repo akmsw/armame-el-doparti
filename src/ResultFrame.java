@@ -4,7 +4,7 @@
  * 
  * @author Bonino, Francisco Ignacio.
  * 
- * @version 1.0.0
+ * @version 3.0.0
  * 
  * @since 06/03/2021
  */
@@ -20,7 +20,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class ResultFrame extends JFrame {
 
-    // Campos privados.
+    /* ---------------------------------------- Campos privados ---------------------------------- */
+
     private JPanel panel;
     private JFrame previousFrame;
     private JButton mainMenuButton;
@@ -30,8 +31,8 @@ public class ResultFrame extends JFrame {
     /**
      * Creación de la ventana de resultados.
      * 
-     * @param inputFrame La ventana de ingreso de datos, de la cual se obtendrá
-     *                   información importante.
+     * @param inputFrame    La ventana de ingreso de datos, de la cual se obtendrá
+     *                      información importante.
      * @param previousFrame La ventana fuente que crea la ventana ResultFrame.
      */
     public ResultFrame(InputFrame inputFrame, JFrame previousFrame) {
@@ -44,7 +45,7 @@ public class ResultFrame extends JFrame {
             ratingMix();
     }
 
-    // ----------------------------------------Métodos privados---------------------------------
+    /* ---------------------------------------- Métodos privados --------------------------------- */
 
     /**
      * Este método inicializa los componentes de la ventana de resultados.
@@ -74,7 +75,7 @@ public class ResultFrame extends JFrame {
                 MainFrame mainFrame = new MainFrame();
 
                 mainFrame.setVisible(true);
-                
+
                 ResultFrame.this.dispose();
             }
         });
@@ -83,7 +84,7 @@ public class ResultFrame extends JFrame {
 
         panel.add(backButton, "growx");
         panel.add(mainMenuButton, "growx");
-        
+
         add(panel);
     }
 
@@ -94,6 +95,7 @@ public class ResultFrame extends JFrame {
     private void randomMix() {
         setTitle("MEZCLA ALEATORIA");
         setVisible(true);
+
         initializeComponents();
     }
 

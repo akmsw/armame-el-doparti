@@ -1,10 +1,11 @@
+
 /**
  * Clase correspondiente a la ventana del
  * menú principal del programa.
  * 
  * @author Bonino, Francisco Ignacio.
  * 
- * @version 1.0.0
+ * @version 3.0.0
  * 
  * @since 27/02/2021
  */
@@ -26,10 +27,12 @@ import net.miginfocom.swing.MigLayout;
 
 public class MainFrame extends JFrame implements ActionListener {
 
-    // Campos públicos.
+    /* ---------------------------------------- Campos públicos ---------------------------------- */
+
     public static ImageIcon iconBall; // Ícono para la ventana.
 
-    // Campos privados.
+    /* ---------------------------------------- Campos privados ---------------------------------- */
+
     private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW, bgImage, chImg; // Íconos utilizados para la ventana.
     private JButton startButton, helpButton, chButton; // Botones del menú principal.
     private JLabel bgLabel; // Etiqueta para la imagen de fondo.
@@ -42,7 +45,7 @@ public class MainFrame extends JFrame implements ActionListener {
         initializeComponents();
     }
 
-    // ----------------------------------------Métodos privados---------------------------------
+    /* ---------------------------------------- Métodos privados --------------------------------- */
 
     /**
      * Este método se encarga de inicializar los botones y la imagen de fondo de la
@@ -82,11 +85,14 @@ public class MainFrame extends JFrame implements ActionListener {
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
         add(panel);
+
         setResizable(false);
         setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(iconBall.getImage());   
+        setIconImage(iconBall.getImage());
+
         pack();
+
         setLocationRelativeTo(null);
     }
 
@@ -106,7 +112,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // TODO.
     }
 
-    // ----------------------------------------Métodos públicos---------------------------------
+    /* ---------------------------------------- Métodos públicos --------------------------------- */
 
     /**
      * Override para indicar qué hacer en base a cada boton pulsado.
@@ -119,11 +125,13 @@ public class MainFrame extends JFrame implements ActionListener {
             String[] options = { "7", "8" };
 
             int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                        "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE, smallIconBall, options, options[0]);
+                                                             "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
+                                                             smallIconBall, options, options[0]);
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
-                    InputFrame inputFrame = new InputFrame(MainFrame.this, playersAmount + 7); // + 7 para compensar el índice de la selección.
+                    // + 7 para compensar el índice de la selección.
+                    InputFrame inputFrame = new InputFrame(MainFrame.this, playersAmount + 7);
 
                     inputFrame.setVisible(true);
 
