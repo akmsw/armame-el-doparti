@@ -33,8 +33,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private ImageIcon smallIconBall, iconAKMSW, smallIconAKMSW, bgImage, chImg; // Íconos utilizados para la ventana.
-    private JButton startButton, helpButton, chButton; // Botones del menú principal.
+    private ImageIcon smallIconBall, bgImage; // Íconos utilizados para la ventana.
+    private JButton startButton, helpButton; // Botones del menú principal.
     private JLabel bgLabel; // Etiqueta para la imagen de fondo.
     private JPanel panel;
 
@@ -53,15 +53,11 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void initializeComponents() {
         bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
-        chImg = new ImageIcon(Main.IMG_PATH + "chicha.jpg");
 
         bgLabel = new JLabel("", bgImage, JLabel.CENTER);
 
         iconBall = new ImageIcon(Main.IMG_PATH + "icon.png");
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-
-        iconAKMSW = new ImageIcon(Main.IMG_PATH + "akmsw.png");
-        smallIconAKMSW = new ImageIcon(iconAKMSW.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 
         startButton = new JButton("Comenzar");
         startButton.setEnabled(true);
@@ -71,17 +67,11 @@ public class MainFrame extends JFrame implements ActionListener {
         helpButton.setEnabled(true);
         helpButton.addActionListener(this);
 
-        chButton = new JButton();
-        chButton.setEnabled(true);
-        chButton.setIcon(new ImageIcon(chImg.getImage().getScaledInstance(73, 80, Image.SCALE_SMOOTH)));
-        chButton.addActionListener(this);
-
         panel = new JPanel(new MigLayout("wrap"));
 
         panel.add(bgLabel, "growx");
         panel.add(startButton, "growx");
         panel.add(helpButton, "growx");
-        panel.add(chButton, "align center");
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
         add(panel);
@@ -94,15 +84,6 @@ public class MainFrame extends JFrame implements ActionListener {
         pack();
 
         setLocationRelativeTo(null);
-    }
-
-    /**
-     * Este método se encarga de desplegar los créditos del programa.
-     */
-    private void chicha() {
-        String line = "<html>" + Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION + "<p><p>   ©akmsw";
-
-        JOptionPane.showMessageDialog(null, line, "Créditos", JOptionPane.PLAIN_MESSAGE, smallIconAKMSW);
     }
 
     /**
@@ -142,9 +123,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     System.exit(-1);
                 }
             }
-        } else if (e.getSource() == chButton)
-            chicha();
-        else if (e.getSource() == helpButton)
+        } else if (e.getSource() == helpButton)
             help();
         else
             System.exit(0);

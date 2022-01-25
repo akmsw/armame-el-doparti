@@ -11,7 +11,6 @@
  */
 
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,7 +40,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
-    private static final int FRAME_WIDTH = 483; // Ancho de la ventana.
+    private static final int FRAME_WIDTH = 390; // Ancho de la ventana.
     private static final int FRAME_HEIGHT = 411; // Alto de la ventana.
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
 
@@ -57,7 +56,6 @@ public class InputFrame extends JFrame implements ActionListener {
     // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private EnumMap<Position, Integer> playersAmountMap;
     private ImageIcon smallIcon; // Ícono para la ventana.
-    private JLabel cdLabel, ldLabel, mfLabel, fwLabel, wcLabel; // Imágenes para cada posición.
     private ArrayList<JLabel> labels; // Arreglo con las imágenes de cada posición.
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
     private JButton mixButton;
@@ -83,9 +81,6 @@ public class InputFrame extends JFrame implements ActionListener {
 
     // Opciones de distribución de jugadores.
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
-
-    // Dimensión y posición para las imágenes.
-    private static final Rectangle LABEL_POS = new Rectangle(374, 100, 85, 85);
 
     /**
      * Constructor de la ventana de mezcla.
@@ -211,24 +206,6 @@ public class InputFrame extends JFrame implements ActionListener {
         addTextFields(Position.WILDCARD, textFieldWC, setWC);
 
         addAnchorCheckBox();
-
-        cdLabel = new JLabel();
-        ldLabel = new JLabel();
-        mfLabel = new JLabel();
-        fwLabel = new JLabel();
-        wcLabel = new JLabel();
-
-        labels.add(cdLabel);
-        labels.add(ldLabel);
-        labels.add(mfLabel);
-        labels.add(fwLabel);
-        labels.add(wcLabel);
-
-        addImage(cdLabel, "cd.jpg", panel);
-        addImage(ldLabel, "ld.jpg", panel);
-        addImage(mfLabel, "mf.jpg", panel);
-        addImage(fwLabel, "fw.jpg", panel);
-        addImage(wcLabel, "wc.jpg", panel);
         addComboBox();
         addButtons();
         addTextArea();
@@ -293,23 +270,6 @@ public class InputFrame extends JFrame implements ActionListener {
 
         for (int i = 0; i < textFieldSet.size(); i++)
             panel.add(textFieldSet.get(i));
-    }
-
-    /**
-     * Este método se encarga de agregar al panel las imágenes correspondientes a
-     * cada posición cuya visibilidad se toggleará en base al ítem seleccionado en
-     * la lista desplegable.
-     * 
-     * @param label    Etiqueta donde se seteará la imagen.
-     * @param fileName Nombre del archivo a buscar.
-     * @param panel    Panel donde se agregará la imagen.
-     */
-    private void addImage(JLabel label, String fileName, JPanel panel) {
-        label.setIcon(new ImageIcon(Main.IMG_PATH + fileName));
-        label.setBounds(LABEL_POS);
-        label.setVisible(true);
-
-        panel.add(label);
     }
 
     /**
