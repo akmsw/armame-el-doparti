@@ -77,7 +77,7 @@ public class InputFrame extends JFrame implements ActionListener {
                                                        "Agregar defensores laterales",
                                                        "Agregar mediocampistas",
                                                        "Agregar delanteros",
-                                                       "Agregar comodines" };
+                                                       "Agregar arqueros" };
 
     // Opciones de distribución de jugadores.
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
@@ -105,7 +105,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método rescata la cantidad de jugadores para cada posición por equipo
      * mediante expresiones regulares.
      * 
-     * [CLMFW].+>.+ : Matchea las líneas que comiencen con C, L, M, F, ó W,
+     * [CLMFG].+>.+ : Matchea las líneas que comiencen con C, L, M, F, ó W,
      * seguido por al menos un caracter '>' (esta regex busca las líneas que
      * nos importan en el archivo .PDA).
      * 
@@ -133,7 +133,7 @@ public class InputFrame extends JFrame implements ActionListener {
             int index = 0;
 
             while ((line = br.readLine()) != null)
-                if (line.matches("[CLMFW].+>.+")) {
+                if (line.matches("[CLMFG].+>.+")) {
                     playersAmountMap.put(Position.values()[index],
                             Integer.parseInt(line.replaceAll("(?!(?<=" + playersAmount + ")\\d).", "")));
                     index++;
@@ -168,17 +168,17 @@ public class InputFrame extends JFrame implements ActionListener {
         textFields = new ArrayList<>();
         labels = new ArrayList<>();
 
-        setCD = new Player[(int) (playersAmountMap.get(Position.CENTRALDEFENDER) * 2)];
-        setLD = new Player[(int) (playersAmountMap.get(Position.LATERALDEFENDER) * 2)];
+        setCD = new Player[(int) (playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
+        setLD = new Player[(int) (playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
         setMF = new Player[(int) (playersAmountMap.get(Position.MIDFIELDER) * 2)];
         setFW = new Player[(int) (playersAmountMap.get(Position.FORWARD) * 2)];
-        setWC = new Player[(int) (playersAmountMap.get(Position.WILDCARD) * 2)];
+        setWC = new Player[(int) (playersAmountMap.get(Position.GOALKEEPER) * 2)];
 
-        initializeSet(setCD, Position.CENTRALDEFENDER);
-        initializeSet(setLD, Position.LATERALDEFENDER);
+        initializeSet(setCD, Position.CENTRAL_DEFENDER);
+        initializeSet(setLD, Position.LATERAL_DEFENDER);
         initializeSet(setMF, Position.MIDFIELDER);
         initializeSet(setFW, Position.FORWARD);
-        initializeSet(setWC, Position.WILDCARD);
+        initializeSet(setWC, Position.GOALKEEPER);
 
         textFields.add(textFieldCD);
         textFields.add(textFieldLD);
@@ -199,11 +199,11 @@ public class InputFrame extends JFrame implements ActionListener {
         panel.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
         panel.setLayout(null);
 
-        addTextFields(Position.CENTRALDEFENDER, textFieldCD, setCD);
-        addTextFields(Position.LATERALDEFENDER, textFieldLD, setLD);
+        addTextFields(Position.CENTRAL_DEFENDER, textFieldCD, setCD);
+        addTextFields(Position.LATERAL_DEFENDER, textFieldLD, setLD);
         addTextFields(Position.MIDFIELDER, textFieldMF, setMF);
         addTextFields(Position.FORWARD, textFieldFW, setFW);
-        addTextFields(Position.WILDCARD, textFieldWC, setWC);
+        addTextFields(Position.GOALKEEPER, textFieldWC, setWC);
 
         addAnchorCheckBox();
         addComboBox();
@@ -422,7 +422,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * lectura. Se muestran los jugadores ingresados en el orden en el que estén
      * posicionados en sus respectivos arreglos. El orden en el que se muestran es:
      * Defensores centrales > Defensores laterales > Mediocampistas > Delanteros >
-     * Comodines.
+     * Arqueros.
      */
     private void updateTextArea() {
         int counter = 0;

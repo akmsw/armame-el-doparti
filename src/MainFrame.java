@@ -1,4 +1,3 @@
-
 /**
  * Clase correspondiente a la ventana del
  * menú principal del programa.

@@ -57,7 +57,7 @@ public class Main {
         positions.add("DEFENSORES LATERALES");
         positions.add("MEDIOCAMPISTAS");
         positions.add("DELANTEROS");
-        positions.add("COMODINES");
+        positions.add("ARQUEROS");
 
         MainFrame mainFrame = new MainFrame();
 
