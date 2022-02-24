@@ -12,13 +12,13 @@ Este programa ofrece una intuitiva y rápida manera de generar equipos para part
 
 El usuario podrá generar sus equipos ingresando los nombres de los jugadores a sortear en cada posición.
 
-- 📋 Si cada equipo consta de 7 jugadores, la distribución para cada equipo será:
+- 📋 Si cada equipo consta de 7 jugadores, la distribución para los mismos será:
   - **Defensores centrales**: 1
   - **Defensores laterales**: 2
   - **Mediocampistas**: 2
   - **Delanteros**: 1
   - **Arqueros**: 1
-- 📋 Si cada equipo consta de 8 jugadores, la distribución para cada equipo será:
+- 📋 Si cada equipo consta de 8 jugadores, la distribución para los mismos será:
   - **Defensores centrales**: 1
   - **Defensores laterales**: 2
   - **Mediocampistas**: 3

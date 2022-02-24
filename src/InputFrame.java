@@ -266,7 +266,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
                         updateTextArea();
 
-                        mixButton.setEnabled(checkMixButton());
+                        // Habilitamos el botón de mezcla sólo cuando todos los jugadores tengan nombre
+                        mixButton.setEnabled(!alreadyExists(""));
                     }
                 }
             });
@@ -472,19 +473,6 @@ public class InputFrame extends JFrame implements ActionListener {
                     return true;
 
         return false;
-    }
-
-    /**
-     * Este método se encarga de chequear si se han ingresado los nombres de todos
-     * los jugadores para habilitar el botón de mezcla.
-     */
-    private boolean checkMixButton() {
-        for (int i = 0; i < playersSets.size(); i++)
-            for (int j = 0; j < playersSets.get(i).length; j++)
-                if (playersSets.get(i)[j].getName().equals(""))
-                    return false;
-
-        return true;
     }
 
     /* ---------------------------------------- Métodos públicos --------------------------------- */
