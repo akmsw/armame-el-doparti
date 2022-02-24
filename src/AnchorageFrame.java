@@ -34,8 +34,6 @@ public class AnchorageFrame extends JFrame {
 
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
-    private static final int FRAME_WIDTH = 402; // Ancho de la ventana.
-    private static final int FRAME_HEIGHT = 432; // Alto de la ventana.
     private static final String FRAME_TITLE = "Anclaje de jugadores";
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
@@ -306,7 +304,6 @@ public class AnchorageFrame extends JFrame {
 
         updateTextArea();
 
-        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setTitle(FRAME_TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(MainFrame.iconBall.getImage());

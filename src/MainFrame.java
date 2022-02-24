@@ -52,11 +52,10 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void initializeComponents() {
         bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
-
-        bgLabel = new JLabel("", bgImage, JLabel.CENTER);
-
         iconBall = new ImageIcon(Main.IMG_PATH + "icon.png");
         smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
+        bgLabel = new JLabel("", bgImage, JLabel.CENTER);
 
         startButton = new JButton("Comenzar");
         startButton.setEnabled(true);

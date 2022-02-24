@@ -1,6 +1,6 @@
 # Armame el doparti v3.0 ⚽ [WIP]
 
-![cover2](https://user-images.githubusercontent.com/66426042/128075498-7262e772-3746-4ef3-9f4a-3d9820e8cd4f.jpg)
+![cover](https://user-images.githubusercontent.com/66426042/128075498-7262e772-3746-4ef3-9f4a-3d9820e8cd4f.jpg)
 
 ```
 🔜 Release date: TBD.

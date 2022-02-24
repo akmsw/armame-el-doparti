@@ -29,19 +29,18 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import net.miginfocom.swing.MigLayout;
+
 public class InputFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
-    private static final int FRAME_WIDTH = 390; // Ancho de la ventana.
-    private static final int FRAME_HEIGHT = 411; // Alto de la ventana.
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre.
 
     /* ---------------------------------------- Campos privados  ---------------------------------- */
@@ -55,13 +54,12 @@ public class InputFrame extends JFrame implements ActionListener {
 
     // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private EnumMap<Position, Integer> playersAmountMap;
-    private ImageIcon smallIcon; // Ícono para la ventana.
-    private ArrayList<JLabel> labels; // Arreglo con las imágenes de cada posición.
+    private ImageIcon smallIcon;
     private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
     private JButton mixButton;
     private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
     private JComboBox<String> comboBox; // Menú desplegable.
-    private JPanel panel;
+    private JPanel masterPanel, leftPanel, rightPanel;
     private JScrollPane scrollPane;
     private JFrame previousFrame;
     private BackButton backButton;
@@ -85,6 +83,7 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * Constructor de la ventana de mezcla.
      * 
+     * @param previousFrame Ventana a la cual regresar si se presiona el botón "Atrás".
      * @param playersAmount Cantidad de jugadores por equipo.
      * 
      * @throws IOException Cuando hay un error de lectura en los archivos PDA.
@@ -96,6 +95,7 @@ public class InputFrame extends JFrame implements ActionListener {
         playersAmountMap = new EnumMap<>(Position.class);
 
         collectPDData(playersAmount);
+        
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
     }
 
@@ -166,7 +166,6 @@ public class InputFrame extends JFrame implements ActionListener {
         textFieldFW = new ArrayList<>();
         textFieldWC = new ArrayList<>();
         textFields = new ArrayList<>();
-        labels = new ArrayList<>();
 
         setCD = new Player[(int) (playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
         setLD = new Player[(int) (playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
@@ -188,31 +187,37 @@ public class InputFrame extends JFrame implements ActionListener {
 
         playersSets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
 
-        setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(frameTitle);
-        setResizable(false);
         setIconImage(MainFrame.iconBall.getImage());
 
-        panel = new JPanel();
-        panel.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-        panel.setLayout(null);
+        masterPanel = new JPanel(new MigLayout("wrap 2"));
+        leftPanel = new JPanel(new MigLayout("wrap"));
+        rightPanel = new JPanel(new MigLayout("wrap"));
 
+        addComboBox();
         addTextFields(Position.CENTRAL_DEFENDER, textFieldCD, setCD);
         addTextFields(Position.LATERAL_DEFENDER, textFieldLD, setLD);
         addTextFields(Position.MIDFIELDER, textFieldMF, setMF);
         addTextFields(Position.FORWARD, textFieldFW, setFW);
         addTextFields(Position.GOALKEEPER, textFieldWC, setWC);
-
-        addAnchorCheckBox();
-        addComboBox();
-        addButtons();
         addTextArea();
+        addButtons();
+        addAnchorCheckBox();
 
-        panel.setBackground(Main.FRAMES_BG_COLOR);
+        leftPanel.setBackground(Main.FRAMES_BG_COLOR);
+        rightPanel.setBackground(Main.FRAMES_BG_COLOR);
+        masterPanel.setBackground(Main.FRAMES_BG_COLOR);
 
-        add(panel);
+        masterPanel.add(leftPanel, "west");
+        masterPanel.add(rightPanel, "east");
+
+        add(masterPanel);
+
+        pack();
+
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -228,7 +233,6 @@ public class InputFrame extends JFrame implements ActionListener {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
             JTextField aux = new JTextField();
 
-            aux.setBounds(5, (45 * (i + 1)), 201, 30);
             aux.addActionListener(new ActionListener() {
                 int index; // Índice que indica el campo de texto donde se ingresó el nombre.
 
@@ -269,7 +273,7 @@ public class InputFrame extends JFrame implements ActionListener {
         }
 
         for (int i = 0; i < textFieldSet.size(); i++)
-            panel.add(textFieldSet.get(i));
+            leftPanel.add(textFieldSet.get(i), "growx");
     }
 
     /**
@@ -279,13 +283,12 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addComboBox() {
         comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
 
-        comboBox.setBounds(5, 5, 200, 30);
         comboBox.addActionListener(this);
 
         // Se muestra el output correspondiente al estado inicial del JComboBox.
         updateOutput(comboBox.getSelectedItem().toString());
 
-        panel.add(comboBox);
+        leftPanel.add(comboBox, "growx");
     }
 
     /**
@@ -297,9 +300,6 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton = new JButton("Mezclar");
         backButton = new BackButton(InputFrame.this, previousFrame);
 
-        backButton.setBounds(240, 310, 101, 30);
-
-        mixButton.setBounds(240, 274, 100, 30);
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
 
@@ -332,8 +332,8 @@ public class InputFrame extends JFrame implements ActionListener {
             }
         });
 
-        panel.add(mixButton);
-        panel.add(backButton);
+        rightPanel.add(mixButton, "growx, span");
+        rightPanel.add(backButton, "growx, span");
     }
 
     /**
@@ -351,9 +351,7 @@ public class InputFrame extends JFrame implements ActionListener {
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        scrollPane.setBounds(215, 5, 150, 260);
-
-        panel.add(scrollPane);
+        rightPanel.add(scrollPane, "grow, span 1 55");
 
         updateTextArea();
     }
@@ -374,9 +372,6 @@ public class InputFrame extends JFrame implements ActionListener {
 
                     textFields.get(j).forEach(tf -> tf.setVisible(j2 == i2));
                 }
-
-                for (int k = 0; k < labels.size(); k++)
-                    labels.get(k).setVisible(i == k);
 
                 return;
             }
@@ -461,12 +456,11 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addAnchorCheckBox() {
         anchor = new JCheckBox("Anclar jugadores", false);
 
-        anchor.setBounds(225, 346, 122, 20);
         anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.CB_FONT_SIZE));
         anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
 
-        panel.add(anchor);
+        rightPanel.add(anchor, "growx");
     }
 
     /* ---------------------------------------- Métodos públicos --------------------------------- */
