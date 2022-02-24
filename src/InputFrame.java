@@ -384,7 +384,7 @@ public class InputFrame extends JFrame implements ActionListener {
     {
         for (int i = 0; i < textFields.size(); i++)
             for (int j = 0; j < textFields.get(i).size(); j++)
-                if (isTextFieldInPanel(textFields.get(i).get(j), leftPanel))
+                if (isComponentInPanel(textFields.get(i).get(j), leftPanel))
                 {
                     textFields.get(i).get(j).setVisible(false);
 
@@ -401,9 +401,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * 
      * @return Si el componente es parte o no del panel especificado.
      */
-    private boolean isTextFieldInPanel(JComponent component, JPanel panel)
+    private boolean isComponentInPanel(JComponent c, JPanel p)
     {
-        return java.util.Arrays.asList(panel.getComponents()).contains(component);
+        return (c.getParent() == p);
     }
 
     /**
