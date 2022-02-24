@@ -45,7 +45,7 @@ public class AnchorageFrame extends JFrame {
     // Arreglo de arreglos de checkboxes de los jugadores.
     private ArrayList<ArrayList<JCheckBox>> cbSets;
     // Arreglos de checkboxes de los jugadores separados por posición.
-    private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB;
+    private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, gkCB;
     // Frame de inputs cuya visibilidad será toggleada.
     private InputFrame inputFrame;
     // Paneles contenedores de los componentes de la ventana de anclajes.
@@ -81,7 +81,7 @@ public class AnchorageFrame extends JFrame {
         ldCB = new ArrayList<>();
         mfCB = new ArrayList<>();
         fwCB = new ArrayList<>();
-        wcCB = new ArrayList<>();
+        gkCB = new ArrayList<>();
 
         cbSets = new ArrayList<>();
 
@@ -89,7 +89,7 @@ public class AnchorageFrame extends JFrame {
         cbSets.add(ldCB);
         cbSets.add(mfCB);
         cbSets.add(fwCB);
-        cbSets.add(wcCB);
+        cbSets.add(gkCB);
 
         anchorageNum = 0;
         playersAnchored = 0;

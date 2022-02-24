@@ -48,11 +48,9 @@ public class InputFrame extends JFrame implements ActionListener {
 
     // Arreglos de campos de texto para ingresar nombres.
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK;
-
     // Lista con los arreglos de campos de texto para ingresar nombres.
     private ArrayList<ArrayList<JTextField>> textFields;
     private BackButton backButton;
-
     // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private EnumMap<Position, Integer> playersAmountMap;
     private ImageIcon smallIcon;
@@ -252,15 +250,17 @@ public class InputFrame extends JFrame implements ActionListener {
                         if (auxTF == textFieldSet.get(index))
                             break;
 
-                    // Nombre sin espacios ni al principio ni al fin, en mayúsculas,
-                    // y cualquier espacio intermedio es reemplazado por un guión bajo.
+                    /*
+                        Nombre sin espacios ni al principio ni al fin, en mayúsculas,
+                        y cualquier espacio intermedio es reemplazado por un guión bajo.
+                    */
                     String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
                     if (name.length() == 0 || name.length() > MAX_NAME_LEN
                         || isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null,
                                 "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
-                                + " caracteres o estar repetido",  "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                + " caracteres, o estar repetido",  "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
                         playersSet[index].setName(name);
 
@@ -280,8 +280,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * y setear el handler de eventos a la misma.
      */
     private void addComboBox() {
-        comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
+        comboBox = new JComboBox<String>(OPTIONS_COMBOBOX);
 
+        comboBox.setSelectedIndex(0);
         comboBox.addActionListener(this);
 
         leftPanel.add(comboBox, "growx");
@@ -353,11 +354,25 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
+     * Este método se encarga de agregar el checkbox de anclaje de jugadores en el
+     * panel del frame.
+     */
+    private void addAnchorCheckBox() {
+        anchor = new JCheckBox("Anclar jugadores", false);
+
+        anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.CB_FONT_SIZE));
+        anchor.setBackground(Main.FRAMES_BG_COLOR);
+        anchor.setVisible(true);
+
+        rightPanel.add(anchor, "growx");
+    }
+
+    /**
      * Este método se encarga de togglear la visibilidad de los
      * campos de texto de ingreso de jugadores en base al ítem
      * seleccionado en la lista desplegable.
      * 
-     * @param text Opción seleccionada del arreglo de Strings 'OPTIONS_COMBOBOX'.
+     * @param text Opción seleccionada del arreglo OPTIONS_COMBOBOX.
      */
     private void updateOutput(String text) {
         int index;
@@ -376,16 +391,38 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
+     * Este método se encarga de actualizar el texto mostrado en el campo de sólo
+     * lectura. Se muestran los jugadores ingresados en el orden en el que estén
+     * posicionados en sus respectivos arreglos. El orden en el que se muestran es:
+     * Defensores centrales > Defensores laterales > Mediocampistas > Delanteros >
+     * Arqueros.
+     */
+    private void updateTextArea() {
+        int counter = 0;
+
+        textArea.setText(null);
+
+        for (int i = 0; i < playersSets.size(); i++)
+            for (int j = 0; j < playersSets.get(i).length; j++)
+                if (!playersSets.get(i)[j].getName().equals("")) {
+                    if (i == 0 && j == 0)
+                        textArea.append(" " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
+                    else
+                        textArea.append("\n " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
+
+                    counter++;
+                }
+    }
+
+    /**
      * Este método se encarga de quitar los elementos de tipo
      * JTextField en el panel izquierdo antes de togglear
      * cuáles deben permanecer en el mismo.
      */
-    private void clearLeftPanel()
-    {
+    private void clearLeftPanel() {
         for (int i = 0; i < textFields.size(); i++)
             for (int j = 0; j < textFields.get(i).size(); j++)
-                if (isComponentInPanel(textFields.get(i).get(j), leftPanel))
-                {
+                if (isComponentInPanel(textFields.get(i).get(j), leftPanel)) {
                     textFields.get(i).get(j).setVisible(false);
 
                     leftPanel.remove(textFields.get(i).get(j));
@@ -401,8 +438,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * 
      * @return Si el componente es parte o no del panel especificado.
      */
-    private boolean isComponentInPanel(JComponent c, JPanel p)
-    {
+    private boolean isComponentInPanel(JComponent c, JPanel p) {
         return (c.getParent() == p);
     }
 
@@ -442,30 +478,6 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de actualizar el texto mostrado en el campo de sólo
-     * lectura. Se muestran los jugadores ingresados en el orden en el que estén
-     * posicionados en sus respectivos arreglos. El orden en el que se muestran es:
-     * Defensores centrales > Defensores laterales > Mediocampistas > Delanteros >
-     * Arqueros.
-     */
-    private void updateTextArea() {
-        int counter = 0;
-
-        textArea.setText(null);
-
-        for (int i = 0; i < playersSets.size(); i++)
-            for (int j = 0; j < playersSets.get(i).length; j++)
-                if (!playersSets.get(i)[j].getName().equals("")) {
-                    if (i == 0 && j == 0)
-                        textArea.append(" " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
-                    else
-                        textArea.append("\n " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
-
-                    counter++;
-                }
-    }
-
-    /**
      * Este método se encarga de chequear si se han ingresado los nombres de todos
      * los jugadores para habilitar el botón de mezcla.
      */
@@ -476,20 +488,6 @@ public class InputFrame extends JFrame implements ActionListener {
                     return false;
 
         return true;
-    }
-
-    /**
-     * Este método se encarga de agregar el checkbox de anclaje de jugadores en el
-     * panel del frame.
-     */
-    private void addAnchorCheckBox() {
-        anchor = new JCheckBox("Anclar jugadores", false);
-
-        anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.CB_FONT_SIZE));
-        anchor.setBackground(Main.FRAMES_BG_COLOR);
-        anchor.setVisible(true);
-
-        rightPanel.add(anchor, "growx");
     }
 
     /* ---------------------------------------- Métodos públicos --------------------------------- */
