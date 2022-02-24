@@ -202,7 +202,7 @@ public class InputFrame extends JFrame implements ActionListener {
         addAnchorCheckBox();
 
         // Se muestra el output correspondiente al estado inicial del JComboBox.
-        updateOutput(comboBox.getSelectedItem().toString());
+        updateTextFields(comboBox.getSelectedItem().toString());
 
         leftPanel.setBackground(Main.FRAMES_BG_COLOR);
         rightPanel.setBackground(Main.FRAMES_BG_COLOR);
@@ -348,7 +348,7 @@ public class InputFrame extends JFrame implements ActionListener {
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        rightPanel.add(scrollPane, "grow, span 1 40");
+        rightPanel.add(scrollPane, "grow, span 1 45");
 
         updateTextArea();
     }
@@ -374,7 +374,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * 
      * @param text Opción seleccionada del arreglo OPTIONS_COMBOBOX.
      */
-    private void updateOutput(String text) {
+    private void updateTextFields(String text) {
         int index;
 
         for (index = 0; index < OPTIONS_COMBOBOX.length; index++)
@@ -383,11 +383,11 @@ public class InputFrame extends JFrame implements ActionListener {
         
         clearLeftPanel();
         
-        for (JTextField tf : textFields.get(index)) {
+        for (JTextField tf : textFields.get(index))
             leftPanel.add(tf, "growx");
 
-            tf.setVisible(true);
-        }
+        leftPanel.revalidate();
+        leftPanel.repaint();
     }
 
     /**
@@ -422,11 +422,8 @@ public class InputFrame extends JFrame implements ActionListener {
     private void clearLeftPanel() {
         for (int i = 0; i < textFields.size(); i++)
             for (int j = 0; j < textFields.get(i).size(); j++)
-                if (isComponentInPanel(textFields.get(i).get(j), leftPanel)) {
-                    textFields.get(i).get(j).setVisible(false);
-
+                if (isComponentInPanel(textFields.get(i).get(j), leftPanel))
                     leftPanel.remove(textFields.get(i).get(j));
-                }
     }
 
     /**
@@ -495,13 +492,13 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * Handler para los eventos ocurridos de la lista desplegable. Se trata la
      * fuente del evento ocurrido como un JComboBox y se trata como un String el
-     * ítem seleccionado en el mismo para pasarlo al método updateOutput.
+     * ítem seleccionado en el mismo para pasarlo al método updateTextFields.
      * 
      * @param e Evento ocurrido (ítem seleccionado).
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        updateOutput((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
+        updateTextFields((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
     }
 
     /**
