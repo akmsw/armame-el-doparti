@@ -28,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,7 +47,7 @@ public class InputFrame extends JFrame implements ActionListener {
     /* ---------------------------------------- Campos privados  ---------------------------------- */
 
     // Arreglos de campos de texto para ingresar nombres.
-    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldWC;
+    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK;
 
     // Lista con los arreglos de campos de texto para ingresar nombres.
     private ArrayList<ArrayList<JTextField>> textFields;
@@ -55,7 +56,7 @@ public class InputFrame extends JFrame implements ActionListener {
     // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private EnumMap<Position, Integer> playersAmountMap;
     private ImageIcon smallIcon;
-    private Player[] setCD, setLD, setMF, setFW, setWC;
+    private Player[] setCD, setLD, setMF, setFW, setGK;
     private JButton mixButton;
     private JCheckBox anchor;
     private JComboBox<String> comboBox;
@@ -70,14 +71,11 @@ public class InputFrame extends JFrame implements ActionListener {
     public int playersAmount; // Cantidad de jugadores por equipo.
     public List<Player[]> playersSets; // Lista con los arreglos de jugadores.
 
-    // Opciones para el menú desplegable.
     private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
                                                        "Agregar defensores laterales",
                                                        "Agregar mediocampistas",
                                                        "Agregar delanteros",
                                                        "Agregar arqueros" };
-
-    // Opciones de distribución de jugadores.
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
 
     /**
@@ -164,28 +162,28 @@ public class InputFrame extends JFrame implements ActionListener {
         textFieldLD = new ArrayList<>();
         textFieldMF = new ArrayList<>();
         textFieldFW = new ArrayList<>();
-        textFieldWC = new ArrayList<>();
+        textFieldGK = new ArrayList<>();
         textFields = new ArrayList<>();
 
         setCD = new Player[(int) (playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
         setLD = new Player[(int) (playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
         setMF = new Player[(int) (playersAmountMap.get(Position.MIDFIELDER) * 2)];
         setFW = new Player[(int) (playersAmountMap.get(Position.FORWARD) * 2)];
-        setWC = new Player[(int) (playersAmountMap.get(Position.GOALKEEPER) * 2)];
+        setGK = new Player[(int) (playersAmountMap.get(Position.GOALKEEPER) * 2)];
 
         initializeSet(setCD, Position.CENTRAL_DEFENDER);
         initializeSet(setLD, Position.LATERAL_DEFENDER);
         initializeSet(setMF, Position.MIDFIELDER);
         initializeSet(setFW, Position.FORWARD);
-        initializeSet(setWC, Position.GOALKEEPER);
+        initializeSet(setGK, Position.GOALKEEPER);
 
         textFields.add(textFieldCD);
         textFields.add(textFieldLD);
         textFields.add(textFieldMF);
         textFields.add(textFieldFW);
-        textFields.add(textFieldWC);
+        textFields.add(textFieldGK);
 
-        playersSets = Arrays.asList(setCD, setLD, setMF, setFW, setWC);
+        playersSets = Arrays.asList(setCD, setLD, setMF, setFW, setGK);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(frameTitle);
@@ -200,10 +198,13 @@ public class InputFrame extends JFrame implements ActionListener {
         addTextFields(Position.LATERAL_DEFENDER, textFieldLD, setLD);
         addTextFields(Position.MIDFIELDER, textFieldMF, setMF);
         addTextFields(Position.FORWARD, textFieldFW, setFW);
-        addTextFields(Position.GOALKEEPER, textFieldWC, setWC);
+        addTextFields(Position.GOALKEEPER, textFieldGK, setGK);
         addTextArea();
         addButtons();
         addAnchorCheckBox();
+
+        // Se muestra el output correspondiente al estado inicial del JComboBox.
+        updateOutput(comboBox.getSelectedItem().toString());
 
         leftPanel.setBackground(Main.FRAMES_BG_COLOR);
         rightPanel.setBackground(Main.FRAMES_BG_COLOR);
@@ -233,7 +234,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, Player[] playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
             JTextField aux = new JTextField();
-
+            
             aux.addActionListener(new ActionListener() {
                 int index; // Índice que indica el campo de texto donde se ingresó el nombre.
 
@@ -272,9 +273,6 @@ public class InputFrame extends JFrame implements ActionListener {
 
             textFieldSet.add(aux);
         }
-
-        for (int i = 0; i < textFieldSet.size(); i++)
-            leftPanel.add(textFieldSet.get(i), "growx");
     }
 
     /**
@@ -285,9 +283,6 @@ public class InputFrame extends JFrame implements ActionListener {
         comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
 
         comboBox.addActionListener(this);
-
-        // Se muestra el output correspondiente al estado inicial del JComboBox.
-        updateOutput(comboBox.getSelectedItem().toString());
 
         leftPanel.add(comboBox, "growx");
     }
@@ -352,32 +347,63 @@ public class InputFrame extends JFrame implements ActionListener {
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        rightPanel.add(scrollPane, "grow, span 1 55");
+        rightPanel.add(scrollPane, "grow, span 1 40");
 
         updateTextArea();
     }
 
     /**
-     * Este método se encarga de actualizar lo mostrado en la ventana en base al
-     * ítem seleccionado en la lista desplegable. Se togglea la visibilidad de las
-     * imágenes y de los campos de texto de ingreso de jugadores.
+     * Este método se encarga de togglear la visibilidad de los
+     * campos de texto de ingreso de jugadores en base al ítem
+     * seleccionado en la lista desplegable.
      * 
      * @param text Opción seleccionada del arreglo de Strings 'OPTIONS_COMBOBOX'.
      */
     private void updateOutput(String text) {
-        for (int i = 0; i < OPTIONS_COMBOBOX.length; i++)
-            if (text.equals(OPTIONS_COMBOBOX[i])) {
-                for (int j = 0; j < textFields.size(); j++) {
-                    final int i2 = i;
-                    final int j2 = j;
+        int index;
 
-                    // TODO: Check this method.
+        for (index = 0; index < OPTIONS_COMBOBOX.length; index++)
+            if (text.equals(OPTIONS_COMBOBOX[index]))
+                break;
+        
+        clearLeftPanel();
+        
+        for (JTextField tf : textFields.get(index)) {
+            leftPanel.add(tf, "growx");
 
-                    textFields.get(j).forEach(tf -> tf.setVisible(j2 == i2));
+            tf.setVisible(true);
+        }
+    }
+
+    /**
+     * Este método se encarga de quitar los elementos de tipo
+     * JTextField en el panel izquierdo antes de togglear
+     * cuáles deben permanecer en el mismo.
+     */
+    private void clearLeftPanel()
+    {
+        for (int i = 0; i < textFields.size(); i++)
+            for (int j = 0; j < textFields.get(i).size(); j++)
+                if (isTextFieldInPanel(textFields.get(i).get(j), leftPanel))
+                {
+                    textFields.get(i).get(j).setVisible(false);
+
+                    leftPanel.remove(textFields.get(i).get(j));
                 }
+    }
 
-                return;
-            }
+    /**
+     * Este método se encarga de verificar si cierto componente es
+     * parte de algún panel en particular de este JFrame.
+     * 
+     * @param component Componente cuya pertenencia se verificará.
+     * @param panel Panel al cual se verificará la pertenencia.
+     * 
+     * @return Si el componente es parte o no del panel especificado.
+     */
+    private boolean isTextFieldInPanel(JComponent component, JPanel panel)
+    {
+        return java.util.Arrays.asList(panel.getComponents()).contains(component);
     }
 
     /**
