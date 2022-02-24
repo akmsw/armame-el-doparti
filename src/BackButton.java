@@ -10,16 +10,11 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Rectangle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class BackButton extends JButton {
-
-    /* ---------------------------------------- Campos privados ---------------------------------- */
-    
-    private static final Rectangle BACKBUTTON_BOUNDS = new Rectangle(224, 310, 100, 30);
 
     /**
      * Constructor del botón para navegar hacia atrás entre ventanas.
@@ -31,7 +26,6 @@ public class BackButton extends JButton {
         setText("Atrás");
         setEnabled(true);
         setVisible(true);
-        setBounds(BACKBUTTON_BOUNDS);
 
         addActionListener(new ActionListener() {
             /**

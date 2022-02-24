@@ -50,19 +50,19 @@ public class InputFrame extends JFrame implements ActionListener {
 
     // Lista con los arreglos de campos de texto para ingresar nombres.
     private ArrayList<ArrayList<JTextField>> textFields;
-    private Player[] setCD, setLD, setMF, setFW, setWC; // Arreglos que almacenan los nombres de los jugadores.
+    private BackButton backButton;
 
     // Mapa que asocia a cada posición un valor numérico (cuántos jugadores por posición por equipo).
     private EnumMap<Position, Integer> playersAmountMap;
     private ImageIcon smallIcon;
-    private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
+    private Player[] setCD, setLD, setMF, setFW, setWC;
     private JButton mixButton;
-    private JCheckBox anchor; // Checkbox de anclaje de jugadores a un mismo equipo.
-    private JComboBox<String> comboBox; // Menú desplegable.
+    private JCheckBox anchor;
+    private JComboBox<String> comboBox;
+    private JFrame previousFrame;    
     private JPanel masterPanel, leftPanel, rightPanel;
     private JScrollPane scrollPane;
-    private JFrame previousFrame;
-    private BackButton backButton;
+    private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real.
 
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
@@ -83,7 +83,7 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * Constructor de la ventana de mezcla.
      * 
-     * @param previousFrame Ventana a la cual regresar si se presiona el botón "Atrás".
+     * @param previousFrame Ventana fuente que crea la ventana InputFrame.
      * @param playersAmount Cantidad de jugadores por equipo.
      * 
      * @throws IOException Cuando hay un error de lectura en los archivos PDA.
@@ -95,7 +95,7 @@ public class InputFrame extends JFrame implements ActionListener {
         playersAmountMap = new EnumMap<>(Position.class);
 
         collectPDData(playersAmount);
-        
+
         initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
     }
 
@@ -214,9 +214,10 @@ public class InputFrame extends JFrame implements ActionListener {
 
         add(masterPanel);
 
+        setResizable(false);
+
         pack();
 
-        setResizable(false);
         setLocationRelativeTo(null);
     }
 
@@ -369,6 +370,8 @@ public class InputFrame extends JFrame implements ActionListener {
                 for (int j = 0; j < textFields.size(); j++) {
                     final int i2 = i;
                     final int j2 = j;
+
+                    // TODO: Check this method.
 
                     textFields.get(j).forEach(tf -> tf.setVisible(j2 == i2));
                 }

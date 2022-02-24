@@ -42,29 +42,20 @@ public class AnchorageFrame extends JFrame {
     private int playersAnchored; // Cantidad de jugadores anclados.
     private int MAX_ANCHOR; // Máxima cantidad permitida de jugadores por anclaje.
 
-    /*
-        Arreglos de checkboxes de los jugadores
-        separados por posición.
-    */
-    private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB;
-
     // Arreglo de arreglos de checkboxes de los jugadores.
     private ArrayList<ArrayList<JCheckBox>> cbSets;
-
+    // Arreglos de checkboxes de los jugadores separados por posición.
+    private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, wcCB;
     // Frame de inputs cuya visibilidad será toggleada.
     private InputFrame inputFrame;
-
     // Paneles contenedores de los componentes de la ventana de anclajes.
     private JPanel masterPanel, leftPanel, rightPanel;
-
     // Botones de la ventana de anclajes.
     private JButton okButton, backButton,
                     newAnchorage, clearAnchorages,
                     deleteAnchorage, deleteLastAnchorage;
 
-    /*
-        Área de texto donde se mostrarán los anclajes en tiempo real.
-    */
+    // Área de texto donde se mostrarán los anclajes en tiempo real.
     private JTextArea textArea;
     private JScrollPane scrollPane; // Scrollpane para el área de texto.
     private ImageIcon smallIcon; // Ícono para la ventana.
@@ -73,6 +64,7 @@ public class AnchorageFrame extends JFrame {
      * Creación de la ventana de anclajes.
      * 
      * @param inputFrame Ventana cuya visibilidad será toggleada.
+     * @param playersAmount Cantidad de jugadores por equipo.
      */
     public AnchorageFrame(InputFrame inputFrame, int playersAmount) {
         this.inputFrame = inputFrame;
@@ -304,6 +296,7 @@ public class AnchorageFrame extends JFrame {
 
         updateTextArea();
 
+        setResizable(false);
         setTitle(FRAME_TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(MainFrame.iconBall.getImage());
@@ -312,7 +305,6 @@ public class AnchorageFrame extends JFrame {
 
         pack();
         
-        setResizable(false);
         setLocationRelativeTo(null);
     }
 
