@@ -344,14 +344,14 @@ public class InputFrame extends JFrame implements ActionListener {
      * usuario.
      */
     private void addTextArea() {
-        textArea = new JTextArea(14, 14);
+        textArea = new JTextArea(14, 12);
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         textArea.setVisible(true);
 
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                                     JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         rightPanel.add(scrollPane, "push, grow, span");
 
