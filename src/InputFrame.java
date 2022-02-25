@@ -334,8 +334,8 @@ public class InputFrame extends JFrame implements ActionListener {
             }
         });
 
-        rightPanel.add(mixButton, "growx, span");
-        rightPanel.add(backButton, "growx, span");
+        rightPanel.add(mixButton, "grow");
+        rightPanel.add(backButton, "grow");
     }
 
     /**
@@ -344,7 +344,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * usuario.
      */
     private void addTextArea() {
-        textArea = new JTextArea();
+        textArea = new JTextArea(14, 14);
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
@@ -353,7 +353,7 @@ public class InputFrame extends JFrame implements ActionListener {
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        rightPanel.add(scrollPane, "w 220!, grow, span 1 52"); // Valores 220, 1 y 52 sujetos al tamaño y fuente utilizados
+        rightPanel.add(scrollPane, "push, grow, span");
 
         updateTextArea();
     }
@@ -369,7 +369,7 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
 
-        rightPanel.add(anchor, "center, wrap");
+        rightPanel.add(anchor, "center");
     }
 
     /**
