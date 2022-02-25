@@ -28,13 +28,16 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
-    public static ImageIcon iconBall; // Ícono para la ventana.
+    public static ImageIcon icon;
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private ImageIcon smallIconBall, bgImage; // Íconos utilizados para la ventana.
-    private JButton startButton, helpButton; // Botones del menú principal.
-    private JLabel bgLabel; // Etiqueta para la imagen de fondo.
+    private ImageIcon smallIcon, bgImage;
+
+    private JButton startButton, helpButton;
+
+    private JLabel bgLabel;
+
     private JPanel panel;
 
     /**
@@ -52,24 +55,26 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void initializeComponents() {
         bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
-        iconBall = new ImageIcon(Main.IMG_PATH + "icon.png");
-        smallIconBall = new ImageIcon(iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        icon = new ImageIcon(Main.IMG_PATH + "icon.png");
+        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+
+        startButton = new JButton("Comenzar");
+        helpButton = new JButton("Ayuda");
 
         bgLabel = new JLabel("", bgImage, JLabel.CENTER);
 
-        startButton = new JButton("Comenzar");
+        panel = new JPanel(new MigLayout("wrap"));
+
         startButton.setEnabled(true);
         startButton.addActionListener(this);
 
-        helpButton = new JButton("Ayuda");
         helpButton.setEnabled(true);
         helpButton.addActionListener(this);
-
-        panel = new JPanel(new MigLayout("wrap"));
 
         panel.add(bgLabel, "growx");
         panel.add(startButton, "growx");
         panel.add(helpButton, "growx");
+
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
         add(panel);
@@ -77,7 +82,7 @@ public class MainFrame extends JFrame implements ActionListener {
         setResizable(false);
         setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(iconBall.getImage());
+        setIconImage(icon.getImage());
 
         pack();
 
@@ -96,7 +101,7 @@ public class MainFrame extends JFrame implements ActionListener {
     /**
      * Override para indicar qué hacer en base a cada boton pulsado.
      * 
-     * @param e Evento ocurrido (botón pulsado).
+     * @param e Evento de click.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -105,11 +110,11 @@ public class MainFrame extends JFrame implements ActionListener {
 
             int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
                                                              "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                                             smallIconBall, options, options[0]);
+                                                             smallIcon, options, options[0]);
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {
-                    // + 7 para compensar el índice de la selección.
+                    // + 7 para compensar el índice de la selección
                     InputFrame inputFrame = new InputFrame(MainFrame.this, playersAmount + 7);
 
                     inputFrame.setVisible(true);

@@ -22,10 +22,14 @@ public class ResultFrame extends JFrame {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private JPanel panel;
-    private JFrame previousFrame;
     private JButton mainMenuButton;
+
+    private JFrame previousFrame;
+
+    private JPanel panel;
+    
     private BackButton backButton;
+    
     private InputFrame inputFrame;
 
     /**
@@ -51,17 +55,19 @@ public class ResultFrame extends JFrame {
      * Este método inicializa los componentes de la ventana de resultados.
      */
     private void initializeComponents() {
+        mainMenuButton = new JButton("Volver al menú principal");
+
+        backButton = new BackButton(ResultFrame.this, previousFrame);
+
+        panel = new JPanel(new MigLayout("wrap"));
+
         setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setIconImage(MainFrame.iconBall.getImage());
-
-        backButton = new BackButton(ResultFrame.this, previousFrame);
+        setIconImage(MainFrame.icon.getImage());
 
         backButton.setBounds(0, 0, 100, 30);
-
-        mainMenuButton = new JButton("Volver al menú principal");
 
         mainMenuButton.addActionListener(new ActionListener() {
             /**
@@ -79,8 +85,6 @@ public class ResultFrame extends JFrame {
                 ResultFrame.this.dispose();
             }
         });
-
-        panel = new JPanel(new MigLayout("wrap"));
 
         panel.add(backButton, "growx");
         panel.add(mainMenuButton, "growx");
@@ -101,7 +105,8 @@ public class ResultFrame extends JFrame {
 
     /**
      * Este método se encarga de armar los equipos de la manera más
-     * equitativa en base a las puntuaciones seteadas a los jugadores.
+     * equitativa en base a las puntuaciones seteadas a los jugadores
+     * y los anclajes existentes.
      */
     private void ratingMix() {
         setTitle("MEZCLA POR PUNTAJES");

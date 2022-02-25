@@ -27,12 +27,12 @@ import net.miginfocom.swing.MigLayout;
 
 public class RatingFrame extends JFrame {
 
-    /* ---------------------------------------- Campos privados  ---------------------------------- */
+    /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private JPanel panel;
     private JButton finishButton;
     private BackButton backButton;
-    private HashMap<Player, JSpinner> spinnersMap; // Mapa que asocia a cada jugador un JSpinner.
+    private HashMap<Player, JSpinner> spinnersMap;
     private InputFrame inputFrame;
 
     /**
@@ -47,10 +47,13 @@ public class RatingFrame extends JFrame {
 
         panel = new JPanel(new MigLayout());
 
-        panel.setBackground(Main.FRAMES_BG_COLOR);
-
         finishButton = new JButton("Finalizar");
+        
+        spinnersMap = new HashMap<>();
+
         backButton = new BackButton(RatingFrame.this, previousFrame);
+
+        panel.setBackground(Main.FRAMES_BG_COLOR);
 
         finishButton.addActionListener(new ActionListener() {
             /**
@@ -66,8 +69,6 @@ public class RatingFrame extends JFrame {
             }
         });
 
-        spinnersMap = new HashMap<>();
-
         for (int i = 0; i < inputFrame.getPlayersSets().size(); i++) {
             JLabel label = new JLabel(Main.positions.get(i));
 
@@ -78,7 +79,7 @@ public class RatingFrame extends JFrame {
 
             for (int j = 0; j < inputFrame.getPlayersSets().get(i).length; j++) {
                 spinnersMap.put(inputFrame.getPlayersSets().get(i)[j],
-                        new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
+                                new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
                 panel.add(new JLabel(inputFrame.getPlayersSets().get(i)[j].getName()), "pushx");
 
@@ -89,24 +90,24 @@ public class RatingFrame extends JFrame {
             }
         }
 
-        panel.add(finishButton, "growx, span, w 230::");
-        panel.add(backButton, "growx, span");
+        panel.add(finishButton, "grow, span");
+        panel.add(backButton, "grow, span");
 
         add(panel);
 
-        setResizable(false);
         setTitle("Puntuaciones");
-        setIconImage(MainFrame.iconBall.getImage());
+        setIconImage(MainFrame.icon.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         pack();
 
+        setResizable(false);
         setLocationRelativeTo(null);
     }
 
     /**
-     * Método de prueba para testear que los puntajes se hayan asignado
-     * correctamente.
+     * Método de prueba para testear que los puntajes 
+     * se hayan asignado correctamente.
      */
     private void ratingsTest() {
         System.out.println("##############################################");

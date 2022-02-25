@@ -13,13 +13,15 @@ public class Player {
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private int rating, anchor;
+
     private String name;
+
     private Position position;
 
     /**
      * Se crea un jugador básico con los parámetros recibidos.
      * 
-     * @param name El nombre del jugador.
+     * @param name     El nombre del jugador.
      * @param position La posición del jugador.
      */
     public Player(String name, Position position) {
@@ -31,8 +33,6 @@ public class Player {
     }
 
     /* ---------------------------------------- Métodos públicos --------------------------------- */
-
-    /* ---------------------------------------- Getters ------------------------------------------ */
 
     /**
      * @return El nombre del jugador.
@@ -61,8 +61,6 @@ public class Player {
     public int getAnchor() {
         return anchor;
     }
-
-    /* ---------------------------------------- Setters ------------------------------------------ */
 
     /**
      * @param name El nombre del jugador.

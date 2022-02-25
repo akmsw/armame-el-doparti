@@ -32,15 +32,15 @@ public class BackButton extends JButton {
              * Este método togglea la visibilidad de la ventana anterior,
              * eliminando la ventana actual para evitar múltiples
              * instancias de una misma ventana con distintas
-             * visibilidades. Esto podría llevar a corrupción de
-             * datos y a mantener información inutilizada en memoria
-             * (e.g.: JFrames duplicados donde uno es visible y otro no).
+             * visibilidades, ya que esto podría llevar a corrupción de
+             * datos y a mantener información inutilizada en memoria.
              * 
              * @param e Evento de click.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
                 previousFrame.setVisible(true);
+                
                 currentFrame.dispose();
             }
         });

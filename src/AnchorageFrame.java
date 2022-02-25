@@ -1,6 +1,5 @@
 /**
- * Clase correspondiente a la ventana de anclaje
- * de jugadores
+ * Clase correspondiente a la ventana de anclaje de jugadores.
  * 
  * @author Bonino, Francisco Ignacio.
  * 
@@ -38,30 +37,31 @@ public class AnchorageFrame extends JFrame {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private int anchorageNum; // Número de anclaje.
-    private int playersAnchored; // Cantidad de jugadores anclados.
-    private int MAX_ANCHOR; // Máxima cantidad permitida de jugadores por anclaje.
-    // Arreglo de arreglos de checkboxes de los jugadores.
+    private int anchorageNum, playersAnchored;
+    private int MAX_ANCHOR; // Máxima cantidad permitida de jugadores por anclaje
+
     private ArrayList<ArrayList<JCheckBox>> cbSets;
-    // Arreglos de checkboxes de los jugadores separados por posición.
+
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, gkCB;
-    // Frame de inputs cuya visibilidad será toggleada.
-    private InputFrame inputFrame;
-    // Paneles contenedores de los componentes de la ventana de anclajes.
-    private JPanel masterPanel, leftPanel, rightPanel;
-    // Botones de la ventana de anclajes.
+
+    private ImageIcon icon;
+
     private JButton okButton, backButton,
                     newAnchorage, clearAnchorages,
                     deleteAnchorage, deleteLastAnchorage;
-    // Área de texto donde se mostrarán los anclajes en tiempo real.
+    
+    private JPanel masterPanel, leftPanel, rightPanel;
+
+    private JScrollPane scrollPane;
+
     private JTextArea textArea;
-    private JScrollPane scrollPane; // Scrollpane para el área de texto.
-    private ImageIcon smallIcon; // Ícono para la ventana.
+
+    private InputFrame inputFrame;
 
     /**
      * Creación de la ventana de anclajes.
      * 
-     * @param inputFrame Ventana cuya visibilidad será toggleada.
+     * @param inputFrame    Ventana cuya visibilidad será toggleada.
      * @param playersAmount Cantidad de jugadores por equipo.
      */
     public AnchorageFrame(InputFrame inputFrame, int playersAmount) {
@@ -69,7 +69,7 @@ public class AnchorageFrame extends JFrame {
 
         MAX_ANCHOR = playersAmount - 1;
 
-        smallIcon = new ImageIcon(MainFrame.iconBall.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        icon = new ImageIcon(MainFrame.icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
         leftPanel = new JPanel(new MigLayout("wrap 2"));
@@ -98,16 +98,27 @@ public class AnchorageFrame extends JFrame {
     /* ---------------------------------------- Métodos privados --------------------------------- */
 
     /**
-     * Este método se encarga de inicializar los componentes de la ventana de
-     * anclaje.
+     * Este método se encarga de inicializar los
+     * componentes de la ventana de anclaje.
      */
     private void initializeComponents() {
+        okButton = new JButton("Finalizar");
+        backButton = new JButton("Atrás");
+        newAnchorage = new JButton("Anclar");
+        deleteAnchorage = new JButton("Borrar un anclaje");
+        deleteLastAnchorage = new JButton("Borrar último anclaje");
+        clearAnchorages = new JButton("Limpiar anclajes");
+        
+        textArea = new JTextArea();
+
+        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
         for (int i = 0; i < cbSets.size(); i++) {
             fillCBSet(inputFrame.getPlayersSets().get(i), cbSets.get(i));
+
             addCBSet(leftPanel, cbSets.get(i), Main.positions.get(i));
         }
-
-        okButton = new JButton("Finalizar");
 
         okButton.addActionListener(new ActionListener() {
             /**
@@ -132,8 +143,6 @@ public class AnchorageFrame extends JFrame {
             }
         });
 
-        backButton = new JButton("Atrás");
-
         backButton.addActionListener(new ActionListener() {
             /**
              * Este método togglea la visibilidad de las ventanas.
@@ -147,25 +156,19 @@ public class AnchorageFrame extends JFrame {
                 clearAnchorages();
 
                 inputFrame.setVisible(true);
-                
+
                 AnchorageFrame.this.dispose();
             }
         });
 
         leftPanel.add(okButton, "growx, span");
         leftPanel.add(backButton, "growx, span");
-        leftPanel.setBackground(Main.FRAMES_BG_COLOR);
 
-        textArea = new JTextArea();
+        leftPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         textArea.setVisible(true);
-
-        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-        newAnchorage = new JButton("Anclar");
 
         newAnchorage.addActionListener(new ActionListener() {
             /**
@@ -173,8 +176,7 @@ public class AnchorageFrame extends JFrame {
              * Sólo se permitirán hacer anclajes de no menos de 2 y no más de MAX_ANCHOR
              * jugadores.
              * No se podrán hacer anclajes que tengan más de la mitad de jugadores de
-             * una misma posición, ya que en ese caso el otro equipo no tendrá la misma
-             * cantidad de jugadores en dicha posición.
+             * una misma posición.
              * 
              * @param e Evento de click.
              */
@@ -188,13 +190,16 @@ public class AnchorageFrame extends JFrame {
                             anchored++;
 
                 if (!validChecksAmount(anchored)) {
-                    errorMsg("No puede haber más de " + MAX_ANCHOR + " ni menos de 2 jugadores en un mismo anclaje.");
+                    errorMsg("No puede haber más de " + MAX_ANCHOR + " ni menos de 2 jugadores en un mismo anclaje");
+
                     return;
                 } else if (!isValidAnchorage()) {
-                    errorMsg("No puede haber más de la mitad de jugadores de una misma posición en un mismo anclaje.");
+                    errorMsg("No puede haber más de la mitad de jugadores de una misma posición en un mismo anclaje");
+
                     return;
                 } else if (!validAnchorageAmount(anchored)) {
-                    errorMsg("No puede haber más de " + (2 * MAX_ANCHOR) + " jugadores anclados en total.");
+                    errorMsg("No puede haber más de " + (2 * MAX_ANCHOR) + " jugadores anclados en total");
+
                     return;
                 }
 
@@ -206,8 +211,6 @@ public class AnchorageFrame extends JFrame {
                 updateTextArea();
             }
         });
-
-        deleteAnchorage = new JButton("Borrar un anclaje");
 
         deleteAnchorage.addActionListener(new ActionListener() {
             /**
@@ -224,11 +227,11 @@ public class AnchorageFrame extends JFrame {
                     OPTIONS_DELETE[i] = Integer.toString(i + 1);
 
                 int anchor = JOptionPane.showOptionDialog(null, "Seleccione qué anclaje desea borrar",
-                             "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE, smallIcon,
-                             OPTIONS_DELETE, OPTIONS_DELETE[0]) + 1; // + 1 para compensar índice del arreglo.
+                        "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE, icon,
+                        OPTIONS_DELETE, OPTIONS_DELETE[0]) + 1; // + 1 para compensar índice del arreglo
 
                 if ((anchor - 1) != JOptionPane.CLOSED_OPTION) {
-                    // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'.
+                    // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'
                     for (int i = 0; i < cbSets.size(); i++)
                         changeAnchor(inputFrame.getPlayersSets().get(i), cbSets.get(i), anchor, 0);
 
@@ -247,8 +250,6 @@ public class AnchorageFrame extends JFrame {
             }
         });
 
-        deleteLastAnchorage = new JButton("Borrar último anclaje");
-
         deleteLastAnchorage.addActionListener(new ActionListener() {
             /**
              * Este método se encarga de borrar el último anclaje realizado.
@@ -260,8 +261,6 @@ public class AnchorageFrame extends JFrame {
                 deleteLast();
             }
         });
-
-        clearAnchorages = new JButton("Limpiar anclajes");
 
         clearAnchorages.addActionListener(new ActionListener() {
             /**
@@ -281,23 +280,23 @@ public class AnchorageFrame extends JFrame {
         rightPanel.add(clearAnchorages, "grow");
 
         rightPanel.setBackground(Main.FRAMES_BG_COLOR);
-        
+
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "east");
-        
+
         masterPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         updateTextArea();
 
-        setResizable(false);
         setTitle(FRAME_TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(MainFrame.iconBall.getImage());
+        setIconImage(MainFrame.icon.getImage());
 
         add(masterPanel);
 
         pack();
-        
+
+        setResizable(false);
         setLocationRelativeTo(null);
     }
 
@@ -332,6 +331,7 @@ public class AnchorageFrame extends JFrame {
      */
     private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
         JLabel label = new JLabel(title);
+        JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
 
         label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
 
@@ -339,8 +339,6 @@ public class AnchorageFrame extends JFrame {
 
         for (JCheckBox cb : cbSet)
             panel.add(cb, "align left, pushx");
-
-        JSeparator line = new JSeparator(JSeparator.HORIZONTAL);
 
         panel.add(line, "growx, span");
     }
@@ -388,10 +386,10 @@ public class AnchorageFrame extends JFrame {
      * Este método se encarga de crear una ventana de error con un texto
      * personalizado.
      * 
-     * @param errorText Texto de error a mostrar en la ventana.
+     * @param errMsg Mensaje de error a mostrar en la ventana.
      */
-    private void errorMsg(String errorText) {
-        JOptionPane.showMessageDialog(null, errorText, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+    private void errorMsg(String errMsg) {
+        JOptionPane.showMessageDialog(null, errMsg, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
     }
 
     /**

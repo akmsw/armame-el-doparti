@@ -25,24 +25,24 @@ public class Main {
 
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
-    // Color de fondo de las ventanas de selección/notificación.
-    private static final Color SELECT_NOTIF_FRAME_BG_COLOR = new Color(176, 189, 162);
-    private static final String FNT_PATH = "src/resources/fonts/"; // Carpeta donde buscar las fuentes.
+    private static final String FNT_PATH = "src/resources/fonts/";
 
     /* ---------------------------------------- Constantes públicas ------------------------------ */
 
+    public static final float FONT_SIZE = 18f; // Tamaño de fuente para los checkboxes necesarios
+
     public static final String PROGRAM_TITLE = "Armame el doparti";
     public static final String PROGRAM_VERSION = "v3.0";
+    public static final String IMG_PATH = "src/resources/images/";
 
-    public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas.
-    public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74); // Color de fondo de los botones.
-    public static final float CB_FONT_SIZE = 12; // Tamaño de fuente para los checkboxes necesarios.
-    public static final String IMG_PATH = "src/resources/images/"; // Carpeta donde buscar las imágenes.
+    public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162);
+    public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74);
 
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
-    public static ArrayList<String> positions; // Arreglo con los strings de las posiciones de los jugadores.
-    public static Font PROGRAM_FONT; // Fuente utilizada para el programa.
+    public static ArrayList<String> positions;
+
+    public static Font PROGRAM_FONT;
 
     /**
      * Método principal.
@@ -70,12 +70,12 @@ public class Main {
     /* ---------------------------------------- Métodos privados --------------------------------- */
 
     /**
-     * Este método se encarga de setear las propiedades de la interfaz
-     * gráfica del programa.
+     * Este método se encarga de setear las propiedades
+     * de la interfaz gráfica del programa.
      */
     private static void setGUIProperties() {
-        UIManager.put("OptionPane.background", SELECT_NOTIF_FRAME_BG_COLOR);
-        UIManager.put("Panel.background", SELECT_NOTIF_FRAME_BG_COLOR);
+        UIManager.put("OptionPane.background", FRAMES_BG_COLOR);
+        UIManager.put("Panel.background", FRAMES_BG_COLOR);
         UIManager.put("Button.background", BUTTONS_BG_COLOR);
         UIManager.put("Button.foreground", Color.WHITE);
         UIManager.put("Button.focus", BUTTONS_BG_COLOR);
@@ -86,7 +86,7 @@ public class Main {
         UIManager.put("Separator.background", FRAMES_BG_COLOR);
 
         try {
-            PROGRAM_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(FNT_PATH + "Comfortaa.ttf")).deriveFont(18f);
+            PROGRAM_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(FNT_PATH + "Comfortaa.ttf")).deriveFont(FONT_SIZE);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
