@@ -54,7 +54,6 @@ public class AnchorageFrame extends JFrame {
     private JButton okButton, backButton,
                     newAnchorage, clearAnchorages,
                     deleteAnchorage, deleteLastAnchorage;
-
     // Área de texto donde se mostrarán los anclajes en tiempo real.
     private JTextArea textArea;
     private JScrollPane scrollPane; // Scrollpane para el área de texto.
@@ -283,7 +282,12 @@ public class AnchorageFrame extends JFrame {
             }
         });
 
-        rightPanel.add(scrollPane, "w 128:213:213, h 311!, growy, wrap");
+        // Altura de scrollPane en base a la cantidad de jugadores
+        if ((MAX_ANCHOR + 1) == 7)
+            rightPanel.add(scrollPane, "h 340, grow, wrap");
+        else
+            rightPanel.add(scrollPane, "h 375, grow, wrap");
+        
         rightPanel.add(newAnchorage, "growx, wrap");
         rightPanel.add(deleteAnchorage, "growx, wrap");
         rightPanel.add(deleteLastAnchorage, "growx, wrap");
@@ -291,7 +295,7 @@ public class AnchorageFrame extends JFrame {
         rightPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         masterPanel.add(leftPanel, "west");
-        masterPanel.add(rightPanel, "center, growx, span");
+        masterPanel.add(rightPanel, "east");
         masterPanel.setBackground(Main.FRAMES_BG_COLOR);
 
         updateTextArea();

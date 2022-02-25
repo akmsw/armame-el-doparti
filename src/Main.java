@@ -86,7 +86,7 @@ public class Main {
         UIManager.put("Separator.background", FRAMES_BG_COLOR);
 
         try {
-            PROGRAM_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(FNT_PATH + "Comfortaa.ttf")).deriveFont(16f);
+            PROGRAM_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(FNT_PATH + "Comfortaa.ttf")).deriveFont(18f);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 

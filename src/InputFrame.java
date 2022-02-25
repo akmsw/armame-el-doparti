@@ -353,7 +353,7 @@ public class InputFrame extends JFrame implements ActionListener {
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        rightPanel.add(scrollPane, "grow, span 1 45");
+        rightPanel.add(scrollPane, "w 220!, grow, span 1 52"); // Valores 220, 1 y 52 sujetos al tamaño y fuente utilizados
 
         updateTextArea();
     }
@@ -369,7 +369,7 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
 
-        rightPanel.add(anchor, "growx");
+        rightPanel.add(anchor, "center, wrap");
     }
 
     /**
