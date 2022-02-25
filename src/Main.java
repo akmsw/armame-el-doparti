@@ -11,6 +11,9 @@
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -24,6 +27,7 @@ public class Main {
 
     // Color de fondo de las ventanas de selección/notificación.
     private static final Color SELECT_NOTIF_FRAME_BG_COLOR = new Color(176, 189, 162);
+    private static final String FNT_PATH = "src/resources/fonts/"; // Carpeta donde buscar las fuentes.
 
     /* ---------------------------------------- Constantes públicas ------------------------------ */
 
@@ -31,8 +35,8 @@ public class Main {
     public static final String PROGRAM_VERSION = "v3.0";
 
     // Fuente utilizada para el programa.
-    public static final FontUIResource PROGRAM_FONT = new FontUIResource("Noto Sans", Font.PLAIN, 13);
-    public static final String IMG_PATH = "src/graphics/"; // Carpeta donde buscar las imágenes.
+    public static Font PROGRAM_FONT;
+    public static final String IMG_PATH = "src/resources/graphics/"; // Carpeta donde buscar las imágenes.
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162); // Color de fondo de las ventanas.
     public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74); // Color de fondo de los botones.
     public static final float CB_FONT_SIZE = 12; // Tamaño de fuente para los checkboxes necesarios.
@@ -82,6 +86,18 @@ public class Main {
         UIManager.put("ComboBox.focus", Color.WHITE);
         UIManager.put("Separator.background", FRAMES_BG_COLOR);
 
+        try {
+            PROGRAM_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(FNT_PATH + "Comfortaa.ttf")).deriveFont(16f);
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+            ge.registerFont(PROGRAM_FONT);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+            System.exit(-1);
+        }
+
         setUIFont(PROGRAM_FONT);
     }
 
@@ -90,7 +106,7 @@ public class Main {
      * 
      * @param f Fuente a utilizar.
      */
-    private static void setUIFont(FontUIResource f) {
+    private static void setUIFont(Font f) {
         Enumeration<Object> keys = UIManager.getDefaults().keys();
 
         while (keys.hasMoreElements()) {

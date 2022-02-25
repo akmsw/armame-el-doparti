@@ -134,6 +134,10 @@ public class InputFrame extends JFrame implements ActionListener {
                             Integer.parseInt(line.replaceAll("(?!(?<=" + playersAmount + ")\\d).", "")));
                     index++;
                 }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+            System.exit(-1);
         }
     }
 
