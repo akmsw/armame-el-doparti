@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.Font;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -107,12 +108,17 @@ public class AnchorageFrame extends JFrame {
 
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    
+        int index = 0;
+        
+        for (Map.Entry<Position, Player[]> ps : inputFrame.playersSets.entrySet()) {
+            fillCBSet(ps.getValue(), cbSets.get(index));
+            addCBSet(leftPanel, cbSets.get(index), Main.positions.get(index));
 
-        for (int i = 0; i < cbSets.size(); i++) {
-            fillCBSet(inputFrame.getPlayersSets().get(i), cbSets.get(i));
-
-            addCBSet(leftPanel, cbSets.get(i), Main.positions.get(i));
+            index++;
         }
+
+        index = 0;
 
         okButton.addActionListener(new ActionListener() {
             /**
@@ -146,6 +152,8 @@ public class AnchorageFrame extends JFrame {
                 }
 
                 AnchorageFrame.this.setVisible(false);
+
+                anchoragesTest();
             }
         });
 
@@ -160,6 +168,7 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearAnchorages();
+                anchoragesTest();
 
                 inputFrame.setVisible(true);
 
@@ -212,9 +221,10 @@ public class AnchorageFrame extends JFrame {
                 anchorageNum++;
 
                 for (int i = 0; i < cbSets.size(); i++)
-                    setAnchors(cbSets.get(i), inputFrame.getPlayersSets().get(i));
+                    setAnchors(cbSets.get(i), inputFrame.playersSets.get(Position.values()[i]));
 
                 updateTextArea();
+                anchoragesTest();
             }
         });
 
@@ -239,7 +249,7 @@ public class AnchorageFrame extends JFrame {
                 if ((anchor - 1) != JOptionPane.CLOSED_OPTION) {
                     // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'
                     for (int i = 0; i < cbSets.size(); i++)
-                        changeAnchor(inputFrame.getPlayersSets().get(i), cbSets.get(i), anchor, 0);
+                        changeAnchor(inputFrame.playersSets.get(Position.values()[i]), cbSets.get(i), anchor, 0);
 
                     /*
                      * A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
@@ -247,11 +257,12 @@ public class AnchorageFrame extends JFrame {
                      */
                     for (int i = (anchor + 1); i <= anchorageNum; i++)
                         for (int j = 0; j < cbSets.size(); j++)
-                            changeAnchor(inputFrame.getPlayersSets().get(j), cbSets.get(j), i, (i - 1));
+                            changeAnchor(inputFrame.playersSets.get(Position.values()[j]), cbSets.get(j), i, (i - 1));
 
                     anchorageNum--;
 
                     updateTextArea();
+                    anchoragesTest();
                 }
             }
         });
@@ -265,6 +276,7 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 deleteLast();
+                anchoragesTest();
             }
         });
 
@@ -276,6 +288,7 @@ public class AnchorageFrame extends JFrame {
              */
             public void actionPerformed(ActionEvent e) {
                 clearAnchorages();
+                anchoragesTest();
             }
         });
 
@@ -435,7 +448,7 @@ public class AnchorageFrame extends JFrame {
      */
     private void deleteLast() {
         for (int i = 0; i < cbSets.size(); i++)
-            changeAnchor(inputFrame.getPlayersSets().get(i), cbSets.get(i), anchorageNum, 0);
+            changeAnchor(inputFrame.playersSets.get(Position.values()[i]), cbSets.get(i), anchorageNum, 0);
 
         anchorageNum--;
 
@@ -454,8 +467,8 @@ public class AnchorageFrame extends JFrame {
 
             textArea.append(" ----- ANCLAJE #" + i + " -----\n");
 
-            for (Player[] pSet : inputFrame.getPlayersSets())
-                for (Player player : pSet)
+            for (Map.Entry<Position, Player[]> ps : inputFrame.playersSets.entrySet())
+                for (Player player : ps.getValue())
                     if (player.getAnchor() == i) {
                         textArea.append(" " + counter + ". " + player.getName() + "\n");
                         counter++;
@@ -524,5 +537,19 @@ public class AnchorageFrame extends JFrame {
                         playersAnchored--;
                     }
                 }
+    }
+
+    /**
+     * Método de prueba para testear que los puntajes se hayan asignado
+     * correctamente.
+     */
+    private void anchoragesTest() {
+        System.out.println("-------------------------------------------------------");
+
+        for (int i = 0; i < inputFrame.playersSets.size(); i++)
+            for (int j = 0; j < inputFrame.playersSets.get(Position.values()[i]).length; j++)
+                System.out.println("JUGADOR " + inputFrame.playersSets.get(Position.values()[i])[j].getName()
+                                    + "(" + inputFrame.playersSets.get(Position.values()[i])[j].getPosition() + ")"
+                                    + " > ANCHOR = " + inputFrame.playersSets.get(Position.values()[i])[j].getAnchor());
     }
 }

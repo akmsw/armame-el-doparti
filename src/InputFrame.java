@@ -18,9 +18,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
@@ -83,7 +83,7 @@ public class InputFrame extends JFrame implements ActionListener {
                                                        "Agregar arqueros" };
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
 
-    public List<Player[]> playersSets; // Lista con los arreglos de jugadores
+    public TreeMap<Position, Player[]> playersSets; // Lista con los arreglos de jugadores
 
     /**
      * Constructor de la ventana de ingreso de jugadores.
@@ -203,7 +203,13 @@ public class InputFrame extends JFrame implements ActionListener {
         textFields.add(textFieldFW);
         textFields.add(textFieldGK);
 
-        playersSets = Arrays.asList(setCD, setLD, setMF, setFW, setGK);
+        playersSets = new TreeMap<Position, Player[]>();
+
+        playersSets.put(Position.CENTRAL_DEFENDER, setCD);
+        playersSets.put(Position.LATERAL_DEFENDER, setLD);
+        playersSets.put(Position.MIDFIELDER, setMF);
+        playersSets.put(Position.FORWARD, setFW);
+        playersSets.put(Position.GOALKEEPER, setGK);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(frameTitle);
@@ -289,6 +295,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
                             // Habilitamos el botón de mezcla sólo cuando todos los jugadores tengan nombre
                             mixButton.setEnabled(!alreadyExists(""));
+
+                            System.out.println("JUGADOR " + name + " EN POSICIÓN: " + playersSet[index].getPosition());
                         }
                     }
                 }
@@ -341,10 +349,14 @@ public class InputFrame extends JFrame implements ActionListener {
                         AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this, playersAmount);
 
                         anchorageFrame.setVisible(true);
-                    } else {
+                    } else if (distribution == 0) {
                         ResultFrame resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
 
                         resultFrame.setVisible(true);
+                    } else {
+                        RatingFrame ratingFrame = new RatingFrame(InputFrame.this, InputFrame.this);
+
+                        ratingFrame.setVisible(true);
                     }
 
                     InputFrame.this.setVisible(false);
@@ -439,16 +451,21 @@ public class InputFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (int i = 0; i < playersSets.size(); i++)
-            for (int j = 0; j < playersSets.get(i).length; j++)
-                if (!playersSets.get(i)[j].getName().equals("")) {
-                    textArea.append((counter + 1) + " - " + playersSets.get(i)[j].getName());
+        for (Map.Entry<Position, Player[]> ps : playersSets.entrySet()) {
+            int lim = ps.getValue().length;
+
+            Player[] set = ps.getValue();
+            
+            for (int i = 0; i < lim; i++)
+                if (!set[i].getName().equals("")) {
+                    textArea.append((counter + 1) + " - " + ps.getValue()[i].getName());
 
                     counter++;
 
                     if (((playersAmount * 2) - counter) != 0)
                         textArea.append("\n");
                 }
+        }
     }
 
     /**
@@ -503,10 +520,15 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        for (int i = 0; i < playersSets.size(); i++)
-            for (int j = 0; j < playersSets.get(i).length; j++)
-                if (playersSets.get(i)[j].getName().equals(name))
+        for (Map.Entry<Position, Player[]> ps : playersSets.entrySet()) {
+            int lim = ps.getValue().length;
+
+            Player[] set = ps.getValue();
+
+            for (int i = 0; i < lim; i++)
+                if (set[i].getName().equals(name))
                     return true;
+        }
 
         return false;
     }
@@ -544,12 +566,5 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     public boolean thereAreAnchorages() {
         return anchorages;
-    }
-
-    /**
-     * @return La lista con los arreglos de jugadores.
-     */
-    public List<Player[]> getPlayersSets() {
-        return playersSets;
     }
 }

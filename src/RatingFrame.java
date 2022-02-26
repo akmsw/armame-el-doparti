@@ -37,6 +37,8 @@ public class RatingFrame extends JFrame {
     
     private HashMap<Player, JSpinner> spinnersMap;
 
+    private InputFrame inputFrame;
+
     private ResultFrame resultFrame;
 
     /**
@@ -47,6 +49,8 @@ public class RatingFrame extends JFrame {
      * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
      */
     public RatingFrame(InputFrame inputFrame, JFrame previousFrame) {
+        this.inputFrame = inputFrame;
+
         panel = new JPanel(new MigLayout());
 
         finishButton = new JButton("Finalizar");
@@ -67,6 +71,8 @@ public class RatingFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
+
+                ratingsTest();
 
                 resultFrame = new ResultFrame(inputFrame, RatingFrame.this);
 
@@ -89,7 +95,7 @@ public class RatingFrame extends JFrame {
             }
         });
 
-        for (int i = 0; i < inputFrame.getPlayersSets().size(); i++) {
+        for (int i = 0; i < inputFrame.playersSets.size(); i++) {
             JLabel label = new JLabel(Main.positions.get(i));
 
             label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
@@ -97,16 +103,16 @@ public class RatingFrame extends JFrame {
             panel.add(label, "span");
             panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
 
-            for (int j = 0; j < inputFrame.getPlayersSets().get(i).length; j++) {
-                spinnersMap.put(inputFrame.getPlayersSets().get(i)[j],
+            for (int j = 0; j < inputFrame.playersSets.get(Position.values()[i]).length; j++) {
+                spinnersMap.put(inputFrame.playersSets.get(Position.values()[i])[j],
                                 new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
-                panel.add(new JLabel(inputFrame.getPlayersSets().get(i)[j].getName()), "pushx");
+                panel.add(new JLabel(inputFrame.playersSets.get(Position.values()[i])[j].getName()), "pushx");
 
                 if ((j % 2) != 0)
-                    panel.add(spinnersMap.get(inputFrame.getPlayersSets().get(i)[j]), "wrap");
+                    panel.add(spinnersMap.get(inputFrame.playersSets.get(Position.values()[i])[j]), "wrap");
                 else
-                    panel.add(spinnersMap.get(inputFrame.getPlayersSets().get(i)[j]));
+                    panel.add(spinnersMap.get(inputFrame.playersSets.get(Position.values()[i])[j]));
             }
         }
 
@@ -124,5 +130,19 @@ public class RatingFrame extends JFrame {
 
         setResizable(false);
         setLocationRelativeTo(null);
+    }
+
+    /**
+     * Método de prueba para testear que los puntajes se hayan asignado
+     * correctamente.
+     */
+    private void ratingsTest() {
+        System.out.println("##############################################");
+
+        for (int i = 0; i < inputFrame.playersSets.size(); i++)
+            for (int j = 0; j < inputFrame.playersSets.get(Position.values()[i]).length; j++)
+                System.out.println("JUGADOR " + inputFrame.playersSets.get(Position.values()[i])[j].getName()
+                        + " (" + inputFrame.playersSets.get(Position.values()[i])[j].getPosition()
+                        + " > RATING = " + inputFrame.playersSets.get(Position.values()[i])[j].getRating());
     }
 }

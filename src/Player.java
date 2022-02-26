@@ -12,7 +12,7 @@ public class Player {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private int rating, anchor;
+    private int rating, anchor, team;
 
     private String name;
 
@@ -28,18 +28,12 @@ public class Player {
         setName(name);
         setRating(0);
         setAnchor(0);
+        setTeam(0);
 
         this.position = position;
     }
 
     /* ---------------------------------------- Métodos públicos --------------------------------- */
-
-    /**
-     * @return El nombre del jugador.
-     */
-    public String getName() {
-        return name;
-    }
 
     /**
      * @return El puntaje asignado al jugador.
@@ -49,17 +43,31 @@ public class Player {
     }
 
     /**
-     * @return La posición del jugador.
-     */
-    public Position getPosition() {
-        return position;
-    }
-
-    /**
      * @return Número de anclaje correspondiente.
      */
     public int getAnchor() {
         return anchor;
+    }
+
+    /**
+     * @return El equipo al que pertenece el jugador.
+     */
+    public int getTeam() {
+        return team;
+    }
+
+    /**
+     * @return El nombre del jugador.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return La posición del jugador.
+     */
+    public Position getPosition() {
+        return position;
     }
 
     /**
@@ -81,5 +89,12 @@ public class Player {
      */
     public void setAnchor(int anchor) {
         this.anchor = anchor;
+    }
+
+    /**
+     * @param team Número de equipo al que pertence el jugador.
+     */
+    public void setTeam(int team) {
+        this.team = team;
     }
 }

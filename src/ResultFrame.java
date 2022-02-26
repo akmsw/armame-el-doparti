@@ -12,6 +12,9 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.HashMap;
+import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +24,8 @@ import net.miginfocom.swing.MigLayout;
 public class ResultFrame extends JFrame {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
+
+    private HashMap<String, Player> team1, team2;
 
     private JButton mainMenuButton;
 
@@ -43,10 +48,18 @@ public class ResultFrame extends JFrame {
         this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
 
-        if (inputFrame.getDistribution() == 0)
-            randomMix();
-        else
-            ratingMix();
+        team1 = new HashMap<String, Player>();
+        team2 = new HashMap<String, Player>();
+
+        if (inputFrame.distribution == 0) {
+            randomMix(inputFrame.thereAreAnchorages());
+    
+            initializeComponents();
+        } else {
+            ratingsMix(inputFrame.thereAreAnchorages());
+    
+            initializeComponents();
+        }
     }
 
     /* ---------------------------------------- Métodos privados --------------------------------- */
@@ -83,18 +96,20 @@ public class ResultFrame extends JFrame {
             }
         });
 
-        if (inputFrame.getDistribution() == 0) {
+        if (inputFrame.distribution == 0) {
             JButton remixButton = new JButton("Nueva mezcla");
 
             remixButton.addActionListener(new ActionListener() {
                 /**
-                 * TODO
+                 * Este método simplemente vuelve a mezclar los
+                 * jugadores de manera aleatoria considerando
+                 * los anclajes ingresados por el usuario.
                  * 
                  * @param e Evento de click.
                  */
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("REMIX");
+                    randomMix(inputFrame.thereAreAnchorages());
                 }
             });
 
@@ -113,29 +128,49 @@ public class ResultFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de armar los equipos de manera completamente
-     * aleatoria.
+     * Este método se encarga de repartir de manera aleatoria los
+     * jugadores en dos equipos.
+     * 
+     * @param anchorages Si la mezcla aleatoria debe tener
+     *                   en cuenta anclajes establecidos.
      */
-    private void randomMix() {
-        if (inputFrame.thereAreAnchorages())
+    private void randomMix(boolean anchorages) {
+        if (anchorages) {
             setTitle("MEZCLA ALEATORIA - CON ANCLAJES");
-        else
+        } else {
             setTitle("MEZCLA ALEATORIA - SIN ANCLAJES");
 
-        initializeComponents();
+            for (int i = 0; i < Position.values().length; i++)
+                mix(Position.values()[i]);
+        }
     }
 
     /**
-     * Este método se encarga de armar los equipos de la manera más
-     * equitativa en base a las puntuaciones seteadas a los jugadores
-     * y los anclajes existentes.
+     * Este método se encarga de repartir los jugadores en dos
+     * equipos de la manera más equitativa posible en base a
+     * los puntajes ingresados por el usuario.
+     * 
+     * @param anchorages Si la mezcla aleatoria debe tener
+     *                   en cuenta anclajes establecidos.
      */
-    private void ratingMix() {
-        if (inputFrame.thereAreAnchorages())
+    private void ratingsMix(boolean anchorages) {
+        if (anchorages) {
             setTitle("MEZCLA POR PUNTAJES - CON ANCLAJES");
-        else
+        } else {
             setTitle("MEZCLA POR PUNTAJES - SIN ANCLAJES");
+        }
+    }
 
-        initializeComponents();
+    /**
+     * Este método toma los jugadores ingresados de la
+     * posición especificada y los reparte de manera
+     * aleatoria.
+     * 
+     * @param position  Posición de los jugadores a sortear.
+     * @param index     Índice de la posición, para buscar en
+     *                  la lista de jugadores.
+     */
+    private void mix(Position position) {
+        inputFrame.playersSets.get(position);
     }
 }
