@@ -65,7 +65,7 @@ public class ResultFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setIconImage(MainFrame.icon_nobg.getImage());
+        setIconImage(MainFrame.icon.getImage());
 
         backButton.setBounds(0, 0, 100, 30);
 

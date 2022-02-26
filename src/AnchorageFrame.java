@@ -221,7 +221,7 @@ public class AnchorageFrame extends JFrame {
                     OPTIONS_DELETE[i] = Integer.toString(i + 1);
 
                 int anchor = JOptionPane.showOptionDialog(null, "Seleccione qué anclaje desea borrar",
-                        "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE, MainFrame.icon_nobg,
+                        "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE, MainFrame.smallIcon,
                         OPTIONS_DELETE, OPTIONS_DELETE[0]) + 1; // + 1 para compensar índice del arreglo
 
                 if ((anchor - 1) != JOptionPane.CLOSED_OPTION) {
@@ -284,7 +284,7 @@ public class AnchorageFrame extends JFrame {
 
         setTitle(FRAME_TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(MainFrame.icon_nobg.getImage());
+        setIconImage(MainFrame.icon.getImage());
 
         add(masterPanel);
 

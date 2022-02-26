@@ -202,7 +202,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(frameTitle);
-        setIconImage(MainFrame.icon_nobg.getImage());
+        setIconImage(MainFrame.icon.getImage());
 
         addComboBox();
         addTextFields(Position.CENTRAL_DEFENDER, textFieldCD, setCD);
@@ -324,7 +324,7 @@ public class InputFrame extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 distribution = JOptionPane.showOptionDialog(null,
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                        JOptionPane.QUESTION_MESSAGE, MainFrame.smallIcon_nobg, OPTIONS_MIX, OPTIONS_MIX[0]);
+                        JOptionPane.QUESTION_MESSAGE, MainFrame.smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
                 if (distribution != JOptionPane.CLOSED_OPTION) {
                     if (anchor.isSelected()) {
