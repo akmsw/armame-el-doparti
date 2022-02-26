@@ -28,11 +28,11 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
-    public static ImageIcon icon;
+    public static ImageIcon icon_bg, icon_nobg, smallIcon_nobg;
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private ImageIcon smallIcon, bgImage;
+    private ImageIcon bgImage;
 
     private JButton startButton, helpButton;
 
@@ -55,8 +55,9 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void initializeComponents() {
         bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
-        icon = new ImageIcon(Main.IMG_PATH + "icon.png");
-        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        icon_bg = new ImageIcon(Main.IMG_PATH + "icon_bg.png");
+        icon_nobg = new ImageIcon(Main.IMG_PATH + "icon_nobg.png");
+        smallIcon_nobg = new ImageIcon(icon_nobg.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
         startButton = new JButton("Comenzar");
         helpButton = new JButton("Ayuda");
@@ -82,7 +83,7 @@ public class MainFrame extends JFrame implements ActionListener {
         setResizable(false);
         setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(icon.getImage());
+        setIconImage(icon_bg.getImage());
 
         pack();
 
@@ -110,7 +111,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
             int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
                                                              "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                                             smallIcon, options, options[0]);
+                                                             smallIcon_nobg, options, options[0]);
 
             if (playersAmount != JOptionPane.CLOSED_OPTION) {
                 try {

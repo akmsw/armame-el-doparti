@@ -10,7 +10,6 @@
  * @since 28/02/2021
  */
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,7 +23,6 @@ import java.util.EnumMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -51,8 +49,6 @@ public class InputFrame extends JFrame implements ActionListener {
     private ArrayList<ArrayList<JTextField>> textFields;
 
     private EnumMap<Position, Integer> playersAmountMap; // Cuántos jugadores hay por posición en cada equipo
-
-    private ImageIcon icon;
 
     private JButton mixButton;
     
@@ -87,7 +83,7 @@ public class InputFrame extends JFrame implements ActionListener {
     public List<Player[]> playersSets; // Lista con los arreglos de jugadores
 
     /**
-     * Constructor de la ventana de mezcla.
+     * Constructor de la ventana de ingreso de jugadores.
      * 
      * @param previousFrame Ventana fuente que crea la ventana InputFrame.
      * @param playersAmount Cantidad de jugadores por equipo.
@@ -206,7 +202,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(frameTitle);
-        setIconImage(MainFrame.icon.getImage());
+        setIconImage(MainFrame.icon_nobg.getImage());
 
         addComboBox();
         addTextFields(Position.CENTRAL_DEFENDER, textFieldCD, setCD);
@@ -309,7 +305,6 @@ public class InputFrame extends JFrame implements ActionListener {
      * al panel de ingreso de jugadores.
      */
     private void addButtons() {
-        icon = new ImageIcon(MainFrame.icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         mixButton = new JButton("Mezclar");
         backButton = new BackButton(InputFrame.this, previousFrame);
 
@@ -329,7 +324,7 @@ public class InputFrame extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 distribution = JOptionPane.showOptionDialog(null,
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                        JOptionPane.QUESTION_MESSAGE, icon, OPTIONS_MIX, OPTIONS_MIX[0]);
+                        JOptionPane.QUESTION_MESSAGE, MainFrame.smallIcon_nobg, OPTIONS_MIX, OPTIONS_MIX[0]);
 
                 if (distribution != JOptionPane.CLOSED_OPTION) {
                     if (anchor.isSelected()) {
@@ -421,12 +416,12 @@ public class InputFrame extends JFrame implements ActionListener {
         for (int i = 0; i < playersSets.size(); i++)
             for (int j = 0; j < playersSets.get(i).length; j++)
                 if (!playersSets.get(i)[j].getName().equals("")) {
-                    if (i == 0 && j == 0)
-                        textArea.append(" " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
-                    else
-                        textArea.append("\n " + (counter + 1) + ". " + playersSets.get(i)[j].getName());
+                    textArea.append((counter + 1) + " - " + playersSets.get(i)[j].getName());
 
                     counter++;
+
+                    if (((playersAmount * 2) - counter) != 0)
+                        textArea.append("\n");
                 }
     }
 

@@ -11,12 +11,10 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
-import java.awt.Image;
 
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -44,8 +42,6 @@ public class AnchorageFrame extends JFrame {
 
     private ArrayList<JCheckBox> cdCB, ldCB, mfCB, fwCB, gkCB;
 
-    private ImageIcon icon;
-
     private JButton okButton, backButton,
                     newAnchorage, clearAnchorages,
                     deleteAnchorage, deleteLastAnchorage;
@@ -68,8 +64,6 @@ public class AnchorageFrame extends JFrame {
         this.inputFrame = inputFrame;
 
         MAX_ANCHOR = playersAmount - 1;
-
-        icon = new ImageIcon(MainFrame.icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
         leftPanel = new JPanel(new MigLayout("wrap 2"));
@@ -227,7 +221,7 @@ public class AnchorageFrame extends JFrame {
                     OPTIONS_DELETE[i] = Integer.toString(i + 1);
 
                 int anchor = JOptionPane.showOptionDialog(null, "Seleccione qué anclaje desea borrar",
-                        "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE, icon,
+                        "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE, MainFrame.icon_nobg,
                         OPTIONS_DELETE, OPTIONS_DELETE[0]) + 1; // + 1 para compensar índice del arreglo
 
                 if ((anchor - 1) != JOptionPane.CLOSED_OPTION) {
@@ -290,7 +284,7 @@ public class AnchorageFrame extends JFrame {
 
         setTitle(FRAME_TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(MainFrame.icon.getImage());
+        setIconImage(MainFrame.icon_nobg.getImage());
 
         add(masterPanel);
 
