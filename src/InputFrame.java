@@ -45,6 +45,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
+    private boolean anchorages;
+
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK;
 
     private ArrayList<ArrayList<JTextField>> textFields;
@@ -94,6 +96,8 @@ public class InputFrame extends JFrame implements ActionListener {
     public InputFrame(JFrame previousFrame, int playersAmount) throws IOException {
         this.previousFrame = previousFrame;
         this.playersAmount = playersAmount;
+
+        anchorages = false;
 
         playersAmountMap = new EnumMap<>(Position.class);
 
@@ -262,7 +266,7 @@ public class InputFrame extends JFrame implements ActionListener {
                         if (auxTF == textFieldSet.get(index))
                             break;
                     
-                    if (!(Pattern.matches("[a-zA-Z]+", aux.getText())))
+                    if (!(Pattern.matches("[a-z A-Z]+", aux.getText())))
                         JOptionPane.showMessageDialog(null,
                                 "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
                                 "¡Error!", JOptionPane.ERROR_MESSAGE, null);
@@ -333,7 +337,7 @@ public class InputFrame extends JFrame implements ActionListener {
                         JOptionPane.QUESTION_MESSAGE, MainFrame.smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
                 if (distribution != JOptionPane.CLOSED_OPTION) {
-                    if (anchor.isSelected()) {
+                    if (thereAreAnchorages()) {
                         AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this, playersAmount);
 
                         anchorageFrame.setVisible(true);
@@ -382,6 +386,20 @@ public class InputFrame extends JFrame implements ActionListener {
         anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.FONT_SIZE));
         anchor.setBackground(Main.FRAMES_BG_COLOR);
         anchor.setVisible(true);
+
+        anchor.addActionListener(new ActionListener() {
+            /**
+             * Este método se encarga de togglear el valor
+             * de la variable anchorages cada vez que se
+             * hace click en el checkbox.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                anchorages = !anchorages;
+            }
+        });
 
         rightPanel.add(anchor, "center");
     }
@@ -519,6 +537,13 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     public int getDistribution() {
         return distribution;
+    }
+
+    /**
+     * @return Si el usuario desea hacer anclajes.
+     */
+    public boolean thereAreAnchorages() {
+        return anchorages;
     }
 
     /**

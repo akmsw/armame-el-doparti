@@ -43,8 +43,6 @@ public class ResultFrame extends JFrame {
         this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
 
-        initializeComponents();
-
         if (inputFrame.getDistribution() == 0)
             randomMix();
         else
@@ -85,6 +83,24 @@ public class ResultFrame extends JFrame {
             }
         });
 
+        if (inputFrame.getDistribution() == 0) {
+            JButton remixButton = new JButton("Nueva mezcla");
+
+            remixButton.addActionListener(new ActionListener() {
+                /**
+                 * TODO
+                 * 
+                 * @param e Evento de click.
+                 */
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("REMIX");
+                }
+            });
+
+            panel.add(remixButton, "growx");
+        }
+
         panel.add(backButton, "growx");
         panel.add(mainMenuButton, "growx");
 
@@ -101,7 +117,12 @@ public class ResultFrame extends JFrame {
      * aleatoria.
      */
     private void randomMix() {
-        setTitle("MEZCLA ALEATORIA");
+        if (inputFrame.thereAreAnchorages())
+            setTitle("MEZCLA ALEATORIA - CON ANCLAJES");
+        else
+            setTitle("MEZCLA ALEATORIA - SIN ANCLAJES");
+
+        initializeComponents();
     }
 
     /**
@@ -110,6 +131,11 @@ public class ResultFrame extends JFrame {
      * y los anclajes existentes.
      */
     private void ratingMix() {
-        setTitle("MEZCLA POR PUNTAJES");
+        if (inputFrame.thereAreAnchorages())
+            setTitle("MEZCLA POR PUNTAJES - CON ANCLAJES");
+        else
+            setTitle("MEZCLA POR PUNTAJES - SIN ANCLAJES");
+
+        initializeComponents();
     }
 }
