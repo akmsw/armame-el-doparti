@@ -63,13 +63,8 @@ public class ResultFrame extends JFrame {
 
         panel = new JPanel(new MigLayout("wrap"));
 
-        setSize(400, 400);
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
         setIconImage(MainFrame.icon.getImage());
-
-        backButton.setBounds(0, 0, 100, 30);
 
         mainMenuButton.addActionListener(new ActionListener() {
             /**
@@ -80,11 +75,13 @@ public class ResultFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                ResultFrame.this.dispose();
+                inputFrame.dispose();
+                previousFrame.dispose();
+
                 MainFrame mainFrame = new MainFrame();
 
                 mainFrame.setVisible(true);
-
-                ResultFrame.this.dispose();
             }
         });
 
@@ -92,6 +89,11 @@ public class ResultFrame extends JFrame {
         panel.add(mainMenuButton, "growx");
 
         add(panel);
+
+        pack();
+
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**

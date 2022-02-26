@@ -68,8 +68,6 @@ public class InputFrame extends JFrame implements ActionListener {
     private Player[] setCD, setLD, setMF, setFW, setGK;
     
     private BackButton backButton;
-
-    private ResultFrame resultFrame;
     
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
@@ -340,7 +338,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
                         anchorageFrame.setVisible(true);
                     } else {
-                        resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
+                        ResultFrame resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
 
                         resultFrame.setVisible(true);
                     }

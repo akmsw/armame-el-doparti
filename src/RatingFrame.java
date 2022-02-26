@@ -36,8 +36,6 @@ public class RatingFrame extends JFrame {
     private BackButton backButton;
     
     private HashMap<Player, JSpinner> spinnersMap;
-    
-    private InputFrame inputFrame;
 
     private ResultFrame resultFrame;
 
@@ -49,8 +47,6 @@ public class RatingFrame extends JFrame {
      * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
      */
     public RatingFrame(InputFrame inputFrame, JFrame previousFrame) {
-        this.inputFrame = inputFrame;
-
         panel = new JPanel(new MigLayout());
 
         finishButton = new JButton("Finalizar");

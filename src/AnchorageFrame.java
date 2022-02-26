@@ -54,8 +54,6 @@ public class AnchorageFrame extends JFrame {
 
     private InputFrame inputFrame;
 
-    private ResultFrame resultFrame;
-
     /**
      * Creación de la ventana de anclajes.
      * 
@@ -132,9 +130,20 @@ public class AnchorageFrame extends JFrame {
                         if (cb.isSelected() && cb.isVisible())
                             cb.setSelected(false);
 
-                resultFrame = new ResultFrame(inputFrame, AnchorageFrame.this);
+                /*
+                 * Si la distribución es por puntajes, antes de mostrar
+                 * la ventana de resultados, se crea la ventana de ingreso
+                 * de puntajes para los jugadores.
+                 */
+                if (inputFrame.getDistribution() == 1) {
+                    RatingFrame ratingFrame = new RatingFrame(inputFrame, AnchorageFrame.this);
 
-                resultFrame.setVisible(true);
+                    ratingFrame.setVisible(true);
+                } else {
+                    ResultFrame resultFrame = new ResultFrame(inputFrame, AnchorageFrame.this);
+
+                    resultFrame.setVisible(true);
+                }
 
                 AnchorageFrame.this.setVisible(false);
             }
