@@ -451,13 +451,9 @@ public class InputFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (Map.Entry<Position, Player[]> ps : playersSets.entrySet()) {
-            int lim = ps.getValue().length;
-
-            Player[] set = ps.getValue();
-            
-            for (int i = 0; i < lim; i++)
-                if (!set[i].getName().equals("")) {
+        for (Map.Entry<Position, Player[]> ps : playersSets.entrySet())
+            for (int i = 0; i < ps.getValue().length; i++)
+                if (!ps.getValue()[i].getName().equals("")) {
                     textArea.append((counter + 1) + " - " + ps.getValue()[i].getName());
 
                     counter++;
@@ -465,7 +461,6 @@ public class InputFrame extends JFrame implements ActionListener {
                     if (((playersAmount * 2) - counter) != 0)
                         textArea.append("\n");
                 }
-        }
     }
 
     /**
@@ -520,15 +515,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        for (Map.Entry<Position, Player[]> ps : playersSets.entrySet()) {
-            int lim = ps.getValue().length;
-
-            Player[] set = ps.getValue();
-
-            for (int i = 0; i < lim; i++)
-                if (set[i].getName().equals(name))
+        for (Map.Entry<Position, Player[]> ps : playersSets.entrySet())
+            for (int i = 0; i < ps.getValue().length; i++)
+                if (ps.getValue()[i].getName().equals(name))
                     return true;
-        }
 
         return false;
     }

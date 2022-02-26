@@ -92,6 +92,8 @@ public class RatingFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 spinnersMap.forEach((k, v) -> { v.setValue(1); k.setRating(0); });
+
+                ratingsTest();
             }
         });
 

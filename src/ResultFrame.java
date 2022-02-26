@@ -139,9 +139,6 @@ public class ResultFrame extends JFrame {
             setTitle("MEZCLA ALEATORIA - CON ANCLAJES");
         } else {
             setTitle("MEZCLA ALEATORIA - SIN ANCLAJES");
-
-            for (int i = 0; i < Position.values().length; i++)
-                mix(Position.values()[i]);
         }
     }
 
@@ -159,18 +156,5 @@ public class ResultFrame extends JFrame {
         } else {
             setTitle("MEZCLA POR PUNTAJES - SIN ANCLAJES");
         }
-    }
-
-    /**
-     * Este método toma los jugadores ingresados de la
-     * posición especificada y los reparte de manera
-     * aleatoria.
-     * 
-     * @param position  Posición de los jugadores a sortear.
-     * @param index     Índice de la posición, para buscar en
-     *                  la lista de jugadores.
-     */
-    private void mix(Position position) {
-        inputFrame.playersSets.get(position);
     }
 }
