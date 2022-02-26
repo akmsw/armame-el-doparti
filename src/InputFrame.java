@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -66,8 +67,10 @@ public class InputFrame extends JFrame implements ActionListener {
 
     private Player[] setCD, setLD, setMF, setFW, setGK;
     
-    private BackButton backButton;    
+    private BackButton backButton;
 
+    private ResultFrame resultFrame;
+    
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
     public int distribution; // Tipo de distribución de jugadores elegida
@@ -260,25 +263,31 @@ public class InputFrame extends JFrame implements ActionListener {
                     for (index = 0; index < textFieldSet.size(); index++)
                         if (auxTF == textFieldSet.get(index))
                             break;
-
-                    /*
-                     * Nombre sin espacios ni al principio ni al final, en mayúsculas,
-                     * y cualquier espacio intermedio es reemplazado por un guión bajo.
-                     */
-                    String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
-
-                    if (name.length() == 0 || name.length() > MAX_NAME_LEN
-                        || isEmptyString(name) || alreadyExists(name))
+                    
+                    if (!(Pattern.matches("[a-zA-Z]+", aux.getText())))
                         JOptionPane.showMessageDialog(null,
-                                "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
-                                + " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
+                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
-                        playersSet[index].setName(name);
+                        /*
+                        * Nombre sin espacios ni al principio ni al final, en mayúsculas,
+                        * y cualquier espacio intermedio es reemplazado por un guión bajo.
+                        */
+                        String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
 
-                        updateTextArea();
+                        if (name.length() == 0 || name.length() > MAX_NAME_LEN
+                            || isEmptyString(name) || alreadyExists(name))
+                            JOptionPane.showMessageDialog(null,
+                                    "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
+                                    + " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                        else {
+                            playersSet[index].setName(name);
 
-                        // Habilitamos el botón de mezcla sólo cuando todos los jugadores tengan nombre
-                        mixButton.setEnabled(!alreadyExists(""));
+                            updateTextArea();
+
+                            // Habilitamos el botón de mezcla sólo cuando todos los jugadores tengan nombre
+                            mixButton.setEnabled(!alreadyExists(""));
+                        }
                     }
                 }
             });
@@ -320,7 +329,6 @@ public class InputFrame extends JFrame implements ActionListener {
              * @param e Evento de click.
              */
             @Override
-            @SuppressWarnings("unused")
             public void actionPerformed(ActionEvent e) {
                 distribution = JOptionPane.showOptionDialog(null,
                         "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
@@ -332,7 +340,9 @@ public class InputFrame extends JFrame implements ActionListener {
 
                         anchorageFrame.setVisible(true);
                     } else {
-                        ResultFrame resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
+                        resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
+
+                        resultFrame.setVisible(true);
                     }
 
                     InputFrame.this.setVisible(false);

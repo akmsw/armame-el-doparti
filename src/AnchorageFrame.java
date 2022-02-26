@@ -54,6 +54,8 @@ public class AnchorageFrame extends JFrame {
 
     private InputFrame inputFrame;
 
+    private ResultFrame resultFrame;
+
     /**
      * Creación de la ventana de anclajes.
      * 
@@ -124,14 +126,15 @@ public class AnchorageFrame extends JFrame {
              * @param e Evento de click.
              */
             @Override
-            @SuppressWarnings("unused")
             public void actionPerformed(ActionEvent e) {
                 for (ArrayList<JCheckBox> cbSet : cbSets)
                     for (JCheckBox cb : cbSet)
                         if (cb.isSelected() && cb.isVisible())
                             cb.setSelected(false);
 
-                ResultFrame resultFrame = new ResultFrame(inputFrame, AnchorageFrame.this);
+                resultFrame = new ResultFrame(inputFrame, AnchorageFrame.this);
+
+                resultFrame.setVisible(true);
 
                 AnchorageFrame.this.setVisible(false);
             }

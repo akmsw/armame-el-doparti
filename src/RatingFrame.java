@@ -30,10 +30,16 @@ public class RatingFrame extends JFrame {
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private JPanel panel;
-    private JButton finishButton;
+
+    private JButton finishButton, resetButton;
+
     private BackButton backButton;
+    
     private HashMap<Player, JSpinner> spinnersMap;
+    
     private InputFrame inputFrame;
+
+    private ResultFrame resultFrame;
 
     /**
      * Creación de la ventana de ingreso de puntajes.
@@ -48,6 +54,7 @@ public class RatingFrame extends JFrame {
         panel = new JPanel(new MigLayout());
 
         finishButton = new JButton("Finalizar");
+        resetButton = new JButton("Reiniciar puntajes");
         
         spinnersMap = new HashMap<>();
 
@@ -65,7 +72,24 @@ public class RatingFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
 
-                ratingsTest();
+                resultFrame = new ResultFrame(inputFrame, RatingFrame.this);
+
+                resultFrame.setVisible(true);
+
+                RatingFrame.this.setVisible(false);
+            }
+        });
+
+        resetButton.addActionListener(new ActionListener() {
+            /**
+             * Este método se encarga de resetear las
+             * puntuaciones de los jugadores.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                spinnersMap.forEach((k, v) -> { v.setValue(1); k.setRating(0); });
             }
         });
 
@@ -83,7 +107,7 @@ public class RatingFrame extends JFrame {
 
                 panel.add(new JLabel(inputFrame.getPlayersSets().get(i)[j].getName()), "pushx");
 
-                if (j % 2 != 0)
+                if ((j % 2) != 0)
                     panel.add(spinnersMap.get(inputFrame.getPlayersSets().get(i)[j]), "wrap");
                 else
                     panel.add(spinnersMap.get(inputFrame.getPlayersSets().get(i)[j]));
@@ -91,6 +115,7 @@ public class RatingFrame extends JFrame {
         }
 
         panel.add(finishButton, "grow, span");
+        panel.add(resetButton, "grow, span");
         panel.add(backButton, "grow, span");
 
         add(panel);
@@ -103,18 +128,5 @@ public class RatingFrame extends JFrame {
 
         setResizable(false);
         setLocationRelativeTo(null);
-    }
-
-    /**
-     * Método de prueba para testear que los puntajes 
-     * se hayan asignado correctamente.
-     */
-    private void ratingsTest() {
-        System.out.println("##############################################");
-
-        for (int i = 0; i < inputFrame.getPlayersSets().size(); i++)
-            for (int j = 0; j < inputFrame.getPlayersSets().get(i).length; j++)
-                System.out.println("JUGADOR " + inputFrame.getPlayersSets().get(i)[j].getName() + " > RATING = "
-                        + inputFrame.getPlayersSets().get(i)[j].getRating());
     }
 }
