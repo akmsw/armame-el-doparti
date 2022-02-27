@@ -9,17 +9,21 @@
  * @since 06/03/2021
  */
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableCellRenderer;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -33,7 +37,13 @@ public class ResultFrame extends JFrame {
 
     private JPanel panel;
 
+    private JTable table;
+
     private Random randomGenerator;
+
+    private String[] columnNames = { "POSICIÓN",
+                                     "EQUIPO #1",
+                                     "EQUIPO #2", };
     
     private BackButton backButton;
     
@@ -52,15 +62,16 @@ public class ResultFrame extends JFrame {
 
         randomGenerator = new Random();
 
-        if (inputFrame.distribution == 0) {
+        table = new JTable((inputFrame.playersAmount + 1), 3);
+
+        if (inputFrame.distribution == 0)
             randomMix(inputFrame.thereAreAnchorages());
-    
-            initializeComponents();
-        } else {
+        else
             ratingsMix(inputFrame.thereAreAnchorages());
-    
-            initializeComponents();
-        }
+
+        fillTable();
+        
+        initializeComponents();
     }
 
     /* ---------------------------------------- Métodos privados --------------------------------- */
@@ -69,14 +80,58 @@ public class ResultFrame extends JFrame {
      * Este método inicializa los componentes de la ventana de resultados.
      */
     private void initializeComponents() {
-        mainMenuButton = new JButton("Volver al menú principal");
-
-        backButton = new BackButton(ResultFrame.this, previousFrame);
-
         panel = new JPanel(new MigLayout("wrap"));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(MainFrame.icon.getImage());
+
+        addTable();
+        addButtons();
+        add(panel);
+
+        autoFitTable();
+
+        pack();
+
+        setResizable(false);
+        setLocationRelativeTo(null);
+    }
+
+    /**
+     * 
+     */
+    private void addTable() {
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setCellSelectionEnabled(false);
+        table.setRowSelectionAllowed(false);
+        table.setColumnSelectionAllowed(false);
+        table.setBorder(BorderFactory.createBevelBorder(1));
+        table.setEnabled(false);
+        table.setVisible(true);
+
+        panel.add(table, "push, grow, span, center");
+    }
+
+    /**
+     * 
+     */
+    private void fillTable() {
+        table.setValueAt(columnNames[0], 0, 0);
+        table.setValueAt(columnNames[1], 0, 1);
+        table.setValueAt(columnNames[2], 0, 2);
+
+        for (int i = 0; i < 3; i++)
+            for (int j = 1; j < (inputFrame.playersAmount + 1); j++)
+                table.setValueAt("WWWWWWWWWW", j, i);
+    }
+
+    /**
+     * 
+     */
+    private void addButtons() {
+        mainMenuButton = new JButton("Volver al menú principal");
+
+        backButton = new BackButton(ResultFrame.this, previousFrame);
 
         mainMenuButton.addActionListener(new ActionListener() {
             /**
@@ -141,13 +196,48 @@ public class ResultFrame extends JFrame {
 
         panel.add(backButton, "growx");
         panel.add(mainMenuButton, "growx");
+    }
 
-        add(panel);
+    /**
+     * 
+     */
+    private void autoFitTable() {
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
 
-        pack();
+            int preferredWidth = tableColumn.getMinWidth();
+            int maxWidth = tableColumn.getMaxWidth();
 
-        setResizable(false);
-        setLocationRelativeTo(null);
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
+
+                Component c = table.prepareRenderer(cellRenderer, row, column);
+                
+                int width = c.getPreferredSize().width + table.getIntercellSpacing().width;
+                
+                preferredWidth = Math.max(preferredWidth, width);
+
+                if (preferredWidth >= maxWidth) {
+                    preferredWidth = maxWidth;
+
+                    break;
+                }
+            }
+
+            tableColumn.setPreferredWidth(preferredWidth);
+        }
+
+        for (int row = 0; row < table.getRowCount(); row++) {
+            int rowHeight = table.getRowHeight();
+
+            for (int column = 0; column < table.getColumnCount(); column++) {
+                Component comp = table.prepareRenderer(table.getCellRenderer(row, column), row, column);
+
+                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
+            }
+
+            table.setRowHeight(row, rowHeight);
+        }
     }
 
     /**
