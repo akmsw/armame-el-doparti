@@ -295,8 +295,6 @@ public class InputFrame extends JFrame implements ActionListener {
 
                             // Habilitamos el botón de mezcla sólo cuando todos los jugadores tengan nombre
                             mixButton.setEnabled(!alreadyExists(""));
-
-                            System.out.println("JUGADOR " + name + " EN POSICIÓN: " + playersSet[index].getPosition());
                         }
                     }
                 }
@@ -454,12 +452,12 @@ public class InputFrame extends JFrame implements ActionListener {
         for (Map.Entry<Position, Player[]> ps : playersSets.entrySet())
             for (int i = 0; i < ps.getValue().length; i++)
                 if (!ps.getValue()[i].getName().equals("")) {
+                    if ((counter != 0) && (((playersAmount * 2) - counter) != 0))
+                        textArea.append("\n");
+                    
                     textArea.append((counter + 1) + " - " + ps.getValue()[i].getName());
 
                     counter++;
-
-                    if (((playersAmount * 2) - counter) != 0)
-                        textArea.append("\n");
                 }
     }
 

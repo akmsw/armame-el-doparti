@@ -152,8 +152,6 @@ public class AnchorageFrame extends JFrame {
                 }
 
                 AnchorageFrame.this.setVisible(false);
-
-                anchoragesTest();
             }
         });
 
@@ -168,7 +166,6 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearAnchorages();
-                anchoragesTest();
 
                 inputFrame.setVisible(true);
 
@@ -224,7 +221,6 @@ public class AnchorageFrame extends JFrame {
                     setAnchors(cbSets.get(i), inputFrame.playersSets.get(Position.values()[i]));
 
                 updateTextArea();
-                anchoragesTest();
             }
         });
 
@@ -262,7 +258,6 @@ public class AnchorageFrame extends JFrame {
                     anchorageNum--;
 
                     updateTextArea();
-                    anchoragesTest();
                 }
             }
         });
@@ -276,7 +271,6 @@ public class AnchorageFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 deleteLast();
-                anchoragesTest();
             }
         });
 
@@ -288,7 +282,6 @@ public class AnchorageFrame extends JFrame {
              */
             public void actionPerformed(ActionEvent e) {
                 clearAnchorages();
-                anchoragesTest();
             }
         });
 
@@ -537,19 +530,5 @@ public class AnchorageFrame extends JFrame {
                         playersAnchored--;
                     }
                 }
-    }
-
-    /**
-     * Método de prueba para testear que los puntajes se hayan asignado
-     * correctamente.
-     */
-    private void anchoragesTest() {
-        System.out.println("-------------------------------------------------------");
-
-        for (int i = 0; i < inputFrame.playersSets.size(); i++)
-            for (int j = 0; j < inputFrame.playersSets.get(Position.values()[i]).length; j++)
-                System.out.println("JUGADOR " + inputFrame.playersSets.get(Position.values()[i])[j].getName()
-                                    + "(" + inputFrame.playersSets.get(Position.values()[i])[j].getPosition() + ")"
-                                    + " > ANCHOR = " + inputFrame.playersSets.get(Position.values()[i])[j].getAnchor());
     }
 }

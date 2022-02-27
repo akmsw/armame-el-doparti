@@ -160,6 +160,8 @@ public class ResultFrame extends JFrame {
                     resetTeams();
 
                     randomMix(inputFrame.thereAreAnchorages());
+
+                    fillTable();
                 }
             });
 
@@ -223,9 +225,9 @@ public class ResultFrame extends JFrame {
      * datos cargados de los jugadores en cada equipo.
      */
     private void fillTable() {
+        // Labels de formato
         table.setValueAt("EQUIPO #1", 0, 1);
         table.setValueAt("EQUIPO #2", 0, 2);
-        table.setValueAt("ARQUERO", 1, 0);
 
         int cdSetLength_half = inputFrame.playersSets.get(Position.CENTRAL_DEFENDER).length / 2;
         int ldSetLength_half = inputFrame.playersSets.get(Position.LATERAL_DEFENDER).length / 2;
@@ -233,16 +235,44 @@ public class ResultFrame extends JFrame {
         int fwSetLength_half = inputFrame.playersSets.get(Position.FORWARD).length / 2;
         
         for (int i = 0; i < cdSetLength_half; i++)
-            table.setValueAt("DEFENSOR CENTRAL", (i + 2), 0);
+            table.setValueAt("DEFENSOR CENTRAL", (i + 1), 0);
         
         for (int i = 0; i < ldSetLength_half; i++)
-            table.setValueAt("DEFENSOR LATERAL", (i + 2 + cdSetLength_half), 0);
+            table.setValueAt("DEFENSOR LATERAL", (i + 1 + cdSetLength_half), 0);
         
         for (int i = 0; i < mfSetLength_half; i++)
-            table.setValueAt("MEDIOCAMPISTA", (i + 2 + cdSetLength_half + ldSetLength_half), 0);
+            table.setValueAt("MEDIOCAMPISTA", (i + 1 + cdSetLength_half + ldSetLength_half), 0);
         
         for (int i = 0; i < fwSetLength_half; i++)
-            table.setValueAt("DELANTERO", (i + 2 + cdSetLength_half + ldSetLength_half + mfSetLength_half), 0);
+            table.setValueAt("DELANTERO", (i + 1 + cdSetLength_half + ldSetLength_half + mfSetLength_half), 0);
+        
+        table.setValueAt("ARQUERO", (1 + cdSetLength_half + ldSetLength_half + mfSetLength_half + fwSetLength_half), 0);
+        
+        // Nombres de los jugadores
+        int row1 = 1;
+        int row2 = 1;
+
+        /*
+         *                      ¡¡¡IMPORTANTE!!!
+         * 
+         * Aquí se llenan los recuadros de la tabla confiando en el
+         * orden en el que se escribieron las posiciones en las filas
+         * de la columna 0. Es decir, los primeros jugadores a ingresar
+         * serán defensores centrales, luego defensores laterales,
+         * mediocampistas, delanteros y por último arqueros. Si se
+         * cambian de lugar los labels de las posiciones en la tabla,
+         * deberá cambiarse esta manera de llenar la tabla, ya que no
+         * se respetará el nuevo orden establecido.
+         * 
+         * TODO: Almacenar datos en un arreglo y alimentar la tabla con el mismo
+         *       para lograr mayor abstracción y eficiencia.
+         */
+        for (Position pos : Position.values())
+            for (Player player : inputFrame.playersSets.get(pos))
+                if (player.getTeam() == 1)
+                    table.setValueAt(player.getName(), row1++, 1);
+                else
+                    table.setValueAt(player.getName(), row2++, 2);
     }
 
     /**
@@ -303,8 +333,6 @@ public class ResultFrame extends JFrame {
 
             for (int i = 0; i < Position.values().length; i++)
                 mixAndDistribute(Position.values()[i]);
-            
-            mixTest();
         }
     }
 
@@ -339,8 +367,6 @@ public class ResultFrame extends JFrame {
      * Al resto de jugadores que quedaron sin elegir de manera
      * aleatoria (aquellos con team == 0), se les asigna el
      * número de equipo opuesto.
-     * Finalmente, se agregan estos jugadores a los mapas de los
-     * equipos.
      * 
      * @param position Posición de los jugadores a distribuir.
      */
@@ -353,8 +379,6 @@ public class ResultFrame extends JFrame {
 
         ArrayList<Integer> alreadySetted = new ArrayList<>();
 
-        System.out.println("teamSubset1 = " + teamSubset1 + "\nteamSubset2 = " + teamSubset2);
-
         for (int i = 0; i < (set.length / 2); i++) {
             do {
                 index = randomGenerator.nextInt(set.length);
@@ -363,15 +387,11 @@ public class ResultFrame extends JFrame {
             alreadySetted.add(index);
 
             set[index].setTeam(teamSubset1);
-
-            System.out.println("JUGADOR " + set[index].getName() + " TIENE TEAM " + teamSubset1);
         }
 
         for (int i = 0; i < set.length; i++)
-            if (set[i].getTeam() == 0) {
+            if (set[i].getTeam() == 0)
                 set[i].setTeam(teamSubset2);
-                System.out.println("JUGADOR " + set[i].getName() + " TENÍA TEAM 0, AHORA TIENE TEAM " + teamSubset2);
-            }
     }
 
     /**
@@ -381,21 +401,5 @@ public class ResultFrame extends JFrame {
         for (Map.Entry<Position, Player[]> ps : inputFrame.playersSets.entrySet())
             for (Player p : ps.getValue())
                 p.setTeam(0);
-        
-        mixTest();
-    }
-
-    /**
-     * Método de prueba para testear que los jugadores se hayan repartido
-     * de la manera correspondiente entre los equipos.
-     */
-    private void mixTest() {
-        System.out.println("//////////////////////////////////////////////");
-
-        for (int i = 0; i < inputFrame.playersSets.size(); i++)
-            for (int j = 0; j < inputFrame.playersSets.get(Position.values()[i]).length; j++)
-                System.out.println("JUGADOR " + inputFrame.playersSets.get(Position.values()[i])[j].getName()
-                        + " (" + inputFrame.playersSets.get(Position.values()[i])[j].getPosition()
-                        + " > EQUIPO = " + inputFrame.playersSets.get(Position.values()[i])[j].getTeam());
     }
 }

@@ -37,8 +37,6 @@ public class RatingFrame extends JFrame {
     
     private HashMap<Player, JSpinner> spinnersMap;
 
-    private InputFrame inputFrame;
-
     private ResultFrame resultFrame;
 
     /**
@@ -49,8 +47,6 @@ public class RatingFrame extends JFrame {
      * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
      */
     public RatingFrame(InputFrame inputFrame, JFrame previousFrame) {
-        this.inputFrame = inputFrame;
-
         panel = new JPanel(new MigLayout());
 
         finishButton = new JButton("Finalizar");
@@ -72,8 +68,6 @@ public class RatingFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
 
-                ratingsTest();
-
                 resultFrame = new ResultFrame(inputFrame, RatingFrame.this);
 
                 resultFrame.setVisible(true);
@@ -92,8 +86,6 @@ public class RatingFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 spinnersMap.forEach((k, v) -> { v.setValue(1); k.setRating(0); });
-
-                ratingsTest();
             }
         });
 
@@ -132,19 +124,5 @@ public class RatingFrame extends JFrame {
 
         setResizable(false);
         setLocationRelativeTo(null);
-    }
-
-    /**
-     * Método de prueba para testear que los puntajes se hayan asignado
-     * correctamente.
-     */
-    private void ratingsTest() {
-        System.out.println("##############################################");
-
-        for (int i = 0; i < inputFrame.playersSets.size(); i++)
-            for (int j = 0; j < inputFrame.playersSets.get(Position.values()[i]).length; j++)
-                System.out.println("JUGADOR " + inputFrame.playersSets.get(Position.values()[i])[j].getName()
-                        + " (" + inputFrame.playersSets.get(Position.values()[i])[j].getPosition()
-                        + " > RATING = " + inputFrame.playersSets.get(Position.values()[i])[j].getRating());
     }
 }
