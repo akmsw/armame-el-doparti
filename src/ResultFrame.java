@@ -9,6 +9,7 @@
  * @since 06/03/2021
  */
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import net.miginfocom.swing.MigLayout;
@@ -40,10 +42,6 @@ public class ResultFrame extends JFrame {
     private JTable table;
 
     private Random randomGenerator;
-
-    private String[] columnNames = { "POSICIÓN",
-                                     "EQUIPO #1",
-                                     "EQUIPO #2", };
     
     private BackButton backButton;
     
@@ -98,35 +96,9 @@ public class ResultFrame extends JFrame {
     }
 
     /**
-     * 
-     */
-    private void addTable() {
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.setCellSelectionEnabled(false);
-        table.setRowSelectionAllowed(false);
-        table.setColumnSelectionAllowed(false);
-        table.setBorder(BorderFactory.createBevelBorder(1));
-        table.setEnabled(false);
-        table.setVisible(true);
-
-        panel.add(table, "push, grow, span, center");
-    }
-
-    /**
-     * 
-     */
-    private void fillTable() {
-        table.setValueAt(columnNames[0], 0, 0);
-        table.setValueAt(columnNames[1], 0, 1);
-        table.setValueAt(columnNames[2], 0, 2);
-
-        for (int i = 0; i < 3; i++)
-            for (int j = 1; j < (inputFrame.playersAmount + 1); j++)
-                table.setValueAt("WWWWWWWWWW", j, i);
-    }
-
-    /**
-     * 
+     * Este método se encarga de colocar en el panel principal
+     * del frame los botones de navegación entre ventanas y de
+     * redistribución en caso de ser necesario.
      */
     private void addButtons() {
         mainMenuButton = new JButton("Volver al menú principal");
@@ -173,7 +145,7 @@ public class ResultFrame extends JFrame {
         });
 
         if (inputFrame.distribution == 0) {
-            JButton remixButton = new JButton("Nueva mezcla");
+            JButton remixButton = new JButton("Redistribuir");
 
             remixButton.addActionListener(new ActionListener() {
                 /**
@@ -199,7 +171,83 @@ public class ResultFrame extends JFrame {
     }
 
     /**
-     * 
+     * Este método se encarga de colocar en el panel principal
+     * del frame la tabla donde se mostrarán los jugadores y
+     * sus respectivas posiciones para cada equipo armado.
+     */
+    private void addTable() {
+        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            /**
+             * Este método se encarga de setear el color de fondo
+             * y de letra de las casillas de la tabla.
+             * 
+             * @param table Tabla fuente.
+             * @param value -.
+             * @param isSelected Si la celda está seleccionada.
+             * @param hasFocus Si la celda está en foco.
+             * @param row Coordenada de fila de la celda.
+             * @param column Coordenada de columna de la celda.
+             */
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                /*
+                 * Fila 0 y columna 0 tendrán fondo verde con letras blancas,
+                 * el resto tendrá fondo blanco con letras negras.
+                 */
+                if ((row == 0) || (column == 0)) {
+                    c.setBackground(Main.BUTTONS_BG_COLOR);
+                    c.setForeground(Color.WHITE);
+                } else {
+                    c.setBackground(Color.WHITE);
+                    c.setForeground(Color.BLACK);
+                }
+                
+                return c;
+            }
+        });
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setCellSelectionEnabled(false);
+        table.setRowSelectionAllowed(false);
+        table.setColumnSelectionAllowed(false);
+        table.setBorder(BorderFactory.createLineBorder(Main.BUTTONS_BG_COLOR));
+        table.setEnabled(false);
+        table.setVisible(true);
+
+        panel.add(table, "push, grow, span, center");
+    }
+
+    /**
+     * Este método se encarga de llenar la tabla con los
+     * datos cargados de los jugadores en cada equipo.
+     */
+    private void fillTable() {
+        table.setValueAt("EQUIPO #1", 0, 1);
+        table.setValueAt("EQUIPO #2", 0, 2);
+        table.setValueAt("ARQUERO", 1, 0);
+
+        int cdSetLength_half = inputFrame.playersSets.get(Position.CENTRAL_DEFENDER).length / 2;
+        int ldSetLength_half = inputFrame.playersSets.get(Position.LATERAL_DEFENDER).length / 2;
+        int mfSetLength_half = inputFrame.playersSets.get(Position.MIDFIELDER).length / 2;
+        int fwSetLength_half = inputFrame.playersSets.get(Position.FORWARD).length / 2;
+        
+        for (int i = 0; i < cdSetLength_half; i++)
+            table.setValueAt("DEFENSOR CENTRAL", (i + 2), 0);
+        
+        for (int i = 0; i < ldSetLength_half; i++)
+            table.setValueAt("DEFENSOR LATERAL", (i + 2 + cdSetLength_half), 0);
+        
+        for (int i = 0; i < mfSetLength_half; i++)
+            table.setValueAt("MEDIOCAMPISTA", (i + 2 + cdSetLength_half + ldSetLength_half), 0);
+        
+        for (int i = 0; i < fwSetLength_half; i++)
+            table.setValueAt("DELANTERO", (i + 2 + cdSetLength_half + ldSetLength_half + mfSetLength_half), 0);
+    }
+
+    /**
+     * Este método se encarga de ajustar las dimensiones de la tabla
+     * de manera que todos los elementos se aprecien completamente.
      */
     private void autoFitTable() {
         for (int column = 0; column < table.getColumnCount(); column++) {

@@ -272,7 +272,7 @@ public class InputFrame extends JFrame implements ActionListener {
                         if (auxTF == textFieldSet.get(index))
                             break;
                     
-                    if (!(Pattern.matches("[a-z A-Z]+", aux.getText())))
+                    if (!(Pattern.matches("[a-z A-ZÁÉÍÓÚáéíóúñÑ]+", aux.getText())))
                         JOptionPane.showMessageDialog(null,
                                 "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
                                 "¡Error!", JOptionPane.ERROR_MESSAGE, null);
@@ -324,7 +324,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * al panel de ingreso de jugadores.
      */
     private void addButtons() {
-        mixButton = new JButton("Mezclar");
+        mixButton = new JButton("Distribuir");
         backButton = new BackButton(InputFrame.this, previousFrame);
 
         mixButton.setEnabled(false);
