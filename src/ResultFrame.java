@@ -12,7 +12,9 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -25,13 +27,13 @@ public class ResultFrame extends JFrame {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private HashMap<String, Player> team1, team2;
-
     private JButton mainMenuButton;
 
     private JFrame previousFrame;
 
     private JPanel panel;
+
+    private Random randomGenerator;
     
     private BackButton backButton;
     
@@ -48,8 +50,7 @@ public class ResultFrame extends JFrame {
         this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
 
-        team1 = new HashMap<String, Player>();
-        team2 = new HashMap<String, Player>();
+        randomGenerator = new Random();
 
         if (inputFrame.distribution == 0) {
             randomMix(inputFrame.thereAreAnchorages());
@@ -86,6 +87,8 @@ public class ResultFrame extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                resetTeams();
+
                 ResultFrame.this.dispose();
                 inputFrame.dispose();
                 previousFrame.dispose();
@@ -96,19 +99,39 @@ public class ResultFrame extends JFrame {
             }
         });
 
+        backButton.addActionListener(new ActionListener() {
+            /**
+             * Este método togglea la visibilidad de las ventanas.
+             * Se sobreescribe para eliminar todos los equipos
+             * asignados en caso de querer retroceder.
+             * 
+             * @param e Evento de click.
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetTeams();
+
+                previousFrame.setVisible(true);
+
+                ResultFrame.this.dispose();
+            }
+        });
+
         if (inputFrame.distribution == 0) {
             JButton remixButton = new JButton("Nueva mezcla");
 
             remixButton.addActionListener(new ActionListener() {
                 /**
-                 * Este método simplemente vuelve a mezclar los
-                 * jugadores de manera aleatoria considerando
-                 * los anclajes ingresados por el usuario.
+                 * Este método resetea los equipos de los jugadores
+                 * y vuelve a mezclarlos de manera aleatoria
+                 * considerando los anclajes ingresados por el usuario.
                  * 
                  * @param e Evento de click.
                  */
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    resetTeams();
+
                     randomMix(inputFrame.thereAreAnchorages());
                 }
             });
@@ -139,6 +162,11 @@ public class ResultFrame extends JFrame {
             setTitle("MEZCLA ALEATORIA - CON ANCLAJES");
         } else {
             setTitle("MEZCLA ALEATORIA - SIN ANCLAJES");
+
+            for (int i = 0; i < Position.values().length; i++)
+                mixAndDistribute(Position.values()[i]);
+            
+            mixTest();
         }
     }
 
@@ -156,5 +184,80 @@ public class ResultFrame extends JFrame {
         } else {
             setTitle("MEZCLA POR PUNTAJES - SIN ANCLAJES");
         }
+    }
+
+    /**
+     * Este método se encarga de distribuir los jugadores
+     * de cierta posición de manera equitativa y aleatoria
+     * entre los dos equipos.
+     * Para esto, se elige un número aleatorio entre 0 y 1 (+1)
+     * para asignarle como equipo a un conjunto de jugadores
+     * del grupo recibido, y el resto tendrá asignado el
+     * equipo opuesto.
+     * Se recorre la mitad de los jugadores del set de manera
+     * aleatoria y se le asigna el equipo del subset1.
+     * A medida que se van eligiendo jugadores, su índice en
+     * el arreglo se almacena para evitar reasignarle un equipo.
+     * Al resto de jugadores que quedaron sin elegir de manera
+     * aleatoria (aquellos con team == 0), se les asigna el
+     * número de equipo opuesto.
+     * Finalmente, se agregan estos jugadores a los mapas de los
+     * equipos.
+     * 
+     * @param position Posición de los jugadores a distribuir.
+     */
+    private void mixAndDistribute(Position position) {
+        int teamSubset1 = randomGenerator.nextInt(2) + 1;
+        int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
+        int index;
+
+        Player[] set = inputFrame.playersSets.get(position);
+
+        ArrayList<Integer> alreadySetted = new ArrayList<>();
+
+        System.out.println("teamSubset1 = " + teamSubset1 + "\nteamSubset2 = " + teamSubset2);
+
+        for (int i = 0; i < (set.length / 2); i++) {
+            do {
+                index = randomGenerator.nextInt(set.length);
+            } while (alreadySetted.contains(index));
+
+            alreadySetted.add(index);
+
+            set[index].setTeam(teamSubset1);
+
+            System.out.println("JUGADOR " + set[index].getName() + " TIENE TEAM " + teamSubset1);
+        }
+
+        for (int i = 0; i < set.length; i++)
+            if (set[i].getTeam() == 0) {
+                set[i].setTeam(teamSubset2);
+                System.out.println("JUGADOR " + set[i].getName() + " TENÍA TEAM 0, AHORA TIENE TEAM " + teamSubset2);
+            }
+    }
+
+    /**
+     * Este método se encarga de resetear los equipos de todos los jugadores.
+     */
+    private void resetTeams() {
+        for (Map.Entry<Position, Player[]> ps : inputFrame.playersSets.entrySet())
+            for (Player p : ps.getValue())
+                p.setTeam(0);
+        
+        mixTest();
+    }
+
+    /**
+     * Método de prueba para testear que los jugadores se hayan repartido
+     * de la manera correspondiente entre los equipos.
+     */
+    private void mixTest() {
+        System.out.println("//////////////////////////////////////////////");
+
+        for (int i = 0; i < inputFrame.playersSets.size(); i++)
+            for (int j = 0; j < inputFrame.playersSets.get(Position.values()[i]).length; j++)
+                System.out.println("JUGADOR " + inputFrame.playersSets.get(Position.values()[i])[j].getName()
+                        + " (" + inputFrame.playersSets.get(Position.values()[i])[j].getPosition()
+                        + " > EQUIPO = " + inputFrame.playersSets.get(Position.values()[i])[j].getTeam());
     }
 }
