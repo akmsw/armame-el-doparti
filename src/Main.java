@@ -29,7 +29,7 @@ public class Main {
 
     /* ---------------------------------------- Constantes públicas ------------------------------ */
 
-    public static final float FONT_SIZE = 18f; // Tamaño de fuente para los checkboxes necesarios
+    public static final float FONT_SIZE = 18f; // Tamaño de fuente para el programa
 
     public static final String PROGRAM_TITLE = "Armame el doparti";
     public static final String PROGRAM_VERSION = "v3.0";

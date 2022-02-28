@@ -536,20 +536,6 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * @return La cantidad de jugadores por equipo.
-     */
-    public int getPlayersAmount() {
-        return playersAmount;
-    }
-
-    /**
-     * @return El tipo de distribución de jugadores elegida.
-     */
-    public int getDistribution() {
-        return distribution;
-    }
-
-    /**
      * @return Si el usuario desea hacer anclajes.
      */
     public boolean thereAreAnchorages() {

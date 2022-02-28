@@ -141,7 +141,7 @@ public class AnchorageFrame extends JFrame {
                  * la ventana de resultados, se crea la ventana de ingreso
                  * de puntajes para los jugadores.
                  */
-                if (inputFrame.getDistribution() == 1) {
+                if (inputFrame.distribution == 1) {
                     RatingFrame ratingFrame = new RatingFrame(inputFrame, AnchorageFrame.this);
 
                     ratingFrame.setVisible(true);
@@ -530,5 +530,14 @@ public class AnchorageFrame extends JFrame {
                         playersAnchored--;
                     }
                 }
+    }
+
+    /* ---------------------------------------- Métodos públicos --------------------------------- */
+
+    /**
+     * @return La cantidad de anclajes hechos.
+     */
+    public int getAnchoragesAmount() {
+        return anchorageNum;
     }
 }

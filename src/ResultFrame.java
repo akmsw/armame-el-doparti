@@ -33,6 +33,8 @@ public class ResultFrame extends JFrame {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
+    // private int ratingT1, ratingT2;
+
     private JButton mainMenuButton;
 
     private JFrame previousFrame;
@@ -58,6 +60,9 @@ public class ResultFrame extends JFrame {
         this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
 
+        /*ratingT1 = 0;
+        ratingT2 = 0;*/
+
         randomGenerator = new Random();
 
         table = new JTable((inputFrame.playersAmount + 1), 3);
@@ -66,8 +71,6 @@ public class ResultFrame extends JFrame {
             randomMix(inputFrame.thereAreAnchorages());
         else
             ratingsMix(inputFrame.thereAreAnchorages());
-
-        fillTable();
         
         initializeComponents();
     }
@@ -87,6 +90,7 @@ public class ResultFrame extends JFrame {
         addButtons();
         add(panel);
 
+        fillTable();
         autoFitTable();
 
         pack();
@@ -257,12 +261,12 @@ public class ResultFrame extends JFrame {
          * 
          * Aquí se llenan los recuadros de la tabla confiando en el
          * orden en el que se escribieron las posiciones en las filas
-         * de la columna 0. Es decir, los primeros jugadores a ingresar
-         * serán defensores centrales, luego defensores laterales,
-         * mediocampistas, delanteros y por último arqueros. Si se
-         * cambian de lugar los labels de las posiciones en la tabla,
-         * deberá cambiarse esta manera de llenar la tabla, ya que no
-         * se respetará el nuevo orden establecido.
+         * de la columna 0 (el mismo orden del enum de posiciones).
+         * Es decir, los primeros jugadores a ingresar serán defensores
+         * centrales, luego defensores laterales, mediocampistas,
+         * delanteros y por último arqueros. Si se cambian de lugar los
+         * labels de las posiciones en la tabla, deberá cambiarse esta
+         * manera de llenarla, ya que no se respetará el nuevo orden establecido.
          * 
          * TODO: Almacenar datos en un arreglo y alimentar la tabla con el mismo
          *       para lograr mayor abstracción y eficiencia.
@@ -327,12 +331,52 @@ public class ResultFrame extends JFrame {
      */
     private void randomMix(boolean anchorages) {
         if (anchorages) {
-            setTitle("MEZCLA ALEATORIA - CON ANCLAJES");
-        } else {
-            setTitle("MEZCLA ALEATORIA - SIN ANCLAJES");
+            setTitle("Aleatorio - Con anclajes - Fútbol " + inputFrame.playersAmount);
 
-            for (int i = 0; i < Position.values().length; i++)
-                mixAndDistribute(Position.values()[i]);
+
+        } else {
+            setTitle("Aleatorio - Sin anclajes - Fútbol " + inputFrame.playersAmount);
+
+            /*
+             * Se elige un número aleatorio entre 0 y 1 (+1)
+             * para asignarle como equipo a un conjunto de jugadores,
+             * y el resto tendrá asignado el equipo opuesto.
+             * Se recorre la mitad de los jugadores del set de manera
+             * aleatoria y se les asigna a los jugadores escogidos
+             * como equipo el número aleatorio generado al principio. 
+             * A medida que se van eligiendo jugadores, su índice en
+             * el arreglo se almacena para evitar reasignarle un equipo.
+             * Al resto de jugadores que quedaron sin elegir de manera
+             * aleatoria (aquellos con team == 0) del mismo grupo, se
+             * les asigna el número de equipo opuesto.
+             */
+
+            int index;
+
+            ArrayList<Integer> alreadySetted = new ArrayList<>();
+
+            for (int i = 0; i < Position.values().length; i++) {
+                int teamSubset1 = randomGenerator.nextInt(2) + 1;
+                int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
+
+                Player[] set = inputFrame.playersSets.get(Position.values()[i]);
+
+                for (int j = 0; j < (set.length / 2); j++) {
+                    do {
+                        index = randomGenerator.nextInt(set.length);
+                    } while (alreadySetted.contains(index));
+        
+                    alreadySetted.add(index);
+        
+                    set[index].setTeam(teamSubset1);
+                }
+        
+                for (int k = 0; k < set.length; k++)
+                    if (set[k].getTeam() == 0)
+                        set[k].setTeam(teamSubset2);
+                
+                alreadySetted.clear();
+            }
         }
     }
 
@@ -346,52 +390,20 @@ public class ResultFrame extends JFrame {
      */
     private void ratingsMix(boolean anchorages) {
         if (anchorages) {
-            setTitle("MEZCLA POR PUNTAJES - CON ANCLAJES");
+            setTitle("Por puntajes - Con anclajes - Fútbol " + inputFrame.playersAmount);
         } else {
-            setTitle("MEZCLA POR PUNTAJES - SIN ANCLAJES");
+            setTitle("Por puntajes - Sin anclajes - Fútbol " + inputFrame.playersAmount);
+
+            for (int i = 0; i < Position.values().length; i++)
+                ratingMixNoAnchorages(Position.values()[i]);
         }
     }
 
     /**
-     * Este método se encarga de distribuir los jugadores
-     * de cierta posición de manera equitativa y aleatoria
-     * entre los dos equipos.
-     * Para esto, se elige un número aleatorio entre 0 y 1 (+1)
-     * para asignarle como equipo a un conjunto de jugadores
-     * del grupo recibido, y el resto tendrá asignado el
-     * equipo opuesto.
-     * Se recorre la mitad de los jugadores del set de manera
-     * aleatoria y se le asigna el equipo del subset1.
-     * A medida que se van eligiendo jugadores, su índice en
-     * el arreglo se almacena para evitar reasignarle un equipo.
-     * Al resto de jugadores que quedaron sin elegir de manera
-     * aleatoria (aquellos con team == 0), se les asigna el
-     * número de equipo opuesto.
-     * 
-     * @param position Posición de los jugadores a distribuir.
+     * @param p
      */
-    private void mixAndDistribute(Position position) {
-        int teamSubset1 = randomGenerator.nextInt(2) + 1;
-        int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
-        int index;
-
-        Player[] set = inputFrame.playersSets.get(position);
-
-        ArrayList<Integer> alreadySetted = new ArrayList<>();
-
-        for (int i = 0; i < (set.length / 2); i++) {
-            do {
-                index = randomGenerator.nextInt(set.length);
-            } while (alreadySetted.contains(index));
-
-            alreadySetted.add(index);
-
-            set[index].setTeam(teamSubset1);
-        }
-
-        for (int i = 0; i < set.length; i++)
-            if (set[i].getTeam() == 0)
-                set[i].setTeam(teamSubset2);
+    private void ratingMixNoAnchorages(Position p) {
+        Player[] set = inputFrame.playersSets.get(p);
     }
 
     /**
