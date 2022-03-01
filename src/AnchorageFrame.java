@@ -221,6 +221,8 @@ public class AnchorageFrame extends JFrame {
                     setAnchors(cbSets.get(i), inputFrame.playersSets.get(Position.values()[i]));
 
                 updateTextArea();
+
+                inputFrame.setTotalAnchorages(anchorageNum);
             }
         });
 

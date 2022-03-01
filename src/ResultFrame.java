@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -33,7 +34,7 @@ public class ResultFrame extends JFrame {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    // private int ratingT1, ratingT2;
+    private ArrayList<Player> team1, team2;
 
     private JButton mainMenuButton;
 
@@ -60,12 +61,12 @@ public class ResultFrame extends JFrame {
         this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
 
-        /*ratingT1 = 0;
-        ratingT2 = 0;*/
-
         randomGenerator = new Random();
 
         table = new JTable((inputFrame.playersAmount + 1), 3);
+
+        team1 = new ArrayList<>();
+        team2 = new ArrayList<>();
 
         if (inputFrame.distribution == 0)
             randomMix(inputFrame.thereAreAnchorages());
@@ -262,7 +263,7 @@ public class ResultFrame extends JFrame {
          * Aquí se llenan los recuadros de la tabla confiando en el
          * orden en el que se escribieron las posiciones en las filas
          * de la columna 0 (el mismo orden del enum de posiciones).
-         * Es decir, los primeros jugadores a ingresar serán defensores
+         * Es decir, los primeros jugadores a cargar serán defensores
          * centrales, luego defensores laterales, mediocampistas,
          * delanteros y por último arqueros. Si se cambian de lugar los
          * labels de las posiciones en la tabla, deberá cambiarse esta
@@ -271,12 +272,12 @@ public class ResultFrame extends JFrame {
          * TODO: Almacenar datos en un arreglo y alimentar la tabla con el mismo
          *       para lograr mayor abstracción y eficiencia.
          */
-        for (Position pos : Position.values())
-            for (Player player : inputFrame.playersSets.get(pos))
-                if (player.getTeam() == 1)
-                    table.setValueAt(player.getName(), row1++, 1);
-                else
-                    table.setValueAt(player.getName(), row2++, 2);
+
+        for (Player player : team1)
+            table.setValueAt(player.getName(), row1++, 1);
+        
+        for (Player player : team2)
+            table.setValueAt(player.getName(), row2++, 2);
     }
 
     /**
@@ -333,7 +334,18 @@ public class ResultFrame extends JFrame {
         if (anchorages) {
             setTitle("Aleatorio - Con anclajes - Fútbol " + inputFrame.playersAmount);
 
+            /*for (Player[] ps : inputFrame.playersSets.values()) {
+                
+            }
 
+            for (int anchor = inputFrame.getTotalAnchorages(); anchor > 0 ; anchor--) {
+                int randomTeam = randomGenerator.nextInt(2) + 1;
+
+                for (Position position : Position.values())
+                    for (Player player : inputFrame.playersSets.get(position))
+                        if (player.getAnchor() == anchor)
+                            player.setTeam(randomTeam);
+            }*/
         } else {
             setTitle("Aleatorio - Sin anclajes - Fútbol " + inputFrame.playersAmount);
 
@@ -369,11 +381,26 @@ public class ResultFrame extends JFrame {
                     alreadySetted.add(index);
         
                     set[index].setTeam(teamSubset1);
+
+                    if (teamSubset1 == 1)
+                        team1.add(set[index]);
+                    else
+                        team2.add(set[index]);
+                    
+                    if (anchorages) {
+                        // TODO
+                    }
                 }
         
                 for (int k = 0; k < set.length; k++)
-                    if (set[k].getTeam() == 0)
+                    if (set[k].getTeam() == 0) {
                         set[k].setTeam(teamSubset2);
+
+                        if (teamSubset2 == 1)
+                            team1.add(set[k]);
+                        else
+                            team2.add(set[k]);
+                    }
                 
                 alreadySetted.clear();
             }
@@ -393,25 +420,20 @@ public class ResultFrame extends JFrame {
             setTitle("Por puntajes - Con anclajes - Fútbol " + inputFrame.playersAmount);
         } else {
             setTitle("Por puntajes - Sin anclajes - Fútbol " + inputFrame.playersAmount);
-
-            for (int i = 0; i < Position.values().length; i++)
-                ratingMixNoAnchorages(Position.values()[i]);
         }
     }
 
     /**
-     * @param p
-     */
-    private void ratingMixNoAnchorages(Position p) {
-        Player[] set = inputFrame.playersSets.get(p);
-    }
-
-    /**
-     * Este método se encarga de resetear los equipos de todos los jugadores.
+     * Este método se encarga de resetear los equipos
+     * de todos los jugadores, y vaciar los arreglos
+     * representativos de cada equipo.
      */
     private void resetTeams() {
         for (Map.Entry<Position, Player[]> ps : inputFrame.playersSets.entrySet())
             for (Player p : ps.getValue())
                 p.setTeam(0);
+        
+        team1.clear();
+        team2.clear();
     }
 }

@@ -45,6 +45,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
+    private int totalAnchorages; // Cantidad total de anclajes en caso de haberlos.
+
     private boolean anchorages;
 
     private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK;
@@ -98,6 +100,8 @@ public class InputFrame extends JFrame implements ActionListener {
         this.playersAmount = playersAmount;
 
         anchorages = false;
+
+        setTotalAnchorages(0);
 
         playersAmountMap = new EnumMap<>(Position.class);
 
@@ -535,6 +539,19 @@ public class InputFrame extends JFrame implements ActionListener {
         updateTextFields((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
     }
 
+    /**
+     * @param totalAnchorages Cantidad total de anclajes existentes.
+     */
+    public void setTotalAnchorages(int totalAnchorages) {
+        this.totalAnchorages = totalAnchorages;
+    }
+
+    /**
+     * @return Cantidad total de anclajes existentes.
+     */
+    public int getTotalAnchorages() {
+        return totalAnchorages;
+    }
     /**
      * @return Si el usuario desea hacer anclajes.
      */
