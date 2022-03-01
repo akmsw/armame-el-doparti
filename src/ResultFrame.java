@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -26,7 +25,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -35,6 +33,8 @@ public class ResultFrame extends JFrame {
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private ArrayList<Player> team1, team2;
+
+    private ArrayList<ArrayList<Player>> teams;
 
     private JButton mainMenuButton;
 
@@ -68,6 +68,11 @@ public class ResultFrame extends JFrame {
         team1 = new ArrayList<>();
         team2 = new ArrayList<>();
 
+        teams = new ArrayList<>();
+
+        teams.add(team1);
+        teams.add(team2);
+
         if (inputFrame.distribution == 0)
             randomMix(inputFrame.thereAreAnchorages());
         else
@@ -92,7 +97,6 @@ public class ResultFrame extends JFrame {
         add(panel);
 
         fillTable();
-        autoFitTable();
 
         pack();
 
@@ -214,6 +218,7 @@ public class ResultFrame extends JFrame {
                 return c;
             }
         });
+
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setCellSelectionEnabled(false);
         table.setRowSelectionAllowed(false);
@@ -221,6 +226,18 @@ public class ResultFrame extends JFrame {
         table.setBorder(BorderFactory.createLineBorder(Main.BUTTONS_BG_COLOR));
         table.setEnabled(false);
         table.setVisible(true);
+
+        // Ajuste del ancho de las celdas para apreciar todo el contenido de las mismas
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
+
+            /*
+             * Valor ajustado a fuente del programa teniendo en cuenta
+             * su tamaño y la cantidad máxima de caracteres en los
+             * nombres de los jugadores.
+             */
+            tableColumn.setPreferredWidth(200);
+        }
 
         panel.add(table, "push, grow, span, center");
     }
@@ -252,10 +269,6 @@ public class ResultFrame extends JFrame {
             table.setValueAt("DELANTERO", (i + 1 + cdSetLength_half + ldSetLength_half + mfSetLength_half), 0);
         
         table.setValueAt("ARQUERO", (1 + cdSetLength_half + ldSetLength_half + mfSetLength_half + fwSetLength_half), 0);
-        
-        // Nombres de los jugadores
-        int row1 = 1;
-        int row2 = 1;
 
         /*
          *                      ¡¡¡IMPORTANTE!!!
@@ -273,43 +286,13 @@ public class ResultFrame extends JFrame {
          *       para lograr mayor abstracción y eficiencia.
          */
 
-        for (Player player : team1)
-            table.setValueAt(player.getName(), row1++, 1);
+        int[] rows = { 1, 1 };
+
+        for (int i = 0; i < teams.size(); i++)
+            for (Player player : teams.get(i))
+                table.setValueAt(player.getName(), rows[i]++, (i + 1));
         
-        for (Player player : team2)
-            table.setValueAt(player.getName(), row2++, 2);
-    }
-
-    /**
-     * Este método se encarga de ajustar las dimensiones de la tabla
-     * de manera que todos los elementos se aprecien completamente.
-     */
-    private void autoFitTable() {
-        for (int column = 0; column < table.getColumnCount(); column++) {
-            TableColumn tableColumn = table.getColumnModel().getColumn(column);
-
-            int preferredWidth = tableColumn.getMinWidth();
-            int maxWidth = tableColumn.getMaxWidth();
-
-            for (int row = 0; row < table.getRowCount(); row++) {
-                TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
-
-                Component c = table.prepareRenderer(cellRenderer, row, column);
-                
-                int width = c.getPreferredSize().width + table.getIntercellSpacing().width;
-                
-                preferredWidth = Math.max(preferredWidth, width);
-
-                if (preferredWidth >= maxWidth) {
-                    preferredWidth = maxWidth;
-
-                    break;
-                }
-            }
-
-            tableColumn.setPreferredWidth(preferredWidth);
-        }
-
+        // Ajuste del alto de las celdas para apreciar todo el contenido de las mismas
         for (int row = 0; row < table.getRowCount(); row++) {
             int rowHeight = table.getRowHeight();
 
