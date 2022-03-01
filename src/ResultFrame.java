@@ -320,18 +320,7 @@ public class ResultFrame extends JFrame {
         if (anchorages) {
             setTitle("Aleatorio - Con anclajes - Fútbol " + inputFrame.playersAmount);
 
-            /*for (Player[] ps : inputFrame.playersSets.values()) {
-                
-            }
-
-            for (int anchor = inputFrame.getTotalAnchorages(); anchor > 0 ; anchor--) {
-                int randomTeam = randomGenerator.nextInt(2) + 1;
-
-                for (Position position : Position.values())
-                    for (Player player : inputFrame.playersSets.get(position))
-                        if (player.getAnchor() == anchor)
-                            player.setTeam(randomTeam);
-            }*/
+            // TODO
         } else {
             setTitle("Aleatorio - Sin anclajes - Fútbol " + inputFrame.playersAmount);
 
@@ -353,11 +342,11 @@ public class ResultFrame extends JFrame {
 
             ArrayList<Integer> alreadySetted = new ArrayList<>();
 
-            for (int i = 0; i < Position.values().length; i++) {
+            for (Position position : Position.values()) {
                 int teamSubset1 = randomGenerator.nextInt(2) + 1;
                 int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
 
-                Player[] set = inputFrame.playersSets.get(Position.values()[i]);
+                Player[] set = inputFrame.playersSets.get(position);
 
                 for (int j = 0; j < (set.length / 2); j++) {
                     do {
@@ -372,20 +361,16 @@ public class ResultFrame extends JFrame {
                         team1.add(set[index]);
                     else
                         team2.add(set[index]);
-                    
-                    if (anchorages) {
-                        // TODO
-                    }
                 }
-        
-                for (int k = 0; k < set.length; k++)
-                    if (set[k].getTeam() == 0) {
-                        set[k].setTeam(teamSubset2);
+
+                for (Player player : set)
+                    if (player.getTeam() == 0) {
+                        player.setTeam(teamSubset2);
 
                         if (teamSubset2 == 1)
-                            team1.add(set[k]);
+                            team1.add(player);
                         else
-                            team2.add(set[k]);
+                            team2.add(player);
                     }
                 
                 alreadySetted.clear();

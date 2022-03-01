@@ -454,12 +454,12 @@ public class InputFrame extends JFrame implements ActionListener {
         textArea.setText(null);
 
         for (Map.Entry<Position, Player[]> ps : playersSets.entrySet())
-            for (int i = 0; i < ps.getValue().length; i++)
-                if (!ps.getValue()[i].getName().equals("")) {
+            for (Player player : ps.getValue())
+                if (!player.getName().equals("")) {
                     if ((counter != 0) && (((playersAmount * 2) - counter) != 0))
                         textArea.append("\n");
                     
-                    textArea.append((counter + 1) + " - " + ps.getValue()[i].getName());
+                    textArea.append((counter + 1) + " - " + player.getName());
 
                     counter++;
                 }
@@ -471,10 +471,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * cuáles deben permanecer en el mismo.
      */
     private void clearLeftPanel() {
-        for (int i = 0; i < textFields.size(); i++)
-            for (int j = 0; j < textFields.get(i).size(); j++)
-                if (isComponentInPanel(textFields.get(i).get(j), leftPanel))
-                    leftPanel.remove(textFields.get(i).get(j));
+        for (ArrayList<JTextField> tfset : textFields)
+            for (JTextField tf : tfset)
+                if (isComponentInPanel(tf, leftPanel))
+                    leftPanel.remove(tf);
     }
 
     /**
@@ -501,8 +501,8 @@ public class InputFrame extends JFrame implements ActionListener {
     private boolean isEmptyString(String string) {
         char[] charArray = string.toCharArray();
 
-        for (int i = 0; i < charArray.length; i++)
-            if (charArray[i] != ' ')
+        for (char c : charArray)
+            if (c != ' ')
                 return false;
 
         return true;
@@ -518,8 +518,8 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     private boolean alreadyExists(String name) {
         for (Map.Entry<Position, Player[]> ps : playersSets.entrySet())
-            for (int i = 0; i < ps.getValue().length; i++)
-                if (ps.getValue()[i].getName().equals(name))
+            for (Player player : ps.getValue())
+                if (player.getName().equals(name))
                     return true;
 
         return false;
