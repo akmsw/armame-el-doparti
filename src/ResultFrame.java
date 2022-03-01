@@ -98,6 +98,31 @@ public class ResultFrame extends JFrame {
 
         fillTable();
 
+        // Ajuste del ancho de las celdas para apreciar todo el contenido de las mismas
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
+
+            /*
+             * Valor ajustado a fuente del programa teniendo en cuenta
+             * su tamaño y la cantidad máxima de caracteres en los
+             * nombres de los jugadores.
+             */
+            tableColumn.setPreferredWidth(200);
+        }
+
+        // Ajuste del alto de las celdas para apreciar todo el contenido de las mismas
+        for (int i = 0; i < table.getRowCount(); i++) {
+            int rowHeight = table.getRowHeight();
+
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                Component comp = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
+
+                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
+            }
+
+            table.setRowHeight(i, rowHeight);
+        }
+
         pack();
 
         setResizable(false);
@@ -227,18 +252,6 @@ public class ResultFrame extends JFrame {
         table.setEnabled(false);
         table.setVisible(true);
 
-        // Ajuste del ancho de las celdas para apreciar todo el contenido de las mismas
-        for (int column = 0; column < table.getColumnCount(); column++) {
-            TableColumn tableColumn = table.getColumnModel().getColumn(column);
-
-            /*
-             * Valor ajustado a fuente del programa teniendo en cuenta
-             * su tamaño y la cantidad máxima de caracteres en los
-             * nombres de los jugadores.
-             */
-            tableColumn.setPreferredWidth(200);
-        }
-
         panel.add(table, "push, grow, span, center");
     }
 
@@ -286,23 +299,13 @@ public class ResultFrame extends JFrame {
          *       para lograr mayor abstracción y eficiencia.
          */
 
-        int[] rows = { 1, 1 };
+        int row = 1;
 
-        for (int i = 0; i < teams.size(); i++)
+        for (int i = 0; i < teams.size(); i++) {
             for (Player player : teams.get(i))
-                table.setValueAt(player.getName(), rows[i]++, (i + 1));
-        
-        // Ajuste del alto de las celdas para apreciar todo el contenido de las mismas
-        for (int row = 0; row < table.getRowCount(); row++) {
-            int rowHeight = table.getRowHeight();
-
-            for (int column = 0; column < table.getColumnCount(); column++) {
-                Component comp = table.prepareRenderer(table.getCellRenderer(row, column), row, column);
-
-                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
-            }
-
-            table.setRowHeight(row, rowHeight);
+                table.setValueAt(player.getName(), row++, (i + 1));
+            
+            row = 1;
         }
     }
 
