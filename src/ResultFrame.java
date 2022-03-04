@@ -107,7 +107,7 @@ public class ResultFrame extends JFrame {
              * su tamaño y la cantidad máxima de caracteres en los
              * nombres de los jugadores.
              */
-            tableColumn.setPreferredWidth(200);
+            tableColumn.setPreferredWidth(250);
         }
 
         // Ajuste del alto de las celdas para apreciar todo el contenido de las mismas
@@ -217,12 +217,12 @@ public class ResultFrame extends JFrame {
              * Este método se encarga de setear el color de fondo
              * y de letra de las casillas de la tabla.
              * 
-             * @param table Tabla fuente.
-             * @param value -.
+             * @param table      Tabla fuente.
+             * @param value      -.
              * @param isSelected Si la celda está seleccionada.
-             * @param hasFocus Si la celda está en foco.
-             * @param row Coordenada de fila de la celda.
-             * @param column Coordenada de columna de la celda.
+             * @param hasFocus   Si la celda está en foco.
+             * @param row        Coordenada de fila de la celda.
+             * @param column     Coordenada de columna de la celda.
              */
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -261,8 +261,8 @@ public class ResultFrame extends JFrame {
      */
     private void fillTable() {
         // Labels de formato
-        table.setValueAt("EQUIPO #1", 0, 1);
-        table.setValueAt("EQUIPO #2", 0, 2);
+        for (int i = 0; i < 2; i++)
+            table.setValueAt("EQUIPO #" + (i + 1), 0, (i + 1));
 
         int cdSetLength_half = inputFrame.playersSets.get(Position.CENTRAL_DEFENDER).length / 2;
         int ldSetLength_half = inputFrame.playersSets.get(Position.LATERAL_DEFENDER).length / 2;
@@ -270,18 +270,18 @@ public class ResultFrame extends JFrame {
         int fwSetLength_half = inputFrame.playersSets.get(Position.FORWARD).length / 2;
         
         for (int i = 0; i < cdSetLength_half; i++)
-            table.setValueAt("DEFENSOR CENTRAL", (i + 1), 0);
+            table.setValueAt(Main.positions.get(Position.CENTRAL_DEFENDER), (i + 1), 0);
         
         for (int i = 0; i < ldSetLength_half; i++)
-            table.setValueAt("DEFENSOR LATERAL", (i + 1 + cdSetLength_half), 0);
+            table.setValueAt(Main.positions.get(Position.LATERAL_DEFENDER), (i + 1 + cdSetLength_half), 0);
         
         for (int i = 0; i < mfSetLength_half; i++)
-            table.setValueAt("MEDIOCAMPISTA", (i + 1 + cdSetLength_half + ldSetLength_half), 0);
+            table.setValueAt(Main.positions.get(Position.MIDFIELDER), (i + 1 + cdSetLength_half + ldSetLength_half), 0);
         
         for (int i = 0; i < fwSetLength_half; i++)
-            table.setValueAt("DELANTERO", (i + 1 + cdSetLength_half + ldSetLength_half + mfSetLength_half), 0);
+            table.setValueAt(Main.positions.get(Position.FORWARD), (i + 1 + cdSetLength_half + ldSetLength_half + mfSetLength_half), 0);
         
-        table.setValueAt("ARQUERO", (1 + cdSetLength_half + ldSetLength_half + mfSetLength_half + fwSetLength_half), 0);
+        table.setValueAt(Main.positions.get(Position.GOALKEEPER), (1 + cdSetLength_half + ldSetLength_half + mfSetLength_half + fwSetLength_half), 0);
 
         /*
          *                      ¡¡¡IMPORTANTE!!!
@@ -295,8 +295,7 @@ public class ResultFrame extends JFrame {
          * labels de las posiciones en la tabla, deberá cambiarse esta
          * manera de llenarla, ya que no se respetará el nuevo orden establecido.
          * 
-         * TODO: Almacenar datos en un arreglo y alimentar la tabla con el mismo
-         *       para lograr mayor abstracción y eficiencia.
+         * TODO: Almacenar datos en un arreglo y alimentar la tabla con el mismo..
          */
 
         int row = 1;
@@ -403,7 +402,7 @@ public class ResultFrame extends JFrame {
         for (Map.Entry<Position, Player[]> ps : inputFrame.playersSets.entrySet())
             for (Player p : ps.getValue())
                 p.setTeam(0);
-        
+
         team1.clear();
         team2.clear();
     }

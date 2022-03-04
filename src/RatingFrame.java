@@ -90,7 +90,7 @@ public class RatingFrame extends JFrame {
         });
 
         for (int i = 0; i < inputFrame.playersSets.size(); i++) {
-            JLabel label = new JLabel(Main.positions.get(i));
+            JLabel label = new JLabel(Main.positions.get(Position.values()[i]));
 
             label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
 

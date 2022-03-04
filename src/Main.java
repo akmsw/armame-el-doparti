@@ -15,8 +15,8 @@ import java.awt.GraphicsEnvironment;
 
 import java.io.File;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
@@ -25,7 +25,7 @@ public class Main {
 
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
-    private static final String FNT_PATH = "src/resources/fonts/";
+    private static final String TTF_PATH = "src/resources/fonts/";
 
     /* ---------------------------------------- Constantes públicas ------------------------------ */
 
@@ -40,7 +40,7 @@ public class Main {
 
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
-    public static ArrayList<String> positions;
+    public static HashMap<Position, String> positions;
 
     public static Font PROGRAM_FONT;
 
@@ -54,13 +54,13 @@ public class Main {
     public static void main(String[] args) {
         setGUIProperties();
 
-        positions = new ArrayList<>();
+        positions = new HashMap<>();
 
-        positions.add("DEFENSORES CENTRALES");
-        positions.add("DEFENSORES LATERALES");
-        positions.add("MEDIOCAMPISTAS");
-        positions.add("DELANTEROS");
-        positions.add("ARQUEROS");
+        positions.put(Position.CENTRAL_DEFENDER, "DEFENSORES CENTRALES");
+        positions.put(Position.LATERAL_DEFENDER, "DEFENSORES LATERALES");
+        positions.put(Position.MIDFIELDER, "MEDIOCAMPISTAS");
+        positions.put(Position.FORWARD, "DELANTEROS");
+        positions.put(Position.GOALKEEPER, "ARQUEROS");
 
         MainFrame mainFrame = new MainFrame();
 
@@ -86,7 +86,8 @@ public class Main {
         UIManager.put("Separator.background", FRAMES_BG_COLOR);
 
         try {
-            PROGRAM_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(FNT_PATH + "Comfortaa.ttf")).deriveFont(FONT_SIZE);
+            // Se registra la fuente para poder setearla
+            PROGRAM_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(TTF_PATH + "Comfortaa.ttf")).deriveFont(FONT_SIZE);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 

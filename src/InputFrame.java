@@ -45,7 +45,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private int totalAnchorages; // Cantidad total de anclajes en caso de haberlos.
+    private int totalAnchorages;
 
     private boolean anchorages;
 
@@ -53,7 +53,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     private ArrayList<ArrayList<JTextField>> textFields;
 
-    private EnumMap<Position, Integer> playersAmountMap; // Cuántos jugadores hay por posición en cada equipo
+    private EnumMap<Position, Integer> playersAmountMap;
 
     private JButton mixButton;
     
@@ -67,7 +67,7 @@ public class InputFrame extends JFrame implements ActionListener {
     
     private JScrollPane scrollPane;
     
-    private JTextArea textArea; // Área de texto donde se mostrarán los jugadores añadidos en tiempo real
+    private JTextArea textArea;
 
     private Player[] setCD, setLD, setMF, setFW, setGK;
     
@@ -557,5 +557,12 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     public boolean thereAreAnchorages() {
         return anchorages;
+    }
+
+    /**
+     * @return Cuántos jugadores hay por posición en cada equipo.
+     */
+    public EnumMap<Position, Integer> getPlayersAmountMap() {
+        return playersAmountMap;
     }
 }

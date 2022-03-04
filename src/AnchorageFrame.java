@@ -113,7 +113,7 @@ public class AnchorageFrame extends JFrame {
         
         for (Map.Entry<Position, Player[]> ps : inputFrame.playersSets.entrySet()) {
             fillCBSet(ps.getValue(), cbSets.get(index));
-            addCBSet(leftPanel, cbSets.get(index), Main.positions.get(index));
+            addCBSet(leftPanel, cbSets.get(index), Main.positions.get(Position.values()[index]));
 
             index++;
         }
