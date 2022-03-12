@@ -34,6 +34,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -42,6 +44,13 @@ public class InputFrame extends JFrame implements ActionListener {
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre
+
+    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
+                                                       "Agregar defensores laterales",
+                                                       "Agregar mediocampistas",
+                                                       "Agregar delanteros",
+                                                       "Agregar arqueros" };
+    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
@@ -65,27 +74,16 @@ public class InputFrame extends JFrame implements ActionListener {
     
     private JPanel masterPanel, leftPanel, rightPanel;
     
-    private JScrollPane scrollPane;
-    
     private JTextArea textArea;
 
     private Player[] setCD, setLD, setMF, setFW, setGK;
-    
-    private BackButton backButton;
     
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
     public int distribution; // Tipo de distribución de jugadores elegida
     public int playersAmount; // Cantidad de jugadores por equipo
 
-    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
-                                                       "Agregar defensores laterales",
-                                                       "Agregar mediocampistas",
-                                                       "Agregar delanteros",
-                                                       "Agregar arqueros" };
-    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
-
-    public TreeMap<Position, Player[]> playersSets; // Lista con los arreglos de jugadores
+    public TreeMap<Position, Player[]> playersSets; // Mapa con los arreglos de jugadores
 
     /**
      * Constructor de la ventana de ingreso de jugadores.
@@ -185,11 +183,11 @@ public class InputFrame extends JFrame implements ActionListener {
         textFieldGK = new ArrayList<>();
         textFields = new ArrayList<>();
 
-        setCD = new Player[(int) (playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
-        setLD = new Player[(int) (playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
-        setMF = new Player[(int) (playersAmountMap.get(Position.MIDFIELDER) * 2)];
-        setFW = new Player[(int) (playersAmountMap.get(Position.FORWARD) * 2)];
-        setGK = new Player[(int) (playersAmountMap.get(Position.GOALKEEPER) * 2)];
+        setCD = new Player[(playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
+        setLD = new Player[(playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
+        setMF = new Player[(playersAmountMap.get(Position.MIDFIELDER) * 2)];
+        setFW = new Player[(playersAmountMap.get(Position.FORWARD) * 2)];
+        setGK = new Player[(playersAmountMap.get(Position.GOALKEEPER) * 2)];
 
         masterPanel = new JPanel(new MigLayout("wrap 2"));
         leftPanel = new JPanel(new MigLayout("wrap"));
@@ -207,7 +205,7 @@ public class InputFrame extends JFrame implements ActionListener {
         textFields.add(textFieldFW);
         textFields.add(textFieldGK);
 
-        playersSets = new TreeMap<Position, Player[]>();
+        playersSets = new TreeMap<>();
 
         playersSets.put(Position.CENTRAL_DEFENDER, setCD);
         playersSets.put(Position.LATERAL_DEFENDER, setLD);
@@ -215,7 +213,7 @@ public class InputFrame extends JFrame implements ActionListener {
         playersSets.put(Position.FORWARD, setFW);
         playersSets.put(Position.GOALKEEPER, setGK);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(frameTitle);
         setIconImage(MainFrame.icon.getImage());
 
@@ -285,7 +283,7 @@ public class InputFrame extends JFrame implements ActionListener {
                         * Nombre sin espacios ni al principio ni al final, en mayúsculas,
                         * y cualquier espacio intermedio es reemplazado por un guión bajo.
                         */
-                        String name = aux.getText().trim().toUpperCase().replaceAll(" ", "_");
+                        String name = aux.getText().trim().toUpperCase().replace(" ", "_");
 
                         if (name.length() == 0 || name.length() > MAX_NAME_LEN
                             || isEmptyString(name) || alreadyExists(name))
@@ -326,9 +324,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * al panel de ingreso de jugadores.
      */
     private void addButtons() {
-        mixButton = new JButton("Distribuir");
-        backButton = new BackButton(InputFrame.this, previousFrame);
+        BackButton backButton = new BackButton(InputFrame.this, previousFrame);
 
+        mixButton = new JButton("Distribuir");
+        
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
 
@@ -382,8 +381,8 @@ public class InputFrame extends JFrame implements ActionListener {
         textArea.setEditable(false);
         textArea.setVisible(true);
 
-        scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                     JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                     ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         rightPanel.add(scrollPane, "push, grow, span");
 

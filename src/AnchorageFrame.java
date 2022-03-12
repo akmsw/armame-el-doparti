@@ -118,8 +118,6 @@ public class AnchorageFrame extends JFrame {
             index++;
         }
 
-        index = 0;
-
         okButton.addActionListener(new ActionListener() {
             /**
              * Este método hace invisible la ventana de anclaje cuando el usuario hizo los

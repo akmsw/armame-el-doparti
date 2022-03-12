@@ -45,6 +45,8 @@ public class ResultFrame extends JFrame {
     private JTable table;
 
     private Random randomGenerator;
+
+    private String title;
     
     private BackButton backButton;
     
@@ -60,6 +62,8 @@ public class ResultFrame extends JFrame {
     public ResultFrame(InputFrame inputFrame, JFrame previousFrame) {
         this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
+
+        title = "";
 
         randomGenerator = new Random();
 
@@ -125,6 +129,9 @@ public class ResultFrame extends JFrame {
 
         pack();
 
+        title = title.concat("Fútbol " + inputFrame.playersAmount);
+        
+        setTitle(title);
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -260,7 +267,6 @@ public class ResultFrame extends JFrame {
      * datos cargados de los jugadores en cada equipo.
      */
     private void fillTable() {
-        // Labels de formato
         for (int i = 0; i < 2; i++)
             table.setValueAt("EQUIPO #" + (i + 1), 0, (i + 1));
 
@@ -316,12 +322,14 @@ public class ResultFrame extends JFrame {
      *                   en cuenta anclajes establecidos.
      */
     private void randomMix(boolean anchorages) {
+        title = title.concat("Aleatorio - ");
+
         if (anchorages) {
-            setTitle("Aleatorio - Con anclajes - Fútbol " + inputFrame.playersAmount);
+            title = title.concat("Con anclajes - ");
 
             // TODO
         } else {
-            setTitle("Aleatorio - Sin anclajes - Fútbol " + inputFrame.playersAmount);
+            title = title.concat("Sin anclajes - ");
 
             /*
              * Se elige un número aleatorio entre 0 y 1 (+1)
@@ -386,10 +394,12 @@ public class ResultFrame extends JFrame {
      *                   en cuenta anclajes establecidos.
      */
     private void ratingsMix(boolean anchorages) {
+        title = title.concat("Por puntajes - ");
+
         if (anchorages) {
-            setTitle("Por puntajes - Con anclajes - Fútbol " + inputFrame.playersAmount);
+            title = title.concat("Con anclajes - ");
         } else {
-            setTitle("Por puntajes - Sin anclajes - Fútbol " + inputFrame.playersAmount);
+            title = title.concat("Sin anclajes - ");
         }
     }
 
