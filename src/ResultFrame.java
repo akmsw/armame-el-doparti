@@ -1,11 +1,11 @@
 /**
  * Clase correspondiente a la ventana de resultados
  * de distribución de jugadores.
- * 
+ *
  * @author Bonino, Francisco Ignacio.
- * 
+ *
  * @version 3.0.0
- * 
+ *
  * @since 06/03/2021
  */
 
@@ -28,6 +28,10 @@ import net.miginfocom.swing.MigLayout;
 
 public class ResultFrame extends JFrame {
 
+    /* ---------------------------------------- Constantes privadas ------------------------------ */
+
+    private static final String GROWX = "growx";
+
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private transient ArrayList<Player> team1;
@@ -44,12 +48,12 @@ public class ResultFrame extends JFrame {
     private Random randomGenerator;
 
     private String frameTitle;
-    
+
     private InputFrame inputFrame;
 
     /**
      * Creación de la ventana de resultados.
-     * 
+     *
      * @param inputFrame    La ventana de ingreso de datos, de la cual se obtendrá
      *                      información importante.
      * @param previousFrame La ventana fuente que crea la ventana ResultFrame.
@@ -76,7 +80,7 @@ public class ResultFrame extends JFrame {
             randomMix(inputFrame.thereAreAnchorages());
         else
             ratingsMix(inputFrame.thereAreAnchorages());
-        
+
         initializeComponents();
     }
 
@@ -125,7 +129,7 @@ public class ResultFrame extends JFrame {
         pack();
 
         frameTitle = frameTitle.concat("Fútbol " + inputFrame.getPlayersPerTeam());
-        
+
         setTitle(frameTitle);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -186,11 +190,11 @@ public class ResultFrame extends JFrame {
                 fillTable();
             });
 
-            panel.add(remixButton, "growx");
+            panel.add(remixButton, GROWX);
         }
 
-        panel.add(backButton, "growx");
-        panel.add(mainMenuButton, "growx");
+        panel.add(backButton, GROWX);
+        panel.add(mainMenuButton, GROWX);
     }
 
     /**
@@ -203,7 +207,7 @@ public class ResultFrame extends JFrame {
             /**
              * Este método se encarga de setear el color de fondo
              * y de letra de las casillas de la tabla.
-             * 
+             *
              * @param table      Tabla fuente.
              * @param value      -.
              * @param isSelected Si la celda está seleccionada.
@@ -226,7 +230,7 @@ public class ResultFrame extends JFrame {
                     c.setBackground(Color.WHITE);
                     c.setForeground(Color.BLACK);
                 }
-                
+
                 return c;
             }
         });
@@ -254,24 +258,24 @@ public class ResultFrame extends JFrame {
         int halfLDSetLength = inputFrame.getPlayersMap().get(Position.LATERAL_DEFENDER).length / 2;
         int halfMFSetLength = inputFrame.getPlayersMap().get(Position.MIDFIELDER).length / 2;
         int halfFWSetLength = inputFrame.getPlayersMap().get(Position.FORWARD).length / 2;
-        
+
         for (int i = 0; i < halfCDSetLength; i++)
             table.setValueAt(Main.positions.get(Position.CENTRAL_DEFENDER), (i + 1), 0);
-        
+
         for (int i = 0; i < halfLDSetLength; i++)
             table.setValueAt(Main.positions.get(Position.LATERAL_DEFENDER), (i + 1 + halfCDSetLength), 0);
-        
+
         for (int i = 0; i < halfMFSetLength; i++)
             table.setValueAt(Main.positions.get(Position.MIDFIELDER), (i + 1 + halfCDSetLength + halfLDSetLength), 0);
-        
+
         for (int i = 0; i < halfFWSetLength; i++)
             table.setValueAt(Main.positions.get(Position.FORWARD), (i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength), 0);
-        
+
         table.setValueAt(Main.positions.get(Position.GOALKEEPER), (1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength), 0);
 
         /*
          *                      ¡¡¡IMPORTANTE!!!
-         * 
+         *
          * Aquí se llenan los recuadros de la tabla confiando en el
          * orden en el que se escribieron las posiciones en las filas
          * de la columna 0 (el mismo orden del enum de posiciones).
@@ -287,7 +291,7 @@ public class ResultFrame extends JFrame {
         for (int i = 0; i < teams.size(); i++) {
             for (Player player : teams.get(i))
                 table.setValueAt(player.getName(), row++, (i + 1));
-            
+
             row = 1;
         }
     }
@@ -295,7 +299,7 @@ public class ResultFrame extends JFrame {
     /**
      * Este método se encarga de repartir de manera aleatoria los
      * jugadores en dos equipos.
-     * 
+     *
      * @param anchorages Si la mezcla aleatoria debe tener
      *                   en cuenta anclajes establecidos.
      */
@@ -315,7 +319,7 @@ public class ResultFrame extends JFrame {
              * y el resto tendrá asignado el equipo opuesto.
              * Se recorre la mitad de los jugadores del set de manera
              * aleatoria y se les asigna a los jugadores escogidos
-             * como equipo el número aleatorio generado al principio. 
+             * como equipo el número aleatorio generado al principio.
              * A medida que se van eligiendo jugadores, su índice en
              * el arreglo se almacena para evitar reasignarle un equipo.
              * Al resto de jugadores que quedaron sin elegir de manera
@@ -337,9 +341,9 @@ public class ResultFrame extends JFrame {
                     do {
                         index = randomGenerator.nextInt(set.length);
                     } while (alreadySetted.contains(index));
-        
+
                     alreadySetted.add(index);
-        
+
                     set[index].setTeam(teamSubset1);
 
                     if (teamSubset1 == 1)
@@ -357,7 +361,7 @@ public class ResultFrame extends JFrame {
                         else
                             team2.add(player);
                     }
-                
+
                 alreadySetted.clear();
             }
         }
@@ -367,7 +371,7 @@ public class ResultFrame extends JFrame {
      * Este método se encarga de repartir los jugadores en dos
      * equipos de la manera más equitativa posible en base a
      * los puntajes ingresados por el usuario.
-     * 
+     *
      * @param anchorages Si la mezcla aleatoria debe tener
      *                   en cuenta anclajes establecidos.
      */

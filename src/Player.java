@@ -1,10 +1,10 @@
 /**
  * Clase representativa de los jugadores.
- * 
+ *
  * @author Bonino, Francisco Ignacio.
- * 
+ *
  * @version 3.0.0
- * 
+ *
  * @since 15/02/2021
  */
 
@@ -22,7 +22,7 @@ public class Player {
 
     /**
      * Se crea un jugador básico con los parámetros recibidos.
-     * 
+     *
      * @param name     El nombre del jugador.
      * @param position La posición del jugador.
      */

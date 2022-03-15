@@ -1,10 +1,10 @@
 /**
  * Clase correspondiente a los botones de navegación entre ventanas.
- * 
+ *
  * @author Bonino, Francisco Ignacio.
- * 
+ *
  * @version 3.0.0
- * 
+ *
  * @since 27/06/2021
  */
 
@@ -15,7 +15,7 @@ public class BackButton extends JButton {
 
     /**
      * Constructor del botón para navegar hacia atrás entre ventanas.
-     * 
+     *
      * @param currentFrame  Ventana donde está colocado el botón.
      * @param previousFrame Ventana a la que regresar cuando se pulse el botón.
      */
@@ -33,7 +33,7 @@ public class BackButton extends JButton {
          */
         addActionListener(e -> {
             previousFrame.setVisible(true);
-            
+
             currentFrame.dispose();
         });
     }

@@ -1,11 +1,11 @@
 /**
  * Clase correspondiente a la ventana de ingreso
  * de puntaje de jugadores.
- * 
+ *
  * @author Bonino, Francisco Ignacio.
- * 
+ *
  * @version 3.0.0
- * 
+ *
  * @since 06/03/2021
  */
 
@@ -27,35 +27,30 @@ import net.miginfocom.swing.MigLayout;
 
 public class RatingFrame extends JFrame {
 
+    /* ---------------------------------------- Constantes privadas ------------------------------ */
+
+    private static final String GROW_SPAN = "grow, span";
+
     /* ---------------------------------------- Campos privados ---------------------------------- */
-
-    private JPanel panel;
-
-    private JButton finishButton;
-    private JButton resetButton;
-
-    private BackButton backButton;
-    
-    private transient HashMap<Player, JSpinner> spinnersMap;
 
     private ResultFrame resultFrame;
 
     /**
      * Creación de la ventana de ingreso de puntajes.
-     * 
+     *
      * @param inputFrame    Ventana de ingreso de datos, de la cual se obtendrá
      *                      información importante.
      * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
      */
     public RatingFrame(InputFrame inputFrame, JFrame previousFrame) {
-        panel = new JPanel(new MigLayout());
+        JPanel panel = new JPanel(new MigLayout());
 
-        finishButton = new JButton("Finalizar");
-        resetButton = new JButton("Reiniciar puntajes");
-        
-        spinnersMap = new HashMap<>();
+        JButton finishButton = new JButton("Finalizar");
+        JButton resetButton = new JButton("Reiniciar puntajes");
 
-        backButton = new BackButton(RatingFrame.this, previousFrame);
+        HashMap<Player, JSpinner> spinnersMap = new HashMap<>();
+
+        BackButton backButton = new BackButton(RatingFrame.this, previousFrame);
 
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
@@ -76,7 +71,7 @@ public class RatingFrame extends JFrame {
         for (int i = 0; i < inputFrame.getPlayersMap().size(); i++) {
             JLabel label = new JLabel(Main.positions.get(Position.values()[i]));
 
-            label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
+            label.setFont(Main.getProgramFont().deriveFont(Font.BOLD));
 
             panel.add(label, "span");
             panel.add(new JSeparator(SwingConstants.HORIZONTAL), "growx, span");
@@ -94,9 +89,9 @@ public class RatingFrame extends JFrame {
             }
         }
 
-        panel.add(finishButton, "grow, span");
-        panel.add(resetButton, "grow, span");
-        panel.add(backButton, "grow, span");
+        panel.add(finishButton, GROW_SPAN);
+        panel.add(resetButton, GROW_SPAN);
+        panel.add(backButton, GROW_SPAN);
 
         add(panel);
 

@@ -1,11 +1,11 @@
 /**
  * Clase correspondiente a la ventana del
  * menú principal del programa.
- * 
+ *
  * @author Bonino, Francisco Ignacio.
- * 
+ *
  * @version 3.0.0
- * 
+ *
  * @since 27/02/2021
  */
 
@@ -27,6 +27,10 @@ import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 public class MainFrame extends JFrame implements ActionListener {
+
+    /* ---------------------------------------- Constantes privadas ------------------------------ */
+
+    private static final String GROWX = "growx";
 
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
@@ -55,12 +59,12 @@ public class MainFrame extends JFrame implements ActionListener {
     private void initializeComponents() {
         ImageIcon bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
 
-        startButton = new JButton("Comenzar");
-        helpButton = new JButton("Ayuda");
-
         JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
 
         JPanel panel = new JPanel(new MigLayout("wrap"));
+
+        startButton = new JButton("Comenzar");
+        helpButton = new JButton("Ayuda");
 
         startButton.setEnabled(true);
         startButton.addActionListener(this);
@@ -68,9 +72,9 @@ public class MainFrame extends JFrame implements ActionListener {
         helpButton.setEnabled(true);
         helpButton.addActionListener(this);
 
-        panel.add(bgLabel, "growx");
-        panel.add(startButton, "growx");
-        panel.add(helpButton, "growx");
+        panel.add(bgLabel, GROWX);
+        panel.add(startButton, GROWX);
+        panel.add(helpButton, GROWX);
 
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
@@ -97,7 +101,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /**
      * Override para indicar qué hacer en base a cada boton pulsado.
-     * 
+     *
      * @param e Evento de click.
      */
     @Override

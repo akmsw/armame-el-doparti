@@ -1,10 +1,10 @@
 /**
  * Clase correspondiente a la ventana de anclaje de jugadores.
- * 
+ *
  * @author Bonino, Francisco Ignacio.
- * 
+ *
  * @version 3.0.0
- * 
+ *
  * @since 15/03/2021
  */
 
@@ -34,7 +34,6 @@ public class AnchorageFrame extends JFrame {
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
     private static final String GROWX_SPAN = "growx, span";
-
     private static final String FRAME_TITLE = "Anclaje de jugadores";
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
@@ -50,11 +49,12 @@ public class AnchorageFrame extends JFrame {
     private ArrayList<JCheckBox> mfCB;
     private ArrayList<JCheckBox> fwCB;
     private ArrayList<JCheckBox> gkCB;
+
     private JButton newAnchorageButton;
     private JButton clearAnchoragesButton;
     private JButton deleteAnchorageButton;
     private JButton deleteLastAnchorageButton;
-    
+
     private JPanel masterPanel;
     private JPanel leftPanel;
     private JPanel rightPanel;
@@ -67,7 +67,7 @@ public class AnchorageFrame extends JFrame {
 
     /**
      * Creación de la ventana de anclajes.
-     * 
+     *
      * @param inputFrame    Ventana cuya visibilidad será toggleada.
      * @param playersAmount Cantidad de jugadores por equipo.
      */
@@ -129,7 +129,7 @@ public class AnchorageFrame extends JFrame {
 
         rightPanel.setBackground(Main.FRAMES_BG_COLOR);
 
-        placeButtons();
+        addButtons();
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "east");
@@ -149,14 +149,14 @@ public class AnchorageFrame extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
     }
-    
+
     /**
      * Este método se encarga de colocar en los paneles de la ventan los botones.
      */
-    private void placeButtons() {
+    private void addButtons() {
         JButton okButton = new JButton("Finalizar");
         BackButton backButton = new BackButton(AnchorageFrame.this, inputFrame);
-        
+
         newAnchorageButton = new JButton("Anclar");
         deleteAnchorageButton = new JButton("Borrar un anclaje");
         deleteLastAnchorageButton = new JButton("Borrar último anclaje");
@@ -216,8 +216,8 @@ public class AnchorageFrame extends JFrame {
         newAnchorageButton.addActionListener(e -> {
             int anchored = 0;
 
-            for (ArrayList<JCheckBox> cbset : cbSets)
-                for (JCheckBox cb : cbset)
+            for (ArrayList<JCheckBox> cbSet : cbSets)
+                for (JCheckBox cb : cbSet)
                     if (cb.isSelected())
                         anchored++;
 
@@ -236,7 +236,7 @@ public class AnchorageFrame extends JFrame {
             }
 
             anchorageNum++;
-            
+
             for (int i = 0; i < cbSets.size(); i++)
                 setAnchors(cbSets.get(i), inputFrame.getPlayersMap().get(Position.values()[i]));
 
@@ -306,7 +306,7 @@ public class AnchorageFrame extends JFrame {
     /**
      * Este método se encarga de llenar los arreglos de checkboxes correspondientes
      * a cada posición.
-     * 
+     *
      * @param playersSet Conjunto de jugadores de donde obtener los nombres.
      * @param cbSet      Conjunto de checkboxes a llenar.
      */
@@ -318,7 +318,7 @@ public class AnchorageFrame extends JFrame {
     /**
      * Este método se encarga de colocar en el panel los checkboxes correspondientes
      * a cada posición junto con una etiqueta que los distinga.
-     * 
+     *
      * @param panel Panel donde se colocarán los checkboxes.
      * @param cbSet Conjunto de checkboxes a colocar.
      * @param title Texto de la etiqueta de acompañamiento.
@@ -327,7 +327,7 @@ public class AnchorageFrame extends JFrame {
         JLabel label = new JLabel(title);
         JSeparator line = new JSeparator(SwingConstants.HORIZONTAL);
 
-        label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
+        label.setFont(Main.getProgramFont().deriveFont(Font.BOLD));
 
         panel.add(label, "span");
 
@@ -340,7 +340,7 @@ public class AnchorageFrame extends JFrame {
     /**
      * @return Si la cantidad de jugadores anclados es al menos 2 y
      *         no más de maxPlayersPerAnchorage.
-     * 
+     *
      * @param anchored Cantidad de jugadores que se intenta anclar.
      */
     private boolean validChecksAmount(int anchored) {
@@ -369,7 +369,7 @@ public class AnchorageFrame extends JFrame {
     /**
      * @return Si la cantidad de jugadores anclados en total no supera el
      *         máximo permitido.
-     * 
+     *
      * @param playersToAnchor Cantidad de jugadores que se intenta anclar.
      */
     private boolean validAnchorageAmount(int playersToAnchor) {
@@ -379,7 +379,7 @@ public class AnchorageFrame extends JFrame {
     /**
      * Este método se encarga de crear una ventana de error con un texto
      * personalizado.
-     * 
+     *
      * @param errMsg Mensaje de error a mostrar en la ventana.
      */
     private void errorMsg(String errMsg) {
@@ -393,7 +393,7 @@ public class AnchorageFrame extends JFrame {
      * caso de que el campo 'anchorageNum' sea 0 (se han querido limpiar los
      * anclajes), se resetearán los números de anclaje de cada jugador y todas las
      * checkboxes quedarán visibles y deseleccionadas.
-     * 
+     *
      * @param cbSet Arreglo de checkboxes a chequear.
      * @param pSet  Arreglo de jugadores correspondiente al arreglo de checkboxes.
      */
@@ -491,7 +491,7 @@ public class AnchorageFrame extends JFrame {
 
     /**
      * Este método se encarga de cambiar el número de anclaje de los jugadores.
-     * 
+     *
      * @param playersSet  Conjunto de jugadores a recorrer.
      * @param cbSet       Conjunto de checkboxes a recorrer.
      * @param target      Anclaje a reemplazar.
