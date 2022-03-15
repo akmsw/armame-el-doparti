@@ -9,8 +9,6 @@
  * @since 06/03/2021
  */
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Font;
 
 import java.util.HashMap;
@@ -22,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -31,11 +31,12 @@ public class RatingFrame extends JFrame {
 
     private JPanel panel;
 
-    private JButton finishButton, resetButton;
+    private JButton finishButton;
+    private JButton resetButton;
 
     private BackButton backButton;
     
-    private HashMap<Player, JSpinner> spinnersMap;
+    private transient HashMap<Player, JSpinner> spinnersMap;
 
     private ResultFrame resultFrame;
 
@@ -58,55 +59,38 @@ public class RatingFrame extends JFrame {
 
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
-        finishButton.addActionListener(new ActionListener() {
-            /**
-             * Este método envía togglear la visibilidad de las ventanas.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
+        // Este método envía togglear la visibilidad de las ventanas
+        finishButton.addActionListener(e -> {
+            spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
 
-                resultFrame = new ResultFrame(inputFrame, RatingFrame.this);
+            resultFrame = new ResultFrame(inputFrame, RatingFrame.this);
 
-                resultFrame.setVisible(true);
+            resultFrame.setVisible(true);
 
-                RatingFrame.this.setVisible(false);
-            }
+            RatingFrame.this.setVisible(false);
         });
 
-        resetButton.addActionListener(new ActionListener() {
-            /**
-             * Este método se encarga de resetear las
-             * puntuaciones de los jugadores.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                spinnersMap.forEach((k, v) -> { v.setValue(1); k.setRating(0); });
-            }
-        });
+        // Este método se encarga de resetear las puntuaciones de los jugadores
+        resetButton.addActionListener(e -> spinnersMap.forEach((k, v) -> { v.setValue(1); k.setRating(0); }));
 
-        for (int i = 0; i < inputFrame.playersSets.size(); i++) {
+        for (int i = 0; i < inputFrame.getPlayersMap().size(); i++) {
             JLabel label = new JLabel(Main.positions.get(Position.values()[i]));
 
             label.setFont(Main.PROGRAM_FONT.deriveFont(Font.BOLD));
 
             panel.add(label, "span");
-            panel.add(new JSeparator(JSeparator.HORIZONTAL), "growx, span");
+            panel.add(new JSeparator(SwingConstants.HORIZONTAL), "growx, span");
 
-            for (int j = 0; j < inputFrame.playersSets.get(Position.values()[i]).length; j++) {
-                spinnersMap.put(inputFrame.playersSets.get(Position.values()[i])[j],
+            for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).length; j++) {
+                spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i])[j],
                                 new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
-                panel.add(new JLabel(inputFrame.playersSets.get(Position.values()[i])[j].getName()), "pushx");
+                panel.add(new JLabel(inputFrame.getPlayersMap().get(Position.values()[i])[j].getName()), "pushx");
 
                 if ((j % 2) != 0)
-                    panel.add(spinnersMap.get(inputFrame.playersSets.get(Position.values()[i])[j]), "wrap");
+                    panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i])[j]), "wrap");
                 else
-                    panel.add(spinnersMap.get(inputFrame.playersSets.get(Position.values()[i])[j]));
+                    panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i])[j]));
             }
         }
 
@@ -118,7 +102,7 @@ public class RatingFrame extends JFrame {
 
         setTitle("Puntuaciones");
         setIconImage(MainFrame.icon.getImage());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         pack();
 

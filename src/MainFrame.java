@@ -21,6 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -28,17 +30,14 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
-    public static ImageIcon icon, smallIcon;
+    public static final ImageIcon icon = new ImageIcon(Main.IMG_PATH + "icon.png");
+    public static final ImageIcon smallIcon = new ImageIcon(icon.getImage().
+                                                            getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private ImageIcon bgImage;
-
-    private JButton startButton, helpButton;
-
-    private JLabel bgLabel;
-
-    private JPanel panel;
+    private JButton startButton;
+    private JButton helpButton;
 
     /**
      * Constructor de la ventana principal.
@@ -54,16 +53,14 @@ public class MainFrame extends JFrame implements ActionListener {
      * ventana principal.
      */
     private void initializeComponents() {
-        bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
-        icon = new ImageIcon(Main.IMG_PATH + "icon.png");
-        smallIcon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        ImageIcon bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
 
         startButton = new JButton("Comenzar");
         helpButton = new JButton("Ayuda");
 
-        bgLabel = new JLabel("", bgImage, JLabel.CENTER);
+        JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
 
-        panel = new JPanel(new MigLayout("wrap"));
+        JPanel panel = new JPanel(new MigLayout("wrap"));
 
         startButton.setEnabled(true);
         startButton.addActionListener(this);
@@ -81,7 +78,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setResizable(false);
         setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(icon.getImage());
 
         pack();

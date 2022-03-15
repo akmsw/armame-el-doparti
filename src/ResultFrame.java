@@ -11,9 +11,6 @@
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
@@ -23,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.TableColumn;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -32,11 +30,10 @@ public class ResultFrame extends JFrame {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private ArrayList<Player> team1, team2;
+    private transient ArrayList<Player> team1;
+    private transient ArrayList<Player> team2;
 
-    private ArrayList<ArrayList<Player>> teams;
-
-    private JButton mainMenuButton;
+    private transient ArrayList<ArrayList<Player>> teams;
 
     private JFrame previousFrame;
 
@@ -46,9 +43,7 @@ public class ResultFrame extends JFrame {
 
     private Random randomGenerator;
 
-    private String title;
-    
-    private BackButton backButton;
+    private String frameTitle;
     
     private InputFrame inputFrame;
 
@@ -63,11 +58,11 @@ public class ResultFrame extends JFrame {
         this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
 
-        title = "";
+        frameTitle = "";
 
         randomGenerator = new Random();
 
-        table = new JTable((inputFrame.playersAmount + 1), 3);
+        table = new JTable((inputFrame.getPlayersPerTeam() + 1), 3);
 
         team1 = new ArrayList<>();
         team2 = new ArrayList<>();
@@ -77,7 +72,7 @@ public class ResultFrame extends JFrame {
         teams.add(team1);
         teams.add(team2);
 
-        if (inputFrame.distribution == 0)
+        if (inputFrame.getDistribution() == 0)
             randomMix(inputFrame.thereAreAnchorages());
         else
             ratingsMix(inputFrame.thereAreAnchorages());
@@ -93,7 +88,7 @@ public class ResultFrame extends JFrame {
     private void initializeComponents() {
         panel = new JPanel(new MigLayout("wrap"));
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(MainFrame.icon.getImage());
 
         addTable();
@@ -129,9 +124,9 @@ public class ResultFrame extends JFrame {
 
         pack();
 
-        title = title.concat("Fútbol " + inputFrame.playersAmount);
+        frameTitle = frameTitle.concat("Fútbol " + inputFrame.getPlayersPerTeam());
         
-        setTitle(title);
+        setTitle(frameTitle);
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -142,68 +137,53 @@ public class ResultFrame extends JFrame {
      * redistribución en caso de ser necesario.
      */
     private void addButtons() {
-        mainMenuButton = new JButton("Volver al menú principal");
+        JButton mainMenuButton = new JButton("Volver al menú principal");
 
-        backButton = new BackButton(ResultFrame.this, previousFrame);
+        BackButton backButton = new BackButton(ResultFrame.this, previousFrame);
 
-        mainMenuButton.addActionListener(new ActionListener() {
-            /**
-             * Este método devuelve al usuario al menú principal
-             * de la aplicación, eliminando la ventana de resultados.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                resetTeams();
+        /*
+         * Este método devuelve al usuario al menú principal
+         * de la aplicación, eliminando la ventana de resultados.
+         */
+        mainMenuButton.addActionListener(e -> {
+            resetTeams();
 
-                ResultFrame.this.dispose();
-                inputFrame.dispose();
-                previousFrame.dispose();
+            ResultFrame.this.dispose();
+            inputFrame.dispose();
+            previousFrame.dispose();
 
-                MainFrame mainFrame = new MainFrame();
+            MainFrame mainFrame = new MainFrame();
 
-                mainFrame.setVisible(true);
-            }
+            mainFrame.setVisible(true);
         });
 
-        backButton.addActionListener(new ActionListener() {
-            /**
-             * Este método togglea la visibilidad de las ventanas.
-             * Se sobreescribe para eliminar todos los equipos
-             * asignados en caso de querer retroceder.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                resetTeams();
+        /*
+         * Este método togglea la visibilidad de las ventanas.
+         * Se sobreescribe para eliminar todos los equipos
+         * asignados en caso de querer retroceder.
+         */
+        backButton.addActionListener(e -> {
+            resetTeams();
 
-                previousFrame.setVisible(true);
+            previousFrame.setVisible(true);
 
-                ResultFrame.this.dispose();
-            }
+            ResultFrame.this.dispose();
         });
 
-        if (inputFrame.distribution == 0) {
+        if (inputFrame.getDistribution() == 0) {
             JButton remixButton = new JButton("Redistribuir");
 
-            remixButton.addActionListener(new ActionListener() {
-                /**
-                 * Este método resetea los equipos de los jugadores
-                 * y vuelve a mezclarlos de manera aleatoria
-                 * considerando los anclajes ingresados por el usuario.
-                 * 
-                 * @param e Evento de click.
-                 */
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    resetTeams();
+            /**
+             * Este método resetea los equipos de los jugadores
+             * y vuelve a mezclarlos de manera aleatoria
+             * considerando los anclajes ingresados por el usuario.
+             */
+            remixButton.addActionListener(e -> {
+                resetTeams();
 
-                    randomMix(inputFrame.thereAreAnchorages());
+                randomMix(inputFrame.thereAreAnchorages());
 
-                    fillTable();
-                }
+                fillTable();
             });
 
             panel.add(remixButton, "growx");
@@ -270,24 +250,24 @@ public class ResultFrame extends JFrame {
         for (int i = 0; i < 2; i++)
             table.setValueAt("EQUIPO #" + (i + 1), 0, (i + 1));
 
-        int cdSetLength_half = inputFrame.playersSets.get(Position.CENTRAL_DEFENDER).length / 2;
-        int ldSetLength_half = inputFrame.playersSets.get(Position.LATERAL_DEFENDER).length / 2;
-        int mfSetLength_half = inputFrame.playersSets.get(Position.MIDFIELDER).length / 2;
-        int fwSetLength_half = inputFrame.playersSets.get(Position.FORWARD).length / 2;
+        int halfCDSetLength = inputFrame.getPlayersMap().get(Position.CENTRAL_DEFENDER).length / 2;
+        int halfLDSetLength = inputFrame.getPlayersMap().get(Position.LATERAL_DEFENDER).length / 2;
+        int halfMFSetLength = inputFrame.getPlayersMap().get(Position.MIDFIELDER).length / 2;
+        int halfFWSetLength = inputFrame.getPlayersMap().get(Position.FORWARD).length / 2;
         
-        for (int i = 0; i < cdSetLength_half; i++)
+        for (int i = 0; i < halfCDSetLength; i++)
             table.setValueAt(Main.positions.get(Position.CENTRAL_DEFENDER), (i + 1), 0);
         
-        for (int i = 0; i < ldSetLength_half; i++)
-            table.setValueAt(Main.positions.get(Position.LATERAL_DEFENDER), (i + 1 + cdSetLength_half), 0);
+        for (int i = 0; i < halfLDSetLength; i++)
+            table.setValueAt(Main.positions.get(Position.LATERAL_DEFENDER), (i + 1 + halfCDSetLength), 0);
         
-        for (int i = 0; i < mfSetLength_half; i++)
-            table.setValueAt(Main.positions.get(Position.MIDFIELDER), (i + 1 + cdSetLength_half + ldSetLength_half), 0);
+        for (int i = 0; i < halfMFSetLength; i++)
+            table.setValueAt(Main.positions.get(Position.MIDFIELDER), (i + 1 + halfCDSetLength + halfLDSetLength), 0);
         
-        for (int i = 0; i < fwSetLength_half; i++)
-            table.setValueAt(Main.positions.get(Position.FORWARD), (i + 1 + cdSetLength_half + ldSetLength_half + mfSetLength_half), 0);
+        for (int i = 0; i < halfFWSetLength; i++)
+            table.setValueAt(Main.positions.get(Position.FORWARD), (i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength), 0);
         
-        table.setValueAt(Main.positions.get(Position.GOALKEEPER), (1 + cdSetLength_half + ldSetLength_half + mfSetLength_half + fwSetLength_half), 0);
+        table.setValueAt(Main.positions.get(Position.GOALKEEPER), (1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength), 0);
 
         /*
          *                      ¡¡¡IMPORTANTE!!!
@@ -300,8 +280,6 @@ public class ResultFrame extends JFrame {
          * delanteros y por último arqueros. Si se cambian de lugar los
          * labels de las posiciones en la tabla, deberá cambiarse esta
          * manera de llenarla, ya que no se respetará el nuevo orden establecido.
-         * 
-         * TODO: Almacenar datos en un arreglo y alimentar la tabla con el mismo..
          */
 
         int row = 1;
@@ -322,14 +300,14 @@ public class ResultFrame extends JFrame {
      *                   en cuenta anclajes establecidos.
      */
     private void randomMix(boolean anchorages) {
-        title = title.concat("Aleatorio - ");
+        frameTitle = frameTitle.concat("Aleatorio - ");
 
         if (anchorages) {
-            title = title.concat("Con anclajes - ");
+            frameTitle = frameTitle.concat("Con anclajes - ");
 
             // TODO
         } else {
-            title = title.concat("Sin anclajes - ");
+            frameTitle = frameTitle.concat("Sin anclajes - ");
 
             /*
              * Se elige un número aleatorio entre 0 y 1 (+1)
@@ -353,7 +331,7 @@ public class ResultFrame extends JFrame {
                 int teamSubset1 = randomGenerator.nextInt(2) + 1;
                 int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
 
-                Player[] set = inputFrame.playersSets.get(position);
+                Player[] set = inputFrame.getPlayersMap().get(position);
 
                 for (int j = 0; j < (set.length / 2); j++) {
                     do {
@@ -394,12 +372,12 @@ public class ResultFrame extends JFrame {
      *                   en cuenta anclajes establecidos.
      */
     private void ratingsMix(boolean anchorages) {
-        title = title.concat("Por puntajes - ");
+        frameTitle = frameTitle.concat("Por puntajes - ");
 
         if (anchorages) {
-            title = title.concat("Con anclajes - ");
+            frameTitle = frameTitle.concat("Con anclajes - ");
         } else {
-            title = title.concat("Sin anclajes - ");
+            frameTitle = frameTitle.concat("Sin anclajes - ");
         }
     }
 
@@ -409,7 +387,7 @@ public class ResultFrame extends JFrame {
      * representativos de cada equipo.
      */
     private void resetTeams() {
-        for (Map.Entry<Position, Player[]> ps : inputFrame.playersSets.entrySet())
+        for (Map.Entry<Position, Player[]> ps : inputFrame.getPlayersMap().entrySet())
             for (Player p : ps.getValue())
                 p.setTeam(0);
 

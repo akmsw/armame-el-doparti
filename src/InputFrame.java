@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
@@ -55,35 +56,27 @@ public class InputFrame extends JFrame implements ActionListener {
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private int totalAnchorages;
+    private int distribution;
+    private int playersPerTeam;
 
     private boolean anchorages;
-
-    private ArrayList<JTextField> textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK;
 
     private ArrayList<ArrayList<JTextField>> textFields;
 
     private EnumMap<Position, Integer> playersAmountMap;
 
+    private transient TreeMap<Position, Player[]> playersSets;
+
     private JButton mixButton;
-    
-    private JCheckBox anchor;
     
     private JComboBox<String> comboBox;
     
     private JFrame previousFrame;
     
-    private JPanel masterPanel, leftPanel, rightPanel;
+    private JPanel leftPanel;
+    private JPanel rightPanel;
     
     private JTextArea textArea;
-
-    private Player[] setCD, setLD, setMF, setFW, setGK;
-    
-    /* ---------------------------------------- Campos públicos ---------------------------------- */
-
-    public int distribution; // Tipo de distribución de jugadores elegida
-    public int playersAmount; // Cantidad de jugadores por equipo
-
-    public TreeMap<Position, Player[]> playersSets; // Mapa con los arreglos de jugadores
 
     /**
      * Constructor de la ventana de ingreso de jugadores.
@@ -93,9 +86,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * 
      * @throws IOException Cuando hay un error de lectura en el archivo PDA.
      */
-    public InputFrame(JFrame previousFrame, int playersAmount) throws IOException {
+    public InputFrame(JFrame previousFrame, int playersPerTeam) throws IOException {
         this.previousFrame = previousFrame;
-        this.playersAmount = playersAmount;
+        this.playersPerTeam = playersPerTeam;
 
         anchorages = false;
 
@@ -103,9 +96,9 @@ public class InputFrame extends JFrame implements ActionListener {
 
         playersAmountMap = new EnumMap<>(Position.class);
 
-        collectPDData(playersAmount);
+        collectPDData(playersPerTeam);
 
-        initializeComponents("Ingreso de jugadores - Fútbol " + playersAmount);
+        initializeComponents("Ingreso de jugadores - Fútbol " + playersPerTeam);
     }
 
     /* ---------------------------------------- Métodos privados --------------------------------- */
@@ -176,20 +169,22 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
-        textFieldCD = new ArrayList<>();
-        textFieldLD = new ArrayList<>();
-        textFieldMF = new ArrayList<>();
-        textFieldFW = new ArrayList<>();
-        textFieldGK = new ArrayList<>();
+        ArrayList<JTextField> textFieldCD = new ArrayList<>();
+        ArrayList<JTextField> textFieldLD = new ArrayList<>();
+        ArrayList<JTextField> textFieldMF = new ArrayList<>();
+        ArrayList<JTextField> textFieldFW = new ArrayList<>();
+        ArrayList<JTextField> textFieldGK = new ArrayList<>();
+        
         textFields = new ArrayList<>();
 
-        setCD = new Player[(playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
-        setLD = new Player[(playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
-        setMF = new Player[(playersAmountMap.get(Position.MIDFIELDER) * 2)];
-        setFW = new Player[(playersAmountMap.get(Position.FORWARD) * 2)];
-        setGK = new Player[(playersAmountMap.get(Position.GOALKEEPER) * 2)];
+        Player[] setCD = new Player[(playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
+        Player[] setLD = new Player[(playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
+        Player[] setMF = new Player[(playersAmountMap.get(Position.MIDFIELDER) * 2)];
+        Player[] setFW = new Player[(playersAmountMap.get(Position.FORWARD) * 2)];
+        Player[] setGK = new Player[(playersAmountMap.get(Position.GOALKEEPER) * 2)];
 
-        masterPanel = new JPanel(new MigLayout("wrap 2"));
+        JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
+
         leftPanel = new JPanel(new MigLayout("wrap"));
         rightPanel = new JPanel(new MigLayout("wrap"));
 
@@ -258,46 +253,38 @@ public class InputFrame extends JFrame implements ActionListener {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
             JTextField aux = new JTextField();
 
-            aux.addActionListener(new ActionListener() {
-                int index; // Índice que indica el campo de texto donde se ingresó el nombre
+            /**
+             * Este método valida la cadena ingresada y, en caso de no haber problemas,
+             * se la setea como el nombre del jugador correspondiente a ese campo de texto.
+             */
+            aux.addActionListener(e -> {
+                JTextField auxTF = (JTextField) e.getSource();
 
-                /**
-                 * Este método valida la cadena ingresada y, en caso de no haber problemas,
-                 * se la setea como el nombre del jugador correspondiente a ese campo de texto.
-                 * 
-                 * @param e Evento de pulsación de tecla 'Enter'.
-                 */
-                public void actionPerformed(ActionEvent e) {
-                    JTextField auxTF = (JTextField) e.getSource();
+                int index = textFieldSet.indexOf(auxTF);
+                
+                if (!(Pattern.matches("[a-z A-ZÁÉÍÓÚáéíóúñÑ]+", aux.getText())))
+                    JOptionPane.showMessageDialog(null,
+                            "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
+                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                else {
+                    /*
+                    * Nombre sin espacios ni al principio ni al final, en mayúsculas,
+                    * y cualquier espacio intermedio es reemplazado por un guión bajo.
+                    */
+                    String name = aux.getText().trim().toUpperCase().replace(" ", "_");
 
-                    for (index = 0; index < textFieldSet.size(); index++)
-                        if (auxTF == textFieldSet.get(index))
-                            break;
-                    
-                    if (!(Pattern.matches("[a-z A-ZÁÉÍÓÚáéíóúñÑ]+", aux.getText())))
+                    if ((name.length() == 0) || (name.length() > MAX_NAME_LEN) || 
+                        isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null,
-                                "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
-                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
+                                + " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
-                        /*
-                        * Nombre sin espacios ni al principio ni al final, en mayúsculas,
-                        * y cualquier espacio intermedio es reemplazado por un guión bajo.
-                        */
-                        String name = aux.getText().trim().toUpperCase().replace(" ", "_");
+                        playersSet[index].setName(name);
 
-                        if (name.length() == 0 || name.length() > MAX_NAME_LEN
-                            || isEmptyString(name) || alreadyExists(name))
-                            JOptionPane.showMessageDialog(null,
-                                    "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
-                                    + " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-                        else {
-                            playersSet[index].setName(name);
+                        updateTextArea();
 
-                            updateTextArea();
-
-                            // Habilitamos el botón de mezcla sólo cuando todos los jugadores tengan nombre
-                            mixButton.setEnabled(!alreadyExists(""));
-                        }
+                        // Habilitamos el botón de mezcla sólo cuando todos los jugadores tengan nombre
+                        mixButton.setEnabled(!alreadyExists(""));
                     }
                 }
             });
@@ -311,7 +298,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * al frame y setear el handler de eventos a la misma.
      */
     private void addComboBox() {
-        comboBox = new JComboBox<String>(OPTIONS_COMBOBOX);
+        comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
 
         comboBox.setSelectedIndex(0);
         comboBox.addActionListener(this);
@@ -331,37 +318,32 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
 
-        mixButton.addActionListener(new ActionListener() {
-            /**
-             * Este método se encarga de tomar el criterio de búsqueda especificado por el
-             * usuario. Además, se chequea si se deben anclar jugadores y se trabaja en base
-             * a eso.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                distribution = JOptionPane.showOptionDialog(null,
-                        "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                        JOptionPane.QUESTION_MESSAGE, MainFrame.smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
+        /*
+         * Este método se encarga de tomar el criterio de búsqueda especificado por el
+         * usuario. Además, se chequea si se deben anclar jugadores y se trabaja en base
+         * a eso.
+         */
+        mixButton.addActionListener(e -> {
+            distribution = JOptionPane.showOptionDialog(null,
+                    "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
+                    JOptionPane.QUESTION_MESSAGE, MainFrame.smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
 
-                if (distribution != JOptionPane.CLOSED_OPTION) {
-                    if (thereAreAnchorages()) {
-                        AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this, playersAmount);
+            if (distribution != JOptionPane.CLOSED_OPTION) {
+                if (thereAreAnchorages()) {
+                    AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this, playersPerTeam);
 
-                        anchorageFrame.setVisible(true);
-                    } else if (distribution == 0) {
-                        ResultFrame resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
+                    anchorageFrame.setVisible(true);
+                } else if (distribution == 0) {
+                    ResultFrame resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
 
-                        resultFrame.setVisible(true);
-                    } else {
-                        RatingFrame ratingFrame = new RatingFrame(InputFrame.this, InputFrame.this);
+                    resultFrame.setVisible(true);
+                } else {
+                    RatingFrame ratingFrame = new RatingFrame(InputFrame.this, InputFrame.this);
 
-                        ratingFrame.setVisible(true);
-                    }
-
-                    InputFrame.this.setVisible(false);
+                    ratingFrame.setVisible(true);
                 }
+
+                InputFrame.this.setVisible(false);
             }
         });
 
@@ -394,27 +376,20 @@ public class InputFrame extends JFrame implements ActionListener {
      * panel del frame.
      */
     private void addAnchorCheckBox() {
-        anchor = new JCheckBox("Anclar jugadores", false);
+        JCheckBox anchorCheckBox = new JCheckBox("Anclar jugadores", false);
 
-        anchor.setFont(Main.PROGRAM_FONT.deriveFont(Main.FONT_SIZE));
-        anchor.setBackground(Main.FRAMES_BG_COLOR);
-        anchor.setVisible(true);
+        anchorCheckBox.setFont(Main.PROGRAM_FONT.deriveFont(Main.FONT_SIZE));
+        anchorCheckBox.setBackground(Main.FRAMES_BG_COLOR);
+        anchorCheckBox.setVisible(true);
 
-        anchor.addActionListener(new ActionListener() {
-            /**
-             * Este método se encarga de togglear el valor
-             * de la variable anchorages cada vez que se
-             * hace click en el checkbox.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                anchorages = !anchorages;
-            }
-        });
+        /**
+         * Este método se encarga de togglear el valor
+         * de la variable anchorages cada vez que se
+         * hace click en el checkbox.
+         */
+        anchorCheckBox.addActionListener(e -> anchorages = !anchorages);
 
-        rightPanel.add(anchor, "center");
+        rightPanel.add(anchorCheckBox, "center");
     }
 
     /**
@@ -455,7 +430,7 @@ public class InputFrame extends JFrame implements ActionListener {
         for (Map.Entry<Position, Player[]> ps : playersSets.entrySet())
             for (Player player : ps.getValue())
                 if (!player.getName().equals("")) {
-                    if ((counter != 0) && (((playersAmount * 2) - counter) != 0))
+                    if ((counter != 0) && (((playersPerTeam * 2) - counter) != 0))
                         textArea.append("\n");
                     
                     textArea.append((counter + 1) + " - " + player.getName());
@@ -551,6 +526,21 @@ public class InputFrame extends JFrame implements ActionListener {
     public int getTotalAnchorages() {
         return totalAnchorages;
     }
+
+    /**
+     * @return Tipo de distribución de jugadores elegida.
+     */
+    public int getDistribution() {
+        return distribution;
+    }
+
+    /**
+     * @return Cantidad de jugadores por equipo.
+     */
+    public int getPlayersPerTeam() {
+        return playersPerTeam;
+    }
+
     /**
      * @return Si el usuario desea hacer anclajes.
      */
@@ -561,7 +551,14 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * @return Cuántos jugadores hay por posición en cada equipo.
      */
-    public EnumMap<Position, Integer> getPlayersAmountMap() {
+    public Map<Position, Integer> getPlayersAmountMap() {
         return playersAmountMap;
+    }
+
+    /**
+     * @return Mapa con los arreglos de jugadores.
+     */
+    public SortedMap<Position, Player[]> getPlayersMap() {
+        return playersSets;
     }
 }

@@ -12,7 +12,9 @@ public class Player {
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
-    private int rating, anchor, team;
+    private int rating;
+    private int anchor;
+    private int team;
 
     private String name;
 

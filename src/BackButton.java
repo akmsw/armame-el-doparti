@@ -8,9 +8,6 @@
  * @since 27/06/2021
  */
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -27,22 +24,17 @@ public class BackButton extends JButton {
         setEnabled(true);
         setVisible(true);
 
-        addActionListener(new ActionListener() {
-            /**
-             * Este método togglea la visibilidad de la ventana anterior,
-             * eliminando la ventana actual para evitar múltiples
-             * instancias de una misma ventana con distintas
-             * visibilidades, ya que esto podría llevar a corrupción de
-             * datos y a mantener información inutilizada en memoria.
-             * 
-             * @param e Evento de click.
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                previousFrame.setVisible(true);
-                
-                currentFrame.dispose();
-            }
+        /*
+         * Este método togglea la visibilidad de la ventana anterior,
+         * eliminando la ventana actual para evitar múltiples
+         * instancias de una misma ventana con distintas
+         * visibilidades, ya que esto podría llevar a corrupción de
+         * datos y a mantener información inutilizada en memoria.
+         */
+        addActionListener(e -> {
+            previousFrame.setVisible(true);
+            
+            currentFrame.dispose();
         });
     }
 }
