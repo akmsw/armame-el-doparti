@@ -35,28 +35,20 @@ public class MainFrame extends JFrame implements ActionListener {
     /* ---------------------------------------- Campos públicos ---------------------------------- */
 
     public static final ImageIcon icon = new ImageIcon(Main.IMG_PATH + "icon.png");
-    public static final ImageIcon smallIcon = new ImageIcon(icon.getImage().
-                                                            getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+    public static final ImageIcon smallIcon = new ImageIcon(icon.getImage()
+                                                                .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private JButton startButton;
     private JButton helpButton;
 
+    /* ---------------------------------------- Constructor -------------------------------------- */
+
     /**
      * Constructor de la ventana principal.
      */
     public MainFrame() {
-        initializeComponents();
-    }
-
-    /* ---------------------------------------- Métodos privados --------------------------------- */
-
-    /**
-     * Este método se encarga de inicializar los botones y la imagen de fondo de la
-     * ventana principal.
-     */
-    private void initializeComponents() {
         ImageIcon bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
 
         JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
@@ -89,6 +81,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setLocationRelativeTo(null);
     }
+
+    /* ---------------------------------------- Métodos privados --------------------------------- */
 
     /**
      * Este método despliega las instrucciones de uso del programa.

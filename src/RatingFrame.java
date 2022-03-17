@@ -9,8 +9,6 @@
  * @since 06/03/2021
  */
 
-import java.awt.Font;
-
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -35,6 +33,8 @@ public class RatingFrame extends JFrame {
 
     private ResultFrame resultFrame;
 
+    /* ---------------------------------------- Constructor -------------------------------------- */
+
     /**
      * Creación de la ventana de ingreso de puntajes.
      *
@@ -54,7 +54,6 @@ public class RatingFrame extends JFrame {
 
         panel.setBackground(Main.FRAMES_BG_COLOR);
 
-        // Este método envía togglear la visibilidad de las ventanas
         finishButton.addActionListener(e -> {
             spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
 
@@ -65,20 +64,21 @@ public class RatingFrame extends JFrame {
             RatingFrame.this.setVisible(false);
         });
 
-        // Este método se encarga de resetear las puntuaciones de los jugadores
-        resetButton.addActionListener(e -> spinnersMap.forEach((k, v) -> { v.setValue(1); k.setRating(0); }));
+        resetButton.addActionListener(e ->
+            spinnersMap.forEach((k, v) -> {
+                v.setValue(1);
+                k.setRating(0);
+            }));
 
         for (int i = 0; i < inputFrame.getPlayersMap().size(); i++) {
-            JLabel label = new JLabel(Main.positions.get(Position.values()[i]));
-
-            label.setFont(Main.getProgramFont().deriveFont(Font.BOLD));
+            JLabel label = new JLabel(Main.getPositionsMap().get(Position.values()[i]));
 
             panel.add(label, "span");
             panel.add(new JSeparator(SwingConstants.HORIZONTAL), "growx, span");
 
             for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).length; j++) {
                 spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i])[j],
-                                new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
+                        new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
                 panel.add(new JLabel(inputFrame.getPlayersMap().get(Position.values()[i])[j].getName()), "pushx");
 

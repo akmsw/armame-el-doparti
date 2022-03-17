@@ -8,9 +8,9 @@
  * @since 15/03/2021
  */
 
-import java.awt.Font;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -42,13 +42,13 @@ public class AnchorageFrame extends JFrame {
     private int anchorageNum;
     private int playersAnchored;
 
-    private ArrayList<ArrayList<JCheckBox>> cbSets;
-
     private ArrayList<JCheckBox> cdCB;
     private ArrayList<JCheckBox> ldCB;
     private ArrayList<JCheckBox> mfCB;
     private ArrayList<JCheckBox> fwCB;
     private ArrayList<JCheckBox> gkCB;
+
+    private List<ArrayList<JCheckBox>> cbSets;
 
     private JButton newAnchorageButton;
     private JButton clearAnchoragesButton;
@@ -86,13 +86,7 @@ public class AnchorageFrame extends JFrame {
         fwCB = new ArrayList<>();
         gkCB = new ArrayList<>();
 
-        cbSets = new ArrayList<>();
-
-        cbSets.add(cdCB);
-        cbSets.add(ldCB);
-        cbSets.add(mfCB);
-        cbSets.add(fwCB);
-        cbSets.add(gkCB);
+        cbSets = Arrays.asList(cdCB, ldCB, mfCB, fwCB, gkCB);
 
         anchorageNum = 0;
         playersAnchored = 0;
@@ -116,7 +110,8 @@ public class AnchorageFrame extends JFrame {
 
         for (Map.Entry<Position, Player[]> ps : inputFrame.getPlayersMap().entrySet()) {
             fillCBSet(ps.getValue(), cbSets.get(index));
-            addCBSet(leftPanel, cbSets.get(index), Main.positions.get(Position.values()[index]));
+
+            addCBSet(leftPanel, cbSets.get(index), Main.getPositionsMap().get(Position.values()[index]));
 
             index++;
         }
@@ -155,6 +150,7 @@ public class AnchorageFrame extends JFrame {
      */
     private void addButtons() {
         JButton okButton = new JButton("Finalizar");
+
         BackButton backButton = new BackButton(AnchorageFrame.this, inputFrame);
 
         newAnchorageButton = new JButton("Anclar");
@@ -162,24 +158,12 @@ public class AnchorageFrame extends JFrame {
         deleteLastAnchorageButton = new JButton("Borrar último anclaje");
         clearAnchoragesButton = new JButton("Limpiar anclajes");
 
-        /*
-         * Este método hace invisible la ventana de anclaje cuando el usuario hizo los
-         * anclajes deseados y está listo para distribuir los jugadores.
-         * Se crea, además, la ventana de resultados. Se destildan aquellos checkboxes
-         * que hayan quedado seleccionados sin anclarse.
-         */
         okButton.addActionListener(e -> {
-
             cbSets.forEach(cbs -> cbs.forEach(cb -> {
                 if (cb.isSelected() && cb.isVisible())
                     cb.setSelected(false);
             }));
 
-            /*
-             * Si la distribución es por puntajes, antes de mostrar
-             * la ventana de resultados, se crea la ventana de ingreso
-             * de puntajes para los jugadores.
-             */
             if (inputFrame.getDistribution() == 1) {
                 RatingFrame ratingFrame = new RatingFrame(inputFrame, AnchorageFrame.this);
 
@@ -193,11 +177,6 @@ public class AnchorageFrame extends JFrame {
             AnchorageFrame.this.setVisible(false);
         });
 
-        /*
-         * Este método togglea la visibilidad de las ventanas.
-         * Se sobreescribe para eliminar todos los anclajes
-         * hechos en caso de querer retroceder.
-         */
         backButton.addActionListener(e -> {
             clearAnchorages();
 
@@ -206,23 +185,15 @@ public class AnchorageFrame extends JFrame {
             AnchorageFrame.this.dispose();
         });
 
-        /*
-         * Este método se encarga de anclar los jugadores cuya checkbox está tildada.
-         * Sólo se permitirán hacer anclajes de no menos de 2 y no más de maxPlayersPerAnchorage
-         * jugadores.
-         * No se podrán hacer anclajes que tengan más de la mitad de jugadores de
-         * una misma posición.
-         */
         newAnchorageButton.addActionListener(e -> {
-            int anchored = 0;
-
-            for (ArrayList<JCheckBox> cbSet : cbSets)
-                for (JCheckBox cb : cbSet)
-                    if (cb.isSelected())
-                        anchored++;
+            int anchored = (int) cbSets.stream()
+                                       .flatMap(List::stream)
+                                       .filter(JCheckBox::isSelected)
+                                       .count();
 
             if (!validChecksAmount(anchored)) {
-                errorMsg("No puede haber más de " + maxPlayersPerAnchorage + " ni menos de 2 jugadores en un mismo anclaje");
+                errorMsg("No puede haber más de " + maxPlayersPerAnchorage
+                        + " ni menos de 2 jugadores en un mismo anclaje");
 
                 return;
             } else if (!isValidAnchorage()) {
@@ -245,10 +216,6 @@ public class AnchorageFrame extends JFrame {
             inputFrame.setTotalAnchorages(anchorageNum);
         });
 
-        /*
-         * Este método se encarga de borrar un anclaje en específico señalado por el
-         * usuario.
-         */
         deleteAnchorageButton.addActionListener(e -> {
             String[] optionsDelete = new String[anchorageNum];
 
@@ -278,10 +245,8 @@ public class AnchorageFrame extends JFrame {
             }
         });
 
-        // Este método se encarga de borrar el último anclaje realizado
         deleteLastAnchorageButton.addActionListener(e -> deleteLast());
 
-        // Este método se encarga de borrar todos los anclajes que se hayan generado
         clearAnchoragesButton.addActionListener(e -> clearAnchorages());
 
         leftPanel.add(okButton, GROWX_SPAN);
@@ -325,9 +290,8 @@ public class AnchorageFrame extends JFrame {
      */
     private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
         JLabel label = new JLabel(title);
-        JSeparator line = new JSeparator(SwingConstants.HORIZONTAL);
 
-        label.setFont(Main.getProgramFont().deriveFont(Font.BOLD));
+        JSeparator line = new JSeparator(SwingConstants.HORIZONTAL);
 
         panel.add(label, "span");
 
@@ -348,20 +312,13 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si el anclaje no posee más de la mitad de algún conjunto de
-     *         jugadores.
+     * @return Si el anclaje no consta de más de la mitad de jugadores
+     *         de algún conjunto.
      */
     private boolean isValidAnchorage() {
-        for (ArrayList<JCheckBox> cbSet : cbSets) {
-            int anchor = 0;
-
-            for (JCheckBox cb : cbSet)
-                if (cb.isSelected())
-                    anchor++;
-
-            if (anchor > (cbSet.size() / 2))
+        for (ArrayList<JCheckBox> cbSet : cbSets)
+            if ((cbSet.stream().filter(JCheckBox::isSelected).count()) > (cbSet.size() / 2))
                 return false;
-        }
 
         return true;
     }
@@ -446,6 +403,7 @@ public class AnchorageFrame extends JFrame {
                 for (Player player : ps.getValue())
                     if (player.getAnchor() == i) {
                         textArea.append(" " + counter + ". " + player.getName() + "\n");
+
                         counter++;
                     }
 
@@ -482,10 +440,10 @@ public class AnchorageFrame extends JFrame {
         } else {
             newAnchorageButton.setEnabled(true);
 
-            cbSets.forEach(cbs -> cbs.forEach(cb -> {
-                if (!cb.isEnabled() && !cb.isSelected())
-                    cb.setEnabled(true);
-            }));
+            for (ArrayList<JCheckBox> cbSet : cbSets)
+                for (JCheckBox cb : cbSet)
+                    if (!cb.isEnabled() && !cb.isSelected())
+                        cb.setEnabled(true);
         }
     }
 

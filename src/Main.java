@@ -42,9 +42,7 @@ public class Main {
 
     private static Font programFont;
 
-    /* ---------------------------------------- Campos protegidos -------------------------------- */
-
-    protected static Map<Position, String> positions;
+    private static Map<Position, String> positions;
 
     /**
      * Método principal.
@@ -89,7 +87,8 @@ public class Main {
 
         try {
             // Se registra la fuente para poder setearla
-            programFont = Font.createFont(Font.TRUETYPE_FONT, new File(TTF_PATH + "Comfortaa.ttf")).deriveFont(FONT_SIZE);
+            programFont = Font.createFont(Font.TRUETYPE_FONT, new File(TTF_PATH + "Comfortaa.ttf"))
+                    .deriveFont(FONT_SIZE);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
@@ -120,10 +119,12 @@ public class Main {
         }
     }
 
+    /* ---------------------------------------- Métodos públicos --------------------------------- */
+
     /**
-     * @return Fuente utilizada para el programa.
+     * @return Mapa con los strings correspondientes a cada posición.
      */
-    public static Font getProgramFont() {
-        return programFont;
+    public static Map<Position, String> getPositionsMap() {
+        return positions;
     }
 }

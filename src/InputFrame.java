@@ -18,7 +18,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -47,10 +49,10 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre
 
     private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
-                                                       "Agregar defensores laterales",
-                                                       "Agregar mediocampistas",
-                                                       "Agregar delanteros",
-                                                       "Agregar arqueros" };
+            "Agregar defensores laterales",
+            "Agregar mediocampistas",
+            "Agregar delanteros",
+            "Agregar arqueros" };
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
@@ -61,7 +63,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     private boolean anchorages;
 
-    private ArrayList<ArrayList<JTextField>> textFields;
+    private List<ArrayList<JTextField>> textFields;
 
     private EnumMap<Position, Integer> playersAmountMap;
 
@@ -77,6 +79,8 @@ public class InputFrame extends JFrame implements ActionListener {
     private JPanel rightPanel;
 
     private JTextArea textArea;
+
+    /* ---------------------------------------- Constructor -------------------------------------- */
 
     /**
      * Constructor de la ventana de ingreso de jugadores.
@@ -114,7 +118,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * (?!(?<=X)\\d). : Matchea el trozo de la línea que no sea un número que nos
      * interesa (el número que nos interesa ocuparía el lugar de la X).
      *
-     *                            ¡¡¡IMPORTANTE!!!
+     * ¡¡¡IMPORTANTE!!!
      *
      * Si el archivo .PDA es modificado en cuanto a orden de las líneas importantes,
      * se debe tener en cuenta que Position.values()[index] confía en que lo hallado
@@ -138,8 +142,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 if (line.matches("[CLMFG].+>.+")) {
                     playersAmountMap.put(Position.values()[index],
                                          Integer.parseInt(
-                                            line.replaceAll( "(?!(?<=" + playersAmount + ")\\d).", "")
-                                        ));
+                                         line.replaceAll("(?!(?<=" + playersAmount + ")\\d).", "")));
 
                     index++;
                 }
@@ -175,8 +178,6 @@ public class InputFrame extends JFrame implements ActionListener {
         ArrayList<JTextField> textFieldFW = new ArrayList<>();
         ArrayList<JTextField> textFieldGK = new ArrayList<>();
 
-        textFields = new ArrayList<>();
-
         Player[] setCD = new Player[(playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
         Player[] setLD = new Player[(playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
         Player[] setMF = new Player[(playersAmountMap.get(Position.MIDFIELDER) * 2)];
@@ -194,11 +195,7 @@ public class InputFrame extends JFrame implements ActionListener {
         initializeSet(setFW, Position.FORWARD);
         initializeSet(setGK, Position.GOALKEEPER);
 
-        textFields.add(textFieldCD);
-        textFields.add(textFieldLD);
-        textFields.add(textFieldMF);
-        textFields.add(textFieldFW);
-        textFields.add(textFieldGK);
+        textFields = Arrays.asList(textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK);
 
         playersSets = new TreeMap<>();
 
@@ -253,31 +250,23 @@ public class InputFrame extends JFrame implements ActionListener {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
             JTextField aux = new JTextField();
 
-            /**
-             * Este método valida la cadena ingresada y, en caso de no haber problemas,
-             * se la setea como el nombre del jugador correspondiente a ese campo de texto.
-             */
             aux.addActionListener(e -> {
                 JTextField auxTF = (JTextField) e.getSource();
 
                 int index = textFieldSet.indexOf(auxTF);
 
-                if (!(Pattern.matches("[a-z A-ZÁÉÍÓÚáéíóúñÑ]+", aux.getText())))
+                if (!(Pattern.matches("[a-z A-ZÁÉÍÓÚáéíóúñÑ]+", aux.getText()))) {
                     JOptionPane.showMessageDialog(null,
                             "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
                             "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-                else {
-                    /*
-                    * Nombre sin espacios ni al principio ni al final, en mayúsculas,
-                    * y cualquier espacio intermedio es reemplazado por un guión bajo.
-                    */
+                } else {
                     String name = aux.getText().trim().toUpperCase().replace(" ", "_");
 
                     if ((name.length() == 0) || (name.length() > MAX_NAME_LEN) ||
-                        isEmptyString(name) || alreadyExists(name))
+                            isEmptyString(name) || alreadyExists(name))
                         JOptionPane.showMessageDialog(null,
-                                "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
-                                + " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN +
+                                " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                     else {
                         playersSet[index].setName(name);
 
@@ -318,11 +307,6 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
 
-        /*
-         * Este método se encarga de tomar el criterio de búsqueda especificado por el
-         * usuario. Además, se chequea si se deben anclar jugadores y se trabaja en base
-         * a eso.
-         */
         mixButton.addActionListener(e -> {
             distribution = JOptionPane.showOptionDialog(null,
                     "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
@@ -364,7 +348,7 @@ public class InputFrame extends JFrame implements ActionListener {
         textArea.setVisible(true);
 
         JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                     ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         rightPanel.add(scrollPane, "push, grow, span");
 
@@ -378,15 +362,9 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addAnchorCheckBox() {
         JCheckBox anchorCheckBox = new JCheckBox("Anclar jugadores", false);
 
-        anchorCheckBox.setFont(Main.getProgramFont().deriveFont(Main.FONT_SIZE));
         anchorCheckBox.setBackground(Main.FRAMES_BG_COLOR);
         anchorCheckBox.setVisible(true);
 
-        /**
-         * Este método se encarga de togglear el valor
-         * de la variable anchorages cada vez que se
-         * hace click en el checkbox.
-         */
         anchorCheckBox.addActionListener(e -> anchorages = !anchorages);
 
         rightPanel.add(anchorCheckBox, "center");
@@ -445,8 +423,8 @@ public class InputFrame extends JFrame implements ActionListener {
      * cuáles deben permanecer en el mismo.
      */
     private void clearLeftPanel() {
-        for (ArrayList<JTextField> tfset : textFields)
-            for (JTextField tf : tfset)
+        for (ArrayList<JTextField> tfSet : textFields)
+            for (JTextField tf : tfSet)
                 if (isComponentInPanel(tf, leftPanel))
                     leftPanel.remove(tf);
     }
@@ -458,7 +436,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param component Componente cuya pertenencia se verificará.
      * @param panel     Panel al cual se verificará la pertenencia.
      *
-     * @return Si el componente es parte o no del panel especificado.
+     * @return Si el componente es parte del panel especificado.
      */
     private boolean isComponentInPanel(JComponent c, JPanel p) {
         return (c.getParent() == p);
@@ -470,7 +448,7 @@ public class InputFrame extends JFrame implements ActionListener {
      *
      * @param string Cadena a analizar.
      *
-     * @return Si la cadena está vacía o no.
+     * @return Si la cadena está vacía.
      */
     private boolean isEmptyString(String string) {
         char[] charArray = string.toCharArray();
@@ -502,9 +480,7 @@ public class InputFrame extends JFrame implements ActionListener {
     /* ---------------------------------------- Métodos públicos --------------------------------- */
 
     /**
-     * Handler para los eventos ocurridos de la lista desplegable. Se trata la
-     * fuente del evento ocurrido como un JComboBox y se trata como un String el
-     * ítem seleccionado en el mismo para pasarlo al método updateTextFields.
+     * Handler para los eventos ocurridos de la lista desplegable.
      *
      * @param e Evento de click.
      */
@@ -542,13 +518,6 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * @return Si el usuario desea hacer anclajes.
-     */
-    public boolean thereAreAnchorages() {
-        return anchorages;
-    }
-
-    /**
      * @return Cuántos jugadores hay por posición en cada equipo.
      */
     public Map<Position, Integer> getPlayersAmountMap() {
@@ -560,5 +529,12 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     public SortedMap<Position, Player[]> getPlayersMap() {
         return playersSets;
+    }
+
+    /**
+     * @return Si el usuario desea hacer anclajes.
+     */
+    public boolean thereAreAnchorages() {
+        return anchorages;
     }
 }

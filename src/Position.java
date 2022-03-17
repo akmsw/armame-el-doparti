@@ -1,5 +1,5 @@
 /**
- * Enum con las posibles posiciones para los jugadores.
+ * Posibles posiciones para los jugadores.
  *
  * @author Bonino, Francisco Ignacio.
  *

@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 
 public class BackButton extends JButton {
 
+    /* ---------------------------------------- Constructor -------------------------------------- */
+
     /**
      * Constructor del botón para navegar hacia atrás entre ventanas.
      *
@@ -24,13 +26,6 @@ public class BackButton extends JButton {
         setEnabled(true);
         setVisible(true);
 
-        /*
-         * Este método togglea la visibilidad de la ventana anterior,
-         * eliminando la ventana actual para evitar múltiples
-         * instancias de una misma ventana con distintas
-         * visibilidades, ya que esto podría llevar a corrupción de
-         * datos y a mantener información inutilizada en memoria.
-         */
         addActionListener(e -> {
             previousFrame.setVisible(true);
 

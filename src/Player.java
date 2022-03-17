@@ -10,7 +10,7 @@
 
 public class Player {
 
-    /* ---------------------------------------- Campos privados ---------------------------------- */
+    /* ---------------------------------------- Campos privados  ---------------------------------- */
 
     private int rating;
     private int anchor;
@@ -19,6 +19,8 @@ public class Player {
     private String name;
 
     private Position position;
+
+    /* ---------------------------------------- Constructor -------------------------------------- */
 
     /**
      * Se crea un jugador básico con los parámetros recibidos.

@@ -11,6 +11,7 @@
 
 import java.awt.Color;
 import java.awt.Component;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
@@ -32,6 +33,8 @@ public class ResultFrame extends JFrame {
 
     private static final String GROWX = "growx";
 
+    private static final int FIXED_CELL_WIDTH = 250;
+
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private transient ArrayList<Player> team1;
@@ -50,6 +53,8 @@ public class ResultFrame extends JFrame {
     private String frameTitle;
 
     private InputFrame inputFrame;
+
+    /* ---------------------------------------- Constructor -------------------------------------- */
 
     /**
      * Creación de la ventana de resultados.
@@ -70,7 +75,6 @@ public class ResultFrame extends JFrame {
 
         team1 = new ArrayList<>();
         team2 = new ArrayList<>();
-
         teams = new ArrayList<>();
 
         teams.add(team1);
@@ -101,7 +105,7 @@ public class ResultFrame extends JFrame {
 
         fillTable();
 
-        // Ajuste del ancho de las celdas para apreciar todo el contenido de las mismas
+        // Ajuste del ancho de las celdas
         for (int column = 0; column < table.getColumnCount(); column++) {
             TableColumn tableColumn = table.getColumnModel().getColumn(column);
 
@@ -110,10 +114,10 @@ public class ResultFrame extends JFrame {
              * su tamaño y la cantidad máxima de caracteres en los
              * nombres de los jugadores.
              */
-            tableColumn.setPreferredWidth(250);
+            tableColumn.setPreferredWidth(FIXED_CELL_WIDTH);
         }
 
-        // Ajuste del alto de las celdas para apreciar todo el contenido de las mismas
+        // Ajuste del alto de las celdas
         for (int i = 0; i < table.getRowCount(); i++) {
             int rowHeight = table.getRowHeight();
 
@@ -145,10 +149,6 @@ public class ResultFrame extends JFrame {
 
         BackButton backButton = new BackButton(ResultFrame.this, previousFrame);
 
-        /*
-         * Este método devuelve al usuario al menú principal
-         * de la aplicación, eliminando la ventana de resultados.
-         */
         mainMenuButton.addActionListener(e -> {
             resetTeams();
 
@@ -162,9 +162,9 @@ public class ResultFrame extends JFrame {
         });
 
         /*
-         * Este método togglea la visibilidad de las ventanas.
-         * Se sobreescribe para eliminar todos los equipos
-         * asignados en caso de querer retroceder.
+         * Este método se sobreescribe para eliminar
+         * todos los equipos asignados en caso de
+         * querer retroceder.
          */
         backButton.addActionListener(e -> {
             resetTeams();
@@ -177,11 +177,6 @@ public class ResultFrame extends JFrame {
         if (inputFrame.getDistribution() == 0) {
             JButton remixButton = new JButton("Redistribuir");
 
-            /**
-             * Este método resetea los equipos de los jugadores
-             * y vuelve a mezclarlos de manera aleatoria
-             * considerando los anclajes ingresados por el usuario.
-             */
             remixButton.addActionListener(e -> {
                 resetTeams();
 
@@ -209,7 +204,7 @@ public class ResultFrame extends JFrame {
              * y de letra de las casillas de la tabla.
              *
              * @param table      Tabla fuente.
-             * @param value      -.
+             * @param value      El valor a setear en la celda.
              * @param isSelected Si la celda está seleccionada.
              * @param hasFocus   Si la celda está en foco.
              * @param row        Coordenada de fila de la celda.
@@ -260,21 +255,24 @@ public class ResultFrame extends JFrame {
         int halfFWSetLength = inputFrame.getPlayersMap().get(Position.FORWARD).length / 2;
 
         for (int i = 0; i < halfCDSetLength; i++)
-            table.setValueAt(Main.positions.get(Position.CENTRAL_DEFENDER), (i + 1), 0);
+            table.setValueAt(Main.getPositionsMap().get(Position.CENTRAL_DEFENDER), (i + 1), 0);
 
         for (int i = 0; i < halfLDSetLength; i++)
-            table.setValueAt(Main.positions.get(Position.LATERAL_DEFENDER), (i + 1 + halfCDSetLength), 0);
+            table.setValueAt(Main.getPositionsMap().get(Position.LATERAL_DEFENDER), (i + 1 + halfCDSetLength), 0);
 
         for (int i = 0; i < halfMFSetLength; i++)
-            table.setValueAt(Main.positions.get(Position.MIDFIELDER), (i + 1 + halfCDSetLength + halfLDSetLength), 0);
+            table.setValueAt(Main.getPositionsMap().get(Position.MIDFIELDER),
+                    (i + 1 + halfCDSetLength + halfLDSetLength), 0);
 
         for (int i = 0; i < halfFWSetLength; i++)
-            table.setValueAt(Main.positions.get(Position.FORWARD), (i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength), 0);
+            table.setValueAt(Main.getPositionsMap().get(Position.FORWARD),
+                    (i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength), 0);
 
-        table.setValueAt(Main.positions.get(Position.GOALKEEPER), (1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength), 0);
+        table.setValueAt(Main.getPositionsMap().get(Position.GOALKEEPER),
+                (1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength), 0);
 
         /*
-         *                      ¡¡¡IMPORTANTE!!!
+         * ¡¡¡IMPORTANTE!!!
          *
          * Aquí se llenan los recuadros de la tabla confiando en el
          * orden en el que se escribieron las posiciones en las filas
