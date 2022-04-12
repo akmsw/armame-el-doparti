@@ -137,7 +137,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @throws IOException Si el archivo no existe.
      */
     private void collectPDData(int playersAmount) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/resources/DIST.PDA"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("resources/DIST.PDA"))) {
             int index = 0;
 
             String line;

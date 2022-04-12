@@ -29,7 +29,7 @@ public class Main {
 
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
-    private static final String TTF_PATH = "src/resources/fonts/";
+    private static final String TTF_PATH = "resources/fonts/";
 
     /* ---------------------------------------- Constantes públicas ------------------------------ */
 
@@ -37,7 +37,7 @@ public class Main {
 
     public static final String PROGRAM_TITLE = "Armame el doparti";
     public static final String PROGRAM_VERSION = "v3.0";
-    public static final String IMG_PATH = "src/resources/img/";
+    public static final String IMG_PATH = "resources/img/";
 
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162);
     public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74);
