@@ -9,6 +9,10 @@
  * @since 15/02/2021
  */
 
+package com.frames;
+
+import com.utils.Position;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -33,7 +37,7 @@ public class Main {
 
     public static final String PROGRAM_TITLE = "Armame el doparti";
     public static final String PROGRAM_VERSION = "v3.0";
-    public static final String IMG_PATH = "src/resources/images/";
+    public static final String IMG_PATH = "src/resources/img/";
 
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162);
     public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74);
@@ -76,19 +80,19 @@ public class Main {
     private static void setGUIProperties() {
         UIManager.put("OptionPane.background", FRAMES_BG_COLOR);
         UIManager.put("Panel.background", FRAMES_BG_COLOR);
+        UIManager.put("CheckBox.background", FRAMES_BG_COLOR);
+        UIManager.put("Separator.background", FRAMES_BG_COLOR);
         UIManager.put("Button.background", BUTTONS_BG_COLOR);
         UIManager.put("Button.foreground", Color.WHITE);
+        UIManager.put("CheckBox.focus", FRAMES_BG_COLOR);
         UIManager.put("Button.focus", BUTTONS_BG_COLOR);
         UIManager.put("ToggleButton.focus", BUTTONS_BG_COLOR);
-        UIManager.put("CheckBox.focus", FRAMES_BG_COLOR);
-        UIManager.put("CheckBox.background", FRAMES_BG_COLOR);
         UIManager.put("ComboBox.focus", Color.WHITE);
-        UIManager.put("Separator.background", FRAMES_BG_COLOR);
 
         try {
             // Se registra la fuente para poder setearla
             programFont = Font.createFont(Font.TRUETYPE_FONT, new File(TTF_PATH + "Comfortaa.ttf"))
-                    .deriveFont(FONT_SIZE);
+                              .deriveFont(FONT_SIZE);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
@@ -111,11 +115,11 @@ public class Main {
         Enumeration<Object> keys = UIManager.getDefaults().keys();
 
         while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get(key);
+            Object k = keys.nextElement();
+            Object value = UIManager.get(k);
 
             if (value instanceof FontUIResource)
-                UIManager.put(key, f);
+                UIManager.put(k, f);
         }
     }
 

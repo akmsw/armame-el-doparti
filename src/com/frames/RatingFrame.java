@@ -9,6 +9,10 @@
  * @since 06/03/2021
  */
 
+package com.frames;
+
+import com.utils.*;
+
 import java.util.HashMap;
 
 import javax.swing.JButton;

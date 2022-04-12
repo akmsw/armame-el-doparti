@@ -8,6 +8,8 @@
  * @since 27/06/2021
  */
 
+package com.utils;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 

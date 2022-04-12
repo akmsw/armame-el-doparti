@@ -8,6 +8,8 @@
  * @since 15/02/2020
  */
 
+package com.utils;
+
 public enum Position {
     CENTRAL_DEFENDER, LATERAL_DEFENDER, MIDFIELDER, FORWARD, GOALKEEPER
 }

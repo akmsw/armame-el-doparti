@@ -8,6 +8,8 @@
  * @since 15/02/2021
  */
 
+package com.utils;
+
 public class Player {
 
     /* ---------------------------------------- Campos privados  ---------------------------------- */
@@ -38,6 +40,34 @@ public class Player {
     }
 
     /* ---------------------------------------- Métodos públicos --------------------------------- */
+
+    /**
+     * @param name El nombre del jugador.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @param rating El puntaje del jugador.
+     */
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    /**
+     * @param anchor Número de anclaje correspondiente.
+     */
+    public void setAnchor(int anchor) {
+        this.anchor = anchor;
+    }
+
+    /**
+     * @param team Número de equipo al que pertenece el jugador.
+     */
+    public void setTeam(int team) {
+        this.team = team;
+    }
 
     /**
      * @return El puntaje asignado al jugador.
@@ -72,33 +102,5 @@ public class Player {
      */
     public Position getPosition() {
         return position;
-    }
-
-    /**
-     * @param name El nombre del jugador.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @param rating El puntaje del jugador.
-     */
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    /**
-     * @param anchor Número de anclaje correspondiente.
-     */
-    public void setAnchor(int anchor) {
-        this.anchor = anchor;
-    }
-
-    /**
-     * @param team Número de equipo al que pertence el jugador.
-     */
-    public void setTeam(int team) {
-        this.team = team;
     }
 }

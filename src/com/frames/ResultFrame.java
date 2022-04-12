@@ -9,6 +9,10 @@
  * @since 06/03/2021
  */
 
+package com.frames;
+
+import com.utils.*;
+
 import java.awt.Color;
 import java.awt.Component;
 
@@ -23,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.TableColumn;
+
 import javax.swing.table.DefaultTableCellRenderer;
 
 import net.miginfocom.swing.MigLayout;

@@ -10,6 +10,10 @@
  * @since 28/02/2021
  */
 
+package com.frames;
+
+import com.utils.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -262,11 +266,15 @@ public class InputFrame extends JFrame implements ActionListener {
                 } else {
                     String name = aux.getText().trim().toUpperCase().replace(" ", "_");
 
-                    if ((name.length() == 0) || (name.length() > MAX_NAME_LEN) ||
-                            isEmptyString(name) || alreadyExists(name))
+                    if ((name.length() > MAX_NAME_LEN) || name.isBlank() ||
+                         name.isEmpty() || alreadyExists(name))
+                    {
                         JOptionPane.showMessageDialog(null,
                                 "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN +
                                 " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+
+                        aux.setText("");
+                    }
                     else {
                         playersSet[index].setName(name);
 
@@ -433,31 +441,13 @@ public class InputFrame extends JFrame implements ActionListener {
      * Este método se encarga de verificar si cierto componente es
      * parte de algún panel en particular de este JFrame.
      *
-     * @param component Componente cuya pertenencia se verificará.
-     * @param panel     Panel al cual se verificará la pertenencia.
+     * @param c Componente cuya pertenencia se verificará.
+     * @param p Panel al cual se verificará la pertenencia.
      *
      * @return Si el componente es parte del panel especificado.
      */
     private boolean isComponentInPanel(JComponent c, JPanel p) {
         return (c.getParent() == p);
-    }
-
-    /**
-     * Indica si una cadena está vacía o no. Si la cadena está compuesta por
-     * caracteres en blanco (espacios), se la tomará como vacía.
-     *
-     * @param string Cadena a analizar.
-     *
-     * @return Si la cadena está vacía.
-     */
-    private boolean isEmptyString(String string) {
-        char[] charArray = string.toCharArray();
-
-        for (char c : charArray)
-            if (c != ' ')
-                return false;
-
-        return true;
     }
 
     /**

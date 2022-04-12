@@ -9,6 +9,8 @@
  * @since 27/02/2021
  */
 
+package com.frames;
+
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,7 +96,7 @@ public class MainFrame extends JFrame implements ActionListener {
     /* ---------------------------------------- Métodos públicos --------------------------------- */
 
     /**
-     * Override para indicar qué hacer en base a cada boton pulsado.
+     * Override para indicar qué hacer en base a cada botón pulsado.
      *
      * @param e Evento de click.
      */
