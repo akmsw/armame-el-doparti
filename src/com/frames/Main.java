@@ -27,17 +27,15 @@ import javax.swing.plaf.FontUIResource;
 
 public class Main {
 
-    /* ---------------------------------------- Constantes privadas ------------------------------ */
-
-    private static final String TTF_PATH = "resources/fonts/";
-
     /* ---------------------------------------- Constantes públicas ------------------------------ */
 
     public static final float FONT_SIZE = 18f;
 
     public static final String PROGRAM_TITLE = "Armame el doparti";
     public static final String PROGRAM_VERSION = "v3.0";
-    public static final String IMG_PATH = "resources/img/";
+    public static final String RES_PATH = "res/";
+    public static final String IMG_PATH = RES_PATH + "img/";
+    public static final String TTF_PATH = RES_PATH + "fonts/";
 
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162);
     public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74);

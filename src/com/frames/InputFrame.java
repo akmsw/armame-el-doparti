@@ -92,7 +92,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param previousFrame Ventana fuente que crea la ventana InputFrame.
      * @param playersAmount Cantidad de jugadores por equipo.
      *
-     * @throws IOException Cuando hay un error de lectura en el archivo PDA.
+     * @throws IOException Cuando hay un error de lectura en el archivo pda.
      */
     public InputFrame(JFrame previousFrame, int playersPerTeam) throws IOException {
         this.previousFrame = previousFrame;
@@ -117,19 +117,19 @@ public class InputFrame extends JFrame implements ActionListener {
      *
      * [CLMFG].+>.+ : Matchea las líneas que comiencen con C, L, M, F, ó W,
      * seguido por al menos un caracter '>' (esta regex busca las líneas que
-     * nos importan en el archivo .PDA).
+     * nos importan en el archivo .pda).
      *
      * (?!(?<=X)\\d). : Matchea el trozo de la línea que no sea un número que nos
      * interesa (el número que nos interesa ocuparía el lugar de la X).
      *
      * ¡¡¡IMPORTANTE!!!
      *
-     * Si el archivo .PDA es modificado en cuanto a orden de las líneas importantes,
+     * Si el archivo .pda es modificado en cuanto a orden de las líneas importantes,
      * se debe tener en cuenta que Position.values()[index] confía en que lo hallado
      * se corresponde con el orden en el que están declarados los valores en el enum
      * Position. Idem, si se cambian de orden los valores del enum Position, se
      * deberá tener en cuenta que Position.values()[index] confía en el orden en el
-     * que se leerán los datos del archivo .PDA y, por consiguiente, se deberá rever
+     * que se leerán los datos del archivo .pda y, por consiguiente, se deberá rever
      * el orden de las líneas importantes de dichos archivos.
      *
      * @param playersAmount Cantidad de jugadores por equipo.
@@ -137,7 +137,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @throws IOException Si el archivo no existe.
      */
     private void collectPDData(int playersAmount) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader("resources/DIST.PDA"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(Main.RES_PATH + "dist.pda"))) {
             int index = 0;
 
             String line;

@@ -196,17 +196,14 @@ public class AnchorageFrame extends JFrame {
                                        .count();
 
             if (!validChecksAmount(anchored)) {
-                errorMsg("No puede haber más de " + maxPlayersPerAnchorage
-                        + " ni menos de 2 jugadores en un mismo anclaje");
-
+                showErrMsg("No puede haber más de " + maxPlayersPerAnchorage +
+                           " ni menos de 2 jugadores en un mismo anclaje");
                 return;
             } else if (!isValidAnchorage()) {
-                errorMsg("No puede haber más de la mitad de jugadores de una misma posición en un mismo anclaje");
-
+                showErrMsg("No puede haber más de la mitad de jugadores de una misma posición en un mismo anclaje");
                 return;
             } else if (!validAnchorageAmount(anchored)) {
-                errorMsg("No puede haber más de " + (2 * maxPlayersPerAnchorage) + " jugadores anclados en total");
-
+                showErrMsg("No puede haber más de " + (2 * maxPlayersPerAnchorage) + " jugadores anclados en total");
                 return;
             }
 
@@ -443,7 +440,7 @@ public class AnchorageFrame extends JFrame {
      *
      * @param errMsg Mensaje de error a mostrar en la ventana.
      */
-    private void errorMsg(String errMsg) {
+    private void showErrMsg(String errMsg) {
         JOptionPane.showMessageDialog(null, errMsg, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
     }
 
