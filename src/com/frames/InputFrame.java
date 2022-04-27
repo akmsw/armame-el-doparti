@@ -53,10 +53,10 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre
 
     private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
-            "Agregar defensores laterales",
-            "Agregar mediocampistas",
-            "Agregar delanteros",
-            "Agregar arqueros" };
+                                                       "Agregar defensores laterales",
+                                                       "Agregar mediocampistas",
+                                                       "Agregar delanteros",
+                                                       "Agregar arqueros" };
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
 
     /* ---------------------------------------- Campos privados ---------------------------------- */
@@ -104,7 +104,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         playersAmountMap = new EnumMap<>(Position.class);
 
-        collectPDData(playersPerTeam);
+        collectPDData();
 
         initializeComponents("Ingreso de jugadores - Fútbol " + playersPerTeam);
     }
@@ -132,11 +132,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * que se leerán los datos del archivo .pda y, por consiguiente, se deberá rever
      * el orden de las líneas importantes de dichos archivos.
      *
-     * @param playersAmount Cantidad de jugadores por equipo.
-     *
      * @throws IOException Si el archivo no existe.
      */
-    private void collectPDData(int playersAmount) throws IOException {
+    private void collectPDData() throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(Main.RES_PATH + "dist.pda"))) {
             int index = 0;
 
@@ -146,7 +144,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 if (line.matches("[CLMFG].+>.+")) {
                     playersAmountMap.put(Position.values()[index],
                                          Integer.parseInt(
-                                         line.replaceAll("(?!(?<=" + playersAmount + ")\\d).", "")));
+                                         line.replaceAll("(?!(?<=" + playersPerTeam + ")\\d).", "")));
 
                     index++;
                 }
