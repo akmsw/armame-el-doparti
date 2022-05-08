@@ -91,13 +91,9 @@ public class Main {
             // Se registra la fuente para poder setearla
             programFont = Font.createFont(Font.TRUETYPE_FONT, new File(TTF_PATH + "Comfortaa.ttf"))
                               .deriveFont(FONT_SIZE);
-
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-
-            ge.registerFont(programFont);
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(programFont);
         } catch (Exception ex) {
             ex.printStackTrace();
-
             System.exit(-1);
         }
 

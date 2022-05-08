@@ -59,6 +59,9 @@ public class InputFrame extends JFrame implements ActionListener {
                                                        "Agregar arqueros" };
     private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
 
+    private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
+    private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
+
     /* ---------------------------------------- Campos privados ---------------------------------- */
 
     private int totalAnchorages;
@@ -141,16 +144,14 @@ public class InputFrame extends JFrame implements ActionListener {
             String line;
 
             while ((line = br.readLine()) != null)
-                if (line.matches("[CLMFG].+>.+")) {
+                if (line.matches(PDA_DATA_RETRIEVE_REGEX)) {
                     playersAmountMap.put(Position.values()[index],
                                          Integer.parseInt(
                                          line.replaceAll("(?!(?<=" + playersPerTeam + ")\\d).", "")));
-
                     index++;
                 }
         } catch (Exception ex) {
             ex.printStackTrace();
-
             System.exit(-1);
         }
     }
@@ -250,28 +251,27 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, Player[] playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
-            JTextField aux = new JTextField();
+            JTextField tf = new JTextField();
 
-            aux.addActionListener(e -> {
+            tf.addActionListener(e -> {
                 JTextField auxTF = (JTextField) e.getSource();
 
                 int index = textFieldSet.indexOf(auxTF);
 
-                if (!(Pattern.matches("[a-z A-ZÁÉÍÓÚáéíóúñÑ]+", aux.getText()))) {
+                if (!(Pattern.matches(NAMES_VALIDATION_REGEX, tf.getText()))) {
                     JOptionPane.showMessageDialog(null,
-                            "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
-                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                        "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
+                        "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                 } else {
-                    String name = aux.getText().trim().toUpperCase().replace(" ", "_");
+                    String name = tf.getText().trim().toUpperCase().replace(" ", "_");
 
                     if ((name.length() > MAX_NAME_LEN) || name.isBlank() ||
-                         name.isEmpty() || alreadyExists(name))
-                    {
+                         name.isEmpty() || alreadyExists(name)) {
                         JOptionPane.showMessageDialog(null,
-                                "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN +
-                                " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                            "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN +
+                            " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
 
-                        aux.setText("");
+                            tf.setText("");
                     }
                     else {
                         playersSet[index].setName(name);
@@ -284,7 +284,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 }
             });
 
-            textFieldSet.add(aux);
+            textFieldSet.add(tf);
         }
     }
 
