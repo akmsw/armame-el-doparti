@@ -62,7 +62,7 @@ public class ResultFrame extends JFrame {
     /* ---------------------------------------- Constructor -------------------------------------- */
 
     /**
-     * Creación de la ventana de resultados.
+     * Constructor de la ventana de resultados.
      *
      * @param inputFrame    La ventana de ingreso de datos, de la cual se obtendrá
      *                      información importante.
@@ -314,8 +314,6 @@ public class ResultFrame extends JFrame {
 
             // TODO
         } else {
-            frameTitle = frameTitle.concat("Sin anclajes - ");
-
             /*
              * Se elige un número aleatorio entre 0 y 1 (+1)
              * para asignarle como equipo a un conjunto de jugadores,
@@ -329,6 +327,8 @@ public class ResultFrame extends JFrame {
              * aleatoria (aquellos con team == 0) del mismo grupo, se
              * les asigna el número de equipo opuesto.
              */
+
+            frameTitle = frameTitle.concat("Sin anclajes - ");
 
             int index;
 

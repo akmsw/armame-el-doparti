@@ -150,7 +150,8 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de colocar en los paneles de la ventan los botones.
+     * Este método se encarga de colocar los botones
+     * en los paneles de la ventana.
      */
     private void addButtons() {
         JButton okButton = new JButton("Finalizar");
@@ -234,8 +235,8 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de llenar los arreglos de checkboxes correspondientes
-     * a cada posición.
+     * Este método se encarga de llenar los arreglos de checkboxes
+     * correspondientes a cada posición.
      *
      * @param playersSet Conjunto de jugadores de donde obtener los nombres.
      * @param cbSet      Conjunto de checkboxes a llenar.
@@ -374,8 +375,8 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de actualizar el área de texto mostrando la cantidad
-     * de anclajes y los jugadores anclados a los mismos.
+     * Este método se encarga de actualizar el área de texto mostrando
+     * la cantidad de anclajes y los jugadores anclados a los mismos.
      */
     private void updateTextArea() {
         textArea.setText("");
@@ -445,7 +446,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si el anclaje no consta de más de la mitad de jugadores
+     * @return Si el anclaje no contiene más de la mitad de jugadores
      *         de algún conjunto.
      */
     private boolean isValidAnchorage() {

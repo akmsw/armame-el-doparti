@@ -506,7 +506,8 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * @return Cuántos jugadores hay por posición en cada equipo.
+     * @return Mapa que indica cuántos jugadores
+     *         hay por posición en cada equipo.
      */
     public Map<Position, Integer> getPlayersAmountMap() {
         return playersAmountMap;

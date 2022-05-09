@@ -25,6 +25,8 @@ public class Player {
     /* ---------------------------------------- Constructor -------------------------------------- */
 
     /**
+     * Constructor.
+     *
      * Se crea un jugador básico con los parámetros recibidos.
      *
      * @param name     El nombre del jugador.

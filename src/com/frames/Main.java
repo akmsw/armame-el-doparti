@@ -72,7 +72,7 @@ public class Main {
     /* ---------------------------------------- Métodos privados --------------------------------- */
 
     /**
-     * Este método se encarga de setear las propiedades
+     * Este método se encarga de configurar las propiedades
      * de la interfaz gráfica del programa.
      */
     private static void setGUIProperties() {
@@ -88,7 +88,7 @@ public class Main {
         UIManager.put("ComboBox.focus", Color.WHITE);
 
         try {
-            // Se registra la fuente para poder setearla
+            // Se registra la fuente para poder utilizarla
             programFont = Font.createFont(Font.TRUETYPE_FONT, new File(TTF_PATH + "Comfortaa.ttf"))
                               .deriveFont(FONT_SIZE);
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(programFont);

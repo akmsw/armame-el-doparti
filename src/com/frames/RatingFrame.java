@@ -40,7 +40,7 @@ public class RatingFrame extends JFrame {
     /* ---------------------------------------- Constructor -------------------------------------- */
 
     /**
-     * Creación de la ventana de ingreso de puntajes.
+     * Constructor de la ventana de ingreso de puntajes.
      *
      * @param inputFrame    Ventana de ingreso de datos, de la cual se obtendrá
      *                      información importante.
