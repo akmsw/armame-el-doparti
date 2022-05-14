@@ -20,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -74,7 +73,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     private EnumMap<Position, Integer> playersAmountMap;
 
-    private transient TreeMap<Position, Player[]> playersSets;
+    private transient TreeMap<Position, ArrayList<Player>> playersSets;
 
     private JButton mixButton;
 
@@ -162,10 +161,11 @@ public class InputFrame extends JFrame implements ActionListener {
      *
      * @param set      Arreglo de jugadores a inicializar.
      * @param position Posición de los jugadores del arreglo.
+     * @param capacity Capacidad del arreglo.
      */
-    private void initializeSet(Player[] set, Position position) {
-        for (int i = 0; i < set.length; i++)
-            set[i] = new Player("", position);
+    private void initializeSet(ArrayList<Player> set, Position position, int capacity) {
+        for (int i = 0; i < capacity; i++)
+            set.add(new Player("", position));
     }
 
     /**
@@ -181,22 +181,17 @@ public class InputFrame extends JFrame implements ActionListener {
         ArrayList<JTextField> textFieldFW = new ArrayList<>();
         ArrayList<JTextField> textFieldGK = new ArrayList<>();
 
-        Player[] setCD = new Player[(playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2)];
-        Player[] setLD = new Player[(playersAmountMap.get(Position.LATERAL_DEFENDER) * 2)];
-        Player[] setMF = new Player[(playersAmountMap.get(Position.MIDFIELDER) * 2)];
-        Player[] setFW = new Player[(playersAmountMap.get(Position.FORWARD) * 2)];
-        Player[] setGK = new Player[(playersAmountMap.get(Position.GOALKEEPER) * 2)];
+        ArrayList<Player> setCD = new ArrayList<>();
+        ArrayList<Player> setLD = new ArrayList<>();
+        ArrayList<Player> setMF = new ArrayList<>();
+        ArrayList<Player> setFW = new ArrayList<>();
+        ArrayList<Player> setGK = new ArrayList<>();
 
-        JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
-
-        leftPanel = new JPanel(new MigLayout("wrap"));
-        rightPanel = new JPanel(new MigLayout("wrap"));
-
-        initializeSet(setCD, Position.CENTRAL_DEFENDER);
-        initializeSet(setLD, Position.LATERAL_DEFENDER);
-        initializeSet(setMF, Position.MIDFIELDER);
-        initializeSet(setFW, Position.FORWARD);
-        initializeSet(setGK, Position.GOALKEEPER);
+        initializeSet(setCD, Position.CENTRAL_DEFENDER, (playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2));
+        initializeSet(setLD, Position.LATERAL_DEFENDER, (playersAmountMap.get(Position.LATERAL_DEFENDER) * 2));
+        initializeSet(setMF, Position.MIDFIELDER, (playersAmountMap.get(Position.MIDFIELDER) * 2));
+        initializeSet(setFW, Position.FORWARD, (playersAmountMap.get(Position.FORWARD) * 2));
+        initializeSet(setGK, Position.GOALKEEPER, (playersAmountMap.get(Position.GOALKEEPER) * 2));
 
         textFields = Arrays.asList(textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK);
 
@@ -212,6 +207,9 @@ public class InputFrame extends JFrame implements ActionListener {
         setTitle(frameTitle);
         setIconImage(MainFrame.icon.getImage());
 
+        leftPanel = new JPanel(new MigLayout("wrap"));
+        rightPanel = new JPanel(new MigLayout("wrap"));
+
         addComboBox();
         addTextFields(Position.CENTRAL_DEFENDER, textFieldCD, setCD);
         addTextFields(Position.LATERAL_DEFENDER, textFieldLD, setLD);
@@ -224,6 +222,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
         // Se muestra el output correspondiente al estado inicial del JComboBox
         updateTextFields(comboBox.getSelectedItem().toString());
+
+        JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
 
         leftPanel.setBackground(Main.FRAMES_BG_COLOR);
         rightPanel.setBackground(Main.FRAMES_BG_COLOR);
@@ -249,7 +249,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param playersSet   Arreglo de jugadores donde se almacenarán los nombres
      *                     ingresados en los campos de texto.
      */
-    private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, Player[] playersSet) {
+    private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, ArrayList<Player> playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
             JTextField tf = new JTextField();
 
@@ -274,11 +274,11 @@ public class InputFrame extends JFrame implements ActionListener {
                             tf.setText("");
                     }
                     else {
-                        playersSet[index].setName(name);
+                        playersSet.get(index).setName(name);
 
                         updateTextArea();
 
-                        // Habilitamos el botón de mezcla sólo cuando todos los jugadores tengan nombre
+                        // Se habilita el botón de mezcla sólo cuando todos los jugadores tengan nombre
                         mixButton.setEnabled(!alreadyExists(""));
                     }
                 }
@@ -411,13 +411,13 @@ public class InputFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (Map.Entry<Position, Player[]> ps : playersSets.entrySet())
-            for (Player player : ps.getValue())
-                if (!player.getName().equals("")) {
+        for (Map.Entry<Position, ArrayList<Player>> ps : playersSets.entrySet())
+            for (Player p : ps.getValue())
+                if (!p.getName().equals("")) {
                     if ((counter != 0) && (((playersPerTeam * 2) - counter) != 0))
                         textArea.append("\n");
 
-                    textArea.append((counter + 1) + " - " + player.getName());
+                    textArea.append((counter + 1) + " - " + p.getName());
 
                     counter++;
                 }
@@ -457,10 +457,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        for (Map.Entry<Position, Player[]> ps : playersSets.entrySet())
-            for (Player player : ps.getValue())
-                if (player.getName().equals(name))
-                    return true;
+        for (Map.Entry<Position, ArrayList<Player>> ps : playersSets.entrySet())
+            if (ps.getValue().stream().filter(p -> p.getName().equals(name)).count() != 0)
+                return true;
 
         return false;
     }
@@ -516,7 +515,7 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * @return Mapa con los arreglos de jugadores.
      */
-    public SortedMap<Position, Player[]> getPlayersMap() {
+    public SortedMap<Position, ArrayList<Player>> getPlayersMap() {
         return playersSets;
     }
 

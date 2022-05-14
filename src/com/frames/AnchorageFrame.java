@@ -112,7 +112,7 @@ public class AnchorageFrame extends JFrame {
 
         int index = 0;
 
-        for (Map.Entry<Position, Player[]> ps : inputFrame.getPlayersMap().entrySet()) {
+        for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet()) {
             fillCBSet(ps.getValue(), cbSets.get(index));
 
             addCBSet(leftPanel, cbSets.get(index), Main.getPositionsMap().get(Position.values()[index]));
@@ -241,9 +241,9 @@ public class AnchorageFrame extends JFrame {
      * @param playersSet Conjunto de jugadores de donde obtener los nombres.
      * @param cbSet      Conjunto de checkboxes a llenar.
      */
-    private void fillCBSet(Player[] playersSet, ArrayList<JCheckBox> cbSet) {
-        for (Player player : playersSet)
-            cbSet.add(new JCheckBox(player.getName()));
+    private void fillCBSet(ArrayList<Player> playersSet, ArrayList<JCheckBox> cbSet) {
+        for (Player p : playersSet)
+            cbSet.add(new JCheckBox(p.getName()));
     }
 
     /**
@@ -278,12 +278,12 @@ public class AnchorageFrame extends JFrame {
      * @param cbSet Arreglo de checkboxes a chequear.
      * @param pSet  Arreglo de jugadores correspondiente al arreglo de checkboxes.
      */
-    private void setAnchors(ArrayList<JCheckBox> cbSet, Player[] pSet) {
-        for (Player player : pSet)
+    private void setAnchors(ArrayList<JCheckBox> cbSet, ArrayList<Player> pSet) {
+        for (Player p : pSet)
             for (JCheckBox cb : cbSet) {
                 if (anchorageNum != 0) {
-                    if (cb.getText().equals(player.getName()) && cb.isSelected()) {
-                        player.setAnchor(anchorageNum);
+                    if (cb.getText().equals(p.getName()) && cb.isSelected()) {
+                        p.setAnchor(anchorageNum);
 
                         playersAnchored++;
 
@@ -291,7 +291,7 @@ public class AnchorageFrame extends JFrame {
                         cb.setVisible(false);
                     }
                 } else {
-                    player.setAnchor(anchorageNum);
+                    p.setAnchor(anchorageNum);
 
                     cb.setSelected(false);
                     cb.setVisible(true);
@@ -307,11 +307,11 @@ public class AnchorageFrame extends JFrame {
      * @param target      Anclaje a reemplazar.
      * @param replacement Nuevo anclaje a setear.
      */
-    private void changeAnchor(Player[] playersSet, ArrayList<JCheckBox> cbSet, int target, int replacement) {
+    private void changeAnchor(ArrayList<Player> playersSet, ArrayList<JCheckBox> cbSet, int target, int replacement) {
         for (JCheckBox cb : cbSet)
-            for (Player player : playersSet)
-                if (cb.getText().equals(player.getName()) && (player.getAnchor() == target)) {
-                    player.setAnchor(replacement);
+            for (Player p : playersSet)
+                if (cb.getText().equals(p.getName()) && (p.getAnchor() == target)) {
+                    p.setAnchor(replacement);
 
                     if (replacement == 0) {
                         cb.setVisible(true);
@@ -386,10 +386,10 @@ public class AnchorageFrame extends JFrame {
 
             textArea.append(" ----- ANCLAJE #" + i + " -----\n");
 
-            for (Map.Entry<Position, Player[]> ps : inputFrame.getPlayersMap().entrySet())
-                for (Player player : ps.getValue())
-                    if (player.getAnchor() == i) {
-                        textArea.append(" " + counter + ". " + player.getName() + "\n");
+            for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet())
+                for (Player p : ps.getValue())
+                    if (p.getAnchor() == i) {
+                        textArea.append(" " + counter + ". " + p.getName() + "\n");
 
                         counter++;
                     }

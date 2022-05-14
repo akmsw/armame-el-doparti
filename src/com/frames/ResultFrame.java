@@ -254,10 +254,10 @@ public class ResultFrame extends JFrame {
         for (int i = 0; i < 2; i++)
             table.setValueAt("EQUIPO #" + (i + 1), 0, (i + 1));
 
-        int halfCDSetLength = inputFrame.getPlayersMap().get(Position.CENTRAL_DEFENDER).length / 2;
-        int halfLDSetLength = inputFrame.getPlayersMap().get(Position.LATERAL_DEFENDER).length / 2;
-        int halfMFSetLength = inputFrame.getPlayersMap().get(Position.MIDFIELDER).length / 2;
-        int halfFWSetLength = inputFrame.getPlayersMap().get(Position.FORWARD).length / 2;
+        int halfCDSetLength = inputFrame.getPlayersMap().get(Position.CENTRAL_DEFENDER).size() / 2;
+        int halfLDSetLength = inputFrame.getPlayersMap().get(Position.LATERAL_DEFENDER).size() / 2;
+        int halfMFSetLength = inputFrame.getPlayersMap().get(Position.MIDFIELDER).size() / 2;
+        int halfFWSetLength = inputFrame.getPlayersMap().get(Position.FORWARD).size() / 2;
 
         for (int i = 0; i < halfCDSetLength; i++)
             table.setValueAt(Main.getPositionsMap().get(Position.CENTRAL_DEFENDER), (i + 1), 0);
@@ -314,20 +314,6 @@ public class ResultFrame extends JFrame {
 
             // TODO
         } else {
-            /*
-             * Se elige un número aleatorio entre 0 y 1 (+1)
-             * para asignarle como equipo a un conjunto de jugadores,
-             * y el resto tendrá asignado el equipo opuesto.
-             * Se recorre la mitad de los jugadores del set de manera
-             * aleatoria y se les asigna a los jugadores escogidos
-             * como equipo el número aleatorio generado al principio.
-             * A medida que se van eligiendo jugadores, su índice en
-             * el arreglo se almacena para evitar reasignarle un equipo.
-             * Al resto de jugadores que quedaron sin elegir de manera
-             * aleatoria (aquellos con team == 0) del mismo grupo, se
-             * les asigna el número de equipo opuesto.
-             */
-
             frameTitle = frameTitle.concat("Sin anclajes - ");
 
             int index;
@@ -335,35 +321,41 @@ public class ResultFrame extends JFrame {
             ArrayList<Integer> alreadySetted = new ArrayList<>();
 
             for (Position position : Position.values()) {
+                /*
+                 * Se elige un número aleatorio entre 0 y 1 (+1)
+                 * para asignarle como equipo a un conjunto de jugadores,
+                 * y el resto tendrá asignado el equipo opuesto.
+                 * Se recorre la mitad de los jugadores del set de manera
+                 * aleatoria y se les asigna a los jugadores escogidos
+                 * como equipo el número aleatorio generado al principio.
+                 * A medida que se van eligiendo jugadores, su índice en
+                 * el arreglo se almacena para evitar reasignarle un equipo.
+                 * Al resto de jugadores que quedaron sin elegir de manera
+                 * aleatoria (aquellos con team == 0) del mismo grupo, se
+                 * les asigna el número de equipo opuesto.
+                 */
                 int teamSubset1 = randomGenerator.nextInt(2) + 1;
                 int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
 
-                Player[] set = inputFrame.getPlayersMap().get(position);
+                ArrayList<Player> set = inputFrame.getPlayersMap().get(position);
 
-                for (int j = 0; j < (set.length / 2); j++) {
+                for (int j = 0; j < (set.size() / 2); j++) {
                     do {
-                        index = randomGenerator.nextInt(set.length);
+                        index = randomGenerator.nextInt(set.size());
                     } while (alreadySetted.contains(index));
 
                     alreadySetted.add(index);
 
-                    set[index].setTeam(teamSubset1);
+                    set.get(index).setTeam(teamSubset1);
 
-                    if (teamSubset1 == 1)
-                        team1.add(set[index]);
-                    else
-                        team2.add(set[index]);
+                    (teamSubset1 == 1 ? team1 : team2).add(set.get(index));
                 }
 
-                for (Player player : set)
-                    if (player.getTeam() == 0) {
-                        player.setTeam(teamSubset2);
+                for (Player p : set.stream().filter(p -> p.getTeam() == 0).toList()) {
+                    p.setTeam(teamSubset2);
 
-                        if (teamSubset2 == 1)
-                            team1.add(player);
-                        else
-                            team2.add(player);
-                    }
+                    (teamSubset2 == 1 ? team1 : team2).add(p);
+                }
 
                 alreadySetted.clear();
             }
@@ -394,7 +386,7 @@ public class ResultFrame extends JFrame {
      * representativos de cada equipo.
      */
     private void resetTeams() {
-        for (Map.Entry<Position, Player[]> ps : inputFrame.getPlayersMap().entrySet())
+        for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet())
             for (Player p : ps.getValue())
                 p.setTeam(0);
 

@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
+import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -80,17 +81,20 @@ public class RatingFrame extends JFrame {
             panel.add(label, "span");
             panel.add(new JSeparator(SwingConstants.HORIZONTAL), "growx, span");
 
-            for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).length; j++) {
-                spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i])[j],
-                        new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
+            for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).size(); j++) {
+                spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i]).get(j),
+                                new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
 
-                panel.add(new JLabel(inputFrame.getPlayersMap().get(Position.values()[i])[j].getName()), "pushx");
+                panel.add(new JLabel(inputFrame.getPlayersMap().get(Position.values()[i]).get(j).getName()), "pushx");
 
                 if ((j % 2) != 0)
-                    panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i])[j]), "wrap");
+                    panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i]).get(j)), "wrap");
                 else
-                    panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i])[j]));
+                    panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i]).get(j)));
             }
+
+            for (JSpinner js : spinnersMap.values())
+                ((DefaultEditor) js.getEditor()).getTextField().setEditable(false);
         }
 
         panel.add(finishButton, GROW_SPAN);
