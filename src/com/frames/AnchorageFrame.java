@@ -170,10 +170,12 @@ public class AnchorageFrame extends JFrame {
             }));
 
             if (inputFrame.getDistribution() == 1) {
+                // Distribución por puntajes
                 RatingFrame ratingFrame = new RatingFrame(inputFrame, AnchorageFrame.this);
 
                 ratingFrame.setVisible(true);
             } else {
+                // Distribución aleatoria
                 ResultFrame resultFrame = new ResultFrame(inputFrame, AnchorageFrame.this);
 
                 resultFrame.setVisible(true);

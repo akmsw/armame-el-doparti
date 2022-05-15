@@ -20,8 +20,10 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -324,10 +326,12 @@ public class InputFrame extends JFrame implements ActionListener {
 
                     anchorageFrame.setVisible(true);
                 } else if (distribution == 0) {
+                    // Distribución aleatoria
                     ResultFrame resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
 
                     resultFrame.setVisible(true);
                 } else {
+                    // Distribución por puntajes
                     RatingFrame ratingFrame = new RatingFrame(InputFrame.this, InputFrame.this);
 
                     ratingFrame.setVisible(true);
@@ -429,10 +433,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * cuáles deben permanecer en el mismo.
      */
     private void clearLeftPanel() {
-        for (ArrayList<JTextField> tfSet : textFields)
-            for (JTextField tf : tfSet)
-                if (isComponentInPanel(tf, leftPanel))
-                    leftPanel.remove(tf);
+        textFields.stream()
+                  .flatMap(Collection::stream)
+                  .filter(tf -> isComponentInPanel(tf, leftPanel))
+                  .forEach(tf -> leftPanel.remove(tf));
     }
 
     /**
@@ -457,11 +461,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si hay algún jugador con el mismo nombre.
      */
     private boolean alreadyExists(String name) {
-        for (Map.Entry<Position, ArrayList<Player>> ps : playersSets.entrySet())
-            if (ps.getValue().stream().filter(p -> p.getName().equals(name)).count() != 0)
-                return true;
-
-        return false;
+        return playersSets.values()
+                          .stream()
+                          .flatMap(Collection::stream)
+                          .anyMatch(p -> p.getName().equals(name));
     }
 
     /* ---------------------------------------- Métodos públicos --------------------------------- */
