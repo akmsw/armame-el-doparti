@@ -32,6 +32,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /* ---------------------------------------- Constantes privadas ------------------------------ */
 
+    private static final Integer[] PLAYERS_PER_TEAM = { 7, 8 };
     private static final String GROWX = "growx";
 
     /* ---------------------------------------- Campos públicos ---------------------------------- */
@@ -103,23 +104,19 @@ public class MainFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton) {
-            String[] options = { "7", "8" };
+            int selected = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
+                                                        "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
+                                                        smallIcon, PLAYERS_PER_TEAM, PLAYERS_PER_TEAM[0]);
 
-            int playersAmount = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                                                             "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                                             smallIcon, options, options[0]);
-
-            if (playersAmount != JOptionPane.CLOSED_OPTION) {
+            if (selected != JOptionPane.CLOSED_OPTION) {
                 try {
-                    // + 7 para compensar el índice de la selección
-                    InputFrame inputFrame = new InputFrame(MainFrame.this, playersAmount + 7);
+                    InputFrame inputFrame = new InputFrame(MainFrame.this, PLAYERS_PER_TEAM[selected]);
 
                     inputFrame.setVisible(true);
 
                     MainFrame.this.setVisible(false);
                 } catch (IOException ex) {
                     ex.printStackTrace();
-
                     System.exit(-1);
                 }
             }
