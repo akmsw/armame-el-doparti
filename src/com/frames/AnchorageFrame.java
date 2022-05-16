@@ -452,11 +452,10 @@ public class AnchorageFrame extends JFrame {
      *         de algún conjunto.
      */
     private boolean isValidAnchorage() {
-        for (ArrayList<JCheckBox> cbSet : cbSets)
-            if ((cbSet.stream().filter(JCheckBox::isSelected).count()) > (cbSet.size() / 2))
-                return false;
-
-        return true;
+        return cbSets.stream()
+                     .noneMatch(cbs -> cbs.stream()
+                                          .filter(JCheckBox::isSelected)
+                                          .count() > (cbs.size() / 2));
     }
 
     /**
