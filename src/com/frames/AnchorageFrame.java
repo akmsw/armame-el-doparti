@@ -182,6 +182,7 @@ public class AnchorageFrame extends JFrame {
             }
 
             AnchorageFrame.this.setVisible(false);
+            AnchorageFrame.this.setLocationRelativeTo(null);
         });
 
         backButton.addActionListener(e -> {

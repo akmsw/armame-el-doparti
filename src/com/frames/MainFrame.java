@@ -115,6 +115,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     inputFrame.setVisible(true);
 
                     MainFrame.this.setVisible(false);
+                    MainFrame.this.setLocationRelativeTo(null);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                     System.exit(-1);

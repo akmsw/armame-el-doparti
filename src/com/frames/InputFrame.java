@@ -256,9 +256,7 @@ public class InputFrame extends JFrame implements ActionListener {
             JTextField tf = new JTextField();
 
             tf.addActionListener(e -> {
-                JTextField auxTF = (JTextField) e.getSource();
-
-                int index = textFieldSet.indexOf(auxTF);
+                int index = textFieldSet.indexOf(e.getSource());
 
                 if (!(Pattern.matches(NAMES_VALIDATION_REGEX, tf.getText()))) {
                     JOptionPane.showMessageDialog(null,
@@ -338,6 +336,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 }
 
                 InputFrame.this.setVisible(false);
+                InputFrame.this.setLocationRelativeTo(null);
             }
         });
 

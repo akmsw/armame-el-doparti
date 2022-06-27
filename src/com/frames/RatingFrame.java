@@ -67,6 +67,7 @@ public class RatingFrame extends JFrame {
             resultFrame.setVisible(true);
 
             RatingFrame.this.setVisible(false);
+            RatingFrame.this.setLocationRelativeTo(null);
         });
 
         resetButton.addActionListener(e ->
