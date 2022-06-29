@@ -1,3 +1,5 @@
+package com.utils;
+
 /**
  * Posibles posiciones para los jugadores.
  *
@@ -7,9 +9,29 @@
  *
  * @since 15/02/2020
  */
-
-package com.utils;
-
 public enum Position {
-    CENTRAL_DEFENDER, LATERAL_DEFENDER, MIDFIELDER, FORWARD, GOALKEEPER
+    /**
+     * Defensor central.
+     */
+    CENTRAL_DEFENDER,
+
+    /**
+     * Defensor lateral.
+     */
+    LATERAL_DEFENDER,
+
+    /**
+     * Mediocampista.
+     */
+    MIDFIELDER,
+
+    /**
+     * Delantero.
+     */
+    FORWARD,
+
+    /**
+     * Arquero.
+     */
+    GOALKEEPER
 }

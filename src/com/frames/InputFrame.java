@@ -1,36 +1,22 @@
-/**
- * Clase correspondiente a la ventana de ingreso
- * de nombres de jugadores y mezcla de los mismos
- * para el sorteo de los equipos.
- *
- * @author Bonino, Francisco Ignacio.
- *
- * @version 3.0.0
- *
- * @since 28/02/2021
- */
-
 package com.frames;
 
-import com.utils.*;
-
+import com.utils.BackButton;
+import com.utils.Player;
+import com.utils.Position;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -44,26 +30,38 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
-
 import net.miginfocom.swing.MigLayout;
 
+/**
+ * Clase correspondiente a la ventana de ingreso
+ * de nombres de jugadores y mezcla de los mismos
+ * para el sorteo de los equipos.
+ *
+ * @author Bonino, Francisco Ignacio.
+ *
+ * @version 3.0.0
+ *
+ * @since 28/02/2021
+ */
 public class InputFrame extends JFrame implements ActionListener {
 
-    /* ---------------------------------------- Constantes privadas ------------------------------ */
+    // ---------------------------------------- Constantes privadas ------------------------------
 
     private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre
+    private static final int TEXT_AREA_ROWS = 14; // Cantidad máxima de caracteres por nombre
+    private static final int TEXT_AREA_COLUMNS = 12; // Cantidad máxima de caracteres por nombre
 
-    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
-                                                       "Agregar defensores laterales",
-                                                       "Agregar mediocampistas",
-                                                       "Agregar delanteros",
-                                                       "Agregar arqueros" };
-    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
+    private static final String[] OPTIONS_COMBOBOX = {"Agregar defensores centrales",
+                                                      "Agregar defensores laterales",
+                                                      "Agregar mediocampistas",
+                                                      "Agregar delanteros",
+                                                      "Agregar arqueros"};
+    private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntajes"};
 
     private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
     private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
 
-    /* ---------------------------------------- Campos privados ---------------------------------- */
+    // ---------------------------------------- Campos privados ----------------------------------
 
     private int totalAnchorages;
     private int distribution;
@@ -75,7 +73,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
     private EnumMap<Position, Integer> playersAmountMap;
 
-    private transient TreeMap<Position, ArrayList<Player>> playersSets;
+    private transient Map<Position, ArrayList<Player>> playersSets;
 
     private JButton mixButton;
 
@@ -88,13 +86,13 @@ public class InputFrame extends JFrame implements ActionListener {
 
     private JTextArea textArea;
 
-    /* ---------------------------------------- Constructor -------------------------------------- */
+    // ---------------------------------------- Constructor --------------------------------------
 
     /**
      * Constructor de la ventana de ingreso de jugadores.
      *
      * @param previousFrame Ventana fuente que crea la ventana InputFrame.
-     * @param playersAmount Cantidad de jugadores por equipo.
+     * @param playersPerTeam Cantidad de jugadores por equipo.
      *
      * @throws IOException Cuando hay un error de lectura en el archivo pda.
      */
@@ -144,14 +142,15 @@ public class InputFrame extends JFrame implements ActionListener {
 
             String line;
 
-            while ((line = br.readLine()) != null)
+            while ((line = br.readLine()) != null) {
                 if (line.matches(PDA_DATA_RETRIEVE_REGEX)) {
                     playersAmountMap.put(Position.values()[index],
                                          Integer.parseInt(
                                          line.replaceAll("(?!(?<=" + playersPerTeam + ")\\d).", "")));
                     index++;
                 }
-        } catch (Exception ex) {
+            }
+        } catch (FileNotFoundException ex) {
             ex.printStackTrace();
             System.exit(-1);
         }
@@ -166,8 +165,9 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param capacity Capacidad del arreglo.
      */
     private void initializeSet(ArrayList<Player> set, Position position, int capacity) {
-        for (int i = 0; i < capacity; i++)
+        for (int i = 0; i < capacity; i++) {
             set.add(new Player("", position));
+        }
     }
 
     /**
@@ -189,11 +189,11 @@ public class InputFrame extends JFrame implements ActionListener {
         ArrayList<Player> setFW = new ArrayList<>();
         ArrayList<Player> setGK = new ArrayList<>();
 
-        initializeSet(setCD, Position.CENTRAL_DEFENDER, (playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2));
-        initializeSet(setLD, Position.LATERAL_DEFENDER, (playersAmountMap.get(Position.LATERAL_DEFENDER) * 2));
-        initializeSet(setMF, Position.MIDFIELDER, (playersAmountMap.get(Position.MIDFIELDER) * 2));
-        initializeSet(setFW, Position.FORWARD, (playersAmountMap.get(Position.FORWARD) * 2));
-        initializeSet(setGK, Position.GOALKEEPER, (playersAmountMap.get(Position.GOALKEEPER) * 2));
+        initializeSet(setCD, Position.CENTRAL_DEFENDER, playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2);
+        initializeSet(setLD, Position.LATERAL_DEFENDER, playersAmountMap.get(Position.LATERAL_DEFENDER) * 2);
+        initializeSet(setMF, Position.MIDFIELDER, playersAmountMap.get(Position.MIDFIELDER) * 2);
+        initializeSet(setFW, Position.FORWARD, playersAmountMap.get(Position.FORWARD) * 2);
+        initializeSet(setGK, Position.GOALKEEPER, playersAmountMap.get(Position.GOALKEEPER) * 2);
 
         textFields = Arrays.asList(textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK);
 
@@ -207,7 +207,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(frameTitle);
-        setIconImage(MainFrame.icon.getImage());
+        setIconImage(MainFrame.ICON.getImage());
 
         leftPanel = new JPanel(new MigLayout("wrap"));
         rightPanel = new JPanel(new MigLayout("wrap"));
@@ -265,15 +265,14 @@ public class InputFrame extends JFrame implements ActionListener {
                 } else {
                     String name = tf.getText().trim().toUpperCase().replace(" ", "_");
 
-                    if ((name.length() > MAX_NAME_LEN) || name.isBlank() ||
-                         name.isEmpty() || alreadyExists(name)) {
+                    if ((name.length() > MAX_NAME_LEN) || name.isBlank()
+                        || name.isEmpty() || alreadyExists(name)) {
                         JOptionPane.showMessageDialog(null,
-                            "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN +
-                            " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                            "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
+                            + " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
 
-                            tf.setText("");
-                    }
-                    else {
+                        tf.setText("");
+                    } else {
                         playersSet.get(index).setName(name);
 
                         updateTextArea();
@@ -316,7 +315,7 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton.addActionListener(e -> {
             distribution = JOptionPane.showOptionDialog(null,
                     "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                    JOptionPane.QUESTION_MESSAGE, MainFrame.smallIcon, OPTIONS_MIX, OPTIONS_MIX[0]);
+                    JOptionPane.QUESTION_MESSAGE, MainFrame.SMALL_ICON, OPTIONS_MIX, OPTIONS_MIX[0]);
 
             if (distribution != JOptionPane.CLOSED_OPTION) {
                 if (thereAreAnchorages()) {
@@ -350,7 +349,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * usuario.
      */
     private void addTextArea() {
-        textArea = new JTextArea(14, 12);
+        textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
@@ -389,14 +388,17 @@ public class InputFrame extends JFrame implements ActionListener {
     private void updateTextFields(String text) {
         int index;
 
-        for (index = 0; index < OPTIONS_COMBOBOX.length; index++)
-            if (text.equals(OPTIONS_COMBOBOX[index]))
+        for (index = 0; index < OPTIONS_COMBOBOX.length; index++) {
+            if (text.equals(OPTIONS_COMBOBOX[index])) {
                 break;
+            }
+        }
 
         clearLeftPanel();
 
-        for (JTextField tf : textFields.get(index))
+        for (JTextField tf : textFields.get(index)) {
             leftPanel.add(tf, "growx");
+        }
 
         leftPanel.revalidate();
         leftPanel.repaint();
@@ -414,16 +416,19 @@ public class InputFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (Map.Entry<Position, ArrayList<Player>> ps : playersSets.entrySet())
-            for (Player p : ps.getValue())
+        for (Map.Entry<Position, ArrayList<Player>> ps : playersSets.entrySet()) {
+            for (Player p : ps.getValue()) {
                 if (!p.getName().equals("")) {
-                    if ((counter != 0) && (((playersPerTeam * 2) - counter) != 0))
+                    if (counter != 0 && playersPerTeam * 2 - counter != 0) {
                         textArea.append("\n");
+                    }
 
                     textArea.append((counter + 1) + " - " + p.getName());
 
                     counter++;
                 }
+            }
+        }
     }
 
     /**
@@ -448,7 +453,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si el componente es parte del panel especificado.
      */
     private boolean isComponentInPanel(JComponent c, JPanel p) {
-        return (c.getParent() == p);
+        return c.getParent() == p;
     }
 
     /**
@@ -517,7 +522,7 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * @return Mapa con los arreglos de jugadores.
      */
-    public SortedMap<Position, ArrayList<Player>> getPlayersMap() {
+    public Map<Position, ArrayList<Player>> getPlayersMap() {
         return playersSets;
     }
 

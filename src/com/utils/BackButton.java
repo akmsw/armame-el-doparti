@@ -1,3 +1,8 @@
+package com.utils;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
 /**
  * Clase correspondiente a los botones de navegación entre ventanas.
  *
@@ -7,15 +12,9 @@
  *
  * @since 27/06/2021
  */
-
-package com.utils;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 public class BackButton extends JButton {
 
-    /* ---------------------------------------- Constructor -------------------------------------- */
+    // ---------------------------------------- Constructor --------------------------------------
 
     /**
      * Constructor del botón para navegar hacia atrás entre ventanas.

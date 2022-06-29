@@ -1,3 +1,23 @@
+package com.frames;
+
+import com.utils.BackButton;
+import com.utils.Player;
+import com.utils.Position;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+import net.miginfocom.swing.MigLayout;
+
 /**
  * Clase correspondiente a la ventana de resultados
  * de distribución de jugadores.
@@ -8,39 +28,16 @@
  *
  * @since 06/03/2021
  */
-
-package com.frames;
-
-import com.utils.*;
-
-import java.awt.Color;
-import java.awt.Component;
-
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Random;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.WindowConstants;
-import javax.swing.table.TableColumn;
-
-import javax.swing.table.DefaultTableCellRenderer;
-
-import net.miginfocom.swing.MigLayout;
-
 public class ResultFrame extends JFrame {
 
-    /* ---------------------------------------- Constantes privadas ------------------------------ */
+    // ---------------------------------------- Constantes privadas ------------------------------
 
     private static final String GROWX = "growx";
 
     private static final int FIXED_CELL_WIDTH = 250;
+    private static final int JTABLE_COLUMNS = 3;
 
-    /* ---------------------------------------- Campos privados ---------------------------------- */
+    // ---------------------------------------- Campos privados ----------------------------------
 
     private transient ArrayList<Player> team1;
     private transient ArrayList<Player> team2;
@@ -59,7 +56,7 @@ public class ResultFrame extends JFrame {
 
     private InputFrame inputFrame;
 
-    /* ---------------------------------------- Constructor -------------------------------------- */
+    // ---------------------------------------- Constructor --------------------------------------
 
     /**
      * Constructor de la ventana de resultados.
@@ -76,7 +73,7 @@ public class ResultFrame extends JFrame {
 
         randomGenerator = new Random();
 
-        table = new JTable((inputFrame.getPlayersPerTeam() + 1), 3);
+        table = new JTable(inputFrame.getPlayersPerTeam() + 1, JTABLE_COLUMNS);
 
         team1 = new ArrayList<>();
         team2 = new ArrayList<>();
@@ -85,15 +82,16 @@ public class ResultFrame extends JFrame {
         teams.add(team1);
         teams.add(team2);
 
-        if (inputFrame.getDistribution() == 0)
+        if (inputFrame.getDistribution() == 0) {
             randomMix(inputFrame.thereAreAnchorages());
-        else
+        } else {
             ratingsMix(inputFrame.thereAreAnchorages());
+        }
 
         initializeComponents();
     }
 
-    /* ---------------------------------------- Métodos privados --------------------------------- */
+    // ---------------------------------------- Métodos privados ---------------------------------
 
     /**
      * Este método inicializa los componentes de la ventana de resultados.
@@ -102,7 +100,7 @@ public class ResultFrame extends JFrame {
         panel = new JPanel(new MigLayout("wrap"));
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(MainFrame.icon.getImage());
+        setIconImage(MainFrame.ICON.getImage());
 
         addTable();
         addButtons();
@@ -216,8 +214,10 @@ public class ResultFrame extends JFrame {
              * @param column     Coordenada de columna de la celda.
              */
             @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            public Component getTableCellRendererComponent(JTable myTable, Object value, boolean isSelected,
+                                                           boolean hasFocus, int row, int column) {
+                final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
+                                                                        hasFocus, row, column);
 
                 /*
                  * Fila 0 y columna 0 tendrán fondo verde con letras blancas,
@@ -251,30 +251,35 @@ public class ResultFrame extends JFrame {
      * datos cargados de los jugadores en cada equipo.
      */
     private void fillTable() {
-        for (int i = 0; i < 2; i++)
-            table.setValueAt("EQUIPO #" + (i + 1), 0, (i + 1));
+        for (int i = 0; i < 2; i++) {
+            table.setValueAt("EQUIPO #" + (i + 1), 0, i + 1);
+        }
 
         int halfCDSetLength = inputFrame.getPlayersMap().get(Position.CENTRAL_DEFENDER).size() / 2;
         int halfLDSetLength = inputFrame.getPlayersMap().get(Position.LATERAL_DEFENDER).size() / 2;
         int halfMFSetLength = inputFrame.getPlayersMap().get(Position.MIDFIELDER).size() / 2;
         int halfFWSetLength = inputFrame.getPlayersMap().get(Position.FORWARD).size() / 2;
 
-        for (int i = 0; i < halfCDSetLength; i++)
-            table.setValueAt(Main.getPositionsMap().get(Position.CENTRAL_DEFENDER), (i + 1), 0);
+        for (int i = 0; i < halfCDSetLength; i++) {
+            table.setValueAt(Main.getPositionsMap().get(Position.CENTRAL_DEFENDER), i + 1, 0);
+        }
 
-        for (int i = 0; i < halfLDSetLength; i++)
-            table.setValueAt(Main.getPositionsMap().get(Position.LATERAL_DEFENDER), (i + 1 + halfCDSetLength), 0);
+        for (int i = 0; i < halfLDSetLength; i++) {
+            table.setValueAt(Main.getPositionsMap().get(Position.LATERAL_DEFENDER), i + 1 + halfCDSetLength, 0);
+        }
 
-        for (int i = 0; i < halfMFSetLength; i++)
+        for (int i = 0; i < halfMFSetLength; i++) {
             table.setValueAt(Main.getPositionsMap().get(Position.MIDFIELDER),
-                    (i + 1 + halfCDSetLength + halfLDSetLength), 0);
+                             i + 1 + halfCDSetLength + halfLDSetLength, 0);
+        }
 
-        for (int i = 0; i < halfFWSetLength; i++)
+        for (int i = 0; i < halfFWSetLength; i++) {
             table.setValueAt(Main.getPositionsMap().get(Position.FORWARD),
-                    (i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength), 0);
+                             i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength, 0);
+        }
 
         table.setValueAt(Main.getPositionsMap().get(Position.GOALKEEPER),
-                (1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength), 0);
+                         1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength, 0);
 
         /*
          * ¡¡¡IMPORTANTE!!!
@@ -292,8 +297,9 @@ public class ResultFrame extends JFrame {
         int row = 1;
 
         for (int i = 0; i < teams.size(); i++) {
-            for (Player player : teams.get(i))
-                table.setValueAt(player.getName(), row++, (i + 1));
+            for (Player player : teams.get(i)) {
+                table.setValueAt(player.getName(), row++, i + 1);
+            }
 
             row = 1;
         }
@@ -386,9 +392,11 @@ public class ResultFrame extends JFrame {
      * representativos de cada equipo.
      */
     private void resetTeams() {
-        for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet())
-            for (Player p : ps.getValue())
+        for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet()) {
+            for (Player p : ps.getValue()) {
                 p.setTeam(0);
+            }
+        }
 
         team1.clear();
         team2.clear();

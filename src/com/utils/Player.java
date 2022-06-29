@@ -1,3 +1,5 @@
+package com.utils;
+
 /**
  * Clase representativa de los jugadores.
  *
@@ -7,9 +9,6 @@
  *
  * @since 15/02/2021
  */
-
-package com.utils;
-
 public class Player {
 
     /* ---------------------------------------- Campos privados  ---------------------------------- */
