@@ -28,9 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 
-import com.utils.BackButton;
-import com.utils.Player;
-import com.utils.Position;
+import com.utils.*;
 
 import net.miginfocom.swing.MigLayout;
 

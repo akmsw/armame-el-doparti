@@ -14,9 +14,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-import com.utils.BackButton;
-import com.utils.Player;
-import com.utils.Position;
+import com.utils.*;
 
 import net.miginfocom.swing.MigLayout;
 

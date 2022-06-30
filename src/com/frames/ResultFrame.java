@@ -15,9 +15,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import com.utils.BackButton;
-import com.utils.Player;
-import com.utils.Position;
+import com.utils.*;
 
 import net.miginfocom.swing.MigLayout;
 
