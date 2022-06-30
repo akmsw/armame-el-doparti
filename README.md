@@ -11,10 +11,10 @@ Este programa ofrece una intuitiva y rápida manera de generar equipos para part
 
 ## 📦 Requisitos
 ### ☕ Java
-#### 🟡 Versión mínima
-- Java 11.
-#### 🟢 Versión recomendada
-- Java 17 *(o más reciente)*.
+- #### Versión mínima
+    🟡 Java 11
+- #### Versión recomendada
+    🟢 Java 17 *(o más reciente)*
 
 ## 🛠️ Instalación
 [TODO]
