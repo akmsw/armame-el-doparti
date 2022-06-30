@@ -26,9 +26,9 @@ Este programa ofrece una intuitiva y rápida manera de generar equipos para part
 ## 📦 Requisitos
 ### ☕ Java
 - #### Versión mínima
-    🟡 Java 11
+    🟡 [Java 11](https://www.oracle.com/ar/java/technologies/javase/jdk11-archive-downloads.html)
 - #### Versión recomendada
-    🟢 Java 17 *(o más reciente)*
+    🟢 [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) *(o más reciente)*
 
 ## 🛠️ Instalación
 [TODO]
