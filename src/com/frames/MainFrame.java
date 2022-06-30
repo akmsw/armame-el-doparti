@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -28,20 +30,13 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // ---------------------------------------- Constantes públicas ------------------------------
 
-    /**
-     * Imagen estándar del icono de la aplicación.
-     */
     public static final ImageIcon ICON = new ImageIcon(Main.IMG_PATH + "icon.png");
-
-    /**
-     * Imagen escalada del icono de la aplicación.
-     */
-    public static final ImageIcon SMALL_ICON = new ImageIcon(ICON.getImage()
-                                                                 .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+    public static final ImageIcon SCALED_ICON = new ImageIcon(ICON.getImage()
+                                                                  .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
-    private static final Integer[] PLAYERS_PER_TEAM = {7, 8};
+    private static final Integer[] PLAYERS_PER_TEAM = { 7, 8 };
 
     private static final String GROWX = "growx";
 
@@ -110,7 +105,7 @@ public class MainFrame extends JFrame implements ActionListener {
         if (e.getSource() == startButton) {
             int selected = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
                                                         "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                                        SMALL_ICON, PLAYERS_PER_TEAM, PLAYERS_PER_TEAM[0]);
+                                                        SCALED_ICON, PLAYERS_PER_TEAM, PLAYERS_PER_TEAM[0]);
 
             if (selected != JOptionPane.CLOSED_OPTION) {
                 try {
@@ -125,10 +120,9 @@ public class MainFrame extends JFrame implements ActionListener {
                     System.exit(-1);
                 }
             }
-        } else if (e.getSource() == helpButton) {
+        } else if (e.getSource() == helpButton)
             help();
-        } else {
+        else
             System.exit(0);
-        }
     }
 }

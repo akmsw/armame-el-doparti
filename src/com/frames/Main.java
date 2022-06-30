@@ -1,6 +1,5 @@
 package com.frames;
 
-import com.utils.Position;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -10,8 +9,11 @@ import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Enumeration;
 import java.util.Map;
+
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
+
+import com.utils.Position;
 
 /**
  * Clase principal, sólo para inicialización del programa
@@ -27,44 +29,15 @@ public final class Main {
 
     // ---------------------------------------- Constantes públicas ------------------------------
 
-    /**
-     * Tamaño de fuente.
-     */
     public static final float FONT_SIZE = 18f;
 
-    /**
-     * Nombre de la aplicación.
-     */
     public static final String PROGRAM_TITLE = "Armame el doparti";
-
-    /**
-     * Versión de la aplicación.
-     */
     public static final String PROGRAM_VERSION = "v3.0";
-
-    /**
-     * Dirección relativa del directorio de recursos.
-     */
     public static final String RES_PATH = "res/";
-
-    /**
-     * Dirección relativa del directorio de imágenes.
-     */
     public static final String IMG_PATH = RES_PATH + "img/";
-
-    /**
-     * Dirección relativa del directorio de fuentes.
-     */
     public static final String TTF_PATH = RES_PATH + "fonts/";
 
-    /**
-     * Color de fondo de las ventanas.
-     */
     public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162);
-
-    /**
-     * Color de fondo de los botones.
-     */
     public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74);
 
     // ---------------------------------------- Campos privados ----------------------------------
@@ -73,11 +46,7 @@ public final class Main {
 
     private static Map<Position, String> positions;
 
-    // ---------------------------------------- Constructores ------------------------------------
-
-    private Main() {
-        // No utilizado.
-    }
+    // --------------------------------- Punto de entrada principal ------------------------------
 
     /**
      * Método principal.
@@ -102,7 +71,7 @@ public final class Main {
         mainFrame.setVisible(true);
     }
 
-    /* ---------------------------------------- Métodos privados --------------------------------- */
+    // ---------------------------------------- Métodos privados ---------------------------------
 
     /**
      * Este método se encarga de configurar las propiedades
@@ -145,13 +114,12 @@ public final class Main {
             Object k = keys.nextElement();
             Object value = UIManager.get(k);
 
-            if (value instanceof FontUIResource) {
+            if (value instanceof FontUIResource)
                 UIManager.put(k, f);
-            }
         }
     }
 
-    /* ---------------------------------------- Métodos públicos --------------------------------- */
+    // ---------------------------------------- Métodos públicos ---------------------------------
 
     /**
      * @return Mapa con los strings correspondientes a cada posición.

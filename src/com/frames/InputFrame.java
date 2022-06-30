@@ -1,12 +1,8 @@
 package com.frames;
 
-import com.utils.BackButton;
-import com.utils.Player;
-import com.utils.Position;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -30,6 +27,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
+
+import com.utils.BackButton;
+import com.utils.Player;
+import com.utils.Position;
+
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -47,19 +49,20 @@ public class InputFrame extends JFrame implements ActionListener {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
-    private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre
-    private static final int TEXT_AREA_ROWS = 14; // Cantidad máxima de caracteres por nombre
-    private static final int TEXT_AREA_COLUMNS = 12; // Cantidad máxima de caracteres por nombre
+    private static final int MAX_NAME_LEN = 10;
+    private static final int TEXT_AREA_ROWS = 14;
+    private static final int TEXT_AREA_COLUMNS = 12;
 
-    private static final String[] OPTIONS_COMBOBOX = {"Agregar defensores centrales",
-                                                      "Agregar defensores laterales",
-                                                      "Agregar mediocampistas",
-                                                      "Agregar delanteros",
-                                                      "Agregar arqueros"};
-    private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntajes"};
+    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
+                                                       "Agregar defensores laterales",
+                                                       "Agregar mediocampistas",
+                                                       "Agregar delanteros",
+                                                       "Agregar arqueros" };
+    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
 
     private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
     private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
+    private static final String PDA_FILENAME = "dist.pda";
 
     // ---------------------------------------- Campos privados ----------------------------------
 
@@ -137,20 +140,19 @@ public class InputFrame extends JFrame implements ActionListener {
      * @throws IOException Si el archivo no existe.
      */
     private void collectPDData() throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(Main.RES_PATH + "dist.pda"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(Main.RES_PATH + PDA_FILENAME))) {
             int index = 0;
 
             String line;
 
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null)
                 if (line.matches(PDA_DATA_RETRIEVE_REGEX)) {
                     playersAmountMap.put(Position.values()[index],
                                          Integer.parseInt(
                                          line.replaceAll("(?!(?<=" + playersPerTeam + ")\\d).", "")));
                     index++;
                 }
-            }
-        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
             System.exit(-1);
         }
@@ -165,9 +167,8 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param capacity Capacidad del arreglo.
      */
     private void initializeSet(ArrayList<Player> set, Position position, int capacity) {
-        for (int i = 0; i < capacity; i++) {
+        for (int i = 0; i < capacity; i++)
             set.add(new Player("", position));
-        }
     }
 
     /**
@@ -277,7 +278,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
                         updateTextArea();
 
-                        // Se habilita el botón de mezcla sólo cuando todos los jugadores tengan nombre
+                        // Se habilita el botón de mezcla sólo cuando todos los jugadores tienen nombre
                         mixButton.setEnabled(!alreadyExists(""));
                     }
                 }
@@ -315,7 +316,7 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton.addActionListener(e -> {
             distribution = JOptionPane.showOptionDialog(null,
                     "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                    JOptionPane.QUESTION_MESSAGE, MainFrame.SMALL_ICON, OPTIONS_MIX, OPTIONS_MIX[0]);
+                    JOptionPane.QUESTION_MESSAGE, MainFrame.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0]);
 
             if (distribution != JOptionPane.CLOSED_OPTION) {
                 if (thereAreAnchorages()) {
@@ -388,17 +389,14 @@ public class InputFrame extends JFrame implements ActionListener {
     private void updateTextFields(String text) {
         int index;
 
-        for (index = 0; index < OPTIONS_COMBOBOX.length; index++) {
-            if (text.equals(OPTIONS_COMBOBOX[index])) {
+        for (index = 0; index < OPTIONS_COMBOBOX.length; index++)
+            if (text.equals(OPTIONS_COMBOBOX[index]))
                 break;
-            }
-        }
 
         clearLeftPanel();
 
-        for (JTextField tf : textFields.get(index)) {
+        for (JTextField tf : textFields.get(index))
             leftPanel.add(tf, "growx");
-        }
 
         leftPanel.revalidate();
         leftPanel.repaint();
@@ -416,19 +414,16 @@ public class InputFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (Map.Entry<Position, ArrayList<Player>> ps : playersSets.entrySet()) {
-            for (Player p : ps.getValue()) {
+        for (Map.Entry<Position, ArrayList<Player>> ps : playersSets.entrySet())
+            for (Player p : ps.getValue())
                 if (!p.getName().equals("")) {
-                    if (counter != 0 && playersPerTeam * 2 - counter != 0) {
+                    if (counter != 0 && playersPerTeam * 2 - counter != 0)
                         textArea.append("\n");
-                    }
 
                     textArea.append((counter + 1) + " - " + p.getName());
 
                     counter++;
                 }
-            }
-        }
     }
 
     /**
@@ -453,7 +448,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si el componente es parte del panel especificado.
      */
     private boolean isComponentInPanel(JComponent c, JPanel p) {
-        return c.getParent() == p;
+        return (c.getParent() == p);
     }
 
     /**

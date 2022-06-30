@@ -11,7 +11,7 @@ package com.utils;
  */
 public class Player {
 
-    /* ---------------------------------------- Campos privados  ---------------------------------- */
+    // ---------------------------------------- Campos privados  ----------------------------------
 
     private int rating;
     private int anchor;
@@ -21,7 +21,7 @@ public class Player {
 
     private Position position;
 
-    /* ---------------------------------------- Constructor -------------------------------------- */
+    // ---------------------------------------- Constructor --------------------------------------
 
     /**
      * Constructor.
@@ -40,7 +40,7 @@ public class Player {
         this.position = position;
     }
 
-    /* ---------------------------------------- Métodos públicos --------------------------------- */
+    // ---------------------------------------- Métodos públicos ---------------------------------
 
     /**
      * @param name El nombre del jugador.

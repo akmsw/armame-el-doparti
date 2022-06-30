@@ -1,10 +1,8 @@
 package com.frames;
 
-import com.utils.BackButton;
-import com.utils.Player;
-import com.utils.Position;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +13,11 @@ import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+
+import com.utils.BackButton;
+import com.utils.Player;
+import com.utils.Position;
+
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -31,10 +34,10 @@ public class RatingFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
-    private static final int JSPINNER_INI = 1;
-    private static final int JSPINNER_MIN = 1;
-    private static final int JSPINNER_MAX = 5;
-    private static final int JSPINNER_STEP = 1;
+    private static final int RATINGS_INI = 1;
+    private static final int RATINGS_MIN = 1;
+    private static final int RATINGS_MAX = 5;
+    private static final int RATINGS_STEP = 1;
 
     private static final String GROW_SPAN = "grow, span";
 
@@ -88,21 +91,19 @@ public class RatingFrame extends JFrame {
 
             for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).size(); j++) {
                 spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i]).get(j),
-                        new JSpinner(new SpinnerNumberModel(JSPINNER_INI, JSPINNER_MIN,
-                                                            JSPINNER_MAX, JSPINNER_STEP)));
+                        new JSpinner(new SpinnerNumberModel(RATINGS_INI, RATINGS_MIN,
+                                                            RATINGS_MAX, RATINGS_STEP)));
 
                 panel.add(new JLabel(inputFrame.getPlayersMap().get(Position.values()[i]).get(j).getName()), "pushx");
 
-                if ((j % 2) != 0) {
+                if ((j % 2) != 0)
                     panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i]).get(j)), "wrap");
-                } else {
+                else
                     panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i]).get(j)));
-                }
             }
 
-            for (JSpinner js : spinnersMap.values()) {
+            for (JSpinner js : spinnersMap.values())
                 ((DefaultEditor) js.getEditor()).getTextField().setEditable(false);
-            }
         }
 
         panel.add(finishButton, GROW_SPAN);
