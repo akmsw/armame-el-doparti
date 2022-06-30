@@ -9,7 +9,7 @@ Release date: TBD
 ## 🔎 ¿Qué es?
 Este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de fútbol 7 u 8.
 
-##  Requisitos
+## 📦 Requisitos
 ### ☕ Java
 - #### 🟡 Versión mínima
     - Java 11.
@@ -46,7 +46,7 @@ El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 
 Para esto, se proporciona un checkbox rotulado con el texto "*Anclar jugadores*" en la ventana de ingreso de nombres. Si el usuario tilda este checkbox, luego de seleccionar el método de distribución de jugadores se le presentará una ventana en la que habrá una lista con todos los nombres ingresados y su respectivo checkbox. Los jugadores cuyo checkbox esté tildado serán anclados al mismo equipo.\
 No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por ejemplo, si se anclan todos los mediocampistas para un mismo equipo, el otro equipo no tendrá mediocampistas y esto no es posible). Lo mismo sucede con anclar a un mismo equipo más de la mitad de jugadores registrados para una posición particular.
 
-## 🔧 Mejoras
+## ✅ Mejoras
 
 - GUI mucho más cómoda, intuitiva y agradable que en versiones anteriores.
 - Arreglo de importantes bugs de la GUI.
