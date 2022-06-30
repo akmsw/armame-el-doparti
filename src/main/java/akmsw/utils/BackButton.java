@@ -1,4 +1,4 @@
-package com.utils;
+package akmsw.utils;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

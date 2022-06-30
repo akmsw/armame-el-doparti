@@ -1,11 +1,13 @@
-package com.frames;
+package akmsw.frames;
 
+import akmsw.utils.BackButton;
+import akmsw.utils.Player;
+import akmsw.utils.Position;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,9 +16,6 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
-
-import com.utils.*;
-
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -83,10 +82,11 @@ public class ResultFrame extends JFrame {
         teams.add(team1);
         teams.add(team2);
 
-        if (inputFrame.getDistribution() == 0)
+        if (inputFrame.getDistribution() == 0) {
             randomMix(inputFrame.thereAreAnchorages());
-        else
+        } else {
             ratingsMix(inputFrame.thereAreAnchorages());
+        }
 
         initializeComponents();
     }
@@ -251,30 +251,35 @@ public class ResultFrame extends JFrame {
      * datos cargados de los jugadores en cada equipo.
      */
     private void fillTable() {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 2; i++) {
             table.setValueAt("EQUIPO #" + (i + 1), 0, i + 1);
+        }
 
         int halfCDSetLength = inputFrame.getPlayersMap().get(Position.CENTRAL_DEFENDER).size() / 2;
         int halfLDSetLength = inputFrame.getPlayersMap().get(Position.LATERAL_DEFENDER).size() / 2;
         int halfMFSetLength = inputFrame.getPlayersMap().get(Position.MIDFIELDER).size() / 2;
         int halfFWSetLength = inputFrame.getPlayersMap().get(Position.FORWARD).size() / 2;
 
-        for (int i = 0; i < halfCDSetLength; i++)
-            table.setValueAt(Main.getPositionsMap().get(Position.CENTRAL_DEFENDER), (i + 1), 0);
+        for (int i = 0; i < halfCDSetLength; i++) {
+            table.setValueAt(Main.getPositionsMap().get(Position.CENTRAL_DEFENDER), i + 1, 0);
+        }
 
-        for (int i = 0; i < halfLDSetLength; i++)
-            table.setValueAt(Main.getPositionsMap().get(Position.LATERAL_DEFENDER), (i + 1 + halfCDSetLength), 0);
+        for (int i = 0; i < halfLDSetLength; i++) {
+            table.setValueAt(Main.getPositionsMap().get(Position.LATERAL_DEFENDER), i + 1 + halfCDSetLength, 0);
+        }
 
-        for (int i = 0; i < halfMFSetLength; i++)
+        for (int i = 0; i < halfMFSetLength; i++) {
             table.setValueAt(Main.getPositionsMap().get(Position.MIDFIELDER),
-                             (i + 1 + halfCDSetLength + halfLDSetLength), 0);
+                             i + 1 + halfCDSetLength + halfLDSetLength, 0);
+        }
 
-        for (int i = 0; i < halfFWSetLength; i++)
+        for (int i = 0; i < halfFWSetLength; i++) {
             table.setValueAt(Main.getPositionsMap().get(Position.FORWARD),
-                             (i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength), 0);
+                             i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength, 0);
+        }
 
         table.setValueAt(Main.getPositionsMap().get(Position.GOALKEEPER),
-                         (1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength), 0);
+                         1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength, 0);
 
         /*
          * ¡¡¡IMPORTANTE!!!
@@ -292,8 +297,9 @@ public class ResultFrame extends JFrame {
         int row = 1;
 
         for (int i = 0; i < teams.size(); i++) {
-            for (Player player : teams.get(i))
+            for (Player player : teams.get(i)) {
                 table.setValueAt(player.getName(), row++, i + 1);
+            }
 
             row = 1;
         }
@@ -373,10 +379,11 @@ public class ResultFrame extends JFrame {
     private void ratingsMix(boolean anchorages) {
         frameTitle = frameTitle.concat("Por puntajes - ");
 
-        if (anchorages)
+        if (anchorages) {
             frameTitle = frameTitle.concat("Con anclajes - ");
-        else
+        } else {
             frameTitle = frameTitle.concat("Sin anclajes - ");
+        }
     }
 
     /**
@@ -385,9 +392,11 @@ public class ResultFrame extends JFrame {
      * representativos de cada equipo.
      */
     private void resetTeams() {
-        for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet())
-            for (Player p : ps.getValue())
+        for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet()) {
+            for (Player p : ps.getValue()) {
                 p.setTeam(0);
+            }
+        }
 
         team1.clear();
         team2.clear();

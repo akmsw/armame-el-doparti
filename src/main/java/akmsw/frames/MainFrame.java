@@ -1,10 +1,14 @@
-package com.frames;
+package akmsw.frames;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+import java.util.Enumeration;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,8 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
-
+import javax.swing.plaf.FontUIResource;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -30,20 +35,37 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // ---------------------------------------- Constantes públicas ------------------------------
 
+    /**
+     * Imagen estándar del icono de la aplicación.
+     */
     public static final ImageIcon ICON = new ImageIcon(Main.IMG_PATH + "icon.png");
+
+    /**
+     * Imagen escalada del icono de la aplicación.
+     */
     public static final ImageIcon SCALED_ICON = new ImageIcon(ICON.getImage()
                                                                   .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
-    private static final Integer[] PLAYERS_PER_TEAM = { 7, 8 };
+    /**
+     * Posibles cantidades de jugadores por equipo.
+     */
+    private static final Integer[] PLAYERS_PER_TEAM = {7, 8};
 
+    /**
+     * Configuración utilizada frecuentemente.
+     */
     private static final String GROWX = "growx";
+
+    private static final String BG_IMG_FILENAME = "bg.png";
 
     // ---------------------------------------- Campos privados ----------------------------------
 
     private JButton startButton;
     private JButton helpButton;
+
+    private Font programFont;
 
     // ---------------------------------------- Constructor --------------------------------------
 
@@ -51,7 +73,10 @@ public class MainFrame extends JFrame implements ActionListener {
      * Constructor de la ventana principal.
      */
     public MainFrame() {
-        ImageIcon bgImage = new ImageIcon(Main.IMG_PATH + "bg.png");
+        setGUIProperties();
+
+        ImageIcon bgImage = new ImageIcon(this.getClass()
+                                              .getResource(Main.IMG_PATH + BG_IMG_FILENAME));
 
         JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
 
@@ -93,6 +118,57 @@ public class MainFrame extends JFrame implements ActionListener {
         // TODO.
     }
 
+    /**
+     * Este método se encarga de configurar las propiedades
+     * de la interfaz gráfica del programa.
+     */
+    private void setGUIProperties() {
+        UIManager.put("OptionPane.background", Main.FRAMES_BG_COLOR);
+        UIManager.put("Panel.background", Main.FRAMES_BG_COLOR);
+        UIManager.put("CheckBox.background", Main.FRAMES_BG_COLOR);
+        UIManager.put("Separator.background", Main.FRAMES_BG_COLOR);
+        UIManager.put("Button.background", Main.BUTTONS_BG_COLOR);
+        UIManager.put("Button.foreground", Color.WHITE);
+        UIManager.put("CheckBox.focus", Main.FRAMES_BG_COLOR);
+        UIManager.put("Button.focus", Main.BUTTONS_BG_COLOR);
+        UIManager.put("ToggleButton.focus", Main.BUTTONS_BG_COLOR);
+        UIManager.put("ComboBox.focus", Color.WHITE);
+
+        try {
+            // Se registra la fuente para poder utilizarla
+            programFont = Font.createFont(Font.TRUETYPE_FONT,
+                                          this.getClass()
+                                              .getClassLoader()
+                                              .getResourceAsStream(Main.TTF_PATH + Main.FONT_NAME))
+                              .deriveFont(Main.FONT_SIZE);
+
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(programFont);
+        } catch (IOException | FontFormatException ex) {
+            ex.printStackTrace();
+            System.exit(-1);
+        }
+
+        setUIFont(programFont);
+    }
+
+    /**
+     * Este método se encarga de setear la fuente utilizada para el programa.
+     *
+     * @param f Fuente a utilizar.
+     */
+    private void setUIFont(Font f) {
+        Enumeration<Object> keys = UIManager.getDefaults().keys();
+
+        while (keys.hasMoreElements()) {
+            Object k = keys.nextElement();
+            Object value = UIManager.get(k);
+
+            if (value instanceof FontUIResource) {
+                UIManager.put(k, f);
+            }
+        }
+    }
+
     // ---------------------------------------- Métodos públicos ---------------------------------
 
     /**
@@ -120,9 +196,10 @@ public class MainFrame extends JFrame implements ActionListener {
                     System.exit(-1);
                 }
             }
-        } else if (e.getSource() == helpButton)
+        } else if (e.getSource() == helpButton) {
             help();
-        else
+        } else {
             System.exit(0);
+        }
     }
 }

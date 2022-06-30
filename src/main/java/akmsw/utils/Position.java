@@ -1,4 +1,4 @@
-package com.utils;
+package akmsw.utils;
 
 /**
  * Posibles posiciones para los jugadores.
