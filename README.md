@@ -6,6 +6,24 @@
 Release date: TBD
 ```
 
+#
+
+## Índice
+- [¿Qué es?](https://github.com/akmsw/armame-el-doparti#-qu%C3%A9-es)
+- [Requisitos](https://github.com/akmsw/armame-el-doparti#-requisitos)
+    - [Java](https://github.com/akmsw/armame-el-doparti#-java)
+        - [Versión mínima](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-m%C3%ADnima)
+        - [Versión recomendada](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada)
+- [Instalación](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-instalaci%C3%B3n)
+- [¿Cómo se usa?](https://github.com/akmsw/armame-el-doparti#-c%C3%B3mo-se-usa)
+- [Nuevas funcionalidades](https://github.com/akmsw/armame-el-doparti#-nuevas-funcionalidades)
+    - [Anclaje de jugadores](https://github.com/akmsw/armame-el-doparti#-anclaje-de-jugadores)
+- [Mejoras](https://github.com/akmsw/armame-el-doparti#-mejoras)
+- [Próximamente](https://github.com/akmsw/armame-el-doparti#-pr%C3%B3ximamente)
+- [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
+
+#
+
 ## 🔎 ¿Qué es?
 Este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de fútbol 7 u 8.
 
