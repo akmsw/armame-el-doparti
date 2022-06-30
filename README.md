@@ -50,7 +50,7 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
 
 - GUI mucho más cómoda, intuitiva y agradable que en versiones anteriores.
 - Arreglo de importantes bugs de la GUI.
-- Se arreglaron partes del código que condicionaban los algoritmos de distribución.
+- Se implementaron algoritmos más eficientes para las distribuciones.
 - Se prescindió de clases y métodos que no eran vitales, mejorando significativamente la modularización del código, su mantenibilidad y la velocidad de ejecución del programa.
 - Implementación de expresiones regulares para alivianar tareas.
 - Importantes cambios de refactorización.
