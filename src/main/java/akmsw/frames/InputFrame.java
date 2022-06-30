@@ -47,19 +47,48 @@ public class InputFrame extends JFrame implements ActionListener {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
-    private static final int MAX_NAME_LEN = 10; // Cantidad máxima de caracteres por nombre
-    private static final int TEXT_AREA_ROWS = 14; // Cantidad máxima de caracteres por nombre
-    private static final int TEXT_AREA_COLUMNS = 12; // Cantidad máxima de caracteres por nombre
+    /**
+     * Cantidad máxima de caracteres por nombre.
+     */
+    private static final int MAX_NAME_LEN = 10;
 
-    private static final String[] OPTIONS_COMBOBOX = {"Agregar defensores centrales",
-                                                      "Agregar defensores laterales",
-                                                      "Agregar mediocampistas",
-                                                      "Agregar delanteros",
-                                                      "Agregar arqueros"};
-    private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntajes"};
+    /**
+     * Cantidad de filas para el área de texto.
+     */
+    private static final int TEXT_AREA_ROWS = 14;
 
+    /**
+     * Cantidad de columnas para el área de texto.
+     */
+    private static final int TEXT_AREA_COLUMNS = 12;
+
+    /**
+     * Opciones para el combobox.
+     */
+    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
+                                                       "Agregar defensores laterales",
+                                                       "Agregar mediocampistas",
+                                                       "Agregar delanteros",
+                                                       "Agregar arqueros" };
+
+    /**
+     * Opciones de distribución de jugadores.
+     */
+    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
+
+    /**
+     * Regex para validación de nombres.
+     */
     private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
+
+    /**
+     * Regex para obtener información del archivo .pda.
+     */
     private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
+
+    /**
+     * Nombre del archivo .pda.
+     */
     private static final String PDA_FILENAME = "/dist.pda";
 
     // ---------------------------------------- Campos privados ----------------------------------
@@ -147,8 +176,7 @@ public class InputFrame extends JFrame implements ActionListener {
             while ((line = br.readLine()) != null) {
                 if (line.matches(PDA_DATA_RETRIEVE_REGEX)) {
                     playersAmountMap.put(Position.values()[index],
-                                         Integer.parseInt(
-                                         line.replaceAll("(?!(?<=" + playersPerTeam + ")\\d).", "")));
+                                         Integer.parseInt(line.replaceAll("(?!(?<=" + playersPerTeam + ")\\d).", "")));
                     index++;
                 }
             }
@@ -262,16 +290,17 @@ public class InputFrame extends JFrame implements ActionListener {
 
                 if (!(Pattern.matches(NAMES_VALIDATION_REGEX, tf.getText()))) {
                     JOptionPane.showMessageDialog(null,
-                        "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
-                        "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                          "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
+                                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                 } else {
                     String name = tf.getText().trim().toUpperCase().replace(" ", "_");
 
                     if ((name.length() > MAX_NAME_LEN) || name.isBlank()
-                        || name.isEmpty() || alreadyExists(name)) {
+                            || name.isEmpty() || alreadyExists(name)) {
                         JOptionPane.showMessageDialog(null,
-                            "El nombre del jugador no puede estar vacío, tener más de " + MAX_NAME_LEN
-                            + " caracteres, o estar repetido", "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                                      "El nombre del jugador no puede estar vacío, tener más de "
+                                                      + MAX_NAME_LEN + " caracteres, o estar repetido",
+                                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
 
                         tf.setText("");
                     } else {

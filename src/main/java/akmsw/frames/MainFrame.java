@@ -38,7 +38,8 @@ public class MainFrame extends JFrame implements ActionListener {
     /**
      * Imagen estándar del icono de la aplicación.
      */
-    public static final ImageIcon ICON = new ImageIcon(Main.IMG_PATH + "icon.png");
+    public static final ImageIcon ICON = new ImageIcon(MainFrame.class
+                                                                .getResource(Main.IMG_PATH + Main.ICON_FILENAME));
 
     /**
      * Imagen escalada del icono de la aplicación.
@@ -58,6 +59,9 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private static final String GROWX = "growx";
 
+    /**
+     * Nombre del archivo de imagen de fondo para el menú principal.
+     */
     private static final String BG_IMG_FILENAME = "bg.png";
 
     // ---------------------------------------- Campos privados ----------------------------------

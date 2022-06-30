@@ -35,7 +35,14 @@ public class AnchorageFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
+    /**
+     * Configuración utilizada frecuentemente.
+     */
     private static final String GROWX_SPAN = "growx, span";
+
+    /**
+     * Título de la ventana.
+     */
     private static final String FRAME_TITLE = "Anclaje de jugadores";
 
     // ---------------------------------------- Campos privados ----------------------------------

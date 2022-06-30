@@ -31,11 +31,29 @@ public class RatingFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
-    private static final int JSPINNER_INI = 1;
-    private static final int JSPINNER_MIN = 1;
-    private static final int JSPINNER_MAX = 5;
-    private static final int JSPINNER_STEP = 1;
+    /**
+     * Valor inicial de los spinners para ratings.
+     */
+    private static final int RATINGS_INI = 1;
 
+    /**
+     * Valor mínimo de los spinners para ratings.
+     */
+    private static final int RATINGS_MIN = 1;
+
+    /**
+     * Valor máximo de los spinners para ratings.
+     */
+    private static final int RATINGS_MAX = 5;
+
+    /**
+     * Paso utilizado para los spinners para ratings.
+     */
+    private static final int RATINGS_STEP = 1;
+
+    /**
+     * Configuración utilizada frecuentemente.
+     */
     private static final String GROW_SPAN = "grow, span";
 
     // ---------------------------------------- Campos privados ----------------------------------
@@ -88,8 +106,8 @@ public class RatingFrame extends JFrame {
 
             for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).size(); j++) {
                 spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i]).get(j),
-                        new JSpinner(new SpinnerNumberModel(JSPINNER_INI, JSPINNER_MIN,
-                                                            JSPINNER_MAX, JSPINNER_STEP)));
+                        new JSpinner(new SpinnerNumberModel(RATINGS_INI, RATINGS_MIN,
+                                                            RATINGS_MAX, RATINGS_STEP)));
 
                 panel.add(new JLabel(inputFrame.getPlayersMap().get(Position.values()[i]).get(j).getName()), "pushx");
 

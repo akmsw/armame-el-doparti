@@ -40,6 +40,11 @@ public final class Main {
     public static final String PROGRAM_VERSION = "v3.0";
 
     /**
+     * Nombre del archivo de imagen de icono para las ventanas.
+     */
+    public static final String ICON_FILENAME = "icon.png";
+
+    /**
      * Dirección relativa del directorio de imágenes.
      */
     public static final String IMG_PATH = "/img/";

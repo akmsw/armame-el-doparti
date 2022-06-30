@@ -32,9 +32,20 @@ public class ResultFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
+    /**
+     * Configuración utilizada frecuentemente.
+     */
     private static final String GROWX = "growx";
 
+    /**
+     * Tamaño de ancho (en píxeles) fijo para las celdas
+     * de la tabla de resultados.
+     */
     private static final int FIXED_CELL_WIDTH = 250;
+
+    /**
+     * Cantidad de columnas para la tabla de resultados.
+     */
     private static final int JTABLE_COLUMNS = 3;
 
     // ---------------------------------------- Campos privados ----------------------------------
