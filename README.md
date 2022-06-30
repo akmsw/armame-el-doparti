@@ -1,6 +1,6 @@
 # Armame el doparti v3.0 ⚽
 
-![cover](./src/main/res/img/cover.png)
+![portada](./src/main/res/img/cover.png)
 
 ```
 Release date: TBD
@@ -63,7 +63,7 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
 ![ventana_principal](./src/main/res/img/ss1.png)\
 *Ventana principal*
 
-![ventana_ingreso](./src/main/res/img/ss2.png)\
+![ventana_ingreso_nombres](./src/main/res/img/ss2.png)\
 *Ventana de ingreso de nombres*
 
 ![ventana_anclajes](./src/main/res/img/ss3.png)\
@@ -72,5 +72,5 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
 ![ventana_puntuaciones](./src/main/res/img/ss4.png)\
 *Ventana de puntuaciones*
 
-![ventana_resultados1](./src/main/res/img/ss5.png)\
+![ventana_resultados](./src/main/res/img/ss5.png)\
 *Ventana de muestra de resultados*
