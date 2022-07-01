@@ -1,9 +1,10 @@
-package akmsw.frames;
+package armameeldoparti.frames;
 
-import akmsw.utils.Position;
 import java.awt.Color;
 import java.util.EnumMap;
 import java.util.Map;
+
+import armameeldoparti.utils.Position;
 
 /**
  * Clase principal, sólo para inicialización del programa

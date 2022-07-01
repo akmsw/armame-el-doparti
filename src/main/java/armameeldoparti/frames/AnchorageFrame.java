@@ -1,8 +1,5 @@
-package akmsw.frames;
+package armameeldoparti.frames;
 
-import akmsw.utils.BackButton;
-import akmsw.utils.Player;
-import akmsw.utils.Position;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +17,10 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+
+import armameeldoparti.utils.BackButton;
+import armameeldoparti.utils.Player;
+import armameeldoparti.utils.Position;
 import net.miginfocom.swing.MigLayout;
 
 /**

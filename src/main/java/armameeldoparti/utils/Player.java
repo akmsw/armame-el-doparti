@@ -1,4 +1,4 @@
-package akmsw.utils;
+package armameeldoparti.utils;
 
 /**
  * Clase representativa de los jugadores.

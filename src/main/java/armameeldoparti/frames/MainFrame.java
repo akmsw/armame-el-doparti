@@ -1,4 +1,4 @@
-package akmsw.frames;
+package armameeldoparti.frames;
 
 import java.awt.Color;
 import java.awt.Font;

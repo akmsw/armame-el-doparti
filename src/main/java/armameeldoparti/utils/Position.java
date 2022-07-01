@@ -1,4 +1,4 @@
-package akmsw.utils;
+package armameeldoparti.utils;
 
 /**
  * Posibles posiciones para los jugadores.

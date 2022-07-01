@@ -1,8 +1,5 @@
-package akmsw.frames;
+package armameeldoparti.frames;
 
-import akmsw.utils.BackButton;
-import akmsw.utils.Player;
-import akmsw.utils.Position;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -16,6 +13,10 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
+
+import armameeldoparti.utils.BackButton;
+import armameeldoparti.utils.Player;
+import armameeldoparti.utils.Position;
 import net.miginfocom.swing.MigLayout;
 
 /**
