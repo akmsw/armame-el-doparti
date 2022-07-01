@@ -1,5 +1,8 @@
 package armameeldoparti.frames;
 
+import armameeldoparti.utils.BackButton;
+import armameeldoparti.utils.Player;
+import armameeldoparti.utils.Position;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
@@ -9,11 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
-
-import armameeldoparti.utils.BackButton;
-import armameeldoparti.utils.Player;
-import armameeldoparti.utils.Position;
-
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;

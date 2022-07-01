@@ -1,5 +1,8 @@
 package armameeldoparti.frames;
 
+import armameeldoparti.utils.BackButton;
+import armameeldoparti.utils.Player;
+import armameeldoparti.utils.Position;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -13,10 +16,6 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
-
-import armameeldoparti.utils.BackButton;
-import armameeldoparti.utils.Player;
-import armameeldoparti.utils.Position;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -395,6 +394,8 @@ public class ResultFrame extends JFrame {
             frameTitle = frameTitle.concat("Con anclajes - ");
         } else {
             frameTitle = frameTitle.concat("Sin anclajes - ");
+
+            // working here...
         }
     }
 

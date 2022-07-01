@@ -1,5 +1,8 @@
 package armameeldoparti.frames;
 
+import armameeldoparti.utils.BackButton;
+import armameeldoparti.utils.Player;
+import armameeldoparti.utils.Position;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -27,10 +30,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
-
-import armameeldoparti.utils.BackButton;
-import armameeldoparti.utils.Player;
-import armameeldoparti.utils.Position;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -66,16 +65,16 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * Opciones para el combobox.
      */
-    private static final String[] OPTIONS_COMBOBOX = { "Agregar defensores centrales",
-                                                       "Agregar defensores laterales",
-                                                       "Agregar mediocampistas",
-                                                       "Agregar delanteros",
-                                                       "Agregar arqueros" };
+    private static final String[] OPTIONS_COMBOBOX = {"Agregar defensores centrales",
+                                                      "Agregar defensores laterales",
+                                                      "Agregar mediocampistas",
+                                                      "Agregar delanteros",
+                                                      "Agregar arqueros"};
 
     /**
      * Opciones de distribución de jugadores.
      */
-    private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntajes" };
+    private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntajes"};
 
     /**
      * Regex para validación de nombres.
