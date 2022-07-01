@@ -21,7 +21,7 @@ Release date: TBD
 - [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
 
 ## 🔎 ¿Qué es?
-Construido completamente en Java y refactorizado en su totalidad, este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de fútbol 7 u 8, ya sea con distribución aleatoria de jugadores o basada en puntuaciones. Se ofrece la posibilidad de asociar dos o más jugadores garantizando así que, sin importar la distribución elegida, quedarán en el mismo equipo.
+Construido completamente en Java y refactorizado en su totalidad, la nueva versión de este programa ofrece una intuitiva y rápida manera de generar equipos para partidos de fútbol 7 u 8, ya sea con distribución aleatoria de jugadores o basada en puntuaciones. Se ofrece la posibilidad de asociar dos o más jugadores garantizando así que, sin importar la distribución elegida, quedarán en el mismo equipo.
 
 ## 📦 Requisitos
 ### ☕ Java
