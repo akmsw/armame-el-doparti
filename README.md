@@ -18,7 +18,7 @@ Release date: TBD
 - [Nuevas funcionalidades](https://github.com/akmsw/armame-el-doparti#-nuevas-funcionalidades)
     - [Anclaje de jugadores](https://github.com/akmsw/armame-el-doparti#-anclaje-de-jugadores)
 - [Mejoras](https://github.com/akmsw/armame-el-doparti#-mejoras)
-- [Solución de problemas comunes](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-soluci%C3%B3n-de-problemas-comunes)
+- [Solución a problemas frecuentes](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-soluci%C3%B3n-de-problemas-comunes)
     - [En Linux](https://github.com/akmsw/armame-el-doparti#-en-linux)
 - [Próximamente](https://github.com/akmsw/armame-el-doparti#-pr%C3%B3ximamente)
 - [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
@@ -34,14 +34,14 @@ Construido completamente en Java y refactorizado en su totalidad, la nueva versi
     🟢 [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) *(o más reciente)*
 
 ## 📥 Descarga
-La versión más reciente del programa se encuentra disponible para su descarga desde la sección [releases](https://github.com/akmsw/armame-el-doparti/releases) de este proyecto.
+La versión estable más reciente del programa se encuentra disponible para su descarga en la sección [releases](https://github.com/akmsw/armame-el-doparti/releases) de este proyecto.
 
-## 🛠️ Instalación y ejecución
+## ▶️ Instalación y ejecución
 Más allá de los requisitos listados, no hace falta ninguna instalación para correr este programa.\
-Una vez descargado el archivo con extensión ***jar***, e independientemente del sistema operativo, podemos dirigirnos a la carpeta donde está situado y abrirlo con un simple *doble click*. En caso de estar en Linux y que el programa no se abra, véase la sección de [solución de problemas comunes]().\
-Otra alternativa es, dentro de la carpeta contenedora del archivo, abrir una terminal y ejecutar el comando:
+Una vez descargado el archivo con extensión ***jar***, e independientemente del sistema operativo, podemos dirigirnos a la carpeta donde está situado y abrirlo con un simple *doble click*. En caso de estar en Linux y que el programa no se abra, véase la sección de [solución a problemas frecuentes en linux](https://github.com/akmsw/armame-el-doparti#-en-linux).\
+Una alternativa es abrir una terminal dentro de la carpeta contenedora del archivo y ejecutar el comando:
 ```bash
-java -jar <nombre_del_archivo>.jar
+java -jar nombre_del_archivo.jar
 ```
 
 ## 📝 ¿Cómo se usa?
@@ -80,7 +80,7 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
 - Implementación de expresiones regulares para alivianar tareas.
 - Importantes cambios de refactorización.
 
-## ⚠️ Solución de problemas comunes
+## 🛠️ Solución a problemas frecuentes
 ### 🐧 En Linux
 - Si el archivo ***jar*** no se ejecuta al hacerle doble click, seguir los siguientes pasos:
     - Click derecho sobre el archivo descargado
