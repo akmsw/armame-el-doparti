@@ -89,13 +89,9 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
     - En el campo de ingreso de comando personalizado, ingresar: `java -jar`
     - Seleccionar como opción predeterminada para ejecución de este tipo de archivos
 
-#
-
 ## 🔜 Próximamente
 - Se agregarán las opciones de 5 y 9 jugadores por equipo.
 - El usuario podrá optar por ingresar una distribución propia de jugadores, o utilizar las provistas por defecto.
-
-#
 
 ## 📸 Capturas de pantalla
 ![ventana_principal](./src/main/res/img/ss1.png)\

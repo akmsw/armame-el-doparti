@@ -9,11 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
@@ -101,8 +101,9 @@ public class RatingFrame extends JFrame {
         for (int i = 0; i < inputFrame.getPlayersMap().size(); i++) {
             JLabel label = new JLabel(Main.getPositionsMap().get(Position.values()[i]));
 
-            panel.add(label, "span");
-            panel.add(new JSeparator(SwingConstants.HORIZONTAL), "growx, span");
+            label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
+
+            panel.add(label, GROW_SPAN);
 
             for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).size(); j++) {
                 spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i]).get(j),

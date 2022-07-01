@@ -291,7 +291,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 if (!(Pattern.matches(NAMES_VALIDATION_REGEX, tf.getText()))) {
                     JOptionPane.showMessageDialog(null,
                                           "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
-                                            "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                          "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                 } else {
                     String name = tf.getText().trim().toUpperCase().replace(" ", "_");
 
@@ -300,7 +300,7 @@ public class InputFrame extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(null,
                                                       "El nombre del jugador no puede estar vacío, tener más de "
                                                       + MAX_NAME_LEN + " caracteres, o estar repetido",
-                                                "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                                                      "¡Error!", JOptionPane.ERROR_MESSAGE, null);
 
                         tf.setText("");
                     } else {
