@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -394,7 +396,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Actualizar el área de texto mostrando la cantidad de anclajes y los jugadores anclados a los mismos.
+     * Actualiza el área de texto mostrando la cantidad de anclajes y los jugadores anclados a los mismos.
      */
     private void updateTextArea() {
         textArea.setText("");
@@ -403,24 +405,22 @@ public class AnchorageFrame extends JFrame {
             private int i;
         };
 
-        for (wrapperIndex.i = 1; wrapperIndex.i <= anchorageNum; wrapperIndex.i++) {
-            var wrapperCounter = new Object() {
-                private int c = 1;
-            };
+        AtomicInteger counter = new AtomicInteger(1);
 
+        for (wrapperIndex.i = 1; wrapperIndex.i <= anchorageNum; wrapperIndex.i++) {
             textArea.append(" ----- ANCLAJE #" + wrapperIndex.i + " -----\n");
 
             inputFrame.getPlayersMap().entrySet().forEach(ps ->
                 ps.getValue().forEach(p -> {
                     if (p.getAnchor() == wrapperIndex.i) {
-                        textArea.append(" " + wrapperCounter.c + ". " + p.getName() + "\n");
-
-                        wrapperCounter.c++;
+                        textArea.append(" " + counter.getAndIncrement() + ". " + p.getName() + "\n");
                     }
                 })
             );
 
             textArea.append("\n");
+
+            counter.set(1);
         }
 
         toggleButtons();
