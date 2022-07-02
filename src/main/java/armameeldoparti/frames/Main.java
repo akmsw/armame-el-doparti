@@ -6,8 +6,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
- * Clase principal, sólo para inicialización del programa
- * y declaración de campos útiles.
+ * Clase principal, sólo para inicialización del programa y declaración de campos útiles.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -70,14 +69,17 @@ public final class Main {
 
     // ----------------------------------------- Constructor -------------------------------------
 
+    /**
+     * Constructor vacío.
+     */
     private Main() {
-        // No utilizado.
+        // No utilizado
     }
 
     // --------------------------------- Punto de entrada principal ------------------------------
 
     /**
-     * Se instancia y ejecuta todo el programa.
+     * Instancia y ejecuta todo el programa.
      *
      * @param args Argumentos para ejecutar el programa.
      */

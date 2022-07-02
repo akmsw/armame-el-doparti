@@ -33,9 +33,7 @@ import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de ingreso
- * de nombres de jugadores y mezcla de los mismos
- * para el sorteo de los equipos.
+ * Clase correspondiente a la ventana de ingreso de nombres de jugadores y de parámetros de distribución.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -63,7 +61,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final int TEXT_AREA_COLUMNS = 12;
 
     /**
-     * Opciones para el combobox.
+     * Opciones para la lista desplegable.
      */
     private static final String[] OPTIONS_COMBOBOX = {"Agregar defensores centrales",
                                                       "Agregar defensores laterales",
@@ -77,12 +75,12 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntajes"};
 
     /**
-     * Regex para validación de nombres.
+     * Expresión regular para validación de nombres.
      */
     private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
 
     /**
-     * Regex para obtener información del archivo .pda.
+     * Expresión regular para obtener información del archivo .pda.
      */
     private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
 
@@ -119,12 +117,12 @@ public class InputFrame extends JFrame implements ActionListener {
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
-     * Constructor de la ventana de ingreso de jugadores.
+     * Construye una ventana de ingreso de jugadores.
      *
-     * @param previousFrame Ventana fuente que crea la ventana InputFrame.
+     * @param previousFrame  Ventana fuente que crea la ventana InputFrame.
      * @param playersPerTeam Cantidad de jugadores por equipo.
      *
-     * @throws IOException Cuando hay un error de lectura en el archivo pda.
+     * @throws IOException Cuando hay un error de lectura en el archivo .pda.
      */
     public InputFrame(JFrame previousFrame, int playersPerTeam) throws IOException {
         this.previousFrame = previousFrame;
@@ -144,18 +142,18 @@ public class InputFrame extends JFrame implements ActionListener {
     // --------------------------------------- Métodos privados ---------------------------------
 
     /**
-     * Este método obtiene la cantidad de jugadores para cada posición por equipo
+     * Obtiene la cantidad de jugadores para cada posición por equipo
      * mediante expresiones regulares.
-     *
-     * [CLMFG].+>.+ : Matchea las líneas que comiencen con C, L, M, F, ó W,
-     * seguido por al menos un caracter '>' (esta regex busca las líneas que
-     * nos importan en el archivo .pda).
-     *
-     * (?!(?<=X)\\d). : Matchea el trozo de la línea que no sea un número que nos
+     * <p>
+     * [CLMFG].+>.+ : Obtiene las líneas que comiencen con C, L, M, F, ó W,
+     * seguido por al menos un caracter '>' (busca las líneas que nos importan en
+     * el archivo .pda).
+     * <p>
+     * (?!(?<=X)\\d). : Obtiene el trozo de la línea que no sea un número que nos
      * interesa (el número que nos interesa ocuparía el lugar de la X).
-     *
+     * <p>
      * ¡¡¡IMPORTANTE!!!
-     *
+     * <p>
      * Si el archivo .pda es modificado en cuanto a orden de las líneas importantes,
      * se debe tener en cuenta que Position.values()[index] confía en que lo hallado
      * se corresponde con el orden en el que están declarados los valores en el enum
@@ -187,8 +185,7 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método llena el conjunto de jugadores recibido con
-     * jugadores sin nombre y con la posición especificada.
+     * Llena el conjunto de jugadores recibido con jugadores sin nombre y con la posición especificada.
      *
      * @param set      Arreglo de jugadores a inicializar.
      * @param position Posición de los jugadores del arreglo.
@@ -201,8 +198,7 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de inicializar los componentes de la ventana de
-     * mezcla.
+     * Inicializa los componentes de la ventana.
      *
      * @param frameTitle Título de la ventana.
      */
@@ -273,13 +269,11 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de crear, almacenar y configurar los campos de texto
-     * correspondientes a cada posición.
+     * Crea, almacena y configura los campos de texto correspondientes a cada posición.
      *
-     * @param position     Posición a buscar en el EnumMap.
-     * @param textFieldSet Arreglo de campos de texto para cada posición.
-     * @param playersSet   Arreglo de jugadores donde se almacenarán los nombres
-     *                     ingresados en los campos de texto.
+     * @param position     Posición de los jugadores.
+     * @param textFieldSet Arreglo de campos de texto para dicha posición.
+     * @param playersSet   Arreglo de jugadores con dicha posición.
      */
     private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, ArrayList<Player> playersSet) {
         for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
@@ -296,7 +290,7 @@ public class InputFrame extends JFrame implements ActionListener {
                     String name = tf.getText().trim().toUpperCase().replace(" ", "_");
 
                     if ((name.length() > MAX_NAME_LEN) || name.isBlank()
-                            || name.isEmpty() || alreadyExists(name)) {
+                        || name.isEmpty() || alreadyExists(name)) {
                         JOptionPane.showMessageDialog(null,
                                                       "El nombre del jugador no puede estar vacío, tener más de "
                                                       + MAX_NAME_LEN + " caracteres, o estar repetido",
@@ -319,8 +313,7 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar la lista desplegable
-     * al frame y setear el handler de eventos a la misma.
+     * Agrega la lista desplegable y le establece el oyente de eventos.
      */
     private void addComboBox() {
         comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
@@ -332,8 +325,7 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de añadir los botones
-     * al panel de ingreso de jugadores.
+     * Añade los botones al panel de la ventana.
      */
     private void addButtons() {
         BackButton backButton = new BackButton(InputFrame.this, previousFrame);
@@ -375,9 +367,8 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de añadir al panel el campo de texto de sólo lectura
-     * donde se mostrarán en tiempo real los nombres de jugadores ingresados por el
-     * usuario.
+     * Añade al panel de la ventan el campo de texto de sólo lectura donde se
+     * mostrarán en tiempo real los nombres de jugadores ingresados por el usuario.
      */
     private void addTextArea() {
         textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
@@ -395,8 +386,7 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de agregar el checkbox de anclaje de jugadores en el
-     * panel del frame.
+     * Agrega la casilla de anclaje de jugadores.
      */
     private void addAnchorCheckBox() {
         JCheckBox anchorCheckBox = new JCheckBox("Anclar jugadores", false);
@@ -410,11 +400,9 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de togglear la visibilidad de los
-     * campos de texto de ingreso de jugadores en base al ítem
-     * seleccionado en la lista desplegable.
+     * Conmuta la visibilidad de los campos de texto de ingreso de jugadores.
      *
-     * @param text Opción seleccionada del arreglo OPTIONS_COMBOBOX.
+     * @param text Ítem seleccionado de la lista desplegable.
      */
     private void updateTextFields(String text) {
         int index;
@@ -436,11 +424,14 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de actualizar el texto mostrado en el campo de sólo
-     * lectura. Se muestran los jugadores ingresados en el orden en el que estén
-     * posicionados en sus respectivos arreglos. El orden en el que se muestran es:
-     * Defensores centrales > Defensores laterales > Mediocampistas > Delanteros >
-     * Arqueros.
+     * Actualiza el texto mostrado en el campo de sólo lectura.
+     * <p>
+     * Se muestran los jugadores ingresados en el orden en el que estén
+     * posicionados en sus respectivos arreglos.
+     * <p>
+     * El orden en el que se muestran es:
+     * <p>
+     * Defensores centrales - Defensores laterales - Mediocampistas - Delanteros - Arqueros.
      */
     private void updateTextArea() {
         int counter = 0;
@@ -463,9 +454,7 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de quitar los elementos de tipo
-     * JTextField en el panel izquierdo antes de togglear
-     * cuáles deben permanecer en el mismo.
+     * Quita los campos de texto del panel izquierdo de la ventana.
      */
     private void clearLeftPanel() {
         textFields.stream()
@@ -475,11 +464,10 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de verificar si cierto componente es
-     * parte de algún panel en particular de este JFrame.
+     * Verifica si un componente es parte de cierto panel.
      *
      * @param c Componente cuya pertenencia se verificará.
-     * @param p Panel al cual se verificará la pertenencia.
+     * @param p Panel ante el cual se verificará la pertenencia.
      *
      * @return Si el componente es parte del panel especificado.
      */
@@ -488,12 +476,9 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de chequear si un nombre está repetido en un arreglo
-     * de jugadores.
+     * @param name Nombre a validar.
      *
-     * @param name Nombre a chequear.
-     *
-     * @return Si hay algún jugador con el mismo nombre.
+     * @return Si ya existe algún jugador con el nombre recibido por parámetro.
      */
     private boolean alreadyExists(String name) {
         return playersSets.values()
@@ -505,7 +490,7 @@ public class InputFrame extends JFrame implements ActionListener {
     // --------------------------------------- Métodos públicos ---------------------------------
 
     /**
-     * Handler para los eventos ocurridos de la lista desplegable.
+     * Gestor para los eventos ocurridos de la lista desplegable.
      *
      * @param e Evento de click.
      */
@@ -543,8 +528,7 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * @return Mapa que indica cuántos jugadores
-     *         hay por posición en cada equipo.
+     * @return Mapa que indica cuántos jugadores hay por posición en cada equipo.
      */
     public Map<Position, Integer> getPlayersAmountMap() {
         return playersAmountMap;

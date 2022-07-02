@@ -24,12 +24,10 @@ public class Player {
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
-     * Constructor.
+     * Construye un jugador básico con los parámetros recibidos.
      *
-     * Se crea un jugador básico con los parámetros recibidos.
-     *
-     * @param name     El nombre del jugador.
-     * @param position La posición del jugador.
+     * @param name     Nombre del jugador.
+     * @param position Posición del jugador.
      */
     public Player(String name, Position position) {
         setName(name);
@@ -43,14 +41,14 @@ public class Player {
     // ---------------------------------------- Métodos públicos ---------------------------------
 
     /**
-     * @param name El nombre del jugador.
+     * @param name Nombre del jugador.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @param rating El puntaje del jugador.
+     * @param rating Puntaje del jugador.
      */
     public void setRating(int rating) {
         this.rating = rating;
@@ -71,7 +69,7 @@ public class Player {
     }
 
     /**
-     * @return El puntaje asignado al jugador.
+     * @return Puntaje asignado al jugador.
      */
     public int getRating() {
         return rating;
@@ -85,21 +83,21 @@ public class Player {
     }
 
     /**
-     * @return El equipo al que pertenece el jugador.
+     * @return Equipo al que pertenece el jugador.
      */
     public int getTeam() {
         return team;
     }
 
     /**
-     * @return El nombre del jugador.
+     * @return Nombre del jugador.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return La posición del jugador.
+     * @return Posición del jugador.
      */
     public Position getPosition() {
         return position;

@@ -11,15 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de ingreso
- * de puntaje de jugadores.
+ * Clase correspondiente a la ventana de ingreso de puntaje de jugadores.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -32,22 +31,22 @@ public class RatingFrame extends JFrame {
     // ---------------------------------------- Constantes privadas ------------------------------
 
     /**
-     * Valor inicial de los spinners para ratings.
+     * Valor inicial de los campos de entrada para puntajes.
      */
     private static final int RATINGS_INI = 1;
 
     /**
-     * Valor mínimo de los spinners para ratings.
+     * Valor mínimo de los campos de entrada para puntajes.
      */
     private static final int RATINGS_MIN = 1;
 
     /**
-     * Valor máximo de los spinners para ratings.
+     * Valor máximo de los campos de entrada para puntajes.
      */
     private static final int RATINGS_MAX = 5;
 
     /**
-     * Paso utilizado para los spinners para ratings.
+     * Paso utilizado para el incremento y decremento del valor de los campos de entrada para puntajes.
      */
     private static final int RATINGS_STEP = 1;
 
@@ -63,7 +62,7 @@ public class RatingFrame extends JFrame {
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
-     * Constructor de la ventana de ingreso de puntajes.
+     * Construye una ventana de ingreso de puntajes.
      *
      * @param inputFrame    Ventana de ingreso de datos, de la cual se obtendrá
      *                      información importante.

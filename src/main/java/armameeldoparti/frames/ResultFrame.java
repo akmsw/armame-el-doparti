@@ -19,8 +19,7 @@ import javax.swing.table.TableColumn;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de resultados
- * de distribución de jugadores.
+ * Clase correspondiente a la ventana de resultados de distribución de jugadores.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -38,15 +37,14 @@ public class ResultFrame extends JFrame {
     private static final String GROWX = "growx";
 
     /**
-     * Tamaño de ancho (en píxeles) fijo para las celdas
-     * de la tabla de resultados.
+     * Tamaño de ancho (en píxeles) fijo para las celdas de la tabla de resultados.
      */
     private static final int FIXED_CELL_WIDTH = 250;
 
     /**
      * Cantidad de columnas para la tabla de resultados.
      */
-    private static final int JTABLE_COLUMNS = 3;
+    private static final int TABLE_COLUMNS = 3;
 
     // ---------------------------------------- Campos privados ----------------------------------
 
@@ -70,21 +68,18 @@ public class ResultFrame extends JFrame {
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
-     * Constructor de la ventana de resultados.
+     * Construye una ventana de resultados.
      *
-     * @param inputFrame    La ventana de ingreso de datos, de la cual se obtendrá
-     *                      información importante.
-     * @param previousFrame La ventana fuente que crea la ventana ResultFrame.
+     * @param inputFrame    Ventana de ingreso de datos, de la cual se obtendrá información importante.
+     * @param previousFrame Ventana fuente que crea la ventana ResultFrame.
      */
     public ResultFrame(InputFrame inputFrame, JFrame previousFrame) {
         this.inputFrame = inputFrame;
         this.previousFrame = previousFrame;
 
-        frameTitle = "";
-
         randomGenerator = new Random();
 
-        table = new JTable(inputFrame.getPlayersPerTeam() + 1, JTABLE_COLUMNS);
+        table = new JTable(inputFrame.getPlayersPerTeam() + 1, TABLE_COLUMNS);
 
         team1 = new ArrayList<>();
         team2 = new ArrayList<>();
@@ -105,7 +100,7 @@ public class ResultFrame extends JFrame {
     // ---------------------------------------- Métodos privados ---------------------------------
 
     /**
-     * Este método inicializa los componentes de la ventana de resultados.
+     * Inicializa los componentes de la ventana de resultados.
      */
     private void initializeComponents() {
         panel = new JPanel(new MigLayout("wrap"));
@@ -144,19 +139,19 @@ public class ResultFrame extends JFrame {
             table.setRowHeight(i, rowHeight);
         }
 
-        pack();
-
         frameTitle = frameTitle.concat("Fútbol " + inputFrame.getPlayersPerTeam());
 
         setTitle(frameTitle);
         setResizable(false);
+
+        pack();
+
         setLocationRelativeTo(null);
     }
 
     /**
-     * Este método se encarga de colocar en el panel principal
-     * del frame los botones de navegación entre ventanas y de
-     * redistribución en caso de ser necesario.
+     * Coloca en el panel principal de la ventana los botones de navegación
+     * y de redistribución en caso de ser necesario.
      */
     private void addButtons() {
         JButton mainMenuButton = new JButton("Volver al menú principal");
@@ -175,11 +170,7 @@ public class ResultFrame extends JFrame {
             mainFrame.setVisible(true);
         });
 
-        /*
-         * Este método se sobreescribe para eliminar
-         * todos los equipos asignados en caso de
-         * querer retroceder.
-         */
+        // Se eliminan todos los equipos asignados en caso de querer retroceder
         backButton.addActionListener(e -> {
             resetTeams();
 
@@ -207,18 +198,16 @@ public class ResultFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de colocar en el panel principal
-     * del frame la tabla donde se mostrarán los jugadores y
-     * sus respectivas posiciones para cada equipo armado.
+     * Coloca en el panel principal de la ventana la tabla donde se mostrarán los jugadores
+     * y sus respectivas posiciones para cada equipo armado.
      */
     private void addTable() {
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             /**
-             * Este método se encarga de setear el color de fondo
-             * y de letra de las casillas de la tabla.
+             * Configura el color de fondo y de letra de las casillas de la tabla.
              *
              * @param table      Tabla fuente.
-             * @param value      El valor a setear en la celda.
+             * @param value      El valor a configurar en la celda.
              * @param isSelected Si la celda está seleccionada.
              * @param hasFocus   Si la celda está en foco.
              * @param row        Coordenada de fila de la celda.
@@ -258,8 +247,7 @@ public class ResultFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de llenar la tabla con los
-     * datos cargados de los jugadores en cada equipo.
+     * Llena la tabla con los datos cargados de los jugadores en cada equipo.
      */
     private void fillTable() {
         for (int i = 0; i < 2; i++) {
@@ -300,36 +288,30 @@ public class ResultFrame extends JFrame {
          * de la columna 0 (el mismo orden del enum de posiciones).
          * Es decir, los primeros jugadores a cargar serán defensores
          * centrales, luego defensores laterales, mediocampistas,
-         * delanteros y por último arqueros. Si se cambian de lugar los
-         * labels de las posiciones en la tabla, deberá cambiarse esta
+         * delanteros y por último arqueros. Si se cambian de lugar las
+         * etiquetas de las posiciones en la tabla, deberá cambiarse esta
          * manera de llenarla, ya que no se respetará el nuevo orden establecido.
          */
 
-        int row = 1;
-
         for (int i = 0; i < teams.size(); i++) {
+            int row = 1;
+
             for (Player player : teams.get(i)) {
                 table.setValueAt(player.getName(), row++, i + 1);
             }
-
-            row = 1;
         }
     }
 
     /**
-     * Este método se encarga de repartir de manera aleatoria los
-     * jugadores en dos equipos.
+     * Reparte los jugadores de manera aleatoria en dos equipos.
      *
-     * @param anchorages Si la mezcla aleatoria debe tener
-     *                   en cuenta anclajes establecidos.
+     * @param anchorages Si la mezcla aleatoria debe tener en cuenta anclajes establecidos.
      */
     private void randomMix(boolean anchorages) {
-        frameTitle = frameTitle.concat("Aleatorio - ");
+        frameTitle = "Aleatorio - ";
 
         if (anchorages) {
             frameTitle = frameTitle.concat("Con anclajes - ");
-
-            // TODO
         } else {
             frameTitle = frameTitle.concat("Sin anclajes - ");
 
@@ -342,7 +324,7 @@ public class ResultFrame extends JFrame {
                  * Se elige un número aleatorio entre 0 y 1 (+1)
                  * para asignarle como equipo a un conjunto de jugadores,
                  * y el resto tendrá asignado el equipo opuesto.
-                 * Se recorre la mitad de los jugadores del set de manera
+                 * Se recorre la mitad de los jugadores del conjunto de manera
                  * aleatoria y se les asigna a los jugadores escogidos
                  * como equipo el número aleatorio generado al principio.
                  * A medida que se van eligiendo jugadores, su índice en
@@ -380,15 +362,13 @@ public class ResultFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de repartir los jugadores en dos
-     * equipos de la manera más equitativa posible en base a
-     * los puntajes ingresados por el usuario.
+     * Reparte los jugadores en dos equipos de la manera más equitativa posible
+     * en base a los puntajes ingresados por el usuario.
      *
-     * @param anchorages Si la mezcla aleatoria debe tener
-     *                   en cuenta anclajes establecidos.
+     * @param anchorages Si la mezcla por puntajes debe tener en cuenta anclajes establecidos.
      */
     private void ratingsMix(boolean anchorages) {
-        frameTitle = frameTitle.concat("Por puntajes - ");
+        frameTitle = "Por puntajes - ";
 
         if (anchorages) {
             frameTitle = frameTitle.concat("Con anclajes - ");
@@ -400,9 +380,8 @@ public class ResultFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de resetear los equipos
-     * de todos los jugadores, y vaciar los arreglos
-     * representativos de cada equipo.
+     * Reinicia los equipos de todos los jugadores y vacía
+     * los arreglos representativos de cada equipo.
      */
     private void resetTeams() {
         for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet()) {

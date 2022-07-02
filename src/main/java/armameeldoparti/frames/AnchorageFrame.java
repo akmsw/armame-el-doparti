@@ -20,7 +20,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
-
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -78,9 +77,9 @@ public class AnchorageFrame extends JFrame {
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
-     * Constructor de la ventana de anclajes.
+     * Construye una ventana de anclajes.
      *
-     * @param inputFrame    Ventana cuya visibilidad será toggleada.
+     * @param inputFrame    Ventana cuya visibilidad será conmutada.
      * @param playersAmount Cantidad de jugadores por equipo.
      */
     public AnchorageFrame(InputFrame inputFrame, int playersAmount) {
@@ -109,8 +108,7 @@ public class AnchorageFrame extends JFrame {
     // --------------------------------------- Métodos privados ---------------------------------
 
     /**
-     * Este método se encarga de inicializar los
-     * componentes de la ventana de anclaje.
+     * Inicializa los componentes de la ventana.
      */
     private void initializeComponents() {
         textArea = new JTextArea();
@@ -158,8 +156,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de colocar los botones
-     * en los paneles de la ventana.
+     * Coloca los botones en los paneles de la ventana.
      */
     private void addButtons() {
         JButton okButton = new JButton("Finalizar");
@@ -248,11 +245,10 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de llenar los arreglos de checkboxes
-     * correspondientes a cada posición.
+     * Llena los arreglos de casillas correspondientes a cada posición.
      *
      * @param playersSet Conjunto de jugadores de donde obtener los nombres.
-     * @param cbSet      Conjunto de checkboxes a llenar.
+     * @param cbSet      Conjunto de casillas a llenar.
      */
     private void fillCBSet(ArrayList<Player> playersSet, ArrayList<JCheckBox> cbSet) {
         for (Player p : playersSet) {
@@ -261,11 +257,10 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de colocar en el panel los checkboxes correspondientes
-     * a cada posición junto con una etiqueta que los distinga.
+     * Coloca en el panel las casillas correspondientes a cada posición junto con una etiqueta que los distinga.
      *
-     * @param panel Panel donde se colocarán los checkboxes.
-     * @param cbSet Conjunto de checkboxes a colocar.
+     * @param panel Panel donde se colocarán las casillas.
+     * @param cbSet Conjunto de casillas a colocar.
      * @param title Texto de la etiqueta de acompañamiento.
      */
     private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
@@ -281,15 +276,15 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de setear el número de anclaje correspondiente a cada
-     * jugador. Luego, se deseleccionan estas checkboxes y se las hace invisibles
-     * para evitar que dos o más anclajes contengan uno o más jugadores iguales. En
-     * caso de que el campo 'anchorageNum' sea 0 (se han querido limpiar los
-     * anclajes), se resetearán los números de anclaje de cada jugador y todas las
-     * checkboxes quedarán visibles y deseleccionadas.
+     * Configura el número de anclaje correspondiente a cada jugador.
+     * Luego, deselecciona estas casillas y las hace invisibles para
+     * evitar que dos o más anclajes contengan uno o más jugadores iguales.
+     * En caso de que el campo 'anchorageNum' sea 0 (se han querido limpiar los
+     * anclajes), se reiniciarán los números de anclaje de cada jugador y todas las
+     * casillas quedarán visibles y deseleccionadas.
      *
-     * @param cbSet Arreglo de checkboxes a chequear.
-     * @param pSet  Arreglo de jugadores correspondiente al arreglo de checkboxes.
+     * @param cbSet Arreglo de casillas a recorrer.
+     * @param pSet  Arreglo de jugadores correspondiente al arreglo de casillas.
      */
     private void setAnchors(ArrayList<JCheckBox> cbSet, ArrayList<Player> pSet) {
         for (Player p : pSet) {
@@ -314,12 +309,12 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de cambiar el número de anclaje de los jugadores.
+     * Cambia el número de anclaje de los jugadores.
      *
      * @param playersSet  Conjunto de jugadores a recorrer.
-     * @param cbSet       Conjunto de checkboxes a recorrer.
+     * @param cbSet       Conjunto de casillas a recorrer.
      * @param target      Anclaje a reemplazar.
-     * @param replacement Nuevo anclaje a setear.
+     * @param replacement Nuevo anclaje a aplicar.
      */
     private void changeAnchor(ArrayList<Player> playersSet, ArrayList<JCheckBox> cbSet, int target, int replacement) {
         for (JCheckBox cb : cbSet) {
@@ -338,7 +333,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de borrar un anclaje específico elegido por el usuario.
+     * Borra un anclaje específico elegido por el usuario.
      */
     private void deleteSpecificAnchorage() {
         String[] optionsDelete = new String[anchorageNum];
@@ -377,7 +372,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de borrar el último anclaje realizado.
+     * Borra el último anclaje realizado.
      */
     private void deleteLast() {
         for (int i = 0; i < cbSets.size(); i++) {
@@ -390,7 +385,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de borrar todos los anclajes que se hayan generado.
+     * Borra todos los anclajes que se hayan generado.
      */
     private void clearAnchorages() {
         do {
@@ -399,8 +394,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de actualizar el área de texto mostrando
-     * la cantidad de anclajes y los jugadores anclados a los mismos.
+     * Actualizar el área de texto mostrando la cantidad de anclajes y los jugadores anclados a los mismos.
      */
     private void updateTextArea() {
         textArea.setText("");
@@ -427,9 +421,8 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de togglear los botones del panel
-     * derecho de la ventana y los checkboxes del panel izquierdo
-     * de la ventana.
+     * Conmuta la habilitación de los botones del panel derecho
+     * y las casillas del panel izquierdo de la ventana.
      */
     private void toggleButtons() {
         if (anchorageNum > 0 && anchorageNum < 2) {
@@ -463,8 +456,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * Este método se encarga de crear una ventana de error con un texto
-     * personalizado.
+     * Crea una ventana de error con un texto personalizado.
      *
      * @param errMsg Mensaje de error a mostrar en la ventana.
      */
@@ -473,8 +465,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si el anclaje no contiene más de la mitad de jugadores
-     *         de algún conjunto.
+     * @return Si el anclaje no contiene más de la mitad de jugadores de algún conjunto.
      */
     private boolean isValidAnchorage() {
         return cbSets.stream()
@@ -484,8 +475,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si la cantidad de jugadores anclados es al menos 2 y
-     *         no más de maxPlayersPerAnchorage.
+     * @return Si la cantidad de jugadores anclados es al menos 2 y no más de maxPlayersPerAnchorage.
      *
      * @param anchored Cantidad de jugadores que se intenta anclar.
      */
@@ -494,8 +484,7 @@ public class AnchorageFrame extends JFrame {
     }
 
     /**
-     * @return Si la cantidad de jugadores anclados en total no supera el
-     *         máximo permitido.
+     * @return Si la cantidad de jugadores anclados en total no supera el máximo permitido.
      *
      * @param playersToAnchor Cantidad de jugadores que se intenta anclar.
      */

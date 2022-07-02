@@ -22,8 +22,7 @@ import javax.swing.plaf.FontUIResource;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana del
- * menú principal del programa.
+ * Clase correspondiente a la ventana del menú principal del programa.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -74,7 +73,7 @@ public class MainFrame extends JFrame implements ActionListener {
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
-     * Constructor de la ventana principal.
+     * Construye la ventana principal.
      */
     public MainFrame() {
         setGUIProperties();
@@ -116,15 +115,14 @@ public class MainFrame extends JFrame implements ActionListener {
     // ---------------------------------------- Métodos privados ---------------------------------
 
     /**
-     * Este método despliega las instrucciones de uso del programa.
+     * Despliega las instrucciones de uso del programa.
      */
     private void help() {
-        // TODO.
+        // TODO
     }
 
     /**
-     * Este método se encarga de configurar las propiedades
-     * de la interfaz gráfica del programa.
+     * Configura las propiedades de la interfaz gráfica del programa.
      */
     private void setGUIProperties() {
         UIManager.put("OptionPane.background", Main.FRAMES_BG_COLOR);
@@ -156,7 +154,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Este método se encarga de setear la fuente utilizada para el programa.
+     * Aplica la fuente para el programa.
      *
      * @param f Fuente a utilizar.
      */
@@ -176,7 +174,11 @@ public class MainFrame extends JFrame implements ActionListener {
     // ---------------------------------------- Métodos públicos ---------------------------------
 
     /**
-     * Override para indicar qué hacer en base a cada botón pulsado.
+     * Indica qué hacer en base a cada botón pulsado.
+     * <p>
+     * Si se presiona el botón "Comenzar", se crea una ventana de tipo InputFrame.
+     * <p>
+     * Si se presiona el botón "Ayuda", se crea una ventana de tipo helpFrame.
      *
      * @param e Evento de click.
      */
@@ -200,10 +202,8 @@ public class MainFrame extends JFrame implements ActionListener {
                     System.exit(-1);
                 }
             }
-        } else if (e.getSource() == helpButton) {
-            help();
         } else {
-            System.exit(0);
+            help();
         }
     }
 }

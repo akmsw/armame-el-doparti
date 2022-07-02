@@ -17,7 +17,7 @@ public class BackButton extends JButton {
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
-     * Constructor del botón para navegar hacia atrás entre ventanas.
+     * Construye un botón para navegar hacia atrás entre ventanas.
      *
      * @param currentFrame  Ventana donde está colocado el botón.
      * @param previousFrame Ventana a la que regresar cuando se pulse el botón.
