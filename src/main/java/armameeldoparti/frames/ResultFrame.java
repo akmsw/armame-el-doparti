@@ -6,6 +6,7 @@ import armameeldoparti.utils.Position;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Random;
 import javax.swing.BorderFactory;
@@ -375,7 +376,12 @@ public class ResultFrame extends JFrame {
         } else {
             frameTitle = frameTitle.concat("Sin anclajes - ");
 
-            // working here...
+            for (int i = 0; i < Position.values().length; i++) {
+                inputFrame.getPlayersMap()
+                          .get(Position.values()[i])
+                          .sort(Comparator.comparing(Player::getRating)
+                                          .reversed());
+            }
         }
     }
 
