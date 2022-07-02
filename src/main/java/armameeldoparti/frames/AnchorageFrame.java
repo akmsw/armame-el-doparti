@@ -399,20 +399,26 @@ public class AnchorageFrame extends JFrame {
     private void updateTextArea() {
         textArea.setText("");
 
-        for (int i = 1; i <= anchorageNum; i++) {
-            int counter = 1;
+        var wrapperIndex = new Object() {
+            private int i;
+        };
 
-            textArea.append(" ----- ANCLAJE #" + i + " -----\n");
+        for (wrapperIndex.i = 1; wrapperIndex.i <= anchorageNum; wrapperIndex.i++) {
+            var wrapperCounter = new Object() {
+                private int c = 1;
+            };
 
-            for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet()) {
-                for (Player p : ps.getValue()) {
-                    if (p.getAnchor() == i) {
-                        textArea.append(" " + counter + ". " + p.getName() + "\n");
+            textArea.append(" ----- ANCLAJE #" + wrapperIndex.i + " -----\n");
 
-                        counter++;
+            inputFrame.getPlayersMap().entrySet().forEach(ps ->
+                ps.getValue().forEach(p -> {
+                    if (p.getAnchor() == wrapperIndex.i) {
+                        textArea.append(" " + wrapperCounter.c + ". " + p.getName() + "\n");
+
+                        wrapperCounter.c++;
                     }
-                }
-            }
+                })
+            );
 
             textArea.append("\n");
         }
