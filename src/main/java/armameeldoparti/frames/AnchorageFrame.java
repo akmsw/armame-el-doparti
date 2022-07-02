@@ -15,11 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
+
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -270,15 +271,13 @@ public class AnchorageFrame extends JFrame {
     private void addCBSet(JPanel panel, ArrayList<JCheckBox> cbSet, String title) {
         JLabel label = new JLabel(title);
 
-        JSeparator line = new JSeparator(SwingConstants.HORIZONTAL);
+        label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-        panel.add(label, "span");
+        panel.add(label, GROWX_SPAN);
 
         for (JCheckBox cb : cbSet) {
             panel.add(cb, "align left, pushx");
         }
-
-        panel.add(line, GROWX_SPAN);
     }
 
     /**
