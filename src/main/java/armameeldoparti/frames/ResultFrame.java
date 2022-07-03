@@ -351,11 +351,14 @@ public class ResultFrame extends JFrame {
                     (teamSubset1 == 1 ? team1 : team2).add(set.get(index));
                 }
 
-                for (Player p : set.stream().filter(p -> p.getTeam() == 0).toList()) {
-                    p.setTeam(teamSubset2);
+                set.stream()
+                    .filter(p -> p.getTeam() == 0)
+                    .toList()
+                    .forEach(p -> {
+                        p.setTeam(teamSubset2);
 
-                    (teamSubset2 == 1 ? team1 : team2).add(p);
-                }
+                        (teamSubset2 == 1 ? team1 : team2).add(p);
+                    });
 
                 alreadySetted.clear();
             }
@@ -376,12 +379,18 @@ public class ResultFrame extends JFrame {
         } else {
             frameTitle = frameTitle.concat("Sin anclajes - ");
 
-            for (int i = 0; i < Position.values().length; i++) {
+            // Se ordenan los jugadores de cada posición en base a su puntaje, de mayor a menor
+            for (Position position : Position.values()) {
                 inputFrame.getPlayersMap()
-                          .get(Position.values()[i])
+                          .get(position)
                           .sort(Comparator.comparing(Player::getRating)
                                           .reversed());
             }
+
+            // Se ordenan los equipos en base a la suma de los puntajes de sus jugadores, de menor a mayor
+            teams.sort(Comparator.comparingInt(t -> t.stream()
+                                                     .mapToInt(Player::getRating)
+                                                     .reduce(0, Math::addExact)));
         }
     }
 

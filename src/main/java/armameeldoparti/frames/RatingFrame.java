@@ -106,8 +106,8 @@ public class RatingFrame extends JFrame {
 
             for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).size(); j++) {
                 spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i]).get(j),
-                        new JSpinner(new SpinnerNumberModel(RATINGS_INI, RATINGS_MIN,
-                                                            RATINGS_MAX, RATINGS_STEP)));
+                                new JSpinner(new SpinnerNumberModel(RATINGS_INI, RATINGS_MIN,
+                                                                    RATINGS_MAX, RATINGS_STEP)));
 
                 panel.add(new JLabel(inputFrame.getPlayersMap().get(Position.values()[i]).get(j).getName()), "pushx");
 
