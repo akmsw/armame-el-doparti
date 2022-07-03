@@ -122,7 +122,8 @@ public class AnchorageFrame extends JFrame {
         for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet()) {
             fillCBSet(ps.getValue(), cbSets.get(index));
 
-            addCBSet(leftPanel, cbSets.get(index), Main.getPositionsMap().get(Position.values()[index]));
+            addCBSet(leftPanel, cbSets.get(index), Main.getPositionsMap()
+                                                       .get(Position.values()[index]));
 
             index++;
         }
@@ -353,7 +354,9 @@ public class AnchorageFrame extends JFrame {
         if ((anchor - 1) != JOptionPane.CLOSED_OPTION) {
             // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'
             for (int j = 0; j < cbSets.size(); j++) {
-                changeAnchor(inputFrame.getPlayersMap().get(Position.values()[j]), cbSets.get(j), anchor, 0);
+                changeAnchor(inputFrame.getPlayersMap()
+                                       .get(Position.values()[j]),
+                             cbSets.get(j), anchor, 0);
             }
 
             /*
@@ -362,7 +365,9 @@ public class AnchorageFrame extends JFrame {
              */
             for (int k = anchor + 1; k <= anchorageNum; k++) {
                 for (int j = 0; j < cbSets.size(); j++) {
-                    changeAnchor(inputFrame.getPlayersMap().get(Position.values()[j]), cbSets.get(j), k, k - 1);
+                    changeAnchor(inputFrame.getPlayersMap()
+                                           .get(Position.values()[j]),
+                                 cbSets.get(j), k, k - 1);
                 }
             }
 
@@ -377,7 +382,9 @@ public class AnchorageFrame extends JFrame {
      */
     private void deleteLast() {
         for (int i = 0; i < cbSets.size(); i++) {
-            changeAnchor(inputFrame.getPlayersMap().get(Position.values()[i]), cbSets.get(i), anchorageNum, 0);
+            changeAnchor(inputFrame.getPlayersMap()
+                                   .get(Position.values()[i]),
+                         cbSets.get(i), anchorageNum, 0);
         }
 
         anchorageNum--;
@@ -409,13 +416,15 @@ public class AnchorageFrame extends JFrame {
         for (wrapperIndex.i = 1; wrapperIndex.i <= anchorageNum; wrapperIndex.i++) {
             textArea.append(" ----- ANCLAJE #" + wrapperIndex.i + " -----\n");
 
-            inputFrame.getPlayersMap().entrySet().forEach(ps ->
-                ps.getValue().forEach(p -> {
-                    if (p.getAnchor() == wrapperIndex.i) {
-                        textArea.append(" " + counter.getAndIncrement() + ". " + p.getName() + "\n");
-                    }
-                })
-            );
+            inputFrame.getPlayersMap()
+                      .entrySet()
+                      .forEach(ps -> ps.getValue()
+                                       .forEach(p -> {
+                                           if (p.getAnchor() == wrapperIndex.i) {
+                                               textArea.append(" " + counter.getAndIncrement()
+                                                               + ". " + p.getName() + "\n");
+                                           }
+                                       }));
 
             textArea.append("\n");
 

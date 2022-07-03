@@ -117,7 +117,8 @@ public class ResultFrame extends JFrame {
 
         // Ajuste del ancho de las celdas
         for (int column = 0; column < table.getColumnCount(); column++) {
-            TableColumn tableColumn = table.getColumnModel().getColumn(column);
+            TableColumn tableColumn = table.getColumnModel()
+                                           .getColumn(column);
 
             /*
              * Valor ajustado a fuente del programa teniendo en cuenta
@@ -255,30 +256,43 @@ public class ResultFrame extends JFrame {
             table.setValueAt("EQUIPO #" + (i + 1), 0, i + 1);
         }
 
-        int halfCDSetLength = inputFrame.getPlayersMap().get(Position.CENTRAL_DEFENDER).size() / 2;
-        int halfLDSetLength = inputFrame.getPlayersMap().get(Position.LATERAL_DEFENDER).size() / 2;
-        int halfMFSetLength = inputFrame.getPlayersMap().get(Position.MIDFIELDER).size() / 2;
-        int halfFWSetLength = inputFrame.getPlayersMap().get(Position.FORWARD).size() / 2;
+        int halfCDSetLength = inputFrame.getPlayersMap()
+                                        .get(Position.CENTRAL_DEFENDER)
+                                        .size() / 2;
+        int halfLDSetLength = inputFrame.getPlayersMap()
+                                        .get(Position.LATERAL_DEFENDER)
+                                        .size() / 2;
+        int halfMFSetLength = inputFrame.getPlayersMap()
+                                        .get(Position.MIDFIELDER)
+                                        .size() / 2;
+        int halfFWSetLength = inputFrame.getPlayersMap()
+                                        .get(Position.FORWARD)
+                                        .size() / 2;
 
         for (int i = 0; i < halfCDSetLength; i++) {
-            table.setValueAt(Main.getPositionsMap().get(Position.CENTRAL_DEFENDER), i + 1, 0);
+            table.setValueAt(Main.getPositionsMap()
+                                 .get(Position.CENTRAL_DEFENDER), i + 1, 0);
         }
 
         for (int i = 0; i < halfLDSetLength; i++) {
-            table.setValueAt(Main.getPositionsMap().get(Position.LATERAL_DEFENDER), i + 1 + halfCDSetLength, 0);
+            table.setValueAt(Main.getPositionsMap()
+                                 .get(Position.LATERAL_DEFENDER), i + 1 + halfCDSetLength, 0);
         }
 
         for (int i = 0; i < halfMFSetLength; i++) {
-            table.setValueAt(Main.getPositionsMap().get(Position.MIDFIELDER),
+            table.setValueAt(Main.getPositionsMap()
+                                 .get(Position.MIDFIELDER),
                              i + 1 + halfCDSetLength + halfLDSetLength, 0);
         }
 
         for (int i = 0; i < halfFWSetLength; i++) {
-            table.setValueAt(Main.getPositionsMap().get(Position.FORWARD),
+            table.setValueAt(Main.getPositionsMap()
+                                 .get(Position.FORWARD),
                              i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength, 0);
         }
 
-        table.setValueAt(Main.getPositionsMap().get(Position.GOALKEEPER),
+        table.setValueAt(Main.getPositionsMap()
+                             .get(Position.GOALKEEPER),
                          1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength, 0);
 
         /*
@@ -337,7 +351,8 @@ public class ResultFrame extends JFrame {
                 int teamSubset1 = randomGenerator.nextInt(2) + 1;
                 int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
 
-                ArrayList<Player> set = inputFrame.getPlayersMap().get(position);
+                ArrayList<Player> set = inputFrame.getPlayersMap()
+                                                  .get(position);
 
                 for (int j = 0; j < (set.size() / 2); j++) {
                     do {
@@ -353,7 +368,6 @@ public class ResultFrame extends JFrame {
 
                 set.stream()
                     .filter(p -> p.getTeam() == 0)
-                    .toList()
                     .forEach(p -> {
                         p.setTeam(teamSubset2);
 

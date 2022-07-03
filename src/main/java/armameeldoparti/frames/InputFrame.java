@@ -298,7 +298,8 @@ public class InputFrame extends JFrame implements ActionListener {
 
                         tf.setText("");
                     } else {
-                        playersSet.get(index).setName(name);
+                        playersSet.get(index)
+                                  .setName(name);
 
                         updateTextArea();
 

@@ -98,18 +98,24 @@ public class RatingFrame extends JFrame {
             }));
 
         for (int i = 0; i < inputFrame.getPlayersMap().size(); i++) {
-            JLabel label = new JLabel(Main.getPositionsMap().get(Position.values()[i]));
+            JLabel label = new JLabel(Main.getPositionsMap()
+                                          .get(Position.values()[i]));
 
             label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
             panel.add(label, GROW_SPAN);
 
             for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).size(); j++) {
-                spinnersMap.put(inputFrame.getPlayersMap().get(Position.values()[i]).get(j),
+                spinnersMap.put(inputFrame.getPlayersMap()
+                                          .get(Position.values()[i])
+                                          .get(j),
                                 new JSpinner(new SpinnerNumberModel(RATINGS_INI, RATINGS_MIN,
                                                                     RATINGS_MAX, RATINGS_STEP)));
 
-                panel.add(new JLabel(inputFrame.getPlayersMap().get(Position.values()[i]).get(j).getName()), "pushx");
+                panel.add(new JLabel(inputFrame.getPlayersMap()
+                                               .get(Position.values()[i])
+                                               .get(j)
+                                               .getName()), "pushx");
 
                 if ((j % 2) != 0) {
                     panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i]).get(j)), "wrap");
