@@ -87,7 +87,7 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * Nombre del archivo .pda.
      */
-    private static final String PDA_FILENAME = "/dist.pda";
+    private static final String PDA_FILENAME = "dist.pda";
 
     // ---------------------------------------- Campos privados ----------------------------------
 
@@ -166,6 +166,7 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     private void collectPDData() throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass()
+                                                                              .getClassLoader()
                                                                               .getResourceAsStream(PDA_FILENAME)))) {
             int index = 0;
 
