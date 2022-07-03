@@ -78,7 +78,7 @@ public class RatingFrame extends JFrame {
 
         BackButton backButton = new BackButton(RatingFrame.this, previousFrame);
 
-        panel.setBackground(Main.FRAMES_BG_COLOR);
+        panel.setBackground(Main.LIGHT_GREEN);
 
         finishButton.addActionListener(e -> {
             spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));

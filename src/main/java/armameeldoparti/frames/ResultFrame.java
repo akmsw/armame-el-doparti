@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -81,8 +82,6 @@ public class ResultFrame extends JFrame {
 
         randomGenerator = new Random();
 
-        table = new JTable(inputFrame.getPlayersPerTeam() + 1, TABLE_COLUMNS);
-
         team1 = new ArrayList<>();
         team2 = new ArrayList<>();
         teams = new ArrayList<>();
@@ -90,9 +89,13 @@ public class ResultFrame extends JFrame {
         teams.add(team1);
         teams.add(team2);
 
-        if (inputFrame.getDistribution() == 0) {
+        if (inputFrame.getDistribution() == Main.RANDOM_MIX) {
+            table = new JTable(inputFrame.getPlayersPerTeam() + 1, TABLE_COLUMNS);
+
             randomMix(inputFrame.thereAreAnchorages());
         } else {
+            table = new JTable(inputFrame.getPlayersPerTeam() + 2, TABLE_COLUMNS);
+
             ratingsMix(inputFrame.thereAreAnchorages());
         }
 
@@ -218,20 +221,33 @@ public class ResultFrame extends JFrame {
              */
             @Override
             public Component getTableCellRendererComponent(JTable myTable, Object value, boolean isSelected,
-                                                           boolean hasFocus, int row, int column) {
+                    boolean hasFocus, int row, int column) {
                 final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
-                                                                        hasFocus, row, column);
+                        hasFocus, row, column);
 
-                /*
-                 * Fila 0 y columna 0 tendrán fondo verde con letras blancas,
-                 * el resto tendrá fondo blanco con letras negras.
-                 */
-                if ((row == 0) || (column == 0)) {
-                    c.setBackground(Main.BUTTONS_BG_COLOR);
+                if (row == 0) {
+                    c.setBackground(Main.DARK_GREEN);
                     c.setForeground(Color.WHITE);
+                } else if (column == 0) {
+                    if (inputFrame.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
+                        c.setBackground(Main.LIGHT_YELLOW);
+                        c.setForeground(Color.BLACK);
+                    } else {
+                        c.setBackground(Main.DARK_GREEN);
+                        c.setForeground(Color.WHITE);
+                    }
+
+                    ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                 } else {
-                    c.setBackground(Color.WHITE);
-                    c.setForeground(Color.BLACK);
+                    if (inputFrame.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
+                        c.setBackground(Main.LIGHT_YELLOW);
+                        c.setForeground(Color.BLACK);
+                    } else {
+                        c.setBackground(Color.WHITE);
+                        c.setForeground(Color.BLACK);
+
+                        ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
+                    }
                 }
 
                 return c;
@@ -242,9 +258,12 @@ public class ResultFrame extends JFrame {
         table.setCellSelectionEnabled(false);
         table.setRowSelectionAllowed(false);
         table.setColumnSelectionAllowed(false);
-        table.setBorder(BorderFactory.createLineBorder(Main.BUTTONS_BG_COLOR));
+        table.setBorder(BorderFactory.createLineBorder(Main.DARK_GREEN));
         table.setEnabled(false);
         table.setVisible(true);
+
+        ((DefaultTableCellRenderer) table.getTableHeader()
+                                         .getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         panel.add(table, "push, grow, span, center");
     }
@@ -315,6 +334,16 @@ public class ResultFrame extends JFrame {
             for (Player player : teams.get(i)) {
                 table.setValueAt(player.getName(), row++, i + 1);
             }
+        }
+
+        if (inputFrame.getDistribution() == Main.RATINGS_MIX) {
+            table.setValueAt("PUNTAJE", table.getRowCount() - 1, 0);
+            table.setValueAt(team1.stream()
+                                  .mapToInt(Player::getRating)
+                                  .reduce(0, Math::addExact), table.getRowCount() - 1, 1);
+            table.setValueAt(team2.stream()
+                                  .mapToInt(Player::getRating)
+                                  .reduce(0, Math::addExact), table.getRowCount() - 1, 2);
         }
     }
 

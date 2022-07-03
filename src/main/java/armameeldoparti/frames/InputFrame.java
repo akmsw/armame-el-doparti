@@ -253,9 +253,9 @@ public class InputFrame extends JFrame implements ActionListener {
 
         JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
 
-        leftPanel.setBackground(Main.FRAMES_BG_COLOR);
-        rightPanel.setBackground(Main.FRAMES_BG_COLOR);
-        masterPanel.setBackground(Main.FRAMES_BG_COLOR);
+        leftPanel.setBackground(Main.LIGHT_GREEN);
+        rightPanel.setBackground(Main.LIGHT_GREEN);
+        masterPanel.setBackground(Main.LIGHT_GREEN);
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "east");
@@ -392,7 +392,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addAnchorCheckBox() {
         JCheckBox anchorCheckBox = new JCheckBox("Anclar jugadores", false);
 
-        anchorCheckBox.setBackground(Main.FRAMES_BG_COLOR);
+        anchorCheckBox.setBackground(Main.LIGHT_GREEN);
         anchorCheckBox.setVisible(true);
 
         anchorCheckBox.addActionListener(e -> anchorages = !anchorages);

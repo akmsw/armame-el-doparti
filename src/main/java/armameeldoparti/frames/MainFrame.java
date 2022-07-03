@@ -98,7 +98,7 @@ public class MainFrame extends JFrame implements ActionListener {
         panel.add(startButton, GROWX);
         panel.add(helpButton, GROWX);
 
-        panel.setBackground(Main.FRAMES_BG_COLOR);
+        panel.setBackground(Main.LIGHT_GREEN);
 
         add(panel);
 
@@ -125,15 +125,15 @@ public class MainFrame extends JFrame implements ActionListener {
      * Configura las propiedades de la interfaz gráfica del programa.
      */
     private void setGUIProperties() {
-        UIManager.put("OptionPane.background", Main.FRAMES_BG_COLOR);
-        UIManager.put("Panel.background", Main.FRAMES_BG_COLOR);
-        UIManager.put("CheckBox.background", Main.FRAMES_BG_COLOR);
-        UIManager.put("Separator.background", Main.FRAMES_BG_COLOR);
-        UIManager.put("Button.background", Main.BUTTONS_BG_COLOR);
+        UIManager.put("OptionPane.background", Main.LIGHT_GREEN);
+        UIManager.put("Panel.background", Main.LIGHT_GREEN);
+        UIManager.put("CheckBox.background", Main.LIGHT_GREEN);
+        UIManager.put("Separator.background", Main.LIGHT_GREEN);
+        UIManager.put("Button.background", Main.DARK_GREEN);
         UIManager.put("Button.foreground", Color.WHITE);
-        UIManager.put("CheckBox.focus", Main.FRAMES_BG_COLOR);
-        UIManager.put("Button.focus", Main.BUTTONS_BG_COLOR);
-        UIManager.put("ToggleButton.focus", Main.BUTTONS_BG_COLOR);
+        UIManager.put("CheckBox.focus", Main.LIGHT_GREEN);
+        UIManager.put("Button.focus", Main.DARK_GREEN);
+        UIManager.put("ToggleButton.focus", Main.DARK_GREEN);
         UIManager.put("ComboBox.focus", Color.WHITE);
 
         try {

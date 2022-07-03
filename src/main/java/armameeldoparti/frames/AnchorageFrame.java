@@ -128,20 +128,20 @@ public class AnchorageFrame extends JFrame {
             index++;
         }
 
-        leftPanel.setBackground(Main.FRAMES_BG_COLOR);
+        leftPanel.setBackground(Main.LIGHT_GREEN);
 
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         textArea.setVisible(true);
 
-        rightPanel.setBackground(Main.FRAMES_BG_COLOR);
+        rightPanel.setBackground(Main.LIGHT_GREEN);
 
         addButtons();
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "east");
 
-        masterPanel.setBackground(Main.FRAMES_BG_COLOR);
+        masterPanel.setBackground(Main.LIGHT_GREEN);
 
         updateTextArea();
 

@@ -19,6 +19,16 @@ public final class Main {
     // ---------------------------------------- Constantes públicas ------------------------------
 
     /**
+     * Indicador de distribución aleatoria.
+     */
+    public static final int RANDOM_MIX = 0;
+
+    /**
+     * Indicador de distribución por puntajes.
+     */
+    public static final int RATINGS_MIX = 1;
+
+    /**
      * Tamaño de la fuente a utilizar.
      */
     public static final float FONT_SIZE = 18f;
@@ -54,14 +64,19 @@ public final class Main {
     public static final String TTF_PATH = "fonts/";
 
     /**
-     * Color de fondo de las ventanas.
+     * Color verde claro en formato RGB.
      */
-    public static final Color FRAMES_BG_COLOR = new Color(176, 189, 162);
+    public static final Color LIGHT_GREEN = new Color(176, 189, 162);
 
     /**
-     * Color de fondo de los botones.
+     * Color verde oscuro en formato RGB.
      */
-    public static final Color BUTTONS_BG_COLOR = new Color(41, 71, 74);
+    public static final Color DARK_GREEN = new Color(41, 71, 74);
+
+    /**
+     * Color amarillo claro en formato RGB.
+     */
+    public static final Color LIGHT_YELLOW = new Color(255, 255, 204);
 
     // ---------------------------------------- Campos privados ----------------------------------
 
