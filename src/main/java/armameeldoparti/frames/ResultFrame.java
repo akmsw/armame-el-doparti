@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javax.swing.BorderFactory;
@@ -399,12 +400,53 @@ public class ResultFrame extends JFrame {
                           .get(position)
                           .sort(Comparator.comparing(Player::getRating)
                                           .reversed());
-            }
 
-            // Se ordenan los equipos en base a la suma de los puntajes de sus jugadores, de menor a mayor
-            teams.sort(Comparator.comparingInt(t -> t.stream()
-                                                     .mapToInt(Player::getRating)
-                                                     .reduce(0, Math::addExact)));
+                /*
+                 * Se ordenan los equipos en base a la suma de los puntajes
+                 * de sus jugadores hasta el momento, de menor a mayor.
+                 */
+                teams.sort(Comparator.comparingInt(t -> t.stream()
+                                                         .mapToInt(Player::getRating)
+                                                         .reduce(0, Math::addExact)));
+
+                if (inputFrame.getPlayersMap().get(position).size() == 2) {
+                    // Al equipo con menor puntaje se le asigna el jugador de mayor puntaje
+                    teams.get(0)
+                         .add(inputFrame.getPlayersMap()
+                                        .get(position)
+                                        .get(0));
+                    teams.get(1)
+                         .add(inputFrame.getPlayersMap()
+                                        .get(position)
+                                        .get(1));
+                } else {
+                    // Hardcodeado para tests con fútbol 7
+                    List<List<Player>> tempPlayersLists = new ArrayList<>();
+                    List<Player> extPlayersList = new ArrayList<>();
+                    List<Player> innPlayersList = new ArrayList<>();
+
+                    extPlayersList.add(inputFrame.getPlayersMap().get(position).get(0));
+                    extPlayersList.add(inputFrame.getPlayersMap().get(position).get(3));
+
+                    innPlayersList.add(inputFrame.getPlayersMap().get(position).get(1));
+                    innPlayersList.add(inputFrame.getPlayersMap().get(position).get(2));
+
+                    tempPlayersLists.add(extPlayersList);
+                    tempPlayersLists.add(innPlayersList);
+
+                    tempPlayersLists.sort(Comparator.comparingInt(set -> set.stream()
+                                                                            .mapToInt(Player::getRating)
+                                                                            .reduce(0, Math::addExact)));
+
+                    for (Player player : tempPlayersLists.get(0)) {
+                        teams.get(1).add(player);
+                    }
+
+                    for (Player player : tempPlayersLists.get(1)) {
+                        teams.get(0).add(player);
+                    }
+                }
+            }
         }
     }
 
