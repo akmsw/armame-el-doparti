@@ -460,11 +460,19 @@ public class ResultFrame extends JFrame {
                     List<Player> extPlayersList = new ArrayList<>();
                     List<Player> innPlayersList = new ArrayList<>();
 
-                    extPlayersList.add(inputFrame.getPlayersMap().get(position).get(0));
-                    extPlayersList.add(inputFrame.getPlayersMap().get(position).get(3));
+                    extPlayersList.add(inputFrame.getPlayersMap()
+                                                 .get(position)
+                                                 .get(0));
+                    extPlayersList.add(inputFrame.getPlayersMap()
+                                                 .get(position)
+                                                 .get(3));
 
-                    innPlayersList.add(inputFrame.getPlayersMap().get(position).get(1));
-                    innPlayersList.add(inputFrame.getPlayersMap().get(position).get(2));
+                    innPlayersList.add(inputFrame.getPlayersMap()
+                                                 .get(position)
+                                                 .get(1));
+                    innPlayersList.add(inputFrame.getPlayersMap()
+                                                 .get(position)
+                                                 .get(2));
 
                     tempPlayersLists.add(extPlayersList);
                     tempPlayersLists.add(innPlayersList);

@@ -38,6 +38,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * Imagen estándar del icono de la aplicación.
      */
     public static final ImageIcon ICON = new ImageIcon(MainFrame.class
+                                                                .getClassLoader()
                                                                 .getResource(Main.IMG_PATH + Main.ICON_FILENAME));
 
     /**
@@ -79,6 +80,7 @@ public class MainFrame extends JFrame implements ActionListener {
         setGUIProperties();
 
         ImageIcon bgImage = new ImageIcon(this.getClass()
+                                              .getClassLoader()
                                               .getResource(Main.IMG_PATH + BG_IMG_FILENAME));
 
         JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);

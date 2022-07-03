@@ -56,7 +56,7 @@ public final class Main {
     /**
      * Dirección relativa del directorio de imágenes.
      */
-    public static final String IMG_PATH = "/img/";
+    public static final String IMG_PATH = "img/";
 
     /**
      * Dirección relativa del directorio de fuentes.
