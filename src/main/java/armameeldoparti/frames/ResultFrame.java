@@ -431,6 +431,8 @@ public class ResultFrame extends JFrame {
 
             // Se ordenan los jugadores de cada posición en base a su puntaje, de mayor a menor
             for (Position position : Position.values()) {
+                int setSize = inputFrame.getPlayersMap().get(position).size();
+
                 inputFrame.getPlayersMap()
                           .get(position)
                           .sort(Comparator.comparing(Player::getRating)
@@ -444,7 +446,7 @@ public class ResultFrame extends JFrame {
                                                          .mapToInt(Player::getRating)
                                                          .reduce(0, Math::addExact)));
 
-                if (inputFrame.getPlayersMap().get(position).size() == 2) {
+                if (setSize == 2) {
                     // Al equipo con menor puntaje se le asigna el jugador de mayor puntaje
                     teams.get(0)
                          .add(inputFrame.getPlayersMap()
@@ -456,36 +458,42 @@ public class ResultFrame extends JFrame {
                                         .get(1));
                 } else {
                     // Hardcodeado para tests con fútbol 7
-                    List<List<Player>> tempPlayersLists = new ArrayList<>();
-                    List<Player> extPlayersList = new ArrayList<>();
-                    List<Player> innPlayersList = new ArrayList<>();
+                    List<List<Player>> playersSubsets = new ArrayList<>();
 
-                    extPlayersList.add(inputFrame.getPlayersMap()
-                                                 .get(position)
-                                                 .get(0));
-                    extPlayersList.add(inputFrame.getPlayersMap()
-                                                 .get(position)
-                                                 .get(3));
+                    List<Player> playersSubset1 = new ArrayList<>();
+                    List<Player> playersSubset2 = new ArrayList<>();
 
-                    innPlayersList.add(inputFrame.getPlayersMap()
-                                                 .get(position)
-                                                 .get(1));
-                    innPlayersList.add(inputFrame.getPlayersMap()
-                                                 .get(position)
-                                                 .get(2));
+                    for (int i = 0; i < setSize / 2; i++) {
+                        if (i % 2 == 0) {
+                            playersSubset1.add(inputFrame.getPlayersMap()
+                                                         .get(position)
+                                                         .get(i));
+                            playersSubset1.add(inputFrame.getPlayersMap()
+                                                         .get(position)
+                                                         .get(setSize - i - 1));
+                        } else {
+                            playersSubset2.add(inputFrame.getPlayersMap()
+                                                         .get(position)
+                                                         .get(i));
+                            playersSubset2.add(inputFrame.getPlayersMap()
+                                                         .get(position)
+                                                         .get(setSize - i - 1));
+                        }
+                    }
 
-                    tempPlayersLists.add(extPlayersList);
-                    tempPlayersLists.add(innPlayersList);
+                    playersSubsets.add(playersSubset1);
+                    playersSubsets.add(playersSubset2);
 
-                    tempPlayersLists.sort(Comparator.comparingInt(set -> set.stream()
-                                                                            .mapToInt(Player::getRating)
-                                                                            .reduce(0, Math::addExact)));
+                    // Ordenamos los subconjuntos en base a sus puntajes, de mayor a menor
+                    playersSubsets.sort(Comparator.comparingInt(set -> set.stream()
+                                                                          .mapToInt(Player::getRating)
+                                                                          .reduce(0, Math::addExact)));
 
-                    for (Player player : tempPlayersLists.get(0)) {
+                    for (Player player : playersSubsets.get(0)) {
                         teams.get(1).add(player);
                     }
 
-                    for (Player player : tempPlayersLists.get(1)) {
+                    for (Player player : playersSubsets.get(1)) {
                         teams.get(0).add(player);
                     }
                 }
