@@ -228,6 +228,8 @@ public class ResultFrame extends JFrame {
                 if (row == 0) {
                     c.setBackground(Main.DARK_GREEN);
                     c.setForeground(Color.WHITE);
+
+                    ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                 } else if (column == 0) {
                     if (inputFrame.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
