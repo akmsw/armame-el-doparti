@@ -186,19 +186,6 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Llena el conjunto de jugadores recibido con jugadores sin nombre y con la posición especificada.
-     *
-     * @param set      Arreglo de jugadores a inicializar.
-     * @param position Posición de los jugadores del arreglo.
-     * @param capacity Capacidad del arreglo.
-     */
-    private void initializeSet(ArrayList<Player> set, Position position, int capacity) {
-        for (int i = 0; i < capacity; i++) {
-            set.add(new Player("", position));
-        }
-    }
-
-    /**
      * Inicializa los componentes de la ventana.
      *
      * @param frameTitle Título de la ventana.
@@ -267,6 +254,19 @@ public class InputFrame extends JFrame implements ActionListener {
 
         setResizable(false);
         setLocationRelativeTo(null);
+    }
+
+    /**
+     * Llena el conjunto de jugadores recibido con jugadores sin nombre y con la posición especificada.
+     *
+     * @param set      Arreglo de jugadores a inicializar.
+     * @param position Posición de los jugadores del arreglo.
+     * @param capacity Capacidad del arreglo.
+     */
+    private void initializeSet(ArrayList<Player> set, Position position, int capacity) {
+        for (int i = 0; i < capacity; i++) {
+            set.add(new Player("", position));
+        }
     }
 
     /**

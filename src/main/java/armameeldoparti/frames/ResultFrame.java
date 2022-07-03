@@ -343,7 +343,7 @@ public class ResultFrame extends JFrame {
         }
 
         if (inputFrame.getDistribution() == Main.RATINGS_MIX) {
-            table.setValueAt("PUNTAJE", table.getRowCount() - 1, 0);
+            table.setValueAt("PUNTAJE DEL EQUIPO", table.getRowCount() - 1, 0);
             table.setValueAt(team1.stream()
                                   .mapToInt(Player::getRating)
                                   .reduce(0, Math::addExact), table.getRowCount() - 1, 1);
@@ -457,7 +457,6 @@ public class ResultFrame extends JFrame {
                                         .get(position)
                                         .get(1));
                 } else {
-                    // Hardcodeado para tests con fútbol 7
                     List<List<Player>> playersSubsets = new ArrayList<>();
 
                     List<Player> playersSubset1 = new ArrayList<>();

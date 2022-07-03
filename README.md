@@ -24,7 +24,7 @@ Release date: TBD
 - [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
 
 ## 🔎 ¿Qué es?
-Construido completamente en Java y refactorizado en su totalidad, la nueva versión de este programa ofrece una rápida e intuitiva manera de generar equipos para partidos de fútbol 7 u 8, ya sea con distribución aleatoria de jugadores o basada en puntuaciones. Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizando de esta forma que quedarán en el mismo equipo sin importar la distribución elegida.
+Construido completamente en Java y refactorizado en su totalidad, la nueva versión de este programa ofrece una rápida e intuitiva manera de generar equipos para partidos de fútbol 7, ya sea con distribución aleatoria de jugadores o basada en puntuaciones. Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizando de esta forma que quedarán en el mismo equipo sin importar la distribución elegida.
 
 ## 📦 Requisitos
 ### ☕ Java
@@ -48,16 +48,10 @@ java -jar nombre_del_archivo.jar
 
 El usuario podrá generar sus equipos ingresando los nombres de los jugadores a sortear en cada posición.
 
-- Si cada equipo consta de 7 jugadores, la distribución para los mismos será:
+- La distribución estándar de jugadores por equipo es:
   - **Defensores centrales**: 1
   - **Defensores laterales**: 2
   - **Mediocampistas**: 2
-  - **Delanteros**: 1
-  - **Arqueros**: 1
-- Si cada equipo consta de 8 jugadores, la distribución para los mismos será:
-  - **Defensores centrales**: 1
-  - **Defensores laterales**: 2
-  - **Mediocampistas**: 3
   - **Delanteros**: 1
   - **Arqueros**: 1
 
@@ -67,7 +61,7 @@ Si los jugadores se reparten en base a sus puntuaciones, la distribución óptim
 
 ## ⭐ Nuevas funcionalidades
 ### 🔗 Anclaje de jugadores
-El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 jugadores seleccionados por el usuario deberán pertenecer al mismo equipo sin importar la distribución que se elija para el resto. El número máximo posible de jugadores a anclar a un mismo equipo será 6 (si se opta por *fútbol 7*) ó 7 (si se opta por *fútbol 8*). El programa garantiza que siempre queden al menos dos jugadores sin anclar para poder realizar alguna distribución.\
+El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 jugadores seleccionados por el usuario deberán pertenecer al mismo equipo sin importar la distribución que se elija para el resto. El número máximo posible de jugadores a anclar a un mismo equipo es de 6, garantizando así que siempre queden al menos dos jugadores sin anclar para poder realizar alguna distribución.\
 Para esto, se proporciona un checkbox rotulado con el texto "*Anclar jugadores*" en la ventana de ingreso de nombres. Si el usuario tilda este checkbox, luego de seleccionar el método de distribución de jugadores se le presentará una ventana en la que habrá una lista con todos los nombres ingresados y su respectivo checkbox. Los jugadores cuyo checkbox esté tildado serán anclados al mismo equipo.\
 No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por ejemplo, si se anclan todos los mediocampistas para un mismo equipo, el otro equipo no tendrá mediocampistas y esto no es posible). Lo mismo sucede con anclar a un mismo equipo más de la mitad de jugadores registrados para una posición particular.
 
@@ -90,7 +84,7 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
     - Seleccionar como opción predeterminada para ejecución de este tipo de archivos
 
 ## 🔜 Próximamente
-- Se agregarán las opciones de 5 y 9 jugadores por equipo.
+- Se agregará la opción de elegir entre fútbol 5 y fútbol 7.
 - El usuario podrá optar por ingresar una distribución propia de jugadores, o utilizar las provistas por defecto.
 
 ## 📸 Capturas de pantalla

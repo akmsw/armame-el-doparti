@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -50,9 +49,9 @@ public class MainFrame extends JFrame implements ActionListener {
     // ---------------------------------------- Constantes privadas ------------------------------
 
     /**
-     * Posibles cantidades de jugadores por equipo.
+     * Cantidad de jugadores por equipo.
      */
-    private static final Integer[] PLAYERS_PER_TEAM = {7, 8};
+    private static final int PLAYERS_PER_TEAM = 7;
 
     /**
      * Configuración utilizada frecuentemente.
@@ -187,22 +186,16 @@ public class MainFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton) {
-            int selected = JOptionPane.showOptionDialog(null, "Seleccione la cantidad de jugadores por equipo",
-                                                        "Antes de empezar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                                        SCALED_ICON, PLAYERS_PER_TEAM, PLAYERS_PER_TEAM[0]);
+            try {
+                InputFrame inputFrame = new InputFrame(MainFrame.this, PLAYERS_PER_TEAM);
 
-            if (selected != JOptionPane.CLOSED_OPTION) {
-                try {
-                    InputFrame inputFrame = new InputFrame(MainFrame.this, PLAYERS_PER_TEAM[selected]);
+                inputFrame.setVisible(true);
 
-                    inputFrame.setVisible(true);
-
-                    MainFrame.this.setVisible(false);
-                    MainFrame.this.setLocationRelativeTo(null);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    System.exit(-1);
-                }
+                MainFrame.this.setVisible(false);
+                MainFrame.this.setLocationRelativeTo(null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                System.exit(-1);
             }
         } else {
             help();
