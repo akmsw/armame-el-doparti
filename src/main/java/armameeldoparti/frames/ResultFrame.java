@@ -234,16 +234,20 @@ public class ResultFrame extends JFrame {
                     if (inputFrame.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
                         c.setForeground(Color.BLACK);
+
+                        ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
                         c.setBackground(Main.DARK_GREEN);
                         c.setForeground(Color.WHITE);
-                    }
 
-                    ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+                        ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
+                    }
                 } else {
                     if (inputFrame.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
                         c.setForeground(Color.BLACK);
+
+                        ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
                         c.setBackground(Color.WHITE);
                         c.setForeground(Color.BLACK);

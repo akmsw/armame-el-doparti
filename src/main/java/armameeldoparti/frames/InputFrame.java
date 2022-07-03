@@ -63,11 +63,11 @@ public class InputFrame extends JFrame implements ActionListener {
     /**
      * Opciones para la lista desplegable.
      */
-    private static final String[] OPTIONS_COMBOBOX = {"Agregar defensores centrales",
-                                                      "Agregar defensores laterales",
-                                                      "Agregar mediocampistas",
-                                                      "Agregar delanteros",
-                                                      "Agregar arqueros"};
+    private static final String[] OPTIONS_COMBOBOX = {"Defensores centrales",
+                                                      "Defensores laterales",
+                                                      "Mediocampistas",
+                                                      "Delanteros",
+                                                      "Arqueros"};
 
     /**
      * Opciones de distribución de jugadores.
