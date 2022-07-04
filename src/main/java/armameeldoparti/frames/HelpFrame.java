@@ -1,17 +1,12 @@
 package armameeldoparti.frames;
 
 import armameeldoparti.utils.BackButton;
-import armameeldoparti.utils.Main;
-import java.io.InputStreamReader;
-import java.util.Scanner;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
-import javax.swing.border.BevelBorder;
-
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -23,29 +18,11 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 03/07/2021
  */
-public class HelpFrame extends JFrame {
-    // ---------------------------------------- Constantes públicas ------------------------------
-
-    // ---------------------------------------- Constantes privadas ------------------------------
-
-    /**
-     * Cantidad de filas para el área de texto.
-     */
-    private static final int TEXT_AREA_ROWS = 25;
-
-    /**
-     * Cantidad de columnas para el área de texto.
-     */
-    private static final int TEXT_AREA_COLUMNS = 40;
-
-    /**
-     * Nombre del archivo .pia.
-     */
-    private static final String PIA_FILENAME = "help.pia";
-
-    // ---------------------------------------- Campos públicos ----------------------------------
+public class HelpFrame extends JFrame implements ActionListener {
 
     // ---------------------------------------- Campos privados ----------------------------------
+
+    private JButton previousPageButton;
 
     private JFrame previousFrame;
 
@@ -72,7 +49,6 @@ public class HelpFrame extends JFrame {
     private void initializeComponents(String frameTitle) {
         masterPanel = new JPanel(new MigLayout());
 
-        addTextArea();
         addButtons();
         add(masterPanel);
 
@@ -91,39 +67,39 @@ public class HelpFrame extends JFrame {
     private void addButtons() {
         BackButton backButton = new BackButton(HelpFrame.this, previousFrame, "Volver al menú principal");
 
+        JButton nextPageButton = new JButton("Siguiente");
+
+        previousPageButton = new JButton("Anterior");
+
+        previousPageButton.setEnabled(false);
+        previousPageButton.addActionListener(this);
+
+        nextPageButton.setEnabled(true);
+        nextPageButton.addActionListener(this);
+
+        masterPanel.add(previousPageButton, "growx");
+        masterPanel.add(nextPageButton, "span");
+
         masterPanel.add(backButton, "push, grow, span");
     }
 
+    // ---------------------------------------- Métodos públicos ---------------------------------
+
     /**
-     * Añade el área de texto con las instrucciones extraídas del archivo .pia.
+     * Indica qué hacer en base a cada botón pulsado.
+     * <p>
+     * Si se presiona el botón "Anterior", se cambia la página de ayuda mostrada por la anterior.
+     * <p>
+     * Si se presiona el botón "Siguiente", se cambia la página de ayuda mostrada por la siguiente.
+     *
+     * @param e Evento de click.
      */
-    private void addTextArea() {
-        JTextArea textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
-
-        textArea.setBorder(new BevelBorder(1));
-        textArea.setBackground(Main.LIGHT_GREEN);
-        textArea.setEditable(false);
-        textArea.setVisible(true);
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-
-        JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        Scanner scanner = new Scanner(new InputStreamReader(this.getClass()
-                                                                .getClassLoader()
-                                                                .getResourceAsStream(PIA_FILENAME)));
-
-        while (scanner.hasNextLine()) {
-            textArea.append(scanner.nextLine());
-
-            if (scanner.hasNextLine()) {
-                textArea.append(System.lineSeparator());
-            }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == previousPageButton) {
+            // TODO
+        } else {
+            // TODO
         }
-
-        textArea.setCaretPosition(0);
-
-        masterPanel.add(scrollPane, "push, grow, span");
     }
 }
