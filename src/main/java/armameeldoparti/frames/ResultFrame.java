@@ -7,12 +7,10 @@ import armameeldoparti.utils.Position;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -472,16 +470,20 @@ public class ResultFrame extends JFrame {
                     /*
                      * Agregamos los jugadores de los extremos, desde afuera
                      * hacia adentro, alternando entre subconjuntos.
+                     *
+                     * ¡¡¡IMPORTANTE!!!
+                     *
+                     * Si la cantidad de jugadores a repartir no es 4, este reparto debería
+                     * automatizarse con un bucle for que altere entre subconjuntos mediante
+                     * una operación de la forma:
+                     *
+                     * (i % 2 == 0 ? : playersSubset1 : playersSubset2).add(...)
                      */
-                    for (int i = 0; i < setSize / 2; i++) {
-                        (i % 2 == 0 ? playersSubset1 : playersSubset2).addAll(Arrays.stream(
-                                                                                        new Integer[]{
-                                                                                            i, setSize - i - 1
-                                                                                        })
-                                                                                    .map(inputFrame.getPlayersMap()
-                                                                                                   .get(position)::get)
-                                                                                    .collect(Collectors.toList()));
-                    }
+                    playersSubset1.add(inputFrame.getPlayersMap().get(position).get(0));
+                    playersSubset1.add(inputFrame.getPlayersMap().get(position).get(setSize - 1));
+
+                    playersSubset2.add(inputFrame.getPlayersMap().get(position).get(1));
+                    playersSubset2.add(inputFrame.getPlayersMap().get(position).get(setSize - 2));
 
                     playersSubsets.add(playersSubset1);
                     playersSubsets.add(playersSubset2);
