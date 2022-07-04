@@ -46,52 +46,6 @@ public class HelpFrame extends JFrame implements ActionListener {
         initializeComponents("Ayuda");
     }
 
-    // ---------------------------------------- Métodos privados ---------------------------------
-
-    /**
-     * Inicializa los componentes de la ventana.
-     *
-     * @param frameTitle Título de la ventana.
-     */
-    private void initializeComponents(String frameTitle) {
-        pageNum = 1;
-
-        masterPanel = new JPanel(new MigLayout());
-
-        addButtons();
-        add(masterPanel);
-
-        pack();
-
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setTitle(frameTitle);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(MainFrame.ICON.getImage());
-    }
-
-    /**
-     * Añade los botones al panel de la ventana.
-     */
-    private void addButtons() {
-        BackButton backButton = new BackButton(HelpFrame.this, previousFrame, "Volver al menú principal");
-
-        previousPageButton = new JButton("Anterior");
-
-        previousPageButton.setEnabled(false);
-        previousPageButton.addActionListener(this);
-
-        nextPageButton = new JButton("Siguiente");
-
-        nextPageButton.setEnabled(true);
-        nextPageButton.addActionListener(this);
-
-        masterPanel.add(previousPageButton, "growx");
-        masterPanel.add(nextPageButton, "span");
-
-        masterPanel.add(backButton, "push, grow, span");
-    }
-
     // ---------------------------------------- Métodos públicos ---------------------------------
 
     /**
@@ -126,5 +80,50 @@ public class HelpFrame extends JFrame implements ActionListener {
 
             // Cambiar a página siguiente
         }
+    }
+
+    // ---------------------------------------- Métodos privados ---------------------------------
+
+    /**
+     * Inicializa los componentes de la ventana.
+     *
+     * @param frameTitle Título de la ventana.
+     */
+    private void initializeComponents(String frameTitle) {
+        pageNum = 1;
+
+        masterPanel = new JPanel(new MigLayout("wrap"));
+
+        addButtons();
+        add(masterPanel);
+
+        pack();
+
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setTitle(frameTitle);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(MainFrame.ICON.getImage());
+    }
+
+    /**
+     * Añade los botones al panel de la ventana.
+     */
+    private void addButtons() {
+        BackButton backButton = new BackButton(HelpFrame.this, previousFrame, "Volver al menú principal");
+
+        previousPageButton = new JButton("Anterior");
+
+        previousPageButton.setEnabled(false);
+        previousPageButton.addActionListener(this);
+
+        nextPageButton = new JButton("Siguiente");
+
+        nextPageButton.setEnabled(true);
+        nextPageButton.addActionListener(this);
+
+        masterPanel.add(previousPageButton, "growx, span, split 2, center");
+        masterPanel.add(nextPageButton, "growx");
+        masterPanel.add(backButton, "growx, span");
     }
 }
