@@ -395,6 +395,8 @@ public class AnchorageFrame extends JFrame {
 
     /**
      * Borra todos los anclajes que se hayan generado.
+     *
+     * @see #deleteLast()
      */
     private void clearAnchorages() {
         do {
@@ -415,7 +417,7 @@ public class AnchorageFrame extends JFrame {
         AtomicInteger counter = new AtomicInteger(1);
 
         for (wrapperIndex.i = 1; wrapperIndex.i <= anchorageNum; wrapperIndex.i++) {
-            textArea.append(" ----- ANCLAJE #" + wrapperIndex.i + " -----\n");
+            textArea.append(" ----- ANCLAJE #" + wrapperIndex.i + " -----" + System.lineSeparator());
 
             inputFrame.getPlayersMap()
                       .entrySet()
@@ -423,11 +425,11 @@ public class AnchorageFrame extends JFrame {
                                        .forEach(p -> {
                                            if (p.getAnchor() == wrapperIndex.i) {
                                                textArea.append(" " + counter.getAndIncrement()
-                                                               + ". " + p.getName() + "\n");
+                                                               + ". " + p.getName() + System.lineSeparator());
                                            }
                                        }));
 
-            textArea.append("\n");
+            textArea.append(System.lineSeparator());
 
             counter.set(1);
         }

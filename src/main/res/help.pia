@@ -1,0 +1,22 @@
+                              ¡Bienvenido a Armame el Doparti v3.0!
+
+En esta guía vas a aprender a utilizar el programa de manera sencilla.
+
+Para empezar, tenés que hacer click en el botón "Comenzar" en el menú principal. Esto va a abrirte una ventana de ingreso de jugadores sobre la que vamos a hablar a continuación.
+
+                            VENTANA DE INGRESO DE JUGADORES
+
+En esta ventana vas a encontrarte con varias cosas. Vamos a dividirla a la mitad y a analizar la parte izquierda y derecha.
+
+A la izquierda vas a ver que hay un menú desplegable, que tiene el nombre de las distintas posiciones que los jugadores pueden tomar en un partido.
+Si le hacés click a alguna de esas opciones, vas a ver que la interfaz gráfica cambia un poco. Lo que cambia es lo que está justo abajo de este menú desplegable: las áreas de texto.
+Cada una de las áreas de texto que ves, representa una posición a ocupar con el nombre de algún jugador.
+Si seleccionamos la primera opción -defensores centrales-, vamos a ver dos áreas de texto. Esto indica que hay que ingresar, de a uno, los nombres de los jugadores que van a ocupar esa posición. Como hay lugar para dos defensores centrales, significa que cada equipo va a tener un defensor central tomado de esa lista.
+Lo mismo pasa con las demás posiciones: del total de áreas de texto que haya, una mitad va a ser para un equipo y la otra mitad va a ser para el otro.
+Recordá que los nombres que ingreses tienen que estar compuestos únicamente por letras de la A a la Z (sí, con Ñ incluida). No pueden tener números, símbolos, estar vacíos o tener más de 10 caracteres.
+Si el nombre tiene espacios (por ejemplo: Juan Pérez), los mismos van a ser reemplazados por un guion bajo. No te preocupes si te olvidaste de sacar algunos espacios al final del nombre o si te quedaron algunos al comienzo, el programa los va a ignorar.
+
+Ahora nos movemos a analizar el lado derecho de la ventana, porque cuando vayas ingresando los nombres de los jugadores, vas a notar otros cambios más.
+
+A la derecha tenemos un área grande de texto vacía (no editable), y debajo tiene dos botones y una casilla de selección.
+A medida que vayas ingresando nombres el área de texto se va a ir actualizando, mostrando los nombres de los jugadores que fuiste ingresando para poder tener una vista rápida de quiénes fueron ya añadidos.

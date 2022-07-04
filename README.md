@@ -46,17 +46,15 @@ java -jar nombre_del_archivo.jar
 
 ## 📝 ¿Cómo se usa?
 
-El usuario podrá generar sus equipos ingresando los nombres de los jugadores a sortear en cada posición.
+El usuario podrá generar sus equipos ingresando los nombres de los jugadores a sortear en cada posición.\
+La distribución estándar de jugadores por equipo es:
+- **Defensores centrales**: 1
+- **Defensores laterales**: 2
+- **Mediocampistas**: 2
+- **Delanteros**: 1
+- **Arqueros**: 1
 
-- La distribución estándar de jugadores por equipo es:
-  - **Defensores centrales**: 1
-  - **Defensores laterales**: 2
-  - **Mediocampistas**: 2
-  - **Delanteros**: 1
-  - **Arqueros**: 1
-
-Una vez ingresados los nombres de todos los jugadores a repartir en cada posición para ambos equipos, se podrá seleccionar si distribuirlos de manera aleatoria, o en base a una puntuación. Si se elige la segunda opción, le será solicitado al usuario una puntuación de 1 ***(mal jugador)*** a 5 ***(excelente jugador)*** para cada jugador ingresado. Finalmente, se armarán los equipos de la manera más equitativa posible.
-
+Una vez ingresados los nombres de todos los jugadores a repartir en cada posición para ambos equipos, se podrá seleccionar si distribuirlos de manera aleatoria, o en base a una puntuación. Si se elige la segunda opción, le será solicitado al usuario una puntuación de 1 ***(mal jugador)*** a 5 ***(excelente jugador)*** para cada jugador ingresado. Finalmente, se armarán los equipos de la manera más equitativa posible.\
 Si los jugadores se reparten en base a sus puntuaciones, la distribución óptima será única. Si se decide distribuirlos de manera aleatoria, se podrán redistribuir tantas veces como se quiera hasta estar conforme.
 
 ## ⭐ Nuevas funcionalidades

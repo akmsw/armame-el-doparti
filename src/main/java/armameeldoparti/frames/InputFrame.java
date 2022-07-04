@@ -7,7 +7,6 @@ import armameeldoparti.utils.Position;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -180,7 +179,7 @@ public class InputFrame extends JFrame implements ActionListener {
                     index++;
                 }
             }
-        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
             System.exit(-1);
         }
@@ -445,7 +444,7 @@ public class InputFrame extends JFrame implements ActionListener {
             for (Player p : ps.getValue()) {
                 if (!p.getName().equals("")) {
                     if (counter != 0 && playersPerTeam * 2 - counter != 0) {
-                        textArea.append("\n");
+                        textArea.append(System.lineSeparator());
                     }
 
                     textArea.append((counter + 1) + " - " + p.getName());
