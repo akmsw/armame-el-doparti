@@ -457,6 +457,8 @@ public class ResultFrame extends JFrame {
                          .add(inputFrame.getPlayersMap()
                                         .get(position)
                                         .get(0));
+
+                    // Al equipo con mayor puntaje se le asigna el jugador de menor puntaje
                     teams.get(1)
                          .add(inputFrame.getPlayersMap()
                                         .get(position)
@@ -467,6 +469,10 @@ public class ResultFrame extends JFrame {
                     List<Player> playersSubset1 = new ArrayList<>();
                     List<Player> playersSubset2 = new ArrayList<>();
 
+                    /*
+                     * Agregamos los jugadores de los extremos, desde afuera
+                     * hacia adentro, alternando entre subconjuntos.
+                     */
                     for (int i = 0; i < setSize / 2; i++) {
                         (i % 2 == 0 ? playersSubset1 : playersSubset2).addAll(Arrays.stream(
                                                                                         new Integer[]{
@@ -485,13 +491,13 @@ public class ResultFrame extends JFrame {
                                                                           .mapToInt(Player::getRating)
                                                                           .reduce(0, Math::addExact)));
 
-                    for (Player player : playersSubsets.get(0)) {
-                        teams.get(1).add(player);
-                    }
+                    // Al equipo con mayor puntaje se le asigna el conjunto de jugadores que sumen menor puntaje
+                    teams.get(0)
+                         .addAll(playersSubsets.get(1));
 
-                    for (Player player : playersSubsets.get(1)) {
-                        teams.get(0).add(player);
-                    }
+                    // Al equipo con menor puntaje se le asigna el conjunto de jugadores que sumen mayor puntaje
+                    teams.get(1)
+                         .addAll(playersSubsets.get(0));
                 }
             }
         }

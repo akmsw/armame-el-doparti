@@ -56,9 +56,11 @@ public class HelpFrame extends JFrame implements ActionListener {
      * Si se presiona el botón "Siguiente", se cambia la página de ayuda mostrada por la siguiente.
      *
      * @param e Evento de click.
+     *
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Se debe arreglar el chequeo para evitar el error NestedIfDepth de Checkstyle
         if (e.getSource() == previousPageButton) {
             if (--pageNum > 1) {
                 if (!nextPageButton.isEnabled()) {
