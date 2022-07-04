@@ -20,9 +20,16 @@ import net.miginfocom.swing.MigLayout;
  */
 public class HelpFrame extends JFrame implements ActionListener {
 
+    // ---------------------------------------- Constantes privadas ------------------------------
+
+    private static final int TOTAL_PAGES = 5;
+
     // ---------------------------------------- Campos privados ----------------------------------
 
+    private int pageNum;
+
     private JButton previousPageButton;
+    private JButton nextPageButton;
 
     private JFrame previousFrame;
 
@@ -47,6 +54,8 @@ public class HelpFrame extends JFrame implements ActionListener {
      * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
+        pageNum = 1;
+
         masterPanel = new JPanel(new MigLayout());
 
         addButtons();
@@ -67,12 +76,12 @@ public class HelpFrame extends JFrame implements ActionListener {
     private void addButtons() {
         BackButton backButton = new BackButton(HelpFrame.this, previousFrame, "Volver al menú principal");
 
-        JButton nextPageButton = new JButton("Siguiente");
-
         previousPageButton = new JButton("Anterior");
 
         previousPageButton.setEnabled(false);
         previousPageButton.addActionListener(this);
+
+        nextPageButton = new JButton("Siguiente");
 
         nextPageButton.setEnabled(true);
         nextPageButton.addActionListener(this);
@@ -97,9 +106,25 @@ public class HelpFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == previousPageButton) {
-            // TODO
+            if (--pageNum > 1) {
+                if (!nextPageButton.isEnabled()) {
+                    nextPageButton.setEnabled(true);
+                }
+            } else {
+                previousPageButton.setEnabled(false);
+            }
+
+            // Cambiar a página anterior
         } else {
-            // TODO
+            if (++pageNum < TOTAL_PAGES) {
+                if (!previousPageButton.isEnabled()) {
+                    previousPageButton.setEnabled(true);
+                }
+            } else {
+                nextPageButton.setEnabled(false);
+            }
+
+            // Cambiar a página siguiente
         }
     }
 }
