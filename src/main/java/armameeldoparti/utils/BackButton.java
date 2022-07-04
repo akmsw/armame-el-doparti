@@ -32,7 +32,7 @@ public class BackButton extends JButton {
      *                      o es un string en blanco, se aplica el texto por defecto.
      */
     public BackButton(JFrame currentFrame, JFrame previousFrame, String text) {
-        setText(((text == null || text.isBlank() || text.isEmpty()) ? DEFAULT_TEXT : text));
+        setText(text == null || text.isBlank() || text.isEmpty() ? DEFAULT_TEXT : text);
         setEnabled(true);
         setVisible(true);
 

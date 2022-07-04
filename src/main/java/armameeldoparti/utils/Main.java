@@ -1,6 +1,6 @@
-package armameeldoparti.frames;
+package armameeldoparti.utils;
 
-import armameeldoparti.utils.Position;
+import armameeldoparti.frames.MainFrame;
 import java.awt.Color;
 import java.util.EnumMap;
 import java.util.Map;

@@ -1,6 +1,7 @@
 package armameeldoparti.frames;
 
 import armameeldoparti.utils.BackButton;
+import armameeldoparti.utils.Main;
 import armameeldoparti.utils.Player;
 import armameeldoparti.utils.Position;
 import java.util.ArrayList;
