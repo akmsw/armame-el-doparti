@@ -26,6 +26,8 @@ public class HelpFrame extends JFrame implements ActionListener {
 
     // ---------------------------------------- Campos privados ----------------------------------
 
+    private JButton previousPageButton;
+
     private JFrame previousFrame;
 
     private JPanel masterPanel;
@@ -44,12 +46,21 @@ public class HelpFrame extends JFrame implements ActionListener {
     // ---------------------------------------- Métodos públicos ---------------------------------
 
     /**
+     * Indica qué hacer en base a cada botón pulsado.
+     * <p>
+     * Si se presiona el botón "Anterior", se cambia la página de ayuda mostrada por la anterior.
+     * <p>
+     * Si se presiona el botón "Siguiente", se cambia la página de ayuda mostrada por la siguiente.
      *
-     * @param e
+     * @param e Evento de click.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO
+        if (e.getSource() == previousPageButton) {
+            // TODO
+        } else {
+            // TODO
+        }
     }
 
     // ---------------------------------------- Métodos privados ---------------------------------
@@ -78,8 +89,13 @@ public class HelpFrame extends JFrame implements ActionListener {
     private void addButtons() {
         BackButton backButton = new BackButton(HelpFrame.this, previousFrame, "Volver al menú principal");
 
-        JButton previousPageButton = new JButton("Anterior");
         JButton nextPageButton = new JButton("Siguiente");
+
+        nextPageButton.addActionListener(this);
+
+        previousPageButton = new JButton("Anterior");
+
+        previousPageButton.addActionListener(this);
 
         masterPanel.add(previousPageButton, "growx");
         masterPanel.add(nextPageButton, "span");
