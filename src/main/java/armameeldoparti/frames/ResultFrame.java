@@ -6,10 +6,12 @@ import armameeldoparti.utils.Position;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -41,6 +43,8 @@ public class ResultFrame extends JFrame {
 
     /**
      * Tamaño de ancho (en píxeles) fijo para las celdas de la tabla de resultados.
+     * Valor ajustado a fuente del programa teniendo en cuenta su tamaño y la cantidad
+     * máxima de caracteres en los nombres de los jugadores.
      */
     private static final int FIXED_CELL_WIDTH = 250;
 
@@ -124,11 +128,6 @@ public class ResultFrame extends JFrame {
             TableColumn tableColumn = table.getColumnModel()
                                            .getColumn(column);
 
-            /*
-             * Valor ajustado a fuente del programa teniendo en cuenta
-             * su tamaño y la cantidad máxima de caracteres en los
-             * nombres de los jugadores.
-             */
             tableColumn.setPreferredWidth(FIXED_CELL_WIDTH);
         }
 
@@ -271,13 +270,6 @@ public class ResultFrame extends JFrame {
         ((DefaultTableCellRenderer) table.getTableHeader()
                                          .getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
-        panel.add(table, "push, grow, span, center");
-    }
-
-    /**
-     * Llena la tabla con los datos cargados de los jugadores en cada equipo.
-     */
-    private void fillTable() {
         for (int i = 0; i < 2; i++) {
             table.setValueAt("EQUIPO #" + (i + 1), 0, i + 1);
         }
@@ -321,6 +313,17 @@ public class ResultFrame extends JFrame {
                              .get(Position.GOALKEEPER),
                          1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength, 0);
 
+        if (inputFrame.getDistribution() == Main.RATINGS_MIX) {
+            table.setValueAt("PUNTAJE DEL EQUIPO", table.getRowCount() - 1, 0);
+        }
+
+        panel.add(table, "push, grow, span, center");
+    }
+
+    /**
+     * Llena la tabla con los datos cargados de los jugadores en cada equipo.
+     */
+    private void fillTable() {
         /*
          * ¡¡¡IMPORTANTE!!!
          *
@@ -343,7 +346,6 @@ public class ResultFrame extends JFrame {
         }
 
         if (inputFrame.getDistribution() == Main.RATINGS_MIX) {
-            table.setValueAt("PUNTAJE DEL EQUIPO", table.getRowCount() - 1, 0);
             table.setValueAt(team1.stream()
                                   .mapToInt(Player::getRating)
                                   .reduce(0, Math::addExact), table.getRowCount() - 1, 1);
@@ -384,6 +386,7 @@ public class ResultFrame extends JFrame {
                  * aleatoria (aquellos con team == 0) del mismo grupo, se
                  * les asigna el número de equipo opuesto.
                  */
+
                 int teamSubset1 = randomGenerator.nextInt(2) + 1;
                 int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
 
@@ -442,6 +445,7 @@ public class ResultFrame extends JFrame {
                  * Se ordenan los equipos en base a la suma de los puntajes
                  * de sus jugadores hasta el momento, de menor a mayor.
                  */
+
                 teams.sort(Comparator.comparingInt(t -> t.stream()
                                                          .mapToInt(Player::getRating)
                                                          .reduce(0, Math::addExact)));
@@ -463,21 +467,13 @@ public class ResultFrame extends JFrame {
                     List<Player> playersSubset2 = new ArrayList<>();
 
                     for (int i = 0; i < setSize / 2; i++) {
-                        if (i % 2 == 0) {
-                            playersSubset1.add(inputFrame.getPlayersMap()
-                                                         .get(position)
-                                                         .get(i));
-                            playersSubset1.add(inputFrame.getPlayersMap()
-                                                         .get(position)
-                                                         .get(setSize - i - 1));
-                        } else {
-                            playersSubset2.add(inputFrame.getPlayersMap()
-                                                         .get(position)
-                                                         .get(i));
-                            playersSubset2.add(inputFrame.getPlayersMap()
-                                                         .get(position)
-                                                         .get(setSize - i - 1));
-                        }
+                        (i % 2 == 0 ? playersSubset1 : playersSubset2).addAll(Arrays.stream(
+                                                                                        new Integer[]{
+                                                                                            i, setSize - i - 1
+                                                                                        })
+                                                                                    .map(inputFrame.getPlayersMap()
+                                                                                                   .get(position)::get)
+                                                                                    .collect(Collectors.toList()));
                     }
 
                     playersSubsets.add(playersSubset1);
