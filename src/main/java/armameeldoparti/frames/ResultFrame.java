@@ -161,7 +161,7 @@ public class ResultFrame extends JFrame {
     private void addButtons() {
         JButton mainMenuButton = new JButton("Volver al menú principal");
 
-        BackButton backButton = new BackButton(ResultFrame.this, previousFrame);
+        BackButton backButton = new BackButton(ResultFrame.this, previousFrame, null);
 
         mainMenuButton.addActionListener(e -> {
             resetTeams();

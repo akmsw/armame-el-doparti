@@ -1,0 +1,89 @@
+package armameeldoparti.frames;
+
+import armameeldoparti.utils.BackButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import net.miginfocom.swing.MigLayout;
+
+/**
+ * Clase correspondiente a la ventana de ayuda.
+ *
+ * @author Bonino, Francisco Ignacio.
+ *
+ * @version 3.0.0
+ *
+ * @since 03/07/2021
+ */
+public class HelpFrame extends JFrame implements ActionListener {
+    // ---------------------------------------- Constantes públicas ------------------------------
+
+    // ---------------------------------------- Constantes privadas ------------------------------
+
+    // ---------------------------------------- Campos públicos ----------------------------------
+
+    // ---------------------------------------- Campos privados ----------------------------------
+
+    private JFrame previousFrame;
+
+    private JPanel masterPanel;
+
+    // ---------------------------------------- Constructor --------------------------------------
+
+    /**
+     * Construye la ventana de ayuda.
+     */
+    public HelpFrame(JFrame previousFrame) {
+        this.previousFrame = previousFrame;
+
+        initializeComponents("Ayuda");
+    }
+
+    // ---------------------------------------- Métodos públicos ---------------------------------
+
+    /**
+     *
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO
+    }
+
+    // ---------------------------------------- Métodos privados ---------------------------------
+
+    /**
+     * Inicializa los componentes de la ventana.
+     *
+     * @param frameTitle Título de la ventana.
+     */
+    private void initializeComponents(String frameTitle) {
+        masterPanel = new JPanel(new MigLayout());
+
+        addButtons();
+        add(masterPanel);
+
+        pack();
+
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setTitle(frameTitle);
+    }
+
+    /**
+     * Añade los botones al panel de la ventana.
+     */
+    private void addButtons() {
+        BackButton backButton = new BackButton(HelpFrame.this, previousFrame, "Volver al menú principal");
+
+        JButton previousPageButton = new JButton("Anterior");
+        JButton nextPageButton = new JButton("Siguiente");
+
+        masterPanel.add(previousPageButton, "growx");
+        masterPanel.add(nextPageButton, "span");
+
+        masterPanel.add(backButton, "push, grow, span");
+    }
+}

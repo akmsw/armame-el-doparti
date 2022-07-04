@@ -76,7 +76,7 @@ public class RatingFrame extends JFrame {
 
         Map<Player, JSpinner> spinnersMap = new HashMap<>();
 
-        BackButton backButton = new BackButton(RatingFrame.this, previousFrame);
+        BackButton backButton = new BackButton(RatingFrame.this, previousFrame, null);
 
         panel.setBackground(Main.LIGHT_GREEN);
 

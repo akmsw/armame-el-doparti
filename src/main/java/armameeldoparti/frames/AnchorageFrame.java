@@ -163,7 +163,7 @@ public class AnchorageFrame extends JFrame {
     private void addButtons() {
         JButton okButton = new JButton("Finalizar");
 
-        BackButton backButton = new BackButton(AnchorageFrame.this, inputFrame);
+        BackButton backButton = new BackButton(AnchorageFrame.this, inputFrame, null);
 
         newAnchorageButton = new JButton("Anclar");
         deleteSpecificAnchorageButton = new JButton("Borrar un anclaje");

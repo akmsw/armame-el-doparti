@@ -119,7 +119,12 @@ public class MainFrame extends JFrame implements ActionListener {
      * Despliega las instrucciones de uso del programa.
      */
     private void help() {
-        // TODO
+        HelpFrame helpFrame = new HelpFrame(MainFrame.this);
+
+        helpFrame.setVisible(true);
+
+        MainFrame.this.setVisible(false);
+        MainFrame.this.setLocationRelativeTo(null);
     }
 
     /**

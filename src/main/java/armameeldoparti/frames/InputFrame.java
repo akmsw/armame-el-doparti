@@ -330,7 +330,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * Añade los botones al panel de la ventana.
      */
     private void addButtons() {
-        BackButton backButton = new BackButton(InputFrame.this, previousFrame);
+        BackButton backButton = new BackButton(InputFrame.this, previousFrame, null);
 
         mixButton = new JButton("Distribuir");
 
