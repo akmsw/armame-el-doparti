@@ -65,11 +65,9 @@ public class RatingFrame extends JFrame {
     /**
      * Construye una ventana de ingreso de puntajes.
      *
-     * @param inputFrame    Ventana de ingreso de datos, de la cual se obtendrá
-     *                      información importante.
      * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
      */
-    public RatingFrame(InputFrame inputFrame, JFrame previousFrame) {
+    public RatingFrame(JFrame previousFrame) {
         JPanel panel = new JPanel(new MigLayout());
 
         JButton finishButton = new JButton("Finalizar");
@@ -84,7 +82,7 @@ public class RatingFrame extends JFrame {
         finishButton.addActionListener(e -> {
             spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
 
-            resultFrame = new ResultFrame(inputFrame, RatingFrame.this);
+            resultFrame = new ResultFrame(RatingFrame.this);
 
             resultFrame.setVisible(true);
 
@@ -98,7 +96,7 @@ public class RatingFrame extends JFrame {
                 k.setRating(0);
             }));
 
-        for (int i = 0; i < inputFrame.getPlayersMap().size(); i++) {
+        for (int i = 0; i < Main.getPlayersSets().size(); i++) {
             JLabel label = new JLabel(Main.getPositionsMap()
                                           .get(Position.values()[i]));
 
@@ -106,22 +104,26 @@ public class RatingFrame extends JFrame {
 
             panel.add(label, GROW_SPAN);
 
-            for (int j = 0; j < inputFrame.getPlayersMap().get(Position.values()[i]).size(); j++) {
-                spinnersMap.put(inputFrame.getPlayersMap()
-                                          .get(Position.values()[i])
-                                          .get(j),
+            for (int j = 0; j < Main.getPlayersSets().get(Position.values()[i]).size(); j++) {
+                spinnersMap.put(Main.getPlayersSets()
+                                    .get(Position.values()[i])
+                                    .get(j),
                                 new JSpinner(new SpinnerNumberModel(RATINGS_INI, RATINGS_MIN,
                                                                     RATINGS_MAX, RATINGS_STEP)));
 
-                panel.add(new JLabel(inputFrame.getPlayersMap()
-                                               .get(Position.values()[i])
-                                               .get(j)
-                                               .getName()), "pushx");
+                panel.add(new JLabel(Main.getPlayersSets()
+                                         .get(Position.values()[i])
+                                         .get(j)
+                                         .getName()), "pushx");
 
                 if ((j % 2) != 0) {
-                    panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i]).get(j)), "wrap");
+                    panel.add(spinnersMap.get(Main.getPlayersSets()
+                                                  .get(Position.values()[i])
+                                                  .get(j)), "wrap");
                 } else {
-                    panel.add(spinnersMap.get(inputFrame.getPlayersMap().get(Position.values()[i]).get(j)));
+                    panel.add(spinnersMap.get(Main.getPlayersSets()
+                                                  .get(Position.values()[i])
+                                                  .get(j)));
                 }
             }
 

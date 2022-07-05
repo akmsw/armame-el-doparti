@@ -92,16 +92,8 @@ public class InputFrame extends JFrame implements ActionListener {
     // ---------------------------------------- Campos privados ----------------------------------
 
     private int totalAnchorages;
-    private int distribution;
-    private int playersPerTeam;
 
-    private boolean anchorages;
-
-    private List<ArrayList<JTextField>> textFields;
-
-    private EnumMap<Position, Integer> playersAmountMap;
-
-    private transient Map<Position, ArrayList<Player>> playersSets;
+    private List<List<JTextField>> textFields;
 
     private JButton mixButton;
 
@@ -126,13 +118,12 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     public InputFrame(JFrame previousFrame, int playersPerTeam) throws IOException {
         this.previousFrame = previousFrame;
-        this.playersPerTeam = playersPerTeam;
 
-        anchorages = false;
+        Main.setPlayersPerTeam(playersPerTeam);
+        Main.setAnchorages(false);
+        Main.setPlayersAmountMap(new EnumMap<>(Position.class));
 
         setTotalAnchorages(0);
-
-        playersAmountMap = new EnumMap<>(Position.class);
 
         collectPDData();
 
@@ -174,8 +165,10 @@ public class InputFrame extends JFrame implements ActionListener {
 
             while ((line = br.readLine()) != null) {
                 if (line.matches(PDA_DATA_RETRIEVE_REGEX)) {
-                    playersAmountMap.put(Position.values()[index],
-                                         Integer.parseInt(line.replaceAll("(?!(?<=" + playersPerTeam + ")\\d).", "")));
+                    Main.getPlayersAmountMap().put(Position.values()[index],
+                                                   Integer.parseInt(line.replaceAll("(?!(?<="
+                                                                                    + Main.getPlayersPerTeam()
+                                                                                    + ")\\d).", "")));
                     index++;
                 }
             }
@@ -191,33 +184,33 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param frameTitle Título de la ventana.
      */
     private void initializeComponents(String frameTitle) {
-        ArrayList<JTextField> textFieldCD = new ArrayList<>();
-        ArrayList<JTextField> textFieldLD = new ArrayList<>();
-        ArrayList<JTextField> textFieldMF = new ArrayList<>();
-        ArrayList<JTextField> textFieldFW = new ArrayList<>();
-        ArrayList<JTextField> textFieldGK = new ArrayList<>();
+        List<JTextField> textFieldCD = new ArrayList<>();
+        List<JTextField> textFieldLD = new ArrayList<>();
+        List<JTextField> textFieldMF = new ArrayList<>();
+        List<JTextField> textFieldFW = new ArrayList<>();
+        List<JTextField> textFieldGK = new ArrayList<>();
 
-        ArrayList<Player> setCD = new ArrayList<>();
-        ArrayList<Player> setLD = new ArrayList<>();
-        ArrayList<Player> setMF = new ArrayList<>();
-        ArrayList<Player> setFW = new ArrayList<>();
-        ArrayList<Player> setGK = new ArrayList<>();
+        List<Player> setCD = new ArrayList<>();
+        List<Player> setLD = new ArrayList<>();
+        List<Player> setMF = new ArrayList<>();
+        List<Player> setFW = new ArrayList<>();
+        List<Player> setGK = new ArrayList<>();
 
-        initializeSet(setCD, Position.CENTRAL_DEFENDER, playersAmountMap.get(Position.CENTRAL_DEFENDER) * 2);
-        initializeSet(setLD, Position.LATERAL_DEFENDER, playersAmountMap.get(Position.LATERAL_DEFENDER) * 2);
-        initializeSet(setMF, Position.MIDFIELDER, playersAmountMap.get(Position.MIDFIELDER) * 2);
-        initializeSet(setFW, Position.FORWARD, playersAmountMap.get(Position.FORWARD) * 2);
-        initializeSet(setGK, Position.GOALKEEPER, playersAmountMap.get(Position.GOALKEEPER) * 2);
+        initializeSet(setCD, Position.CENTRAL_DEFENDER, Main.getPlayersAmountMap().get(Position.CENTRAL_DEFENDER) * 2);
+        initializeSet(setLD, Position.LATERAL_DEFENDER, Main.getPlayersAmountMap().get(Position.LATERAL_DEFENDER) * 2);
+        initializeSet(setMF, Position.MIDFIELDER, Main.getPlayersAmountMap().get(Position.MIDFIELDER) * 2);
+        initializeSet(setFW, Position.FORWARD, Main.getPlayersAmountMap().get(Position.FORWARD) * 2);
+        initializeSet(setGK, Position.GOALKEEPER, Main.getPlayersAmountMap().get(Position.GOALKEEPER) * 2);
 
         textFields = Arrays.asList(textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK);
 
-        playersSets = new TreeMap<>();
+        Main.setPlayersSets(new TreeMap<>());
 
-        playersSets.put(Position.CENTRAL_DEFENDER, setCD);
-        playersSets.put(Position.LATERAL_DEFENDER, setLD);
-        playersSets.put(Position.MIDFIELDER, setMF);
-        playersSets.put(Position.FORWARD, setFW);
-        playersSets.put(Position.GOALKEEPER, setGK);
+        Main.getPlayersSets().put(Position.CENTRAL_DEFENDER, setCD);
+        Main.getPlayersSets().put(Position.LATERAL_DEFENDER, setLD);
+        Main.getPlayersSets().put(Position.MIDFIELDER, setMF);
+        Main.getPlayersSets().put(Position.FORWARD, setFW);
+        Main.getPlayersSets().put(Position.GOALKEEPER, setGK);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(frameTitle);
@@ -263,7 +256,7 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param position Posición de los jugadores del arreglo.
      * @param capacity Capacidad del arreglo.
      */
-    private void initializeSet(ArrayList<Player> set, Position position, int capacity) {
+    private void initializeSet(List<Player> set, Position position, int capacity) {
         for (int i = 0; i < capacity; i++) {
             set.add(new Player("", position));
         }
@@ -276,8 +269,8 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param textFieldSet Arreglo de campos de texto para dicha posición.
      * @param playersSet   Arreglo de jugadores con dicha posición.
      */
-    private void addTextFields(Position position, ArrayList<JTextField> textFieldSet, ArrayList<Player> playersSet) {
-        for (int i = 0; i < (playersAmountMap.get(position) * 2); i++) {
+    private void addTextFields(Position position, List<JTextField> textFieldSet, List<Player> playersSet) {
+        for (int i = 0; i < (Main.getPlayersAmountMap().get(position) * 2); i++) {
             JTextField tf = new JTextField();
 
             tf.addActionListener(e -> {
@@ -338,23 +331,25 @@ public class InputFrame extends JFrame implements ActionListener {
         mixButton.setVisible(true);
 
         mixButton.addActionListener(e -> {
-            distribution = JOptionPane.showOptionDialog(null,
-                    "Seleccione el criterio de distribución de jugadores", "Antes de continuar...", 2,
-                    JOptionPane.QUESTION_MESSAGE, MainFrame.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0]);
+            Main.setDistribution(JOptionPane.showOptionDialog(null,
+                                                      "Seleccione el criterio de distribución de jugadores",
+                                                              "Antes de continuar...", 2,
+                                                              JOptionPane.QUESTION_MESSAGE, MainFrame.SCALED_ICON,
+                                                              OPTIONS_MIX, OPTIONS_MIX[0]));
 
-            if (distribution != JOptionPane.CLOSED_OPTION) {
-                if (thereAreAnchorages()) {
-                    AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this, playersPerTeam);
+            if (Main.getDistribution() != JOptionPane.CLOSED_OPTION) {
+                if (Main.thereAreAnchorages()) {
+                    AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this, Main.getPlayersPerTeam());
 
                     anchorageFrame.setVisible(true);
-                } else if (distribution == 0) {
+                } else if (Main.getDistribution() == 0) {
                     // Distribución aleatoria
-                    ResultFrame resultFrame = new ResultFrame(InputFrame.this, InputFrame.this);
+                    ResultFrame resultFrame = new ResultFrame(InputFrame.this);
 
                     resultFrame.setVisible(true);
                 } else {
                     // Distribución por puntajes
-                    RatingFrame ratingFrame = new RatingFrame(InputFrame.this, InputFrame.this);
+                    RatingFrame ratingFrame = new RatingFrame(InputFrame.this);
 
                     ratingFrame.setVisible(true);
                 }
@@ -396,7 +391,7 @@ public class InputFrame extends JFrame implements ActionListener {
         anchorCheckBox.setBackground(Main.LIGHT_GREEN);
         anchorCheckBox.setVisible(true);
 
-        anchorCheckBox.addActionListener(e -> anchorages = !anchorages);
+        anchorCheckBox.addActionListener(e -> Main.setAnchorages(!Main.thereAreAnchorages()));
 
         rightPanel.add(anchorCheckBox, "center");
     }
@@ -440,10 +435,10 @@ public class InputFrame extends JFrame implements ActionListener {
 
         textArea.setText(null);
 
-        for (Map.Entry<Position, ArrayList<Player>> ps : playersSets.entrySet()) {
+        for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets().entrySet()) {
             for (Player p : ps.getValue()) {
                 if (!p.getName().equals("")) {
-                    if (counter != 0 && playersPerTeam * 2 - counter != 0) {
+                    if (counter != 0 && Main.getPlayersPerTeam() * 2 - counter != 0) {
                         textArea.append(System.lineSeparator());
                     }
 
@@ -483,10 +478,10 @@ public class InputFrame extends JFrame implements ActionListener {
      * @return Si ya existe algún jugador con el nombre recibido por parámetro.
      */
     private boolean alreadyExists(String name) {
-        return playersSets.values()
-                          .stream()
-                          .flatMap(Collection::stream)
-                          .anyMatch(p -> p.getName().equals(name));
+        return Main.getPlayersSets().values()
+                                    .stream()
+                                    .flatMap(Collection::stream)
+                                    .anyMatch(p -> p.getName().equals(name));
     }
 
     // --------------------------------------- Métodos públicos ---------------------------------
@@ -513,40 +508,5 @@ public class InputFrame extends JFrame implements ActionListener {
      */
     public int getTotalAnchorages() {
         return totalAnchorages;
-    }
-
-    /**
-     * @return Tipo de distribución de jugadores elegida.
-     */
-    public int getDistribution() {
-        return distribution;
-    }
-
-    /**
-     * @return Cantidad de jugadores por equipo.
-     */
-    public int getPlayersPerTeam() {
-        return playersPerTeam;
-    }
-
-    /**
-     * @return Mapa que indica cuántos jugadores hay por posición en cada equipo.
-     */
-    public Map<Position, Integer> getPlayersAmountMap() {
-        return playersAmountMap;
-    }
-
-    /**
-     * @return Mapa con los arreglos de jugadores.
-     */
-    public Map<Position, ArrayList<Player>> getPlayersMap() {
-        return playersSets;
-    }
-
-    /**
-     * @return Si el usuario desea hacer anclajes.
-     */
-    public boolean thereAreAnchorages() {
-        return anchorages;
     }
 }

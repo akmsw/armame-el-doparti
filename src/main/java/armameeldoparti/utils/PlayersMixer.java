@@ -1,6 +1,5 @@
 package armameeldoparti.utils;
 
-import armameeldoparti.frames.InputFrame;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,13 +35,12 @@ public class PlayersMixer {
     /**
      * Reparte los jugadores de manera aleatoria en dos equipos.
      *
-     * @param inputFrame
-     * @param teams
-     * @param anchorages Si la mezcla aleatoria debe tener en cuenta anclajes establecidos.
+     * @param teams      Lista contenedora de equipos.
+     * @param anchorages Si la mezcla debe tener en cuenta anclajes establecidos.
      *
      * @return Los equipos actualizados con los jugadores repartidos.
      */
-    public List<List<Player>> randomMix(InputFrame inputFrame, List<List<Player>> teams, boolean anchorages) {
+    public List<List<Player>> randomMix(List<List<Player>> teams, boolean anchorages) {
         if (anchorages) {
             return Collections.emptyList(); // TODO
         } else {
@@ -68,8 +66,8 @@ public class PlayersMixer {
                 int teamSubset1 = randomGenerator.nextInt(2) + 1;
                 int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
 
-                ArrayList<Player> set = inputFrame.getPlayersMap()
-                                                  .get(position);
+                List<Player> set = Main.getPlayersSets()
+                                            .get(position);
 
                 for (int j = 0; j < (set.size() / 2); j++) {
                     do {
@@ -104,20 +102,20 @@ public class PlayersMixer {
      *
      * @param anchorages Si la mezcla por puntajes debe tener en cuenta anclajes establecidos.
      */
-    public List<List<Player>> ratingsMix(InputFrame inputFrame, List<List<Player>> teams, boolean anchorages) {
+    public List<List<Player>> ratingsMix(List<List<Player>> teams, boolean anchorages) {
         if (anchorages) {
             return Collections.emptyList(); // TODO
         } else {
             // Se ordenan los jugadores de cada posición en base a su puntaje, de mayor a menor
             for (Position position : Position.values()) {
-                int setSize = inputFrame.getPlayersMap()
-                                        .get(position)
-                                        .size();
+                int setSize = Main.getPlayersSets()
+                                  .get(position)
+                                  .size();
 
-                inputFrame.getPlayersMap()
-                          .get(position)
-                          .sort(Comparator.comparing(Player::getRating)
-                                          .reversed());
+                Main.getPlayersSets()
+                    .get(position)
+                    .sort(Comparator.comparing(Player::getRating)
+                                    .reversed());
 
                 /*
                  * Se ordenan los equipos en base a la suma de los puntajes
@@ -130,15 +128,15 @@ public class PlayersMixer {
                 if (setSize == 2) {
                     // Al equipo con menor puntaje se le asigna el jugador de mayor puntaje
                     teams.get(0)
-                         .add(inputFrame.getPlayersMap()
-                                        .get(position)
-                                        .get(0));
+                         .add(Main.getPlayersSets()
+                                  .get(position)
+                                  .get(0));
 
                     // Al equipo con mayor puntaje se le asigna el jugador de menor puntaje
                     teams.get(1)
-                         .add(inputFrame.getPlayersMap()
-                                        .get(position)
-                                        .get(1));
+                         .add(Main.getPlayersSets()
+                                  .get(position)
+                                  .get(1));
                 } else {
                     List<List<Player>> playersSubsets = new ArrayList<>();
 
@@ -157,19 +155,19 @@ public class PlayersMixer {
                      *
                      * (i % 2 == 0 ? playersSubset1 : playersSubset2).add(...)
                      */
-                    playersSubset1.add(inputFrame.getPlayersMap()
-                                                 .get(position)
-                                                 .get(0));
-                    playersSubset1.add(inputFrame.getPlayersMap()
-                                                 .get(position)
-                                                 .get(setSize - 1));
+                    playersSubset1.add(Main.getPlayersSets()
+                                           .get(position)
+                                           .get(0));
+                    playersSubset1.add(Main.getPlayersSets()
+                                           .get(position)
+                                           .get(setSize - 1));
 
-                    playersSubset2.add(inputFrame.getPlayersMap()
-                                                 .get(position)
-                                                 .get(1));
-                    playersSubset2.add(inputFrame.getPlayersMap()
-                                                 .get(position)
-                                                 .get(setSize - 2));
+                    playersSubset2.add(Main.getPlayersSets()
+                                           .get(position)
+                                           .get(1));
+                    playersSubset2.add(Main.getPlayersSets()
+                                           .get(position)
+                                           .get(setSize - 2));
 
                     playersSubsets.add(playersSubset1);
                     playersSubsets.add(playersSubset2);

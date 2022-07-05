@@ -68,18 +68,14 @@ public class ResultFrame extends JFrame {
 
     private String frameTitle;
 
-    private InputFrame inputFrame;
-
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
      * Construye una ventana de resultados.
      *
-     * @param inputFrame    Ventana de ingreso de datos, de la cual se obtendrá información importante.
      * @param previousFrame Ventana fuente que crea la ventana ResultFrame.
      */
-    public ResultFrame(InputFrame inputFrame, JFrame previousFrame) {
-        this.inputFrame = inputFrame;
+    public ResultFrame(JFrame previousFrame) {
         this.previousFrame = previousFrame;
 
         team1 = new ArrayList<>();
@@ -91,29 +87,29 @@ public class ResultFrame extends JFrame {
 
         mixer = new PlayersMixer();
 
-        if (inputFrame.getDistribution() == Main.RANDOM_MIX) {
+        if (Main.getDistribution() == Main.RANDOM_MIX) {
             setFrameTitle("Aleatorio - ");
 
-            table = new JTable(inputFrame.getPlayersPerTeam() + 1, TABLE_COLUMNS);
+            table = new JTable(Main.getPlayersPerTeam() + 1, TABLE_COLUMNS);
 
-            if (inputFrame.thereAreAnchorages()) {
+            if (Main.thereAreAnchorages()) {
                 setFrameTitle(getFrameTitle().concat("Con anclajes - "));
             } else {
                 setFrameTitle(getFrameTitle().concat("Sin anclajes - "));
 
-                teams = mixer.randomMix(inputFrame, getTeams(), inputFrame.thereAreAnchorages());
+                teams = mixer.randomMix(getTeams(), Main.thereAreAnchorages());
             }
         } else {
             setFrameTitle("Por puntajes - ");
 
-            table = new JTable(inputFrame.getPlayersPerTeam() + 2, TABLE_COLUMNS);
+            table = new JTable(Main.getPlayersPerTeam() + 2, TABLE_COLUMNS);
 
-            if (inputFrame.thereAreAnchorages()) {
+            if (Main.thereAreAnchorages()) {
                 setFrameTitle(getFrameTitle().concat("Con anclajes - "));
             } else {
                 setFrameTitle(getFrameTitle().concat("Sin anclajes - "));
 
-                teams = mixer.ratingsMix(inputFrame, getTeams(), inputFrame.thereAreAnchorages());
+                teams = mixer.ratingsMix(getTeams(), Main.thereAreAnchorages());
             }
         }
 
@@ -181,7 +177,7 @@ public class ResultFrame extends JFrame {
             table.setRowHeight(i, rowHeight);
         }
 
-        setTitle(getFrameTitle().concat("Fútbol " + inputFrame.getPlayersPerTeam()));
+        setTitle(getFrameTitle().concat("Fútbol " + Main.getPlayersPerTeam()));
         setResizable(false);
 
         pack();
@@ -194,21 +190,7 @@ public class ResultFrame extends JFrame {
      * y de redistribución en caso de ser necesario.
      */
     private void addButtons() {
-        JButton mainMenuButton = new JButton("Volver al menú principal");
-
         BackButton backButton = new BackButton(ResultFrame.this, previousFrame, null);
-
-        mainMenuButton.addActionListener(e -> {
-            resetTeams();
-
-            ResultFrame.this.dispose();
-            inputFrame.dispose();
-            previousFrame.dispose();
-
-            MainFrame mainFrame = new MainFrame();
-
-            mainFrame.setVisible(true);
-        });
 
         // Se eliminan todos los equipos asignados en caso de querer retroceder
         backButton.addActionListener(e -> {
@@ -219,13 +201,13 @@ public class ResultFrame extends JFrame {
             ResultFrame.this.dispose();
         });
 
-        if (inputFrame.getDistribution() == 0) {
+        if (Main.getDistribution() == 0) {
             JButton remixButton = new JButton("Redistribuir");
 
             remixButton.addActionListener(e -> {
                 resetTeams();
 
-                teams = mixer.randomMix(inputFrame, getTeams(), inputFrame.thereAreAnchorages());
+                teams = mixer.randomMix(getTeams(), Main.thereAreAnchorages());
 
                 fillTable();
             });
@@ -234,7 +216,6 @@ public class ResultFrame extends JFrame {
         }
 
         panel.add(backButton, GROWX);
-        panel.add(mainMenuButton, GROWX);
     }
 
     /**
@@ -255,9 +236,9 @@ public class ResultFrame extends JFrame {
              */
             @Override
             public Component getTableCellRendererComponent(JTable myTable, Object value, boolean isSelected,
-                    boolean hasFocus, int row, int column) {
+                                                           boolean hasFocus, int row, int column) {
                 final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
-                        hasFocus, row, column);
+                                                                        hasFocus, row, column);
 
                 if (row == 0) {
                     c.setBackground(Main.DARK_GREEN);
@@ -265,7 +246,7 @@ public class ResultFrame extends JFrame {
 
                     ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                 } else if (column == 0) {
-                    if (inputFrame.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
+                    if (Main.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
                         c.setForeground(Color.BLACK);
 
@@ -277,7 +258,7 @@ public class ResultFrame extends JFrame {
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
                     }
                 } else {
-                    if (inputFrame.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
+                    if (Main.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
                         c.setForeground(Color.BLACK);
 
@@ -305,51 +286,32 @@ public class ResultFrame extends JFrame {
         ((DefaultTableCellRenderer) table.getTableHeader()
                                          .getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
-        for (int i = 0; i < 2; i++) {
-            table.setValueAt("EQUIPO #" + (i + 1), 0, i + 1);
-        }
-
-        int halfCDSetLength = inputFrame.getPlayersMap()
-                                        .get(Position.CENTRAL_DEFENDER)
-                                        .size() / 2;
-        int halfLDSetLength = inputFrame.getPlayersMap()
-                                        .get(Position.LATERAL_DEFENDER)
-                                        .size() / 2;
-        int halfMFSetLength = inputFrame.getPlayersMap()
-                                        .get(Position.MIDFIELDER)
-                                        .size() / 2;
-        int halfFWSetLength = inputFrame.getPlayersMap()
-                                        .get(Position.FORWARD)
-                                        .size() / 2;
-
-        for (int i = 0; i < halfCDSetLength; i++) {
-            table.setValueAt(Main.getPositionsMap()
-                                 .get(Position.CENTRAL_DEFENDER), i + 1, 0);
-        }
-
-        for (int i = 0; i < halfLDSetLength; i++) {
-            table.setValueAt(Main.getPositionsMap()
-                                 .get(Position.LATERAL_DEFENDER), i + 1 + halfCDSetLength, 0);
-        }
-
-        for (int i = 0; i < halfMFSetLength; i++) {
-            table.setValueAt(Main.getPositionsMap()
-                                 .get(Position.MIDFIELDER),
-                             i + 1 + halfCDSetLength + halfLDSetLength, 0);
-        }
-
-        for (int i = 0; i < halfFWSetLength; i++) {
-            table.setValueAt(Main.getPositionsMap()
-                                 .get(Position.FORWARD),
-                             i + 1 + halfCDSetLength + halfLDSetLength + halfMFSetLength, 0);
-        }
+        table.setValueAt("EQUIPO #1", 0, 1);
+        table.setValueAt("EQUIPO #2", 0, 2);
 
         table.setValueAt(Main.getPositionsMap()
-                             .get(Position.GOALKEEPER),
-                         1 + halfCDSetLength + halfLDSetLength + halfMFSetLength + halfFWSetLength, 0);
+                             .get(Position.CENTRAL_DEFENDER), 1, 0);
 
-        if (inputFrame.getDistribution() == Main.RATINGS_MIX) {
-            table.setValueAt("PUNTAJE DEL EQUIPO", table.getRowCount() - 1, 0);
+        table.setValueAt(Main.getPositionsMap()
+                             .get(Position.LATERAL_DEFENDER), 2, 0);
+
+        table.setValueAt(Main.getPositionsMap()
+                             .get(Position.LATERAL_DEFENDER), 3, 0);
+
+        table.setValueAt(Main.getPositionsMap()
+                             .get(Position.MIDFIELDER), 4, 0);
+
+        table.setValueAt(Main.getPositionsMap()
+                             .get(Position.MIDFIELDER), 5, 0);
+
+        table.setValueAt(Main.getPositionsMap()
+                             .get(Position.FORWARD), 6, 0);
+
+        table.setValueAt(Main.getPositionsMap()
+                             .get(Position.FORWARD), 7, 0);
+
+        if (Main.getDistribution() == Main.RATINGS_MIX) {
+            table.setValueAt("PUNTAJE DEL EQUIPO", 8, 0);
         }
 
         panel.add(table, "push, grow, span, center");
@@ -380,7 +342,7 @@ public class ResultFrame extends JFrame {
             }
         }
 
-        if (inputFrame.getDistribution() == Main.RATINGS_MIX) {
+        if (Main.getDistribution() == Main.RATINGS_MIX) {
             table.setValueAt(team1.stream()
                                   .mapToInt(Player::getRating)
                                   .reduce(0, Math::addExact), table.getRowCount() - 1, 1);
@@ -402,7 +364,7 @@ public class ResultFrame extends JFrame {
      * los arreglos representativos de cada equipo.
      */
     private void resetTeams() {
-        for (Map.Entry<Position, ArrayList<Player>> ps : inputFrame.getPlayersMap().entrySet()) {
+        for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets().entrySet()) {
             for (Player p : ps.getValue()) {
                 p.setTeam(0);
             }

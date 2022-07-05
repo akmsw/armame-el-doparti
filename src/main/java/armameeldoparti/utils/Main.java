@@ -3,6 +3,7 @@ package armameeldoparti.utils;
 import armameeldoparti.frames.MainFrame;
 import java.awt.Color;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -80,7 +81,17 @@ public final class Main {
 
     // ---------------------------------------- Campos privados ----------------------------------
 
+    private static int distribution;
+    private static int playersPerTeam;
+    private static int totalAnchorages;
+
+    private static boolean anchorages;
+
     private static Map<Position, String> positions;
+
+    private static Map<Position, List<Player>> playersSets;
+
+    private static Map<Position, Integer> playersAmountMap;
 
     // ----------------------------------------- Constructor -------------------------------------
 
@@ -119,5 +130,89 @@ public final class Main {
      */
     public static Map<Position, String> getPositionsMap() {
         return positions;
+    }
+
+    /**
+     * @return La distribución elegida.
+     */
+    public static int getDistribution() {
+        return distribution;
+    }
+
+    /**
+     * @return Cantidad de jugadores por equipo.
+     */
+    public static int getPlayersPerTeam() {
+        return playersPerTeam;
+    }
+
+    /**
+     * @param d Distribución elegida.
+     */
+    public static void setDistribution(int d) {
+        distribution = d;
+    }
+
+    /**
+     * @return Mapa que asocia las posiciones con los conjuntos de jugadores.
+     */
+    public static Map<Position, List<Player>> getPlayersSets() {
+        return playersSets;
+    }
+
+    /**
+     * @return Mapa que asocia las posiciones con la cantidad de jugadores para cada una.
+     */
+    public static Map<Position, Integer> getPlayersAmountMap() {
+        return playersAmountMap;
+    }
+
+    /**
+     * @return Cantidad total de anclajes realizados.
+     */
+    public static int getTotalAnchorages() {
+        return totalAnchorages;
+    }
+
+    /**
+     * @param ppt Cantidad de jugadores por equipo.
+     */
+    public static void setPlayersPerTeam(int ppt) {
+        playersPerTeam = ppt;
+    }
+
+    /**
+     * @param a Si hay o debe haber anclajes.
+     */
+    public static void setAnchorages(boolean a) {
+        anchorages = a;
+    }
+
+    /**
+     * @param pss Mapa que asocia las posiciones con los conjuntos de jugadores.
+     */
+    public static void setPlayersSets(Map<Position, List<Player>> pss) {
+        playersSets = pss;
+    }
+
+    /**
+     * @param pam Mapa que asocia las posiciones con la cantidad de jugadores para cada una.
+     */
+    public static void setPlayersAmountMap(Map<Position, Integer> pam) {
+        playersAmountMap = (EnumMap<Position, Integer>) pam;
+    }
+
+    /**
+     * @param totalAnchorages Cantidad total de anclajes realizados.
+     */
+    public static void setTotalAnchorages(int totalAnchorages) {
+        Main.totalAnchorages = totalAnchorages;
+    }
+
+    /**
+     * @return Si hay o debe haber anclajes.
+     */
+    public static boolean thereAreAnchorages() {
+        return anchorages;
     }
 }
