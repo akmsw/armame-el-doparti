@@ -305,7 +305,7 @@ public class ResultFrame extends JFrame {
             table.setValueAt(Main.getPositionsMap()
                                  .get(Position.GOALKEEPER), table.getRowCount() - 2, 0);
 
-            table.setValueAt("puntuación DEL EQUIPO", table.getRowCount() - 1, 0);
+            table.setValueAt("PUNTAJE DEL EQUIPO", table.getRowCount() - 1, 0);
         } else {
             table.setValueAt(Main.getPositionsMap()
                                  .get(Position.GOALKEEPER), table.getRowCount() - 1, 0);
