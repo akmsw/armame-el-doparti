@@ -19,7 +19,7 @@ import javax.swing.border.SoftBevelBorder;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de ingreso de puntaje de jugadores.
+ * Clase correspondiente a la ventana de ingreso de puntuación de jugadores.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -32,22 +32,22 @@ public class RatingsFrame extends JFrame {
     // ---------------------------------------- Constantes privadas ------------------------------
 
     /**
-     * Valor inicial de los campos de entrada para puntajes.
+     * Valor inicial de los campos de entrada para puntuaciones.
      */
     private static final int RATINGS_INI = 1;
 
     /**
-     * Valor mínimo de los campos de entrada para puntajes.
+     * Valor mínimo de los campos de entrada para puntuaciones.
      */
     private static final int RATINGS_MIN = 1;
 
     /**
-     * Valor máximo de los campos de entrada para puntajes.
+     * Valor máximo de los campos de entrada para puntuaciones.
      */
     private static final int RATINGS_MAX = 5;
 
     /**
-     * Paso utilizado para el incremento y decremento del valor de los campos de entrada para puntajes.
+     * Paso utilizado para el incremento y decremento del valor de los campos de entrada para puntuaciones.
      */
     private static final int RATINGS_STEP = 1;
 
@@ -63,7 +63,7 @@ public class RatingsFrame extends JFrame {
     // ---------------------------------------- Constructor --------------------------------------
 
     /**
-     * Construye una ventana de ingreso de puntajes.
+     * Construye una ventana de ingreso de puntuaciones.
      *
      * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
      */
@@ -71,7 +71,7 @@ public class RatingsFrame extends JFrame {
         JPanel panel = new JPanel(new MigLayout());
 
         JButton finishButton = new JButton("Finalizar");
-        JButton resetButton = new JButton("Reiniciar puntajes");
+        JButton resetButton = new JButton("Reiniciar puntuaciones");
 
         Map<Player, JSpinner> spinnersMap = new HashMap<>();
 

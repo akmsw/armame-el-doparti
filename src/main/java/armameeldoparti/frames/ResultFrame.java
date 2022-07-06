@@ -100,7 +100,7 @@ public class ResultFrame extends JFrame {
                 teams = mixer.randomMix(getTeams(), Main.thereAreAnchorages());
             }
         } else {
-            setFrameTitle("Por puntajes - ");
+            setFrameTitle("Por puntuaciones - ");
 
             table = new JTable(Main.PLAYERS_PER_TEAM + 2, TABLE_COLUMNS);
 
@@ -284,23 +284,31 @@ public class ResultFrame extends JFrame {
 
         table.setValueAt("EQUIPO #1", 0, 1);
         table.setValueAt("EQUIPO #2", 0, 2);
-        table.setValueAt(Main.getPositionsMap()
-                             .get(Position.CENTRAL_DEFENDER), 1, 0);
-        table.setValueAt(Main.getPositionsMap()
-                             .get(Position.LATERAL_DEFENDER), 2, 0);
-        table.setValueAt(Main.getPositionsMap()
-                             .get(Position.LATERAL_DEFENDER), 3, 0);
-        table.setValueAt(Main.getPositionsMap()
-                             .get(Position.MIDFIELDER), 4, 0);
-        table.setValueAt(Main.getPositionsMap()
-                             .get(Position.MIDFIELDER), 5, 0);
-        table.setValueAt(Main.getPositionsMap()
-                             .get(Position.FORWARD), 6, 0);
-        table.setValueAt(Main.getPositionsMap()
-                             .get(Position.FORWARD), 7, 0);
+
+        for (int i = 1; i < table.getRowCount() - 1; i++) {
+            if (i == 1) {
+                table.setValueAt(Main.getPositionsMap()
+                                     .get(Position.CENTRAL_DEFENDER), i, 0);
+            } else if (i < 4) {
+                table.setValueAt(Main.getPositionsMap()
+                                     .get(Position.LATERAL_DEFENDER), i, 0);
+            } else if (i < 6) {
+                table.setValueAt(Main.getPositionsMap()
+                                     .get(Position.MIDFIELDER), i, 0);
+            } else if (i < 7) {
+                table.setValueAt(Main.getPositionsMap()
+                                     .get(Position.FORWARD), i, 0);
+            }
+        }
 
         if (Main.getDistribution() == Main.RATINGS_MIX) {
-            table.setValueAt("PUNTAJE DEL EQUIPO", 8, 0);
+            table.setValueAt(Main.getPositionsMap()
+                                 .get(Position.GOALKEEPER), table.getRowCount() - 2, 0);
+
+            table.setValueAt("puntuación DEL EQUIPO", table.getRowCount() - 1, 0);
+        } else {
+            table.setValueAt(Main.getPositionsMap()
+                                 .get(Position.GOALKEEPER), table.getRowCount() - 1, 0);
         }
 
         panel.add(table, "push, grow, span, center");
@@ -343,9 +351,9 @@ public class ResultFrame extends JFrame {
 
     /**
      * Reparte los jugadores en dos equipos de la manera más equitativa posible
-     * en base a los puntajes ingresados por el usuario.
+     * en base a los puntuaciones ingresados por el usuario.
      *
-     * @param anchorages Si la mezcla por puntajes debe tener en cuenta anclajes establecidos.
+     * @param anchorages Si la mezcla por puntuaciones debe tener en cuenta anclajes establecidos.
      */
 
     /**

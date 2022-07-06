@@ -182,7 +182,7 @@ public class AnchoragesFrame extends JFrame {
             }));
 
             if (Main.getDistribution() == 1) {
-                // Distribución por puntajes
+                // Distribución por puntuaciones
                 RatingsFrame ratingFrame = new RatingsFrame(AnchoragesFrame.this);
 
                 ratingFrame.setVisible(true);

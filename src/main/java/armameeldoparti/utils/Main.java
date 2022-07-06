@@ -25,7 +25,7 @@ public final class Main {
     public static final int RANDOM_MIX = 0;
 
     /**
-     * Indicador de distribución por puntajes.
+     * Indicador de distribución por puntuaciones.
      */
     public static final int RATINGS_MIX = 1;
 

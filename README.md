@@ -98,5 +98,8 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
 ![ventana_puntuaciones](./src/main/res/img/ss4.png)\
 *Ventana de puntuaciones*
 
-![ventana_resultados](./src/main/res/img/ss5.png)\
-*Ventana de muestra de resultados*
+![ventana_resultados_1](./src/main/res/img/ss5.png)\
+*Ventana de muestra de resultados con distribución aleatoria sin anclajes*
+
+![ventana_resultados_2](./src/main/res/img/ss6.png)\
+*Ventana de muestra de resultados con distribución por puntuaciones sin anclajes*

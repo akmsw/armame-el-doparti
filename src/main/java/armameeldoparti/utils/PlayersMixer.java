@@ -98,15 +98,15 @@ public class PlayersMixer {
 
     /**
      * Reparte los jugadores en dos equipos de la manera más equitativa posible
-     * en base a los puntajes ingresados por el usuario.
+     * en base a los puntuaciones ingresados por el usuario.
      *
-     * @param anchorages Si la mezcla por puntajes debe tener en cuenta anclajes establecidos.
+     * @param anchorages Si la mezcla por puntuaciones debe tener en cuenta anclajes establecidos.
      */
     public List<List<Player>> ratingsMix(List<List<Player>> teams, boolean anchorages) {
         if (anchorages) {
             return Collections.emptyList(); // TODO
         } else {
-            // Se ordenan los jugadores de cada posición en base a su puntaje, de mayor a menor
+            // Se ordenan los jugadores de cada posición en base a su puntuación, de mayor a menor
             for (Position position : Position.values()) {
                 int setSize = Main.getPlayersSets()
                                   .get(position)
@@ -118,7 +118,7 @@ public class PlayersMixer {
                                     .reversed());
 
                 /*
-                 * Se ordenan los equipos en base a la suma de los puntajes
+                 * Se ordenan los equipos en base a la suma de los puntuaciones
                  * de sus jugadores hasta el momento, de menor a mayor.
                  */
                 teams.sort(Comparator.comparingInt(t -> t.stream()
@@ -126,13 +126,13 @@ public class PlayersMixer {
                                                          .reduce(0, Math::addExact)));
 
                 if (setSize == 2) {
-                    // Al equipo con menor puntaje se le asigna el jugador de mayor puntaje
+                    // Al equipo con menor puntuación se le asigna el jugador de mayor puntuación
                     teams.get(0)
                          .add(Main.getPlayersSets()
                                   .get(position)
                                   .get(0));
 
-                    // Al equipo con mayor puntaje se le asigna el jugador de menor puntaje
+                    // Al equipo con mayor puntuación se le asigna el jugador de menor puntuación
                     teams.get(1)
                          .add(Main.getPlayersSets()
                                   .get(position)
@@ -172,16 +172,16 @@ public class PlayersMixer {
                     playersSubsets.add(playersSubset1);
                     playersSubsets.add(playersSubset2);
 
-                    // Ordenamos los subconjuntos en base a sus puntajes, de mayor a menor
+                    // Ordenamos los subconjuntos en base a sus puntuaciones, de mayor a menor
                     playersSubsets.sort(Comparator.comparingInt(set -> set.stream()
                                   .mapToInt(Player::getRating)
                                   .reduce(0, Math::addExact)));
 
-                    // Al equipo con mayor puntaje se le asigna el conjunto de jugadores que sumen menor puntaje
+                    // Al equipo con mayor puntuación se le asigna el conjunto de jugadores que sumen menor puntuación
                     teams.get(0)
                          .addAll(playersSubsets.get(1));
 
-                    // Al equipo con menor puntaje se le asigna el conjunto de jugadores que sumen mayor puntaje
+                    // Al equipo con menor puntuación se le asigna el conjunto de jugadores que sumen mayor puntuación
                     teams.get(1)
                          .addAll(playersSubsets.get(0));
                 }

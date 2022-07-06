@@ -68,7 +68,7 @@ public class InputFrame extends JFrame {
     /**
      * Opciones de distribución de jugadores.
      */
-    private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntajes"};
+    private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntuaciones"};
 
     /**
      * Expresión regular para validación de nombres.
@@ -338,7 +338,7 @@ public class InputFrame extends JFrame {
 
                     resultFrame.setVisible(true);
                 } else {
-                    // Distribución por puntajes
+                    // Distribución por puntuaciones
                     RatingsFrame ratingFrame = new RatingsFrame(InputFrame.this);
 
                     ratingFrame.setVisible(true);
