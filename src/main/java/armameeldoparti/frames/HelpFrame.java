@@ -1,8 +1,6 @@
 package armameeldoparti.frames;
 
 import armameeldoparti.utils.BackButton;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,7 +16,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 03/07/2021
  */
-public class HelpFrame extends JFrame implements ActionListener {
+public class HelpFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
@@ -27,9 +25,6 @@ public class HelpFrame extends JFrame implements ActionListener {
     // ---------------------------------------- Campos privados ----------------------------------
 
     private int pageNum;
-
-    private JButton previousPageButton;
-    private JButton nextPageButton;
 
     private JFrame previousFrame;
 
@@ -46,44 +41,6 @@ public class HelpFrame extends JFrame implements ActionListener {
         initializeComponents("Ayuda");
     }
 
-    // ---------------------------------------- Métodos públicos ---------------------------------
-
-    /**
-     * Indica qué hacer en base a cada botón pulsado.
-     * <p>
-     * Si se presiona el botón "Anterior", se cambia la página de ayuda mostrada por la anterior.
-     * <p>
-     * Si se presiona el botón "Siguiente", se cambia la página de ayuda mostrada por la siguiente.
-     *
-     * @param e Evento de click.
-     *
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Se debe arreglar el chequeo para evitar el error NestedIfDepth de Checkstyle
-        if (e.getSource() == previousPageButton) {
-            if (--pageNum > 1) {
-                if (!nextPageButton.isEnabled()) {
-                    nextPageButton.setEnabled(true);
-                }
-            } else {
-                previousPageButton.setEnabled(false);
-            }
-
-            // Cambiar a página anterior
-        } else {
-            if (++pageNum < TOTAL_PAGES) {
-                if (!previousPageButton.isEnabled()) {
-                    previousPageButton.setEnabled(true);
-                }
-            } else {
-                nextPageButton.setEnabled(false);
-            }
-
-            // Cambiar a página siguiente
-        }
-    }
-
     // ---------------------------------------- Métodos privados ---------------------------------
 
     /**
@@ -98,9 +55,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 
         addButtons();
         add(masterPanel);
-
         pack();
-
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle(frameTitle);
@@ -114,15 +69,34 @@ public class HelpFrame extends JFrame implements ActionListener {
     private void addButtons() {
         BackButton backButton = new BackButton(HelpFrame.this, previousFrame, "Volver al menú principal");
 
-        previousPageButton = new JButton("Anterior");
+        JButton previousPageButton = new JButton("Anterior");
+        JButton nextPageButton = new JButton("Siguiente");
 
         previousPageButton.setEnabled(false);
-        previousPageButton.addActionListener(this);
+        previousPageButton.addActionListener(e -> {
+            if (--pageNum > 1) {
+                if (!nextPageButton.isEnabled()) {
+                    nextPageButton.setEnabled(true);
+                }
+            } else {
+                previousPageButton.setEnabled(false);
+            }
 
-        nextPageButton = new JButton("Siguiente");
+            // Cambiar a página anterior
+        });
 
         nextPageButton.setEnabled(true);
-        nextPageButton.addActionListener(this);
+        nextPageButton.addActionListener(e -> {
+            if (++pageNum < TOTAL_PAGES) {
+                if (!previousPageButton.isEnabled()) {
+                    previousPageButton.setEnabled(true);
+                }
+            } else {
+                nextPageButton.setEnabled(false);
+            }
+
+            // Cambiar a página siguiente
+        });
 
         masterPanel.add(previousPageButton, "growx, span, split 2, center");
         masterPanel.add(nextPageButton, "growx");

@@ -34,7 +34,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 15/03/2021
  */
-public class AnchorageFrame extends JFrame {
+public class AnchoragesFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
@@ -85,7 +85,7 @@ public class AnchorageFrame extends JFrame {
      * @param previousFrame Ventana cuya visibilidad será conmutada.
      * @param playersAmount Cantidad de jugadores por equipo.
      */
-    public AnchorageFrame(JFrame previousFrame, int playersAmount) {
+    public AnchoragesFrame(JFrame previousFrame, int playersAmount) {
         this.previousFrame = previousFrame;
 
         maxPlayersPerAnchorage = playersAmount - 1;
@@ -131,7 +131,6 @@ public class AnchorageFrame extends JFrame {
 
         for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets().entrySet()) {
             fillCBSet(ps.getValue(), cbSets.get(index));
-
             addCBSet(leftPanel, cbSets.get(index), Main.getPositionsMap()
                                                        .get(Position.values()[index]));
 
@@ -150,19 +149,14 @@ public class AnchorageFrame extends JFrame {
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "east");
-
         masterPanel.setBackground(Main.LIGHT_GREEN);
 
         updateTextArea();
-
         setTitle(FRAME_TITLE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(MainFrame.ICON.getImage());
-
         add(masterPanel);
-
         pack();
-
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -173,7 +167,7 @@ public class AnchorageFrame extends JFrame {
     private void addButtons() {
         JButton okButton = new JButton("Finalizar");
 
-        BackButton backButton = new BackButton(AnchorageFrame.this, previousFrame, null);
+        BackButton backButton = new BackButton(AnchoragesFrame.this, previousFrame, null);
 
         newAnchorageButton = new JButton("Anclar");
         deleteSpecificAnchorageButton = new JButton("Borrar un anclaje");
@@ -189,18 +183,18 @@ public class AnchorageFrame extends JFrame {
 
             if (Main.getDistribution() == 1) {
                 // Distribución por puntajes
-                RatingFrame ratingFrame = new RatingFrame(AnchorageFrame.this);
+                RatingsFrame ratingFrame = new RatingsFrame(AnchoragesFrame.this);
 
                 ratingFrame.setVisible(true);
             } else {
                 // Distribución aleatoria
-                ResultFrame resultFrame = new ResultFrame(AnchorageFrame.this);
+                ResultFrame resultFrame = new ResultFrame(AnchoragesFrame.this);
 
                 resultFrame.setVisible(true);
             }
 
-            AnchorageFrame.this.setVisible(false);
-            AnchorageFrame.this.setLocationRelativeTo(null);
+            AnchoragesFrame.this.setVisible(false);
+            AnchoragesFrame.this.setLocationRelativeTo(null);
         });
 
         backButton.addActionListener(e -> {
@@ -208,7 +202,7 @@ public class AnchorageFrame extends JFrame {
 
             previousFrame.setVisible(true);
 
-            AnchorageFrame.this.dispose();
+            AnchoragesFrame.this.dispose();
         });
 
         newAnchorageButton.addActionListener(e -> {
@@ -521,7 +515,7 @@ public class AnchorageFrame extends JFrame {
     // --------------------------------------- Métodos públicos ---------------------------------
 
     /**
-     * @return La cantidad de anclajes hechos.
+     * @return Cantidad de anclajes hechos.
      */
     public int getAnchoragesAmount() {
         return anchorageNum;

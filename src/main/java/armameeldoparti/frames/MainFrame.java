@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Enumeration;
 import javax.swing.ImageIcon;
@@ -30,7 +28,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 27/02/2021
  */
-public class MainFrame extends JFrame implements ActionListener {
+public class MainFrame extends JFrame {
 
     // ---------------------------------------- Constantes públicas ------------------------------
 
@@ -48,11 +46,6 @@ public class MainFrame extends JFrame implements ActionListener {
                                                                   .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
     // ---------------------------------------- Constantes privadas ------------------------------
-
-    /**
-     * Cantidad de jugadores por equipo.
-     */
-    private static final int PLAYERS_PER_TEAM = 7;
 
     /**
      * Configuración utilizada frecuentemente.
@@ -91,26 +84,34 @@ public class MainFrame extends JFrame implements ActionListener {
         helpButton = new JButton("Ayuda");
 
         startButton.setEnabled(true);
-        startButton.addActionListener(this);
+        startButton.addActionListener(e -> {
+            try {
+                InputFrame inputFrame = new InputFrame(MainFrame.this, Main.PLAYERS_PER_TEAM);
+
+                inputFrame.setVisible(true);
+
+                MainFrame.this.setVisible(false);
+                MainFrame.this.setLocationRelativeTo(null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                System.exit(-1);
+            }
+        });
 
         helpButton.setEnabled(true);
-        helpButton.addActionListener(this);
+        helpButton.addActionListener(e -> help());
 
         panel.add(bgLabel, GROWX);
         panel.add(startButton, GROWX);
         panel.add(helpButton, GROWX);
-
         panel.setBackground(Main.LIGHT_GREEN);
 
         add(panel);
-
         setResizable(false);
         setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(ICON.getImage());
-
         pack();
-
         setLocationRelativeTo(null);
     }
 
@@ -175,36 +176,6 @@ public class MainFrame extends JFrame implements ActionListener {
             if (value instanceof FontUIResource) {
                 UIManager.put(k, f);
             }
-        }
-    }
-
-    // ---------------------------------------- Métodos públicos ---------------------------------
-
-    /**
-     * Indica qué hacer en base a cada botón pulsado.
-     * <p>
-     * Si se presiona el botón "Comenzar", se crea una ventana de tipo InputFrame.
-     * <p>
-     * Si se presiona el botón "Ayuda", se crea una ventana de tipo helpFrame.
-     *
-     * @param e Evento de click.
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startButton) {
-            try {
-                InputFrame inputFrame = new InputFrame(MainFrame.this, PLAYERS_PER_TEAM);
-
-                inputFrame.setVisible(true);
-
-                MainFrame.this.setVisible(false);
-                MainFrame.this.setLocationRelativeTo(null);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                System.exit(-1);
-            }
-        } else {
-            help();
         }
     }
 }

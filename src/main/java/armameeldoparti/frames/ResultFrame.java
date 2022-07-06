@@ -53,6 +53,8 @@ public class ResultFrame extends JFrame {
 
     // ---------------------------------------- Campos privados ----------------------------------
 
+    private String frameTitle;
+
     private transient List<Player> team1;
     private transient List<Player> team2;
 
@@ -65,8 +67,6 @@ public class ResultFrame extends JFrame {
     private JTable table;
 
     private transient PlayersMixer mixer;
-
-    private String frameTitle;
 
     // ---------------------------------------- Constructor --------------------------------------
 
@@ -90,7 +90,7 @@ public class ResultFrame extends JFrame {
         if (Main.getDistribution() == Main.RANDOM_MIX) {
             setFrameTitle("Aleatorio - ");
 
-            table = new JTable(Main.getPlayersPerTeam() + 1, TABLE_COLUMNS);
+            table = new JTable(Main.PLAYERS_PER_TEAM + 1, TABLE_COLUMNS);
 
             if (Main.thereAreAnchorages()) {
                 setFrameTitle(getFrameTitle().concat("Con anclajes - "));
@@ -102,7 +102,7 @@ public class ResultFrame extends JFrame {
         } else {
             setFrameTitle("Por puntajes - ");
 
-            table = new JTable(Main.getPlayersPerTeam() + 2, TABLE_COLUMNS);
+            table = new JTable(Main.PLAYERS_PER_TEAM + 2, TABLE_COLUMNS);
 
             if (Main.thereAreAnchorages()) {
                 setFrameTitle(getFrameTitle().concat("Con anclajes - "));
@@ -149,11 +149,9 @@ public class ResultFrame extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(MainFrame.ICON.getImage());
-
         addTable();
         addButtons();
         add(panel);
-
         fillTable();
 
         // Ajuste del ancho de las celdas
@@ -177,11 +175,9 @@ public class ResultFrame extends JFrame {
             table.setRowHeight(i, rowHeight);
         }
 
-        setTitle(getFrameTitle().concat("Fútbol " + Main.getPlayersPerTeam()));
+        setTitle(getFrameTitle().concat("Fútbol " + Main.PLAYERS_PER_TEAM));
         setResizable(false);
-
         pack();
-
         setLocationRelativeTo(null);
     }
 
@@ -288,25 +284,18 @@ public class ResultFrame extends JFrame {
 
         table.setValueAt("EQUIPO #1", 0, 1);
         table.setValueAt("EQUIPO #2", 0, 2);
-
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.CENTRAL_DEFENDER), 1, 0);
-
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.LATERAL_DEFENDER), 2, 0);
-
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.LATERAL_DEFENDER), 3, 0);
-
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.MIDFIELDER), 4, 0);
-
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.MIDFIELDER), 5, 0);
-
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.FORWARD), 6, 0);
-
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.FORWARD), 7, 0);
 

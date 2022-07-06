@@ -67,7 +67,7 @@ public class PlayersMixer {
                 int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
 
                 List<Player> set = Main.getPlayersSets()
-                                            .get(position);
+                                       .get(position);
 
                 for (int j = 0; j < (set.size() / 2); j++) {
                     do {

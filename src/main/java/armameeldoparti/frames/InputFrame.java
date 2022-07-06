@@ -4,8 +4,6 @@ import armameeldoparti.utils.BackButton;
 import armameeldoparti.utils.Main;
 import armameeldoparti.utils.Player;
 import armameeldoparti.utils.Position;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -39,7 +37,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 28/02/2021
  */
-public class InputFrame extends JFrame implements ActionListener {
+public class InputFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
@@ -59,7 +57,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private static final int TEXT_AREA_COLUMNS = 12;
 
     /**
-     * Opciones para la lista desplegable.
+     * Posiciones para la lista desplegable.
      */
     private static final String[] OPTIONS_COMBOBOX = {"Defensores centrales",
                                                       "Defensores laterales",
@@ -117,14 +115,11 @@ public class InputFrame extends JFrame implements ActionListener {
     public InputFrame(JFrame previousFrame, int playersPerTeam) throws IOException {
         this.previousFrame = previousFrame;
 
-        Main.setPlayersPerTeam(playersPerTeam);
         Main.setAnchorages(false);
         Main.setPlayersAmountMap(new EnumMap<>(Position.class));
 
         setTotalAnchorages(0);
-
         collectPDData();
-
         initializeComponents("Ingreso de jugadores - Fútbol " + playersPerTeam);
     }
 
@@ -165,7 +160,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 if (line.matches(PDA_DATA_RETRIEVE_REGEX)) {
                     Main.getPlayersAmountMap().put(Position.values()[index],
                                                    Integer.parseInt(line.replaceAll("(?!(?<="
-                                                                                    + Main.getPlayersPerTeam()
+                                                                                    + Main.PLAYERS_PER_TEAM
                                                                                     + ")\\d).", "")));
                     index++;
                 }
@@ -226,9 +221,8 @@ public class InputFrame extends JFrame implements ActionListener {
         addTextArea();
         addButtons();
         addAnchorCheckBox();
-
-        // Se muestra el output correspondiente al estado inicial del JComboBox
-        updateTextFields(comboBox.getSelectedItem().toString());
+        updateTextFields(comboBox.getSelectedItem()
+                                 .toString()); // Output correspondiente al estado inicial del JComboBox
 
         JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
 
@@ -240,9 +234,7 @@ public class InputFrame extends JFrame implements ActionListener {
         masterPanel.add(rightPanel, "east");
 
         add(masterPanel);
-
         pack();
-
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -312,7 +304,7 @@ public class InputFrame extends JFrame implements ActionListener {
         comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
 
         comboBox.setSelectedIndex(0);
-        comboBox.addActionListener(this);
+        comboBox.addActionListener(e -> updateTextFields((String) ((JComboBox<?>) e.getSource()).getSelectedItem()));
 
         leftPanel.add(comboBox, "growx");
     }
@@ -337,7 +329,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
             if (Main.getDistribution() != JOptionPane.CLOSED_OPTION) {
                 if (Main.thereAreAnchorages()) {
-                    AnchorageFrame anchorageFrame = new AnchorageFrame(InputFrame.this, Main.getPlayersPerTeam());
+                    AnchoragesFrame anchorageFrame = new AnchoragesFrame(InputFrame.this, Main.PLAYERS_PER_TEAM);
 
                     anchorageFrame.setVisible(true);
                 } else if (Main.getDistribution() == 0) {
@@ -347,7 +339,7 @@ public class InputFrame extends JFrame implements ActionListener {
                     resultFrame.setVisible(true);
                 } else {
                     // Distribución por puntajes
-                    RatingFrame ratingFrame = new RatingFrame(InputFrame.this);
+                    RatingsFrame ratingFrame = new RatingsFrame(InputFrame.this);
 
                     ratingFrame.setVisible(true);
                 }
@@ -428,7 +420,7 @@ public class InputFrame extends JFrame implements ActionListener {
         for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets().entrySet()) {
             for (Player p : ps.getValue()) {
                 if (!p.getName().equals("")) {
-                    if (counter != 0 && Main.getPlayersPerTeam() * 2 - counter != 0) {
+                    if (counter != 0 && Main.PLAYERS_PER_TEAM * 2 - counter != 0) {
                         textArea.append(System.lineSeparator());
                     }
 
@@ -475,16 +467,6 @@ public class InputFrame extends JFrame implements ActionListener {
     }
 
     // --------------------------------------- Métodos públicos ---------------------------------
-
-    /**
-     * Gestor para los eventos ocurridos de la lista desplegable.
-     *
-     * @param e Evento de click.
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        updateTextFields((String) ((JComboBox<?>) e.getSource()).getSelectedItem());
-    }
 
     /**
      * @param totalAnchorages Cantidad total de anclajes existentes.

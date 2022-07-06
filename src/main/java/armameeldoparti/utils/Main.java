@@ -30,6 +30,11 @@ public final class Main {
     public static final int RATINGS_MIX = 1;
 
     /**
+     * Cantidad de jugadores por equipo.
+     */
+    public static final int PLAYERS_PER_TEAM = 7;
+
+    /**
      * Tamaño de la fuente a utilizar.
      */
     public static final float FONT_SIZE = 18f;
@@ -82,16 +87,13 @@ public final class Main {
     // ---------------------------------------- Campos privados ----------------------------------
 
     private static int distribution;
-    private static int playersPerTeam;
     private static int totalAnchorages;
 
     private static boolean anchorages;
 
-    private static Map<Position, String> positions;
-
-    private static Map<Position, List<Player>> playersSets;
-
     private static Map<Position, Integer> playersAmountMap;
+    private static Map<Position, String> positions;
+    private static Map<Position, List<Player>> playersSets;
 
     // ----------------------------------------- Constructor -------------------------------------
 
@@ -133,17 +135,10 @@ public final class Main {
     }
 
     /**
-     * @return La distribución elegida.
+     * @return Distribución elegida.
      */
     public static int getDistribution() {
         return distribution;
-    }
-
-    /**
-     * @return Cantidad de jugadores por equipo.
-     */
-    public static int getPlayersPerTeam() {
-        return playersPerTeam;
     }
 
     /**
@@ -175,13 +170,6 @@ public final class Main {
     }
 
     /**
-     * @param ppt Cantidad de jugadores por equipo.
-     */
-    public static void setPlayersPerTeam(int ppt) {
-        playersPerTeam = ppt;
-    }
-
-    /**
      * @param a Si hay o debe haber anclajes.
      */
     public static void setAnchorages(boolean a) {
@@ -199,7 +187,7 @@ public final class Main {
      * @param pam Mapa que asocia las posiciones con la cantidad de jugadores para cada una.
      */
     public static void setPlayersAmountMap(Map<Position, Integer> pam) {
-        playersAmountMap = (EnumMap<Position, Integer>) pam;
+        playersAmountMap = pam;
     }
 
     /**

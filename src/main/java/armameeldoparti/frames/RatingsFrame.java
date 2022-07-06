@@ -27,7 +27,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 06/03/2021
  */
-public class RatingFrame extends JFrame {
+public class RatingsFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas ------------------------------
 
@@ -67,7 +67,7 @@ public class RatingFrame extends JFrame {
      *
      * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
      */
-    public RatingFrame(JFrame previousFrame) {
+    public RatingsFrame(JFrame previousFrame) {
         JPanel panel = new JPanel(new MigLayout());
 
         JButton finishButton = new JButton("Finalizar");
@@ -75,19 +75,19 @@ public class RatingFrame extends JFrame {
 
         Map<Player, JSpinner> spinnersMap = new HashMap<>();
 
-        BackButton backButton = new BackButton(RatingFrame.this, previousFrame, null);
+        BackButton backButton = new BackButton(RatingsFrame.this, previousFrame, null);
 
         panel.setBackground(Main.LIGHT_GREEN);
 
         finishButton.addActionListener(e -> {
             spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
 
-            resultFrame = new ResultFrame(RatingFrame.this);
+            resultFrame = new ResultFrame(RatingsFrame.this);
 
             resultFrame.setVisible(true);
 
-            RatingFrame.this.setVisible(false);
-            RatingFrame.this.setLocationRelativeTo(null);
+            RatingsFrame.this.setVisible(false);
+            RatingsFrame.this.setLocationRelativeTo(null);
         });
 
         resetButton.addActionListener(e ->
@@ -137,13 +137,10 @@ public class RatingFrame extends JFrame {
         panel.add(backButton, GROW_SPAN);
 
         add(panel);
-
         setTitle("Puntuaciones");
         setIconImage(MainFrame.ICON.getImage());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         pack();
-
         setResizable(false);
         setLocationRelativeTo(null);
     }
