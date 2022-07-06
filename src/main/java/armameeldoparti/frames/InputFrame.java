@@ -25,10 +25,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
@@ -374,10 +372,7 @@ public class InputFrame extends JFrame implements ActionListener {
         textArea.setEditable(false);
         textArea.setVisible(true);
 
-        JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        rightPanel.add(scrollPane, "push, grow, span");
+        rightPanel.add(textArea, "push, grow, span");
 
         updateTextArea();
     }
@@ -388,9 +383,7 @@ public class InputFrame extends JFrame implements ActionListener {
     private void addAnchorCheckBox() {
         JCheckBox anchorCheckBox = new JCheckBox("Anclar jugadores", false);
 
-        anchorCheckBox.setBackground(Main.LIGHT_GREEN);
         anchorCheckBox.setVisible(true);
-
         anchorCheckBox.addActionListener(e -> Main.setAnchorages(!Main.thereAreAnchorages()));
 
         rightPanel.add(anchorCheckBox, "center");

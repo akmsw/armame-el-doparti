@@ -22,6 +22,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -117,6 +118,14 @@ public class AnchorageFrame extends JFrame {
 
         scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = Main.LIGHT_GREEN;
+                this.trackColor = Main.DARK_GREEN;
+            }
+        });
 
         int index = 0;
 
