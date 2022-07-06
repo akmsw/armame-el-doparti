@@ -83,7 +83,6 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
 
 ## 🔜 Próximamente
 - Se agregará la opción de elegir entre fútbol 5 y fútbol 7.
-- El usuario podrá optar por ingresar una distribución propia de jugadores, o utilizar las provistas por defecto.
 
 ## 📸 Capturas de pantalla
 ![ventana_principal](./src/main/res/img/ss1.png)\

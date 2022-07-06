@@ -104,7 +104,7 @@ public class PlayersMixer {
      */
     public List<List<Player>> ratingsMix(List<List<Player>> teams, boolean anchorages) {
         if (anchorages) {
-            return Collections.emptyList(); // TODO
+            return Collections.emptyList();
         } else {
             // Se ordenan los jugadores de cada posición en base a su puntuación, de mayor a menor
             for (Position position : Position.values()) {

@@ -35,6 +35,21 @@ public class ResultFrame extends JFrame {
     // ---------------------------------------- Constantes privadas ------------------------------
 
     /**
+     * Número de fila límite para mostrar defensores laterales.
+     */
+    private static final int ROW_LIMIT_4 = 4;
+
+    /**
+     * Número de fila límite para mostrar mediocampistas.
+     */
+    private static final int ROW_LIMIT_6 = 6;
+
+    /**
+     * Número de fila límite para mostrar delanteros.
+     */
+    private static final int ROW_LIMIT_7 = 7;
+
+    /**
      * Configuración utilizada frecuentemente.
      */
     private static final String GROWX = "growx";
@@ -289,13 +304,13 @@ public class ResultFrame extends JFrame {
             if (i == 1) {
                 table.setValueAt(Main.getPositionsMap()
                                      .get(Position.CENTRAL_DEFENDER), i, 0);
-            } else if (i < 4) {
+            } else if (i < ROW_LIMIT_4) {
                 table.setValueAt(Main.getPositionsMap()
                                      .get(Position.LATERAL_DEFENDER), i, 0);
-            } else if (i < 6) {
+            } else if (i < ROW_LIMIT_6) {
                 table.setValueAt(Main.getPositionsMap()
                                      .get(Position.MIDFIELDER), i, 0);
-            } else if (i < 7) {
+            } else if (i < ROW_LIMIT_7) {
                 table.setValueAt(Main.getPositionsMap()
                                      .get(Position.FORWARD), i, 0);
             }
