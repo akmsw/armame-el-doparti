@@ -395,18 +395,15 @@ public class InputFrame extends JFrame implements ActionListener {
      * @param text Ítem seleccionado de la lista desplegable.
      */
     private void updateTextFields(String text) {
-        int index;
+        for (int i = 0; i < OPTIONS_COMBOBOX.length; i++) {
+            if (text.equals(OPTIONS_COMBOBOX[i])) {
+                clearLeftPanel();
 
-        for (index = 0; index < OPTIONS_COMBOBOX.length; index++) {
-            if (text.equals(OPTIONS_COMBOBOX[index])) {
+                textFields.get(i)
+                          .forEach(tf -> leftPanel.add(tf, "growx"));
+
                 break;
             }
-        }
-
-        clearLeftPanel();
-
-        for (JTextField tf : textFields.get(index)) {
-            leftPanel.add(tf, "growx");
         }
 
         leftPanel.revalidate();
