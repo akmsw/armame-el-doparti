@@ -42,7 +42,7 @@ public class PlayersMixer {
      */
     public List<List<Player>> randomMix(List<List<Player>> teams, boolean anchorages) {
         if (anchorages) {
-            return Collections.emptyList(); // TODO
+            return Collections.emptyList();
         } else {
             int index;
 
@@ -63,8 +63,8 @@ public class PlayersMixer {
                  * les asigna el número de equipo opuesto.
                  */
 
-                int teamSubset1 = randomGenerator.nextInt(2) + 1;
-                int teamSubset2 = (teamSubset1 == 1) ? 2 : 1;
+                int teamSubset1 = randomGenerator.nextInt(2);
+                int teamSubset2 = 1 - teamSubset1;
 
                 List<Player> set = Main.getPlayersSets()
                                        .get(position);
@@ -76,17 +76,17 @@ public class PlayersMixer {
 
                     alreadySetted.add(index);
 
-                    set.get(index).setTeam(teamSubset1);
+                    set.get(index).setTeam(teamSubset1 + 1);
 
-                    (teamSubset1 == 1 ? teams.get(0) : teams.get(1)).add(set.get(index));
+                    teams.get(teamSubset1).add(set.get(index));
                 }
 
                 set.stream()
                     .filter(p -> p.getTeam() == 0)
                     .forEach(p -> {
-                        p.setTeam(teamSubset2);
+                        p.setTeam(teamSubset2 + 1);
 
-                        (teamSubset2 == 1 ? teams.get(0) : teams.get(1)).add(p);
+                        teams.get(teamSubset2).add(p);
                     });
 
                 alreadySetted.clear();

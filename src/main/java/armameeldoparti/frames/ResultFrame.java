@@ -109,10 +109,12 @@ public class ResultFrame extends JFrame {
 
             if (Main.thereAreAnchorages()) {
                 setFrameTitle(getFrameTitle().concat("Con anclajes - "));
+
+                teams = mixer.randomMix(getTeams(), true);
             } else {
                 setFrameTitle(getFrameTitle().concat("Sin anclajes - "));
 
-                teams = mixer.randomMix(getTeams(), Main.thereAreAnchorages());
+                teams = mixer.randomMix(getTeams(), false);
             }
         } else {
             setFrameTitle("Por puntuaciones - ");
@@ -212,7 +214,7 @@ public class ResultFrame extends JFrame {
             ResultFrame.this.dispose();
         });
 
-        if (Main.getDistribution() == 0) {
+        if (Main.getDistribution() == Main.RANDOM_MIX) {
             JButton remixButton = new JButton("Redistribuir");
 
             remixButton.addActionListener(e -> {
@@ -247,9 +249,9 @@ public class ResultFrame extends JFrame {
              */
             @Override
             public Component getTableCellRendererComponent(JTable myTable, Object value, boolean isSelected,
-                                                           boolean hasFocus, int row, int column) {
+                    boolean hasFocus, int row, int column) {
                 final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
-                                                                        hasFocus, row, column);
+                        hasFocus, row, column);
 
                 if (row == 0) {
                     c.setBackground(Main.DARK_GREEN);
@@ -295,8 +297,17 @@ public class ResultFrame extends JFrame {
         table.setVisible(true);
 
         ((DefaultTableCellRenderer) table.getTableHeader()
-                                         .getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+                .getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
+        fillTableFields();
+
+        panel.add(table, "push, grow, span, center");
+    }
+
+    /**
+     * Llena las celdas fijas de la tabla, cuyos textos no cambian.
+     */
+    private void fillTableFields() {
         table.setValueAt("EQUIPO #1", 0, 1);
         table.setValueAt("EQUIPO #2", 0, 2);
 
@@ -325,8 +336,6 @@ public class ResultFrame extends JFrame {
             table.setValueAt(Main.getPositionsMap()
                                  .get(Position.GOALKEEPER), table.getRowCount() - 1, 0);
         }
-
-        panel.add(table, "push, grow, span, center");
     }
 
     /**
