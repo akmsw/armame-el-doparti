@@ -17,11 +17,11 @@ import java.util.Random;
  */
 public class PlayersMixer {
 
-    // ---------------------------------------- Campos privados ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private Random randomGenerator;
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye el objeto repartidor de jugadores.
@@ -30,7 +30,7 @@ public class PlayersMixer {
         randomGenerator = new Random();
     }
 
-    // ---------------------------------------- Métodos públicos ---------------------------------
+    // ---------------------------------------- Métodos públicos ----------------------------------
 
     /**
      * Reparte los jugadores de manera aleatoria en dos equipos.
@@ -69,7 +69,7 @@ public class PlayersMixer {
                 List<Player> set = Main.getPlayersSets()
                                        .get(position);
 
-                for (int j = 0; j < (set.size() / 2); j++) {
+                for (int i = 0; i < (set.size() / 2); i++) {
                     do {
                         index = randomGenerator.nextInt(set.size());
                     } while (alreadySetted.contains(index));

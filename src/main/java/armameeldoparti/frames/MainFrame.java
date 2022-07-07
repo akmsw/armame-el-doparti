@@ -30,7 +30,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class MainFrame extends JFrame {
 
-    // ---------------------------------------- Constantes públicas ------------------------------
+    // ---------------------------------------- Constantes públicas -------------------------------
 
     /**
      * Imagen estándar del icono de la aplicación.
@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
     public static final ImageIcon SCALED_ICON = new ImageIcon(ICON.getImage()
                                                                   .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 
-    // ---------------------------------------- Constantes privadas ------------------------------
+    // ---------------------------------------- Constantes privadas -------------------------------
 
     /**
      * Configuración utilizada frecuentemente.
@@ -57,14 +57,14 @@ public class MainFrame extends JFrame {
      */
     private static final String BG_IMG_FILENAME = "bg.png";
 
-    // ---------------------------------------- Campos privados ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private JButton startButton;
     private JButton helpButton;
 
     private Font programFont;
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye la ventana principal.
@@ -115,7 +115,7 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    // ---------------------------------------- Métodos privados ---------------------------------
+    // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
      * Despliega las instrucciones de uso del programa.
@@ -129,7 +129,9 @@ public class MainFrame extends JFrame {
         MainFrame.this.setLocationRelativeTo(null);
     }
 
-    /**
+    // ---------------------------------------- Setters -------------------------------------------
+
+        /**
      * Configura las propiedades de la interfaz gráfica del programa.
      */
     private void setGUIProperties() {

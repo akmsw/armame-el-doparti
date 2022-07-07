@@ -29,7 +29,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class RatingsFrame extends JFrame {
 
-    // ---------------------------------------- Constantes privadas ------------------------------
+    // ---------------------------------------- Constantes privadas -------------------------------
 
     /**
      * Valor inicial de los campos de entrada para puntuaciones.
@@ -56,11 +56,11 @@ public class RatingsFrame extends JFrame {
      */
     private static final String GROW_SPAN = "grow, span";
 
-    // ---------------------------------------- Campos privados ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private ResultFrame resultFrame;
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye una ventana de ingreso de puntuaciones.

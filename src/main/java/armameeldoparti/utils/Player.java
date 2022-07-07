@@ -11,7 +11,7 @@ package armameeldoparti.utils;
  */
 public class Player {
 
-    // ---------------------------------------- Campos privados  ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private int rating;
     private int anchor;
@@ -21,7 +21,7 @@ public class Player {
 
     private Position position;
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye un jugador básico con los parámetros recibidos.
@@ -38,35 +38,9 @@ public class Player {
         this.position = position;
     }
 
-    // ---------------------------------------- Métodos públicos ---------------------------------
+    // ---------------------------------------- Métodos públicos ----------------------------------
 
-    /**
-     * @param name Nombre del jugador.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @param rating Puntaje del jugador.
-     */
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    /**
-     * @param anchor Número de anclaje correspondiente.
-     */
-    public void setAnchor(int anchor) {
-        this.anchor = anchor;
-    }
-
-    /**
-     * @param team Número de equipo al que pertenece el jugador.
-     */
-    public void setTeam(int team) {
-        this.team = team;
-    }
+    // ---------------------------------------- Getters -------------------------------------------
 
     /**
      * @return Puntaje asignado al jugador.
@@ -101,5 +75,35 @@ public class Player {
      */
     public Position getPosition() {
         return position;
+    }
+
+    // ---------------------------------------- Setters -------------------------------------------
+
+    /**
+     * @param name Nombre del jugador.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @param rating Puntaje del jugador.
+     */
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    /**
+     * @param anchor Número de anclaje correspondiente.
+     */
+    public void setAnchor(int anchor) {
+        this.anchor = anchor;
+    }
+
+    /**
+     * @param team Número de equipo al que pertenece el jugador.
+     */
+    public void setTeam(int team) {
+        this.team = team;
     }
 }

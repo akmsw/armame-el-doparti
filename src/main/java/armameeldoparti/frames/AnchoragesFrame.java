@@ -36,7 +36,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class AnchoragesFrame extends JFrame {
 
-    // ---------------------------------------- Constantes privadas ------------------------------
+    // ---------------------------------------- Constantes privadas -------------------------------
 
     /**
      * Configuración utilizada frecuentemente.
@@ -48,7 +48,7 @@ public class AnchoragesFrame extends JFrame {
      */
     private static final String FRAME_TITLE = "Anclaje de jugadores";
 
-    // ---------------------------------------- Campos privados ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private int maxPlayersPerAnchorage;
     private int anchorageNum;
@@ -77,7 +77,7 @@ public class AnchoragesFrame extends JFrame {
 
     private JTextArea textArea;
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye una ventana de anclajes.
@@ -108,7 +108,18 @@ public class AnchoragesFrame extends JFrame {
         initializeComponents();
     }
 
-    // --------------------------------------- Métodos privados ---------------------------------
+    // ---------------------------------------- Métodos públicos ----------------------------------
+
+    // ---------------------------------------- Getters -------------------------------------------
+
+    /**
+     * @return Cantidad de anclajes hechos.
+     */
+    public int getAnchoragesAmount() {
+        return anchorageNum;
+    }
+
+    // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
      * Inicializa los componentes de la ventana.
@@ -278,39 +289,6 @@ public class AnchoragesFrame extends JFrame {
 
         for (JCheckBox cb : cbSet) {
             panel.add(cb, "align left, pushx");
-        }
-    }
-
-    /**
-     * Configura el número de anclaje correspondiente a cada jugador.
-     * Luego, deselecciona estas casillas y las hace invisibles para
-     * evitar que dos o más anclajes contengan uno o más jugadores iguales.
-     * En caso de que el campo 'anchorageNum' sea 0 (se han querido limpiar los
-     * anclajes), se reiniciarán los números de anclaje de cada jugador y todas las
-     * casillas quedarán visibles y deseleccionadas.
-     *
-     * @param cbSet Arreglo de casillas a recorrer.
-     * @param pSet  Arreglo de jugadores correspondiente al arreglo de casillas.
-     */
-    private void setAnchors(List<JCheckBox> cbSet, List<Player> pSet) {
-        for (Player p : pSet) {
-            for (JCheckBox cb : cbSet) {
-                if (anchorageNum != 0) {
-                    if (cb.getText().equals(p.getName()) && cb.isSelected()) {
-                        p.setAnchor(anchorageNum);
-
-                        playersAnchored++;
-
-                        cb.setSelected(false);
-                        cb.setVisible(false);
-                    }
-                } else {
-                    p.setAnchor(anchorageNum);
-
-                    cb.setSelected(false);
-                    cb.setVisible(true);
-                }
-            }
         }
     }
 
@@ -512,12 +490,38 @@ public class AnchoragesFrame extends JFrame {
         return playersAnchored + playersToAnchor <= 2 * maxPlayersPerAnchorage;
     }
 
-    // --------------------------------------- Métodos públicos ---------------------------------
+    // ---------------------------------------- Setters -------------------------------------------
 
     /**
-     * @return Cantidad de anclajes hechos.
+     * Configura el número de anclaje correspondiente a cada jugador.
+     * Luego, deselecciona estas casillas y las hace invisibles para
+     * evitar que dos o más anclajes contengan uno o más jugadores iguales.
+     * En caso de que el campo 'anchorageNum' sea 0 (se han querido limpiar los
+     * anclajes), se reiniciarán los números de anclaje de cada jugador y todas las
+     * casillas quedarán visibles y deseleccionadas.
+     *
+     * @param cbSet Arreglo de casillas a recorrer.
+     * @param pSet  Arreglo de jugadores correspondiente al arreglo de casillas.
      */
-    public int getAnchoragesAmount() {
-        return anchorageNum;
+    private void setAnchors(List<JCheckBox> cbSet, List<Player> pSet) {
+        for (Player p : pSet) {
+            for (JCheckBox cb : cbSet) {
+                if (anchorageNum != 0) {
+                    if (cb.getText().equals(p.getName()) && cb.isSelected()) {
+                        p.setAnchor(anchorageNum);
+
+                        playersAnchored++;
+
+                        cb.setSelected(false);
+                        cb.setVisible(false);
+                    }
+                } else {
+                    p.setAnchor(anchorageNum);
+
+                    cb.setSelected(false);
+                    cb.setVisible(true);
+                }
+            }
+        }
     }
 }

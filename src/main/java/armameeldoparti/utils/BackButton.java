@@ -14,14 +14,14 @@ import javax.swing.JFrame;
  */
 public class BackButton extends JButton {
 
-    // ---------------------------------------- Constantes privadas ------------------------------
+    // ---------------------------------------- Constantes privadas -------------------------------
 
     /**
      * Texto por defecto a mostrar en el botón.
      */
     private static final String DEFAULT_TEXT = "Atrás";
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye un botón para navegar hacia atrás entre ventanas.

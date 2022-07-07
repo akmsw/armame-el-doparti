@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public final class Main {
 
-    // ---------------------------------------- Constantes públicas ------------------------------
+    // ---------------------------------------- Constantes públicas -------------------------------
 
     /**
      * Indicador de distribución aleatoria.
@@ -84,7 +84,7 @@ public final class Main {
      */
     public static final Color LIGHT_YELLOW = new Color(255, 255, 204);
 
-    // ---------------------------------------- Campos privados ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private static int distribution;
     private static int totalAnchorages;
@@ -95,7 +95,7 @@ public final class Main {
     private static Map<Position, String> positions;
     private static Map<Position, List<Player>> playersSets;
 
-    // ----------------------------------------- Constructor -------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Constructor vacío.
@@ -104,7 +104,7 @@ public final class Main {
         // No utilizado
     }
 
-    // --------------------------------- Punto de entrada principal ------------------------------
+    // ---------------------------------------- Punto de entrada principal ------------------------
 
     /**
      * Instancia y ejecuta todo el programa.
@@ -125,13 +125,15 @@ public final class Main {
         mainFrame.setVisible(true);
     }
 
-    // --------------------------------------- Métodos públicos ---------------------------------
+    // ---------------------------------------- Métodos públicos ----------------------------------
+
+    // ---------------------------------------- Getters -------------------------------------------
 
     /**
-     * @return Mapa con los strings correspondientes a cada posición.
+     * @return Cantidad total de anclajes realizados.
      */
-    public static Map<Position, String> getPositionsMap() {
-        return positions;
+    public static int getTotalAnchorages() {
+        return totalAnchorages;
     }
 
     /**
@@ -142,17 +144,10 @@ public final class Main {
     }
 
     /**
-     * @param d Distribución elegida.
+     * @return Si hay o debe haber anclajes.
      */
-    public static void setDistribution(int d) {
-        distribution = d;
-    }
-
-    /**
-     * @return Mapa que asocia las posiciones con los conjuntos de jugadores.
-     */
-    public static Map<Position, List<Player>> getPlayersSets() {
-        return playersSets;
+    public static boolean thereAreAnchorages() {
+        return anchorages;
     }
 
     /**
@@ -163,10 +158,33 @@ public final class Main {
     }
 
     /**
-     * @return Cantidad total de anclajes realizados.
+     * @return Mapa que asocia las posiciones con los conjuntos de jugadores.
      */
-    public static int getTotalAnchorages() {
-        return totalAnchorages;
+    public static Map<Position, List<Player>> getPlayersSets() {
+        return playersSets;
+    }
+
+    /**
+     * @return Mapa con los strings correspondientes a cada posición.
+     */
+    public static Map<Position, String> getPositionsMap() {
+        return positions;
+    }
+
+    // ---------------------------------------- Setters -------------------------------------------
+
+    /**
+     * @param totalAnchorages Cantidad total de anclajes realizados.
+     */
+    public static void setTotalAnchorages(int totalAnchorages) {
+        Main.totalAnchorages = totalAnchorages;
+    }
+
+    /**
+     * @param d Distribución elegida.
+     */
+    public static void setDistribution(int d) {
+        distribution = d;
     }
 
     /**
@@ -177,13 +195,6 @@ public final class Main {
     }
 
     /**
-     * @param pss Mapa que asocia las posiciones con los conjuntos de jugadores.
-     */
-    public static void setPlayersSets(Map<Position, List<Player>> pss) {
-        playersSets = pss;
-    }
-
-    /**
      * @param pam Mapa que asocia las posiciones con la cantidad de jugadores para cada una.
      */
     public static void setPlayersAmountMap(Map<Position, Integer> pam) {
@@ -191,16 +202,9 @@ public final class Main {
     }
 
     /**
-     * @param totalAnchorages Cantidad total de anclajes realizados.
+     * @param pss Mapa que asocia las posiciones con los conjuntos de jugadores.
      */
-    public static void setTotalAnchorages(int totalAnchorages) {
-        Main.totalAnchorages = totalAnchorages;
-    }
-
-    /**
-     * @return Si hay o debe haber anclajes.
-     */
-    public static boolean thereAreAnchorages() {
-        return anchorages;
+    public static void setPlayersSets(Map<Position, List<Player>> pss) {
+        playersSets = pss;
     }
 }

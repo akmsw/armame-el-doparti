@@ -39,7 +39,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class InputFrame extends JFrame {
 
-    // ---------------------------------------- Constantes privadas ------------------------------
+    // ---------------------------------------- Constantes privadas -------------------------------
 
     /**
      * Cantidad máxima de caracteres por nombre.
@@ -85,7 +85,7 @@ public class InputFrame extends JFrame {
      */
     private static final String PDA_FILENAME = "dist.pda";
 
-    // ---------------------------------------- Campos privados ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private int totalAnchorages;
 
@@ -102,7 +102,7 @@ public class InputFrame extends JFrame {
 
     private JTextArea textArea;
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye una ventana de ingreso de jugadores.
@@ -123,7 +123,27 @@ public class InputFrame extends JFrame {
         initializeComponents("Ingreso de jugadores - Fútbol " + playersPerTeam);
     }
 
-    // --------------------------------------- Métodos privados ---------------------------------
+    // ---------------------------------------- Métodos públicos ----------------------------------
+
+    // ---------------------------------------- Getters -------------------------------------------
+
+    /**
+     * @return Cantidad total de anclajes existentes.
+     */
+    public int getTotalAnchorages() {
+        return totalAnchorages;
+    }
+
+    // ---------------------------------------- Setters -------------------------------------------
+
+    /**
+     * @param totalAnchorages Cantidad total de anclajes existentes.
+     */
+    public void setTotalAnchorages(int totalAnchorages) {
+        this.totalAnchorages = totalAnchorages;
+    }
+
+    // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
      * Obtiene la cantidad de jugadores para cada posición por equipo
@@ -464,21 +484,5 @@ public class InputFrame extends JFrame {
                                     .stream()
                                     .flatMap(Collection::stream)
                                     .anyMatch(p -> p.getName().equals(name));
-    }
-
-    // --------------------------------------- Métodos públicos ---------------------------------
-
-    /**
-     * @param totalAnchorages Cantidad total de anclajes existentes.
-     */
-    public void setTotalAnchorages(int totalAnchorages) {
-        this.totalAnchorages = totalAnchorages;
-    }
-
-    /**
-     * @return Cantidad total de anclajes existentes.
-     */
-    public int getTotalAnchorages() {
-        return totalAnchorages;
     }
 }

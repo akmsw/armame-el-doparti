@@ -18,11 +18,11 @@ import net.miginfocom.swing.MigLayout;
  */
 public class HelpFrame extends JFrame {
 
-    // ---------------------------------------- Constantes privadas ------------------------------
+    // ---------------------------------------- Constantes privadas -------------------------------
 
     private static final int TOTAL_PAGES = 5;
 
-    // ---------------------------------------- Campos privados ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private int pageNum;
 
@@ -30,7 +30,7 @@ public class HelpFrame extends JFrame {
 
     private JPanel masterPanel;
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye la ventana de ayuda.
@@ -41,7 +41,7 @@ public class HelpFrame extends JFrame {
         initializeComponents("Ayuda");
     }
 
-    // ---------------------------------------- Métodos privados ---------------------------------
+    // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
      * Inicializa los componentes de la ventana.

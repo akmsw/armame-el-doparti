@@ -32,7 +32,9 @@ import net.miginfocom.swing.MigLayout;
  */
 public class ResultFrame extends JFrame {
 
-    // ---------------------------------------- Constantes privadas ------------------------------
+
+
+    // ---------------------------------------- Constantes públicas -------------------------------
 
     /**
      * Número de fila límite para mostrar defensores laterales.
@@ -66,7 +68,7 @@ public class ResultFrame extends JFrame {
      */
     private static final int TABLE_COLUMNS = 3;
 
-    // ---------------------------------------- Campos privados ----------------------------------
+    // ---------------------------------------- Campos privados -----------------------------------
 
     private String frameTitle;
 
@@ -83,7 +85,7 @@ public class ResultFrame extends JFrame {
 
     private transient PlayersMixer mixer;
 
-    // ---------------------------------------- Constructor --------------------------------------
+    // ---------------------------------------- Constructor ---------------------------------------
 
     /**
      * Construye una ventana de resultados.
@@ -133,7 +135,9 @@ public class ResultFrame extends JFrame {
         initializeComponents();
     }
 
-    // ---------------------------------------- Métodos públicos ---------------------------------
+    // ---------------------------------------- Métodos públicos ----------------------------------
+
+    // --------------------------------------------- Getters --------------------------------------
 
     /**
      * @return El título de la ventana.
@@ -149,6 +153,8 @@ public class ResultFrame extends JFrame {
         return teams;
     }
 
+    // --------------------------------------------- Setters --------------------------------------
+
     /**
      * @param frameTitle El nuevo título para la ventana.
      */
@@ -156,7 +162,7 @@ public class ResultFrame extends JFrame {
         this.frameTitle = frameTitle;
     }
 
-    // ---------------------------------------- Métodos privados ---------------------------------
+    // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
      * Inicializa los componentes de la ventana de resultados.
@@ -297,7 +303,7 @@ public class ResultFrame extends JFrame {
         table.setVisible(true);
 
         ((DefaultTableCellRenderer) table.getTableHeader()
-                .getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+                                         .getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         fillTableFields();
 
