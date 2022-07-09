@@ -32,8 +32,6 @@ import net.miginfocom.swing.MigLayout;
  */
 public class ResultFrame extends JFrame {
 
-
-
     // ---------------------------------------- Constantes públicas -------------------------------
 
     /**

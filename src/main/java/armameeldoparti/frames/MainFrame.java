@@ -131,7 +131,7 @@ public class MainFrame extends JFrame {
 
     // ---------------------------------------- Setters -------------------------------------------
 
-        /**
+    /**
      * Configura las propiedades de la interfaz gráfica del programa.
      */
     private void setGUIProperties() {
