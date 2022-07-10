@@ -19,7 +19,7 @@ public class PlayersMixer {
 
     // ---------------------------------------- Campos privados -----------------------------------
 
-    private Random randomGenerator;
+    Random randomGenerator;
 
     // ---------------------------------------- Constructor ---------------------------------------
 
@@ -27,7 +27,7 @@ public class PlayersMixer {
      * Construye el objeto repartidor de jugadores.
      */
     public PlayersMixer() {
-        randomGenerator = new Random();
+        // No necesita cuerpo
     }
 
     // ---------------------------------------- Métodos públicos ----------------------------------
@@ -41,8 +41,18 @@ public class PlayersMixer {
      * @return Los equipos actualizados con los jugadores repartidos.
      */
     public List<List<Player>> randomMix(List<List<Player>> teams, boolean anchorages) {
+        /*
+         * Se elige un número aleatorio entre 0 y 1 (+1)
+         * para asignarle como equipo a un conjunto de jugadores,
+         * y el resto tendrá asignado el equipo opuesto.
+         */
+        randomGenerator = new Random();
+
+        int teamSubset1 = randomGenerator.nextInt(2);
+        int teamSubset2 = 1 - teamSubset1;
+
         if (anchorages) {
-            return Collections.emptyList();
+            return teams;
         } else {
             int index;
 
@@ -50,9 +60,6 @@ public class PlayersMixer {
 
             for (Position position : Position.values()) {
                 /*
-                 * Se elige un número aleatorio entre 0 y 1 (+1)
-                 * para asignarle como equipo a un conjunto de jugadores,
-                 * y el resto tendrá asignado el equipo opuesto.
                  * Se recorre la mitad de los jugadores del conjunto de manera
                  * aleatoria y se les asigna a los jugadores escogidos
                  * como equipo el número aleatorio generado al principio.
@@ -62,9 +69,6 @@ public class PlayersMixer {
                  * aleatoria (aquellos con team == 0) del mismo grupo, se
                  * les asigna el número de equipo opuesto.
                  */
-                int teamSubset1 = randomGenerator.nextInt(2);
-                int teamSubset2 = 1 - teamSubset1;
-
                 List<Player> set = Main.getPlayersSets()
                                        .get(position);
 

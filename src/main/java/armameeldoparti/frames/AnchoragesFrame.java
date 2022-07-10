@@ -240,8 +240,6 @@ public class AnchoragesFrame extends JFrame {
             }
 
             updateTextArea();
-
-            Main.setTotalAnchorages(anchorageNum);
         });
 
         deleteSpecificAnchorageButton.addActionListener(e -> deleteSpecificAnchorage());

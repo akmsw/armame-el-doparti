@@ -92,7 +92,6 @@ public final class Main {
     // ---------------------------------------- Campos privados -----------------------------------
 
     private static int distribution;
-    private static int totalAnchorages;
 
     private static boolean anchorages;
 
@@ -135,13 +134,6 @@ public final class Main {
     // ---------------------------------------- Getters -------------------------------------------
 
     /**
-     * @return Cantidad total de anclajes realizados.
-     */
-    public static int getTotalAnchorages() {
-        return totalAnchorages;
-    }
-
-    /**
      * @return Distribución elegida.
      */
     public static int getDistribution() {
@@ -177,13 +169,6 @@ public final class Main {
     }
 
     // ---------------------------------------- Setters -------------------------------------------
-
-    /**
-     * @param totalAnchorages Cantidad total de anclajes realizados.
-     */
-    public static void setTotalAnchorages(int totalAnchorages) {
-        Main.totalAnchorages = totalAnchorages;
-    }
 
     /**
      * @param d Distribución elegida.

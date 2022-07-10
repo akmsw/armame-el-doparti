@@ -168,6 +168,8 @@ public class ResultFrame extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(MainFrame.ICON.getImage());
+        setTitle(getFrameTitle().concat("Fútbol " + Main.PLAYERS_PER_TEAM));
+        setResizable(false);
         addTable();
         addButtons();
         add(panel);
@@ -186,16 +188,14 @@ public class ResultFrame extends JFrame {
             int rowHeight = table.getRowHeight();
 
             for (int j = 0; j < table.getColumnCount(); j++) {
-                Component comp = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
+                Component component = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
 
-                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
+                rowHeight = Math.max(rowHeight, component.getPreferredSize().height);
             }
 
             table.setRowHeight(i, rowHeight);
         }
 
-        setTitle(getFrameTitle().concat("Fútbol " + Main.PLAYERS_PER_TEAM));
-        setResizable(false);
         pack();
         setLocationRelativeTo(null);
     }
@@ -289,7 +289,6 @@ public class ResultFrame extends JFrame {
                 return c;
             }
         });
-
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setCellSelectionEnabled(false);
         table.setRowSelectionAllowed(false);
@@ -297,7 +296,6 @@ public class ResultFrame extends JFrame {
         table.setBorder(BorderFactory.createLineBorder(Main.DARK_GREEN));
         table.setEnabled(false);
         table.setVisible(true);
-
         ((DefaultTableCellRenderer) table.getTableHeader()
                                          .getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
