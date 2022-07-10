@@ -18,10 +18,6 @@ import java.util.stream.Collectors;
  */
 public class PlayersMixer {
 
-    // ---------------------------------------- Campos privados -----------------------------------
-
-    private Random randomGenerator;
-
     // ---------------------------------------- Constructor ---------------------------------------
 
     /**
@@ -47,59 +43,13 @@ public class PlayersMixer {
          * para asignarle como equipo a un conjunto de jugadores,
          * y el resto tendrá asignado el equipo opuesto.
          */
-        randomGenerator = new Random();
+        Random randomGenerator = new Random();
 
         int index;
         int teamSubset1 = randomGenerator.nextInt(2);
         int teamSubset2 = 1 - teamSubset1;
 
         if (anchorages) {
-            List<Player> currentWorkingTeam = teams.get(teamSubset1);
-
-            for (Position position : Position.values()) {
-                List<Player> playersSet = Main.getPlayersSets().get(position);
-                List<Integer> alreadySetted = new ArrayList<>();
-
-                for (int i = 0; i < playersSet.size() / 2; i++) {
-                    do {
-                        index = randomGenerator.nextInt(playersSet.size());
-                    } while (alreadySetted.contains(index));
-
-                    alreadySetted.add(index);
-
-                    Player player = playersSet.get(index);
-
-                    if (player.getAnchor() != 0 && player.getTeam() == 0) {
-                        List<Player> anchoredPlayers = Main.getPlayersSets()
-                                                           .values()
-                                                           .stream()
-                                                           .flatMap(List::stream)
-                                                           .filter(p -> p.getAnchor() == player.getAnchor())
-                                                           .collect(Collectors.toList());
-
-                        if (currentWorkingTeam.size() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM) {
-                            anchoredPlayers.forEach(p -> p.setTeam(teamSubset1 + 1));
-                            currentWorkingTeam.addAll(anchoredPlayers);
-                        }
-                    } else {
-                        if (player.getTeam() == 0) {
-                            player.setTeam(teamSubset1 + 1);
-                            currentWorkingTeam.add(player);
-                        }
-                    }
-
-                    if (currentWorkingTeam.size() == Main.PLAYERS_PER_TEAM) {
-                        break;
-                    }
-                }
-
-                if (currentWorkingTeam.size() == Main.PLAYERS_PER_TEAM) {
-                    break;
-                } else {
-                    alreadySetted.clear();
-                }
-            }
-
             List<Player> remainingPlayers = Main.getPlayersSets()
                                                 .values()
                                                 .stream()
@@ -125,30 +75,29 @@ public class PlayersMixer {
                  * aleatoria (aquellos con team == 0) del mismo grupo, se
                  * les asigna el número de equipo opuesto.
                  */
-                List<Player> set = Main.getPlayersSets()
-                                       .get(position);
-
+                List<Player> playersSet = Main.getPlayersSets()
+                                              .get(position);
                 List<Integer> alreadySetted = new ArrayList<>();
 
-                for (int i = 0; i < (set.size() / 2); i++) {
+                for (int i = 0; i < (playersSet.size() / 2); i++) {
                     do {
-                        index = randomGenerator.nextInt(set.size());
+                        index = randomGenerator.nextInt(playersSet.size());
                     } while (alreadySetted.contains(index));
 
                     alreadySetted.add(index);
 
-                    set.get(index).setTeam(teamSubset1 + 1);
+                    playersSet.get(index).setTeam(teamSubset1 + 1);
 
-                    teams.get(teamSubset1).add(set.get(index));
+                    teams.get(teamSubset1).add(playersSet.get(index));
                 }
 
-                set.stream()
-                    .filter(p -> p.getTeam() == 0)
-                    .forEach(p -> {
-                        p.setTeam(teamSubset2 + 1);
+                playersSet.stream()
+                          .filter(p -> p.getTeam() == 0)
+                          .forEach(p -> {
+                              p.setTeam(teamSubset2 + 1);
 
-                        teams.get(teamSubset2).add(p);
-                    });
+                              teams.get(teamSubset2).add(p);
+                          });
 
                 alreadySetted.clear();
             }

@@ -251,37 +251,32 @@ public class ResultFrame extends JFrame {
              */
             @Override
             public Component getTableCellRendererComponent(JTable myTable, Object value, boolean isSelected,
-                    boolean hasFocus, int row, int column) {
+                                                           boolean hasFocus, int row, int column) {
                 final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
-                        hasFocus, row, column);
+                                                                        hasFocus, row, column);
 
                 if (row == 0) {
                     c.setBackground(Main.DARK_GREEN);
                     c.setForeground(Color.WHITE);
-
                     ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                 } else if (column == 0) {
                     if (Main.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
                         c.setForeground(Color.BLACK);
-
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
                         c.setBackground(Main.DARK_GREEN);
                         c.setForeground(Color.WHITE);
-
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
                     }
                 } else {
                     if (Main.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
                         c.setForeground(Color.BLACK);
-
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
                         c.setBackground(Color.WHITE);
                         c.setForeground(Color.BLACK);
-
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
                     }
                 }
@@ -354,7 +349,6 @@ public class ResultFrame extends JFrame {
          * etiquetas de las posiciones en la tabla, deberá cambiarse esta
          * manera de llenarla, ya que no se respetará el nuevo orden establecido.
          */
-
         for (int i = 0; i < teams.size(); i++) {
             int row = 1;
 
