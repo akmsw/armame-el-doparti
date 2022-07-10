@@ -1,7 +1,6 @@
 package armameeldoparti.utils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -37,7 +36,7 @@ public class PlayersMixer {
      *
      * @return Los equipos actualizados con los jugadores repartidos.
      */
-    public List<List<Player>> randomMix(List<List<Player>> teams, boolean anchorages) {
+    public List<Team> randomMix(List<Team> teams, boolean anchorages) {
         /*
          * Se elige un número aleatorio entre 0 y 1 (+1)
          * para asignarle como equipo a un conjunto de jugadores,
@@ -50,6 +49,61 @@ public class PlayersMixer {
         int teamSubset2 = 1 - teamSubset1;
 
         if (anchorages) {
+            Team currentWorkingTeam = teams.get(teamSubset1);
+
+            teamFull:
+            for (Position position : Position.values()) {
+                List<Player> playersSet = Main.getPlayersSets()
+                                              .get(position);
+
+                List<Integer> alreadySetted = new ArrayList<>();
+
+                for (int i = 0; i < playersSet.size(); i++) {
+                    do {
+                        index = randomGenerator.nextInt(playersSet.size());
+                    } while (alreadySetted.contains(index));
+
+                    alreadySetted.add(index);
+
+                    Player player = playersSet.get(index);
+
+                    if (player.getAnchor() != 0 && player.getTeam() == 0) {
+                        List<Player> anchoredPlayers = Main.getPlayersSets()
+                                                           .values()
+                                                           .stream()
+                                                           .flatMap(List::stream)
+                                                           .filter(p -> p.getAnchor() == player.getAnchor())
+                                                           .collect(Collectors.toList());
+
+                        if (currentWorkingTeam.getPlayers()
+                                              .values()
+                                              .stream()
+                                              .mapToInt(List::size)
+                                              .sum() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM) {
+                            anchoredPlayers.forEach(p -> {
+                                p.setTeam(teamSubset1 + 1);
+
+                                currentWorkingTeam.getPlayers().get(p.getPosition()).add(p);
+                            });
+                        }
+                    } else {
+                        if (player.getTeam() == 0) {
+                            player.setTeam(teamSubset1 + 1);
+
+                            currentWorkingTeam.getPlayers().get(player.getPosition()).add(player);
+                        }
+                    }
+
+                    if (currentWorkingTeam.getPlayers()
+                                          .values()
+                                          .stream()
+                                          .mapToInt(List::size)
+                                          .sum()  == Main.PLAYERS_PER_TEAM) {
+                        break teamFull;
+                    }
+                }
+            }
+
             List<Player> remainingPlayers = Main.getPlayersSets()
                                                 .values()
                                                 .stream()
@@ -57,12 +111,14 @@ public class PlayersMixer {
                                                 .filter(p -> p.getTeam() == 0)
                                                 .collect(Collectors.toList());
 
-            remainingPlayers.forEach(p -> p.setTeam(teamSubset2 + 1));
+            remainingPlayers.forEach(p -> {
+                p.setTeam(teamSubset2 + 1);
 
-            teams.get(teamSubset2)
-                 .addAll(remainingPlayers);
-
-            return teams;
+                teams.get(teamSubset2)
+                     .getPlayers()
+                     .get(p.getPosition())
+                     .add(p);
+            });
         } else {
             for (Position position : Position.values()) {
                 /*
@@ -86,9 +142,14 @@ public class PlayersMixer {
 
                     alreadySetted.add(index);
 
-                    playersSet.get(index).setTeam(teamSubset1 + 1);
+                    Player chosenPlayer = playersSet.get(index);
 
-                    teams.get(teamSubset1).add(playersSet.get(index));
+                    chosenPlayer.setTeam(teamSubset1 + 1);
+
+                    teams.get(teamSubset1)
+                         .getPlayers()
+                         .get(chosenPlayer.getPosition())
+                         .add(chosenPlayer);
                 }
 
                 playersSet.stream()
@@ -96,7 +157,10 @@ public class PlayersMixer {
                           .forEach(p -> {
                               p.setTeam(teamSubset2 + 1);
 
-                              teams.get(teamSubset2).add(p);
+                              teams.get(teamSubset2)
+                                   .getPlayers()
+                                   .get(p.getPosition())
+                                   .add(p);
                           });
 
                 alreadySetted.clear();
@@ -112,46 +176,46 @@ public class PlayersMixer {
      *
      * @param anchorages Si la mezcla por puntuaciones debe tener en cuenta anclajes establecidos.
      */
-    public List<List<Player>> ratingsMix(List<List<Player>> teams, boolean anchorages) {
+    public List<Team> ratingsMix(List<Team> teams, boolean anchorages) {
         if (anchorages) {
-            return Collections.emptyList();
+            // TODO
         } else {
-            // Se ordenan los jugadores de cada posición en base a su puntuación, de mayor a menor
             for (Position position : Position.values()) {
-                int setSize = Main.getPlayersSets()
-                                  .get(position)
-                                  .size();
+                List<Player> currentSet = Main.getPlayersSets()
+                                              .get(position);
 
-                Main.getPlayersSets()
-                    .get(position)
-                    .sort(Comparator.comparing(Player::getRating)
-                                    .reversed());
+                // Se ordenan los jugadores de esta posición en base a su puntuación, de mayor a menor
+                currentSet.sort(Comparator.comparingInt(Player::getRating)
+                                          .reversed());
 
                 /*
                  * Se ordenan los equipos en base a la suma de los puntuaciones
                  * de sus jugadores hasta el momento, de menor a mayor.
                  */
-                teams.sort(Comparator.comparingInt(t -> t.stream()
+                teams.sort(Comparator.comparingInt(t -> t.getPlayers()
+                                                         .values()
+                                                         .stream()
+                                                         .flatMap(List::stream)
                                                          .mapToInt(Player::getRating)
                                                          .reduce(0, Math::addExact)));
 
-                if (setSize == 2) {
+                if (currentSet.size() == 2) {
                     // Al equipo con menor puntuación se le asigna el jugador de mayor puntuación
                     teams.get(0)
-                         .add(Main.getPlayersSets()
-                                  .get(position)
-                                  .get(0));
+                         .getPlayers()
+                         .get(position)
+                         .add(currentSet.get(0));
 
                     // Al equipo con mayor puntuación se le asigna el jugador de menor puntuación
                     teams.get(1)
-                         .add(Main.getPlayersSets()
-                                  .get(position)
-                                  .get(1));
+                         .getPlayers()
+                         .get(position)
+                         .add(currentSet.get(1));
                 } else {
-                    List<List<Player>> playersSubsets = new ArrayList<>();
-
                     List<Player> playersSubset1 = new ArrayList<>();
                     List<Player> playersSubset2 = new ArrayList<>();
+
+                    List<List<Player>> playersSubsets = new ArrayList<>();
 
                     /*
                      * Agregamos los jugadores de los extremos, desde afuera
@@ -165,34 +229,30 @@ public class PlayersMixer {
                      *
                      * (i % 2 == 0 ? playersSubset1 : playersSubset2).add(...)
                      */
-                    playersSubset1.add(Main.getPlayersSets()
-                                           .get(position)
-                                           .get(0));
-                    playersSubset1.add(Main.getPlayersSets()
-                                           .get(position)
-                                           .get(setSize - 1));
+                    playersSubset1.add(currentSet.get(0));
+                    playersSubset1.add(currentSet.get(currentSet.size() - 1));
 
-                    playersSubset2.add(Main.getPlayersSets()
-                                           .get(position)
-                                           .get(1));
-                    playersSubset2.add(Main.getPlayersSets()
-                                           .get(position)
-                                           .get(setSize - 2));
+                    playersSubset2.add(currentSet.get(1));
+                    playersSubset2.add(currentSet.get(currentSet.size() - 2));
 
                     playersSubsets.add(playersSubset1);
                     playersSubsets.add(playersSubset2);
 
                     // Ordenamos los subconjuntos en base a sus puntuaciones, de mayor a menor
-                    playersSubsets.sort(Comparator.comparingInt(set -> set.stream()
-                                                                          .mapToInt(Player::getRating)
-                                                                          .reduce(0, Math::addExact)));
-
-                    // Al equipo con mayor puntuación se le asigna el conjunto de jugadores que sumen menor puntuación
-                    teams.get(0)
-                         .addAll(playersSubsets.get(1));
+                    playersSubsets.sort(Comparator.comparingInt(ps -> ps.stream()
+                                                                        .mapToInt(Player::getRating)
+                                                                        .reduce(0, Math::addExact)));
 
                     // Al equipo con menor puntuación se le asigna el conjunto de jugadores que sumen mayor puntuación
+                    teams.get(0)
+                         .getPlayers()
+                         .get(position)
+                         .addAll(playersSubsets.get(1));
+
+                    // Al equipo con mayor puntuación se le asigna el conjunto de jugadores que sumen menor puntuación
                     teams.get(1)
+                         .getPlayers()
+                         .get(position)
                          .addAll(playersSubsets.get(0));
                 }
             }

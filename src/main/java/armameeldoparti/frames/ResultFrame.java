@@ -5,6 +5,7 @@ import armameeldoparti.utils.Main;
 import armameeldoparti.utils.Player;
 import armameeldoparti.utils.PlayersMixer;
 import armameeldoparti.utils.Position;
+import armameeldoparti.utils.Team;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -69,15 +70,16 @@ public class ResultFrame extends JFrame {
 
     private String frameTitle;
 
-    private transient List<Player> team1;
-    private transient List<Player> team2;
-    private transient List<List<Player>> teams;
-
     private JFrame previousFrame;
 
     private JPanel panel;
 
     private JTable table;
+
+    private transient Team team1;
+    private transient Team team2;
+
+    private transient List<Team> teams;
 
     private transient PlayersMixer mixer;
 
@@ -91,8 +93,8 @@ public class ResultFrame extends JFrame {
     public ResultFrame(JFrame previousFrame) {
         this.previousFrame = previousFrame;
 
-        team1 = new ArrayList<>();
-        team2 = new ArrayList<>();
+        team1 = new Team(1);
+        team2 = new Team(2);
         teams = new ArrayList<>();
 
         teams.add(team1);
@@ -145,7 +147,7 @@ public class ResultFrame extends JFrame {
     /**
      * @return El arreglo de equipos.
      */
-    public List<List<Player>> getTeams() {
+    public List<Team> getTeams() {
         return teams;
     }
 
@@ -337,6 +339,8 @@ public class ResultFrame extends JFrame {
      * Llena la tabla con los datos cargados de los jugadores en cada equipo.
      */
     private void fillTable() {
+        int column = 1;
+
         /*
          * ¡¡¡IMPORTANTE!!!
          *
@@ -349,19 +353,31 @@ public class ResultFrame extends JFrame {
          * etiquetas de las posiciones en la tabla, deberá cambiarse esta
          * manera de llenarla, ya que no se respetará el nuevo orden establecido.
          */
-        for (int i = 0; i < teams.size(); i++) {
+        for (Team team : teams) {
             int row = 1;
 
-            for (Player player : teams.get(i)) {
-                table.setValueAt(player.getName(), row++, i + 1);
+            for (Position position : Position.values()) {
+                for (Player player : team.getPlayers().get(position)) {
+                    table.setValueAt(player.getName(), row++, column);
+                }
             }
+
+            column++;
         }
 
         if (Main.getDistribution() == Main.RATINGS_MIX) {
-            table.setValueAt(team1.stream()
+            table.setValueAt(teams.get(0)
+                                  .getPlayers()
+                                  .values()
+                                  .stream()
+                                  .flatMap(List::stream)
                                   .mapToInt(Player::getRating)
                                   .reduce(0, Math::addExact), table.getRowCount() - 1, 1);
-            table.setValueAt(team2.stream()
+            table.setValueAt(teams.get(1)
+                                  .getPlayers()
+                                  .values()
+                                  .stream()
+                                  .flatMap(List::stream)
                                   .mapToInt(Player::getRating)
                                   .reduce(0, Math::addExact), table.getRowCount() - 1, 2);
         }
@@ -384,6 +400,6 @@ public class ResultFrame extends JFrame {
             .forEach(ps -> ps.getValue()
                              .forEach(p -> p.setTeam(0)));
 
-        teams.forEach(List::clear);
+        teams.forEach(Team::clear);
     }
 }

@@ -1,7 +1,7 @@
 package armameeldoparti.utils;
 
 /**
- * Posibles posiciones para los jugadores.
+ * Clase correspondiente a las posibles posiciones para los jugadores.
  *
  * @author Bonino, Francisco Ignacio.
  *
