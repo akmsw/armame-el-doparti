@@ -128,7 +128,8 @@ public class RatingsFrame extends JFrame {
             }
 
             for (JSpinner js : spinnersMap.values()) {
-                ((DefaultEditor) js.getEditor()).getTextField().setEditable(false);
+                ((DefaultEditor) js.getEditor()).getTextField()
+                                                .setEditable(false);
             }
         }
 

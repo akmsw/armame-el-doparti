@@ -60,6 +60,11 @@ public final class Main {
     public static final String ICON_FILENAME = "icon.png";
 
     /**
+     * Nombre del archivo de imagen de fondo para el menú principal.
+     */
+    public static final String BG_IMG_FILENAME = "bg.png";
+
+    /**
      * Dirección relativa del directorio de imágenes.
      */
     public static final String IMG_PATH = "img/";

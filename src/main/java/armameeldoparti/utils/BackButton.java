@@ -35,7 +35,6 @@ public class BackButton extends JButton {
         setText(text == null || text.isBlank() || text.isEmpty() ? DEFAULT_TEXT : text);
         setEnabled(true);
         setVisible(true);
-
         addActionListener(e -> {
             previousFrame.setVisible(true);
 

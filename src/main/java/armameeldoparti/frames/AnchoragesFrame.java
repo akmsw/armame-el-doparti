@@ -59,7 +59,6 @@ public class AnchoragesFrame extends JFrame {
     private List<JCheckBox> mfCB;
     private List<JCheckBox> fwCB;
     private List<JCheckBox> gkCB;
-
     private List<List<JCheckBox>> cbSets;
 
     private JButton newAnchorageButton;
@@ -246,9 +245,7 @@ public class AnchoragesFrame extends JFrame {
         });
 
         deleteSpecificAnchorageButton.addActionListener(e -> deleteSpecificAnchorage());
-
         deleteLastAnchorageButton.addActionListener(e -> deleteLast());
-
         clearAnchoragesButton.addActionListener(e -> clearAnchorages());
 
         leftPanel.add(okButton, GROWX_SPAN);

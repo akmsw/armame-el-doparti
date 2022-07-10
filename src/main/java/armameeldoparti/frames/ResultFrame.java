@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -50,11 +49,6 @@ public class ResultFrame extends JFrame {
     private static final int ROW_LIMIT_7 = 7;
 
     /**
-     * Configuración utilizada frecuentemente.
-     */
-    private static final String GROWX = "growx";
-
-    /**
      * Tamaño de ancho (en píxeles) fijo para las celdas de la tabla de resultados.
      * Valor ajustado a fuente del programa teniendo en cuenta su tamaño y la cantidad
      * máxima de caracteres en los nombres de los jugadores.
@@ -66,13 +60,17 @@ public class ResultFrame extends JFrame {
      */
     private static final int TABLE_COLUMNS = 3;
 
+    /**
+     * Configuración utilizada frecuentemente.
+     */
+    private static final String GROWX = "growx";
+
     // ---------------------------------------- Campos privados -----------------------------------
 
     private String frameTitle;
 
     private transient List<Player> team1;
     private transient List<Player> team2;
-
     private transient List<List<Player>> teams;
 
     private JFrame previousFrame;
@@ -389,13 +387,11 @@ public class ResultFrame extends JFrame {
      * los arreglos representativos de cada equipo.
      */
     private void resetTeams() {
-        for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets().entrySet()) {
-            for (Player p : ps.getValue()) {
-                p.setTeam(0);
-            }
-        }
+        Main.getPlayersSets()
+            .entrySet()
+            .forEach(ps -> ps.getValue()
+                             .forEach(p -> p.setTeam(0)));
 
-        team1.clear();
-        team2.clear();
+        teams.forEach(List::clear);
     }
 }

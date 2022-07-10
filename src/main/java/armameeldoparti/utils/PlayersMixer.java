@@ -62,7 +62,6 @@ public class PlayersMixer {
                  * aleatoria (aquellos con team == 0) del mismo grupo, se
                  * les asigna el número de equipo opuesto.
                  */
-
                 int teamSubset1 = randomGenerator.nextInt(2);
                 int teamSubset2 = 1 - teamSubset1;
 

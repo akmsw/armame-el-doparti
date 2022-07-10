@@ -52,11 +52,6 @@ public class MainFrame extends JFrame {
      */
     private static final String GROWX = "growx";
 
-    /**
-     * Nombre del archivo de imagen de fondo para el menú principal.
-     */
-    private static final String BG_IMG_FILENAME = "bg.png";
-
     // ---------------------------------------- Campos privados -----------------------------------
 
     private JButton startButton;
@@ -74,7 +69,7 @@ public class MainFrame extends JFrame {
 
         ImageIcon bgImage = new ImageIcon(this.getClass()
                                               .getClassLoader()
-                                              .getResource(Main.IMG_PATH + BG_IMG_FILENAME));
+                                              .getResource(Main.IMG_PATH + Main.BG_IMG_FILENAME));
 
         JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
 
@@ -99,7 +94,14 @@ public class MainFrame extends JFrame {
         });
 
         helpButton.setEnabled(true);
-        helpButton.addActionListener(e -> help());
+        helpButton.addActionListener(e -> {
+            HelpFrame helpFrame = new HelpFrame(MainFrame.this);
+
+            helpFrame.setVisible(true);
+
+            MainFrame.this.setVisible(false);
+            MainFrame.this.setLocationRelativeTo(null);
+        });
 
         panel.add(bgLabel, GROWX);
         panel.add(startButton, GROWX);
@@ -116,18 +118,6 @@ public class MainFrame extends JFrame {
     }
 
     // ---------------------------------------- Métodos privados ----------------------------------
-
-    /**
-     * Despliega las instrucciones de uso del programa.
-     */
-    private void help() {
-        HelpFrame helpFrame = new HelpFrame(MainFrame.this);
-
-        helpFrame.setVisible(true);
-
-        MainFrame.this.setVisible(false);
-        MainFrame.this.setLocationRelativeTo(null);
-    }
 
     // ---------------------------------------- Setters -------------------------------------------
 

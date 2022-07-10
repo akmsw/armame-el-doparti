@@ -57,20 +57,6 @@ public class InputFrame extends JFrame {
     private static final int TEXT_AREA_COLUMNS = 12;
 
     /**
-     * Posiciones para la lista desplegable.
-     */
-    private static final String[] OPTIONS_COMBOBOX = {"Defensores centrales",
-                                                      "Defensores laterales",
-                                                      "Mediocampistas",
-                                                      "Delanteros",
-                                                      "Arqueros"};
-
-    /**
-     * Opciones de distribución de jugadores.
-     */
-    private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntuaciones"};
-
-    /**
      * Expresión regular para validación de nombres.
      */
     private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
@@ -84,6 +70,20 @@ public class InputFrame extends JFrame {
      * Nombre del archivo .pda.
      */
     private static final String PDA_FILENAME = "dist.pda";
+
+    /**
+     * Posiciones para la lista desplegable.
+     */
+    private static final String[] OPTIONS_COMBOBOX = {"Defensores centrales",
+                                                      "Defensores laterales",
+                                                      "Mediocampistas",
+                                                      "Delanteros",
+                                                      "Arqueros"};
+
+    /**
+     * Opciones de distribución de jugadores.
+     */
+    private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntuaciones"};
 
     // ---------------------------------------- Campos privados -----------------------------------
 
@@ -218,7 +218,6 @@ public class InputFrame extends JFrame {
         textFields = Arrays.asList(textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK);
 
         Main.setPlayersSets(new TreeMap<>());
-
         Main.getPlayersSets().put(Position.CENTRAL_DEFENDER, setCD);
         Main.getPlayersSets().put(Position.LATERAL_DEFENDER, setLD);
         Main.getPlayersSets().put(Position.MIDFIELDER, setMF);
@@ -254,8 +253,8 @@ public class InputFrame extends JFrame {
         masterPanel.add(rightPanel, "east");
 
         add(masterPanel);
-        pack();
         setResizable(false);
+        pack();
         setLocationRelativeTo(null);
     }
 
@@ -302,8 +301,7 @@ public class InputFrame extends JFrame {
 
                         tf.setText("");
                     } else {
-                        playersSet.get(index)
-                                  .setName(name);
+                        playersSet.get(index).setName(name);
 
                         updateTextArea();
 
@@ -339,7 +337,6 @@ public class InputFrame extends JFrame {
 
         mixButton.setEnabled(false);
         mixButton.setVisible(true);
-
         mixButton.addActionListener(e -> {
             Main.setDistribution(JOptionPane.showOptionDialog(null,
                                                       "Seleccione el criterio de distribución de jugadores",
@@ -483,6 +480,7 @@ public class InputFrame extends JFrame {
         return Main.getPlayersSets().values()
                                     .stream()
                                     .flatMap(Collection::stream)
-                                    .anyMatch(p -> p.getName().equals(name));
+                                    .anyMatch(p -> p.getName()
+                                                    .equals(name));
     }
 }
