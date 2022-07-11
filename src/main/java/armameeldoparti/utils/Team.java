@@ -18,8 +18,6 @@ public class Team {
 
     // ---------------------------------------- Campos privados -----------------------------------
 
-    private int teamNumber;
-
     private List<Player> goalkeepers;
     private List<Player> centralDefenders;
     private List<Player> lateralDefenders;
@@ -33,7 +31,7 @@ public class Team {
     /**
      * Construye un equipo con sus posiciones vacías.
      */
-    public Team(int teamNumber) {
+    public Team() {
         goalkeepers = new ArrayList<>();
         centralDefenders = new ArrayList<>();
         lateralDefenders = new ArrayList<>();
@@ -47,8 +45,6 @@ public class Team {
         teamPlayers.put(Position.LATERAL_DEFENDER, lateralDefenders);
         teamPlayers.put(Position.MIDFIELDER, midfielders);
         teamPlayers.put(Position.FORWARD, forwards);
-
-        setTeamNumber(teamNumber);
     }
 
     // ---------------------------------------- Métodos públicos ----------------------------------
@@ -64,18 +60,19 @@ public class Team {
     // ---------------------------------------- Getters -------------------------------------------
 
     /**
-     * @return Mapa con los jugadores de este equipo para cada posición.
+     * @return cantidad total de jugadores en el equipo.
+     */
+    public int getPlayersCount() {
+        return teamPlayers.values()
+                          .stream()
+                          .mapToInt(List::size)
+                          .sum();
+    }
+
+    /**
+     * @return mapa con los jugadores de este equipo para cada posición.
      */
     public Map<Position, List<Player>> getPlayers() {
         return teamPlayers;
-    }
-
-    public int getTeamNumber() {
-        return teamNumber;
-    }
-
-    // ---------------------------------------- Setters -------------------------------------------
-    private void setTeamNumber(int teamNumber) {
-        this.teamNumber = teamNumber;
     }
 }

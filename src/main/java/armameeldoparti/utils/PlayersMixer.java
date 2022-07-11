@@ -42,8 +42,8 @@ public class PlayersMixer {
      */
     public List<Team> randomMix(List<Team> teams, boolean anchorages) {
         /*
-         * Se elige un número aleatorio entre 0 y 1 (+1)
-         * para asignarle como equipo a un conjunto de jugadores,
+         * Se elige un número aleatorio entre 0 y 1 para
+         * asignarle como equipo a un conjunto de jugadores,
          * y el resto tendrá asignado el equipo opuesto.
          */
         randomGenerator = new Random();
@@ -53,6 +53,25 @@ public class PlayersMixer {
         int teamSubset2 = 1 - teamSubset1;
 
         if (anchorages) {
+            /*
+             * Si hay anclajes, se comienza recorriendo cada posición.
+             * Mientras la posición en la que se está trabajando no tenga la
+             * cantidad de jugadores especificada para dicha posición por equipo,
+             * se seguirá iterando.
+             * Se escoge un jugador de manera aleatoria del conjunto total de
+             * jugadores con la posición seleccionada, y se chequea si está
+             * disponible (equipo = 0) y si tiene anclajes.
+             * Si el jugador está disponible y está anclado con otros jugadores,
+             * se toma todos los jugadores de todas las posiciones con su mismo
+             * número de anclaje y se valida si se pueden agregar al equipo sin
+             * sobrepasar la cantidad de jugadores permitida por cada posición.
+             * En caso de que sí se pueda, se los agrega. Si no, se continúa iterando.
+             * Si el jugador no tiene anclaje y se lo puede agregar sin sobrepasar el
+             * límite de jugadores para su posición, se lo agrega.
+             * Cuando el primer equipo elegido está lleno, se deja de iterar.
+             * Se toman todos los jugadores restantes y se les asigna el número de
+             * equipo contrario al elegido en un principio.
+             */
             Team currentWorkingTeam = teams.get(teamSubset1);
 
             teamFull:
@@ -62,7 +81,7 @@ public class PlayersMixer {
 
                 List<Integer> alreadySetted = new ArrayList<>();
 
-                for (int i = 0; i < playersSet.size() / 2; i++) {
+                while (currentWorkingTeam.getPlayers().get(position).size() < Main.getPlayersAmountMap().get(position)) {
                     do {
                         index = randomGenerator.nextInt(playersSet.size());
                     } while (alreadySetted.contains(index));
@@ -79,11 +98,7 @@ public class PlayersMixer {
                                                            .filter(p -> p.getAnchor() == player.getAnchor())
                                                            .collect(Collectors.toList());
 
-                        if (currentWorkingTeam.getPlayers()
-                                              .values()
-                                              .stream()
-                                              .mapToInt(List::size)
-                                              .sum() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM) {
+                        if (currentWorkingTeam.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM && validateAnchoredPlayers(currentWorkingTeam, anchoredPlayers)) {
                             anchoredPlayers.forEach(p -> {
                                 p.setTeam(teamSubset1 + 1);
 
@@ -91,22 +106,14 @@ public class PlayersMixer {
                             });
                         }
                     } else {
-                        if (player.getTeam() == 0 && currentWorkingTeam.getPlayers()
-                                                                       .values()
-                                                                       .stream()
-                                                                       .mapToInt(List::size)
-                                                                       .sum() + 1 <= Main.PLAYERS_PER_TEAM) {
+                        if (player.getTeam() == 0 && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
                             player.setTeam(teamSubset1 + 1);
 
                             currentWorkingTeam.getPlayers().get(player.getPosition()).add(player);
                         }
                     }
 
-                    if (currentWorkingTeam.getPlayers()
-                                          .values()
-                                          .stream()
-                                          .mapToInt(List::size)
-                                          .sum()  == Main.PLAYERS_PER_TEAM) {
+                    if (currentWorkingTeam.getPlayersCount() == Main.PLAYERS_PER_TEAM) {
                         break teamFull;
                     }
                 }
@@ -267,5 +274,38 @@ public class PlayersMixer {
         }
 
         return teams;
+    }
+
+    // ---------------------------------------- Métodos privados ----------------------------------
+
+    /**
+     * Valida si todos los jugadores anclados pueden ser agregados al equipo.
+     * <p>
+     * Se recorren los conjuntos de jugadores con las posiciones de todos los anclados, y
+     * se evalúa si al agregarlos no se supera el número de jugadores permitidos por posición
+     * por equipo.
+     * <p>
+     * Esto se hace con el fin de evitar que en un equipo queden más de la mitad de jugadores
+     * de una posición.
+     *
+     * @param team            Equipo donde se desea registrar los jugadores anclados
+     * @param anchoredPlayers Lista de jugadores con el mismo anclaje.
+     *
+     * @return Si se pueden agregar al equipo los jugadores anclados especificados.
+     */
+    private boolean validateAnchoredPlayers(Team team, List<Player> anchoredPlayers) {
+        for (Player player : anchoredPlayers) {
+            if (team.getPlayers()
+                    .get(player.getPosition())
+                    .size()
+                + anchoredPlayers.stream()
+                                 .filter(p -> p.getPosition() == player.getPosition())
+                                 .count() > Main.getPlayersAmountMap()
+                                                .get(player.getPosition())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -11,7 +11,6 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -95,8 +94,8 @@ public class ResultFrame extends JFrame {
     public ResultFrame(JFrame previousFrame) {
         this.previousFrame = previousFrame;
 
-        team1 = new Team(1);
-        team2 = new Team(2);
+        team1 = new Team();
+        team2 = new Team();
         teams = new ArrayList<>();
 
         teams.add(team1);
