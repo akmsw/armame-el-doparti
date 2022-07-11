@@ -259,7 +259,7 @@ public class InputFrame extends JFrame {
     }
 
     /**
-     * Llena el conjunto de jugadores recibido con jugadores sin nombre y con la posición especificada.
+     * Llena el conjunto de jugadores recibido con jugadores sin nombre ni puntuación, y con la posición especificada.
      *
      * @param set      Arreglo de jugadores a inicializar.
      * @param position Posición de los jugadores del arreglo.

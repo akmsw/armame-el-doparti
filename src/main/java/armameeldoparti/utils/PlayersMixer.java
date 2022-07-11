@@ -49,7 +49,7 @@ public class PlayersMixer {
         randomGenerator = new Random();
 
         int index;
-        int teamSubset1 = randomGenerator.nextInt(2);
+        int teamSubset1 = randomGenerator.nextInt(teams.size());
         int teamSubset2 = 1 - teamSubset1;
 
         if (anchorages) {
@@ -91,7 +91,11 @@ public class PlayersMixer {
                             });
                         }
                     } else {
-                        if (player.getTeam() == 0) {
+                        if (player.getTeam() == 0 && currentWorkingTeam.getPlayers()
+                                                                       .values()
+                                                                       .stream()
+                                                                       .mapToInt(List::size)
+                                                                       .sum() + 1 <= Main.PLAYERS_PER_TEAM) {
                             player.setTeam(teamSubset1 + 1);
 
                             currentWorkingTeam.getPlayers().get(player.getPosition()).add(player);

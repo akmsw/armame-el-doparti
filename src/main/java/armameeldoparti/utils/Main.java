@@ -89,6 +89,11 @@ public final class Main {
      */
     public static final Color LIGHT_YELLOW = new Color(255, 255, 204);
 
+    /**
+     * Color rojo claro en formato RGB.
+     */
+    public static final Color LIGHT_ORANGE = new Color(255, 204, 153);
+
     // ---------------------------------------- Campos privados -----------------------------------
 
     private static int distribution;

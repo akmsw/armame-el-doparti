@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -277,8 +279,21 @@ public class ResultFrame extends JFrame {
                         c.setForeground(Color.BLACK);
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
-                        c.setBackground(Color.WHITE);
                         c.setForeground(Color.BLACK);
+
+                        if (Main.getPlayersSets()
+                                .values()
+                                .stream()
+                                .flatMap(List::stream)
+                                .filter(p -> p.getName() == value)
+                                .collect(Collectors.toList())
+                                .get(0)
+                                .getAnchor() != 0) {
+                            c.setBackground(Main.LIGHT_ORANGE);
+                        } else {
+                            c.setBackground(Color.WHITE);
+                        }
+
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
                     }
                 }
@@ -384,22 +399,14 @@ public class ResultFrame extends JFrame {
     }
 
     /**
-     * Reparte los jugadores en dos equipos de la manera más equitativa posible
-     * en base a los puntuaciones ingresados por el usuario.
-     *
-     * @param anchorages Si la mezcla por puntuaciones debe tener en cuenta anclajes establecidos.
-     */
-
-    /**
      * Reinicia los equipos de todos los jugadores y vacía
      * los arreglos representativos de cada equipo.
      */
     private void resetTeams() {
-        Main.getPlayersSets()
-            .entrySet()
-            .forEach(ps -> ps.getValue()
-                             .forEach(p -> p.setTeam(0)));
-
         teams.forEach(Team::clear);
+
+        Main.getPlayersSets()
+            .values()
+            .forEach(ps -> ps.forEach(p -> p.setTeam(0)));
     }
 }
