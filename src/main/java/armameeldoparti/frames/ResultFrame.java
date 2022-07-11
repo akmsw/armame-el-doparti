@@ -67,6 +67,16 @@ public class ResultFrame extends JFrame {
      */
     private static final String GROWX = "growx";
 
+    /**
+     * Colores utilizados para los distintos anclajes en la tabla de resultados.
+     */
+    private static final Color[] ANCHORAGES_COLORS = {new Color(255, 204, 153),
+                                                      new Color(184, 224, 227),
+                                                      new Color(151, 197, 216),
+                                                      new Color(220, 206, 235),
+                                                      new Color(195, 235, 198),
+                                                      new Color(219, 220, 218)};
+
     // ---------------------------------------- Campos privados -----------------------------------
 
     private String frameTitle;
@@ -289,7 +299,7 @@ public class ResultFrame extends JFrame {
                         c.setForeground(Color.BLACK);
 
                         if (playerOnCell.getAnchor() != 0) {
-                            c.setBackground(Main.getAnchoragesColors().get(playerOnCell.getAnchor() - 1));
+                            c.setBackground(ANCHORAGES_COLORS[playerOnCell.getAnchor() - 1]);
                         } else {
                             c.setBackground(Color.WHITE);
                         }
