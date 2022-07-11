@@ -2,6 +2,7 @@ package armameeldoparti.utils;
 
 import armameeldoparti.frames.MainFrame;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -89,16 +90,13 @@ public final class Main {
      */
     public static final Color LIGHT_YELLOW = new Color(255, 255, 204);
 
-    /**
-     * Color rojo claro en formato RGB.
-     */
-    public static final Color LIGHT_ORANGE = new Color(255, 204, 153);
-
     // ---------------------------------------- Campos privados -----------------------------------
 
     private static int distribution;
 
     private static boolean anchorages;
+
+    private static List<Color> anchoragesColors;
 
     private static Map<Position, Integer> playersAmountMap;
     private static Map<Position, String> positions;
@@ -129,6 +127,15 @@ public final class Main {
         positions.put(Position.FORWARD, "DELANTEROS");
         positions.put(Position.GOALKEEPER, "ARQUEROS");
 
+        anchoragesColors = new ArrayList<>();
+
+        anchoragesColors.add(new Color(255, 204, 153));
+        anchoragesColors.add(new Color(184, 224, 227));
+        anchoragesColors.add(new Color(151, 197, 216));
+        anchoragesColors.add(new Color(220, 206, 235));
+        anchoragesColors.add(new Color(195, 235, 198));
+        anchoragesColors.add(new Color(219, 220, 218));
+
         MainFrame mainFrame = new MainFrame();
 
         mainFrame.setVisible(true);
@@ -150,6 +157,13 @@ public final class Main {
      */
     public static boolean thereAreAnchorages() {
         return anchorages;
+    }
+
+    /**
+     * @return Lista con los colores utilizados para cada anclaje en la tabla de resultados.
+     */
+    public static List<Color> getAnchoragesColors() {
+        return anchoragesColors;
     }
 
     /**

@@ -60,12 +60,13 @@ public class PlayersMixer {
              * se seguirá iterando.
              * Se escoge un jugador de manera aleatoria del conjunto total de
              * jugadores con la posición seleccionada, y se chequea si está
-             * disponible (equipo = 0) y si tiene anclajes.
+             * disponible (equipo = 0) y si tiene anclajes (anclaje != 0).
              * Si el jugador está disponible y está anclado con otros jugadores,
-             * se toma todos los jugadores de todas las posiciones con su mismo
+             * se toman todos los jugadores de todas las posiciones con su mismo
              * número de anclaje y se valida si se pueden agregar al equipo sin
              * sobrepasar la cantidad de jugadores permitida por cada posición.
-             * En caso de que sí se pueda, se los agrega. Si no, se continúa iterando.
+             * En caso de que sí se pueda, se los agrega. Si no, se los ignora y se
+             * continúa iterando.
              * Si el jugador no tiene anclaje y se lo puede agregar sin sobrepasar el
              * límite de jugadores para su posición, se lo agrega.
              * Cuando el primer equipo elegido está lleno, se deja de iterar.

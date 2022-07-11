@@ -278,17 +278,18 @@ public class ResultFrame extends JFrame {
                         c.setForeground(Color.BLACK);
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
+                        Player playerOnCell = Main.getPlayersSets()
+                                                  .values()
+                                                  .stream()
+                                                  .flatMap(List::stream)
+                                                  .filter(p -> p.getName() == value)
+                                                  .collect(Collectors.toList())
+                                                  .get(0);
+
                         c.setForeground(Color.BLACK);
 
-                        if (Main.getPlayersSets()
-                                .values()
-                                .stream()
-                                .flatMap(List::stream)
-                                .filter(p -> p.getName() == value)
-                                .collect(Collectors.toList())
-                                .get(0)
-                                .getAnchor() != 0) {
-                            c.setBackground(Main.LIGHT_ORANGE);
+                        if (playerOnCell.getAnchor() != 0) {
+                            c.setBackground(Main.getAnchoragesColors().get(playerOnCell.getAnchor() - 1));
                         } else {
                             c.setBackground(Color.WHITE);
                         }
