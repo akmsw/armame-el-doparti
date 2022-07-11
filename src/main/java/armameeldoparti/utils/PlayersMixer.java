@@ -13,9 +13,13 @@ import java.util.stream.Collectors;
  *
  * @version 3.0.0
  *
- * @since 04/07/2021
+ * @since 04/07/2022
  */
 public class PlayersMixer {
+
+    // ---------------------------------------- Campos privados -----------------------------------
+
+    private Random randomGenerator;
 
     // ---------------------------------------- Constructor ---------------------------------------
 
@@ -23,7 +27,7 @@ public class PlayersMixer {
      * Construye el objeto repartidor de jugadores.
      */
     public PlayersMixer() {
-        // No necesita cuerpo
+        randomGenerator = new Random();
     }
 
     // ---------------------------------------- Métodos públicos ----------------------------------
@@ -42,7 +46,7 @@ public class PlayersMixer {
          * para asignarle como equipo a un conjunto de jugadores,
          * y el resto tendrá asignado el equipo opuesto.
          */
-        Random randomGenerator = new Random();
+        randomGenerator = new Random();
 
         int index;
         int teamSubset1 = randomGenerator.nextInt(2);
@@ -58,7 +62,7 @@ public class PlayersMixer {
 
                 List<Integer> alreadySetted = new ArrayList<>();
 
-                for (int i = 0; i < playersSet.size(); i++) {
+                for (int i = 0; i < playersSet.size() / 2; i++) {
                     do {
                         index = randomGenerator.nextInt(playersSet.size());
                     } while (alreadySetted.contains(index));
@@ -135,7 +139,7 @@ public class PlayersMixer {
                                               .get(position);
                 List<Integer> alreadySetted = new ArrayList<>();
 
-                for (int i = 0; i < (playersSet.size() / 2); i++) {
+                for (int i = 0; i < playersSet.size() / 2; i++) {
                     do {
                         index = randomGenerator.nextInt(playersSet.size());
                     } while (alreadySetted.contains(index));

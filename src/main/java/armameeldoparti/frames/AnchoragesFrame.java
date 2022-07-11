@@ -61,6 +61,7 @@ public class AnchoragesFrame extends JFrame {
     private List<JCheckBox> gkCB;
     private List<List<JCheckBox>> cbSets;
 
+    private JButton okButton;
     private JButton newAnchorageButton;
     private JButton clearAnchoragesButton;
     private JButton deleteSpecificAnchorageButton;
@@ -175,7 +176,7 @@ public class AnchoragesFrame extends JFrame {
      * Coloca los botones en los paneles de la ventana.
      */
     private void addButtons() {
-        JButton okButton = new JButton("Finalizar");
+        okButton = new JButton("Finalizar");
 
         BackButton backButton = new BackButton(AnchoragesFrame.this, previousFrame, null);
 
@@ -184,6 +185,7 @@ public class AnchoragesFrame extends JFrame {
         deleteLastAnchorageButton = new JButton("Borrar último anclaje");
         clearAnchoragesButton = new JButton("Limpiar anclajes");
 
+        okButton.setEnabled(false);
         okButton.addActionListener(e -> {
             cbSets.forEach(cbs -> cbs.forEach(cb -> {
                 if (cb.isSelected() && cb.isVisible()) {
@@ -419,14 +421,15 @@ public class AnchoragesFrame extends JFrame {
      */
     private void toggleButtons() {
         if (anchorageNum > 0 && anchorageNum < 2) {
+            okButton.setEnabled(true);
             deleteSpecificAnchorageButton.setEnabled(false);
             deleteLastAnchorageButton.setEnabled(true);
             clearAnchoragesButton.setEnabled(true);
         } else if (anchorageNum >= 2) {
             deleteSpecificAnchorageButton.setEnabled(true);
             deleteLastAnchorageButton.setEnabled(true);
-            clearAnchoragesButton.setEnabled(true);
         } else {
+            okButton.setEnabled(false);
             deleteSpecificAnchorageButton.setEnabled(false);
             deleteLastAnchorageButton.setEnabled(false);
             clearAnchoragesButton.setEnabled(false);

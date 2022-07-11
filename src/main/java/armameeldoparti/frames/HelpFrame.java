@@ -14,7 +14,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @version 3.0.0
  *
- * @since 03/07/2021
+ * @since 03/07/2022
  */
 public class HelpFrame extends JFrame {
 
