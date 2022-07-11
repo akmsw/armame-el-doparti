@@ -60,7 +60,7 @@ public class Team {
     // ---------------------------------------- Getters -------------------------------------------
 
     /**
-     * @return cantidad total de jugadores en el equipo.
+     * @return Cantidad total de jugadores en el equipo.
      */
     public int getPlayersCount() {
         return teamPlayers.values()
@@ -70,7 +70,7 @@ public class Team {
     }
 
     /**
-     * @return mapa con los jugadores de este equipo para cada posición.
+     * @return Mapa con los jugadores de este equipo para cada posición.
      */
     public Map<Position, List<Player>> getPlayers() {
         return teamPlayers;

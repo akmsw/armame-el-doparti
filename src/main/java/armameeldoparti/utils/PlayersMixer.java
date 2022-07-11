@@ -81,7 +81,10 @@ public class PlayersMixer {
 
                 List<Integer> alreadySetted = new ArrayList<>();
 
-                while (currentWorkingTeam.getPlayers().get(position).size() < Main.getPlayersAmountMap().get(position)) {
+                while (currentWorkingTeam.getPlayers()
+                                         .get(position)
+                                         .size() < Main.getPlayersAmountMap()
+                                                       .get(position)) {
                     do {
                         index = randomGenerator.nextInt(playersSet.size());
                     } while (alreadySetted.contains(index));
@@ -98,7 +101,8 @@ public class PlayersMixer {
                                                            .filter(p -> p.getAnchor() == player.getAnchor())
                                                            .collect(Collectors.toList());
 
-                        if (currentWorkingTeam.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM && validateAnchoredPlayers(currentWorkingTeam, anchoredPlayers)) {
+                        if (currentWorkingTeam.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM
+                            && validateAnchoredPlayers(currentWorkingTeam, anchoredPlayers)) {
                             anchoredPlayers.forEach(p -> {
                                 p.setTeam(teamSubset1 + 1);
 
@@ -109,7 +113,9 @@ public class PlayersMixer {
                         if (player.getTeam() == 0 && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
                             player.setTeam(teamSubset1 + 1);
 
-                            currentWorkingTeam.getPlayers().get(player.getPosition()).add(player);
+                            currentWorkingTeam.getPlayers()
+                                              .get(player.getPosition())
+                                              .add(player);
                         }
                     }
 
