@@ -111,7 +111,8 @@ public class PlayersMixer {
                             });
                         }
                     } else {
-                        if (player.getTeam() == 0 && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
+                        if (player.getTeam() == 0
+                            && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
                             player.setTeam(teamSubset1 + 1);
 
                             currentWorkingTeam.getPlayers()
@@ -167,7 +168,6 @@ public class PlayersMixer {
                     Player chosenPlayer = playersSet.get(index);
 
                     chosenPlayer.setTeam(teamSubset1 + 1);
-
                     teams.get(teamSubset1)
                          .getPlayers()
                          .get(chosenPlayer.getPosition())
@@ -178,7 +178,6 @@ public class PlayersMixer {
                           .filter(p -> p.getTeam() == 0)
                           .forEach(p -> {
                               p.setTeam(teamSubset2 + 1);
-
                               teams.get(teamSubset2)
                                    .getPlayers()
                                    .get(p.getPosition())

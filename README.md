@@ -81,9 +81,6 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
     - En el campo de ingreso de comando personalizado, ingresar: `java -jar`
     - Seleccionar como opción predeterminada para ejecución de este tipo de archivos
 
-## 🔜 Próximamente
-- Se agregará la opción de elegir entre fútbol 5 y fútbol 7.
-
 ## 📸 Capturas de pantalla
 ![ventana_principal](./src/main/res/img/ss1.png)\
 *Ventana principal*
@@ -101,4 +98,7 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
 *Ventana de muestra de resultados con distribución aleatoria sin anclajes*
 
 ![ventana_resultados_2](./src/main/res/img/ss6.png)\
+*Ventana de muestra de resultados con distribución aleatoria con tres anclajes distintos*
+
+![ventana_resultados_3](./src/main/res/img/ss7.png)\
 *Ventana de muestra de resultados con distribución por puntuaciones sin anclajes*
