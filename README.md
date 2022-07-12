@@ -20,7 +20,7 @@ Release date: TBD
 - [Mejoras](https://github.com/akmsw/armame-el-doparti#-mejoras)
 - [Solución a problemas frecuentes](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-soluci%C3%B3n-de-problemas-comunes)
     - [En Linux](https://github.com/akmsw/armame-el-doparti#-en-linux)
-- [Próximamente](https://github.com/akmsw/armame-el-doparti#-pr%C3%B3ximamente)
+- [Seguimiento](https://github.com/akmsw/armame-el-doparti#-seguimiento)
 - [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
 
 ## 🔎 ¿Qué es?
@@ -59,7 +59,7 @@ Si los jugadores se reparten en base a sus puntuaciones, la distribución óptim
 
 ## ⭐ Nuevas funcionalidades
 ### 🔗 Anclaje de jugadores
-El objetivo de esta funcionalidad es la de indicarle al programa que al menos 2 jugadores seleccionados por el usuario deberán pertenecer al mismo equipo sin importar la distribución que se elija para el resto. El número máximo posible de jugadores a anclar a un mismo equipo es de 6, garantizando así que siempre queden al menos dos jugadores sin anclar para poder realizar alguna distribución.\
+El objetivo de esta funcionalidad es la de indicarle al programa que al menos dos jugadores seleccionados por el usuario deberán pertenecer al mismo equipo sin importar la distribución que se elija para el resto. El número máximo posible de jugadores a anclar a un mismo equipo es de 6, garantizando así que siempre queden al menos dos jugadores sin anclar para poder realizar alguna distribución.\
 Para esto, se proporciona un checkbox rotulado con el texto "*Anclar jugadores*" en la ventana de ingreso de nombres. Si el usuario tilda este checkbox, luego de seleccionar el método de distribución de jugadores se le presentará una ventana en la que habrá una lista con todos los nombres ingresados y su respectivo checkbox. Los jugadores cuyo checkbox esté tildado serán anclados al mismo equipo.\
 No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por ejemplo, si se anclan todos los mediocampistas para un mismo equipo, el otro equipo no tendrá mediocampistas y esto no es posible). Lo mismo sucede con anclar a un mismo equipo más de la mitad de jugadores registrados para una posición particular.
 
@@ -80,6 +80,9 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
     - Abrir con...
     - En el campo de ingreso de comando personalizado, ingresar: `java -jar`
     - Seleccionar como opción predeterminada para ejecución de este tipo de archivos
+
+## 📋 Seguimiento
+Para estar al tanto del desarrollo del programa, se puede visitar el [panel de seguimiento](https://github.com/users/akmsw/projects/2) del mismo y ver en qué se está trabajando, qué cosas están por implementarse, y qué cosas se han terminado de implementar.
 
 ## 📸 Capturas de pantalla
 ![ventana_principal](./src/main/res/img/ss1.png)\
