@@ -58,7 +58,11 @@ public class RatingsFrame extends JFrame {
 
     // ---------------------------------------- Campos privados -----------------------------------
 
+    private JPanel masterPanel;
+
     private ResultFrame resultFrame;
+
+    private transient Map<Player, JSpinner> spinnersMap;
 
     // ---------------------------------------- Constructor ---------------------------------------
 
@@ -68,16 +72,40 @@ public class RatingsFrame extends JFrame {
      * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
      */
     public RatingsFrame(JFrame previousFrame) {
-        JPanel panel = new JPanel(new MigLayout());
+        initializeGUI(previousFrame);
+    }
 
+    /**
+     * Inicializa la interfaz gráfica de esta ventana.
+     *
+     * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
+     */
+    private void initializeGUI(JFrame previousFrame) {
+        masterPanel = new JPanel(new MigLayout());
+
+        spinnersMap = new HashMap<>();
+
+        addSpinners();
+        addButtons(previousFrame);
+        add(masterPanel);
+        setTitle("Puntuaciones");
+        setIconImage(MainFrame.ICON.getImage());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pack();
+        setResizable(false);
+        setLocationRelativeTo(null);
+    }
+
+    /**
+     * Añade los botones al panel de la ventana.
+     *
+     * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
+     */
+    private void addButtons(JFrame previousFrame) {
         JButton finishButton = new JButton("Finalizar");
         JButton resetButton = new JButton("Reiniciar puntuaciones");
 
-        Map<Player, JSpinner> spinnersMap = new HashMap<>();
-
         BackButton backButton = new BackButton(RatingsFrame.this, previousFrame, null);
-
-        panel.setBackground(Main.LIGHT_GREEN);
 
         finishButton.addActionListener(e -> {
             spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
@@ -96,13 +124,22 @@ public class RatingsFrame extends JFrame {
                 k.setRating(0);
             }));
 
+        masterPanel.add(finishButton, GROW_SPAN);
+        masterPanel.add(resetButton, GROW_SPAN);
+        masterPanel.add(backButton, GROW_SPAN);
+    }
+
+    /**
+     * Añade los campos de puntuación al panel de la ventana.
+     */
+    private void addSpinners() {
         for (int i = 0; i < Main.getPlayersSets().size(); i++) {
             JLabel label = new JLabel(Main.getPositionsMap()
                                           .get(Position.values()[i]));
 
             label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-            panel.add(label, GROW_SPAN);
+            masterPanel.add(label, GROW_SPAN);
 
             for (int j = 0; j < Main.getPlayersSets().get(Position.values()[i]).size(); j++) {
                 spinnersMap.put(Main.getPlayersSets()
@@ -111,17 +148,17 @@ public class RatingsFrame extends JFrame {
                                 new JSpinner(new SpinnerNumberModel(RATINGS_INI, RATINGS_MIN,
                                                                     RATINGS_MAX, RATINGS_STEP)));
 
-                panel.add(new JLabel(Main.getPlayersSets()
+                masterPanel.add(new JLabel(Main.getPlayersSets()
                                          .get(Position.values()[i])
                                          .get(j)
                                          .getName()), "pushx");
 
                 if ((j % 2) != 0) {
-                    panel.add(spinnersMap.get(Main.getPlayersSets()
+                    masterPanel.add(spinnersMap.get(Main.getPlayersSets()
                                                   .get(Position.values()[i])
                                                   .get(j)), "wrap");
                 } else {
-                    panel.add(spinnersMap.get(Main.getPlayersSets()
+                    masterPanel.add(spinnersMap.get(Main.getPlayersSets()
                                                   .get(Position.values()[i])
                                                   .get(j)));
                 }
@@ -132,17 +169,5 @@ public class RatingsFrame extends JFrame {
                                                 .setEditable(false);
             }
         }
-
-        panel.add(finishButton, GROW_SPAN);
-        panel.add(resetButton, GROW_SPAN);
-        panel.add(backButton, GROW_SPAN);
-
-        add(panel);
-        setTitle("Puntuaciones");
-        setIconImage(MainFrame.ICON.getImage());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        pack();
-        setResizable(false);
-        setLocationRelativeTo(null);
     }
 }

@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -115,12 +114,9 @@ public class InputFrame extends JFrame {
     public InputFrame(JFrame previousFrame, int playersPerTeam) throws IOException {
         this.previousFrame = previousFrame;
 
-        Main.setAnchorages(false);
-        Main.setPlayersAmountMap(new EnumMap<>(Position.class));
-
         setTotalAnchorages(0);
         collectPDData();
-        initializeComponents("Ingreso de jugadores - Fútbol " + playersPerTeam);
+        initializeGUI("Ingreso de jugadores - Fútbol " + playersPerTeam);
     }
 
     // ---------------------------------------- Métodos públicos ----------------------------------
@@ -192,11 +188,11 @@ public class InputFrame extends JFrame {
     }
 
     /**
-     * Inicializa los componentes de la ventana.
+     * Inicializa y muestra la interfaz gráfica de esta ventana.
      *
      * @param frameTitle Título de la ventana.
      */
-    private void initializeComponents(String frameTitle) {
+    private void initializeGUI(String frameTitle) {
         List<JTextField> textFieldCD = new ArrayList<>();
         List<JTextField> textFieldLD = new ArrayList<>();
         List<JTextField> textFieldMF = new ArrayList<>();
@@ -231,6 +227,8 @@ public class InputFrame extends JFrame {
         leftPanel = new JPanel(new MigLayout("wrap"));
         rightPanel = new JPanel(new MigLayout("wrap"));
 
+        JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
+
         addComboBox();
         addTextFields(Position.CENTRAL_DEFENDER, textFieldCD, setCD);
         addTextFields(Position.LATERAL_DEFENDER, textFieldLD, setLD);
@@ -241,13 +239,7 @@ public class InputFrame extends JFrame {
         addButtons();
         addAnchorCheckBox();
         updateTextFields(comboBox.getSelectedItem()
-                                 .toString()); // Output correspondiente al estado inicial del JComboBox
-
-        JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
-
-        leftPanel.setBackground(Main.LIGHT_GREEN);
-        rightPanel.setBackground(Main.LIGHT_GREEN);
-        masterPanel.setBackground(Main.LIGHT_GREEN);
+                                 .toString()); // Ajustamos el panel izquierdo al item inicial de la lista desplegable
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "east");

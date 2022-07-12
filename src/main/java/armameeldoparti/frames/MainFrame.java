@@ -54,10 +54,7 @@ public class MainFrame extends JFrame {
 
     // ---------------------------------------- Campos privados -----------------------------------
 
-    private JButton startButton;
-    private JButton helpButton;
-
-    private Font programFont;
+    private JPanel masterPanel;
 
     // ---------------------------------------- Constructor ---------------------------------------
 
@@ -66,17 +63,47 @@ public class MainFrame extends JFrame {
      */
     public MainFrame() {
         setGUIProperties();
+        initializeGUI();
+    }
 
+    // ---------------------------------------- Métodos privados ----------------------------------
+
+    /**
+     * Inicializa y muestra la interfaz gráfica de esta ventana.
+     */
+    private void initializeGUI() {
+        masterPanel = new JPanel(new MigLayout("wrap"));
+
+        addBackground();
+        addButtons();
+        add(masterPanel);
+        setResizable(false);
+        setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(ICON.getImage());
+        pack();
+        setLocationRelativeTo(null);
+    }
+
+    /**
+     * Añade la imagen de fondo al panel de la ventana.
+     */
+    private void addBackground() {
         ImageIcon bgImage = new ImageIcon(this.getClass()
                                               .getClassLoader()
                                               .getResource(Main.IMG_PATH + Main.BG_IMG_FILENAME));
 
         JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
 
-        JPanel panel = new JPanel(new MigLayout("wrap"));
+        masterPanel.add(bgLabel, GROWX);
+    }
 
-        startButton = new JButton("Comenzar");
-        helpButton = new JButton("Ayuda");
+    /**
+     * Añade los botones al panel de la ventana.
+     */
+    private void addButtons() {
+        JButton startButton = new JButton("Comenzar");
+        JButton helpButton = new JButton("Ayuda");
 
         startButton.setEnabled(true);
         startButton.addActionListener(e -> {
@@ -103,21 +130,9 @@ public class MainFrame extends JFrame {
             MainFrame.this.setLocationRelativeTo(null);
         });
 
-        panel.add(bgLabel, GROWX);
-        panel.add(startButton, GROWX);
-        panel.add(helpButton, GROWX);
-        panel.setBackground(Main.LIGHT_GREEN);
-
-        add(panel);
-        setResizable(false);
-        setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(ICON.getImage());
-        pack();
-        setLocationRelativeTo(null);
+        masterPanel.add(startButton, GROWX);
+        masterPanel.add(helpButton, GROWX);
     }
-
-    // ---------------------------------------- Métodos privados ----------------------------------
 
     // ---------------------------------------- Setters -------------------------------------------
 
@@ -138,19 +153,19 @@ public class MainFrame extends JFrame {
 
         try {
             // Se registra la fuente para poder utilizarla
-            programFont = Font.createFont(Font.TRUETYPE_FONT,
+            Font programFont = Font.createFont(Font.TRUETYPE_FONT,
                                           this.getClass()
                                               .getClassLoader()
                                               .getResourceAsStream(Main.TTF_PATH + Main.FONT_NAME))
                               .deriveFont(Main.FONT_SIZE);
 
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(programFont);
+
+            setUIFont(programFont);
         } catch (IOException | FontFormatException ex) {
             ex.printStackTrace();
             System.exit(-1);
         }
-
-        setUIFont(programFont);
     }
 
     /**

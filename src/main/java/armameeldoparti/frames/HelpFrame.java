@@ -38,19 +38,19 @@ public class HelpFrame extends JFrame {
     public HelpFrame(JFrame previousFrame) {
         this.previousFrame = previousFrame;
 
-        initializeComponents("Ayuda");
+        pageNum = 1;
+
+        initializeGUI("Ayuda");
     }
 
     // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
-     * Inicializa los componentes de la ventana.
+     * Inicializa y muestra la interfaz gráfica de esta ventana.
      *
      * @param frameTitle Título de la ventana.
      */
-    private void initializeComponents(String frameTitle) {
-        pageNum = 1;
-
+    private void initializeGUI(String frameTitle) {
         masterPanel = new JPanel(new MigLayout("wrap"));
 
         addButtons();

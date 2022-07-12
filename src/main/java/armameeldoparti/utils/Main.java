@@ -124,6 +124,9 @@ public final class Main {
         positions.put(Position.FORWARD, "DELANTEROS");
         positions.put(Position.GOALKEEPER, "ARQUEROS");
 
+        setPlayersAmountMap(new EnumMap<>(Position.class));
+        setAnchorages(false);
+
         MainFrame mainFrame = new MainFrame();
 
         mainFrame.setVisible(true);

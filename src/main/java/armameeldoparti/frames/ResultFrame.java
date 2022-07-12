@@ -141,7 +141,7 @@ public class ResultFrame extends JFrame {
             }
         }
 
-        initializeComponents();
+        initializeGUI();
     }
 
     // ---------------------------------------- Métodos públicos ----------------------------------
@@ -174,9 +174,9 @@ public class ResultFrame extends JFrame {
     // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
-     * Inicializa los componentes de la ventana de resultados.
+     * Inicializa y muestra la interfaz gráfica de esta ventana.
      */
-    private void initializeComponents() {
+    private void initializeGUI() {
         panel = new JPanel(new MigLayout("wrap"));
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

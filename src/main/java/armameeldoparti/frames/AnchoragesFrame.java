@@ -69,7 +69,6 @@ public class AnchoragesFrame extends JFrame {
 
     private JFrame previousFrame;
 
-    private JPanel masterPanel;
     private JPanel leftPanel;
     private JPanel rightPanel;
 
@@ -90,10 +89,6 @@ public class AnchoragesFrame extends JFrame {
 
         maxPlayersPerAnchorage = playersAmount - 1;
 
-        masterPanel = new JPanel(new MigLayout("wrap 2"));
-        leftPanel = new JPanel(new MigLayout("wrap 2"));
-        rightPanel = new JPanel(new MigLayout("wrap"));
-
         cdCB = new ArrayList<>();
         ldCB = new ArrayList<>();
         mfCB = new ArrayList<>();
@@ -105,26 +100,20 @@ public class AnchoragesFrame extends JFrame {
         anchorageNum = 0;
         playersAnchored = 0;
 
-        initializeComponents();
-    }
-
-    // ---------------------------------------- Métodos públicos ----------------------------------
-
-    // ---------------------------------------- Getters -------------------------------------------
-
-    /**
-     * @return Cantidad de anclajes hechos.
-     */
-    public int getAnchoragesAmount() {
-        return anchorageNum;
+        initializeGUI();
     }
 
     // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
-     * Inicializa los componentes de la ventana.
+     * Inicializa y muestra la interfaz gráfica de esta ventana.
      */
-    private void initializeComponents() {
+    private void initializeGUI() {
+        JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
+
+        leftPanel = new JPanel(new MigLayout("wrap 2"));
+        rightPanel = new JPanel(new MigLayout("wrap"));
+
         textArea = new JTextArea();
 
         scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -148,19 +137,14 @@ public class AnchoragesFrame extends JFrame {
             index++;
         }
 
-        leftPanel.setBackground(Main.LIGHT_GREEN);
-
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         textArea.setVisible(true);
-
-        rightPanel.setBackground(Main.LIGHT_GREEN);
 
         addButtons();
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "east");
-        masterPanel.setBackground(Main.LIGHT_GREEN);
 
         updateTextArea();
         setTitle(FRAME_TITLE);
