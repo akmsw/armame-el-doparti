@@ -82,7 +82,7 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
     - Seleccionar como opción predeterminada para ejecución de este tipo de archivos
 
 ## 📋 Seguimiento
-Para estar al tanto del desarrollo del programa, se puede visitar el [panel de seguimiento](https://github.com/users/akmsw/projects/2) del mismo y ver en qué se está trabajando, qué cosas están por implementarse, y qué cosas se han terminado de implementar.
+Para estar al tanto del desarrollo del programa, se puede visitar el [panel de seguimiento](https://github.com/users/akmsw/projects/2) del mismo y ver en qué se está trabajando, qué está por añadirse/modificarse, y qué cosas se han terminado de implementar.
 
 ## 📸 Capturas de pantalla
 ![ventana_principal](./src/main/res/img/ss1.png)\
