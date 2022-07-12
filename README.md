@@ -98,10 +98,10 @@ Para estar al tanto del desarrollo del programa, se puede visitar el [panel de s
 *Ventana de puntuaciones*
 
 ![ventana_resultados_1](./src/main/res/img/ss5.png)\
-*Ventana de muestra de resultados con distribución aleatoria sin anclajes*
+*Ventana de muestra de resultado de distribución aleatoria sin anclajes*
 
 ![ventana_resultados_2](./src/main/res/img/ss6.png)\
-*Ventana de muestra de resultados con distribución aleatoria con tres anclajes distintos*
+*Ventana de muestra de resultado de distribución aleatoria con tres anclajes distintos*
 
 ![ventana_resultados_3](./src/main/res/img/ss7.png)\
-*Ventana de muestra de resultados con distribución por puntuaciones sin anclajes*
+*Ventana de muestra de resultado de distribución por puntuaciones sin anclajes*
