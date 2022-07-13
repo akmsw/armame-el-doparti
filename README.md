@@ -10,8 +10,8 @@ Release date: TBD
 ![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange?logo=apachemaven)
 ![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen?logo=sonarlint)
 ![checkStyleBadge](https://img.shields.io/badge/checkstyle-passing-brightgreen)
-![operatingSystemBadge](https://img.shields.io/badge/OS-multiplatform-blueviolet)
-![licenseBadge](https://img.shields.io/badge/license-gpl3.0-blue)
+![operatingSystemBadge](https://img.shields.io/badge/OS-multiplatform-blueviolet?logo=windowsterminal)
+![licenseBadge](https://img.shields.io/badge/license-gpl3.0-blue?logo=gnu)
 
 ## 📜 Índice
 - [¿Qué es?](https://github.com/akmsw/armame-el-doparti#-qu%C3%A9-es)
