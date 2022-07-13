@@ -75,17 +75,19 @@ public class PlayersMixer {
              */
             Team currentWorkingTeam = teams.get(teamSubset1);
 
-            teamFull:
-            for (Position position : Position.values()) {
+            boolean teamFull = false;
+
+            for (int i = 0; i < Position.values().length && !teamFull; i++) {
                 List<Player> playersSet = Main.getPlayersSets()
-                                              .get(position);
+                                              .get(Position.values()[i]);
 
                 List<Integer> alreadySetted = new ArrayList<>();
 
                 while (currentWorkingTeam.getPlayers()
-                                         .get(position)
+                                         .get(Position.values()[i])
                                          .size() < Main.getPlayersAmountMap()
-                                                       .get(position)) {
+                                                       .get(Position.values()[i])
+                       && !teamFull) {
                     do {
                         index = randomGenerator.nextInt(playersSet.size());
                     } while (alreadySetted.contains(index));
@@ -122,7 +124,8 @@ public class PlayersMixer {
                     }
 
                     if (currentWorkingTeam.getPlayersCount() == Main.PLAYERS_PER_TEAM) {
-                        break teamFull;
+                        teamFull = true;
+                        break;
                     }
                 }
             }
