@@ -6,6 +6,13 @@
 Release date: TBD
 ```
 
+![javaBadge](https://img.shields.io/badge/openjdk-11%2B-red)
+![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange)
+![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-green)
+![checkStyleBadge](https://img.shields.io/badge/checkstyle-passing-green)
+![operatingSystemBadge](https://img.shields.io/badge/OS-multiplatform-blueviolet)
+![licenseBadge](https://img.shields.io/badge/license-gpl3.0-blue)
+
 ## 📜 Índice
 - [¿Qué es?](https://github.com/akmsw/armame-el-doparti#-qu%C3%A9-es)
 - [Requisitos](https://github.com/akmsw/armame-el-doparti#-requisitos)

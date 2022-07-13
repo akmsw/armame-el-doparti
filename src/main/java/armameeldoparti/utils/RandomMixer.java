@@ -19,8 +19,8 @@ public class RandomMixer {
     // ---------------------------------------- Campos privados -----------------------------------
 
     private int index;
-    private int teamSubset1;
-    private int teamSubset2;
+    private int chosenTeam1;
+    private int chosenTeam2;
 
     private Random randomGenerator;
 
@@ -57,8 +57,8 @@ public class RandomMixer {
      * @return Los equipos con los jugadores distribuidos de la manera deseada.
      */
     private List<Team> withoutAnchorages(List<Team> teams) {
-        teamSubset1 = randomGenerator.nextInt(teams.size());
-        teamSubset2 = 1 - teamSubset1;
+        chosenTeam1 = randomGenerator.nextInt(teams.size());
+        chosenTeam2 = 1 - chosenTeam1;
 
         for (Position position : Position.values()) {
             /*
@@ -83,9 +83,9 @@ public class RandomMixer {
 
                 Player chosenPlayer = playersSet.get(index);
 
-                chosenPlayer.setTeam(teamSubset1 + 1);
+                chosenPlayer.setTeam(chosenTeam1 + 1);
 
-                teams.get(teamSubset1)
+                teams.get(chosenTeam1)
                      .getPlayers()
                      .get(chosenPlayer.getPosition())
                      .add(chosenPlayer);
@@ -94,9 +94,9 @@ public class RandomMixer {
             playersSet.stream()
                       .filter(p -> p.getTeam() == 0)
                       .forEach(p -> {
-                          p.setTeam(teamSubset2 + 1);
+                          p.setTeam(chosenTeam2 + 1);
 
-                          teams.get(teamSubset2)
+                          teams.get(chosenTeam2)
                                .getPlayers()
                                .get(p.getPosition())
                                .add(p);
@@ -120,8 +120,8 @@ public class RandomMixer {
          * asignarle como equipo a un conjunto de jugadores,
          * y el resto tendrá asignado el equipo opuesto.
          */
-        teamSubset1 = randomGenerator.nextInt(teams.size());
-        teamSubset2 = 1 - teamSubset1;
+        chosenTeam1 = randomGenerator.nextInt(teams.size());
+        chosenTeam2 = 1 - chosenTeam1;
 
         /*
         * Si hay anclajes, se comienza recorriendo cada posición.
@@ -143,7 +143,7 @@ public class RandomMixer {
         * Se toman todos los jugadores restantes y se les asigna el número de
         * equipo contrario al elegido en un principio.
         */
-        Team currentWorkingTeam = teams.get(teamSubset1);
+        Team currentWorkingTeam = teams.get(chosenTeam1);
 
         boolean teamFull = false;
 
@@ -177,14 +177,14 @@ public class RandomMixer {
                     if (currentWorkingTeam.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM
                         && validateAnchoredPlayers(currentWorkingTeam, anchoredPlayers)) {
                         anchoredPlayers.forEach(p -> {
-                            p.setTeam(teamSubset1 + 1);
+                            p.setTeam(chosenTeam1 + 1);
                             currentWorkingTeam.getPlayers().get(p.getPosition()).add(p);
                         });
                     }
                 } else {
                     if (player.getTeam() == 0
                         && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
-                        player.setTeam(teamSubset1 + 1);
+                        player.setTeam(chosenTeam1 + 1);
                         currentWorkingTeam.getPlayers()
                                           .get(player.getPosition())
                                           .add(player);
@@ -206,9 +206,9 @@ public class RandomMixer {
                                             .collect(Collectors.toList());
 
         remainingPlayers.forEach(p -> {
-            p.setTeam(teamSubset2 + 1);
+            p.setTeam(chosenTeam2 + 1);
 
-            teams.get(teamSubset2)
+            teams.get(chosenTeam2)
                  .getPlayers()
                  .get(p.getPosition())
                  .add(p);
