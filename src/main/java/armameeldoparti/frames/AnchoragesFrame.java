@@ -162,7 +162,7 @@ public class AnchoragesFrame extends JFrame {
     private void addButtons() {
         okButton = new JButton("Finalizar");
 
-        BackButton backButton = new BackButton(AnchoragesFrame.this, previousFrame, null);
+        BackButton backButton = new BackButton(this, previousFrame, null);
 
         newAnchorageButton = new JButton("Anclar");
         deleteSpecificAnchorageButton = new JButton("Borrar un anclaje");
@@ -179,18 +179,16 @@ public class AnchoragesFrame extends JFrame {
 
             if (Main.getDistribution() == 1) {
                 // Distribución por puntuaciones
-                RatingsFrame ratingFrame = new RatingsFrame(AnchoragesFrame.this);
-
-                ratingFrame.setVisible(true);
+                ScoresInputFrame scoresInputFrame = new ScoresInputFrame(this);
+                scoresInputFrame.setVisible(true);
             } else {
                 // Distribución aleatoria
-                ResultFrame resultFrame = new ResultFrame(AnchoragesFrame.this);
-
-                resultFrame.setVisible(true);
+                ResultsFrame resultsFrame = new ResultsFrame(this);
+                resultsFrame.setVisible(true);
             }
 
-            AnchoragesFrame.this.setVisible(false);
-            AnchoragesFrame.this.setLocationRelativeTo(null);
+            setVisible(false);
+            setLocationRelativeTo(null);
         });
 
         backButton.addActionListener(e -> {
@@ -198,7 +196,7 @@ public class AnchoragesFrame extends JFrame {
 
             previousFrame.setVisible(true);
 
-            AnchoragesFrame.this.dispose();
+            dispose();
         });
 
         newAnchorageButton.addActionListener(e -> {

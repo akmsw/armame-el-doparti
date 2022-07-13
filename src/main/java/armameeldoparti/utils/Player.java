@@ -13,7 +13,7 @@ public class Player {
 
     // ---------------------------------------- Campos privados -----------------------------------
 
-    private int rating;
+    private int score;
     private int anchor;
     private int team;
 
@@ -31,7 +31,7 @@ public class Player {
      */
     public Player(String name, Position position) {
         setName(name);
-        setRating(0);
+        setScore(0);
         setAnchor(0);
         setTeam(0);
 
@@ -45,8 +45,8 @@ public class Player {
     /**
      * @return Puntaje asignado al jugador.
      */
-    public int getRating() {
-        return rating;
+    public int getScore() {
+        return score;
     }
 
     /**
@@ -87,10 +87,10 @@ public class Player {
     }
 
     /**
-     * @param rating Puntaje del jugador.
+     * @param score Puntuación del jugador.
      */
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     /**

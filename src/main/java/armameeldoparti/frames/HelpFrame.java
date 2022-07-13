@@ -75,7 +75,7 @@ public class HelpFrame extends JFrame {
      * Añade los botones al panel de la ventana.
      */
     private void addButtons() {
-        BackButton backButton = new BackButton(HelpFrame.this, previousFrame, "Volver al menú principal");
+        BackButton backButton = new BackButton(this, previousFrame, "Volver al menú principal");
 
         JButton previousPageButton = new JButton("Anterior");
         JButton nextPageButton = new JButton("Siguiente");

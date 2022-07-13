@@ -28,7 +28,7 @@ public final class Main {
     /**
      * Indicador de distribución por puntuaciones.
      */
-    public static final int RATINGS_MIX = 1;
+    public static final int BY_SCORES_MIX = 1;
 
     /**
      * Cantidad de jugadores por equipo.
@@ -131,7 +131,6 @@ public final class Main {
         setAnchorages(false);
 
         MainFrame mainFrame = new MainFrame();
-
         mainFrame.setVisible(true);
     }
 

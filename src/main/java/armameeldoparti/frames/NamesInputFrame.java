@@ -33,7 +33,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 28/02/2021
  */
-public class InputFrame extends JFrame {
+public class NamesInputFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -66,6 +66,11 @@ public class InputFrame extends JFrame {
      * Nombre del archivo .pda.
      */
     private static final String PDA_FILENAME = "dist.pda";
+
+    /**
+     * Título de la ventana.
+     */
+    private static final String FRAME_TITLE = "Ingreso de jugadores";
 
     /**
      * Posiciones para la lista desplegable.
@@ -107,12 +112,12 @@ public class InputFrame extends JFrame {
      *
      * @throws IOException Cuando hay un error de lectura en el archivo .pda.
      */
-    public InputFrame(JFrame previousFrame) throws IOException {
+    public NamesInputFrame(JFrame previousFrame) throws IOException {
         this.previousFrame = previousFrame;
 
         setTotalAnchorages(0);
         collectPDData();
-        initializeGUI("Ingreso de jugadores - Fútbol " + Main.PLAYERS_PER_TEAM);
+        initializeGUI();
     }
 
     // ---------------------------------------- Métodos públicos ----------------------------------
@@ -185,10 +190,8 @@ public class InputFrame extends JFrame {
 
     /**
      * Inicializa y muestra la interfaz gráfica de esta ventana.
-     *
-     * @param frameTitle Título de la ventana.
      */
-    private void initializeGUI(String frameTitle) {
+    private void initializeGUI() {
         List<JTextField> textFieldCD = new ArrayList<>();
         List<JTextField> textFieldLD = new ArrayList<>();
         List<JTextField> textFieldMF = new ArrayList<>();
@@ -216,7 +219,7 @@ public class InputFrame extends JFrame {
         Main.getPlayersSets().put(Position.GOALKEEPER, setGK);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle(frameTitle);
+        setTitle(FRAME_TITLE);
         setIconImage(MainFrame.ICON.getImage());
 
         leftPanel = new JPanel(new MigLayout("wrap"));
@@ -322,7 +325,7 @@ public class InputFrame extends JFrame {
      * Añade los botones al panel de la ventana.
      */
     private void addButtons() {
-        BackButton backButton = new BackButton(InputFrame.this, previousFrame, null);
+        BackButton backButton = new BackButton(this, previousFrame, null);
 
         mixButton = new JButton("Distribuir");
 
@@ -337,20 +340,20 @@ public class InputFrame extends JFrame {
 
             if (Main.getDistribution() != JOptionPane.CLOSED_OPTION) {
                 if (Main.thereAreAnchorages()) {
-                    AnchoragesFrame anchorageFrame = new AnchoragesFrame(InputFrame.this, Main.PLAYERS_PER_TEAM);
+                    AnchoragesFrame anchorageFrame = new AnchoragesFrame(this, Main.PLAYERS_PER_TEAM);
                     anchorageFrame.setVisible(true);
                 } else if (Main.getDistribution() == 0) {
                     // Distribución aleatoria
-                    ResultFrame resultFrame = new ResultFrame(InputFrame.this);
-                    resultFrame.setVisible(true);
+                    ResultsFrame resultsFrame = new ResultsFrame(this);
+                    resultsFrame.setVisible(true);
                 } else {
                     // Distribución por puntuaciones
-                    RatingsFrame ratingFrame = new RatingsFrame(InputFrame.this);
-                    ratingFrame.setVisible(true);
+                    ScoresInputFrame scoresInputFrame = new ScoresInputFrame(this);
+                    scoresInputFrame.setVisible(true);
                 }
 
-                InputFrame.this.setVisible(false);
-                InputFrame.this.setLocationRelativeTo(null);
+                setVisible(false);
+                setLocationRelativeTo(null);
             }
         });
 
@@ -396,7 +399,8 @@ public class InputFrame extends JFrame {
 
         for (int i = 0; i < OPTIONS_COMBOBOX.length; i++) {
             if (text.equals(OPTIONS_COMBOBOX[i])) {
-                textFields.get(i).forEach(tf -> leftPanel.add(tf, "growx"));
+                textFields.get(i)
+                          .forEach(tf -> leftPanel.add(tf, "growx"));
 
                 break;
             }

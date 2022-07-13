@@ -1,10 +1,11 @@
 package armameeldoparti.frames;
 
 import armameeldoparti.utils.BackButton;
+import armameeldoparti.utils.ByScoresMixer;
 import armameeldoparti.utils.Main;
 import armameeldoparti.utils.Player;
-import armameeldoparti.utils.PlayersMixer;
 import armameeldoparti.utils.Position;
+import armameeldoparti.utils.RandomMixer;
 import armameeldoparti.utils.Team;
 import java.awt.Color;
 import java.awt.Component;
@@ -30,7 +31,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 06/03/2021
  */
-public class ResultFrame extends JFrame {
+public class ResultsFrame extends JFrame {
 
     // ---------------------------------------- Constantes públicas -------------------------------
 
@@ -91,7 +92,8 @@ public class ResultFrame extends JFrame {
 
     private transient List<Team> teams;
 
-    private transient PlayersMixer mixer;
+    private transient RandomMixer randomMixer;
+    private transient ByScoresMixer byScoresMixer;
 
     // ---------------------------------------- Constructor ---------------------------------------
 
@@ -100,7 +102,7 @@ public class ResultFrame extends JFrame {
      *
      * @param previousFrame Ventana fuente que crea la ventana ResultFrame.
      */
-    public ResultFrame(JFrame previousFrame) {
+    public ResultsFrame(JFrame previousFrame) {
         this.previousFrame = previousFrame;
 
         team1 = new Team();
@@ -110,7 +112,8 @@ public class ResultFrame extends JFrame {
         teams.add(team1);
         teams.add(team2);
 
-        mixer = new PlayersMixer();
+        randomMixer = new RandomMixer();
+        byScoresMixer = new ByScoresMixer();
 
         if (Main.getDistribution() == Main.RANDOM_MIX) {
             setFrameTitle("Aleatorio - ");
@@ -118,13 +121,13 @@ public class ResultFrame extends JFrame {
             table = new JTable(Main.PLAYERS_PER_TEAM + 1, TABLE_COLUMNS);
 
             if (Main.thereAreAnchorages()) {
-                setFrameTitle(getFrameTitle().concat("Con anclajes - "));
+                setFrameTitle(getFrameTitle().concat("Con anclajes"));
 
-                teams = mixer.randomMix(getTeams(), true);
+                teams = randomMixer.mixPlayers(teams, true);
             } else {
-                setFrameTitle(getFrameTitle().concat("Sin anclajes - "));
+                setFrameTitle(getFrameTitle().concat("Sin anclajes"));
 
-                teams = mixer.randomMix(getTeams(), false);
+                teams = randomMixer.mixPlayers(teams, false);
             }
         } else {
             setFrameTitle("Por puntuaciones - ");
@@ -132,11 +135,13 @@ public class ResultFrame extends JFrame {
             table = new JTable(Main.PLAYERS_PER_TEAM + 2, TABLE_COLUMNS);
 
             if (Main.thereAreAnchorages()) {
-                setFrameTitle(getFrameTitle().concat("Con anclajes - "));
-            } else {
-                setFrameTitle(getFrameTitle().concat("Sin anclajes - "));
+                setFrameTitle(getFrameTitle().concat("Con anclajes"));
 
-                teams = mixer.ratingsMix(getTeams(), Main.thereAreAnchorages());
+                teams = byScoresMixer.mixPlayers(teams, true);
+            } else {
+                setFrameTitle(getFrameTitle().concat("Sin anclajes"));
+
+                teams = byScoresMixer.mixPlayers(teams, false);
             }
         }
 
@@ -180,7 +185,7 @@ public class ResultFrame extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(MainFrame.ICON.getImage());
-        setTitle(getFrameTitle().concat("Fútbol " + Main.PLAYERS_PER_TEAM));
+        setTitle(getFrameTitle());
         setResizable(false);
         addTable();
         addButtons();
@@ -216,7 +221,7 @@ public class ResultFrame extends JFrame {
      * y de redistribución en caso de ser necesario.
      */
     private void addButtons() {
-        BackButton backButton = new BackButton(ResultFrame.this, previousFrame, null);
+        BackButton backButton = new BackButton(this, previousFrame, null);
 
         // Se eliminan todos los equipos asignados en caso de querer retroceder
         backButton.addActionListener(e -> {
@@ -224,7 +229,7 @@ public class ResultFrame extends JFrame {
 
             previousFrame.setVisible(true);
 
-            ResultFrame.this.dispose();
+            dispose();
         });
 
         if (Main.getDistribution() == Main.RANDOM_MIX) {
@@ -233,7 +238,7 @@ public class ResultFrame extends JFrame {
             remixButton.addActionListener(e -> {
                 resetTeams();
 
-                teams = mixer.randomMix(getTeams(), Main.thereAreAnchorages());
+                teams = randomMixer.mixPlayers(teams, Main.thereAreAnchorages());
 
                 fillTable();
             });
@@ -271,7 +276,7 @@ public class ResultFrame extends JFrame {
                     c.setForeground(Color.WHITE);
                     ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                 } else if (column == 0) {
-                    if (Main.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
+                    if (Main.getDistribution() == Main.BY_SCORES_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
                         c.setForeground(Color.BLACK);
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -281,7 +286,7 @@ public class ResultFrame extends JFrame {
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
                     }
                 } else {
-                    if (Main.getDistribution() == Main.RATINGS_MIX && row == table.getRowCount() - 1) {
+                    if (Main.getDistribution() == Main.BY_SCORES_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
                         c.setForeground(Color.BLACK);
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -347,7 +352,7 @@ public class ResultFrame extends JFrame {
             }
         }
 
-        if (Main.getDistribution() == Main.RATINGS_MIX) {
+        if (Main.getDistribution() == Main.BY_SCORES_MIX) {
             table.setValueAt(Main.getPositionsMap()
                                  .get(Position.GOALKEEPER),
                              table.getRowCount() - 2, 0);
@@ -389,13 +394,13 @@ public class ResultFrame extends JFrame {
             column++;
         }
 
-        if (Main.getDistribution() == Main.RATINGS_MIX) {
+        if (Main.getDistribution() == Main.BY_SCORES_MIX) {
             table.setValueAt(teams.get(0)
                                   .getPlayers()
                                   .values()
                                   .stream()
                                   .flatMap(List::stream)
-                                  .mapToInt(Player::getRating)
+                                  .mapToInt(Player::getScore)
                                   .reduce(0, Math::addExact),
                              table.getRowCount() - 1, 1);
             table.setValueAt(teams.get(1)
@@ -403,7 +408,7 @@ public class ResultFrame extends JFrame {
                                   .values()
                                   .stream()
                                   .flatMap(List::stream)
-                                  .mapToInt(Player::getRating)
+                                  .mapToInt(Player::getScore)
                                   .reduce(0, Math::addExact),
                              table.getRowCount() - 1, 2);
         }

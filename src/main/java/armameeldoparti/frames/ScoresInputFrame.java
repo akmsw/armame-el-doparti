@@ -27,29 +27,29 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 06/03/2021
  */
-public class RatingsFrame extends JFrame {
+public class ScoresInputFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas -------------------------------
 
     /**
      * Valor inicial de los campos de entrada para puntuaciones.
      */
-    private static final int RATINGS_INI = 1;
+    private static final int SCORE_INI = 1;
 
     /**
      * Valor mínimo de los campos de entrada para puntuaciones.
      */
-    private static final int RATINGS_MIN = 1;
+    private static final int SCORE_MIN = 1;
 
     /**
      * Valor máximo de los campos de entrada para puntuaciones.
      */
-    private static final int RATINGS_MAX = 5;
+    private static final int SCORE_MAX = 5;
 
     /**
      * Paso utilizado para el incremento y decremento del valor de los campos de entrada para puntuaciones.
      */
-    private static final int RATINGS_STEP = 1;
+    private static final int SCORE_STEP = 1;
 
     /**
      * Configuración utilizada frecuentemente.
@@ -59,13 +59,13 @@ public class RatingsFrame extends JFrame {
     /**
      * Título de la ventana.
      */
-    private static final String FRAME_TITLE = "Puntuaciones";
+    private static final String FRAME_TITLE = "Ingreso de puntuaciones";
 
     // ---------------------------------------- Campos privados -----------------------------------
 
     private JPanel masterPanel;
 
-    private ResultFrame resultFrame;
+    private ResultsFrame resultsFrame;
 
     private transient Map<Player, JSpinner> spinnersMap;
 
@@ -74,16 +74,16 @@ public class RatingsFrame extends JFrame {
     /**
      * Construye una ventana de ingreso de puntuaciones.
      *
-     * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
+     * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
      */
-    public RatingsFrame(JFrame previousFrame) {
+    public ScoresInputFrame(JFrame previousFrame) {
         initializeGUI(previousFrame);
     }
 
     /**
      * Inicializa la interfaz gráfica de esta ventana.
      *
-     * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
+     * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
      */
     private void initializeGUI(JFrame previousFrame) {
         masterPanel = new JPanel(new MigLayout());
@@ -104,20 +104,20 @@ public class RatingsFrame extends JFrame {
     /**
      * Añade los botones al panel de la ventana.
      *
-     * @param previousFrame Ventana fuente que crea la ventana RatingFrame.
+     * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
      */
     private void addButtons(JFrame previousFrame) {
         JButton finishButton = new JButton("Finalizar");
         JButton resetButton = new JButton("Reiniciar puntuaciones");
 
-        BackButton backButton = new BackButton(RatingsFrame.this, previousFrame, null);
+        BackButton backButton = new BackButton(this, previousFrame, null);
 
         finishButton.addActionListener(e -> {
-            spinnersMap.forEach((k, v) -> k.setRating((int) v.getValue()));
+            spinnersMap.forEach((k, v) -> k.setScore((int) v.getValue()));
 
-            resultFrame = new ResultFrame(RatingsFrame.this);
+            resultsFrame = new ResultsFrame(this);
 
-            resultFrame.setVisible(true);
+            resultsFrame.setVisible(true);
 
             setVisible(false);
             setLocationRelativeTo(null);
@@ -125,7 +125,7 @@ public class RatingsFrame extends JFrame {
 
         resetButton.addActionListener(e -> spinnersMap.forEach((k, v) -> {
             v.setValue(1);
-            k.setRating(0);
+            k.setScore(0);
         }));
 
         masterPanel.add(finishButton, GROW_SPAN);
@@ -149,8 +149,8 @@ public class RatingsFrame extends JFrame {
                 spinnersMap.put(Main.getPlayersSets()
                                     .get(Position.values()[i])
                                     .get(j),
-                                new JSpinner(new SpinnerNumberModel(RATINGS_INI, RATINGS_MIN,
-                                                                    RATINGS_MAX, RATINGS_STEP)));
+                                new JSpinner(new SpinnerNumberModel(SCORE_INI, SCORE_MIN,
+                                                                    SCORE_MAX, SCORE_STEP)));
 
                 masterPanel.add(new JLabel(Main.getPlayersSets()
                                                .get(Position.values()[i])
@@ -169,7 +169,8 @@ public class RatingsFrame extends JFrame {
             }
 
             for (JSpinner js : spinnersMap.values()) {
-                ((DefaultEditor) js.getEditor()).getTextField().setEditable(false);
+                ((DefaultEditor) js.getEditor()).getTextField()
+                                                .setEditable(false);
             }
         }
     }

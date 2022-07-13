@@ -94,9 +94,8 @@ public class MainFrame extends JFrame {
      * Añade la imagen de fondo al panel de la ventana.
      */
     private void addBackground() {
-        ImageIcon bgImage = new ImageIcon(this.getClass()
-                                              .getClassLoader()
-                                              .getResource(Main.IMG_PATH + Main.BG_IMG_FILENAME));
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader()
+                                                    .getResource(Main.IMG_PATH + Main.BG_IMG_FILENAME));
 
         JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
 
@@ -113,12 +112,11 @@ public class MainFrame extends JFrame {
         startButton.setEnabled(true);
         startButton.addActionListener(e -> {
             try {
-                InputFrame inputFrame = new InputFrame(this);
+                NamesInputFrame namesInputFrame = new NamesInputFrame(this);
+                namesInputFrame.setVisible(true);
 
-                inputFrame.setVisible(true);
-
-                this.setVisible(false);
-                this.setLocationRelativeTo(null);
+                setVisible(false);
+                setLocationRelativeTo(null);
             } catch (IOException ex) {
                 ex.printStackTrace();
                 System.exit(-1);
@@ -131,8 +129,8 @@ public class MainFrame extends JFrame {
 
             helpFrame.setVisible(true);
 
-            this.setVisible(false);
-            this.setLocationRelativeTo(null);
+            setVisible(false);
+            setLocationRelativeTo(null);
         });
 
         masterPanel.add(startButton, GROWX);
