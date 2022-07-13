@@ -108,7 +108,6 @@ public class PlayersMixer {
                             && validateAnchoredPlayers(currentWorkingTeam, anchoredPlayers)) {
                             anchoredPlayers.forEach(p -> {
                                 p.setTeam(teamSubset1 + 1);
-
                                 currentWorkingTeam.getPlayers().get(p.getPosition()).add(p);
                             });
                         }
@@ -116,7 +115,6 @@ public class PlayersMixer {
                         if (player.getTeam() == 0
                             && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
                             player.setTeam(teamSubset1 + 1);
-
                             currentWorkingTeam.getPlayers()
                                               .get(player.getPosition())
                                               .add(player);
@@ -139,7 +137,6 @@ public class PlayersMixer {
 
             remainingPlayers.forEach(p -> {
                 p.setTeam(teamSubset2 + 1);
-
                 teams.get(teamSubset2)
                      .getPlayers()
                      .get(p.getPosition())
@@ -186,7 +183,6 @@ public class PlayersMixer {
                                    .get(p.getPosition())
                                    .add(p);
                           });
-
                 alreadySetted.clear();
             }
         }
@@ -202,7 +198,7 @@ public class PlayersMixer {
      */
     public List<Team> ratingsMix(List<Team> teams, boolean anchorages) {
         if (anchorages) {
-            // TODO
+            return teams; // TODO
         } else {
             for (Position position : Position.values()) {
                 List<Player> currentSet = Main.getPlayersSets()
