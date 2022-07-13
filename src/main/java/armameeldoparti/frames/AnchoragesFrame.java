@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -119,20 +118,21 @@ public class AnchoragesFrame extends JFrame {
         scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                                      ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-            @Override
-            protected void configureScrollBarColors() {
-                this.thumbColor = Main.LIGHT_GREEN;
-                this.trackColor = Main.DARK_GREEN;
-            }
-        });
+        scrollPane.getVerticalScrollBar()
+                  .setUI(new BasicScrollBarUI() {
+                      @Override
+                      protected void configureScrollBarColors() {
+                          this.thumbColor = Main.LIGHT_GREEN;
+                          this.trackColor = Main.DARK_GREEN;
+                      }
+                  });
 
         int index = 0;
 
         for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets().entrySet()) {
             fillCBSet(ps.getValue(), cbSets.get(index));
-            addCBSet(leftPanel, cbSets.get(index), Main.getPositionsMap()
-                                                       .get(Position.values()[index]));
+            addCBSet(cbSets.get(index), Main.getPositionsMap()
+                                            .get(Position.values()[index]));
 
             index++;
         }
@@ -215,7 +215,7 @@ public class AnchoragesFrame extends JFrame {
                 showErrMsg("No puede haber más de la mitad de jugadores de una misma posición en un mismo anclaje");
                 return;
             } else if (!validAnchorageAmount(anchored)) {
-                showErrMsg("No puede haber más de " + (2 * maxPlayersPerAnchorage) + " jugadores anclados en total");
+                showErrMsg("No puede haber más de " + 2 * maxPlayersPerAnchorage + " jugadores anclados en total");
                 return;
             }
 
@@ -249,28 +249,23 @@ public class AnchoragesFrame extends JFrame {
      * @param cbSet      Conjunto de casillas a llenar.
      */
     private void fillCBSet(List<Player> playersSet, List<JCheckBox> cbSet) {
-        for (Player p : playersSet) {
-            cbSet.add(new JCheckBox(p.getName()));
-        }
+        playersSet.forEach(p -> cbSet.add(new JCheckBox(p.getName())));
     }
 
     /**
      * Coloca en el panel las casillas correspondientes a cada posición junto con una etiqueta que los distinga.
      *
-     * @param panel Panel donde se colocarán las casillas.
      * @param cbSet Conjunto de casillas a colocar.
      * @param title Texto de la etiqueta de acompañamiento.
      */
-    private void addCBSet(JPanel panel, List<JCheckBox> cbSet, String title) {
+    private void addCBSet(List<JCheckBox> cbSet, String title) {
         JLabel label = new JLabel(title);
 
         label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-        panel.add(label, GROWX_SPAN);
+        leftPanel.add(label, GROWX_SPAN);
 
-        for (JCheckBox cb : cbSet) {
-            panel.add(cb, "align left, pushx");
-        }
+        cbSet.forEach(cb -> leftPanel.add(cb, "align left, pushx"));
     }
 
     /**
@@ -314,11 +309,10 @@ public class AnchoragesFrame extends JFrame {
                                                   MainFrame.SCALED_ICON, optionsDelete,
                                                   optionsDelete[0]) + 1; // + 1 para compensar índice del arreglo
 
-        if ((anchor - 1) != JOptionPane.CLOSED_OPTION) {
+        if (anchor - 1 != JOptionPane.CLOSED_OPTION) {
             // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'
             for (int j = 0; j < cbSets.size(); j++) {
-                changeAnchor(Main.getPlayersSets()
-                                 .get(Position.values()[j]),
+                changeAnchor(Main.getPlayersSets().get(Position.values()[j]),
                              cbSets.get(j), anchor, 0);
             }
 
@@ -328,8 +322,7 @@ public class AnchoragesFrame extends JFrame {
              */
             for (int k = anchor + 1; k <= anchorageNum; k++) {
                 for (int j = 0; j < cbSets.size(); j++) {
-                    changeAnchor(Main.getPlayersSets()
-                                     .get(Position.values()[j]),
+                    changeAnchor(Main.getPlayersSets().get(Position.values()[j]),
                                  cbSets.get(j), k, k - 1);
                 }
             }
@@ -345,8 +338,7 @@ public class AnchoragesFrame extends JFrame {
      */
     private void deleteLast() {
         for (int i = 0; i < cbSets.size(); i++) {
-            changeAnchor(Main.getPlayersSets()
-                             .get(Position.values()[i]),
+            changeAnchor(Main.getPlayersSets().get(Position.values()[i]),
                          cbSets.get(i), anchorageNum, 0);
         }
 
@@ -376,7 +368,9 @@ public class AnchoragesFrame extends JFrame {
             private int i;
         };
 
-        AtomicInteger counter = new AtomicInteger(1);
+        var wrapperCounter = new Object() {
+            private int c = 1;
+        };
 
         for (wrapperIndex.i = 1; wrapperIndex.i <= anchorageNum; wrapperIndex.i++) {
             textArea.append(" ----- ANCLAJE #" + wrapperIndex.i + " -----" + System.lineSeparator());
@@ -386,14 +380,16 @@ public class AnchoragesFrame extends JFrame {
                 .forEach(ps -> ps.getValue()
                                  .forEach(p -> {
                                      if (p.getAnchor() == wrapperIndex.i) {
-                                         textArea.append(" " + counter.getAndIncrement()
+                                         textArea.append(" " + wrapperCounter.c
                                                          + ". " + p.getName() + System.lineSeparator());
                                      }
+
+                                     wrapperCounter.c++;
                                  }));
 
             textArea.append(System.lineSeparator());
 
-            counter.set(1);
+            wrapperCounter.c = 1;
         }
 
         toggleButtons();
@@ -419,19 +415,18 @@ public class AnchoragesFrame extends JFrame {
             clearAnchoragesButton.setEnabled(false);
         }
 
-        if ((2 * maxPlayersPerAnchorage - playersAnchored) < 2) {
+        if (2 * maxPlayersPerAnchorage - playersAnchored < 2) {
             newAnchorageButton.setEnabled(false);
 
             cbSets.forEach(cbs -> cbs.forEach(cb -> cb.setEnabled(!cb.isEnabled())));
         } else {
             newAnchorageButton.setEnabled(true);
 
-            cbSets.forEach(cbSet ->
-                cbSet.forEach(cb -> {
-                    if (!cb.isEnabled() && !cb.isSelected()) {
-                        cb.setEnabled(true);
-                    }
-                }));
+            cbSets.forEach(cbs -> cbs.forEach(cb -> {
+                if (!cb.isEnabled() && !cb.isSelected()) {
+                    cb.setEnabled(true);
+                }
+            }));
         }
     }
 
@@ -451,7 +446,7 @@ public class AnchoragesFrame extends JFrame {
         return cbSets.stream()
                      .noneMatch(cbs -> cbs.stream()
                                           .filter(JCheckBox::isSelected)
-                                          .count() > (cbs.size() / 2));
+                                          .count() > cbs.size() / 2);
     }
 
     /**

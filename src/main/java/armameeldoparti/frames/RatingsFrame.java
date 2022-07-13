@@ -56,6 +56,11 @@ public class RatingsFrame extends JFrame {
      */
     private static final String GROW_SPAN = "grow, span";
 
+    /**
+     * Título de la ventana.
+     */
+    private static final String FRAME_TITLE = "Puntuaciones";
+
     // ---------------------------------------- Campos privados -----------------------------------
 
     private JPanel masterPanel;
@@ -88,7 +93,7 @@ public class RatingsFrame extends JFrame {
         addSpinners();
         addButtons(previousFrame);
         add(masterPanel);
-        setTitle("Puntuaciones");
+        setTitle(FRAME_TITLE);
         setIconImage(MainFrame.ICON.getImage());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
@@ -114,15 +119,14 @@ public class RatingsFrame extends JFrame {
 
             resultFrame.setVisible(true);
 
-            RatingsFrame.this.setVisible(false);
-            RatingsFrame.this.setLocationRelativeTo(null);
+            setVisible(false);
+            setLocationRelativeTo(null);
         });
 
-        resetButton.addActionListener(e ->
-            spinnersMap.forEach((k, v) -> {
-                v.setValue(1);
-                k.setRating(0);
-            }));
+        resetButton.addActionListener(e -> spinnersMap.forEach((k, v) -> {
+            v.setValue(1);
+            k.setRating(0);
+        }));
 
         masterPanel.add(finishButton, GROW_SPAN);
         masterPanel.add(resetButton, GROW_SPAN);
@@ -149,24 +153,23 @@ public class RatingsFrame extends JFrame {
                                                                     RATINGS_MAX, RATINGS_STEP)));
 
                 masterPanel.add(new JLabel(Main.getPlayersSets()
-                                         .get(Position.values()[i])
-                                         .get(j)
-                                         .getName()), "pushx");
+                                               .get(Position.values()[i])
+                                               .get(j)
+                                               .getName()), "pushx");
 
-                if ((j % 2) != 0) {
+                if (j % 2 != 0) {
                     masterPanel.add(spinnersMap.get(Main.getPlayersSets()
-                                                  .get(Position.values()[i])
-                                                  .get(j)), "wrap");
+                                               .get(Position.values()[i])
+                                               .get(j)), "wrap");
                 } else {
                     masterPanel.add(spinnersMap.get(Main.getPlayersSets()
-                                                  .get(Position.values()[i])
-                                                  .get(j)));
+                                               .get(Position.values()[i])
+                                               .get(j)));
                 }
             }
 
             for (JSpinner js : spinnersMap.values()) {
-                ((DefaultEditor) js.getEditor()).getTextField()
-                                                .setEditable(false);
+                ((DefaultEditor) js.getEditor()).getTextField().setEditable(false);
             }
         }
     }

@@ -34,7 +34,8 @@ public class Player {
         setRating(0);
         setAnchor(0);
         setTeam(0);
-        setPosition(position);
+
+        this.position = position;
     }
 
     // ---------------------------------------- Métodos públicos ----------------------------------
@@ -104,12 +105,5 @@ public class Player {
      */
     public void setTeam(int team) {
         this.team = team;
-    }
-
-    /**
-     * @param position Posición del jugador.
-     */
-    public void setPosition(Position position) {
-        this.position = position;
     }
 }

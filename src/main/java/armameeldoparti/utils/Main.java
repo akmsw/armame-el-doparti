@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Clase principal, sólo para inicialización del programa y declaración de campos útiles.
@@ -116,7 +117,10 @@ public final class Main {
      * @param args Argumentos para ejecutar el programa.
      */
     public static void main(String[] args) {
+        playersAmountMap = new EnumMap<>(Position.class);
         positions = new EnumMap<>(Position.class);
+
+        playersSets = new TreeMap<>();
 
         positions.put(Position.CENTRAL_DEFENDER, "DEFENSORES CENTRALES");
         positions.put(Position.LATERAL_DEFENDER, "DEFENSORES LATERALES");
@@ -124,7 +128,6 @@ public final class Main {
         positions.put(Position.FORWARD, "DELANTEROS");
         positions.put(Position.GOALKEEPER, "ARQUEROS");
 
-        setPlayersAmountMap(new EnumMap<>(Position.class));
         setAnchorages(false);
 
         MainFrame mainFrame = new MainFrame();
@@ -185,19 +188,5 @@ public final class Main {
      */
     public static void setAnchorages(boolean a) {
         anchorages = a;
-    }
-
-    /**
-     * @param pam Mapa que asocia las posiciones con la cantidad de jugadores para cada una.
-     */
-    public static void setPlayersAmountMap(Map<Position, Integer> pam) {
-        playersAmountMap = pam;
-    }
-
-    /**
-     * @param pss Mapa que asocia las posiciones con los conjuntos de jugadores.
-     */
-    public static void setPlayersSets(Map<Position, List<Player>> pss) {
-        playersSets = pss;
     }
 }

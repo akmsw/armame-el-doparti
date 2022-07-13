@@ -19,7 +19,6 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -190,10 +189,9 @@ public class ResultFrame extends JFrame {
 
         // Ajuste del ancho de las celdas
         for (int column = 0; column < table.getColumnCount(); column++) {
-            TableColumn tableColumn = table.getColumnModel()
-                                           .getColumn(column);
-
-            tableColumn.setPreferredWidth(FIXED_CELL_WIDTH);
+            table.getColumnModel()
+                 .getColumn(column)
+                 .setPreferredWidth(FIXED_CELL_WIDTH);
         }
 
         // Ajuste del alto de las celdas
@@ -351,12 +349,13 @@ public class ResultFrame extends JFrame {
 
         if (Main.getDistribution() == Main.RATINGS_MIX) {
             table.setValueAt(Main.getPositionsMap()
-                                 .get(Position.GOALKEEPER), table.getRowCount() - 2, 0);
-
+                                 .get(Position.GOALKEEPER),
+                             table.getRowCount() - 2, 0);
             table.setValueAt("PUNTAJE DEL EQUIPO", table.getRowCount() - 1, 0);
         } else {
             table.setValueAt(Main.getPositionsMap()
-                                 .get(Position.GOALKEEPER), table.getRowCount() - 1, 0);
+                                 .get(Position.GOALKEEPER),
+                             table.getRowCount() - 1, 0);
         }
     }
 
@@ -397,14 +396,16 @@ public class ResultFrame extends JFrame {
                                   .stream()
                                   .flatMap(List::stream)
                                   .mapToInt(Player::getRating)
-                                  .reduce(0, Math::addExact), table.getRowCount() - 1, 1);
+                                  .reduce(0, Math::addExact),
+                             table.getRowCount() - 1, 1);
             table.setValueAt(teams.get(1)
                                   .getPlayers()
                                   .values()
                                   .stream()
                                   .flatMap(List::stream)
                                   .mapToInt(Player::getRating)
-                                  .reduce(0, Math::addExact), table.getRowCount() - 1, 2);
+                                  .reduce(0, Math::addExact),
+                             table.getRowCount() - 1, 2);
         }
     }
 

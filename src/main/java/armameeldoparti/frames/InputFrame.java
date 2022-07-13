@@ -11,14 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -107,16 +104,15 @@ public class InputFrame extends JFrame {
      * Construye una ventana de ingreso de jugadores.
      *
      * @param previousFrame  Ventana fuente que crea la ventana InputFrame.
-     * @param playersPerTeam Cantidad de jugadores por equipo.
      *
      * @throws IOException Cuando hay un error de lectura en el archivo .pda.
      */
-    public InputFrame(JFrame previousFrame, int playersPerTeam) throws IOException {
+    public InputFrame(JFrame previousFrame) throws IOException {
         this.previousFrame = previousFrame;
 
         setTotalAnchorages(0);
         collectPDData();
-        initializeGUI("Ingreso de jugadores - Fútbol " + playersPerTeam);
+        initializeGUI("Ingreso de jugadores - Fútbol " + Main.PLAYERS_PER_TEAM);
     }
 
     // ---------------------------------------- Métodos públicos ----------------------------------
@@ -213,7 +209,6 @@ public class InputFrame extends JFrame {
 
         textFields = Arrays.asList(textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK);
 
-        Main.setPlayersSets(new TreeMap<>());
         Main.getPlayersSets().put(Position.CENTRAL_DEFENDER, setCD);
         Main.getPlayersSets().put(Position.LATERAL_DEFENDER, setLD);
         Main.getPlayersSets().put(Position.MIDFIELDER, setMF);
@@ -238,8 +233,9 @@ public class InputFrame extends JFrame {
         addTextArea();
         addButtons();
         addAnchorCheckBox();
-        updateTextFields(comboBox.getSelectedItem()
-                                 .toString()); // Ajustamos el panel izquierdo al item inicial de la lista desplegable
+
+        // Se ajusta el panel izquierdo al item inicial de la lista desplegable
+        updateTextFields(comboBox.getSelectedItem().toString());
 
         masterPanel.add(leftPanel, "west");
         masterPanel.add(rightPanel, "east");
@@ -271,7 +267,7 @@ public class InputFrame extends JFrame {
      * @param playersSet   Arreglo de jugadores con dicha posición.
      */
     private void addTextFields(Position position, List<JTextField> textFieldSet, List<Player> playersSet) {
-        for (int i = 0; i < (Main.getPlayersAmountMap().get(position) * 2); i++) {
+        for (int i = 0; i < Main.getPlayersAmountMap().get(position) * 2; i++) {
             JTextField tf = new JTextField();
 
             tf.addActionListener(e -> {
@@ -282,7 +278,10 @@ public class InputFrame extends JFrame {
                                           "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
                                           "¡Error!", JOptionPane.ERROR_MESSAGE, null);
                 } else {
-                    String name = tf.getText().trim().toUpperCase().replace(" ", "_");
+                    String name = tf.getText()
+                                    .trim()
+                                    .toUpperCase()
+                                    .replace(" ", "_");
 
                     if ((name.length() > MAX_NAME_LEN) || name.isBlank()
                         || name.isEmpty() || alreadyExists(name)) {
@@ -339,17 +338,14 @@ public class InputFrame extends JFrame {
             if (Main.getDistribution() != JOptionPane.CLOSED_OPTION) {
                 if (Main.thereAreAnchorages()) {
                     AnchoragesFrame anchorageFrame = new AnchoragesFrame(InputFrame.this, Main.PLAYERS_PER_TEAM);
-
                     anchorageFrame.setVisible(true);
                 } else if (Main.getDistribution() == 0) {
                     // Distribución aleatoria
                     ResultFrame resultFrame = new ResultFrame(InputFrame.this);
-
                     resultFrame.setVisible(true);
                 } else {
                     // Distribución por puntuaciones
                     RatingsFrame ratingFrame = new RatingsFrame(InputFrame.this);
-
                     ratingFrame.setVisible(true);
                 }
 
@@ -396,12 +392,11 @@ public class InputFrame extends JFrame {
      * @param text Ítem seleccionado de la lista desplegable.
      */
     private void updateTextFields(String text) {
+        clearLeftPanel();
+
         for (int i = 0; i < OPTIONS_COMBOBOX.length; i++) {
             if (text.equals(OPTIONS_COMBOBOX[i])) {
-                clearLeftPanel();
-
-                textFields.get(i)
-                          .forEach(tf -> leftPanel.add(tf, "growx"));
+                textFields.get(i).forEach(tf -> leftPanel.add(tf, "growx"));
 
                 break;
             }
@@ -422,23 +417,28 @@ public class InputFrame extends JFrame {
      * Defensores centrales - Defensores laterales - Mediocampistas - Delanteros - Arqueros.
      */
     private void updateTextArea() {
-        int counter = 0;
+        var wrapperCounter = new Object() {
+            private int counter;
+        };
 
         textArea.setText(null);
 
-        for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets().entrySet()) {
-            for (Player p : ps.getValue()) {
-                if (!p.getName().equals("")) {
-                    if (counter != 0 && Main.PLAYERS_PER_TEAM * 2 - counter != 0) {
-                        textArea.append(System.lineSeparator());
-                    }
+        Main.getPlayersSets()
+            .entrySet()
+            .forEach(ps -> ps.getValue()
+                             .stream()
+                             .filter(p -> !p.getName()
+                                            .equals(""))
+                             .forEach(p -> {
+                                 if (wrapperCounter.counter != 0
+                                     && Main.PLAYERS_PER_TEAM * 2 - wrapperCounter.counter != 0) {
+                                     textArea.append(System.lineSeparator());
+                                 }
 
-                    textArea.append((counter + 1) + " - " + p.getName());
+                                 wrapperCounter.counter++;
 
-                    counter++;
-                }
-            }
-        }
+                                 textArea.append(wrapperCounter.counter + " - " + p.getName());
+                             }));
     }
 
     /**
@@ -447,20 +447,8 @@ public class InputFrame extends JFrame {
     private void clearLeftPanel() {
         textFields.stream()
                   .flatMap(Collection::stream)
-                  .filter(tf -> isComponentInPanel(tf, leftPanel))
+                  .filter(tf -> tf.getParent() == leftPanel)
                   .forEach(tf -> leftPanel.remove(tf));
-    }
-
-    /**
-     * Verifica si un componente es parte de cierto panel.
-     *
-     * @param c Componente cuya pertenencia se verificará.
-     * @param p Panel ante el cual se verificará la pertenencia.
-     *
-     * @return Si el componente es parte del panel especificado.
-     */
-    private boolean isComponentInPanel(JComponent c, JPanel p) {
-        return c.getParent() == p;
     }
 
     /**

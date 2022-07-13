@@ -52,6 +52,11 @@ public class MainFrame extends JFrame {
      */
     private static final String GROWX = "growx";
 
+    /**
+     * Título de la ventana.
+     */
+    private static final String FRAME_TITLE = Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION;
+
     // ---------------------------------------- Campos privados -----------------------------------
 
     private JPanel masterPanel;
@@ -78,7 +83,7 @@ public class MainFrame extends JFrame {
         addButtons();
         add(masterPanel);
         setResizable(false);
-        setTitle(Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION);
+        setTitle(FRAME_TITLE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(ICON.getImage());
         pack();
@@ -108,12 +113,12 @@ public class MainFrame extends JFrame {
         startButton.setEnabled(true);
         startButton.addActionListener(e -> {
             try {
-                InputFrame inputFrame = new InputFrame(MainFrame.this, Main.PLAYERS_PER_TEAM);
+                InputFrame inputFrame = new InputFrame(this);
 
                 inputFrame.setVisible(true);
 
-                MainFrame.this.setVisible(false);
-                MainFrame.this.setLocationRelativeTo(null);
+                this.setVisible(false);
+                this.setLocationRelativeTo(null);
             } catch (IOException ex) {
                 ex.printStackTrace();
                 System.exit(-1);
@@ -122,12 +127,12 @@ public class MainFrame extends JFrame {
 
         helpButton.setEnabled(true);
         helpButton.addActionListener(e -> {
-            HelpFrame helpFrame = new HelpFrame(MainFrame.this);
+            HelpFrame helpFrame = new HelpFrame(this);
 
             helpFrame.setVisible(true);
 
-            MainFrame.this.setVisible(false);
-            MainFrame.this.setLocationRelativeTo(null);
+            this.setVisible(false);
+            this.setLocationRelativeTo(null);
         });
 
         masterPanel.add(startButton, GROWX);

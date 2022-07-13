@@ -20,7 +20,15 @@ public class HelpFrame extends JFrame {
 
     // ---------------------------------------- Constantes privadas -------------------------------
 
+    /**
+     * Cantidad total de páginas de instrucciones.
+     */
     private static final int TOTAL_PAGES = 5;
+
+    /**
+     * Título de la ventana.
+     */
+    private static final String FRAME_TITLE = "Ayuda";
 
     // ---------------------------------------- Campos privados -----------------------------------
 
@@ -40,7 +48,7 @@ public class HelpFrame extends JFrame {
 
         pageNum = 1;
 
-        initializeGUI("Ayuda");
+        initializeGUI(FRAME_TITLE);
     }
 
     // ---------------------------------------- Métodos privados ----------------------------------
@@ -82,7 +90,7 @@ public class HelpFrame extends JFrame {
                 previousPageButton.setEnabled(false);
             }
 
-            // Cambiar a página anterior
+            // TODO: cambiar a página anterior
         });
 
         nextPageButton.setEnabled(true);
@@ -95,7 +103,7 @@ public class HelpFrame extends JFrame {
                 nextPageButton.setEnabled(false);
             }
 
-            // Cambiar a página siguiente
+            // TODO: cambiar a página siguiente
         });
 
         masterPanel.add(previousPageButton, "growx, span, split 2, center");
