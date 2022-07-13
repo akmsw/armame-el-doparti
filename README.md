@@ -6,9 +6,9 @@
 Release date: TBD
 ```
 
-![javaBadge](https://img.shields.io/badge/jdk-11%2B-red)
-![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange)
-![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen)
+![javaBadge](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)
+![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange?logo=apachemaven)
+![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen?logo=sonarlint)
 ![checkStyleBadge](https://img.shields.io/badge/checkstyle-passing-brightgreen)
 ![operatingSystemBadge](https://img.shields.io/badge/OS-multiplatform-blueviolet)
 ![licenseBadge](https://img.shields.io/badge/license-gpl3.0-blue)
