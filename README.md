@@ -6,12 +6,12 @@
 Release date: TBD
 ```
 
-![javaBadge](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)
-![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange?logo=apachemaven)
-![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen?logo=sonarlint)
+![javaBadge](https://img.shields.io/badge/jdk-11%2B-red)
+![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange)
+![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen)
 ![checkStyleBadge](https://img.shields.io/badge/checkstyle-passing-brightgreen)
-![operatingSystemBadge](https://img.shields.io/badge/OS-multiplatform-blueviolet?logo=windowsterminal)
-![licenseBadge](https://img.shields.io/badge/license-gpl3.0-blue?logo=gnu)
+![operatingSystemBadge](https://img.shields.io/badge/OS-multiplatform-blueviolet)
+![licenseBadge](https://img.shields.io/badge/license-gpl3.0-blue)
 
 ## 📜 Índice
 - [¿Qué es?](https://github.com/akmsw/armame-el-doparti#-qu%C3%A9-es)
