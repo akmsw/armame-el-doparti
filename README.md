@@ -6,11 +6,11 @@
 Release date: TBD
 ```
 
-[![javaBadge](https://img.shields.io/badge/jdk-11%2B-red)](https://openjdk.org/projects/jdk/11/)
+[![javaBadge](https://img.shields.io/badge/openjdk-11%2B-red)](https://openjdk.org/)
 [![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange)](https://maven.apache.org/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen)](https://www.sonarlint.org/)
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle-passing-brightgreen)](https://checkstyle.sourceforge.io/)
-[![operatingSystemBadge](https://img.shields.io/badge/OS-multiplatform-blueviolet)](https://en.wikipedia.org/wiki/Cross-platform_software)
+[![operatingSystemBadge](https://img.shields.io/badge/OS-cross--platform-blueviolet)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/license-gpl3.0-blue)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 ## 📜 Índice
