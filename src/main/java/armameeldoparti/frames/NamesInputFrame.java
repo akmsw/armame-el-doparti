@@ -38,54 +38,22 @@ public class NamesInputFrame extends JFrame {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
-  /**
-   * Cantidad máxima de caracteres por nombre.
-   */
   private static final int MAX_NAME_LEN = 10;
-
-  /**
-   * Cantidad de filas para el área de texto.
-   */
   private static final int TEXT_AREA_ROWS = 14;
-
-  /**
-   * Cantidad de columnas para el área de texto.
-   */
   private static final int TEXT_AREA_COLUMNS = 12;
 
-  /**
-   * Expresión regular para validación de nombres.
-   */
   private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
-
-  /**
-   * Expresión regular para obtener información del archivo .pda.
-   */
   private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
-
-  /**
-   * Nombre del archivo .pda.
-   */
   private static final String PDA_FILE = "dist.pda";
-
-  /**
-   * Título de la ventana.
-   */
   private static final String FRAME_TITLE = "Ingreso de jugadores";
 
-  /**
-   * Posiciones para la lista desplegable.
-   */
   private static final String[] OPTIONS_COMBOBOX = { "Defensores centrales",
                                                      "Defensores laterales",
                                                      "Mediocampistas",
                                                      "Delanteros",
                                                      "Arqueros" };
-
-  /**
-   * Opciones de distribución de jugadores.
-   */
-  private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntuaciones" };
+  private static final String[] OPTIONS_MIX = { "Aleatoriamente",
+                                                "Por puntuaciones" };
 
   // ---------------------------------------- Campos privados -----------------------------------
 

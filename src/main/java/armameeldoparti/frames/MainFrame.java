@@ -49,14 +49,7 @@ public class MainFrame extends JFrame {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
-  /**
-   * Configuración utilizada frecuentemente.
-   */
   private static final String GROWX = "growx";
-
-  /**
-   * Título de la ventana.
-   */
   private static final String FRAME_TITLE = Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION;
 
   // ---------------------------------------- Campos privados -----------------------------------

@@ -20,14 +20,8 @@ public class HelpFrame extends JFrame {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
-  /**
-   * Cantidad total de páginas de instrucciones.
-   */
   private static final int TOTAL_PAGES = 5;
 
-  /**
-   * Título de la ventana.
-   */
   private static final String FRAME_TITLE = "Ayuda";
 
   // ---------------------------------------- Campos privados -----------------------------------

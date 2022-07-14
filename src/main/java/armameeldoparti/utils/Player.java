@@ -61,7 +61,7 @@ public class Player {
   }
 
   /**
-   * Retorna el equipo al que pertenece el jugador.
+   * Retorna el número de equipo al que pertenece el jugador.
    *
    * @return Equipo al que pertenece el jugador.
    */

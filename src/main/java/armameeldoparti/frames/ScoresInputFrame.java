@@ -31,35 +31,12 @@ public class ScoresInputFrame extends JFrame {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
-  /**
-   * Valor inicial de los campos de entrada para puntuaciones.
-   */
   private static final int SCORE_INI = 1;
-
-  /**
-   * Valor mínimo de los campos de entrada para puntuaciones.
-   */
   private static final int SCORE_MIN = 1;
-
-  /**
-   * Valor máximo de los campos de entrada para puntuaciones.
-   */
   private static final int SCORE_MAX = 5;
-
-  /**
-   * Paso utilizado para el incremento y decremento del valor de los campos de entrada
-   * para puntuaciones.
-   */
   private static final int SCORE_STEP = 1;
 
-  /**
-   * Configuración utilizada frecuentemente.
-   */
   private static final String GROW_SPAN = "grow, span";
-
-  /**
-   * Título de la ventana.
-   */
   private static final String FRAME_TITLE = "Ingreso de puntuaciones";
 
   // ---------------------------------------- Campos privados -----------------------------------

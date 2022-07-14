@@ -16,9 +16,6 @@ public class BackButton extends JButton {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
-  /**
-   * Texto por defecto a mostrar en el botón.
-   */
   private static final String DEFAULT_TEXT = "Atrás";
 
   // ---------------------------------------- Constructor ---------------------------------------

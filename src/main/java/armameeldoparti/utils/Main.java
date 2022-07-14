@@ -20,74 +20,22 @@ public final class Main {
 
   // ---------------------------------------- Constantes públicas -------------------------------
 
-  /**
-   * Indicador de distribución aleatoria.
-   */
   public static final int RANDOM_MIX = 0;
-
-  /**
-   * Indicador de distribución por puntuaciones.
-   */
   public static final int BY_SCORES_MIX = 1;
-
-  /**
-   * Cantidad de jugadores por equipo.
-   */
   public static final int PLAYERS_PER_TEAM = 7;
 
-  /**
-   * Tamaño de la fuente a utilizar.
-   */
   public static final float FONT_SIZE = 18f;
 
-  /**
-   * Nombre de la fuente a utilizar.
-   */
   public static final String FONT_NAME = "comfortaa.ttf";
-
-  /**
-   * Nombre de la aplicación.
-   */
   public static final String PROGRAM_TITLE = "Armame el doparti";
-
-  /**
-   * Versión de la aplicación.
-   */
   public static final String PROGRAM_VERSION = "v3.0";
-
-  /**
-   * Nombre del archivo de imagen de icono para las ventanas.
-   */
   public static final String ICON_FILENAME = "icon.png";
-
-  /**
-   * Nombre del archivo de imagen de fondo para el menú principal.
-   */
   public static final String BG_IMG_FILENAME = "bg.png";
-
-  /**
-   * Dirección relativa del directorio de imágenes.
-   */
   public static final String IMG_PATH = "img/";
-
-  /**
-   * Dirección relativa del directorio de fuentes.
-   */
   public static final String TTF_PATH = "fonts/";
 
-  /**
-   * Color verde claro en formato RGB.
-   */
   public static final Color LIGHT_GREEN = new Color(176, 189, 162);
-
-  /**
-   * Color verde oscuro en formato RGB.
-   */
   public static final Color DARK_GREEN = new Color(41, 71, 74);
-
-  /**
-   * Color amarillo claro en formato RGB.
-   */
   public static final Color LIGHT_YELLOW = new Color(255, 255, 204);
 
   // ---------------------------------------- Campos privados -----------------------------------

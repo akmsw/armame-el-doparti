@@ -35,35 +35,14 @@ public class ResultsFrame extends JFrame {
   // ---------------------------------------- Constantes públicas -------------------------------
 
   /**
-   * Número de fila límite para mostrar defensores laterales.
-   */
-  private static final int ROW_LIMIT_4 = 4;
-
-  /**
-   * Número de fila límite para mostrar mediocampistas.
-   */
-  private static final int ROW_LIMIT_6 = 6;
-
-  /**
-   * Número de fila límite para mostrar delanteros.
-   */
-  private static final int ROW_LIMIT_7 = 7;
-
-  /**
    * Tamaño de ancho (en píxeles) fijo para las celdas de la tabla de resultados.
    * Valor ajustado a fuente del programa teniendo en cuenta su tamaño y la cantidad
    * máxima de caracteres en los nombres de los jugadores.
    */
   private static final int FIXED_CELL_WIDTH = 250;
 
-  /**
-   * Cantidad de columnas para la tabla de resultados.
-   */
   private static final int TABLE_COLUMNS = 3;
 
-  /**
-   * Configuración utilizada frecuentemente.
-   */
   private static final String GROWX = "growx";
 
   /**
@@ -338,13 +317,13 @@ public class ResultsFrame extends JFrame {
       if (i == 1) {
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.CENTRAL_DEFENDER), i, 0);
-      } else if (i < ROW_LIMIT_4) {
+      } else if (i < 4) {
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.LATERAL_DEFENDER), i, 0);
-      } else if (i < ROW_LIMIT_6) {
+      } else if (i < 6) {
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.MIDFIELDER), i, 0);
-      } else if (i < ROW_LIMIT_7) {
+      } else if (i < 7) {
         table.setValueAt(Main.getPositionsMap()
                              .get(Position.FORWARD), i, 0);
       }
