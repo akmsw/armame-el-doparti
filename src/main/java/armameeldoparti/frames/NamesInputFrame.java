@@ -44,7 +44,7 @@ public class NamesInputFrame extends JFrame {
 
   private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
   private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
-  private static final String PDA_FILE = "dist.pda";
+  private static final String PDA_FILENAME = "dist.pda";
   private static final String FRAME_TITLE = "Ingreso de jugadores";
 
   private static final String[] OPTIONS_COMBOBOX = { "Defensores centrales",
@@ -142,7 +142,7 @@ public class NamesInputFrame extends JFrame {
     try {
       BufferedReader br = new BufferedReader(
           new InputStreamReader(getClass().getClassLoader()
-                                          .getResourceAsStream(PDA_FILE))
+                                          .getResourceAsStream(Main.DOCS_PATH + PDA_FILENAME))
       );
 
       int index = 0;

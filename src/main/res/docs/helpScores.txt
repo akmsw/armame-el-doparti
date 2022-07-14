@@ -1,0 +1,22 @@
+es
+el
+texto
+del
+documento
+de
+ayuda
+para
+la
+cuarta página
+de la
+ayuda
+del
+programa
+
+(esto es
+sobre
+ayuda
+para la
+configuración
+de
+puntuaciones)

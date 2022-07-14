@@ -107,15 +107,15 @@ public class AnchoragesFrame extends JFrame {
     textArea = new JTextArea();
 
     scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                  ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     scrollPane.getVerticalScrollBar()
               .setUI(new BasicScrollBarUI() {
-                  @Override
-                  protected void configureScrollBarColors() {
-                      this.thumbColor = Main.LIGHT_GREEN;
-                      this.trackColor = Main.DARK_GREEN;
-                  }
+                @Override
+                protected void configureScrollBarColors() {
+                  this.thumbColor = Main.LIGHT_GREEN;
+                  this.trackColor = Main.DARK_GREEN;
+                }
               });
 
     int index = 0;

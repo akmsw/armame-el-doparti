@@ -1,0 +1,22 @@
+es
+el
+texto
+del
+documento
+de
+ayuda
+para
+la
+tercera página
+de la
+ayuda
+del
+programa
+
+(esto es
+sobre
+ayuda
+para el
+establecimiento
+de
+anclajes)

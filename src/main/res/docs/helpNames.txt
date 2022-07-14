@@ -1,0 +1,25 @@
+este
+es
+el
+texto
+del
+documento
+de
+ayuda
+para
+la
+segunda página
+de la
+ayuda
+del
+programa
+
+(esto es
+sobre
+ayuda
+para el
+ingreso
+de
+nombres
+de
+jugadores)

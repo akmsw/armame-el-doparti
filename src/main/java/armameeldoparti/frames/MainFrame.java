@@ -158,7 +158,7 @@ public class MainFrame extends JFrame {
                                                    .deriveFont(Main.FONT_SIZE);
 
       GraphicsEnvironment.getLocalGraphicsEnvironment()
-                          .registerFont(programFont);
+                         .registerFont(programFont);
 
       setProgramFont(programFont);
     } catch (IOException | FontFormatException ex) {

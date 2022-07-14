@@ -1,0 +1,30 @@
+es
+el
+texto
+del
+documento
+de
+ayuda
+para
+la
+quinta página
+de la
+ayuda
+del
+programa
+
+(esto es
+sobre
+ayuda
+para la
+explicación
+y
+ejemplo
+de
+distribución
+aleatoria
+de
+jugadores
+con y
+sin
+anclajes)
