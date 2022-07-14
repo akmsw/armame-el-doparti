@@ -10,28 +10,28 @@ package armameeldoparti.utils;
  * @since 15/02/2020
  */
 public enum Position {
-    /**
-     * Defensor central.
-     */
-    CENTRAL_DEFENDER,
+  /**
+   * Defensor central.
+   */
+  CENTRAL_DEFENDER,
 
-    /**
-     * Defensor lateral.
-     */
-    LATERAL_DEFENDER,
+  /**
+   * Defensor lateral.
+   */
+  LATERAL_DEFENDER,
 
-    /**
-     * Mediocampista.
-     */
-    MIDFIELDER,
+  /**
+   * Mediocampista.
+   */
+  MIDFIELDER,
 
-    /**
-     * Delantero.
-     */
-    FORWARD,
+  /**
+   * Delantero.
+   */
+  FORWARD,
 
-    /**
-     * Arquero.
-     */
-    GOALKEEPER
+  /**
+   * Arquero.
+   */
+  GOALKEEPER
 }

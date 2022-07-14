@@ -14,23 +14,23 @@ import java.util.List;
  */
 public interface PlayersMixer {
 
-    // ---------------------------------------- Métodos públicos abstractos -----------------------
+  // ---------------------------------------- Métodos públicos abstractos -----------------------
 
-    /**
-     * Distribuye los jugadores sin tener en cuenta anclajes.
-     *
-     * @param teams Lista contenedora de equipos.
-     *
-     * @return Los equipos con los jugadores distribuidos de la manera deseada.
-     */
-    List<Team> withoutAnchorages(List<Team> teams);
+  /**
+   * Distribuye los jugadores sin tener en cuenta anclajes.
+   *
+   * @param teams Lista contenedora de equipos.
+   *
+   * @return Los equipos con los jugadores distribuidos de la manera deseada.
+   */
+  List<Team> withoutAnchorages(List<Team> teams);
 
-    /**
-     * Distribuye los jugadores teniendo en cuenta anclajes.
-     *
-     * @param teams Lista contenedora de equipos.
-     *
-     * @return Los equipos con los jugadores distribuidos de la manera deseada.
-     */
-    List<Team> withAnchorages(List<Team> teams);
+  /**
+   * Distribuye los jugadores teniendo en cuenta anclajes.
+   *
+   * @param teams Lista contenedora de equipos.
+   *
+   * @return Los equipos con los jugadores distribuidos de la manera deseada.
+   */
+  List<Team> withAnchorages(List<Team> teams);
 }

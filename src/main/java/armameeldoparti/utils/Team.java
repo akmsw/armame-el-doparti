@@ -16,63 +16,67 @@ import java.util.Map;
  */
 public class Team {
 
-    // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Campos privados -----------------------------------
 
-    private List<Player> goalkeepers;
-    private List<Player> centralDefenders;
-    private List<Player> lateralDefenders;
-    private List<Player> midfielders;
-    private List<Player> forwards;
+  private List<Player> goalkeepers;
+  private List<Player> centralDefenders;
+  private List<Player> lateralDefenders;
+  private List<Player> midfielders;
+  private List<Player> forwards;
 
-    private Map<Position, List<Player>> teamPlayers;
+  private Map<Position, List<Player>> teamPlayers;
 
-    // ---------------------------------------- Constructor ---------------------------------------
+  // ---------------------------------------- Constructor ---------------------------------------
 
-    /**
-     * Construye un equipo con sus posiciones vacías.
-     */
-    public Team() {
-        goalkeepers = new ArrayList<>();
-        centralDefenders = new ArrayList<>();
-        lateralDefenders = new ArrayList<>();
-        midfielders = new ArrayList<>();
-        forwards = new ArrayList<>();
+  /**
+   * Construye un equipo con sus posiciones vacías.
+   */
+  public Team() {
+    goalkeepers = new ArrayList<>();
+    centralDefenders = new ArrayList<>();
+    lateralDefenders = new ArrayList<>();
+    midfielders = new ArrayList<>();
+    forwards = new ArrayList<>();
 
-        teamPlayers = new EnumMap<>(Position.class);
+    teamPlayers = new EnumMap<>(Position.class);
 
-        teamPlayers.put(Position.GOALKEEPER, goalkeepers);
-        teamPlayers.put(Position.CENTRAL_DEFENDER, centralDefenders);
-        teamPlayers.put(Position.LATERAL_DEFENDER, lateralDefenders);
-        teamPlayers.put(Position.MIDFIELDER, midfielders);
-        teamPlayers.put(Position.FORWARD, forwards);
-    }
+    teamPlayers.put(Position.GOALKEEPER, goalkeepers);
+    teamPlayers.put(Position.CENTRAL_DEFENDER, centralDefenders);
+    teamPlayers.put(Position.LATERAL_DEFENDER, lateralDefenders);
+    teamPlayers.put(Position.MIDFIELDER, midfielders);
+    teamPlayers.put(Position.FORWARD, forwards);
+  }
 
-    // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Métodos públicos ----------------------------------
 
-    /**
-     * Vacía las listas de jugadores de cada posición.
-     */
-    public void clear() {
-        teamPlayers.values()
-                   .forEach(List::clear);
-    }
+  /**
+   * Vacía las listas de jugadores de cada posición.
+   */
+  public void clear() {
+    teamPlayers.values()
+               .forEach(List::clear);
+  }
 
-    // ---------------------------------------- Getters -------------------------------------------
+  // ---------------------------------------- Getters -------------------------------------------
 
-    /**
-     * @return Cantidad total de jugadores en el equipo.
-     */
-    public int getPlayersCount() {
-        return teamPlayers.values()
-                          .stream()
-                          .mapToInt(List::size)
-                          .sum();
-    }
+  /**
+   * Retorna la cantidad total de jugadores en el equipo.
+   *
+   * @return Cantidad total de jugadores en el equipo.
+   */
+  public int getPlayersCount() {
+    return teamPlayers.values()
+                      .stream()
+                      .mapToInt(List::size)
+                      .sum();
+  }
 
-    /**
-     * @return Mapa con los jugadores de este equipo para cada posición.
-     */
-    public Map<Position, List<Player>> getPlayers() {
-        return teamPlayers;
-    }
+  /**
+   * Retorna los jugadores de este separados por posiciones.
+   *
+   * @return Mapa con los jugadores de este equipo para cada posición.
+   */
+  public Map<Position, List<Player>> getPlayers() {
+    return teamPlayers;
+  }
 }

@@ -29,149 +29,150 @@ import net.miginfocom.swing.MigLayout;
  */
 public class ScoresInputFrame extends JFrame {
 
-    // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Constantes privadas -------------------------------
 
-    /**
-     * Valor inicial de los campos de entrada para puntuaciones.
-     */
-    private static final int SCORE_INI = 1;
+  /**
+   * Valor inicial de los campos de entrada para puntuaciones.
+   */
+  private static final int SCORE_INI = 1;
 
-    /**
-     * Valor mínimo de los campos de entrada para puntuaciones.
-     */
-    private static final int SCORE_MIN = 1;
+  /**
+   * Valor mínimo de los campos de entrada para puntuaciones.
+   */
+  private static final int SCORE_MIN = 1;
 
-    /**
-     * Valor máximo de los campos de entrada para puntuaciones.
-     */
-    private static final int SCORE_MAX = 5;
+  /**
+   * Valor máximo de los campos de entrada para puntuaciones.
+   */
+  private static final int SCORE_MAX = 5;
 
-    /**
-     * Paso utilizado para el incremento y decremento del valor de los campos de entrada para puntuaciones.
-     */
-    private static final int SCORE_STEP = 1;
+  /**
+   * Paso utilizado para el incremento y decremento del valor de los campos de entrada
+   * para puntuaciones.
+   */
+  private static final int SCORE_STEP = 1;
 
-    /**
-     * Configuración utilizada frecuentemente.
-     */
-    private static final String GROW_SPAN = "grow, span";
+  /**
+   * Configuración utilizada frecuentemente.
+   */
+  private static final String GROW_SPAN = "grow, span";
 
-    /**
-     * Título de la ventana.
-     */
-    private static final String FRAME_TITLE = "Ingreso de puntuaciones";
+  /**
+   * Título de la ventana.
+   */
+  private static final String FRAME_TITLE = "Ingreso de puntuaciones";
 
-    // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Campos privados -----------------------------------
 
-    private JPanel masterPanel;
+  private JPanel masterPanel;
 
-    private ResultsFrame resultsFrame;
+  private ResultsFrame resultsFrame;
 
-    private transient Map<Player, JSpinner> spinnersMap;
+  private transient Map<Player, JSpinner> spinnersMap;
 
-    // ---------------------------------------- Constructor ---------------------------------------
+  // ---------------------------------------- Constructor ---------------------------------------
 
-    /**
-     * Construye una ventana de ingreso de puntuaciones.
-     *
-     * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
-     */
-    public ScoresInputFrame(JFrame previousFrame) {
-        initializeGUI(previousFrame);
-    }
+  /**
+   * Construye una ventana de ingreso de puntuaciones.
+   *
+   * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
+   */
+  public ScoresInputFrame(JFrame previousFrame) {
+    initializeInterface(previousFrame);
+  }
 
-    /**
-     * Inicializa la interfaz gráfica de esta ventana.
-     *
-     * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
-     */
-    private void initializeGUI(JFrame previousFrame) {
-        masterPanel = new JPanel(new MigLayout());
+  /**
+   * Inicializa la interfaz gráfica de esta ventana.
+   *
+   * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
+   */
+  private void initializeInterface(JFrame previousFrame) {
+    masterPanel = new JPanel(new MigLayout());
 
-        spinnersMap = new HashMap<>();
+    spinnersMap = new HashMap<>();
 
-        addSpinners();
-        addButtons(previousFrame);
-        add(masterPanel);
-        setTitle(FRAME_TITLE);
-        setResizable(false);
-        setIconImage(MainFrame.ICON.getImage());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-    }
+    addSpinners();
+    addButtons(previousFrame);
+    add(masterPanel);
+    setTitle(FRAME_TITLE);
+    setResizable(false);
+    setIconImage(MainFrame.ICON.getImage());
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    pack();
+    setLocationRelativeTo(null);
+  }
 
-    /**
-     * Añade los botones al panel de la ventana.
-     *
-     * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
-     */
-    private void addButtons(JFrame previousFrame) {
-        JButton finishButton = new JButton("Finalizar");
-        JButton resetButton = new JButton("Reiniciar puntuaciones");
+  /**
+   * Añade los botones al panel de la ventana.
+   *
+   * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
+   */
+  private void addButtons(JFrame previousFrame) {
+    JButton finishButton = new JButton("Finalizar");
+    JButton resetButton = new JButton("Reiniciar puntuaciones");
 
-        BackButton backButton = new BackButton(this, previousFrame, null);
+    finishButton.addActionListener(e -> {
+      spinnersMap.forEach((k, v) -> k.setScore((int) v.getValue()));
 
-        finishButton.addActionListener(e -> {
-            spinnersMap.forEach((k, v) -> k.setScore((int) v.getValue()));
+      resultsFrame = new ResultsFrame(this);
 
-            resultsFrame = new ResultsFrame(this);
+      resultsFrame.setVisible(true);
 
-            resultsFrame.setVisible(true);
+      setVisible(false);
+      setLocationRelativeTo(null);
+    });
 
-            setVisible(false);
-            setLocationRelativeTo(null);
-        });
+    resetButton.addActionListener(e -> spinnersMap.forEach((k, v) -> {
+      v.setValue(1);
+      k.setScore(0);
+    }));
 
-        resetButton.addActionListener(e -> spinnersMap.forEach((k, v) -> {
-            v.setValue(1);
-            k.setScore(0);
-        }));
+    BackButton backButton = new BackButton(this, previousFrame, null);
 
-        masterPanel.add(finishButton, GROW_SPAN);
-        masterPanel.add(resetButton, GROW_SPAN);
-        masterPanel.add(backButton, GROW_SPAN);
-    }
+    masterPanel.add(finishButton, GROW_SPAN);
+    masterPanel.add(resetButton, GROW_SPAN);
+    masterPanel.add(backButton, GROW_SPAN);
+  }
 
-    /**
-     * Añade los campos de puntuación al panel de la ventana.
-     */
-    private void addSpinners() {
-        for (int i = 0; i < Main.getPlayersSets().size(); i++) {
-            JLabel label = new JLabel(Main.getPositionsMap()
-                                          .get(Position.values()[i]));
+  /**
+   * Añade los campos de puntuación al panel de la ventana.
+   */
+  private void addSpinners() {
+    for (int i = 0; i < Main.getPlayersSets().size(); i++) {
+      JLabel label = new JLabel(Main.getPositionsMap()
+                                    .get(Position.values()[i]));
 
-            label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
+      label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-            masterPanel.add(label, GROW_SPAN);
+      masterPanel.add(label, GROW_SPAN);
 
-            for (int j = 0; j < Main.getPlayersSets().get(Position.values()[i]).size(); j++) {
-                spinnersMap.put(Main.getPlayersSets()
-                                    .get(Position.values()[i])
-                                    .get(j),
-                                new JSpinner(new SpinnerNumberModel(SCORE_INI, SCORE_MIN,
-                                                                    SCORE_MAX, SCORE_STEP)));
+      for (int j = 0; j < Main.getPlayersSets().get(Position.values()[i]).size(); j++) {
+        spinnersMap.put(Main.getPlayersSets()
+                            .get(Position.values()[i])
+                            .get(j),
+                        new JSpinner(new SpinnerNumberModel(SCORE_INI, SCORE_MIN,
+                                                            SCORE_MAX, SCORE_STEP)));
 
-                masterPanel.add(new JLabel(Main.getPlayersSets()
-                                               .get(Position.values()[i])
-                                               .get(j)
-                                               .getName()), "pushx");
+        masterPanel.add(new JLabel(Main.getPlayersSets()
+                                       .get(Position.values()[i])
+                                       .get(j)
+                                       .getName()), "pushx");
 
-                if (j % 2 != 0) {
-                    masterPanel.add(spinnersMap.get(Main.getPlayersSets()
-                                               .get(Position.values()[i])
-                                               .get(j)), "wrap");
-                } else {
-                    masterPanel.add(spinnersMap.get(Main.getPlayersSets()
-                                               .get(Position.values()[i])
-                                               .get(j)));
-                }
-            }
-
-            for (JSpinner js : spinnersMap.values()) {
-                ((DefaultEditor) js.getEditor()).getTextField()
-                                                .setEditable(false);
-            }
+        if (j % 2 != 0) {
+          masterPanel.add(spinnersMap.get(Main.getPlayersSets()
+                                     .get(Position.values()[i])
+                                     .get(j)), "wrap");
+        } else {
+          masterPanel.add(spinnersMap.get(Main.getPlayersSets()
+                                     .get(Position.values()[i])
+                                     .get(j)));
         }
+      }
+
+      for (JSpinner js : spinnersMap.values()) {
+        ((DefaultEditor) js.getEditor()).getTextField()
+                                        .setEditable(false);
+      }
     }
+  }
 }
