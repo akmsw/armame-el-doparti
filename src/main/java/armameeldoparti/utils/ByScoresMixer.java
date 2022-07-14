@@ -51,7 +51,8 @@ public class ByScoresMixer implements PlayersMixer {
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
     for (Position position : Position.values()) {
-      List<Player> currentSet = Main.getPlayersSets().get(position);
+      List<Player> currentSet = Main.getPlayersSets()
+                                    .get(position);
 
       // Se ordenan los jugadores de esta posición en base a su puntuación, de mayor a menor
       currentSet.sort(Comparator.comparingInt(Player::getScore)
@@ -62,24 +63,24 @@ public class ByScoresMixer implements PlayersMixer {
         * de sus jugadores hasta el momento, de menor a mayor.
         */
       teams.sort(Comparator.comparingInt(t -> t.getPlayers()
-                                                .values()
-                                                .stream()
-                                                .flatMap(List::stream)
-                                                .mapToInt(Player::getScore)
-                                                .reduce(0, Math::addExact)));
+                                               .values()
+                                               .stream()
+                                               .flatMap(List::stream)
+                                               .mapToInt(Player::getScore)
+                                               .reduce(0, Math::addExact)));
 
       if (currentSet.size() == 2) {
         // Al equipo con menor puntuación se le asigna el jugador de mayor puntuación
         teams.get(0)
-              .getPlayers()
-              .get(position)
-              .add(currentSet.get(0));
+             .getPlayers()
+             .get(position)
+             .add(currentSet.get(0));
 
         // Al equipo con mayor puntuación se le asigna el jugador de menor puntuación
         teams.get(1)
-              .getPlayers()
-              .get(position)
-              .add(currentSet.get(1));
+             .getPlayers()
+             .get(position)
+             .add(currentSet.get(1));
       } else {
         List<Player> playersSubset1 = new ArrayList<>();
         List<Player> playersSubset2 = new ArrayList<>();

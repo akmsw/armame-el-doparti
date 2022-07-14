@@ -76,16 +76,16 @@ public class NamesInputFrame extends JFrame {
   /**
    * Posiciones para la lista desplegable.
    */
-  private static final String[] OPTIONS_COMBOBOX = {"Defensores centrales",
-                                                    "Defensores laterales",
-                                                    "Mediocampistas",
-                                                    "Delanteros",
-                                                    "Arqueros"};
+  private static final String[] OPTIONS_COMBOBOX = { "Defensores centrales",
+                                                     "Defensores laterales",
+                                                     "Mediocampistas",
+                                                     "Delanteros",
+                                                     "Arqueros" };
 
   /**
    * Opciones de distribución de jugadores.
    */
-  private static final String[] OPTIONS_MIX = {"Aleatoriamente", "Por puntuaciones"};
+  private static final String[] OPTIONS_MIX = { "Aleatoriamente", "Por puntuaciones" };
 
   // ---------------------------------------- Campos privados -----------------------------------
 
@@ -349,7 +349,7 @@ public class NamesInputFrame extends JFrame {
 
     comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
-      updateTextFields((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
+        updateTextFields((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
     );
 
     leftPanel.add(comboBox, "growx");
@@ -365,10 +365,10 @@ public class NamesInputFrame extends JFrame {
     mixButton.setVisible(true);
     mixButton.addActionListener(e -> {
       Main.setDistribution(
-        JOptionPane.showOptionDialog(null,
-                                     "Seleccione el criterio de distribución de jugadores",
-                                     "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                     MainFrame.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0])
+          JOptionPane.showOptionDialog(null,
+                                      "Seleccione el criterio de distribución de jugadores",
+                                      "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
+                                      MainFrame.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0])
       );
 
       if (Main.getDistribution() != JOptionPane.CLOSED_OPTION) {
