@@ -1,6 +1,6 @@
 # Armame el doparti v3.0 ⚽
 
-![portada](./src/main/res/img/cover.png)
+![portada](./src/main/res/img/readme/cover.png)
 
 ```
 Release date: TBD
@@ -92,23 +92,23 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
 Para estar al tanto del desarrollo del programa, se puede visitar el [panel de seguimiento](https://github.com/users/akmsw/projects/2) del mismo y ver en qué se está trabajando, qué está por añadirse/modificarse, y qué cosas se han terminado de implementar.
 
 ## 📸 Capturas de pantalla
-![ventana_principal](./src/main/res/img/ss1.png)\
+![ventana_principal](./src/main/res/img/readme/ss1.png)\
 *Ventana principal*
 
-![ventana_ingreso_nombres](./src/main/res/img/ss2.png)\
+![ventana_ingreso_nombres](./src/main/res/img/readme/ss2.png)\
 *Ventana de ingreso de nombres*
 
-![ventana_anclajes](./src/main/res/img/ss3.png)\
+![ventana_anclajes](./src/main/res/img/readme/ss3.png)\
 *Ventana de anclajes*
 
-![ventana_puntuaciones](./src/main/res/img/ss4.png)\
+![ventana_puntuaciones](./src/main/res/img/readme/ss4.png)\
 *Ventana de puntuaciones*
 
-![ventana_resultados_1](./src/main/res/img/ss5.png)\
+![ventana_resultados_1](./src/main/res/img/readme/ss5.png)\
 *Ventana de muestra de resultado de distribución aleatoria sin anclajes*
 
-![ventana_resultados_2](./src/main/res/img/ss6.png)\
+![ventana_resultados_2](./src/main/res/img/readme/ss6.png)\
 *Ventana de muestra de resultado de distribución aleatoria con tres anclajes distintos*
 
-![ventana_resultados_3](./src/main/res/img/ss7.png)\
+![ventana_resultados_3](./src/main/res/img/readme/ss7.png)\
 *Ventana de muestra de resultado de distribución por puntuaciones sin anclajes*

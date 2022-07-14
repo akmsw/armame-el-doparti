@@ -11,7 +11,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -299,13 +298,12 @@ public class ResultsFrame extends JFrame {
                         c.setBackground(Main.LIGHT_YELLOW);
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
-                        Player playerOnCell = Main.getPlayersSets()
-                                                  .values()
-                                                  .stream()
-                                                  .flatMap(List::stream)
-                                                  .filter(p -> p.getName() == value)
-                                                  .collect(Collectors.toList())
-                                                  .get(0);
+                        Player playerOnCell = (Player) Main.getPlayersSets()
+                                                           .values()
+                                                           .stream()
+                                                           .flatMap(List::stream)
+                                                           .filter(p -> p.getName() == value)
+                                                           .toArray()[0];
 
                         c.setBackground(playerOnCell.getAnchor() != 0
                                         ? ANCHORAGES_COLORS[playerOnCell.getAnchor() - 1] : Color.WHITE);

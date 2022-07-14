@@ -72,6 +72,9 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/readme/*</exclude>
+                    </excludes>
                     <archive>
                         <manifest>
                             <mainClass>armameeldoparti.utils.Main</mainClass>
