@@ -113,8 +113,8 @@ public class AnchoragesFrame extends JFrame {
               .setUI(new BasicScrollBarUI() {
                 @Override
                 protected void configureScrollBarColors() {
-                  this.thumbColor = Main.LIGHT_GREEN;
-                  this.trackColor = Main.DARK_GREEN;
+                  this.thumbColor = Main.DARK_GREEN;
+                  this.trackColor = Main.MEDIUM_GREEN;
                 }
               });
 

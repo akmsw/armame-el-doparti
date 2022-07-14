@@ -101,6 +101,7 @@ public class HelpFrame extends JFrame {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
     textArea.setBorder(BorderFactory.createBevelBorder(1));
+    textArea.setBackground(Main.LIGHT_GREEN);
     textArea.setEditable(false);
 
     JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -110,8 +111,8 @@ public class HelpFrame extends JFrame {
               .setUI(new BasicScrollBarUI() {
                 @Override
                 protected void configureScrollBarColors() {
-                  this.thumbColor = Main.LIGHT_GREEN;
-                  this.trackColor = Main.DARK_GREEN;
+                  this.thumbColor = Main.DARK_GREEN;
+                  this.trackColor = Main.MEDIUM_GREEN;
                 }
               });
 
