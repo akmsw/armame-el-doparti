@@ -269,6 +269,10 @@ public class ResultsFrame extends JFrame {
                 final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
                                                                         hasFocus, row, column);
 
+                /*
+                 * Fila 0 y columna 0 tienen fondo verde oscuro con letras blancas. Sólo las celdas de
+                 * las columnas de los títulos de los equipos y la de puntuaciones estarán centradas.
+                 */
                 if (row == 0) {
                     c.setBackground(Main.DARK_GREEN);
                     c.setForeground(Color.WHITE);
@@ -276,7 +280,6 @@ public class ResultsFrame extends JFrame {
                 } else if (column == 0) {
                     if (Main.getDistribution() == Main.BY_SCORES_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
-                        c.setForeground(Color.BLACK);
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
                         c.setBackground(Main.DARK_GREEN);
@@ -284,9 +287,16 @@ public class ResultsFrame extends JFrame {
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
                     }
                 } else {
+                    /*
+                     * Las demás celdas tendrán letras negras. El color de fondo será amarillo si la celda muestra
+                     * puntajes. Si la celda corresponde a un jugador con un anclaje establecido, se toma como
+                     * color de fondo el color correspondiente a su número de anclaje. Si la celda muestra un
+                     * puntaje, estará centrada; de lo contrario estará alineada a la izquierda.
+                     */
+                    c.setForeground(Color.BLACK);
+
                     if (Main.getDistribution() == Main.BY_SCORES_MIX && row == table.getRowCount() - 1) {
                         c.setBackground(Main.LIGHT_YELLOW);
-                        c.setForeground(Color.BLACK);
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                     } else {
                         Player playerOnCell = Main.getPlayersSets()
@@ -297,14 +307,8 @@ public class ResultsFrame extends JFrame {
                                                   .collect(Collectors.toList())
                                                   .get(0);
 
-                        c.setForeground(Color.BLACK);
-
-                        if (playerOnCell.getAnchor() != 0) {
-                            c.setBackground(ANCHORAGES_COLORS[playerOnCell.getAnchor() - 1]);
-                        } else {
-                            c.setBackground(Color.WHITE);
-                        }
-
+                        c.setBackground(playerOnCell.getAnchor() != 0
+                                        ? ANCHORAGES_COLORS[playerOnCell.getAnchor() - 1] : Color.WHITE);
                         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
                     }
                 }
