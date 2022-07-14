@@ -483,24 +483,28 @@ public class AnchoragesFrame extends JFrame {
    * @param playersSet Arreglo de jugadores correspondiente al arreglo de casillas.
    */
   private void setAnchors(List<JCheckBox> cbSet, List<Player> playersSet) {
-    for (Player p : playersSet) {
-      for (JCheckBox cb : cbSet) {
-        if (anchorageNum != 0) {
-          if (cb.getText().equals(p.getName()) && cb.isSelected()) {
-            p.setAnchor(anchorageNum);
+    cbSet.stream()
+         .filter(JCheckBox::isSelected)
+         .forEach(cb -> {
+          if (anchorageNum != 0) {
+            playersSet.stream()
+                      .filter(p -> p.getName()
+                                    .equals(cb.getText()))
+                      .forEach(p -> {
+                        p.setAnchor(anchorageNum);
 
-            playersAnchored++;
+                        playersAnchored++;
 
-            cb.setSelected(false);
-            cb.setVisible(false);
+                        cb.setVisible(false);
+                      });
+          } else {
+            playersSet.forEach(p -> {
+              p.setAnchor(anchorageNum);
+              cb.setVisible(true);
+            });
           }
-        } else {
-          p.setAnchor(anchorageNum);
 
           cb.setSelected(false);
-          cb.setVisible(true);
-        }
-      }
-    }
+         });
   }
 }
