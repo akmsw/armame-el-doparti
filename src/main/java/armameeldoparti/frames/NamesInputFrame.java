@@ -366,9 +366,9 @@ public class NamesInputFrame extends JFrame {
     mixButton.addActionListener(e -> {
       Main.setDistribution(
           JOptionPane.showOptionDialog(null,
-                                      "Seleccione el criterio de distribución de jugadores",
-                                      "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
-                                      MainFrame.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0])
+                                       "Seleccione el criterio de distribución de jugadores",
+                                       "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
+                                       MainFrame.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0])
       );
 
       if (Main.getDistribution() != JOptionPane.CLOSED_OPTION) {
