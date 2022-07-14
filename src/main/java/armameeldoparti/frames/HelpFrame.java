@@ -48,17 +48,15 @@ public class HelpFrame extends JFrame {
 
         pageNum = 1;
 
-        initializeGUI(FRAME_TITLE);
+        initializeGUI();
     }
 
     // ---------------------------------------- Métodos privados ----------------------------------
 
     /**
      * Inicializa y muestra la interfaz gráfica de esta ventana.
-     *
-     * @param frameTitle Título de la ventana.
      */
-    private void initializeGUI(String frameTitle) {
+    private void initializeGUI() {
         masterPanel = new JPanel(new MigLayout("wrap"));
 
         addButtons();
@@ -66,7 +64,7 @@ public class HelpFrame extends JFrame {
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
-        setTitle(frameTitle);
+        setTitle(FRAME_TITLE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(MainFrame.ICON.getImage());
     }

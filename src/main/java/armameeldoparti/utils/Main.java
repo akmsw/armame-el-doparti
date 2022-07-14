@@ -114,7 +114,7 @@ public final class Main {
     /**
      * Instancia y ejecuta todo el programa.
      *
-     * @param args Argumentos para ejecutar el programa.
+     * @param args Argumentos para ejecutar el programa (no implementado).
      */
     public static void main(String[] args) {
         playersAmountMap = new EnumMap<>(Position.class);

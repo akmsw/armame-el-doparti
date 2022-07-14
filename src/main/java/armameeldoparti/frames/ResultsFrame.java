@@ -233,9 +233,8 @@ public class ResultsFrame extends JFrame {
             remixButton.addActionListener(e -> {
                 resetTeams();
 
-                teams = Main.thereAreAnchorages() ? randomMixer.withAnchorages(teams)
-                                                  :
-                        randomMixer.withoutAnchorages(teams);
+                teams = Main.thereAreAnchorages()
+                        ? randomMixer.withAnchorages(teams) : randomMixer.withoutAnchorages(teams);
 
                 fillTable();
             });

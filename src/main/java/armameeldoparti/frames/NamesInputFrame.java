@@ -204,29 +204,39 @@ public class NamesInputFrame extends JFrame {
         List<Player> setFW = new ArrayList<>();
         List<Player> setGK = new ArrayList<>();
 
-        initializeSet(setCD, Position.CENTRAL_DEFENDER, Main.getPlayersAmountMap().get(Position.CENTRAL_DEFENDER) * 2);
-        initializeSet(setLD, Position.LATERAL_DEFENDER, Main.getPlayersAmountMap().get(Position.LATERAL_DEFENDER) * 2);
-        initializeSet(setMF, Position.MIDFIELDER, Main.getPlayersAmountMap().get(Position.MIDFIELDER) * 2);
-        initializeSet(setFW, Position.FORWARD, Main.getPlayersAmountMap().get(Position.FORWARD) * 2);
-        initializeSet(setGK, Position.GOALKEEPER, Main.getPlayersAmountMap().get(Position.GOALKEEPER) * 2);
+        initializeSet(setCD, Position.CENTRAL_DEFENDER, Main.getPlayersAmountMap()
+                                                            .get(Position.CENTRAL_DEFENDER) * 2);
+        initializeSet(setLD, Position.LATERAL_DEFENDER, Main.getPlayersAmountMap()
+                                                            .get(Position.LATERAL_DEFENDER) * 2);
+        initializeSet(setMF, Position.MIDFIELDER, Main.getPlayersAmountMap()
+                                                      .get(Position.MIDFIELDER) * 2);
+        initializeSet(setFW, Position.FORWARD, Main.getPlayersAmountMap()
+                                                   .get(Position.FORWARD) * 2);
+        initializeSet(setGK, Position.GOALKEEPER, Main.getPlayersAmountMap()
+                                                      .get(Position.GOALKEEPER) * 2);
 
         textFields = Arrays.asList(textFieldCD, textFieldLD, textFieldMF, textFieldFW, textFieldGK);
 
-        Main.getPlayersSets().put(Position.CENTRAL_DEFENDER, setCD);
-        Main.getPlayersSets().put(Position.LATERAL_DEFENDER, setLD);
-        Main.getPlayersSets().put(Position.MIDFIELDER, setMF);
-        Main.getPlayersSets().put(Position.FORWARD, setFW);
-        Main.getPlayersSets().put(Position.GOALKEEPER, setGK);
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle(FRAME_TITLE);
-        setIconImage(MainFrame.ICON.getImage());
+        Main.getPlayersSets()
+            .put(Position.CENTRAL_DEFENDER, setCD);
+        Main.getPlayersSets()
+            .put(Position.LATERAL_DEFENDER, setLD);
+        Main.getPlayersSets()
+            .put(Position.MIDFIELDER, setMF);
+        Main.getPlayersSets()
+            .put(Position.FORWARD, setFW);
+        Main.getPlayersSets()
+            .put(Position.GOALKEEPER, setGK);
 
         leftPanel = new JPanel(new MigLayout("wrap"));
         rightPanel = new JPanel(new MigLayout("wrap"));
 
         JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
 
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle(FRAME_TITLE);
+        setIconImage(MainFrame.ICON.getImage());
+        setResizable(false);
         addComboBox();
         addTextFields(Position.CENTRAL_DEFENDER, textFieldCD, setCD);
         addTextFields(Position.LATERAL_DEFENDER, textFieldLD, setLD);
@@ -244,7 +254,6 @@ public class NamesInputFrame extends JFrame {
         masterPanel.add(rightPanel, "east");
 
         add(masterPanel);
-        setResizable(false);
         pack();
         setLocationRelativeTo(null);
     }
@@ -274,8 +283,6 @@ public class NamesInputFrame extends JFrame {
             JTextField tf = new JTextField();
 
             tf.addActionListener(e -> {
-                int index = textFieldSet.indexOf(e.getSource());
-
                 if (!(Pattern.matches(NAMES_VALIDATION_REGEX, tf.getText()))) {
                     JOptionPane.showMessageDialog(null,
                                           "El nombre del jugador debe estar formado sólo por letras de la A a la Z",
@@ -295,7 +302,7 @@ public class NamesInputFrame extends JFrame {
 
                         tf.setText("");
                     } else {
-                        playersSet.get(index).setName(name);
+                        playersSet.get(textFieldSet.indexOf(e.getSource())).setName(name);
 
                         updateTextArea();
 

@@ -37,7 +37,6 @@ public class BackButton extends JButton {
         setVisible(true);
         addActionListener(e -> {
             previousFrame.setVisible(true);
-
             currentFrame.dispose();
         });
     }

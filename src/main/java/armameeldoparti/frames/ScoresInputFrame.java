@@ -94,10 +94,10 @@ public class ScoresInputFrame extends JFrame {
         addButtons(previousFrame);
         add(masterPanel);
         setTitle(FRAME_TITLE);
+        setResizable(false);
         setIconImage(MainFrame.ICON.getImage());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
-        setResizable(false);
         setLocationRelativeTo(null);
     }
 

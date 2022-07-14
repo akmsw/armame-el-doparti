@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Clase correspondiente a los algoritmos de distribución de jugadores en base a sus puntajes.
+ * Clase correspondiente a los algoritmos de distribución de jugadores en base a sus puntuaciones.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -28,7 +28,7 @@ public class ByScoresMixer implements PlayersMixer {
     // ---------------------------------------- Métodos públicos ----------------------------------
 
     /**
-     * Distribuye los jugadores en base a sus puntajes de la manera más equitativa posible
+     * Distribuye los jugadores en base a sus puntuaciones de la manera más equitativa posible
      * considerando los anclajes establecidos.
      *
      * @param teams Lista contenedora de equipos.
@@ -41,7 +41,7 @@ public class ByScoresMixer implements PlayersMixer {
     }
 
     /**
-     * Distribuye los jugadores en base a sus puntajes de la manera más equitativa posible
+     * Distribuye los jugadores en base a sus puntuaciones de la manera más equitativa posible
      * sin considerar anclajes.
      *
      * @param teams Lista contenedora de equipos.

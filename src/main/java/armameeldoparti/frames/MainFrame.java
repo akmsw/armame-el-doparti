@@ -157,10 +157,9 @@ public class MainFrame extends JFrame {
         try {
             // Se registra la fuente para poder utilizarla
             Font programFont = Font.createFont(Font.TRUETYPE_FONT,
-                                               this.getClass()
-                                                   .getClassLoader()
-                                                   .getResourceAsStream(Main.TTF_PATH + Main.FONT_NAME))
-                                                   .deriveFont(Main.FONT_SIZE);
+                                               getClass().getClassLoader()
+                                                         .getResourceAsStream(Main.TTF_PATH + Main.FONT_NAME))
+                                                         .deriveFont(Main.FONT_SIZE);
 
             GraphicsEnvironment.getLocalGraphicsEnvironment()
                                .registerFont(programFont);

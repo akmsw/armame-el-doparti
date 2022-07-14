@@ -59,7 +59,9 @@ public class RandomMixer implements PlayersMixer {
              * aleatoria (aquellos con team == 0) del mismo grupo, se
              * les asigna el número de equipo opuesto.
              */
-            List<Player> playersSet = Main.getPlayersSets().get(position);
+            List<Player> playersSet = Main.getPlayersSets()
+                                          .get(position);
+
             List<Integer> alreadySetted = new ArrayList<>();
 
             for (int i = 0; i < playersSet.size() / 2; i++) {
@@ -157,17 +159,19 @@ public class RandomMixer implements PlayersMixer {
 
                 if (player.getAnchor() != 0 && player.getTeam() == 0) {
                     List<Player> anchoredPlayers = Main.getPlayersSets()
-                                                        .values()
-                                                        .stream()
-                                                        .flatMap(List::stream)
-                                                        .filter(p -> p.getAnchor() == player.getAnchor())
-                                                        .collect(Collectors.toList());
+                                                       .values()
+                                                       .stream()
+                                                       .flatMap(List::stream)
+                                                       .filter(p -> p.getAnchor() == player.getAnchor())
+                                                       .collect(Collectors.toList());
 
                     if (currentWorkingTeam.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM
                         && validateAnchoredPlayers(currentWorkingTeam, anchoredPlayers)) {
                         anchoredPlayers.forEach(p -> {
                             p.setTeam(chosenTeam1 + 1);
-                            currentWorkingTeam.getPlayers().get(p.getPosition()).add(p);
+                            currentWorkingTeam.getPlayers()
+                                              .get(p.getPosition())
+                                              .add(p);
                         });
                     }
                 } else {

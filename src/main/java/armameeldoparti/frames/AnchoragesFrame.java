@@ -148,11 +148,11 @@ public class AnchoragesFrame extends JFrame {
 
         updateTextArea();
         setTitle(FRAME_TITLE);
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setIconImage(MainFrame.ICON.getImage());
         add(masterPanel);
         pack();
-        setResizable(false);
         setLocationRelativeTo(null);
     }
 
@@ -220,7 +220,8 @@ public class AnchoragesFrame extends JFrame {
             anchorageNum++;
 
             for (int i = 0; i < cbSets.size(); i++) {
-                setAnchors(cbSets.get(i), Main.getPlayersSets().get(Position.values()[i]));
+                setAnchors(cbSets.get(i), Main.getPlayersSets()
+                                              .get(Position.values()[i]));
             }
 
             updateTextArea();
@@ -267,27 +268,31 @@ public class AnchoragesFrame extends JFrame {
     }
 
     /**
-     * Cambia el número de anclaje de los jugadores.
+     * Cambia el número de anclaje de los jugadores deseados.
      *
-     * @param playersSet  Conjunto de jugadores a recorrer.
-     * @param cbSet       Conjunto de casillas a recorrer.
      * @param target      Anclaje a reemplazar.
      * @param replacement Nuevo anclaje a aplicar.
      */
-    private void changeAnchor(List<Player> playersSet, List<JCheckBox> cbSet, int target, int replacement) {
-        for (JCheckBox cb : cbSet) {
-            for (Player p : playersSet) {
-                if (cb.getText().equals(p.getName()) && (p.getAnchor() == target)) {
-                    p.setAnchor(replacement);
+    private void changeAnchor(int target, int replacement) {
+        Main.getPlayersSets()
+            .values()
+            .stream()
+            .flatMap(List::stream)
+            .filter(p -> p.getAnchor() == target)
+            .forEach(p -> {
+                p.setAnchor(replacement);
 
-                    if (replacement == 0) {
-                        cb.setVisible(true);
-
-                        playersAnchored--;
-                    }
+                if (replacement == 0) {
+                    cbSets.stream()
+                          .flatMap(List::stream)
+                          .filter(cb -> cb.getText()
+                                          .equals(p.getName()))
+                                          .forEach(cb -> {
+                                              cb.setVisible(true);
+                                              playersAnchored--;
+                                          });
                 }
-            }
-        }
+            });
     }
 
     /**
@@ -310,8 +315,7 @@ public class AnchoragesFrame extends JFrame {
         if (anchor - 1 != JOptionPane.CLOSED_OPTION) {
             // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'
             for (int j = 0; j < cbSets.size(); j++) {
-                changeAnchor(Main.getPlayersSets().get(Position.values()[j]),
-                             cbSets.get(j), anchor, 0);
+                changeAnchor(anchor, 0);
             }
 
             /*
@@ -320,8 +324,7 @@ public class AnchoragesFrame extends JFrame {
              */
             for (int k = anchor + 1; k <= anchorageNum; k++) {
                 for (int j = 0; j < cbSets.size(); j++) {
-                    changeAnchor(Main.getPlayersSets().get(Position.values()[j]),
-                                 cbSets.get(j), k, k - 1);
+                    changeAnchor(k, k - 1);
                 }
             }
 
@@ -336,8 +339,7 @@ public class AnchoragesFrame extends JFrame {
      */
     private void deleteLast() {
         for (int i = 0; i < cbSets.size(); i++) {
-            changeAnchor(Main.getPlayersSets().get(Position.values()[i]),
-                         cbSets.get(i), anchorageNum, 0);
+            changeAnchor(anchorageNum, 0);
         }
 
         anchorageNum--;
@@ -380,9 +382,8 @@ public class AnchoragesFrame extends JFrame {
                                      if (p.getAnchor() == wrapperIndex.i) {
                                          textArea.append(" " + wrapperCounter.c
                                                          + ". " + p.getName() + System.lineSeparator());
+                                         wrapperCounter.c++;
                                      }
-
-                                     wrapperCounter.c++;
                                  }));
 
             textArea.append(System.lineSeparator());

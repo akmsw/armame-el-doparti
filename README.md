@@ -6,7 +6,8 @@
 Release date: TBD
 ```
 
-[![javaBadge](https://img.shields.io/badge/openjdk-11%2B-red)](https://openjdk.org/)
+[![JDKSource](https://img.shields.io/badge/jdk%20source-18-red)](https://openjdk.org/projects/jdk/18/)
+[![JDKTarget](https://img.shields.io/badge/jdk%20target-11%2B-red)](https://openjdk.org/projects/jdk/11/)
 [![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange)](https://maven.apache.org/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-2-yellow)](https://www.sonarlint.org/)
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle-1-yellow)](https://checkstyle.sourceforge.io/)
