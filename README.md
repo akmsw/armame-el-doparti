@@ -10,7 +10,7 @@ Release date: TBD
 [![openJDKTarget](https://img.shields.io/badge/JDK%20target-11%2B-red)](https://openjdk.org/projects/jdk/11/)
 [![apacheMavenBadge](https://img.shields.io/badge/Apache-Maven-orange)](https://maven.apache.org/)
 [![sonarLintBadge](https://img.shields.io/badge/SonarLint-2-yellow)](https://www.sonarlint.org/)
-[![checkStyleBadge](https://img.shields.io/badge/Checkstyle10.3.1%20google__checks-passing-brightgreen)](https://checkstyle.sourceforge.io/)
+[![checkStyleBadge](https://img.shields.io/badge/Checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
 [![operatingSystemBadge](https://img.shields.io/badge/OS-cross--platform-blueviolet)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/License-GPL3.0-blue)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
