@@ -34,11 +34,12 @@ public final class Main {
   public static final String IMG_PATH = "img/";
   public static final String TTF_PATH = "fonts/";
   public static final String DOCS_PATH = "docs/";
+  public static final String HELP_DOCS_PATH = "docs/help/";
 
   public static final Color LIGHT_GREEN = new Color(176, 189, 162);
   public static final Color MEDIUM_GREEN = new Color(109, 130, 118);
   public static final Color DARK_GREEN = new Color(41, 71, 74);
-  public static final Color LIGHT_YELLOW = new Color(255, 255, 204);
+  public static final Color LIGHT_ORANGE = new Color(255, 238, 153);
 
   // ---------------------------------------- Campos privados -----------------------------------
 

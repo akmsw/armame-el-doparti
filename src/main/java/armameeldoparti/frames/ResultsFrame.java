@@ -50,9 +50,9 @@ public class ResultsFrame extends JFrame {
    */
   private static final Color[] ANCHORAGES_COLORS = { new Color(255, 204, 153),
                                                      new Color(184, 224, 227),
-                                                     new Color(151, 197, 216),
                                                      new Color(220, 206, 235),
                                                      new Color(195, 235, 198),
+                                                     new Color(151, 197, 216),
                                                      new Color(219, 220, 218) };
 
   // ---------------------------------------- Campos privados -----------------------------------
@@ -253,7 +253,7 @@ public class ResultsFrame extends JFrame {
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
           } else if (column == 0) {
               if (Main.getDistribution() == Main.BY_SCORES_MIX && row == table.getRowCount() - 1) {
-                c.setBackground(Main.LIGHT_YELLOW);
+                c.setBackground(Main.LIGHT_ORANGE);
                 ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
               } else {
                 c.setBackground(Main.DARK_GREEN);
@@ -271,7 +271,7 @@ public class ResultsFrame extends JFrame {
               c.setForeground(Color.BLACK);
 
               if (Main.getDistribution() == Main.BY_SCORES_MIX && row == table.getRowCount() - 1) {
-                c.setBackground(Main.LIGHT_YELLOW);
+                c.setBackground(Main.LIGHT_ORANGE);
                 ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
               } else {
                 Player playerOnCell = (Player) Main.getPlayersSets()

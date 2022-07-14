@@ -178,7 +178,7 @@ public class HelpFrame extends JFrame {
     try {
       BufferedReader br = new BufferedReader(
           new InputStreamReader(getClass().getClassLoader()
-                                          .getResourceAsStream(Main.DOCS_PATH + helpPages.get(pageNum)))
+                                          .getResourceAsStream(Main.HELP_DOCS_PATH + helpPages.get(pageNum)))
       );
 
       String line;
