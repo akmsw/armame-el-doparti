@@ -1,5 +1,6 @@
 package armameeldoparti.utils;
 
+import armameeldoparti.interfaces.PlayersMixer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @since 12/07/2022
  */
-public class ByScoresMixer {
+public class ByScoresMixer implements PlayersMixer {
 
     // ---------------------------------------- Constructor ---------------------------------------
 
@@ -27,20 +28,6 @@ public class ByScoresMixer {
     // ---------------------------------------- Métodos públicos ----------------------------------
 
     /**
-     * Invoca el método correspondiente para la distribución elegida.
-     *
-     * @param teams      Lista contenedora de equipos.
-     * @param anchorages Si se deben considerar anclajes establecidos.
-     *
-     * @return Los equipos con los jugadores distribuidos de la manera deseada.
-     */
-    public List<Team> mixPlayers(List<Team> teams, boolean anchorages) {
-        return anchorages ? withAnchorages(teams) : withoutAnchorages(teams);
-    }
-
-    // ---------------------------------------- Métodos privados ----------------------------------
-
-    /**
      * Distribuye los jugadores en base a sus puntajes de la manera más equitativa posible
      * considerando los anclajes establecidos.
      *
@@ -48,7 +35,8 @@ public class ByScoresMixer {
      *
      * @return Los equipos con los jugadores distribuidos de la manera deseada.
      */
-    private List<Team> withAnchorages(List<Team> teams) {
+    @Override
+    public List<Team> withAnchorages(List<Team> teams) {
         return teams;
     }
 
@@ -60,7 +48,8 @@ public class ByScoresMixer {
      *
      * @return Los equipos con los jugadores distribuidos de la manera deseada.
      */
-    private List<Team> withoutAnchorages(List<Team> teams) {
+    @Override
+    public List<Team> withoutAnchorages(List<Team> teams) {
         for (Position position : Position.values()) {
             List<Player> currentSet = Main.getPlayersSets().get(position);
 

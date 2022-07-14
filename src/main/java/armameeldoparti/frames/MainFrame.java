@@ -157,12 +157,13 @@ public class MainFrame extends JFrame {
         try {
             // Se registra la fuente para poder utilizarla
             Font programFont = Font.createFont(Font.TRUETYPE_FONT,
-                                          this.getClass()
-                                              .getClassLoader()
-                                              .getResourceAsStream(Main.TTF_PATH + Main.FONT_NAME))
-                              .deriveFont(Main.FONT_SIZE);
+                                               this.getClass()
+                                                   .getClassLoader()
+                                                   .getResourceAsStream(Main.TTF_PATH + Main.FONT_NAME))
+                                                   .deriveFont(Main.FONT_SIZE);
 
-            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(programFont);
+            GraphicsEnvironment.getLocalGraphicsEnvironment()
+                               .registerFont(programFont);
 
             setUIFont(programFont);
         } catch (IOException | FontFormatException ex) {
@@ -177,7 +178,8 @@ public class MainFrame extends JFrame {
      * @param f Fuente a utilizar.
      */
     private void setUIFont(Font f) {
-        Enumeration<Object> keys = UIManager.getDefaults().keys();
+        Enumeration<Object> keys = UIManager.getDefaults()
+                                            .keys();
 
         while (keys.hasMoreElements()) {
             Object k = keys.nextElement();

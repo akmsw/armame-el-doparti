@@ -122,12 +122,10 @@ public class ResultsFrame extends JFrame {
 
             if (Main.thereAreAnchorages()) {
                 setFrameTitle(getFrameTitle().concat("Con anclajes"));
-
-                teams = randomMixer.mixPlayers(teams, true);
+                teams = randomMixer.withAnchorages(teams);
             } else {
                 setFrameTitle(getFrameTitle().concat("Sin anclajes"));
-
-                teams = randomMixer.mixPlayers(teams, false);
+                teams = randomMixer.withoutAnchorages(teams);
             }
         } else {
             setFrameTitle("Por puntuaciones - ");
@@ -136,12 +134,10 @@ public class ResultsFrame extends JFrame {
 
             if (Main.thereAreAnchorages()) {
                 setFrameTitle(getFrameTitle().concat("Con anclajes"));
-
-                teams = byScoresMixer.mixPlayers(teams, true);
+                teams = byScoresMixer.withAnchorages(teams);
             } else {
                 setFrameTitle(getFrameTitle().concat("Sin anclajes"));
-
-                teams = byScoresMixer.mixPlayers(teams, false);
+                teams = byScoresMixer.withoutAnchorages(teams);
             }
         }
 
@@ -238,7 +234,9 @@ public class ResultsFrame extends JFrame {
             remixButton.addActionListener(e -> {
                 resetTeams();
 
-                teams = randomMixer.mixPlayers(teams, Main.thereAreAnchorages());
+                teams = Main.thereAreAnchorages() ? randomMixer.withAnchorages(teams)
+                                                  :
+                        randomMixer.withoutAnchorages(teams);
 
                 fillTable();
             });

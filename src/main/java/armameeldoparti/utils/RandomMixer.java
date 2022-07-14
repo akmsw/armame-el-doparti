@@ -1,5 +1,6 @@
 package armameeldoparti.utils;
 
+import armameeldoparti.interfaces.PlayersMixer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
  *
  * @since 12/07/2022
  */
-public class RandomMixer {
+public class RandomMixer implements PlayersMixer {
 
     // ---------------------------------------- Campos privados -----------------------------------
 
@@ -36,27 +37,14 @@ public class RandomMixer {
     // ---------------------------------------- Métodos públicos ----------------------------------
 
     /**
-     * Invoca el método correspondiente para la distribución elegida.
-     *
-     * @param teams      Lista contenedora de equipos.
-     * @param anchorages Si se deben considerar anclajes establecidos.
-     *
-     * @return Los equipos con los jugadores distribuidos de la manera deseada.
-     */
-    public List<Team> mixPlayers(List<Team> teams, boolean anchorages) {
-        return anchorages ? withAnchorages(teams) : withoutAnchorages(teams);
-    }
-
-    // ---------------------------------------- Métodos privados ----------------------------------
-
-    /**
      * Distribuye los jugadores de manera completamente aleatoria.
      *
      * @param teams Lista contenedora de equipos.
      *
      * @return Los equipos con los jugadores distribuidos de la manera deseada.
      */
-    private List<Team> withoutAnchorages(List<Team> teams) {
+    @Override
+    public List<Team> withoutAnchorages(List<Team> teams) {
         chosenTeam1 = randomGenerator.nextInt(teams.size());
         chosenTeam2 = 1 - chosenTeam1;
 
@@ -114,7 +102,8 @@ public class RandomMixer {
      *
      * @return Los equipos con los jugadores distribuidos de la manera deseada.
      */
-    private List<Team> withAnchorages(List<Team> teams) {
+    @Override
+    public List<Team> withAnchorages(List<Team> teams) {
         /*
          * Se elige un número aleatorio entre 0 y 1 para
          * asignarle como equipo a un conjunto de jugadores,
