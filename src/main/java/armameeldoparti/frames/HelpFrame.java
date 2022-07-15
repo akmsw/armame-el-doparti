@@ -5,6 +5,9 @@ import armameeldoparti.utils.Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,22 +37,23 @@ public class HelpFrame extends JFrame {
   private static final int TOTAL_PAGES = 6;
   private static final int TEXT_AREA_ROWS = 20;
   private static final int TEXT_AREA_COLUMNS = 30;
+  private static final int PAGE_TITLE_INDEX = 0;
+  private static final int PAGE_FILENAME_INDEX = 1;
 
   private static final String FRAME_TITLE = "Ayuda";
 
-  private static final String[] HELP_PAGES = { "helpIntro.txt", "helpNames.txt",
-                                               "helpAnchorages.txt", "helpScores.txt",
-                                               "helpRandomMix.txt", "helpByScoresMix.txt" };
-
-  private static final String[] PAGES_TITLES = { "AYUDA",
-                                                 "INGRESO DE JUGADORES",
-                                                 "ANCLAJES", "PUNTUACIONES",
-                                                 "DISTRIBUCIÓN ALEATORIA",
-                                                 "DISTRIBUCIÓN POR PUNTUACIONES" };
+  private static final Map<Integer, List<String>> pagesMap = Map.of(
+    0, Arrays.asList("INTRODUCCIÓN", "helpIntro.txt"),
+    1, Arrays.asList("INGRESO DE JUGADORES", "helpNames.txt"),
+    2, Arrays.asList("ANCLAJES", "helpAnchorages.txt"),
+    3, Arrays.asList("PUNTUACIONES", "helpScores.txt"),
+    4, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.txt"),
+    5, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpByScoresMix.txt")
+  );
 
   // ---------------------------------------- Campos privados -----------------------------------
 
-  private int pageNum;
+  private int pageNumber;
 
   private JFrame previousFrame;
 
@@ -69,7 +73,7 @@ public class HelpFrame extends JFrame {
   public HelpFrame(JFrame previousFrame) {
     this.previousFrame = previousFrame;
 
-    pageNum = 0;
+    pageNumber = 0;
 
     initializeInterface();
   }
@@ -145,7 +149,7 @@ public class HelpFrame extends JFrame {
 
     previousPageButton.setEnabled(false);
     previousPageButton.addActionListener(e -> {
-      if (--pageNum > 0) {
+      if (--pageNumber > 0) {
         nextPageButton.setEnabled(true);
       } else {
         previousPageButton.setEnabled(false);
@@ -156,7 +160,7 @@ public class HelpFrame extends JFrame {
 
     nextPageButton.setEnabled(true);
     nextPageButton.addActionListener(e -> {
-      if (++pageNum < TOTAL_PAGES - 1) {
+      if (++pageNumber < TOTAL_PAGES - 1) {
         previousPageButton.setEnabled(true);
       } else {
         nextPageButton.setEnabled(false);
@@ -176,7 +180,8 @@ public class HelpFrame extends JFrame {
    * Actualiza la página de instrucciones mostrada en el área de texto.
    */
   private void updatePage() {
-    scrollPane.setBorder(BorderFactory.createTitledBorder(PAGES_TITLES[pageNum]));
+    scrollPane.setBorder(BorderFactory.createTitledBorder(pagesMap.get(pageNumber)
+                                                                  .get(PAGE_TITLE_INDEX)));
 
     textArea.setText("");
 
@@ -186,7 +191,8 @@ public class HelpFrame extends JFrame {
       textArea.read(new BufferedReader(
                       new InputStreamReader(
                         getClass().getClassLoader()
-                                  .getResourceAsStream(Main.HELP_DOCS_PATH + HELP_PAGES[pageNum])
+                                  .getResourceAsStream(Main.HELP_DOCS_PATH + pagesMap.get(pageNumber)
+                                                                                     .get(PAGE_FILENAME_INDEX))
                       )
                     ), null);
     } catch (IOException ex) {
@@ -199,6 +205,6 @@ public class HelpFrame extends JFrame {
    * Actualiza el texto mostrado en la etiqueta de progreso de lectura.
    */
   private void updateLabel() {
-    pagesCounter.setText(pageNum + 1 + "/" + TOTAL_PAGES);
+    pagesCounter.setText(pageNumber + 1 + "/" + TOTAL_PAGES);
   }
 }

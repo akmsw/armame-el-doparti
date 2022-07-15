@@ -6,8 +6,7 @@
 Release date: TBD
 ```
 
-[![openJDKSource](https://img.shields.io/badge/jdk%20source-18-red)](https://openjdk.org/projects/jdk/18/)
-[![openJDKTarget](https://img.shields.io/badge/jdk%20target-11%2B-red)](https://openjdk.org/projects/jdk/11/)
+[![openJDKTarget](https://img.shields.io/badge/jdk-11%2B-red)](https://openjdk.org/projects/jdk/11/)
 [![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange)](https://maven.apache.org/)
 [![buildBadge](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/akmsw/armame-el-doparti/actions)
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)

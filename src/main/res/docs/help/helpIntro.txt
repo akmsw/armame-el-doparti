@@ -2,11 +2,10 @@
 
 Te presento a continuación una guía muy fácil de seguir para entender cómo usar el programa y todas sus funcionalidades.
 
-Justo abajo de este espacio de texto tenés un indicador que te muestra cuántas páginas de instrucciones hay para leer, y cuál estás leyendo.
+Para ubicarnos un poco, arriba de este espacio de texto tenés el título que te indica de qué trata la página en la que estás.
 
-Abajo de ese indicador tenés dos botones: 'Anterior' y 'Siguiente' que te van a servir para navegar entre las distintas páginas de ayuda, y 'Volver al menú principal', que hace exactamente lo que dice.
+Abajo tenés un indicador que te muestra cuántas páginas de instrucciones hay para leer, y cuál estás leyendo.
+
+Bajo ese indicador tenés los botones 'Anterior' y 'Siguiente' que te van a servir para navegar entre las distintas páginas de ayuda, y 'Volver al menú principal', que hace exactamente lo que dice.
 
 ¡Empecemos!
-
-
-@akmsw
