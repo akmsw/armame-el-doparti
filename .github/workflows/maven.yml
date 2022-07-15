@@ -1,5 +1,6 @@
-name: Java CI with Maven
+name: Java CI with Maven for armame-el-doparti
 
+# La acción se va a correr ante un 'push' o 'pull request' en la rama 'develop-v3.0'.
 on:
   push:
     branches: [ "develop-v3.0" ]
@@ -9,6 +10,7 @@ on:
 jobs:
   build:
 
+    # Verificar que corra en Ubuntu es suficiente.
     runs-on: ubuntu-latest
 
     steps:
@@ -20,4 +22,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B clean compile package
+      run: mvn -B package --file pom.xml
