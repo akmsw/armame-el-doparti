@@ -1,22 +1,15 @@
-es
-el
-texto
-del
-documento
-de
-ayuda
-para
-la
-cuarta página
-de la
-ayuda
-del
-programa
+Si elegiste repartir los jugadores en base a sus puntuaciones, ya sea que hayas elegido anclar jugadores o no, ahora vas a ver esta nueva ventana.
 
-(esto es
-sobre
-ayuda
-para la
-configuración
-de
-puntuaciones)
+Acá tenés, separados por posiciones, todos los jugadores junto a una casilla numérica que podés modificar. Por defecto arranca con puntuación 1, vos lo podés cambiar apretando las flechas de arriba y abajo para aumentar o disminuir (de a 1) la puntuación de cada jugador.
+
+Si hay un Messi, hay que ponerle puntaje 5 (excelente). Si tenés alguien que juega al fútbol como yo, le ponés un 1 (malo). Lo importante es ser imparcial y justo con las puntuaciones que se le asignen a los jugadores. Todos tienen que estar de acuerdo con la puntuación que se le asignó.
+
+Eso último queda como responsabilidad de quien maneja el programa.
+
+Si querés reiniciar los puntajes para ponerlos de nuevo, tenés el botón 'Reiniciar puntajes'.
+
+El botón 'Atrás' te vuelve a la ventana anterior, pero deshace todas las puntuaciones que hayas ingresado (de nuevo, ojo con esto).
+
+Cuando termines, apretá el botón 'Finalizar'.
+
+¡Ahora hay que ver los resultados!

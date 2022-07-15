@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
 import net.miginfocom.swing.MigLayout;
 
@@ -148,6 +149,7 @@ public class MainFrame extends JFrame {
     UIManager.put("Button.focus", Main.DARK_GREEN);
     UIManager.put("ToggleButton.focus", Main.DARK_GREEN);
     UIManager.put("ComboBox.focus", Color.WHITE);
+    UIManager.put("TitledBorder.border", new LineBorder(Main.DARK_GREEN));
 
     try {
       // Se registra la fuente para poder utilizarla

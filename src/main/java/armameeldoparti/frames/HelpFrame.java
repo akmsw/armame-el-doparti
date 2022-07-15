@@ -5,9 +5,6 @@ import armameeldoparti.utils.Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,6 +37,16 @@ public class HelpFrame extends JFrame {
 
   private static final String FRAME_TITLE = "Ayuda";
 
+  private static final String[] HELP_PAGES = { "helpIntro.txt", "helpNames.txt",
+                                               "helpAnchorages.txt", "helpScores.txt",
+                                               "helpRandomMix.txt", "helpByScoresMix.txt" };
+
+  private static final String[] PAGES_TITLES = { "AYUDA",
+                                                 "INGRESO DE JUGADORES",
+                                                 "ANCLAJES", "PUNTUACIONES",
+                                                 "DISTRIBUCIÓN ALEATORIA",
+                                                 "DISTRIBUCIÓN POR PUNTUACIONES" };
+
   // ---------------------------------------- Campos privados -----------------------------------
 
   private int pageNum;
@@ -50,9 +57,9 @@ public class HelpFrame extends JFrame {
 
   private JPanel masterPanel;
 
-  private JTextArea textArea;
+  private JScrollPane scrollPane;
 
-  private List<String> helpPages;
+  private JTextArea textArea;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -61,12 +68,6 @@ public class HelpFrame extends JFrame {
    */
   public HelpFrame(JFrame previousFrame) {
     this.previousFrame = previousFrame;
-
-    helpPages = new ArrayList<>();
-
-    helpPages.addAll(Arrays.asList("helpIntro.txt", "helpNames.txt",
-                                   "helpAnchorages.txt", "helpScores.txt",
-                                   "helpRandomMix.txt", "helpByScoresMix.txt"));
 
     pageNum = 0;
 
@@ -98,17 +99,16 @@ public class HelpFrame extends JFrame {
   private void addTextArea() {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
-    textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setBackground(Main.LIGHT_GREEN);
     textArea.setEditable(false);
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
 
-    JScrollPane scrollPane = new JScrollPane();
+    scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    scrollPane.setViewportView(textArea);
-    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    scrollPane.setBackground(Main.LIGHT_GREEN);
+    scrollPane.setForeground(Main.DARK_GREEN);
     scrollPane.getVerticalScrollBar()
               .setUI(new BasicScrollBarUI() {
                 @Override
@@ -130,7 +130,7 @@ public class HelpFrame extends JFrame {
   private void addPagesLabel() {
     pagesCounter = new JLabel();
 
-    pagesCounter.setBorder(BorderFactory.createBevelBorder(1));
+    pagesCounter.setBorder(BorderFactory.createLoweredSoftBevelBorder());
     pagesCounter.setHorizontalAlignment(SwingConstants.CENTER);
 
     masterPanel.add(pagesCounter, "grow, span");
@@ -176,6 +176,8 @@ public class HelpFrame extends JFrame {
    * Actualiza la página de instrucciones mostrada en el área de texto.
    */
   private void updatePage() {
+    scrollPane.setBorder(BorderFactory.createTitledBorder(PAGES_TITLES[pageNum]));
+
     textArea.setText("");
 
     updateLabel();
@@ -184,7 +186,7 @@ public class HelpFrame extends JFrame {
       textArea.read(new BufferedReader(
                       new InputStreamReader(
                         getClass().getClassLoader()
-                                  .getResourceAsStream(Main.HELP_DOCS_PATH + helpPages.get(pageNum))
+                                  .getResourceAsStream(Main.HELP_DOCS_PATH + HELP_PAGES[pageNum])
                       )
                     ), null);
     } catch (IOException ex) {

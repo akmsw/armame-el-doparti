@@ -1,25 +1,23 @@
-este
-es
-el
-texto
-del
-documento
-de
-ayuda
-para
-la
-segunda página
-de la
-ayuda
-del
-programa
+Cuando apretés el botón 'Comenzar' en el menú principal, se va a abrir una ventana que tiene varios elementos. Vamos a analizarlos de a uno.
 
-(esto es
-sobre
-ayuda
-para el
-ingreso
-de
-nombres
-de
-jugadores)
+Empezando por la izquierda, tenés un menú desplegable que muestra las diferentes posiciones de los jugadores. Si le hacés click a la flecha vas a ver que el menú se despliega y vas a poder elegir alguna posición.
+
+Si probás elegir diferentes posiciones, vas a ver que justo abajo del menú desplegable van cambiando unos campos de texto en blanco. Esos campos son espacios vacíos para que vos los llenes con los nombres de los jugadores que van a jugar en esa posición.
+
+Por ejemplo, si elegís 'Arqueros' vas a tener dos campos de texto vacíos donde vas a tener que escribir los nombres de los arqueros que se van a repartir, un nombre en cada casilla.
+
+Recordá que los nombres sólo pueden tener letras de la A a la Z (incluyendo la Ñ). Para una mejor lectura, el programa pasa los nombres a mayúsculas y los espacios los reemplaza por guiones bajos.
+
+A medida que vayas ingresando los nombres, vas a ver que a la derecha, en el espacio de texto vacío más grande, van apareciendo los nombres de los jugadores que ya ingresaste. Esto es para que vayas viendo en tiempo real cuántos jugadores ya cargaste.
+
+Abajo de ese espacio de texto más grande, tenés dos botones y una casilla de selección.
+
+El botón 'Distribuir' se va a habilitar sólo cuando los 14 jugadores hayan sido ingresados correctamente.
+
+El botón 'Atrás' está siempre habilitado y te va a volver al menú principal (si volvés, todo lo que hayas ingresado se va a perder, así que ojo).
+
+Podés tildar la casilla 'Anclar jugadores' cuando quieras. Esto va a servir para más adelante.
+
+Cuando hayas ingresado todos los nombres de los jugadores y aprietes el botón 'Distribuir', vas a ver un mensaje que te va a preguntar cómo querés distribuir los jugadores. Acá podés elegir si repartirlos de manera aleatoria o por puntuaciones.
+
+Veamos con qué nos encontramos.
