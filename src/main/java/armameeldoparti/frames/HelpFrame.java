@@ -82,16 +82,14 @@ public class HelpFrame extends JFrame {
     masterPanel = new JPanel(new MigLayout("wrap"));
 
     addTextArea();
-    addPagesLabel();
     addButtons();
-    add(masterPanel);
     setTitle(FRAME_TITLE);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(MainFrame.ICON.getImage());
     setResizable(false);
+    add(masterPanel);
     pack();
     setLocationRelativeTo(null);
-    updatePage();
   }
 
   /**
@@ -103,10 +101,14 @@ public class HelpFrame extends JFrame {
     textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setBackground(Main.LIGHT_GREEN);
     textArea.setEditable(false);
+    textArea.setLineWrap(true);
+    textArea.setWrapStyleWord(true);
 
-    JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    JScrollPane scrollPane = new JScrollPane();
 
+    scrollPane.setViewportView(textArea);
+    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     scrollPane.getVerticalScrollBar()
               .setUI(new BasicScrollBarUI() {
                 @Override
@@ -117,6 +119,9 @@ public class HelpFrame extends JFrame {
               });
 
     masterPanel.add(scrollPane);
+
+    addPagesLabel();
+    updatePage();
   }
 
   /**
@@ -176,20 +181,12 @@ public class HelpFrame extends JFrame {
     updateLabel();
 
     try {
-      BufferedReader br = new BufferedReader(
-          new InputStreamReader(getClass().getClassLoader()
-                                          .getResourceAsStream(Main.HELP_DOCS_PATH + helpPages.get(pageNum)))
-      );
-
-      String line;
-
-      while ((line = br.readLine()) != null) {
-        textArea.append(line);
-        textArea.append(System.lineSeparator());
-      }
-
-      textArea.setCaretPosition(0);
-
+      textArea.read(new BufferedReader(
+                      new InputStreamReader(
+                        getClass().getClassLoader()
+                                  .getResourceAsStream(Main.HELP_DOCS_PATH + helpPages.get(pageNum))
+                      )
+                    ), null);
     } catch (IOException ex) {
       ex.printStackTrace();
       System.exit(-1);

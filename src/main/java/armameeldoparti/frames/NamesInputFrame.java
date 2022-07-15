@@ -135,33 +135,27 @@ public class NamesInputFrame extends JFrame {
    * deberá tener en cuenta que Position.values()[index] confía en el orden en el
    * que se leerán los datos del archivo .pda y, por consiguiente, se deberá rever
    * el orden de las líneas importantes de dichos archivos.
-   *
-   * @throws IOException Si el archivo no existe.
    */
-  private void getPlayersDistributionData() throws IOException {
-    try {
-      BufferedReader br = new BufferedReader(
-          new InputStreamReader(getClass().getClassLoader()
-                                          .getResourceAsStream(Main.DOCS_PATH + PDA_FILENAME))
-      );
+  private void getPlayersDistributionData() {
+    BufferedReader br = new BufferedReader(
+        new InputStreamReader(getClass().getClassLoader()
+                                        .getResourceAsStream(Main.DOCS_PATH + PDA_FILENAME))
+    );
 
-      int index = 0;
+    var wrapperIndex = new Object() {
+      private int index;
+    };
 
-      String line;
+    br.lines().forEach(l -> {
+      if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
+        Main.getPlayersAmountMap().put(Position.values()[wrapperIndex.index],
+                                        Integer.parseInt(l.replaceAll("(?!(?<="
+                                                                      + Main.PLAYERS_PER_TEAM
+                                                                      + ")\\d).", "")));
 
-      while ((line = br.readLine()) != null) {
-        if (line.matches(PDA_DATA_RETRIEVE_REGEX)) {
-          Main.getPlayersAmountMap().put(Position.values()[index],
-                                         Integer.parseInt(line.replaceAll("(?!(?<="
-                                                                          + Main.PLAYERS_PER_TEAM
-                                                                          + ")\\d).", "")));
-          index++;
-        }
+        wrapperIndex.index++;
       }
-    } catch (IOException ex) {
-      ex.printStackTrace();
-      System.exit(-1);
-    }
+    });
   }
 
   /**

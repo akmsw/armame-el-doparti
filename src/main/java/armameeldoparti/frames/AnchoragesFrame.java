@@ -130,7 +130,6 @@ public class AnchoragesFrame extends JFrame {
 
     textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setEditable(false);
-    textArea.setVisible(true);
 
     addButtons();
 
@@ -486,25 +485,25 @@ public class AnchoragesFrame extends JFrame {
     cbSet.stream()
          .filter(JCheckBox::isSelected)
          .forEach(cb -> {
-          if (anchorageNum != 0) {
-            playersSet.stream()
-                      .filter(p -> p.getName()
-                                    .equals(cb.getText()))
-                      .forEach(p -> {
-                        p.setAnchor(anchorageNum);
+           if (anchorageNum != 0) {
+             playersSet.stream()
+                       .filter(p -> p.getName()
+                                     .equals(cb.getText()))
+                       .forEach(p -> {
+                         p.setAnchor(anchorageNum);
 
-                        playersAnchored++;
+                         playersAnchored++;
 
-                        cb.setVisible(false);
-                      });
-          } else {
-            playersSet.forEach(p -> {
-              p.setAnchor(anchorageNum);
-              cb.setVisible(true);
-            });
-          }
+                         cb.setVisible(false);
+                       });
+           } else {
+             playersSet.forEach(p -> {
+               p.setAnchor(anchorageNum);
+               cb.setVisible(true);
+             });
+           }
 
-          cb.setSelected(false);
+           cb.setSelected(false);
          });
   }
 }
