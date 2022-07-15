@@ -6,13 +6,14 @@
 Release date: TBD
 ```
 
-[![openJDKSource](https://img.shields.io/badge/JDK%20source-18-red)](https://openjdk.org/projects/jdk/18/)
-[![openJDKTarget](https://img.shields.io/badge/JDK%20target-11%2B-red)](https://openjdk.org/projects/jdk/11/)
-[![apacheMavenBadge](https://img.shields.io/badge/Apache-Maven-orange)](https://maven.apache.org/)
-[![sonarLintBadge](https://img.shields.io/badge/SonarLint-2-yellow)](https://www.sonarlint.org/)
-[![checkStyleBadge](https://img.shields.io/badge/Checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
-[![operatingSystemBadge](https://img.shields.io/badge/OS-cross--platform-blueviolet)](https://en.wikipedia.org/wiki/Cross-platform_software)
-[![licenseBadge](https://img.shields.io/badge/License-GPL3.0-blue)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![openJDKSource](https://img.shields.io/badge/jdk%20source-18-red)](https://openjdk.org/projects/jdk/18/)
+[![openJDKTarget](https://img.shields.io/badge/jdk%20target-11%2B-red)](https://openjdk.org/projects/jdk/11/)
+[![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange)](https://maven.apache.org/)
+[![buildBadge](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/akmsw/armame-el-doparti/actions)
+[![sonarLintBadge](https://img.shields.io/badge/sonarlint-2-yellow)](https://www.sonarlint.org/)
+[![checkStyleBadge](https://img.shields.io/badge/checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
+[![operatingSystemBadge](https://img.shields.io/badge/os%20target-cross%20platform-blueviolet)](https://en.wikipedia.org/wiki/Cross-platform_software)
+[![licenseBadge](https://img.shields.io/badge/license-gpl3.0-blue)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 ## 📜 Índice
 - [¿Qué es?](https://github.com/akmsw/armame-el-doparti#-qu%C3%A9-es)
