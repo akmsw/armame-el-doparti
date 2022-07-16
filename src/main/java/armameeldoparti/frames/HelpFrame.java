@@ -3,8 +3,8 @@ package armameeldoparti.frames;
 import armameeldoparti.utils.BackButton;
 import armameeldoparti.utils.Main;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -188,16 +188,15 @@ public class HelpFrame extends JFrame {
 
     updateLabel();
 
-    try {
-      textArea.read(new BufferedReader(
-                      new InputStreamReader(
-                        getClass().getClassLoader()
-                                  .getResourceAsStream(Main.HELP_DOCS_PATH
-                                                       + pagesMap.get(pageNumber)
-                                                                 .get(PAGE_FILENAME_INDEX))
-                      )
-                    ), null);
-    } catch (IOException ex) {
+    try (BufferedReader reader = new BufferedReader(
+      new InputStreamReader(getClass().getClassLoader()
+                                      .getResourceAsStream(Main.HELP_DOCS_PATH
+                                                           + pagesMap.get(pageNumber)
+                                                                     .get(PAGE_FILENAME_INDEX)),
+      StandardCharsets.UTF_8)
+    )) {
+      textArea.read(reader, null);
+    } catch (Exception ex) {
       ex.printStackTrace();
       System.exit(-1);
     }
