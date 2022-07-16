@@ -43,8 +43,6 @@ public class ResultsFrame extends JFrame {
 
   private static final int TABLE_COLUMNS = 3;
 
-  private static final String GROWX = "growx";
-
   /**
    * Colores utilizados para los distintos anclajes en la tabla de resultados.
    */
@@ -216,10 +214,10 @@ public class ResultsFrame extends JFrame {
         fillTable();
       });
 
-      panel.add(remixButton, GROWX);
+      panel.add(remixButton, "growx");
     }
 
-    panel.add(backButton, GROWX);
+    panel.add(backButton, "growx");
   }
 
   /**
