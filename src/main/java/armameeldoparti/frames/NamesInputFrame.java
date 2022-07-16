@@ -47,13 +47,17 @@ public class NamesInputFrame extends JFrame {
   private static final String PDA_FILENAME = "dist.pda";
   private static final String FRAME_TITLE = "Ingreso de jugadores";
 
-  private static final String[] OPTIONS_COMBOBOX = { "Defensores centrales",
-                                                     "Defensores laterales",
-                                                     "Mediocampistas",
-                                                     "Delanteros",
-                                                     "Arqueros" };
-  private static final String[] OPTIONS_MIX = { "Aleatoriamente",
-                                                "Por puntuaciones" };
+  private static final String[] OPTIONS_COMBOBOX = {
+    "Defensores centrales",
+    "Defensores laterales",
+    "Mediocampistas",
+    "Delanteros",
+    "Arqueros"
+  };
+  private static final String[] OPTIONS_MIX = {
+    "Aleatoriamente",
+    "Por puntuaciones"
+  };
 
   // ---------------------------------------- Campos privados -----------------------------------
 

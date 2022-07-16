@@ -4,7 +4,7 @@ Invitás a tu hermano o un amigo de otro grupo para poder jugar, pero como no se
 
 ¿Alguna vez te pasó? Eso mismo es un anclaje.
 
-Si tildaste la casilla 'Anclar jugadores', se va a abrir esta ventana donde vas a poder avisarle al programa estos ajustes que debería considerar a la hora de armar los equipos.
+Si tildaste la casilla 'Anclar jugadores', se va a abrir una ventana donde vas a poder avisarle al programa estos ajustes que debería considerar a la hora de armar los equipos.
 
 Los jugadores aparecen separados por sus posiciones, y cada uno tiene una casilla con su nombre que podés tildar.
 
@@ -20,7 +20,7 @@ Tampoco podés anclar menos de dos jugadores. Eso no tiene sentido, che.
 
 Para asegurarse que siempre van a haber al menos dos jugadores para repartir, no vas a poder anclar más de 6 jugadores por equipo (si anclás 7 jugadores a un mismo equipo significa que ya armaste los equipos y no te hace falta usar este programa), osea que como mucho vas a poder anclar 12 jugadores (6 para un lado, 6 para el otro, y 2 se reparten según el criterio que hayas elegido).
 
-El botón 'Finalizar' se habilita cuando hay al menos un anclaje hecho (si no vas a anclar a nadie, ¿para qué seleccionaste la opción?).
+El botón 'Finalizar' se habilita cuando hay al menos un anclaje hecho (si no vas a anclar a nadie, ¿para qué seleccionaste esta opción?).
 
 El botón 'Atrás' te vuelve a la ventana anterior, pero deshace todos los anclajes que hayas hecho (ojo también con eso).
 

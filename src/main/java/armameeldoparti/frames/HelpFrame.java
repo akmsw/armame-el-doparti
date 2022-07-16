@@ -89,12 +89,14 @@ public class HelpFrame extends JFrame {
     masterPanel = new JPanel(new MigLayout("wrap"));
 
     addTextArea();
+    addPagesLabel();
     addButtons();
     setTitle(FRAME_TITLE);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(MainFrame.ICON.getImage());
     setResizable(false);
     add(masterPanel);
+    updatePage();
     pack();
     setLocationRelativeTo(null);
   }
@@ -125,9 +127,6 @@ public class HelpFrame extends JFrame {
               });
 
     masterPanel.add(scrollPane);
-
-    addPagesLabel();
-    updatePage();
   }
 
   /**
@@ -139,7 +138,7 @@ public class HelpFrame extends JFrame {
     pagesCounter.setBorder(BorderFactory.createLoweredSoftBevelBorder());
     pagesCounter.setHorizontalAlignment(SwingConstants.CENTER);
 
-    masterPanel.add(pagesCounter, "grow, span");
+    masterPanel.add(pagesCounter, "growx");
   }
 
   /**

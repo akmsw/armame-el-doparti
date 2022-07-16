@@ -48,12 +48,14 @@ public class ResultsFrame extends JFrame {
   /**
    * Colores utilizados para los distintos anclajes en la tabla de resultados.
    */
-  private static final Color[] ANCHORAGES_COLORS = { new Color(255, 204, 153),
-                                                     new Color(184, 224, 227),
-                                                     new Color(220, 206, 235),
-                                                     new Color(195, 235, 198),
-                                                     new Color(151, 197, 216),
-                                                     new Color(219, 220, 218) };
+  private static final Color[] ANCHORAGES_COLORS = {
+    new Color(255, 204, 153),
+    new Color(184, 224, 227),
+    new Color(220, 206, 235),
+    new Color(195, 235, 198),
+    new Color(151, 197, 216),
+    new Color(219, 220, 218)
+  };
 
   // ---------------------------------------- Campos privados -----------------------------------
 
