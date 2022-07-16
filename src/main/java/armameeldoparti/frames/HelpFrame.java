@@ -34,22 +34,24 @@ public class HelpFrame extends JFrame {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
-  private static final int TOTAL_PAGES = 6;
+  private static final Map<Integer, List<String>> pagesMap = Map.of(
+    0, Arrays.asList("INTRODUCCIÓN", "helpIntro.txt"),
+    1, Arrays.asList("CRITERIOS ESTABLECIDOS", "helpCriteria.txt"),
+    2, Arrays.asList("INGRESO DE JUGADORES", "helpNames.txt"),
+    3, Arrays.asList("ANCLAJES", "helpAnchorages.txt"),
+    4, Arrays.asList("PUNTUACIONES", "helpScores.txt"),
+    5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.txt"),
+    6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpByScoresMix.txt"),
+    7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.txt")
+  );
+
+  private static final int TOTAL_PAGES = pagesMap.size();
   private static final int TEXT_AREA_ROWS = 20;
   private static final int TEXT_AREA_COLUMNS = 30;
   private static final int PAGE_TITLE_INDEX = 0;
   private static final int PAGE_FILENAME_INDEX = 1;
 
   private static final String FRAME_TITLE = "Ayuda";
-
-  private static final Map<Integer, List<String>> pagesMap = Map.of(
-    0, Arrays.asList("INTRODUCCIÓN", "helpIntro.txt"),
-    1, Arrays.asList("INGRESO DE JUGADORES", "helpNames.txt"),
-    2, Arrays.asList("ANCLAJES", "helpAnchorages.txt"),
-    3, Arrays.asList("PUNTUACIONES", "helpScores.txt"),
-    4, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.txt"),
-    5, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpByScoresMix.txt")
-  );
 
   // ---------------------------------------- Campos privados -----------------------------------
 
@@ -191,8 +193,9 @@ public class HelpFrame extends JFrame {
       textArea.read(new BufferedReader(
                       new InputStreamReader(
                         getClass().getClassLoader()
-                                  .getResourceAsStream(Main.HELP_DOCS_PATH + pagesMap.get(pageNumber)
-                                                                                     .get(PAGE_FILENAME_INDEX))
+                                  .getResourceAsStream(Main.HELP_DOCS_PATH
+                                                       + pagesMap.get(pageNumber)
+                                                                 .get(PAGE_FILENAME_INDEX))
                       )
                     ), null);
     } catch (IOException ex) {

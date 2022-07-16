@@ -1,0 +1,15 @@
+Con este programa vas a poder armar equipos para fútbol 7.
+
+La formación por defecto que se ofrece, por equipo, es la siguiente:
+
+Arqueros: 1 (y sí, master)
+Defensores centrales: 1
+Defensores laterales: 2
+Mediocampistas: 2
+Delanteros: 1
+
+En próximas versiones se va a ofrecer la posibilidad de indicar otra formación, e incluso elegir entre fútbol 5 y 7.
+
+Las ventanas del programa no se pueden maximizar ni podés cambiarle el tamaño. Las podés minimizar si querés; pero si cerrás alguna, el programa se cierra completamente.
+
+Ahora sí, arranquemos.

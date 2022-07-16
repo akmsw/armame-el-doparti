@@ -1,0 +1,26 @@
+Si elegiste distribuir los jugadores de manera aleatoria, vas a ver ahora la ventana de resultados de acuerdo a lo que hayas seleccionado.
+
+Vas a ver una tabla que tiene 3 columnas y 8 filas.
+La primera fila y la primera columna tienen sus celdas de color verde con letras blancas para diferenciarlas del resto.
+
+La tabla tiene una columna que dice 'EQUIPO #1' y otra que dice 'EQUIPO #2', las cuales separan los equipos.
+
+Los jugadores se separan en base a sus posiciones, fila por fila, las cuales están en el siguiente orden:
+
+Defensores centrales
+Defensores laterales
+Mediocampistas
+Delanteros
+Arqueros
+
+El resto de casillas contiene los nombres de los jugadores, repartidos aleatoriamente.
+
+Si no hiciste ningún anclaje, todas las casillas con nombres de jugadores van a tener fondo blanco y letras negras, y vas a ver que los dos equipos se armaron de manera aleatoria.
+
+Si hiciste al menos un anclaje, todos los jugadores del mismo anclaje van a aparecer en sus casillas con un color de fondo. Cada anclaje tiene su propio color de fondo para diferenciarlos entre sí.
+
+Abajo de esta tabla vas a ver el botón 'Redistribuir' que vuelve a armar los equipos de manera aleatoria, teniendo en cuenta si hiciste anclajes o no.
+
+El botón 'Atrás' te vuelve a la ventana anterior.
+
+Pero, ¿qué pasa si repartiste en base a puntuaciones?

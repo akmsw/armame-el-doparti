@@ -12,7 +12,7 @@ Seleccioná las casillas de aquellos jugadores que querés anclar, y apretá el 
 
 Si querés hacer otro anclaje, podés repetir el proceso.
 
-Si querés borrar el último anclaje que hiciste, o si querés borrar uno de tantos, podés hacerlo mediante los botones 'Borrar un anclaje' (vas a tener que decirle cuál de todos querés borrar) y 'Borrar último anclaje'. Para borrar todos los anclajes que hiciste de un solo saque, tenés el botón 'Limpiar anclajes'.
+Si querés borrar el último anclaje que hiciste, o si querés borrar uno de tantos, podés hacerlo mediante los botones 'Borrar un anclaje' (vas a tener que indicar cuál de todos querés borrar) y 'Borrar último anclaje'. Para borrar de un solo saque todos los anclajes que hiciste, tenés el botón 'Limpiar anclajes'.
 
 No vas a poder anclar a un mismo equipo más de la mitad de jugadores de una misma posición.
 Por ejemplo, no podés anclar 3 mediocampistas porque de esa manera un equipo se queda con 3 y otro con 1.
