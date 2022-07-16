@@ -35,14 +35,14 @@ public class HelpFrame extends JFrame {
   // ---------------------------------------- Constantes privadas -------------------------------
 
   private static final Map<Integer, List<String>> pagesMap = Map.of(
-    0, Arrays.asList("INTRODUCCIÓN", "helpIntro.txt"),
-    1, Arrays.asList("CRITERIOS ESTABLECIDOS", "helpCriteria.txt"),
-    2, Arrays.asList("INGRESO DE JUGADORES", "helpNames.txt"),
-    3, Arrays.asList("ANCLAJES", "helpAnchorages.txt"),
-    4, Arrays.asList("PUNTUACIONES", "helpScores.txt"),
-    5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.txt"),
-    6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpByScoresMix.txt"),
-    7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.txt")
+      0, Arrays.asList("INTRODUCCIÓN", "helpIntro.txt"),
+      1, Arrays.asList("CRITERIOS ESTABLECIDOS", "helpCriteria.txt"),
+      2, Arrays.asList("INGRESO DE JUGADORES", "helpNames.txt"),
+      3, Arrays.asList("ANCLAJES", "helpAnchorages.txt"),
+      4, Arrays.asList("PUNTUACIONES", "helpScores.txt"),
+      5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.txt"),
+      6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpByScoresMix.txt"),
+      7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.txt")
   );
 
   private static final int TOTAL_PAGES = pagesMap.size();
@@ -116,7 +116,6 @@ public class HelpFrame extends JFrame {
                                  ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     scrollPane.setBackground(Main.LIGHT_GREEN);
-    scrollPane.setForeground(Main.DARK_GREEN);
     scrollPane.getVerticalScrollBar()
               .setUI(new BasicScrollBarUI() {
                 @Override
@@ -189,11 +188,11 @@ public class HelpFrame extends JFrame {
     updateLabel();
 
     try (BufferedReader reader = new BufferedReader(
-      new InputStreamReader(getClass().getClassLoader()
-                                      .getResourceAsStream(Main.HELP_DOCS_PATH
-                                                           + pagesMap.get(pageNumber)
-                                                                     .get(PAGE_FILENAME_INDEX)),
-      StandardCharsets.UTF_8)
+        new InputStreamReader(getClass().getClassLoader()
+                                        .getResourceAsStream(Main.HELP_DOCS_PATH
+                                                             + pagesMap.get(pageNumber)
+                                                                       .get(PAGE_FILENAME_INDEX)),
+                              StandardCharsets.UTF_8)
     )) {
       textArea.read(reader, null);
     } catch (Exception ex) {
