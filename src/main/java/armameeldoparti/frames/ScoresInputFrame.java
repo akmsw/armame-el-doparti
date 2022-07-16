@@ -5,6 +5,7 @@ import armameeldoparti.utils.Main;
 import armameeldoparti.utils.Player;
 import armameeldoparti.utils.Position;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -123,27 +124,20 @@ public class ScoresInputFrame extends JFrame {
 
       masterPanel.add(label, GROW_SPAN);
 
-      for (int j = 0; j < Main.getPlayersSets().get(Position.values()[i]).size(); j++) {
-        spinnersMap.put(Main.getPlayersSets()
-                            .get(Position.values()[i])
-                            .get(j),
+      List<Player> currentSet = Main.getPlayersSets()
+                                    .get(Position.values()[i]);
+
+      for (int j = 0; j < currentSet.size(); j++) {
+        spinnersMap.put(currentSet.get(j),
                         new JSpinner(new SpinnerNumberModel(SCORE_INI, SCORE_MIN,
                                                             SCORE_MAX, SCORE_STEP)));
 
-        masterPanel.add(new JLabel(Main.getPlayersSets()
-                                       .get(Position.values()[i])
-                                       .get(j)
-                                       .getName()), "pushx");
+        masterPanel.add(new JLabel(currentSet.get(j)
+                                             .getName()),
+                                   "pushx");
 
-        if (j % 2 != 0) {
-          masterPanel.add(spinnersMap.get(Main.getPlayersSets()
-                                     .get(Position.values()[i])
-                                     .get(j)), "wrap");
-        } else {
-          masterPanel.add(spinnersMap.get(Main.getPlayersSets()
-                                     .get(Position.values()[i])
-                                     .get(j)));
-        }
+        masterPanel.add(spinnersMap.get(currentSet.get(j)),
+                        j % 2 != 0 ? "wrap" : null);
       }
 
       for (JSpinner js : spinnersMap.values()) {
