@@ -2,6 +2,8 @@ package armameeldoparti.utils;
 
 import armameeldoparti.interfaces.PlayersMixer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -50,7 +52,12 @@ public class ByScoresMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    for (Position position : Position.values()) {
+    // Las posiciones se recorrerán en orden inverso para lograr la mejor distribución
+    List<Position> reversedEnum = Arrays.asList(Position.values());
+
+    Collections.reverse(reversedEnum);
+
+    for (Position position : reversedEnum) {
       List<Player> currentSet = Main.getPlayersSets()
                                     .get(position);
 
@@ -59,9 +66,9 @@ public class ByScoresMixer implements PlayersMixer {
                                 .reversed());
 
       /*
-        * Se ordenan los equipos en base a la suma de los puntuaciones
-        * de sus jugadores hasta el momento, de menor a mayor.
-        */
+       * Se ordenan los equipos en base a la suma de los puntuaciones
+       * de sus jugadores hasta el momento, de menor a mayor.
+       */
       teams.sort(Comparator.comparingInt(Team::getTeamScore));
 
       if (currentSet.size() == 2) {
