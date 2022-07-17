@@ -28,7 +28,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 06/03/2021
  */
-public class ScoresInputFrame extends JFrame {
+public class SkillsInputFrame extends JFrame {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -53,16 +53,16 @@ public class ScoresInputFrame extends JFrame {
   /**
    * Construye una ventana de ingreso de puntuaciones.
    *
-   * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
+   * @param previousFrame Ventana fuente que crea la ventana SkillInputFrame.
    */
-  public ScoresInputFrame(JFrame previousFrame) {
+  public SkillsInputFrame(JFrame previousFrame) {
     initializeInterface(previousFrame);
   }
 
   /**
    * Inicializa la interfaz gráfica de esta ventana.
    *
-   * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
+   * @param previousFrame Ventana fuente que crea la ventana SkillInputFrame.
    */
   private void initializeInterface(JFrame previousFrame) {
     masterPanel = new JPanel(new MigLayout());
@@ -83,14 +83,14 @@ public class ScoresInputFrame extends JFrame {
   /**
    * Añade los botones al panel de la ventana.
    *
-   * @param previousFrame Ventana fuente que crea la ventana ScoreInputFrame.
+   * @param previousFrame Ventana fuente que crea la ventana SkillInputFrame.
    */
   private void addButtons(JFrame previousFrame) {
     JButton finishButton = new JButton("Finalizar");
     JButton resetButton = new JButton("Reiniciar puntuaciones");
 
     finishButton.addActionListener(e -> {
-      spinnersMap.forEach((k, v) -> k.setScore((int) v.getValue()));
+      spinnersMap.forEach((k, v) -> k.setSkill((int) v.getValue()));
 
       resultsFrame = new ResultsFrame(this);
 
@@ -102,7 +102,7 @@ public class ScoresInputFrame extends JFrame {
 
     resetButton.addActionListener(e -> spinnersMap.forEach((k, v) -> {
       v.setValue(1);
-      k.setScore(0);
+      k.setSkill(0);
     }));
 
     BackButton backButton = new BackButton(this, previousFrame, null);

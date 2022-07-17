@@ -16,14 +16,14 @@ import java.util.List;
  *
  * @since 12/07/2022
  */
-public class ByScoresMixer implements PlayersMixer {
+public class BySkillMixer implements PlayersMixer {
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
    * Construye el objeto repartidor de jugadores.
    */
-  public ByScoresMixer() {
+  public BySkillMixer() {
       // No necesita cuerpo
   }
 
@@ -62,14 +62,14 @@ public class ByScoresMixer implements PlayersMixer {
                                     .get(position);
 
       // Se ordenan los jugadores de esta posición en base a su puntuación, de mayor a menor
-      currentSet.sort(Comparator.comparingInt(Player::getScore)
+      currentSet.sort(Comparator.comparingInt(Player::getSkill)
                                 .reversed());
 
       /*
        * Se ordenan los equipos en base a la suma de los puntuaciones
        * de sus jugadores hasta el momento, de menor a mayor.
        */
-      teams.sort(Comparator.comparingInt(Team::getTeamScore));
+      teams.sort(Comparator.comparingInt(Team::getTeamSkill));
 
       if (currentSet.size() == 2) {
         // Al equipo con menor puntuación se le asigna el jugador de mayor puntuación
@@ -112,7 +112,7 @@ public class ByScoresMixer implements PlayersMixer {
 
         // Ordenamos los subconjuntos en base a sus puntuaciones, de mayor a menor
         playersSubsets.sort(Comparator.comparingInt(ps -> ps.stream()
-                                                            .mapToInt(Player::getScore)
+                                                            .mapToInt(Player::getSkill)
                                                             .reduce(0, Math::addExact)));
 
         /*

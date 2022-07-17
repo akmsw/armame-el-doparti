@@ -347,7 +347,7 @@ public class NamesInputFrame extends JFrame {
           resultsFrame.setVisible(true);
         } else {
           // Distribución por puntuaciones
-          ScoresInputFrame scoresInputFrame = new ScoresInputFrame(this);
+          SkillsInputFrame scoresInputFrame = new SkillsInputFrame(this);
           scoresInputFrame.setVisible(true);
         }
 

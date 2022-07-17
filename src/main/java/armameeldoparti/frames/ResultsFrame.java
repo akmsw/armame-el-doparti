@@ -1,7 +1,7 @@
 package armameeldoparti.frames;
 
 import armameeldoparti.utils.BackButton;
-import armameeldoparti.utils.ByScoresMixer;
+import armameeldoparti.utils.BySkillMixer;
 import armameeldoparti.utils.Main;
 import armameeldoparti.utils.Player;
 import armameeldoparti.utils.Position;
@@ -71,7 +71,7 @@ public class ResultsFrame extends JFrame {
   private transient List<Team> teams;
 
   private transient RandomMixer randomMixer;
-  private transient ByScoresMixer byScoresMixer;
+  private transient BySkillMixer bySkillMixer;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -91,7 +91,7 @@ public class ResultsFrame extends JFrame {
     teams.add(team2);
 
     randomMixer = new RandomMixer();
-    byScoresMixer = new ByScoresMixer();
+    bySkillMixer = new BySkillMixer();
 
     if (Main.getDistribution() == Main.RANDOM_MIX) {
       setFrameTitle("Aleatorio - ");
@@ -112,10 +112,10 @@ public class ResultsFrame extends JFrame {
 
       if (Main.thereAreAnchorages()) {
         setFrameTitle(getFrameTitle().concat("Con anclajes"));
-        teams = byScoresMixer.withAnchorages(teams);
+        teams = bySkillMixer.withAnchorages(teams);
       } else {
         setFrameTitle(getFrameTitle().concat("Sin anclajes"));
-        teams = byScoresMixer.withoutAnchorages(teams);
+        teams = bySkillMixer.withoutAnchorages(teams);
       }
     }
 
@@ -377,7 +377,7 @@ public class ResultsFrame extends JFrame {
                             .values()
                             .stream()
                             .flatMap(List::stream)
-                            .mapToInt(Player::getScore)
+                            .mapToInt(Player::getSkill)
                             .reduce(0, Math::addExact),
                        table.getRowCount() - 1, 1);
       table.setValueAt(teams.get(1)
@@ -385,7 +385,7 @@ public class ResultsFrame extends JFrame {
                             .values()
                             .stream()
                             .flatMap(List::stream)
-                            .mapToInt(Player::getScore)
+                            .mapToInt(Player::getSkill)
                             .reduce(0, Math::addExact),
                        table.getRowCount() - 1, 2);
     }

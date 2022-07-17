@@ -76,11 +76,11 @@ public class Team {
    *
    * @return La puntuación total del equipo.
    */
-  public int getTeamScore() {
+  public int getTeamSkill() {
     return teamPlayers.values()
                       .stream()
                       .flatMap(List::stream)
-                      .mapToInt(Player::getScore)
+                      .mapToInt(Player::getSkill)
                       .sum();
   }
 

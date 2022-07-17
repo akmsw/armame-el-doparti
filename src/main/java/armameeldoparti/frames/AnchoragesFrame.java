@@ -169,7 +169,7 @@ public class AnchoragesFrame extends JFrame {
 
       if (Main.getDistribution() == 1) {
         // Distribución por puntuaciones
-        ScoresInputFrame scoresInputFrame = new ScoresInputFrame(this);
+        SkillsInputFrame scoresInputFrame = new SkillsInputFrame(this);
         scoresInputFrame.setVisible(true);
       } else {
         // Distribución aleatoria
