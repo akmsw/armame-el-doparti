@@ -62,12 +62,7 @@ public class ByScoresMixer implements PlayersMixer {
         * Se ordenan los equipos en base a la suma de los puntuaciones
         * de sus jugadores hasta el momento, de menor a mayor.
         */
-      teams.sort(Comparator.comparingInt(t -> t.getPlayers()
-                                               .values()
-                                               .stream()
-                                               .flatMap(List::stream)
-                                               .mapToInt(Player::getScore)
-                                               .reduce(0, Math::addExact)));
+      teams.sort(Comparator.comparingInt(Team::getTeamScore));
 
       if (currentSet.size() == 2) {
         // Al equipo con menor puntuación se le asigna el jugador de mayor puntuación

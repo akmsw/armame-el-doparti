@@ -72,6 +72,19 @@ public class Team {
   }
 
   /**
+   * Retorna la puntuación total acumulada hasta el momento en el equipo.
+   *
+   * @return La puntuación total del equipo.
+   */
+  public int getTeamScore() {
+    return teamPlayers.values()
+                      .stream()
+                      .flatMap(List::stream)
+                      .mapToInt(Player::getScore)
+                      .sum();
+  }
+
+  /**
    * Retorna los jugadores de este separados por posiciones.
    *
    * @return Mapa con los jugadores de este equipo para cada posición.
