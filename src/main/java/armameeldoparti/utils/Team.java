@@ -92,4 +92,18 @@ public class Team {
   public Map<Position, List<Player>> getPlayers() {
     return teamPlayers;
   }
+
+  /**
+   * Revisa si una posición en particular del equipo ya tiene la cantidad de
+   * jugadores que debería.
+   *
+   * @param position Posición a revisar.
+   *
+   * @return Si el equipo ya tiene la cantidad de jugadores necesaria para esa posición.
+   */
+  public boolean isPositionFull(Position position) {
+    return teamPlayers.get(position)
+                      .size() == Main.getPlayersAmountMap()
+                                     .get(position);
+  }
 }

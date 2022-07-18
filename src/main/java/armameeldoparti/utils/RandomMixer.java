@@ -48,6 +48,8 @@ public class RandomMixer implements PlayersMixer {
     chosenTeam1 = randomGenerator.nextInt(teams.size());
     chosenTeam2 = 1 - chosenTeam1;
 
+    List<Integer> alreadySetted = new ArrayList<>();
+
     for (Position position : Position.values()) {
       /*
        * Se recorre la mitad de los jugadores del conjunto de manera
@@ -61,8 +63,6 @@ public class RandomMixer implements PlayersMixer {
        */
       List<Player> playersSet = Main.getPlayersSets()
                                     .get(position);
-
-      List<Integer> alreadySetted = new ArrayList<>();
 
       for (int i = 0; i < playersSet.size() / 2; i++) {
         do {
@@ -91,6 +91,7 @@ public class RandomMixer implements PlayersMixer {
                        .get(p.getPosition())
                        .add(p);
                 });
+
       alreadySetted.clear();
     }
 
@@ -136,13 +137,13 @@ public class RandomMixer implements PlayersMixer {
      */
     Team currentWorkingTeam = teams.get(chosenTeam1);
 
+    List<Integer> alreadySetted = new ArrayList<>();
+
     boolean teamFull = false;
 
     for (int i = 0; i < Position.values().length && !teamFull; i++) {
       List<Player> playersSet = Main.getPlayersSets()
                                     .get(Position.values()[i]);
-
-      List<Integer> alreadySetted = new ArrayList<>();
 
       while (currentWorkingTeam.getPlayers()
                                .get(Position.values()[i])
@@ -152,8 +153,6 @@ public class RandomMixer implements PlayersMixer {
         do {
           index = randomGenerator.nextInt(playersSet.size());
         } while (alreadySetted.contains(index));
-
-        alreadySetted.add(index);
 
         Player player = playersSet.get(index);
 
@@ -165,14 +164,15 @@ public class RandomMixer implements PlayersMixer {
                                              .filter(p -> p.getAnchor() == player.getAnchor())
                                              .collect(Collectors.toList());
 
-          if (currentWorkingTeam.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM
-              && validateAnchoredPlayers(currentWorkingTeam, anchoredPlayers)) {
+          if (validateAnchorage(currentWorkingTeam, anchoredPlayers)) {
             anchoredPlayers.forEach(p -> {
               p.setTeam(chosenTeam1 + 1);
               currentWorkingTeam.getPlayers()
                                 .get(p.getPosition())
                                 .add(p);
             });
+
+            alreadySetted.add(index);
           }
         } else {
           if (player.getTeam() == 0
@@ -181,6 +181,8 @@ public class RandomMixer implements PlayersMixer {
             currentWorkingTeam.getPlayers()
                               .get(player.getPosition())
                               .add(player);
+
+            alreadySetted.add(index);
           }
         }
 
@@ -189,6 +191,8 @@ public class RandomMixer implements PlayersMixer {
           break;
         }
       }
+
+      alreadySetted.clear();
     }
 
     List<Player> remainingPlayers = Main.getPlayersSets()
@@ -225,8 +229,16 @@ public class RandomMixer implements PlayersMixer {
    *
    * @return Si se pueden agregar al equipo los jugadores anclados especificados.
    */
-  private boolean validateAnchoredPlayers(Team team, List<Player> anchoredPlayers) {
+  private boolean validateAnchorage(Team team, List<Player> anchoredPlayers) {
+    if (team.getPlayersCount() + anchoredPlayers.size() > Main.PLAYERS_PER_TEAM) {
+      return false;
+    }
+
     for (Player player : anchoredPlayers) {
+      if (team.isPositionFull(player.getPosition())) {
+        return false;
+      }
+
       if (team.getPlayers()
               .get(player.getPosition())
               .size()

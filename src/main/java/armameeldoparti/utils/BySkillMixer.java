@@ -91,8 +91,6 @@ public class BySkillMixer implements PlayersMixer {
          * Agregamos los jugadores de los extremos, desde afuera
          * hacia adentro, alternando entre subconjuntos.
          *
-         * ¡¡¡IMPORTANTE!!!
-         *
          * Si la cantidad de jugadores a repartir no es 4, este reparto debería
          * automatizarse con un bucle 'for' que altere entre subconjuntos mediante
          * una operación de la forma:
@@ -117,7 +115,7 @@ public class BySkillMixer implements PlayersMixer {
 
         /*
          * Al equipo con menor puntuación se le asigna el conjunto de jugadores
-         * que sumen mayor puntuación
+         * que sumen mayor puntuación.
          */
         teams.get(0)
              .getPlayers()
@@ -126,7 +124,7 @@ public class BySkillMixer implements PlayersMixer {
 
         /*
          * Al equipo con mayor puntuación se le asigna el conjunto de jugadores
-         * que sumen menor puntuación
+         * que sumen menor puntuación.
          */
         teams.get(1)
              .getPlayers()
