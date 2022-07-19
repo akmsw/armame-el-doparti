@@ -120,7 +120,8 @@ public class AnchoragesFrame extends JFrame {
 
     int index = 0;
 
-    for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets().entrySet()) {
+    for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets()
+                                                    .entrySet()) {
       fillCheckboxesSet(ps.getValue(), cbSets.get(index));
       addCheckboxesSet(cbSets.get(index), Main.getPositionsMap()
                                               .get(Position.values()[index]));
@@ -199,7 +200,7 @@ public class AnchoragesFrame extends JFrame {
 
       if (!validChecksAmount(anchored)) {
         showErrMsg("No puede haber más de " + maxPlayersPerAnchorage
-                    + " ni menos de 2 jugadores en un mismo anclaje");
+                   + " ni menos de 2 jugadores en un mismo anclaje");
         return;
       } else if (!isValidAnchorage()) {
         showErrMsg("No puede haber más de la mitad de jugadores de una misma posición "
@@ -441,9 +442,9 @@ public class AnchoragesFrame extends JFrame {
    */
   private boolean isValidAnchorage() {
     return cbSets.stream()
-                  .noneMatch(cbs -> cbs.stream()
-                                       .filter(JCheckBox::isSelected)
-                                       .count() > cbs.size() / 2);
+                 .noneMatch(cbs -> cbs.stream()
+                                      .filter(JCheckBox::isSelected)
+                                      .count() > cbs.size() / 2);
   }
 
   /**

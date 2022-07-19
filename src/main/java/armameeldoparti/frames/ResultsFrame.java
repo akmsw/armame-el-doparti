@@ -225,71 +225,8 @@ public class ResultsFrame extends JFrame {
    * y sus respectivas posiciones para cada equipo armado.
    */
   private void addTable() {
-    table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-        /**
-         * Configura el color de fondo y de letra de las casillas de la tabla.
-         *
-         * @param table      Tabla fuente.
-         * @param value      El valor a configurar en la celda.
-         * @param isSelected Si la celda está seleccionada.
-         * @param hasFocus   Si la celda está en foco.
-         * @param row        Coordenada de fila de la celda.
-         * @param column     Coordenada de columna de la celda.
-         */
-        @Override
-        public Component getTableCellRendererComponent(JTable myTable, Object value,
-                                                       boolean isSelected, boolean hasFocus,
-                                                       int row, int column) {
-          final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
-                                                                  hasFocus, row, column);
+    setTableFormat();
 
-          /*
-            * Fila 0 y columna 0 tienen fondo verde oscuro con letras blancas. Sólo las celdas de
-            * las columnas de los títulos de los equipos y la de puntuaciones estarán centradas.
-            */
-          if (row == 0) {
-              c.setBackground(Main.DARK_GREEN);
-              c.setForeground(Color.WHITE);
-              ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
-          } else if (column == 0) {
-              if (Main.getDistribution() == Main.BY_SCORES_MIX && row == table.getRowCount() - 1) {
-                c.setBackground(Main.LIGHT_ORANGE);
-                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
-              } else {
-                c.setBackground(Main.DARK_GREEN);
-                c.setForeground(Color.WHITE);
-                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
-              }
-          } else {
-              /*
-               * Las demás celdas tendrán letras negras. El color de fondo será amarillo
-               * si la celda muestra puntajes. Si la celda corresponde a un jugador con
-               * un anclaje establecido, se toma como color de fondo el color correspondiente
-               * a su número de anclaje. Si la celda muestra un puntaje, estará centrada.
-               * De lo contrario, estará alineada a la izquierda.
-               */
-              c.setForeground(Color.BLACK);
-
-              if (Main.getDistribution() == Main.BY_SCORES_MIX && row == table.getRowCount() - 1) {
-                c.setBackground(Main.LIGHT_ORANGE);
-                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
-              } else {
-                Player playerOnCell = (Player) Main.getPlayersSets()
-                                                   .values()
-                                                   .stream()
-                                                   .flatMap(List::stream)
-                                                   .filter(p -> p.getName() == value)
-                                                   .toArray()[0];
-
-                c.setBackground(playerOnCell.getAnchor() != 0
-                                ? ANCHORAGES_COLORS[playerOnCell.getAnchor() - 1] : Color.WHITE);
-                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
-              }
-          }
-
-          return c;
-        }
-    });
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     table.setCellSelectionEnabled(false);
     table.setRowSelectionAllowed(false);
@@ -304,6 +241,95 @@ public class ResultsFrame extends JFrame {
     fillTableFields();
 
     panel.add(table, "push, grow, span, center");
+  }
+
+  /**
+   * Ajusta el formato de centrado de texto y de colores de fondo y letra
+   * para cada celda de la tabla de resultados.
+   */
+  private void setTableFormat() {
+    table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+      /**
+       * Configura el color de fondo y de letra de las casillas de la tabla.
+       *
+       * <p>Fila 0 y columna 0 tienen fondo verde oscuro con letras blancas.
+       * Las demás celdas tendrán letras negras.
+       *
+       * <p>El color de fondo será anaranjado si la celda muestra puntajes.
+       * Si la celda corresponde a un jugador con un anclaje establecido, se toma
+       * como color de fondo el color correspondiente a su número de anclaje.
+       *
+       * <p>Si la celda muestra un puntaje o un título de equipo, estará centrada.
+       * De lo contrario, estará alineada a la izquierda.
+       *
+       * @param table      Tabla fuente.
+       * @param value      El valor a configurar en la celda.
+       * @param isSelected Si la celda está seleccionada.
+       * @param hasFocus   Si la celda está en foco.
+       * @param row        Coordenada de fila de la celda.
+       * @param column     Coordenada de columna de la celda.
+       */
+      @Override
+      public Component getTableCellRendererComponent(JTable myTable, Object value,
+                                                     boolean isSelected, boolean hasFocus,
+                                                     int row, int column) {
+        final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
+                                                                hasFocus, row, column);
+
+        boolean byScoresMixFlag = Main.getDistribution() == Main.BY_SCORES_MIX
+                                  && row == table.getRowCount() - 1;
+
+        /*
+
+         */
+        if (row == 0) {
+          c.setBackground(Main.DARK_GREEN);
+          c.setForeground(Color.WHITE);
+          ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+
+          return c;
+        }
+
+        if (column == 0) {
+          if (byScoresMixFlag) {
+            c.setBackground(Main.LIGHT_ORANGE);
+            c.setForeground(Color.BLACK);
+            ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+
+            return c;
+          }
+
+          c.setBackground(Main.DARK_GREEN);
+          c.setForeground(Color.WHITE);
+          ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
+
+          return c;
+        }
+
+        if (byScoresMixFlag) {
+          c.setBackground(Main.LIGHT_ORANGE);
+          c.setForeground(Color.BLACK);
+          ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+
+          return c;
+        }
+
+        Player playerOnCell = (Player) Main.getPlayersSets()
+                                           .values()
+                                           .stream()
+                                           .flatMap(List::stream)
+                                           .filter(p -> p.getName() == value)
+                                           .toArray()[0];
+
+        c.setBackground(playerOnCell.getAnchor() != 0
+                        ? ANCHORAGES_COLORS[playerOnCell.getAnchor() - 1]
+                        : Color.WHITE);
+        c.setForeground(Color.BLACK);
+        ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
+
+        return c;
+      }
+    });
   }
 
   /**

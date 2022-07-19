@@ -85,15 +85,6 @@ public class Team {
   }
 
   /**
-   * Retorna los jugadores de este separados por posiciones.
-   *
-   * @return Mapa con los jugadores de este equipo para cada posición.
-   */
-  public Map<Position, List<Player>> getPlayers() {
-    return teamPlayers;
-  }
-
-  /**
    * Revisa si una posición en particular del equipo ya tiene la cantidad de
    * jugadores que debería.
    *
@@ -105,5 +96,14 @@ public class Team {
     return teamPlayers.get(position)
                       .size() == Main.getPlayersAmountMap()
                                      .get(position);
+  }
+
+  /**
+   * Retorna los jugadores de este separados por posiciones.
+   *
+   * @return Mapa con los jugadores de este equipo para cada posición.
+   */
+  public Map<Position, List<Player>> getPlayers() {
+    return teamPlayers;
   }
 }

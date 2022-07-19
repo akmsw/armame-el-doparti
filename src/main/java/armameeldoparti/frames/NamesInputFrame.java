@@ -153,9 +153,9 @@ public class NamesInputFrame extends JFrame {
     br.lines().forEach(l -> {
       if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
         Main.getPlayersAmountMap().put(Position.values()[wrapperIndex.index],
-                                        Integer.parseInt(l.replaceAll("(?!(?<="
-                                                                      + Main.PLAYERS_PER_TEAM
-                                                                      + ")\\d).", "")));
+                                       Integer.parseInt(l.replaceAll("(?!(?<="
+                                                                     + Main.PLAYERS_PER_TEAM
+                                                                     + ")\\d).", "")));
 
         wrapperIndex.index++;
       }
@@ -266,7 +266,8 @@ public class NamesInputFrame extends JFrame {
    */
   private void addTextFields(Position position,
                              List<JTextField> textFieldSet, List<Player> playersSet) {
-    for (int i = 0; i < Main.getPlayersAmountMap().get(position) * 2; i++) {
+    for (int i = 0; i < Main.getPlayersAmountMap()
+                            .get(position) * 2; i++) {
       JTextField tf = new JTextField();
 
       tf.addActionListener(e -> {
@@ -402,7 +403,6 @@ public class NamesInputFrame extends JFrame {
       if (text.equals(OPTIONS_COMBOBOX[i])) {
         textFields.get(i)
                   .forEach(tf -> leftPanel.add(tf, "growx"));
-
         break;
       }
     }
