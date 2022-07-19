@@ -226,18 +226,6 @@ public class ResultsFrame extends JFrame {
    */
   private void addTable() {
     setTableFormat();
-
-    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-    table.setCellSelectionEnabled(false);
-    table.setRowSelectionAllowed(false);
-    table.setColumnSelectionAllowed(false);
-    table.setBorder(BorderFactory.createLineBorder(Main.DARK_GREEN));
-    table.setEnabled(false);
-    table.setVisible(true);
-    ((DefaultTableCellRenderer) table.getTableHeader()
-                                     .getDefaultRenderer())
-                                     .setHorizontalAlignment(SwingConstants.CENTER);
-
     fillTableFields();
 
     panel.add(table, "push, grow, span, center");
@@ -246,21 +234,21 @@ public class ResultsFrame extends JFrame {
   /**
    * Ajusta el formato de centrado de texto y de colores de fondo y letra
    * para cada celda de la tabla de resultados.
+   *
+   * <p>Fila 0 y columna 0 tienen fondo verde oscuro con letras blancas.
+   * Las demás celdas tendrán letras negras.
+   *
+   * <p>El color de fondo será anaranjado si la celda muestra puntajes.
+   * Si la celda corresponde a un jugador con un anclaje establecido, se toma
+   * como color de fondo el color correspondiente a su número de anclaje.
+   *
+   * <p>Si la celda muestra un puntaje o un título de equipo, estará centrada.
+   * De lo contrario, estará alineada a la izquierda.
    */
   private void setTableFormat() {
     table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
       /**
        * Configura el color de fondo y de letra de las casillas de la tabla.
-       *
-       * <p>Fila 0 y columna 0 tienen fondo verde oscuro con letras blancas.
-       * Las demás celdas tendrán letras negras.
-       *
-       * <p>El color de fondo será anaranjado si la celda muestra puntajes.
-       * Si la celda corresponde a un jugador con un anclaje establecido, se toma
-       * como color de fondo el color correspondiente a su número de anclaje.
-       *
-       * <p>Si la celda muestra un puntaje o un título de equipo, estará centrada.
-       * De lo contrario, estará alineada a la izquierda.
        *
        * @param table      Tabla fuente.
        * @param value      El valor a configurar en la celda.
@@ -330,6 +318,13 @@ public class ResultsFrame extends JFrame {
         return c;
       }
     });
+
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    table.setCellSelectionEnabled(false);
+    table.setRowSelectionAllowed(false);
+    table.setColumnSelectionAllowed(false);
+    table.setBorder(BorderFactory.createLineBorder(Main.DARK_GREEN));
+    table.setEnabled(false);
   }
 
   /**

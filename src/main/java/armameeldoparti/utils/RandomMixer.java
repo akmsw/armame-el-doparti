@@ -171,7 +171,6 @@ public class RandomMixer implements PlayersMixer {
                                 .get(p.getPosition())
                                 .add(p);
             });
-
             alreadySetted.add(index);
           }
         } else {
@@ -181,7 +180,6 @@ public class RandomMixer implements PlayersMixer {
             currentWorkingTeam.getPlayers()
                               .get(player.getPosition())
                               .add(player);
-
             alreadySetted.add(index);
           }
         }
@@ -204,7 +202,6 @@ public class RandomMixer implements PlayersMixer {
 
     remainingPlayers.forEach(p -> {
       p.setTeam(chosenTeam2 + 1);
-
       teams.get(chosenTeam2)
            .getPlayers()
            .get(p.getPosition())
