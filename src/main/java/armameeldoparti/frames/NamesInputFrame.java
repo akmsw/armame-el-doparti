@@ -466,6 +466,6 @@ public class NamesInputFrame extends JFrame {
                .stream()
                .flatMap(Collection::stream)
                .anyMatch(p -> p.getName()
-                              .equals(name));
+                               .equals(name));
   }
 }

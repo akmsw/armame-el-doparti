@@ -245,11 +245,12 @@ public class RandomMixer implements PlayersMixer {
       return false;
     }
 
-    for (Player player : anchoredPlayers) {
-      if (player.getTeam() != 0 || team.isPositionFull(player.getPosition())) {
-        return false;
-      }
+    if (anchoredPlayers.stream()
+                       .anyMatch(p -> p.getTeam() != 0 || team.isPositionFull(p.getPosition()))) {
+      return false;
+    }
 
+    for (Player player : anchoredPlayers) {
       if (team.getPlayers()
               .get(player.getPosition())
               .size()

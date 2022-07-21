@@ -205,15 +205,7 @@ public class ResultsFrame extends JFrame {
     if (Main.getDistribution() == Main.RANDOM_MIX) {
       JButton remixButton = new JButton("Redistribuir");
 
-      remixButton.addActionListener(e -> {
-        resetTeams();
-
-        teams = Main.thereAreAnchorages()
-                ? randomMixer.withAnchorages(teams)
-                : randomMixer.withoutAnchorages(teams);
-
-        fillTable();
-      });
+      remixButton.addActionListener(e -> newMix());
 
       panel.add(remixButton, "growx");
     }
@@ -407,6 +399,19 @@ public class ResultsFrame extends JFrame {
                             .reduce(0, Math::addExact),
                        table.getRowCount() - 1, 2);
     }
+  }
+
+  /**
+   * Realiza una nueva distribución aleatoria.
+   */
+  private void newMix() {
+    resetTeams();
+
+    teams = Main.thereAreAnchorages()
+            ? randomMixer.withAnchorages(teams)
+            : randomMixer.withoutAnchorages(teams);
+
+    fillTable();
   }
 
   /**

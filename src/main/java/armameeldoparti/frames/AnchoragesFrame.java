@@ -266,9 +266,9 @@ public class AnchoragesFrame extends JFrame {
    */
   private void newAnchorage() {
     int anchored = (int) cbSets.stream()
-                                 .flatMap(List::stream)
-                                 .filter(JCheckBox::isSelected)
-                                 .count();
+                               .flatMap(List::stream)
+                               .filter(JCheckBox::isSelected)
+                               .count();
 
     if (!validChecksAmount(anchored)) {
       showErrMsg("No puede haber más de " + maxPlayersPerAnchorage
