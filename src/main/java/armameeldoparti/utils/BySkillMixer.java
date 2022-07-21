@@ -46,13 +46,31 @@ public class BySkillMixer implements PlayersMixer {
    * Distribuye los jugadores en base a sus puntuaciones de la manera más equitativa posible
    * sin considerar anclajes.
    *
+   * <p>Se recorren las posiciones en orden inverso para lograr la mejor distribución.
+   *
+   * <p>Se ordenan los jugadores de cada posición en base a su puntuación, de mayor a menor.
+   * Luego se ordenan los equipos en base a la suma de los puntuaciones de sus jugadores
+   * hasta el momento, de menor a mayor.
+   *
+   * <p>Si la cantidad de jugadores a repartir es 2, al equipo con menor puntuación se le
+   * asigna el jugador de mayor puntuación. Al equipo con mayor puntuación se le asigna
+   * el jugador de menor puntuación.
+   *
+   * <p>Si la cantidad de jugadores a repartir es 4, se arman dos subconjuntos con
+   * los jugadores de los extremos, desde afuera hacia adentro, alternando entre
+   * subconjuntos. Luego se ordenan estos subconjuntos en base a sus puntuaciones,
+   * de mayor a menor.
+   *
+   * <p>Al equipo con menor puntuación se le asigna el conjunto de jugadores que sumen
+   * mayor puntuación. Al equipo con mayor puntuación se le asigna el conjunto de jugadores
+   * que sumen menor puntuación.
+   *
    * @param teams Lista contenedora de equipos.
    *
    * @return Los equipos con los jugadores distribuidos de la manera deseada.
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    // Las posiciones se recorrerán en orden inverso para lograr la mejor distribución
     List<Position> reversedEnum = Arrays.asList(Position.values());
 
     Collections.reverse(reversedEnum);
@@ -61,24 +79,17 @@ public class BySkillMixer implements PlayersMixer {
       List<Player> currentSet = Main.getPlayersSets()
                                     .get(position);
 
-      // Se ordenan los jugadores de esta posición en base a su puntuación, de mayor a menor
       currentSet.sort(Comparator.comparingInt(Player::getSkill)
                                 .reversed());
 
-      /*
-       * Se ordenan los equipos en base a la suma de los puntuaciones
-       * de sus jugadores hasta el momento, de menor a mayor.
-       */
       teams.sort(Comparator.comparingInt(Team::getTeamSkill));
 
       if (currentSet.size() == 2) {
-        // Al equipo con menor puntuación se le asigna el jugador de mayor puntuación
         teams.get(0)
              .getPlayers()
              .get(position)
              .add(currentSet.get(0));
 
-        // Al equipo con mayor puntuación se le asigna el jugador de menor puntuación
         teams.get(1)
              .getPlayers()
              .get(position)
@@ -88,12 +99,9 @@ public class BySkillMixer implements PlayersMixer {
         List<Player> playersSubset2 = new ArrayList<>();
 
         /*
-         * Agregamos los jugadores de los extremos, desde afuera
-         * hacia adentro, alternando entre subconjuntos.
-         *
-         * Si la cantidad de jugadores a repartir no es 4, este reparto debería
-         * automatizarse con un bucle 'for' que altere entre subconjuntos mediante
-         * una operación de la forma:
+         * Si la cantidad de jugadores a repartir no es 4, esto debería
+         * hacerse con un bucle 'for' que altere entre subconjuntos
+         * mediante una operación de la forma:
          *
          * (i % 2 == 0 ? playersSubset1 : playersSubset2).add(...)
          */
@@ -107,25 +115,15 @@ public class BySkillMixer implements PlayersMixer {
 
         playersSubsets.add(playersSubset1);
         playersSubsets.add(playersSubset2);
-
-        // Ordenamos los subconjuntos en base a sus puntuaciones, de mayor a menor
         playersSubsets.sort(Comparator.comparingInt(ps -> ps.stream()
                                                             .mapToInt(Player::getSkill)
                                                             .reduce(0, Math::addExact)));
 
-        /*
-         * Al equipo con menor puntuación se le asigna el conjunto de jugadores
-         * que sumen mayor puntuación.
-         */
         teams.get(0)
              .getPlayers()
              .get(position)
              .addAll(playersSubsets.get(1));
 
-        /*
-         * Al equipo con mayor puntuación se le asigna el conjunto de jugadores
-         * que sumen menor puntuación.
-         */
         teams.get(1)
              .getPlayers()
              .get(position)

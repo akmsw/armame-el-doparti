@@ -211,11 +211,13 @@ public class RandomMixer implements PlayersMixer {
     return teams;
   }
 
+  // ---------------------------------------- Métodos privados ----------------------------------
+
   /**
-   * Actualiza el valor del índice de jugador a seleccionar.
+   * Actualiza de manera aleatoria el valor del índice de jugador a seleccionar.
    *
    * @param range      Límite superior (exclusive) para el generador aleatorio.
-   * @param indexesSet Conjunto donde revisar si el índice generado está presente.
+   * @param indexesSet Conjunto donde revisar si el índice generado ya está presente.
    */
   private void updateIndex(int range, List<Integer> indexesSet) {
     do {

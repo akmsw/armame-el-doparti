@@ -315,9 +315,9 @@ public class AnchoragesFrame extends JFrame {
       }
 
       /*
-        * A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
-        * se les decrementa en 1 su número de anclaje.
-        */
+       * A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
+       * se les decrementa en 1 su número de anclaje.
+       */
       for (int k = anchor + 1; k <= anchorageNum; k++) {
         for (int j = 0; j < cbSets.size(); j++) {
           changeAnchor(k, k - 1);

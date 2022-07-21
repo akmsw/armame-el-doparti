@@ -116,7 +116,8 @@ public class SkillsInputFrame extends JFrame {
    * Añade los campos de puntuación al panel de la ventana.
    */
   private void addSpinners() {
-    for (int i = 0; i < Main.getPlayersSets().size(); i++) {
+    for (int i = 0; i < Main.getPlayersSets()
+                            .size(); i++) {
       JLabel label = new JLabel(Main.getPositionsMap()
                                     .get(Position.values()[i]));
 

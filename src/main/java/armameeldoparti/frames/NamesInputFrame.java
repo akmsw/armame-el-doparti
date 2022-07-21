@@ -292,7 +292,8 @@ public class NamesInputFrame extends JFrame {
 
             tf.setText("");
           } else {
-            playersSet.get(textFieldSet.indexOf(e.getSource())).setName(name);
+            playersSet.get(textFieldSet.indexOf(e.getSource()))
+                      .setName(name);
 
             updateTextArea();
 
@@ -460,10 +461,11 @@ public class NamesInputFrame extends JFrame {
    * @return Si ya existe algún jugador con el nombre recibido por parámetro.
    */
   private boolean alreadyExists(String name) {
-    return Main.getPlayersSets().values()
-                                .stream()
-                                .flatMap(Collection::stream)
-                                .anyMatch(p -> p.getName()
-                                                .equals(name));
+    return Main.getPlayersSets()
+               .values()
+               .stream()
+               .flatMap(Collection::stream)
+               .anyMatch(p -> p.getName()
+                              .equals(name));
   }
 }

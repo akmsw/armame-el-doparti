@@ -128,7 +128,7 @@ public final class Main {
   /**
    * Retorna las cadenas correspondientes a las posiciones de los jugadores.
    *
-   * @return Mapa con los strings correspondientes a cada posición.
+   * @return Mapa con las posiciones y su representación en cadenas de caracteres.
    */
   public static Map<Position, String> getPositionsMap() {
     return positions;

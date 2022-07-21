@@ -379,7 +379,8 @@ public class ResultsFrame extends JFrame {
       int row = 1;
 
       for (Position position : Position.values()) {
-        for (Player player : team.getPlayers().get(position)) {
+        for (Player player : team.getPlayers()
+                                 .get(position)) {
           table.setValueAt(player.getName(), row++, column);
         }
       }
@@ -396,6 +397,7 @@ public class ResultsFrame extends JFrame {
                             .mapToInt(Player::getSkill)
                             .reduce(0, Math::addExact),
                        table.getRowCount() - 1, 1);
+
       table.setValueAt(teams.get(1)
                             .getPlayers()
                             .values()
