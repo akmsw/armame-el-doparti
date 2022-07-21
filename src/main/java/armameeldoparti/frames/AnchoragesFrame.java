@@ -53,7 +53,7 @@ public class AnchoragesFrame extends JFrame {
   private List<JCheckBox> gkCheckboxes;
   private List<List<JCheckBox>> cbSets;
 
-  private JButton okButton;
+  private JButton finishButton;
   private JButton newAnchorageButton;
   private JButton clearAnchoragesButton;
   private JButton deleteSpecificAnchorageButton;
@@ -153,34 +153,14 @@ public class AnchoragesFrame extends JFrame {
    * Coloca los botones en los paneles de la ventana.
    */
   private void addButtons() {
-    okButton = new JButton("Finalizar");
+    finishButton = new JButton("Finalizar");
 
     newAnchorageButton = new JButton("Anclar");
     deleteSpecificAnchorageButton = new JButton("Borrar un anclaje");
     deleteLastAnchorageButton = new JButton("Borrar último anclaje");
     clearAnchoragesButton = new JButton("Limpiar anclajes");
 
-    okButton.setEnabled(false);
-    okButton.addActionListener(e -> {
-      cbSets.forEach(cbs -> cbs.forEach(cb -> {
-        if (cb.isSelected() && cb.isVisible()) {
-          cb.setSelected(false);
-        }
-      }));
-
-      if (Main.getDistribution() == 1) {
-        // Distribución por puntuaciones
-        SkillsInputFrame scoresInputFrame = new SkillsInputFrame(this);
-        scoresInputFrame.setVisible(true);
-      } else {
-        // Distribución aleatoria
-        ResultsFrame resultsFrame = new ResultsFrame(this);
-        resultsFrame.setVisible(true);
-      }
-
-      setVisible(false);
-      setLocationRelativeTo(null);
-    });
+    finishButton.setEnabled(false);
 
     BackButton backButton = new BackButton(this, previousFrame, null);
 
@@ -192,41 +172,30 @@ public class AnchoragesFrame extends JFrame {
       dispose();
     });
 
-    newAnchorageButton.addActionListener(e -> {
-      int anchored = (int) cbSets.stream()
-                                 .flatMap(List::stream)
-                                 .filter(JCheckBox::isSelected)
-                                 .count();
+    finishButton.addActionListener(e -> finish());
+    newAnchorageButton.addActionListener(e -> newAnchorage());
+    deleteSpecificAnchorageButton.addActionListener(e -> {
+      String[] optionsDelete = new String[anchorageNum];
 
-      if (!validChecksAmount(anchored)) {
-        showErrMsg("No puede haber más de " + maxPlayersPerAnchorage
-                   + " ni menos de 2 jugadores en un mismo anclaje");
-        return;
-      } else if (!isValidAnchorage()) {
-        showErrMsg("No puede haber más de la mitad de jugadores de una misma posición "
-                   + "en un mismo anclaje");
-        return;
-      } else if (!validAnchorageAmount(anchored)) {
-        showErrMsg("No puede haber más de " + 2 * maxPlayersPerAnchorage
-                   + " jugadores anclados en total");
-        return;
+      for (int i = 0; i < anchorageNum; i++) {
+        optionsDelete[i] = Integer.toString(i + 1);
       }
 
-      anchorageNum++;
+      int anchorageToDelete = JOptionPane.showOptionDialog(null,
+                                                           "Seleccione qué anclaje desea borrar",
+                                                           "Antes de continuar...", 2,
+                                                           JOptionPane.QUESTION_MESSAGE,
+                                                           MainFrame.SCALED_ICON, optionsDelete,
+                                                           optionsDelete[0]) + 1;
 
-      for (int i = 0; i < cbSets.size(); i++) {
-        setAnchors(cbSets.get(i), Main.getPlayersSets()
-                                      .get(Position.values()[i]));
+      if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
+        deleteSpecificAnchorage(anchorageToDelete);
       }
-
-      updateTextArea();
     });
-
-    deleteSpecificAnchorageButton.addActionListener(e -> deleteSpecificAnchorage());
     deleteLastAnchorageButton.addActionListener(e -> deleteLast());
     clearAnchoragesButton.addActionListener(e -> clearAnchorages());
 
-    leftPanel.add(okButton, GROWX_SPAN);
+    leftPanel.add(finishButton, GROWX_SPAN);
     leftPanel.add(backButton, GROWX_SPAN);
 
     rightPanel.add(scrollPane, "span2, push, grow");
@@ -264,6 +233,72 @@ public class AnchoragesFrame extends JFrame {
   }
 
   /**
+   * Crea una nueva ventana de ingreso de puntuaciones si se requiere, o
+   * una nueva ventana de muestra de resultados.
+   *
+   * <p>Aquellas casillas que quedaron seleccionadas cuyos jugadores no
+   * fueron anclados, se deseleccionan.
+   */
+  private void finish() {
+    cbSets.forEach(cbs -> cbs.forEach(cb -> {
+      if (cb.isSelected() && cb.isVisible()) {
+        cb.setSelected(false);
+      }
+    }));
+
+    if (Main.getDistribution() == 1) {
+      // Distribución por puntuaciones
+      SkillsInputFrame scoresInputFrame = new SkillsInputFrame(this);
+      scoresInputFrame.setVisible(true);
+    } else {
+      // Distribución aleatoria
+      ResultsFrame resultsFrame = new ResultsFrame(this);
+      resultsFrame.setVisible(true);
+    }
+
+    setVisible(false);
+    setLocationRelativeTo(null);
+  }
+
+  /**
+   * Crea un nuevo anclaje en base a los jugadores correspondientes a las casillas
+   * seleccionadas.
+   */
+  private void newAnchorage() {
+    int anchored = (int) cbSets.stream()
+                                 .flatMap(List::stream)
+                                 .filter(JCheckBox::isSelected)
+                                 .count();
+
+    if (!validChecksAmount(anchored)) {
+      showErrMsg("No puede haber más de " + maxPlayersPerAnchorage
+                 + " ni menos de 2 jugadores en un mismo anclaje");
+      return;
+    }
+
+    if (!validAnchorage()) {
+      showErrMsg("No puede haber más de la mitad de jugadores de una misma posición "
+                  + "en un mismo anclaje");
+      return;
+    }
+
+    if (!validAnchorageAmount(anchored)) {
+      showErrMsg("No puede haber más de " + 2 * maxPlayersPerAnchorage
+                  + " jugadores anclados en total");
+      return;
+    }
+
+    anchorageNum++;
+
+    for (int i = 0; i < cbSets.size(); i++) {
+      setAnchors(cbSets.get(i), Main.getPlayersSets()
+                                    .get(Position.values()[i]));
+    }
+
+    updateTextArea();
+  }
+
+  /**
    * Cambia el número de anclaje de los jugadores deseados.
    *
    * @param target      Anclaje a reemplazar.
@@ -293,41 +328,29 @@ public class AnchoragesFrame extends JFrame {
 
   /**
    * Borra un anclaje específico elegido por el usuario.
+   *
+   * <p>Se le pide al usuario que ingrese el número de anclaje a borrar.
+   *
+   * <p>Los que tenían ese anclaje, ahora tienen anclaje '0'.
+   * A los demás (desde el anclaje elegido + 1 hasta anchorageNum),
+   * se les decrementa en 1 su número de anclaje.
+   *
+   * @param anchorageToDelete Número de anclaje a borrar.
    */
-  private void deleteSpecificAnchorage() {
-    String[] optionsDelete = new String[anchorageNum];
-
-    for (int i = 0; i < anchorageNum; i++) {
-      optionsDelete[i] = Integer.toString(i + 1);
+  private void deleteSpecificAnchorage(int anchorageToDelete) {
+    for (int j = 0; j < cbSets.size(); j++) {
+      changeAnchor(anchorageToDelete, 0);
     }
 
-    int anchor = JOptionPane.showOptionDialog(null,
-                                              "Seleccione qué anclaje desea borrar",
-                                        "Antes de continuar...", 2,
-                                              JOptionPane.QUESTION_MESSAGE,
-                                              MainFrame.SCALED_ICON, optionsDelete,
-                                              optionsDelete[0]) + 1;
-
-    if (anchor - 1 != JOptionPane.CLOSED_OPTION) {
-      // Los que tenían anclaje igual a 'anchor' ahora tienen anclaje '0'
+    for (int k = anchorageToDelete + 1; k <= anchorageNum; k++) {
       for (int j = 0; j < cbSets.size(); j++) {
-        changeAnchor(anchor, 0);
+        changeAnchor(k, k - 1);
       }
-
-      /*
-       * A los que tienen anclaje desde 'anchor + 1' hasta 'anchorageNum'
-       * se les decrementa en 1 su número de anclaje.
-       */
-      for (int k = anchor + 1; k <= anchorageNum; k++) {
-        for (int j = 0; j < cbSets.size(); j++) {
-          changeAnchor(k, k - 1);
-        }
-      }
-
-      anchorageNum--;
-
-      updateTextArea();
     }
+
+    anchorageNum--;
+
+    updateTextArea();
   }
 
   /**
@@ -397,7 +420,7 @@ public class AnchoragesFrame extends JFrame {
    */
   private void toggleButtons() {
     if (anchorageNum > 0 && anchorageNum < 2) {
-      okButton.setEnabled(true);
+      finishButton.setEnabled(true);
       deleteSpecificAnchorageButton.setEnabled(false);
       deleteLastAnchorageButton.setEnabled(true);
       clearAnchoragesButton.setEnabled(true);
@@ -405,7 +428,7 @@ public class AnchoragesFrame extends JFrame {
       deleteSpecificAnchorageButton.setEnabled(true);
       deleteLastAnchorageButton.setEnabled(true);
     } else {
-      okButton.setEnabled(false);
+      finishButton.setEnabled(false);
       deleteSpecificAnchorageButton.setEnabled(false);
       deleteLastAnchorageButton.setEnabled(false);
       clearAnchoragesButton.setEnabled(false);
@@ -440,7 +463,7 @@ public class AnchoragesFrame extends JFrame {
    *
    * @return Si el anclaje no contiene más de la mitad de jugadores de algún conjunto.
    */
-  private boolean isValidAnchorage() {
+  private boolean validAnchorage() {
     return cbSets.stream()
                  .noneMatch(cbs -> cbs.stream()
                                       .filter(JCheckBox::isSelected)
