@@ -209,7 +209,8 @@ public class ResultsFrame extends JFrame {
         resetTeams();
 
         teams = Main.thereAreAnchorages()
-                ? randomMixer.withAnchorages(teams) : randomMixer.withoutAnchorages(teams);
+                ? randomMixer.withAnchorages(teams)
+                : randomMixer.withoutAnchorages(teams);
 
         fillTable();
       });
@@ -267,9 +268,6 @@ public class ResultsFrame extends JFrame {
         boolean byScoresMixFlag = Main.getDistribution() == Main.BY_SCORES_MIX
                                   && row == table.getRowCount() - 1;
 
-        /*
-
-         */
         if (row == 0) {
           c.setBackground(Main.DARK_GREEN);
           c.setForeground(Color.WHITE);
@@ -364,22 +362,19 @@ public class ResultsFrame extends JFrame {
 
   /**
    * Llena la tabla con los datos cargados de los jugadores en cada equipo.
+   *
+   * <p>Aquí se llenan los recuadros de la tabla confiando en el orden en el
+   * que se escribieron las posiciones en las filas de la columna 0
+   * (el mismo orden del enum de posiciones).
+   * Es decir, los primeros jugadores a cargar serán defensores centrales,
+   * luego defensores laterales, mediocampistas, delanteros y por último arqueros.
+   *
+   * <p>Si se cambian de lugar las etiquetas de las posiciones en la tabla, deberá
+   * cambiarse esta manera de llenarla, ya que no se respetará el nuevo orden establecido.
    */
   private void fillTable() {
     int column = 1;
 
-    /*
-      * ¡¡¡IMPORTANTE!!!
-      *
-      * Aquí se llenan los recuadros de la tabla confiando en el
-      * orden en el que se escribieron las posiciones en las filas
-      * de la columna 0 (el mismo orden del enum de posiciones).
-      * Es decir, los primeros jugadores a cargar serán defensores
-      * centrales, luego defensores laterales, mediocampistas,
-      * delanteros y por último arqueros. Si se cambian de lugar las
-      * etiquetas de las posiciones en la tabla, deberá cambiarse esta
-      * manera de llenarla, ya que no se respetará el nuevo orden establecido.
-      */
     for (Team team : teams) {
       int row = 1;
 

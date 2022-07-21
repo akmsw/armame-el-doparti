@@ -172,18 +172,18 @@ public class MainFrame extends JFrame {
   /**
    * Aplica la fuente para el programa.
    *
-   * @param f Fuente a utilizar.
+   * @param font Fuente a utilizar.
    */
-  private void setProgramFont(Font f) {
+  private void setProgramFont(Font font) {
     Enumeration<Object> keys = UIManager.getDefaults()
                                         .keys();
 
     while (keys.hasMoreElements()) {
-      Object k = keys.nextElement();
-      Object value = UIManager.get(k);
+      Object key = keys.nextElement();
+      Object value = UIManager.get(key);
 
       if (value instanceof FontUIResource) {
-        UIManager.put(k, f);
+        UIManager.put(key, font);
       }
     }
   }

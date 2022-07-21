@@ -39,6 +39,17 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Distribuye los jugadores de manera completamente aleatoria.
    *
+   * <p>Se recorre la mitad de los jugadores del conjunto de manera aleatoria
+   * y se les asigna a los jugadores escogidos como equipo el número aleatorio
+   * generado al principio.
+   *
+   * <p>A medida que se van eligiendo jugadores, su índice en el arreglo se
+   * almacena para evitar reasignarle un equipo.
+   *
+   * <p>Al resto de jugadores que quedaron sin elegir de manera aleatoria
+   * (aquellos con team == 0) del mismo grupo, se les asigna el número de equipo
+   * opuesto.
+   *
    * @param teams Lista contenedora de equipos.
    *
    * @return Los equipos con los jugadores distribuidos de la manera deseada.
@@ -51,16 +62,6 @@ public class RandomMixer implements PlayersMixer {
     List<Integer> alreadySetted = new ArrayList<>();
 
     for (Position position : Position.values()) {
-      /*
-       * Se recorre la mitad de los jugadores del conjunto de manera
-       * aleatoria y se les asigna a los jugadores escogidos
-       * como equipo el número aleatorio generado al principio.
-       * A medida que se van eligiendo jugadores, su índice en
-       * el arreglo se almacena para evitar reasignarle un equipo.
-       * Al resto de jugadores que quedaron sin elegir de manera
-       * aleatoria (aquellos con team == 0) del mismo grupo, se
-       * les asigna el número de equipo opuesto.
-       */
       List<Player> playersSet = Main.getPlayersSets()
                                     .get(position);
 
@@ -101,47 +102,47 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Distribuye los jugadores de manera aleatoria considerando los anclajes establecidos.
    *
+   * <p>Se elige un número aleatorio entre 0 y 1 para asignarle como equipo a un conjunto
+   * de jugadores, y el resto tendrá asignado el equipo opuesto.
+   *
+   * <p>Se comienza recorriendo cada posición. Mientras la posición en
+   * la que se está trabajando no tenga la cantidad de jugadores especificada para dicha
+   * posición por equipo, se seguirá iterando.
+   *
+   * <p>Se escoge un jugador de manera aleatoria del conjunto total de jugadores con la
+   * posición seleccionada, y se chequea si está disponible (equipo = 0) y si tiene anclajes
+   * (anclaje != 0).
+   *
+   * <p>Si el jugador está disponible y está anclado con otros jugadores, se toman todos
+   * los jugadores de todas las posiciones con su mismo número de anclaje y se valida si se
+   * pueden agregar al equipo sin sobrepasar la cantidad de jugadores permitida por cada
+   * posición. En caso de que sí se pueda, se los agrega. Si no, se los ignora y se
+   * continúa iterando.
+   *
+   * <p>Si el jugador no tiene anclaje y se lo puede agregar sin sobrepasar el límite de
+   * jugadores para su posición, se lo agrega.
+   *
+   * <p>Cuando el primer equipo elegido está lleno, se deja de iterar. Se toman todos los
+   * jugadores restantes y se les asigna el número de equipo contrario al elegido en un
+   * principio.
+   *
    * @param teams Lista contenedora de equipos.
    *
    * @return Los equipos con los jugadores distribuidos de la manera deseada.
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    /*
-     * Se elige un número aleatorio entre 0 y 1 para
-     * asignarle como equipo a un conjunto de jugadores,
-     * y el resto tendrá asignado el equipo opuesto.
-     */
     chosenTeam1 = randomGenerator.nextInt(teams.size());
     chosenTeam2 = 1 - chosenTeam1;
 
-    /*
-     * Si hay anclajes, se comienza recorriendo cada posición.
-     * Mientras la posición en la que se está trabajando no tenga la
-     * cantidad de jugadores especificada para dicha posición por equipo,
-     * se seguirá iterando.
-     * Se escoge un jugador de manera aleatoria del conjunto total de
-     * jugadores con la posición seleccionada, y se chequea si está
-     * disponible (equipo = 0) y si tiene anclajes (anclaje != 0).
-     * Si el jugador está disponible y está anclado con otros jugadores,
-     * se toman todos los jugadores de todas las posiciones con su mismo
-     * número de anclaje y se valida si se pueden agregar al equipo sin
-     * sobrepasar la cantidad de jugadores permitida por cada posición.
-     * En caso de que sí se pueda, se los agrega. Si no, se los ignora y se
-     * continúa iterando.
-     * Si el jugador no tiene anclaje y se lo puede agregar sin sobrepasar el
-     * límite de jugadores para su posición, se lo agrega.
-     * Cuando el primer equipo elegido está lleno, se deja de iterar.
-     * Se toman todos los jugadores restantes y se les asigna el número de
-     * equipo contrario al elegido en un principio.
-     */
     Team currentWorkingTeam = teams.get(chosenTeam1);
 
     List<Integer> alreadySetted = new ArrayList<>();
 
     boolean teamFull = false;
 
-    for (int i = 0; i < Position.values().length && !teamFull; i++) {
+    for (int i = 0; i < Position.values()
+                                .length && !teamFull; i++) {
       List<Player> playersSet = Main.getPlayersSets()
                                     .get(Position.values()[i]);
 
@@ -150,9 +151,7 @@ public class RandomMixer implements PlayersMixer {
                                .size() < Main.getPlayersAmountMap()
                                              .get(Position.values()[i])
              && !teamFull) {
-        do {
-          index = randomGenerator.nextInt(playersSet.size());
-        } while (alreadySetted.contains(index));
+        updateIndex(playersSet.size(), alreadySetted);
 
         Player player = playersSet.get(index);
 
@@ -209,6 +208,18 @@ public class RandomMixer implements PlayersMixer {
     });
 
     return teams;
+  }
+
+  /**
+   *
+   * @param range
+   *
+   * @return
+   */
+  private void updateIndex(int range, List<Integer> alreadySetted) {
+    do {
+      index = randomGenerator.nextInt(range);
+    } while (alreadySetted.contains(index));
   }
 
   /**

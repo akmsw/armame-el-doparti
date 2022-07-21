@@ -130,8 +130,6 @@ public class NamesInputFrame extends JFrame {
    * <p>(?!(?<=X)\\d). : Obtiene el trozo de la línea que no sea un número que nos
    * interesa (el número que nos interesa ocuparía el lugar de la X).
    *
-   * <p>¡¡¡IMPORTANTE!!!
-   *
    * <p>Si el archivo .pda es modificado en cuanto a orden de las líneas importantes,
    * se debe tener en cuenta que Position.values()[index] confía en que lo hallado
    * se corresponde con el orden en el que están declarados los valores en el enum
@@ -417,9 +415,7 @@ public class NamesInputFrame extends JFrame {
    * <p>Se muestran los jugadores ingresados en el orden en el que estén posicionados en sus
    * respectivos arreglos.
    *
-   * <p>El orden en el que se muestran es:
-   *
-   * <p>Defensores centrales - Defensores laterales - Mediocampistas - Delanteros - Arqueros.
+   * <p>El orden en el que se muestran es el mismo que el del enum de posiciones.
    */
   private void updateTextArea() {
     var wrapperCounter = new Object() {
