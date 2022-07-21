@@ -28,7 +28,6 @@ Release date: TBD
 - [Mejoras](https://github.com/akmsw/armame-el-doparti#-mejoras)
 - [Solución a problemas frecuentes](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-soluci%C3%B3n-de-problemas-comunes)
     - [En Linux](https://github.com/akmsw/armame-el-doparti#-en-linux)
-- [Seguimiento](https://github.com/akmsw/armame-el-doparti#-seguimiento)
 - [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
 
 ## 🔎 ¿Qué es?
@@ -88,9 +87,6 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
     - Abrir con...
     - En el campo de ingreso de comando personalizado, ingresar: `java -jar`
     - Seleccionar como opción predeterminada para ejecución de este tipo de archivos
-
-## 📋 Seguimiento
-Para estar al tanto del desarrollo del programa, se puede visitar el [panel de seguimiento](https://github.com/users/akmsw/projects/2) del mismo y ver en qué se está trabajando, qué está por añadirse/modificarse, y qué cosas se han terminado de implementar.
 
 ## 📸 Capturas de pantalla
 ![ventana_principal](./src/main/res/img/readme/ss1.png)\
