@@ -10,7 +10,7 @@ Release date: TBD
 [![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange)](https://maven.apache.org/)
 [![buildBadge](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
-[![sonarLintBadge](https://img.shields.io/badge/sonarlint-1-yellow)](https://www.sonarlint.org/)
+[![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen)](https://www.sonarlint.org/)
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross%20platform-blueviolet)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/gpl-3.0-blue)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 

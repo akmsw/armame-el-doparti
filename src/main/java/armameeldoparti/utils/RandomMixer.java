@@ -137,7 +137,7 @@ public class RandomMixer implements PlayersMixer {
 
     Team currentWorkingTeam = teams.get(chosenTeam1);
 
-    List<Integer> alreadySetted = new ArrayList<>();
+    List<Integer> indexesSet = new ArrayList<>();
 
     boolean teamFull = false;
 
@@ -151,75 +151,76 @@ public class RandomMixer implements PlayersMixer {
                                .size() < Main.getPlayersAmountMap()
                                              .get(Position.values()[i])
              && !teamFull) {
-        updateIndex(playersSet.size(), alreadySetted);
+        updateIndex(playersSet.size(), indexesSet);
 
         Player player = playersSet.get(index);
 
-        if (player.getAnchor() != 0 && player.getTeam() == 0) {
-          List<Player> anchoredPlayers = Main.getPlayersSets()
-                                             .values()
-                                             .stream()
-                                             .flatMap(List::stream)
-                                             .filter(p -> p.getAnchor() == player.getAnchor())
-                                             .collect(Collectors.toList());
+        if (player.getTeam() != 0) {
+          continue;
+        }
 
-          if (validateAnchorage(currentWorkingTeam, anchoredPlayers)) {
-            anchoredPlayers.forEach(p -> {
-              p.setTeam(chosenTeam1 + 1);
-              currentWorkingTeam.getPlayers()
-                                .get(p.getPosition())
-                                .add(p);
-            });
-            alreadySetted.add(index);
-          }
-        } else {
-          if (player.getTeam() == 0
-              && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
-            player.setTeam(chosenTeam1 + 1);
+        if (player.getAnchor() == 0
+            && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
+          player.setTeam(chosenTeam1 + 1);
+          currentWorkingTeam.getPlayers()
+                            .get(player.getPosition())
+                            .add(player);
+          indexesSet.add(index);
+          /*
+           * TODO: acá se debería actualizar teamFull y hacer un continue,
+           * pero se entra en conflicto con S135.
+           */
+        }
+
+        List<Player> anchoredPlayers = Main.getPlayersSets()
+                                           .values()
+                                           .stream()
+                                           .flatMap(List::stream)
+                                           .filter(p -> p.getAnchor() == player.getAnchor())
+                                           .collect(Collectors.toList());
+
+        if (validateAnchorage(currentWorkingTeam, anchoredPlayers)) {
+          anchoredPlayers.forEach(p -> {
+            p.setTeam(chosenTeam1 + 1);
             currentWorkingTeam.getPlayers()
-                              .get(player.getPosition())
-                              .add(player);
-            alreadySetted.add(index);
-          }
+                              .get(p.getPosition())
+                              .add(p);
+          });
+          indexesSet.add(index);
         }
 
-        if (currentWorkingTeam.getPlayersCount() == Main.PLAYERS_PER_TEAM) {
-          teamFull = true;
-          break;
-        }
+        teamFull = currentWorkingTeam.getPlayersCount() == Main.PLAYERS_PER_TEAM;
       }
 
-      alreadySetted.clear();
+      indexesSet.clear();
     }
 
-    List<Player> remainingPlayers = Main.getPlayersSets()
-                                        .values()
-                                        .stream()
-                                        .flatMap(List::stream)
-                                        .filter(p -> p.getTeam() == 0)
-                                        .collect(Collectors.toList());
-
-    remainingPlayers.forEach(p -> {
-      p.setTeam(chosenTeam2 + 1);
-      teams.get(chosenTeam2)
-           .getPlayers()
-           .get(p.getPosition())
-           .add(p);
-    });
+    Main.getPlayersSets()
+        .values()
+        .stream()
+        .flatMap(List::stream)
+        .filter(p -> p.getTeam() == 0)
+        .forEach(p -> {
+          p.setTeam(chosenTeam2 + 1);
+          teams.get(chosenTeam2)
+               .getPlayers()
+               .get(p.getPosition())
+               .add(p);
+        });
 
     return teams;
   }
 
   /**
+   * Actualiza el valor del índice de jugador a seleccionar.
    *
-   * @param range
-   *
-   * @return
+   * @param range      Límite superior (exclusive) para el generador aleatorio.
+   * @param indexesSet Conjunto donde revisar si el índice generado está presente.
    */
-  private void updateIndex(int range, List<Integer> alreadySetted) {
+  private void updateIndex(int range, List<Integer> indexesSet) {
     do {
       index = randomGenerator.nextInt(range);
-    } while (alreadySetted.contains(index));
+    } while (indexesSet.contains(index));
   }
 
   /**
@@ -243,7 +244,7 @@ public class RandomMixer implements PlayersMixer {
     }
 
     for (Player player : anchoredPlayers) {
-      if (team.isPositionFull(player.getPosition())) {
+      if (player.getTeam() != 0 || team.isPositionFull(player.getPosition())) {
         return false;
       }
 
