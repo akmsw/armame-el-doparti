@@ -189,10 +189,10 @@ public class AnchoragesFrame extends JFrame {
                                                            optionsDelete[0]) + 1;
 
       if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
-        deleteSpecificAnchorage(anchorageToDelete);
+        deleteAnchorage(anchorageToDelete);
       }
     });
-    deleteLastAnchorageButton.addActionListener(e -> deleteLast());
+    deleteLastAnchorageButton.addActionListener(e -> deleteAnchorage(anchorageNum));
     clearAnchoragesButton.addActionListener(e -> clearAnchorages());
 
     leftPanel.add(finishButton, GROWX_SPAN);
@@ -329,36 +329,24 @@ public class AnchoragesFrame extends JFrame {
   /**
    * Borra un anclaje específico elegido por el usuario.
    *
-   * <p>Se le pide al usuario que ingrese el número de anclaje a borrar.
-   *
-   * <p>Los que tenían ese anclaje, ahora tienen anclaje '0'.
-   * A los demás (desde el anclaje elegido + 1 hasta anchorageNum),
+   * <p>Los que tenían ese anclaje, ahora tienen anclaje 0.
+   * Si se desea borrar un anclaje que no sea el último, entonces
+   * a los demás (desde el anclaje elegido + 1 hasta anchorageNum)
    * se les decrementa en 1 su número de anclaje.
    *
    * @param anchorageToDelete Número de anclaje a borrar.
    */
-  private void deleteSpecificAnchorage(int anchorageToDelete) {
+  private void deleteAnchorage(int anchorageToDelete) {
     for (int j = 0; j < cbSets.size(); j++) {
       changeAnchor(anchorageToDelete, 0);
     }
 
-    for (int k = anchorageToDelete + 1; k <= anchorageNum; k++) {
-      for (int j = 0; j < cbSets.size(); j++) {
-        changeAnchor(k, k - 1);
+    if (anchorageToDelete != anchorageNum) {
+      for (int k = anchorageToDelete + 1; k <= anchorageNum; k++) {
+        for (int j = 0; j < cbSets.size(); j++) {
+          changeAnchor(k, k - 1);
+        }
       }
-    }
-
-    anchorageNum--;
-
-    updateTextArea();
-  }
-
-  /**
-   * Borra el último anclaje realizado.
-   */
-  private void deleteLast() {
-    for (int i = 0; i < cbSets.size(); i++) {
-      changeAnchor(anchorageNum, 0);
     }
 
     anchorageNum--;
@@ -373,7 +361,7 @@ public class AnchoragesFrame extends JFrame {
    */
   private void clearAnchorages() {
     do {
-      deleteLast();
+      deleteAnchorage(anchorageNum);
     } while (anchorageNum > 0);
   }
 
@@ -498,7 +486,7 @@ public class AnchoragesFrame extends JFrame {
    * Configura el número de anclaje correspondiente a cada jugador.
    * Luego, deselecciona estas casillas y las hace invisibles para
    * evitar que dos o más anclajes contengan uno o más jugadores iguales.
-   * En caso de que el campo 'anchorageNum' sea 0 (se han querido limpiar los
+   * En caso de que el campo anchorageNum sea 0 (se han querido limpiar los
    * anclajes), se reiniciarán los números de anclaje de cada jugador y todas las
    * casillas quedarán visibles y deseleccionadas.
    *

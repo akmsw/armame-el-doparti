@@ -100,8 +100,8 @@ public class BySkillMixer implements PlayersMixer {
 
         /*
          * Si la cantidad de jugadores a repartir no es 4, esto debería
-         * hacerse con un bucle 'for' que altere entre subconjuntos
-         * mediante una operación de la forma:
+         * hacerse con un bucle que altere entre subconjuntos mediante
+         * una operación de la forma:
          *
          * (i % 2 == 0 ? playersSubset1 : playersSubset2).add(...)
          */
