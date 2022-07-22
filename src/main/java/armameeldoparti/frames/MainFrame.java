@@ -152,7 +152,7 @@ public class MainFrame extends JFrame {
     UIManager.put("TitledBorder.border", new LineBorder(Main.DARK_GREEN));
 
     try {
-      // Se registra la fuente para poder utilizarla
+      // Se crea y registra la fuente para poder utilizarla
       Font programFont = Font.createFont(Font.TRUETYPE_FONT,
                                          getClass().getClassLoader()
                                                    .getResourceAsStream(Main.TTF_PATH

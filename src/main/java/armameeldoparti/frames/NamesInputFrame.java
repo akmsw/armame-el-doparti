@@ -139,7 +139,7 @@ public class NamesInputFrame extends JFrame {
    * el orden de las líneas importantes de dichos archivos.
    */
   private void getPlayersDistributionData() {
-    BufferedReader br = new BufferedReader(
+    BufferedReader buff = new BufferedReader(
         new InputStreamReader(getClass().getClassLoader()
                                         .getResourceAsStream(Main.DOCS_PATH + PDA_FILENAME))
     );
@@ -148,16 +148,18 @@ public class NamesInputFrame extends JFrame {
       private int index;
     };
 
-    br.lines().forEach(l -> {
-      if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
-        Main.getPlayersAmountMap().put(Position.values()[wrapperIndex.index],
-                                       Integer.parseInt(l.replaceAll("(?!(?<="
-                                                                     + Main.PLAYERS_PER_TEAM
-                                                                     + ")\\d).", "")));
+    buff.lines()
+        .forEach(l -> {
+          if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
+            Main.getPlayersAmountMap()
+                .put(Position.values()[wrapperIndex.index],
+                    Integer.parseInt(l.replaceAll("(?!(?<="
+                                                  + Main.PLAYERS_PER_TEAM
+                                                  + ")\\d).", "")));
 
-        wrapperIndex.index++;
-      }
-    });
+            wrapperIndex.index++;
+          }
+        });
   }
 
   /**
@@ -178,18 +180,21 @@ public class NamesInputFrame extends JFrame {
 
     List<Player> midfielders = new ArrayList<>();
 
-    initializeSet(midfielders, Position.MIDFIELDER, Main.getPlayersAmountMap()
-                                                        .get(Position.MIDFIELDER) * 2);
+    initializeSet(midfielders, Position.MIDFIELDER,
+                  Main.getPlayersAmountMap()
+                      .get(Position.MIDFIELDER) * 2);
 
     List<Player> forwards = new ArrayList<>();
 
-    initializeSet(forwards, Position.FORWARD, Main.getPlayersAmountMap()
-                                                  .get(Position.FORWARD) * 2);
+    initializeSet(forwards, Position.FORWARD,
+                  Main.getPlayersAmountMap()
+                      .get(Position.FORWARD) * 2);
 
     List<Player> goalkeepers = new ArrayList<>();
 
-    initializeSet(goalkeepers, Position.GOALKEEPER, Main.getPlayersAmountMap()
-                                                        .get(Position.GOALKEEPER) * 2);
+    initializeSet(goalkeepers, Position.GOALKEEPER,
+                  Main.getPlayersAmountMap()
+                      .get(Position.GOALKEEPER) * 2);
 
     List<JTextField> centralDefendersTextFields = new ArrayList<>();
     List<JTextField> lateralDefendersTextFields = new ArrayList<>();
@@ -202,12 +207,16 @@ public class NamesInputFrame extends JFrame {
 
     Main.getPlayersSets()
         .put(Position.CENTRAL_DEFENDER, centralDefenders);
+
     Main.getPlayersSets()
         .put(Position.LATERAL_DEFENDER, lateralDefenders);
+
     Main.getPlayersSets()
         .put(Position.MIDFIELDER, midfielders);
+
     Main.getPlayersSets()
         .put(Position.FORWARD, forwards);
+
     Main.getPlayersSets()
         .put(Position.GOALKEEPER, goalkeepers);
 
@@ -275,7 +284,7 @@ public class NamesInputFrame extends JFrame {
                                         + " de la A a la Z", "¡Error!",
                                         JOptionPane.ERROR_MESSAGE, null);
 
-          tf.setText("");
+          tf.setText(null);
         } else {
           String name = tf.getText()
                           .trim()
@@ -290,7 +299,7 @@ public class NamesInputFrame extends JFrame {
                                           + " caracteres, o estar repetido",
                                           "¡Error!", JOptionPane.ERROR_MESSAGE, null);
 
-            tf.setText("");
+            tf.setText(null);
           } else {
             playersSet.get(textFieldSet.indexOf(e.getSource()))
                       .setName(name);
@@ -371,7 +380,6 @@ public class NamesInputFrame extends JFrame {
 
     textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setEditable(false);
-    textArea.setVisible(true);
 
     rightPanel.add(textArea, "push, grow, span");
 
@@ -384,7 +392,6 @@ public class NamesInputFrame extends JFrame {
   private void addAnchorCheckBox() {
     JCheckBox anchorCheckBox = new JCheckBox("Anclar jugadores", false);
 
-    anchorCheckBox.setVisible(true);
     anchorCheckBox.addActionListener(e -> Main.setAnchorages(!Main.thereAreAnchorages()));
 
     rightPanel.add(anchorCheckBox, "center");

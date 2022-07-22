@@ -274,7 +274,7 @@ public class AnchoragesFrame extends JFrame {
 
     if (!validChecksAmount(playersToAnchorAmount)) {
       showErrMsg("No puede haber más de " + maxPlayersPerAnchorage + " ni menos de 2 jugadores en "
-                 + " un mismo anclaje");
+                 + "un mismo anclaje");
       return;
     }
 
@@ -372,7 +372,7 @@ public class AnchoragesFrame extends JFrame {
    * y los jugadores anclados a los mismos.
    */
   private void updateTextArea() {
-    textArea.setText("");
+    textArea.setText(null);
 
     var wrapperIndex = new Object() {
       private int index;

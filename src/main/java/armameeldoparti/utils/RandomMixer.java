@@ -241,27 +241,20 @@ public class RandomMixer implements PlayersMixer {
    * @return Si se pueden agregar al equipo los jugadores anclados especificados.
    */
   private boolean validateAnchorage(Team team, List<Player> anchoredPlayers) {
-    if (team.getPlayersCount() + anchoredPlayers.size() > Main.PLAYERS_PER_TEAM) {
-      return false;
-    }
-
-    if (anchoredPlayers.stream()
-                       .anyMatch(p -> p.getTeam() != 0 || team.isPositionFull(p.getPosition()))) {
-      return false;
-    }
-
-    for (Player player : anchoredPlayers) {
-      if (team.getPlayers()
-              .get(player.getPosition())
-              .size()
-          + anchoredPlayers.stream()
-                           .filter(p -> p.getPosition() == player.getPosition())
-                           .count() > Main.getPlayersAmountMap()
-                                          .get(player.getPosition())) {
-        return false;
-      }
-    }
-
-    return true;
+    return team.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM
+           && anchoredPlayers.stream()
+                             .noneMatch(p -> p.getTeam() != 0
+                                             || team.isPositionFull(p.getPosition())
+                                             || team.getPlayers()
+                                                    .get(p.getPosition())
+                                                    .size()
+                                                + anchoredPlayers.stream()
+                                                                 .filter(ap ->
+                                                                   ap.getPosition()
+                                                                   == p.getPosition()
+                                                                 )
+                                                                 .count()
+                                                                 > Main.getPlayersAmountMap()
+                                                                       .get(p.getPosition()));
   }
 }
