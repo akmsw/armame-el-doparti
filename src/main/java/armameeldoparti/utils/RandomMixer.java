@@ -113,8 +113,8 @@ public class RandomMixer implements PlayersMixer {
    * posición seleccionada, y se chequea si está disponible (equipo = 0) y si tiene anclajes
    * (anclaje != 0).
    *
-   * <p>Si el jugador está disponible y está anclado con otros jugadores, se toman todos
-   * los jugadores de todas las posiciones con su mismo número de anclaje y se valida si se
+   * <p>Si el jugador está disponible y está anclado con otros jugadores, se toman los
+   * jugadores de todas las posiciones con su mismo número de anclaje y se valida si se
    * pueden agregar al equipo sin sobrepasar la cantidad de jugadores permitida por cada
    * posición. En caso de que sí se pueda, se los agrega. Si no, se los ignora y se
    * continúa iterando.
@@ -228,12 +228,12 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Valida si todos los jugadores anclados pueden ser agregados al equipo.
    *
-   * <p>Se recorren los conjuntos de jugadores con las posiciones de todos los anclados, y
-   * se evalúa si al agregarlos no se supera el número de jugadores permitidos por posición
-   * por equipo.
+   * <p>Se evalúa si algún jugador ya tiene un equipo asignado o si la posición de alguno de
+   * los jugadores del anclaje en el equipo destino ya está completa.
    *
-   * <p>Esto se hace con el fin de evitar que en un equipo queden más de la mitad de jugadores
-   * de una posición.
+   * <p>Finalmente, se evalúa si al agregarlos no se supera el número de jugadores permitidos
+   * por posición por equipo. Esto se hace con el fin de evitar que en un mismo equipo queden
+   * más de la mitad de jugadores registrados de una misma posición.
    *
    * @param team            Equipo donde se desea registrar los jugadores anclados.
    * @param anchoredPlayers Lista de jugadores con el mismo anclaje.
@@ -251,8 +251,7 @@ public class RandomMixer implements PlayersMixer {
                                                 + anchoredPlayers.stream()
                                                                  .filter(ap ->
                                                                    ap.getPosition()
-                                                                   == p.getPosition()
-                                                                 )
+                                                                   == p.getPosition())
                                                                  .count()
                                                                  > Main.getPlayersAmountMap()
                                                                        .get(p.getPosition()));
