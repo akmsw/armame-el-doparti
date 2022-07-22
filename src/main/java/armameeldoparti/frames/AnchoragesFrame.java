@@ -265,26 +265,26 @@ public class AnchoragesFrame extends JFrame {
    * seleccionadas.
    */
   private void newAnchorage() {
-    int anchored = (int) cbSets.stream()
-                               .flatMap(List::stream)
-                               .filter(JCheckBox::isSelected)
-                               .count();
+    int playersToAnchorAmount = (int) cbSets.stream()
+                                            .flatMap(List::stream)
+                                            .filter(JCheckBox::isSelected)
+                                            .count();
 
-    if (!validChecksAmount(anchored)) {
-      showErrMsg("No puede haber más de " + maxPlayersPerAnchorage
-                 + " ni menos de 2 jugadores en un mismo anclaje");
+    if (!validChecksAmount(playersToAnchorAmount)) {
+      showErrMsg("No puede haber más de " + maxPlayersPerAnchorage + " ni menos de 2 jugadores en "
+                 + " un mismo anclaje");
       return;
     }
 
-    if (!validAnchorage()) {
+    if (!validCheckedPlayersPerPosition()) {
       showErrMsg("No puede haber más de la mitad de jugadores de una misma posición "
-                  + "en un mismo anclaje");
+                 + "en un mismo anclaje");
       return;
     }
 
-    if (!validAnchorageAmount(anchored)) {
+    if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
       showErrMsg("No puede haber más de " + 2 * maxPlayersPerAnchorage
-                  + " jugadores anclados en total");
+                 + " jugadores anclados en total");
       return;
     }
 
@@ -451,7 +451,7 @@ public class AnchoragesFrame extends JFrame {
    *
    * @return Si el anclaje no contiene más de la mitad de jugadores de algún conjunto.
    */
-  private boolean validAnchorage() {
+  private boolean validCheckedPlayersPerPosition() {
     return cbSets.stream()
                  .noneMatch(cbs -> cbs.stream()
                                       .filter(JCheckBox::isSelected)
@@ -461,23 +461,23 @@ public class AnchoragesFrame extends JFrame {
   /**
    * Revisa si la cantidad de jugadores anclados es al menos 2 y no más de maxPlayersPerAnchorage.
    *
-   * @param anchored Cantidad de jugadores que se intenta anclar.
+   * @param playersToAnchorAmount Cantidad de jugadores que se intenta anclar.
    *
    * @return Si la cantidad de jugadores anclados es al menos 2 y no más de maxPlayersPerAnchorage.
    */
-  private boolean validChecksAmount(int anchored) {
-    return anchored <= maxPlayersPerAnchorage && anchored >= 2;
+  private boolean validChecksAmount(int playersToAnchorAmount) {
+    return playersToAnchorAmount <= maxPlayersPerAnchorage && playersToAnchorAmount >= 2;
   }
 
   /**
    * Revisa si la cantidad de jugadores anclados en total no supera el máximo permitido.
    *
-   * @param playersToAnchor Cantidad de jugadores que se intenta anclar.
+   * @param playersToAnchorAmount Cantidad de jugadores que se intenta anclar.
    *
    * @return Si la cantidad de jugadores anclados en total no supera el máximo permitido.
    */
-  private boolean validAnchorageAmount(int playersToAnchor) {
-    return playersAnchored + playersToAnchor <= 2 * maxPlayersPerAnchorage;
+  private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
+    return playersAnchored + playersToAnchorAmount <= 2 * maxPlayersPerAnchorage;
   }
 
   // ---------------------------------------- Setters -------------------------------------------
