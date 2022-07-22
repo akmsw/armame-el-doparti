@@ -1,4 +1,4 @@
-name: Java CI with Maven for armame-el-doparti
+name: build
 
 # La acción se va a correr ante un 'push' o 'pull request' en la rama 'develop-v3.0'.
 on:
