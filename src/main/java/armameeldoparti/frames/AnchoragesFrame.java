@@ -125,8 +125,9 @@ public class AnchoragesFrame extends JFrame {
         .entrySet()
         .forEach(ps -> {
           fillCheckboxesSet(ps.getValue(), cbSets.get(wrapperIndex.index));
-          addCheckboxesSet(cbSets.get(wrapperIndex.index), Main.getPositionsMap()
-                                                               .get(Position.values()[wrapperIndex.index]));
+          addCheckboxesSet(cbSets.get(wrapperIndex.index),
+                           Main.getPositionsMap()
+                               .get(Position.values()[wrapperIndex.index]));
           wrapperIndex.index++;
         });
 
