@@ -10,6 +10,7 @@ import armameeldoparti.utils.Team;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -176,7 +177,8 @@ public class ResultsFrame extends JFrame {
 
       for (int j = 0; j < table.getColumnCount(); j++) {
         Component component = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
-        rowHeight = Math.max(rowHeight, component.getPreferredSize().height);
+        rowHeight = Math.max(rowHeight, component.getPreferredSize()
+                                                 .height);
       }
 
       table.setRowHeight(i, rowHeight);
@@ -365,20 +367,25 @@ public class ResultsFrame extends JFrame {
    * cambiarse esta manera de llenarla, ya que no se respetará el nuevo orden establecido.
    */
   private void fillTable() {
-    int column = 1;
+    var wrapperColumn = new Object() {
+      int column = 1;
+    };
 
-    for (Team team : teams) {
+    var wrapperRow = new Object() {
       int row = 1;
+    };
 
-      for (Position position : Position.values()) {
-        for (Player player : team.getPlayers()
-                                 .get(position)) {
-          table.setValueAt(player.getName(), row++, column);
-        }
-      }
-
-      column++;
-    }
+    teams.forEach(team -> {
+      Arrays.stream(Position.values())
+            .forEach(position ->
+              team.getPlayers()
+                  .get(position)
+                  .forEach(player -> table.setValueAt(player.getName(),
+                                                      wrapperRow.row++,
+                                                      wrapperColumn.column)));
+      wrapperColumn.column++;
+      wrapperRow.row = 1;
+    });
 
     if (Main.getDistribution() == Main.BY_SCORES_MIX) {
       table.setValueAt(teams.get(0)

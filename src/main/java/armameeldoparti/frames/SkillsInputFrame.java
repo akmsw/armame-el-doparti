@@ -141,10 +141,9 @@ public class SkillsInputFrame extends JFrame {
                         j % 2 != 0 ? "wrap" : null);
       }
 
-      for (JSpinner js : spinnersMap.values()) {
-        ((DefaultEditor) js.getEditor()).getTextField()
-                                        .setEditable(false);
-      }
+      spinnersMap.values()
+                 .forEach(s -> ((DefaultEditor) s.getEditor()).getTextField()
+                                                              .setEditable(false));
     }
   }
 }

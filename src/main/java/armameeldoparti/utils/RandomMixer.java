@@ -167,7 +167,7 @@ public class RandomMixer implements PlayersMixer {
                             .add(player);
           indexesSet.add(index);
           /*
-           * TODO: acá se debería actualizar teamFull y hacer un continue,
+           * Acá se debería actualizar teamFull y hacer un continue,
            * pero se entra en conflicto con S135.
            */
         }

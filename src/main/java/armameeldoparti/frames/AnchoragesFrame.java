@@ -7,7 +7,6 @@ import armameeldoparti.utils.Position;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -56,7 +55,7 @@ public class AnchoragesFrame extends JFrame {
   private JButton finishButton;
   private JButton newAnchorageButton;
   private JButton clearAnchoragesButton;
-  private JButton deleteSpecificAnchorageButton;
+  private JButton deleteAnchorageButton;
   private JButton deleteLastAnchorageButton;
 
   private JFrame previousFrame;
@@ -118,16 +117,18 @@ public class AnchoragesFrame extends JFrame {
                 }
               });
 
-    int index = 0;
+    var wrapperIndex = new Object() {
+      int index = 0;
+    };
 
-    for (Map.Entry<Position, List<Player>> ps : Main.getPlayersSets()
-                                                    .entrySet()) {
-      fillCheckboxesSet(ps.getValue(), cbSets.get(index));
-      addCheckboxesSet(cbSets.get(index), Main.getPositionsMap()
-                                              .get(Position.values()[index]));
-
-      index++;
-    }
+    Main.getPlayersSets()
+        .entrySet()
+        .forEach(ps -> {
+          fillCheckboxesSet(ps.getValue(), cbSets.get(wrapperIndex.index));
+          addCheckboxesSet(cbSets.get(wrapperIndex.index), Main.getPositionsMap()
+                                                               .get(Position.values()[wrapperIndex.index]));
+          wrapperIndex.index++;
+        });
 
     textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setEditable(false);
@@ -156,7 +157,7 @@ public class AnchoragesFrame extends JFrame {
     finishButton = new JButton("Finalizar");
 
     newAnchorageButton = new JButton("Anclar");
-    deleteSpecificAnchorageButton = new JButton("Borrar un anclaje");
+    deleteAnchorageButton = new JButton("Borrar un anclaje");
     deleteLastAnchorageButton = new JButton("Borrar último anclaje");
     clearAnchoragesButton = new JButton("Limpiar anclajes");
 
@@ -174,7 +175,9 @@ public class AnchoragesFrame extends JFrame {
 
     finishButton.addActionListener(e -> finish());
     newAnchorageButton.addActionListener(e -> newAnchorage());
-    deleteSpecificAnchorageButton.addActionListener(e -> {
+    deleteLastAnchorageButton.addActionListener(e -> deleteAnchorage(anchorageNum));
+    clearAnchoragesButton.addActionListener(e -> clearAnchorages());
+    deleteAnchorageButton.addActionListener(e -> {
       String[] optionsDelete = new String[anchorageNum];
 
       for (int i = 0; i < anchorageNum; i++) {
@@ -186,21 +189,19 @@ public class AnchoragesFrame extends JFrame {
                                                            "Antes de continuar...", 2,
                                                            JOptionPane.QUESTION_MESSAGE,
                                                            MainFrame.SCALED_ICON, optionsDelete,
-                                                           optionsDelete[0]) + 1;
+                                                           optionsDelete[0]);
 
       if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
-        deleteAnchorage(anchorageToDelete);
+        deleteAnchorage(anchorageToDelete + 1);
       }
     });
-    deleteLastAnchorageButton.addActionListener(e -> deleteAnchorage(anchorageNum));
-    clearAnchoragesButton.addActionListener(e -> clearAnchorages());
 
     leftPanel.add(finishButton, GROWX_SPAN);
     leftPanel.add(backButton, GROWX_SPAN);
 
     rightPanel.add(scrollPane, "span2, push, grow");
     rightPanel.add(newAnchorageButton, "grow");
-    rightPanel.add(deleteSpecificAnchorageButton, "grow");
+    rightPanel.add(deleteAnchorageButton, "grow");
     rightPanel.add(deleteLastAnchorageButton, "grow");
     rightPanel.add(clearAnchoragesButton, "grow");
   }
@@ -357,7 +358,7 @@ public class AnchoragesFrame extends JFrame {
   /**
    * Borra todos los anclajes que se hayan generado.
    *
-   * @see #deleteLast()
+   * @see armameeldoparti.frames.AnchoragesFrame#deleteAnchorage(int)
    */
   private void clearAnchorages() {
     do {
@@ -409,15 +410,15 @@ public class AnchoragesFrame extends JFrame {
   private void toggleButtons() {
     if (anchorageNum > 0 && anchorageNum < 2) {
       finishButton.setEnabled(true);
-      deleteSpecificAnchorageButton.setEnabled(false);
+      deleteAnchorageButton.setEnabled(false);
       deleteLastAnchorageButton.setEnabled(true);
       clearAnchoragesButton.setEnabled(true);
     } else if (anchorageNum >= 2) {
-      deleteSpecificAnchorageButton.setEnabled(true);
+      deleteAnchorageButton.setEnabled(true);
       deleteLastAnchorageButton.setEnabled(true);
     } else {
       finishButton.setEnabled(false);
-      deleteSpecificAnchorageButton.setEnabled(false);
+      deleteAnchorageButton.setEnabled(false);
       deleteLastAnchorageButton.setEnabled(false);
       clearAnchoragesButton.setEnabled(false);
     }
