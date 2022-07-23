@@ -56,8 +56,7 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    chosenTeam1 = randomGenerator.nextInt(teams.size());
-    chosenTeam2 = 1 - chosenTeam1;
+    updateChosenTeams(teams.size());
 
     List<Integer> alreadySetted = new ArrayList<>();
 
@@ -66,9 +65,7 @@ public class RandomMixer implements PlayersMixer {
                                     .get(position);
 
       for (int i = 0; i < playersSet.size() / 2; i++) {
-        do {
-          index = randomGenerator.nextInt(playersSet.size());
-        } while (alreadySetted.contains(index));
+        updateIndex(playersSet.size(), alreadySetted);
 
         alreadySetted.add(index);
 
@@ -132,8 +129,7 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    chosenTeam1 = randomGenerator.nextInt(teams.size());
-    chosenTeam2 = 1 - chosenTeam1;
+    updateChosenTeams(teams.size());
 
     Team currentWorkingTeam = teams.get(chosenTeam1);
 
@@ -223,6 +219,16 @@ public class RandomMixer implements PlayersMixer {
     do {
       index = randomGenerator.nextInt(range);
     } while (indexesSet.contains(index));
+  }
+
+  /**
+   * Actualiza de manera aleatoria el valor de los equipos con los que se trabajará.
+   *
+   * @param range Límite superior (exclusive) para el generador aleatorio.
+   */
+  private void updateChosenTeams(int range) {
+    chosenTeam1 = randomGenerator.nextInt(range);
+    chosenTeam2 = 1 - chosenTeam1;
   }
 
   /**

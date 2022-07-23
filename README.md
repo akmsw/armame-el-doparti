@@ -11,6 +11,7 @@ Release date: TBD
 [![build](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen?logo=sonarlint)](https://www.sonarlint.org/)
+[![jUnit5Badge](https://img.shields.io/badge/junit5-passing-brightgreen?logo=junit5)](https://junit.org/junit5/)
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross--platform-blueviolet?logo=windows-terminal)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/gpl-3.0-blue?logo=gnu)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
