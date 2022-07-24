@@ -168,6 +168,7 @@ public class AnchoragesFrame extends JFrame {
 
     backButton.addActionListener(e -> {
       clearAnchorages();
+      updateTextArea();
 
       previousFrame.setVisible(true);
 
@@ -175,9 +176,18 @@ public class AnchoragesFrame extends JFrame {
     });
 
     finishButton.addActionListener(e -> finish());
-    newAnchorageButton.addActionListener(e -> newAnchorage());
-    deleteLastAnchorageButton.addActionListener(e -> deleteAnchorage(anchorageNum));
-    clearAnchoragesButton.addActionListener(e -> clearAnchorages());
+    newAnchorageButton.addActionListener(e -> {
+      newAnchorage();
+      updateTextArea();
+    });
+    deleteLastAnchorageButton.addActionListener(e -> {
+      deleteAnchorage(anchorageNum);
+      updateTextArea();
+    });
+    clearAnchoragesButton.addActionListener(e -> {
+      clearAnchorages();
+      updateTextArea();
+    });
     deleteAnchorageButton.addActionListener(e -> {
       String[] optionsDelete = new String[anchorageNum];
 
@@ -194,6 +204,7 @@ public class AnchoragesFrame extends JFrame {
 
       if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
         deleteAnchorage(anchorageToDelete + 1);
+        updateTextArea();
       }
     });
 
@@ -296,12 +307,15 @@ public class AnchoragesFrame extends JFrame {
       setAnchors(cbSets.get(i), Main.getPlayersSets()
                                     .get(Position.values()[i]));
     }
-
-    updateTextArea();
   }
 
   /**
    * Cambia el número de anclaje de los jugadores deseados.
+   *
+   * <p>Si el nuevo anclaje a aplicar es 0 (se quiere borrar un anclaje),
+   * entonces las casillas de los jugadores del anclaje objetivo se vuelven
+   * a poner visibles y se decrementa el número de jugadores anclados en la
+   * cantidad que corresponda.
    *
    * @param target      Anclaje a reemplazar.
    * @param replacement Nuevo anclaje a aplicar.
@@ -352,8 +366,6 @@ public class AnchoragesFrame extends JFrame {
     }
 
     anchorageNum--;
-
-    updateTextArea();
   }
 
   /**
