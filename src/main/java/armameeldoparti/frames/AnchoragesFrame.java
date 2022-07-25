@@ -332,7 +332,7 @@ public class AnchoragesFrame extends JFrame {
                  .filter(cbs -> cbs.stream()
                                    .anyMatch(JCheckBox::isSelected))
                  .forEach(cbs -> setAnchorages(cbs, Main.getPlayersSets()
-                                                        .get(getPositionFromCBSet(cbs))));
+                                                        .get(getCorrespondingPosition(cbs))));
   }
 
   /**
@@ -344,7 +344,7 @@ public class AnchoragesFrame extends JFrame {
    *
    * @return Posición asociada al conjunto de casillas.
    */
-  private Position getPositionFromCBSet(List<JCheckBox> cbSet) {
+  private Position getCorrespondingPosition(List<JCheckBox> cbSet) {
     return (Position) checkBoxesMap.entrySet()
                                    .stream()
                                    .filter(e -> e.getValue()
@@ -359,7 +359,6 @@ public class AnchoragesFrame extends JFrame {
    * @return Si -.
    */
   private boolean validAnchoragesCombination() {
-    // TODO
     return true;
   }
 
