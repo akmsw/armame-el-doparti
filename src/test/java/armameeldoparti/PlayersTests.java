@@ -20,13 +20,13 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
  *
  * @since 23/07/2022
  */
-class PlayersTest implements ArgumentsProvider {
+class PlayersTests implements ArgumentsProvider {
 
   /**
    * Pruebas unitarias simples para los métodos de un jugador.
    */
   @ParameterizedTest
-  @ArgumentsSource(PlayersTest.class)
+  @ArgumentsSource(PlayersTests.class)
   void creation(String name, Position position) {
     Player player = new Player(name, position);
 
