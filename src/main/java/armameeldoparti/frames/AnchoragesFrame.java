@@ -5,8 +5,9 @@ import armameeldoparti.utils.Main;
 import armameeldoparti.utils.Player;
 import armameeldoparti.utils.Position;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -36,6 +37,9 @@ public class AnchoragesFrame extends JFrame {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
+  private static final String GROW = "grow";
+  private static final String GROWX_SPAN = "growx, span";
+
   private static final String FRAME_TITLE = "Anclaje de jugadores";
 
   // ---------------------------------------- Campos privados -----------------------------------
@@ -49,7 +53,6 @@ public class AnchoragesFrame extends JFrame {
   private List<JCheckBox> mfCheckboxes;
   private List<JCheckBox> fwCheckboxes;
   private List<JCheckBox> gkCheckboxes;
-  private List<List<JCheckBox>> cbSets;
 
   private JButton finishButton;
   private JButton newAnchorageButton;
@@ -65,6 +68,8 @@ public class AnchoragesFrame extends JFrame {
   private JScrollPane scrollPane;
 
   private JTextArea textArea;
+
+  private Map<Position, List<JCheckBox>> checkBoxesMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -85,7 +90,13 @@ public class AnchoragesFrame extends JFrame {
     fwCheckboxes = new ArrayList<>();
     gkCheckboxes = new ArrayList<>();
 
-    cbSets = Arrays.asList(cdCheckboxes, ldCheckboxes, mfCheckboxes, fwCheckboxes, gkCheckboxes);
+    checkBoxesMap = new EnumMap<>(Position.class);
+
+    checkBoxesMap.put(Position.CENTRAL_DEFENDER, cdCheckboxes);
+    checkBoxesMap.put(Position.LATERAL_DEFENDER, ldCheckboxes);
+    checkBoxesMap.put(Position.MIDFIELDER, mfCheckboxes);
+    checkBoxesMap.put(Position.FORWARD, fwCheckboxes);
+    checkBoxesMap.put(Position.GOALKEEPER, gkCheckboxes);
 
     anchoragesAmount = 0;
     playersAnchored = 0;
@@ -116,30 +127,27 @@ public class AnchoragesFrame extends JFrame {
                 }
               });
 
-    var wrapperIndex = new Object() {
-      int index = 0;
-    };
-
     Main.getPlayersSets()
         .entrySet()
         .forEach(ps -> {
-          fillCheckboxesSet(ps.getValue(), cbSets.get(wrapperIndex.index));
-          addCheckboxesSet(cbSets.get(wrapperIndex.index),
-                           Main.getPositionsMap()
-                               .get(Position.values()[wrapperIndex.index]));
-          wrapperIndex.index++;
+          final Position currentPosition = ps.getValue()
+                                             .get(0)
+                                             .getPosition();
+
+          fillCheckboxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
+          addCheckboxesSet(checkBoxesMap.get(currentPosition), Main.getPositionsMap()
+                                                                   .get(currentPosition));
         });
 
     textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setEditable(false);
-
-    addButtons();
 
     JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
 
     masterPanel.add(leftPanel, "west");
     masterPanel.add(rightPanel, "east");
 
+    addButtons();
     updateTextArea();
     toggleButtons();
     setTitle(FRAME_TITLE);
@@ -223,14 +231,14 @@ public class AnchoragesFrame extends JFrame {
       }
     });
 
-    leftPanel.add(finishButton, "growx, span");
-    leftPanel.add(backButton, "growx, span");
+    leftPanel.add(finishButton, GROWX_SPAN);
+    leftPanel.add(backButton, GROWX_SPAN);
 
     rightPanel.add(scrollPane, "span2, push, grow");
-    rightPanel.add(newAnchorageButton, "grow");
-    rightPanel.add(deleteAnchorageButton, "grow");
-    rightPanel.add(deleteLastAnchorageButton, "grow");
-    rightPanel.add(clearAnchoragesButton, "grow");
+    rightPanel.add(newAnchorageButton, GROW);
+    rightPanel.add(deleteAnchorageButton, GROW);
+    rightPanel.add(deleteLastAnchorageButton, GROW);
+    rightPanel.add(clearAnchoragesButton, GROW);
   }
 
   /**
@@ -255,7 +263,7 @@ public class AnchoragesFrame extends JFrame {
 
     label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-    leftPanel.add(label, "growx, span");
+    leftPanel.add(label, GROWX_SPAN);
 
     cbSet.forEach(cb -> leftPanel.add(cb, "align left, pushx"));
   }
@@ -268,11 +276,11 @@ public class AnchoragesFrame extends JFrame {
    * fueron anclados, se deseleccionan.
    */
   private void finish() {
-    cbSets.forEach(cbs -> cbs.forEach(cb -> {
-      if (cb.isSelected() && cb.isVisible()) {
-        cb.setSelected(false);
-      }
-    }));
+    checkBoxesMap.values()
+                 .stream()
+                 .flatMap(List::stream)
+                 .filter(cb -> cb.isSelected() && cb.isVisible())
+                 .forEach(cb -> cb.setSelected(false));
 
     if (Main.getDistribution() == 1) {
       // Distribución por puntuaciones
@@ -293,10 +301,11 @@ public class AnchoragesFrame extends JFrame {
    * seleccionadas, corroborando las condiciones necesarias.
    */
   private void newAnchorage() {
-    int playersToAnchorAmount = (int) cbSets.stream()
-                                            .flatMap(List::stream)
-                                            .filter(JCheckBox::isSelected)
-                                            .count();
+    int playersToAnchorAmount = (int) checkBoxesMap.values()
+                                                   .stream()
+                                                   .flatMap(List::stream)
+                                                   .filter(JCheckBox::isSelected)
+                                                   .count();
 
     if (!validChecksAmount(playersToAnchorAmount)) {
       showErrMsg("No puede haber más de " + maxPlayersPerAnchorage
@@ -318,11 +327,30 @@ public class AnchoragesFrame extends JFrame {
 
     anchoragesAmount++;
 
-    cbSets.stream()
-          .filter(cbs -> cbs.stream()
-                            .anyMatch(JCheckBox::isSelected))
-          .forEach(cb -> setAnchorages(cb, Main.getPlayersSets()
-                                               .get(Position.values()[cbSets.indexOf(cb)])));
+    checkBoxesMap.values()
+                 .stream()
+                 .filter(cbs -> cbs.stream()
+                                   .anyMatch(JCheckBox::isSelected))
+                 .forEach(cbs -> setAnchorages(cbs, Main.getPlayersSets()
+                                                        .get(getPositionFromCBSet(cbs))));
+  }
+
+  /**
+   * Obtiene la posición correspondiente al conjunto de casillas
+   * recibido por parámetro.
+   *
+   * @param cbSet Conjunto de casillas de las cuales se quiere obtener
+   *              su posición asociada.
+   *
+   * @return Posición asociada al conjunto de casillas.
+   */
+  private Position getPositionFromCBSet(List<JCheckBox> cbSet) {
+    return (Position) checkBoxesMap.entrySet()
+                                   .stream()
+                                   .filter(e -> e.getValue()
+                                                 .equals(cbSet))
+                                   .map(Map.Entry::getKey)
+                                   .toArray()[0];
   }
 
   /**
@@ -356,14 +384,15 @@ public class AnchoragesFrame extends JFrame {
           p.setAnchor(replacement);
 
           if (replacement == 0) {
-            cbSets.stream()
-                  .flatMap(List::stream)
-                  .filter(cb -> cb.getText()
-                                  .equals(p.getName()))
-                                  .forEach(cb -> {
-                                    cb.setVisible(true);
-                                    playersAnchored--;
-                                  });
+            checkBoxesMap.values()
+                         .stream()
+                         .flatMap(List::stream)
+                         .filter(cb -> cb.getText()
+                                         .equals(p.getName()))
+                         .forEach(cb -> {
+                           cb.setVisible(true);
+                           playersAnchored--;
+                         });
           }
         });
   }
@@ -379,13 +408,13 @@ public class AnchoragesFrame extends JFrame {
    * @param anchorageToDelete Número de anclaje a borrar.
    */
   private void deleteAnchorage(int anchorageToDelete) {
-    for (int j = 0; j < cbSets.size(); j++) {
+    for (int j = 0; j < checkBoxesMap.size(); j++) {
       changeAnchorage(anchorageToDelete, 0);
     }
 
     if (anchorageToDelete != anchoragesAmount) {
       for (int k = anchorageToDelete + 1; k <= anchoragesAmount; k++) {
-        for (int j = 0; j < cbSets.size(); j++) {
+        for (int j = 0; j < checkBoxesMap.size(); j++) {
           changeAnchorage(k, k - 1);
         }
       }
@@ -467,15 +496,18 @@ public class AnchoragesFrame extends JFrame {
     if (2 * maxPlayersPerAnchorage - playersAnchored < 2) {
       newAnchorageButton.setEnabled(false);
 
-      cbSets.forEach(cbs -> cbs.forEach(cb -> cb.setEnabled(!cb.isEnabled())));
+      checkBoxesMap.values()
+                   .stream()
+                   .flatMap(List::stream)
+                   .forEach(cb -> cb.setEnabled(!cb.isEnabled()));
     } else {
       newAnchorageButton.setEnabled(true);
 
-      cbSets.forEach(cbs -> cbs.forEach(cb -> {
-        if (!cb.isEnabled() && !cb.isSelected()) {
-          cb.setEnabled(true);
-        }
-      }));
+      checkBoxesMap.values()
+                   .stream()
+                   .flatMap(List::stream)
+                   .filter(cb -> !cb.isEnabled() && !cb.isSelected())
+                   .forEach(cb -> cb.setEnabled(true));
     }
   }
 
@@ -494,10 +526,11 @@ public class AnchoragesFrame extends JFrame {
    * @return Si el anclaje no contiene más de la mitad de jugadores de algún conjunto.
    */
   private boolean validCheckedPlayersPerPosition() {
-    return cbSets.stream()
-                 .noneMatch(cbs -> cbs.stream()
-                                      .filter(JCheckBox::isSelected)
-                                      .count() > cbs.size() / 2);
+    return checkBoxesMap.values()
+                        .stream()
+                        .noneMatch(cbs -> cbs.stream()
+                                             .filter(JCheckBox::isSelected)
+                                             .count() > cbs.size() / 2);
   }
 
   /**
