@@ -186,13 +186,38 @@ public class AnchoragesFrame extends JFrame {
 
     finishButton.addActionListener(e -> {
       if (!validAnchoragesCombination()) {
-        showErrMsg("Error msg");
-      } else {
-        finish();
+        showErrorMessage("Error message");
+        return;
       }
+
+      finish();
     });
 
     newAnchorageButton.addActionListener(e -> {
+      int playersToAnchorAmount = (int) checkBoxesMap.values()
+                                                     .stream()
+                                                     .flatMap(List::stream)
+                                                     .filter(JCheckBox::isSelected)
+                                                     .count();
+
+      if (!validChecksAmount(playersToAnchorAmount)) {
+        showErrorMessage("No puede haber más de " + maxPlayersPerAnchorage
+                         + " ni menos de 2 jugadores en un mismo anclaje");
+        return;
+      }
+
+      if (!validCheckedPlayersPerPosition()) {
+        showErrorMessage("No puede haber más de la mitad de jugadores de una misma posición "
+                         + "en un mismo anclaje");
+        return;
+      }
+
+      if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
+        showErrorMessage("No puede haber más de " + 2 * maxPlayersPerAnchorage
+                         + " jugadores anclados en total");
+        return;
+      }
+
       newAnchorage();
       updateTextArea();
       toggleButtons();
@@ -297,34 +322,10 @@ public class AnchoragesFrame extends JFrame {
   }
 
   /**
-   * Crea un nuevo anclaje en base a los jugadores correspondientes a las casillas
-   * seleccionadas, corroborando las condiciones necesarias.
+   * Crea un nuevo anclaje en base a los jugadores
+   * correspondientes a las casillas seleccionadas.
    */
   private void newAnchorage() {
-    int playersToAnchorAmount = (int) checkBoxesMap.values()
-                                                   .stream()
-                                                   .flatMap(List::stream)
-                                                   .filter(JCheckBox::isSelected)
-                                                   .count();
-
-    if (!validChecksAmount(playersToAnchorAmount)) {
-      showErrMsg("No puede haber más de " + maxPlayersPerAnchorage
-                 + " ni menos de 2 jugadores en un mismo anclaje");
-      return;
-    }
-
-    if (!validCheckedPlayersPerPosition()) {
-      showErrMsg("No puede haber más de la mitad de jugadores de una misma posición "
-                 + "en un mismo anclaje");
-      return;
-    }
-
-    if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
-      showErrMsg("No puede haber más de " + 2 * maxPlayersPerAnchorage
-                 + " jugadores anclados en total");
-      return;
-    }
-
     anchoragesAmount++;
 
     checkBoxesMap.values()
@@ -515,7 +516,7 @@ public class AnchoragesFrame extends JFrame {
    *
    * @param errMsg Mensaje de error a mostrar en la ventana.
    */
-  private void showErrMsg(String errMsg) {
+  private void showErrorMessage(String errMsg) {
     JOptionPane.showMessageDialog(null, errMsg, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
   }
 
