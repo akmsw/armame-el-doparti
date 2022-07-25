@@ -322,8 +322,9 @@ public class AnchoragesFrame extends JFrame {
   }
 
   /**
-   * Crea un nuevo anclaje en base a los jugadores
-   * correspondientes a las casillas seleccionadas.
+   * Crea un nuevo anclaje en base a los jugadores correspondientes
+   * a las casillas seleccionadas y actualiza el valor de jugadores
+   * anclados en total.
    */
   private void newAnchorage() {
     anchoragesAmount++;
@@ -332,8 +333,14 @@ public class AnchoragesFrame extends JFrame {
                  .stream()
                  .filter(cbs -> cbs.stream()
                                    .anyMatch(JCheckBox::isSelected))
-                 .forEach(cbs -> setAnchorages(cbs, Main.getPlayersSets()
-                                                        .get(getCorrespondingPosition(cbs))));
+                 .forEach(this::setAnchorages);
+
+    playersAnchored = (int) Main.getPlayersSets()
+                                .values()
+                                .stream()
+                                .flatMap(List::stream)
+                                .filter(p -> p.getAnchor() != 0)
+                                .count();
   }
 
   /**
@@ -495,14 +502,12 @@ public class AnchoragesFrame extends JFrame {
 
     if (2 * maxPlayersPerAnchorage - playersAnchored < 2) {
       newAnchorageButton.setEnabled(false);
-
       checkBoxesMap.values()
                    .stream()
                    .flatMap(List::stream)
                    .forEach(cb -> cb.setEnabled(!cb.isEnabled()));
     } else {
       newAnchorageButton.setEnabled(true);
-
       checkBoxesMap.values()
                    .stream()
                    .flatMap(List::stream)
@@ -562,24 +567,22 @@ public class AnchoragesFrame extends JFrame {
    * Luego, deselecciona sus casillas y las hace invisibles para
    * evitar que dos o más anclajes contengan uno o más jugadores iguales.
    *
-   * @param cbSet      Arreglo de casillas a recorrer.
-   * @param playersSet Arreglo de jugadores correspondiente al arreglo de casillas.
+   * @param cbSet Arreglo de casillas a recorrer.
    */
-  private void setAnchorages(List<JCheckBox> cbSet, List<Player> playersSet) {
+  private void setAnchorages(List<JCheckBox> cbSet) {
+    Main.getPlayersSets()
+        .get(getCorrespondingPosition(cbSet))
+        .stream()
+        .filter(p -> cbSet.stream()
+                          .filter(JCheckBox::isSelected)
+                          .anyMatch(cb -> cb.getText()
+                                            .equals(p.getName())))
+        .forEach(p -> p.setAnchor(anchoragesAmount));
+
     cbSet.stream()
          .filter(JCheckBox::isSelected)
          .forEach(cb -> {
-           playersSet.stream()
-                     .filter(p -> p.getName()
-                                   .equals(cb.getText()))
-                     .forEach(p -> {
-                       p.setAnchor(anchoragesAmount);
-
-                       playersAnchored++;
-
-                       cb.setVisible(false);
-                     });
-
+           cb.setVisible(false);
            cb.setSelected(false);
          });
   }
