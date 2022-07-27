@@ -459,14 +459,13 @@ public class AnchoragesController {
    * @return Posición asociada al conjunto de casillas.
    */
   private static Position getCorrespondingPosition(List<JCheckBox> cbSet) {
-    return anchoragesView.getCheckBoxesMap()
-                         .entrySet()
-                         .stream()
-                         .filter(e -> e.getValue()
-                                       .equals(cbSet))
-                         .map(Map.Entry::getKey)
-                         .toList()
-                         .get(0);
+    return (Position) anchoragesView.getCheckBoxesMap()
+                                    .entrySet()
+                                    .stream()
+                                    .filter(e -> e.getValue()
+                                                  .equals(cbSet))
+                                    .map(Map.Entry::getKey)
+                                    .toArray()[0];
   }
 
   // ---------------------------------------- Setters -------------------------------------------
