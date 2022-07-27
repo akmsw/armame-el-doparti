@@ -1,4 +1,4 @@
-package armameeldoparti.utils;
+package armameeldoparti.models;
 
 /**
  * Clase representativa de los jugadores.
@@ -43,45 +43,45 @@ public class Player {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Retrorna el puntaje asignado al jugador.
+   * Obtiene el puntaje asignado al jugador.
    *
-   * @return Puntaje asignado al jugador.
+   * @return El puntaje asignado al jugador.
    */
   public int getSkill() {
     return skill;
   }
 
   /**
-   * Retorna el número de anclaje al que corresponde el jugador.
+   * Obtiene el número de anclaje al que corresponde el jugador.
    *
-   * @return Número de anclaje correspondiente.
+   * @return El número de anclaje correspondiente.
    */
   public int getAnchor() {
     return anchor;
   }
 
   /**
-   * Retorna el número de equipo al que pertenece el jugador.
+   * Obtiene el número de equipo al que pertenece el jugador.
    *
-   * @return Equipo al que pertenece el jugador.
+   * @return El número de equipo al que pertenece el jugador.
    */
   public int getTeam() {
     return team;
   }
 
   /**
-   * Retorna el nombre del jugador.
+   * Obtiene el nombre del jugador.
    *
-   * @return Nombre del jugador.
+   * @return El nombre del jugador.
    */
   public String getName() {
     return name;
   }
 
   /**
-   * Retorna la posición del jugador.
+   * Obtiene la posición del jugador.
    *
-   * @return Posición del jugador.
+   * @return La posición del jugador.
    */
   public Position getPosition() {
     return position;

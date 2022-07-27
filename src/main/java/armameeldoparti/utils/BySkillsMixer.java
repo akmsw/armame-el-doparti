@@ -1,6 +1,9 @@
 package armameeldoparti.utils;
 
 import armameeldoparti.interfaces.PlayersMixer;
+import armameeldoparti.models.Player;
+import armameeldoparti.models.Position;
+import armameeldoparti.models.Team;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,18 +15,18 @@ import java.util.List;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 3.0.0
+ * @version 0.0.1
  *
  * @since 12/07/2022
  */
-public class BySkillMixer implements PlayersMixer {
+public class BySkillsMixer implements PlayersMixer {
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
    * Construye el objeto repartidor de jugadores.
    */
-  public BySkillMixer() {
+  public BySkillsMixer() {
       // No necesita cuerpo
   }
 

@@ -1,6 +1,9 @@
 package armameeldoparti.utils;
 
 import armameeldoparti.interfaces.PlayersMixer;
+import armameeldoparti.models.Player;
+import armameeldoparti.models.Position;
+import armameeldoparti.models.Team;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +14,7 @@ import java.util.stream.Collectors;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 3.0.0
+ * @version 0.0.1
  *
  * @since 12/07/2022
  */
@@ -164,7 +167,7 @@ public class RandomMixer implements PlayersMixer {
           indexesSet.add(index);
           /*
            * Acá se debería actualizar teamFull y hacer un continue,
-           * pero se entra en conflicto con S135.
+           * pero se entra en conflicto con java:S135.
            */
         }
 

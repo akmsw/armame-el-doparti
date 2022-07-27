@@ -1,9 +1,9 @@
-package armameeldoparti.frames;
+package armameeldoparti.views;
 
-import armameeldoparti.utils.BackButton;
+import armameeldoparti.controllers.SkillsInputController;
+import armameeldoparti.models.Player;
+import armameeldoparti.models.Position;
 import armameeldoparti.utils.Main;
-import armameeldoparti.utils.Player;
-import armameeldoparti.utils.Position;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,14 +28,9 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 06/03/2021
  */
-public class SkillsInputFrame extends JFrame {
+public class SkillsInputView extends JFrame {
 
   // ---------------------------------------- Constantes privadas -------------------------------
-
-  private static final int SCORE_INI = 1;
-  private static final int SCORE_MIN = 1;
-  private static final int SCORE_MAX = 5;
-  private static final int SCORE_STEP = 1;
 
   private static final String GROW_SPAN = "grow, span";
   private static final String FRAME_TITLE = "Ingreso de puntuaciones";
@@ -44,71 +39,65 @@ public class SkillsInputFrame extends JFrame {
 
   private JPanel masterPanel;
 
-  private ResultsFrame resultsFrame;
-
   private transient Map<Player, JSpinner> spinnersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
    * Construye una ventana de ingreso de puntuaciones.
-   *
-   * @param previousFrame Ventana fuente que crea la ventana SkillInputFrame.
    */
-  public SkillsInputFrame(JFrame previousFrame) {
-    initializeInterface(previousFrame);
+  public SkillsInputView() {
+    initializeInterface();
   }
+
+  // ---------------------------------------- Métodos públicos ----------------------------------
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  /**
+   * Obtiene el mapa que asocia cada jugador con su respectivo campo de puntuación.
+   *
+   * @return El mapa que asocia cada jugador con su respectivo campo de puntuación.
+   */
+  public Map<Player, JSpinner> getSpinnersMap() {
+    return spinnersMap;
+  }
+
+  // ---------------------------------------- Métodos privados ----------------------------------
 
   /**
    * Inicializa la interfaz gráfica de esta ventana.
-   *
-   * @param previousFrame Ventana fuente que crea la ventana SkillInputFrame.
    */
-  private void initializeInterface(JFrame previousFrame) {
+  private void initializeInterface() {
     masterPanel = new JPanel(new MigLayout());
 
     spinnersMap = new HashMap<>();
 
-    addSpinners();
-    addButtons(previousFrame);
-    add(masterPanel);
     setTitle(FRAME_TITLE);
     setResizable(false);
-    setIconImage(MainFrame.ICON.getImage());
+    setIconImage(MainMenuView.ICON.getImage());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    addSpinners();
+    addButtons();
+    add(masterPanel);
     pack();
     setLocationRelativeTo(null);
   }
 
   /**
    * Añade los botones al panel de la ventana.
-   *
-   * @param previousFrame Ventana fuente que crea la ventana SkillInputFrame.
    */
-  private void addButtons(JFrame previousFrame) {
+  private void addButtons() {
     JButton finishButton = new JButton("Finalizar");
-    JButton resetButton = new JButton("Reiniciar puntuaciones");
+    JButton resetSkillsButton = new JButton("Reiniciar puntuaciones");
+    JButton backButton = new JButton("Atrás");
 
-    finishButton.addActionListener(e -> {
-      spinnersMap.forEach((k, v) -> k.setSkill((int) v.getValue()));
-
-      resultsFrame = new ResultsFrame(this);
-
-      resultsFrame.setVisible(true);
-
-      setVisible(false);
-      setLocationRelativeTo(null);
-    });
-
-    resetButton.addActionListener(e -> spinnersMap.forEach((k, v) -> {
-      v.setValue(1);
-      k.setSkill(0);
-    }));
-
-    BackButton backButton = new BackButton(this, previousFrame, null);
+    finishButton.addActionListener(e -> SkillsInputController.finishButtonEvent());
+    resetSkillsButton.addActionListener(e -> SkillsInputController.resetSkillsButtonEvent());
+    backButton.addActionListener(e -> SkillsInputController.backButtonEvent());
 
     masterPanel.add(finishButton, GROW_SPAN);
-    masterPanel.add(resetButton, GROW_SPAN);
+    masterPanel.add(resetSkillsButton, GROW_SPAN);
     masterPanel.add(backButton, GROW_SPAN);
   }
 
@@ -130,8 +119,10 @@ public class SkillsInputFrame extends JFrame {
 
       for (int j = 0; j < currentSet.size(); j++) {
         spinnersMap.put(currentSet.get(j),
-                        new JSpinner(new SpinnerNumberModel(SCORE_INI, SCORE_MIN,
-                                                            SCORE_MAX, SCORE_STEP)));
+                        new JSpinner(new SpinnerNumberModel(SkillsInputController.SCORE_INI,
+                                                            SkillsInputController.SCORE_MIN,
+                                                            SkillsInputController.SCORE_MAX,
+                                                            SkillsInputController.SCORE_STEP)));
 
         masterPanel.add(new JLabel(currentSet.get(j)
                                              .getName()),

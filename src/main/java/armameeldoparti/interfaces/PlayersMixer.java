@@ -1,6 +1,6 @@
 package armameeldoparti.interfaces;
 
-import armameeldoparti.utils.Team;
+import armameeldoparti.models.Team;
 import java.util.List;
 
 /**
@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 3.0.0
+ * @version 0.0.1
  *
  * @since 13/03/2022
  */

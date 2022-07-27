@@ -1,11 +1,21 @@
 package armameeldoparti.utils;
 
-import armameeldoparti.frames.MainFrame;
+import armameeldoparti.controllers.MainMenuController;
+import armameeldoparti.models.Player;
+import armameeldoparti.models.Position;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.IOException;
 import java.util.EnumMap;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.FontUIResource;
 
 /**
  * Clase principal, sólo para inicialización del programa y declaración de campos útiles.
@@ -21,7 +31,7 @@ public final class Main {
   // ---------------------------------------- Constantes públicas -------------------------------
 
   public static final int RANDOM_MIX = 0;
-  public static final int BY_SCORES_MIX = 1;
+  public static final int BY_SKILLS_MIX = 1;
   public static final int PLAYERS_PER_TEAM = 7;
 
   public static final float FONT_SIZE = 18f;
@@ -63,7 +73,7 @@ public final class Main {
   // ---------------------------------------- Punto de entrada principal ------------------------
 
   /**
-   * Instancia y ejecuta todo el programa.
+   * Instancia y ejecuta el programa.
    *
    * @param args Argumentos para ejecutar el programa (no implementado).
    */
@@ -80,9 +90,9 @@ public final class Main {
     positions.put(Position.GOALKEEPER, "ARQUEROS");
 
     setAnchorages(false);
+    setGraphicalProperties();
 
-    MainFrame mainFrame = new MainFrame();
-    mainFrame.setVisible(true);
+    MainMenuController.showMainMenuView();
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
@@ -90,7 +100,7 @@ public final class Main {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Retorna la distribución elegida para los jugadores.
+   * Obtiene la distribución elegida para los jugadores.
    *
    * @return Distribución elegida.
    */
@@ -99,7 +109,7 @@ public final class Main {
   }
 
   /**
-   * Retorna si la opción de anclajes fue elegida.
+   * Indica si la opción de anclajes fue elegida.
    *
    * @return Si hay o debe haber anclajes.
    */
@@ -108,7 +118,7 @@ public final class Main {
   }
 
   /**
-   * Retorna la cantidad de jugadores en total por cada posición.
+   * Obtiene el mapa que asocia las posiciones con la cantidad de jugadores para cada una.
    *
    * @return Mapa que asocia las posiciones con la cantidad de jugadores para cada una.
    */
@@ -117,7 +127,7 @@ public final class Main {
   }
 
   /**
-   * Retorna la cantidad de jugadores por equipo por cada posición.
+   * Obtiene el mapa que asocia las posiciones con los conjuntos de jugadores.
    *
    * @return Mapa que asocia las posiciones con los conjuntos de jugadores.
    */
@@ -126,7 +136,7 @@ public final class Main {
   }
 
   /**
-   * Retorna las cadenas correspondientes a las posiciones de los jugadores.
+   * Obtiene el mapa con las posiciones y su representación en cadenas de caracteres.
    *
    * @return Mapa con las posiciones y su representación en cadenas de caracteres.
    */
@@ -152,5 +162,61 @@ public final class Main {
    */
   public static void setAnchorages(boolean a) {
     anchorages = a;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  /**
+   * Configura las propiedades de la interfaz gráfica del programa.
+   */
+  private static void setGraphicalProperties() {
+    UIManager.put("OptionPane.background", Main.LIGHT_GREEN);
+    UIManager.put("Panel.background", Main.LIGHT_GREEN);
+    UIManager.put("CheckBox.background", Main.LIGHT_GREEN);
+    UIManager.put("Separator.background", Main.LIGHT_GREEN);
+    UIManager.put("Button.background", Main.DARK_GREEN);
+    UIManager.put("Button.foreground", Color.WHITE);
+    UIManager.put("CheckBox.focus", Main.LIGHT_GREEN);
+    UIManager.put("Button.focus", Main.DARK_GREEN);
+    UIManager.put("ToggleButton.focus", Main.DARK_GREEN);
+    UIManager.put("ComboBox.focus", Color.WHITE);
+    UIManager.put("TitledBorder.border", new LineBorder(Main.DARK_GREEN));
+
+    try {
+      // Se crea y registra la fuente para poder utilizarla
+      Font programFont = Font.createFont(Font.TRUETYPE_FONT,
+                                         Main.class
+                                             .getClassLoader()
+                                             .getResourceAsStream(Main.TTF_PATH
+                                                                  + Main.FONT_NAME))
+                                             .deriveFont(Main.FONT_SIZE);
+
+      GraphicsEnvironment.getLocalGraphicsEnvironment()
+                         .registerFont(programFont);
+
+      setProgramFont(programFont);
+    } catch (IOException | FontFormatException ex) {
+      ex.printStackTrace();
+      System.exit(-1);
+    }
+  }
+
+  /**
+   * Aplica la fuente para el programa.
+   *
+   * @param font Fuente a utilizar.
+   */
+  private static void setProgramFont(Font font) {
+    Enumeration<Object> keys = UIManager.getDefaults()
+                                        .keys();
+
+    while (keys.hasMoreElements()) {
+      Object key = keys.nextElement();
+      Object value = UIManager.get(key);
+
+      if (value instanceof FontUIResource) {
+        UIManager.put(key, font);
+      }
+    }
   }
 }

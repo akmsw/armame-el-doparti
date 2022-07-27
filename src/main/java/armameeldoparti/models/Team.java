@@ -1,5 +1,6 @@
-package armameeldoparti.utils;
+package armameeldoparti.models;
 
+import armameeldoparti.utils.Main;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -60,7 +61,7 @@ public class Team {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Retorna la cantidad total de jugadores en el equipo.
+   * Obtiene la cantidad total de jugadores en el equipo.
    *
    * @return Cantidad total de jugadores en el equipo.
    */
@@ -72,9 +73,9 @@ public class Team {
   }
 
   /**
-   * Retorna la puntuación total acumulada hasta el momento en el equipo.
+   * Obtiene la puntuación total acumulada hasta el momento en el equipo.
    *
-   * @return La puntuación total del equipo.
+   * @return La puntuación total acumulada hasta el momento en el equipo.
    */
   public int getTeamSkill() {
     return teamPlayers.values()
@@ -99,7 +100,7 @@ public class Team {
   }
 
   /**
-   * Retorna los jugadores de este separados por posiciones.
+   * Obtiene el mapa con los jugadores de este equipo para cada posición.
    *
    * @return Mapa con los jugadores de este equipo para cada posición.
    */
