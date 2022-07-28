@@ -90,6 +90,8 @@ public class HelpController implements Controller {
    * y hace visible la ventana anterior.
    */
   public void backButtonEvent() {
+    pageNumber = 0;
+    updatePage();
     hideView();
 
     Main.getMainMenuController()
