@@ -63,7 +63,6 @@ public class NamesInputController implements Controller {
                                    .getSelectedItem()
                                    .toString());
 
-    namesInputView.setLocationRelativeTo(null);
     namesInputView.setVisible(true);
   }
 
@@ -73,6 +72,7 @@ public class NamesInputController implements Controller {
   @Override
   public void hideView() {
     namesInputView.setVisible(false);
+    Controller.centerView(namesInputView);
   }
 
   /**

@@ -50,7 +50,6 @@ public class AnchoragesController implements Controller {
    */
   @Override
   public void showView() {
-    anchoragesView.setLocationRelativeTo(null);
     anchoragesView.setVisible(true);
   }
 
@@ -60,6 +59,7 @@ public class AnchoragesController implements Controller {
   @Override
   public void hideView() {
     anchoragesView.setVisible(false);
+    Controller.centerView(anchoragesView);
   }
 
   /**

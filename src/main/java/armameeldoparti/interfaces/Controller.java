@@ -1,5 +1,8 @@
 package armameeldoparti.interfaces;
 
+import java.awt.Toolkit;
+import javax.swing.JFrame;
+
 /**
  * Interfaz que especifica los métodos básicos para la interacción
  * entre los controladores y sus vistas asignadas.
@@ -28,4 +31,21 @@ public interface Controller {
    * Reinicia la ventana controlada a sus valores por defecto.
    */
   void resetView();
+
+  /**
+   * Centra la ventana en la pantalla principal.
+   *
+   * <p>EN LINUX: Si no se utiliza la combinación de setLocation
+   * con Toolkit y luego setLocationRelativeTo con null, la ventana
+   * no será centrada, sino que su posición varía.
+   *
+   * @param frame Ventana a centrar.
+   */
+  static void centerView(JFrame frame) {
+    frame.setLocation((Toolkit.getDefaultToolkit()
+                              .getScreenSize().width - frame.getSize().width) / 2,
+                      (Toolkit.getDefaultToolkit()
+                              .getScreenSize().height - frame.getSize().height) / 2);
+    frame.setLocationRelativeTo(null);
+  }
 }

@@ -71,7 +71,6 @@ public class ResultsController implements Controller {
    */
   @Override
   public void showView() {
-    resultsView.setLocationRelativeTo(null);
     resultsView.setVisible(true);
   }
 
@@ -81,6 +80,7 @@ public class ResultsController implements Controller {
   @Override
   public void hideView() {
     resultsView.setVisible(false);
+    Controller.centerView(resultsView);
   }
 
   /**

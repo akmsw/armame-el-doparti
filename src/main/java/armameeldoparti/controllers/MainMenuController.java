@@ -37,7 +37,6 @@ public class MainMenuController implements Controller {
    */
   @Override
   public void showView() {
-    mainMenuView.setLocationRelativeTo(null);
     mainMenuView.setVisible(true);
   }
 
@@ -47,6 +46,7 @@ public class MainMenuController implements Controller {
   @Override
   public void hideView() {
     mainMenuView.setVisible(false);
+    Controller.centerView(mainMenuView);
   }
 
   /**

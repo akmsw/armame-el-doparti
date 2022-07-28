@@ -37,7 +37,6 @@ public class SkillsInputController implements Controller {
    */
   @Override
   public void showView() {
-    skillsInputView.setLocationRelativeTo(null);
     skillsInputView.setVisible(true);
   }
 
@@ -47,6 +46,7 @@ public class SkillsInputController implements Controller {
   @Override
   public void hideView() {
     skillsInputView.setVisible(false);
+    Controller.centerView(skillsInputView);
   }
 
   /**

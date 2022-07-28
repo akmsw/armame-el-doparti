@@ -63,7 +63,6 @@ public class HelpController implements Controller {
    */
   @Override
   public void showView() {
-    helpView.setLocationRelativeTo(null);
     helpView.setVisible(true);
   }
 
@@ -73,6 +72,7 @@ public class HelpController implements Controller {
   @Override
   public void hideView() {
     helpView.setVisible(false);
+    Controller.centerView(helpView);
   }
 
   /**

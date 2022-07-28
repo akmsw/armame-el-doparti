@@ -279,21 +279,21 @@ public final class Main {
     UIManager.put("Panel.background", Main.LIGHT_GREEN);
     UIManager.put("CheckBox.background", Main.LIGHT_GREEN);
     UIManager.put("Separator.background", Main.LIGHT_GREEN);
-    UIManager.put("Button.background", Main.DARK_GREEN);
-    UIManager.put("Button.foreground", Color.WHITE);
     UIManager.put("CheckBox.focus", Main.LIGHT_GREEN);
+    UIManager.put("Button.background", Main.DARK_GREEN);
     UIManager.put("Button.focus", Main.DARK_GREEN);
     UIManager.put("ToggleButton.focus", Main.DARK_GREEN);
-    UIManager.put("ComboBox.focus", Color.WHITE);
     UIManager.put("TitledBorder.border", new LineBorder(Main.DARK_GREEN));
+    UIManager.put("Button.foreground", Color.WHITE);
+    UIManager.put("ComboBox.focus", Color.WHITE);
+
 
     try {
       // Se crea y registra la fuente para poder utilizarla
       Font programFont = Font.createFont(Font.TRUETYPE_FONT,
                                          Main.class
                                              .getClassLoader()
-                                             .getResourceAsStream(Main.TTF_PATH
-                                                                  + Main.FONT_NAME))
+                                             .getResourceAsStream(Main.TTF_PATH + Main.FONT_NAME))
                                              .deriveFont(Main.FONT_SIZE);
 
       GraphicsEnvironment.getLocalGraphicsEnvironment()
