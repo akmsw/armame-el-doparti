@@ -1,10 +1,9 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.HelpController;
+import armameeldoparti.abstracts.View;
 import armameeldoparti.utils.Main;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,7 +23,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 03/07/2022
  */
-public class HelpView extends JFrame {
+public class HelpView extends View {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -104,12 +103,13 @@ public class HelpView extends JFrame {
     return scrollPane;
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Métodos protegidos --------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de esta ventana.
+   * Inicializa y muestra la interfaz gráfica de la ventana.
    */
-  private void initializeInterface() {
+  @Override
+  protected void initializeInterface() {
     masterPanel = new JPanel(new MigLayout("wrap"));
 
     addTextArea();
@@ -123,6 +123,40 @@ public class HelpView extends JFrame {
     pack();
     setLocationRelativeTo(null);
   }
+
+  /**
+   * Coloca los botones en los paneles de la ventana.
+   */
+  @Override
+  protected void addButtons() {
+    previousPageButton = new JButton("Anterior");
+    nextPageButton = new JButton("Siguiente");
+
+    JButton backButton = new JButton("Volver al menú principal");
+
+    previousPageButton.addActionListener(e ->
+        Main.getHelpController()
+            .previousPageButtonEvent()
+    );
+
+    nextPageButton.addActionListener(e ->
+        Main.getHelpController()
+            .nextPageButtonEvent()
+    );
+
+    backButton.addActionListener(e ->
+        Main.getHelpController()
+            .backButtonEvent()
+    );
+
+    previousPageButton.setEnabled(false);
+
+    masterPanel.add(previousPageButton, "growx, span, split 2, center");
+    masterPanel.add(nextPageButton, "growx");
+    masterPanel.add(backButton, "growx, span");
+  }
+
+  // ---------------------------------------- Métodos privados ----------------------------------
 
   /**
    * Añade el área de texto para mostrar las instrucciones del programa.
@@ -161,25 +195,5 @@ public class HelpView extends JFrame {
     pagesCounter.setHorizontalAlignment(SwingConstants.CENTER);
 
     masterPanel.add(pagesCounter, "growx");
-  }
-
-  /**
-   * Añade los botones al panel de la ventana.
-   */
-  private void addButtons() {
-    previousPageButton = new JButton("Anterior");
-    nextPageButton = new JButton("Siguiente");
-
-    JButton backButton = new JButton("Volver al menú principal");
-
-    previousPageButton.addActionListener(e -> HelpController.previousPageButtonEvent());
-    nextPageButton.addActionListener(e -> HelpController.nextPageButtonEvent());
-    backButton.addActionListener(e -> HelpController.backButtonEvent());
-
-    previousPageButton.setEnabled(false);
-
-    masterPanel.add(previousPageButton, "growx, span, split 2, center");
-    masterPanel.add(nextPageButton, "growx");
-    masterPanel.add(backButton, "growx, span");
   }
 }

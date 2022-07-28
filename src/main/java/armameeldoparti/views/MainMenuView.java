@@ -1,11 +1,10 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.MainMenuController;
+import armameeldoparti.abstracts.View;
 import armameeldoparti.utils.Main;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -21,7 +20,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 27/02/2021
  */
-public class MainMenuView extends JFrame {
+public class MainMenuView extends View {
 
   // ---------------------------------------- Constantes públicas -------------------------------
 
@@ -59,12 +58,13 @@ public class MainMenuView extends JFrame {
     initializeInterface();
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Métodos protegidos --------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de esta ventana.
+   * Inicializa y muestra la interfaz gráfica de la ventana.
    */
-  private void initializeInterface() {
+  @Override
+  protected void initializeInterface() {
     masterPanel = new JPanel(new MigLayout("wrap"));
 
     addBackground();
@@ -79,6 +79,30 @@ public class MainMenuView extends JFrame {
   }
 
   /**
+   * Coloca los botones en los paneles de la ventana.
+   */
+  @Override
+  protected void addButtons() {
+    JButton startButton = new JButton("Comenzar");
+    JButton helpButton = new JButton("Ayuda");
+
+    startButton.addActionListener(e ->
+        Main.getMainMenuController()
+            .startButtonEvent()
+    );
+
+    helpButton.addActionListener(e ->
+        Main.getMainMenuController()
+            .helpButtonEvent()
+    );
+
+    masterPanel.add(startButton, GROWX);
+    masterPanel.add(helpButton, GROWX);
+  }
+
+  // ---------------------------------------- Métodos privados ----------------------------------
+
+  /**
    * Añade la imagen de fondo al panel de la ventana.
    */
   private void addBackground() {
@@ -89,19 +113,5 @@ public class MainMenuView extends JFrame {
     JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
 
     masterPanel.add(bgLabel, GROWX);
-  }
-
-  /**
-   * Añade los botones al panel de la ventana.
-   */
-  private void addButtons() {
-    JButton startButton = new JButton("Comenzar");
-    JButton helpButton = new JButton("Ayuda");
-
-    startButton.addActionListener(e -> MainMenuController.startButtonEvent());
-    helpButton.addActionListener(e -> MainMenuController.helpButtonEvent());
-
-    masterPanel.add(startButton, GROWX);
-    masterPanel.add(helpButton, GROWX);
   }
 }

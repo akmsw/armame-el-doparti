@@ -1,5 +1,7 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.interfaces.Controller;
+import armameeldoparti.utils.Main;
 import armameeldoparti.views.MainMenuView;
 
 /**
@@ -11,35 +13,48 @@ import armameeldoparti.views.MainMenuView;
  *
  * @since 26/07/2022
  */
-public class MainMenuController {
+public class MainMenuController implements Controller {
 
   // ---------------------------------------- Campos privados -----------------------------------
 
-  private static MainMenuView mainMenuView = new MainMenuView();
+  private MainMenuView mainMenuView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Constructor vacío.
+   * Construye el controlador para la vista del menú principal.
+   *
+   * @param mainMenuView Vista a controlar.
    */
-  private MainMenuController() {
-    // No implementado
+  public MainMenuController(MainMenuView mainMenuView) {
+    this.mainMenuView = mainMenuView;
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
 
   /**
-   * Hace visible la ventana del menú principal.
+   * Hace visible la ventana controlada.
    */
-  public static void showMainMenuView() {
+  @Override
+  public void showView() {
+    mainMenuView.setLocationRelativeTo(null);
     mainMenuView.setVisible(true);
   }
 
   /**
-   * Hace visible la ventana del menú principal.
+   * Hace invisible la ventana controlada.
    */
-  public static void hideMainMenuView() {
+  @Override
+  public void hideView() {
     mainMenuView.setVisible(false);
+  }
+
+  /**
+   * Reinicia la ventana controlada a sus valores por defecto.
+   */
+  @Override
+  public void resetView() {
+    // No es necesario implementarlo en esta ventana
   }
 
   /**
@@ -48,11 +63,14 @@ public class MainMenuController {
    * <p>Hace invisible la ventana del menú principal
    * y hace visible la ventana de ayuda.
    */
-  public static void helpButtonEvent() {
-    hideMainMenuView();
+  public void helpButtonEvent() {
+    hideView();
 
-    HelpController.updatePage();
-    HelpController.showHelpView();
+    Main.getHelpController()
+        .updatePage();
+
+    Main.getHelpController()
+        .showView();
   }
 
   /**
@@ -61,9 +79,10 @@ public class MainMenuController {
    * <p>Hace invisible la ventana del menú principal
    *  y hace visible la ventana de ingreso de nombres.
    */
-  public static void startButtonEvent() {
-    NamesInputController.showNamesInputView();
+  public void startButtonEvent() {
+    Main.getNamesInputController()
+        .showView();
 
-    hideMainMenuView();
+    hideView();
   }
 }

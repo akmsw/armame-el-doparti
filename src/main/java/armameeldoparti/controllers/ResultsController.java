@@ -1,5 +1,6 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.interfaces.Controller;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
@@ -25,7 +26,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @since 26/07/2022
  */
-public class ResultsController {
+public class ResultsController implements Controller {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -45,29 +46,50 @@ public class ResultsController {
 
   // ---------------------------------------- Campos privados -----------------------------------
 
-  private static ResultsView resultsView = new ResultsView();
+  private List<Team> teams;
 
-  private static List<Team> teams;
+  private RandomMixer randomMixer = new RandomMixer();
+  private BySkillsMixer bySkillsMixer = new BySkillsMixer();
 
-  private static RandomMixer randomMixer = new RandomMixer();
-  private static BySkillsMixer bySkillsMixer = new BySkillsMixer();
+  private ResultsView resultsView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Constructor vacío.
+   * Construye el controlador para la vista de resultados.
+   *
+   * @param resultsView Vista a controlar.
    */
-  private ResultsController() {
-    // No necesita cuerpo
+  public ResultsController(ResultsView resultsView) {
+    this.resultsView = resultsView;
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
 
   /**
-   * Hace visible la ventana de muestra de resultados.
+   * Hace visible la ventana controlada.
    */
-  public static void showResultsView() {
+  @Override
+  public void showView() {
+    resultsView.setLocationRelativeTo(null);
     resultsView.setVisible(true);
+  }
+
+  /**
+   * Hace invisible la ventana controlada.
+   */
+  @Override
+  public void hideView() {
+    resultsView.setVisible(false);
+  }
+
+  /**
+   * Reinicia la ventana controlada a sus valores por defecto.
+   */
+  @Override
+  public void resetView() {
+    resultsView.dispose();
+    resultsView = new ResultsView();
   }
 
   /**
@@ -77,7 +99,7 @@ public class ResultsController {
    * coloca los resultados de la distribución. Finalmente, hace visible la ventana
    * de muestra de resultados.
    */
-  public static void setUp() {
+  public void setUp() {
     Team team1 = new Team();
     Team team2 = new Team();
 
@@ -109,18 +131,21 @@ public class ResultsController {
    * <p>Reinicia los equipos, elimina y reinstancia la ventana
    * de ingreso de nombres, y hace visible la correspondiente.
    */
-  public static void backButtonEvent() {
+  public void backButtonEvent() {
     resetTeams();
-    disposeResultsView();
+    resetView();
 
     if (Main.getDistribution() == Main.RANDOM_MIX) {
       if (Main.thereAreAnchorages()) {
-        AnchoragesController.showAnchoragesView();
+        Main.getAnchoragesController()
+            .showView();
       } else {
-        NamesInputController.showNamesInputView();
+        Main.getNamesInputController()
+            .showView();
       }
     } else {
-      SkillsInputController.showSkillsInputView();
+      Main.getSkillsInputController()
+          .showView();
     }
   }
 
@@ -131,7 +156,7 @@ public class ResultsController {
    * criterio establecido y actualiza la tabla de muestra de
    * resultados.
    */
-  public static void remixButtonEvent() {
+  public void remixButtonEvent() {
     resetTeams();
 
     teams = randomMix(Main.thereAreAnchorages());
@@ -151,7 +176,7 @@ public class ResultsController {
    * <p>Si se cambian de lugar las etiquetas de las posiciones en la tabla, deberá
    * cambiarse esta manera de llenarla, ya que no se respetará el nuevo orden establecido.
    */
-  public static void updateTable() {
+  public void updateTable() {
     var wrapperColumn = new Object() {
       int column = 1;
     };
@@ -206,7 +231,7 @@ public class ResultsController {
    * @return Los equipos actualizados con los jugadores distribuidos
    *         con el criterio establecido.
    */
-  public static List<Team> randomMix(boolean thereAreAnchorages) {
+  public List<Team> randomMix(boolean thereAreAnchorages) {
     return thereAreAnchorages
            ? randomMixer.withAnchorages(teams)
            : randomMixer.withoutAnchorages(teams);
@@ -220,7 +245,7 @@ public class ResultsController {
    * @return Los equipos actualizados con los jugadores distribuidos
    *         con el criterio establecido.
    */
-  public static List<Team> bySkillsMix(boolean thereAreAnchorages) {
+  public List<Team> bySkillsMix(boolean thereAreAnchorages) {
     return thereAreAnchorages
            ? bySkillsMixer.withAnchorages(teams)
            : bySkillsMixer.withoutAnchorages(teams);
@@ -242,7 +267,7 @@ public class ResultsController {
    * <p>Si la celda muestra un puntaje o un título de equipo, estará centrada.
    * De lo contrario, estará alineada a la izquierda.
    */
-  private static void setTableFormat() {
+  private void setTableFormat() {
     resultsView.getTable().setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
       /**
        * Configura el color de fondo y de letra de las casillas de la tabla.
@@ -318,7 +343,7 @@ public class ResultsController {
   /**
    * Llena las celdas fijas de la tabla, cuyos textos no cambian.
    */
-  private static void fillTableFields() {
+  private void fillTableFields() {
     resultsView.getTable()
                .setValueAt("EQUIPO #1", 0, 1);
     resultsView.getTable()
@@ -360,22 +385,11 @@ public class ResultsController {
    * Reinicia los equipos de todos los jugadores y vacía
    * los arreglos representativos de cada equipo.
    */
-  private static void resetTeams() {
+  private void resetTeams() {
     teams.forEach(Team::clear);
 
     Main.getPlayersSets()
         .values()
         .forEach(ps -> ps.forEach(p -> p.setTeam(0)));
-  }
-
-  /**
-   * Reinicia los equipos, elimina la ventana y la reinstancia para que
-   * la próxima vez que se la requiera, tenga toda su información por defecto.
-   */
-  private static void disposeResultsView() {
-    resetTeams();
-
-    resultsView.dispose();
-    resultsView = new ResultsView();
   }
 }

@@ -1,6 +1,6 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.AnchoragesController;
+import armameeldoparti.abstracts.View;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.utils.Main;
@@ -11,7 +11,6 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -32,7 +31,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 15/03/2021
  */
-public class AnchoragesView extends JFrame {
+public class AnchoragesView extends View {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -70,7 +69,6 @@ public class AnchoragesView extends JFrame {
    * Construye una ventana de anclajes.
    */
   public AnchoragesView() {
-
     cdCheckboxes = new ArrayList<>();
     ldCheckboxes = new ArrayList<>();
     mfCheckboxes = new ArrayList<>();
@@ -89,6 +87,26 @@ public class AnchoragesView extends JFrame {
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
+
+  /**
+   * Actualiza las casillas con los nombres de los jugadores.
+   */
+  public void updateCheckBoxesText() {
+    for (Position position : Position.values()) {
+      for (int i = 0; i < Main.getPlayersSets()
+                              .get(position)
+                              .size(); i++) {
+        checkBoxesMap.get(position)
+                     .get(i)
+                     .setText(Main.getPlayersSets()
+                                  .get(position)
+                                  .get(i)
+                                  .getName());
+      }
+    }
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
 
   /**
    * Obtiene el botón de finalización.
@@ -153,12 +171,13 @@ public class AnchoragesView extends JFrame {
     return checkBoxesMap;
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Métodos protegidos --------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de esta ventana.
+   * Inicializa y muestra la interfaz gráfica de la ventana.
    */
-  private void initializeInterface() {
+  @Override
+  protected void initializeInterface() {
     leftPanel = new JPanel(new MigLayout("wrap 2"));
     rightPanel = new JPanel(new MigLayout("wrap"));
 
@@ -209,42 +228,49 @@ public class AnchoragesView extends JFrame {
   /**
    * Coloca los botones en los paneles de la ventana.
    */
-  private void addButtons() {
+  @Override
+  protected void addButtons() {
     finishButton = new JButton("Finalizar");
 
     finishButton.setEnabled(false);
     finishButton.addActionListener(e ->
-        AnchoragesController.finishButtonEvent()
+        Main.getAnchoragesController()
+            .finishButtonEvent()
     );
 
     newAnchorageButton = new JButton("Anclar");
 
     newAnchorageButton.addActionListener(e ->
-        AnchoragesController.newAnchorageButtonEvent()
+        Main.getAnchoragesController()
+            .newAnchorageButtonEvent()
     );
 
     deleteAnchorageButton = new JButton("Borrar un anclaje");
 
     deleteAnchorageButton.addActionListener(e ->
-        AnchoragesController.deleteAnchorageButtonEvent()
+        Main.getAnchoragesController()
+            .deleteAnchorageButtonEvent()
     );
 
     deleteLastAnchorageButton = new JButton("Borrar último anclaje");
 
     deleteLastAnchorageButton.addActionListener(e ->
-        AnchoragesController.deleteLastAnchorageButtonEvent()
+        Main.getAnchoragesController()
+            .deleteLastAnchorageButtonEvent()
     );
 
     clearAnchoragesButton = new JButton("Limpiar anclajes");
 
     clearAnchoragesButton.addActionListener(e ->
-        AnchoragesController.clearAnchoragesButtonEvent()
+        Main.getAnchoragesController()
+            .clearAnchoragesButtonEvent()
     );
 
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        AnchoragesController.backButtonEvent()
+        Main.getAnchoragesController()
+            .backButtonEvent()
     );
 
     leftPanel.add(finishButton, GROWX_SPAN);
@@ -256,6 +282,8 @@ public class AnchoragesView extends JFrame {
     rightPanel.add(deleteLastAnchorageButton, GROW);
     rightPanel.add(clearAnchoragesButton, GROW);
   }
+
+  // ---------------------------------------- Métodos privados ----------------------------------
 
   /**
    * Llena los arreglos de casillas correspondientes a cada posición.

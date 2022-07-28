@@ -1,5 +1,6 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.interfaces.Controller;
 import armameeldoparti.utils.Main;
 import armameeldoparti.views.SkillsInputView;
 
@@ -12,35 +13,49 @@ import armameeldoparti.views.SkillsInputView;
  *
  * @since 26/07/2022
  */
-public class SkillsInputController {
-
-  // ---------------------------------------- Constantes públicas -------------------------------
-
-  public static final int SCORE_INI = 1;
-  public static final int SCORE_MIN = 1;
-  public static final int SCORE_MAX = 5;
-  public static final int SCORE_STEP = 1;
+public class SkillsInputController implements Controller {
 
   // ---------------------------------------- Campos privados -----------------------------------
 
-  private static SkillsInputView skillsInputView = new SkillsInputView();
+  private SkillsInputView skillsInputView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Constructor vacío.
+   * Construye el controlador para la vista de ingreso de puntuaciones.
+   *
+   * @param skillsInputView Vista a controlar.
    */
-  private SkillsInputController() {
-    // No necesita cuerpo
+  public SkillsInputController(SkillsInputView skillsInputView) {
+    this.skillsInputView = skillsInputView;
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
 
   /**
-   * Hace visible la ventana de ingreso de resultados.
+   * Hace visible la ventana controlada.
    */
-  public static void showSkillsInputView() {
+  @Override
+  public void showView() {
+    skillsInputView.setLocationRelativeTo(null);
     skillsInputView.setVisible(true);
+  }
+
+  /**
+   * Hace invisible la ventana controlada.
+   */
+  @Override
+  public void hideView() {
+    skillsInputView.setVisible(false);
+  }
+
+  /**
+   * Reinicia la ventana controlada a sus valores por defecto.
+   */
+  @Override
+  public void resetView() {
+    resetSkills();
+    hideView();
   }
 
   /**
@@ -50,14 +65,17 @@ public class SkillsInputController {
    * hace invisible la ventana de ingreso de puntuaciones y
    * muestra la ventana de resultados.
    */
-  public static void finishButtonEvent() {
+  public void finishButtonEvent() {
     skillsInputView.getSpinnersMap()
                    .forEach((k, v) -> k.setSkill((int) v.getValue()));
 
-    hideSkillsInputView();
+    hideView();
 
-    ResultsController.setUp();
-    ResultsController.showResultsView();
+    Main.getResultsController()
+        .setUp();
+
+    Main.getResultsController()
+        .showView();
   }
 
   /**
@@ -66,12 +84,8 @@ public class SkillsInputController {
    * <p>Aplica a todos los jugadores la puntuación por defecto (0) y
    * reinicia el valor de todos los campos de ingreso de puntuación.
    */
-  public static void resetSkillsButtonEvent() {
-    skillsInputView.getSpinnersMap()
-                   .forEach((k, v) -> {
-                     k.setSkill(0);
-                     v.setValue(SCORE_MIN);
-                   });
+  public void resetSkillsButtonEvent() {
+    resetSkills();
   }
 
   /**
@@ -80,31 +94,36 @@ public class SkillsInputController {
    * <p>Elimina la ventana de ingreso de puntuaciones
    * y hace visible la ventana correspondiente.
    */
-  public static void backButtonEvent() {
-    disposeSkillsInputView();
+  public void backButtonEvent() {
+    resetView();
 
     if (Main.thereAreAnchorages()) {
-      AnchoragesController.showAnchoragesView();
+      Main.getAnchoragesController()
+          .showView();
     } else {
-      NamesInputController.showNamesInputView();
+      Main.getNamesInputController()
+          .showView();
     }
+  }
+
+  /**
+   * Actualiza las etiquetas con los nombres de los jugadores.
+   */
+  public void updateNameLabels() {
+    skillsInputView.updateNameLabels();
   }
 
   // ---------------------------------------- Métodos privados ----------------------------------
 
   /**
-   * Hace invisible la ventana de ingreso de resultados.
+   * Aplica a todos los jugadores la puntuación por defecto (0) y
+   * reinicia el valor de todos los campos de ingreso de puntuación.
    */
-  private static void hideSkillsInputView() {
-    skillsInputView.setVisible(false);
-  }
-
-  /**
-   * Elimina la ventana y la reinstancia para que la próxima vez que se
-   * la requiera, tenga toda su información por defecto.
-   */
-  private static void disposeSkillsInputView() {
-    skillsInputView.dispose();
-    skillsInputView = new SkillsInputView();
+  private void resetSkills() {
+    skillsInputView.getSpinnersMap()
+                   .forEach((k, v) -> {
+                     k.setSkill(0);
+                     v.setValue(Main.SCORE_MIN);
+                   });
   }
 }

@@ -1,11 +1,10 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.NamesInputController;
+import armameeldoparti.abstracts.View;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.utils.Main;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -31,7 +29,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 28/02/2021
  */
-public class NamesInputView extends JFrame {
+public class NamesInputView extends View {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -67,8 +65,6 @@ public class NamesInputView extends JFrame {
 
   /**
    * Construye una ventana de ingreso de jugadores.
-   *
-   * @throws IOException Cuando hay un error de lectura en el archivo .pda.
    */
   public NamesInputView() {
     getPlayersDistributionData();
@@ -135,69 +131,13 @@ public class NamesInputView extends JFrame {
     return textFields;
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Métodos protegidos --------------------------------
 
   /**
-   * Obtiene la cantidad de jugadores para cada posición por equipo
-   * mediante expresiones regulares.
-   *
-   * <p>[CLMFG].+>.+ : Obtiene las líneas que comiencen con C, L, M, F, ó W,
-   * seguido por al menos un caracter '>' (busca las líneas que nos importan en
-   * el archivo .pda).
-   *
-   * <p>(?!(?<=X)\\d). : Obtiene el trozo de la línea que no sea un número que nos
-   * interesa (el número que nos interesa ocuparía el lugar de la X).
-   *
-   * <p>Si el archivo .pda es modificado en cuanto a orden de las líneas importantes,
-   * se debe tener en cuenta que Position.values()[index] confía en que lo hallado
-   * se corresponde con el orden en el que están declarados los valores en el enum
-   * Position. Idem, si se cambian de orden los valores del enum Position, se
-   * deberá tener en cuenta que Position.values()[index] confía en el orden en el
-   * que se leerán los datos del archivo .pda y, por consiguiente, se deberá rever
-   * el orden de las líneas importantes de dichos archivos.
+   * Inicializa y muestra la interfaz gráfica de la ventana.
    */
-  private void getPlayersDistributionData() {
-    BufferedReader buff = new BufferedReader(
-        new InputStreamReader(getClass().getClassLoader()
-                                        .getResourceAsStream(Main.DOCS_PATH + PDA_FILENAME))
-    );
-
-    var wrapperIndex = new Object() {
-      private int index;
-    };
-
-    buff.lines()
-        .forEach(l -> {
-          if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
-            Main.getPlayersAmountMap()
-                .put(Position.values()[wrapperIndex.index],
-                    Integer.parseInt(l.replaceAll("(?!(?<="
-                                                  + Main.PLAYERS_PER_TEAM
-                                                  + ")\\d).", "")));
-
-            wrapperIndex.index++;
-          }
-        });
-  }
-
-  /**
-   * Llena el conjunto de jugadores recibido con jugadores sin nombre ni puntuación,
-   * y con la posición especificada.
-   *
-   * @param set      Arreglo de jugadores a inicializar.
-   * @param position Posición de los jugadores del arreglo.
-   * @param capacity Capacidad del arreglo.
-   */
-  private void initializeSet(List<Player> set, Position position, int capacity) {
-    for (int i = 0; i < capacity; i++) {
-      set.add(new Player("", position));
-    }
-  }
-
-  /**
-   * Inicializa y muestra la interfaz gráfica de esta ventana.
-   */
-  private void initializeInterface() {
+  @Override
+  protected void initializeInterface() {
     List<Player> centralDefenders = new ArrayList<>();
 
     initializeSet(centralDefenders, Position.CENTRAL_DEFENDER,
@@ -279,6 +219,47 @@ public class NamesInputView extends JFrame {
   }
 
   /**
+   * Coloca los botones en los paneles de la ventana.
+   */
+  @Override
+  protected void addButtons() {
+    mixButton = new JButton("Distribuir");
+
+    JButton backButton = new JButton("Atrás");
+
+    mixButton.setEnabled(false);
+
+    mixButton.addActionListener(e ->
+        Main.getNamesInputController()
+            .mixButtonEvent()
+    );
+
+    backButton.addActionListener(e ->
+        Main.getNamesInputController()
+            .backButtonEvent()
+    );
+
+    rightPanel.add(mixButton, "grow");
+    rightPanel.add(backButton, "grow");
+  }
+
+  // ---------------------------------------- Métodos privados ----------------------------------
+
+  /**
+   * Llena el conjunto de jugadores recibido con jugadores sin nombre ni puntuación,
+   * y con la posición especificada.
+   *
+   * @param set      Arreglo de jugadores a inicializar.
+   * @param position Posición de los jugadores del arreglo.
+   * @param capacity Capacidad del arreglo.
+   */
+  private void initializeSet(List<Player> set, Position position, int capacity) {
+    for (int i = 0; i < capacity; i++) {
+      set.add(new Player("", position));
+    }
+  }
+
+  /**
    * Agrega la lista desplegable y le establece el oyente de eventos.
    */
   private void addComboBox() {
@@ -286,29 +267,10 @@ public class NamesInputView extends JFrame {
 
     comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
-        NamesInputController.comboBoxEvent(
-          (String) ((JComboBox<?>) e.getSource()).getSelectedItem()
-        )
-    );
+        Main.getNamesInputController()
+            .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem()));
 
     leftPanel.add(comboBox, "growx");
-  }
-
-  /**
-   * Añade los botones al panel de la ventana.
-   */
-  private void addButtons() {
-    mixButton = new JButton("Distribuir");
-
-    JButton backButton = new JButton("Atrás");
-
-    mixButton.setEnabled(false);
-
-    mixButton.addActionListener(e -> NamesInputController.mixButtonEvent());
-    backButton.addActionListener(e -> NamesInputController.backButtonEvent());
-
-    rightPanel.add(mixButton, "grow");
-    rightPanel.add(backButton, "grow");
   }
 
   /**
@@ -348,10 +310,55 @@ public class NamesInputView extends JFrame {
                             .get(position) * 2; i++) {
       JTextField tf = new JTextField();
 
-      tf.addActionListener(e -> NamesInputController.textFieldEvent(textFieldSet, playersSet, tf,
-                                                                    (JTextField) e.getSource()));
+      tf.addActionListener(e ->
+          Main.getNamesInputController()
+              .textFieldEvent(textFieldSet, playersSet, tf, (JTextField) e.getSource())
+      );
 
       textFieldSet.add(tf);
     }
+  }
+
+  /**
+   * Obtiene la cantidad de jugadores para cada posición por equipo
+   * mediante expresiones regulares.
+   *
+   * <p>[CLMFG].+>.+ : Obtiene las líneas que comiencen con C, L, M, F, ó W,
+   * seguido por al menos un caracter '>' (busca las líneas que nos importan en
+   * el archivo .pda).
+   *
+   * <p>(?!(?<=X)\\d). : Obtiene el trozo de la línea que no sea un número que nos
+   * interesa (el número que nos interesa ocuparía el lugar de la X).
+   *
+   * <p>Si el archivo .pda es modificado en cuanto a orden de las líneas importantes,
+   * se debe tener en cuenta que Position.values()[index] confía en que lo hallado
+   * se corresponde con el orden en el que están declarados los valores en el enum
+   * Position. Idem, si se cambian de orden los valores del enum Position, se
+   * deberá tener en cuenta que Position.values()[index] confía en el orden en el
+   * que se leerán los datos del archivo .pda y, por consiguiente, se deberá rever
+   * el orden de las líneas importantes de dichos archivos.
+   */
+  private void getPlayersDistributionData() {
+    BufferedReader buff = new BufferedReader(
+        new InputStreamReader(getClass().getClassLoader()
+                                        .getResourceAsStream(Main.DOCS_PATH + PDA_FILENAME))
+    );
+
+    var wrapperIndex = new Object() {
+      private int index;
+    };
+
+    buff.lines()
+        .forEach(l -> {
+          if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
+            Main.getPlayersAmountMap()
+                .put(Position.values()[wrapperIndex.index],
+                    Integer.parseInt(l.replaceAll("(?!(?<="
+                                                  + Main.PLAYERS_PER_TEAM
+                                                  + ")\\d).", "")));
+
+            wrapperIndex.index++;
+          }
+        });
   }
 }

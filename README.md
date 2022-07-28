@@ -2,15 +2,17 @@
 
 ![portada](./src/main/res/img/readme/cover.png)
 
-```
-Release date: TBD
-```
+[![releaseDateBadge](https://img.shields.io/badge/release%20date-tbd-yellow)]()
 
+#
+
+[![build](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
+[![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
+[![checkStyleBadge](https://img.shields.io/badge/checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
+[![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen?logo=sonarlint)](https://www.sonarlint.org/)\
 [![openJDKTarget](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/11/)
 [![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange?logo=apachemaven)](https://maven.apache.org/)
-[![build](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
-[![checkStyleBadge](https://img.shields.io/badge/checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
-[![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen?logo=sonarlint)](https://www.sonarlint.org/)
+[![maintainedBadge](https://img.shields.io/badge/maintained-yes-brightgreen)]()\
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross--platform-blueviolet?logo=windows-terminal)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/gpl-3.0-blue?logo=gnu)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
@@ -87,6 +89,9 @@ No se podrán anclar a un mismo equipo todos los jugadores de un mismo tipo (por
     - Abrir con...
     - En el campo de ingreso de comando personalizado, ingresar: `java -jar`
     - Seleccionar como opción predeterminada para ejecución de este tipo de archivos
+
+## ⚠️ Reportes y sugerencias
+Si el programa presenta algún error que debe ser reportado para arreglarlo, si se te ocurrió alguna nueva funcionalidad para agregar al programa, o si opinás que algo podría ser modificado, la sección de [issues](https://github.com/akmsw/armame-el-doparti/issues) está abierta para que hagas estos reportes y/o sugerencias. Es necesario tener una cuenta en GitHub para abrir un nuevo reporte en el repositorio. Para poder trabajar en ello lo más rápidamente posible, te proveo unas plantillas para cada caso donde te pido toda la información que me será útil.
 
 ## 📸 Capturas de pantalla
 ![ventana_principal](./src/main/res/img/readme/ss1.png)\

@@ -1,11 +1,10 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.ResultsController;
+import armameeldoparti.abstracts.View;
 import armameeldoparti.utils.Main;
 import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
@@ -20,7 +19,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 06/03/2021
  */
-public class ResultsView extends JFrame {
+public class ResultsView extends View {
 
   /**
    * Tamaño de ancho (en píxeles) fijo para las celdas de la tabla de resultados.
@@ -57,8 +56,9 @@ public class ResultsView extends JFrame {
   // ---------------------------------------- Métodos públicos ----------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de esta ventana.
+   * Inicializa y muestra la interfaz gráfica de la ventana.
    */
+  @Override
   public void initializeInterface() {
     panel = new JPanel(new MigLayout("wrap"));
 
@@ -69,6 +69,35 @@ public class ResultsView extends JFrame {
     addTable();
     addButtons();
     add(panel);
+  }
+
+  /**
+   * Aplica el tamaño ideal para las celdas de la tabla.
+   */
+  public void setTableCellsSize() {
+    // Ajuste del ancho de las celdas
+    for (int column = 0; column < table.getColumnCount(); column++) {
+      table.getColumnModel()
+           .getColumn(column)
+           .setPreferredWidth(FIXED_CELL_WIDTH);
+    }
+
+    // Ajuste del alto de las celdas
+    for (int i = 0; i < table.getRowCount(); i++) {
+      int rowHeight = table.getRowHeight();
+
+      for (int j = 0; j < table.getColumnCount(); j++) {
+        Component component = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
+        rowHeight = Math.max(rowHeight, component.getPreferredSize()
+                                                 .height);
+      }
+
+      table
+      .setRowHeight(i, rowHeight);
+    }
+
+    pack();
+    setLocationRelativeTo(null);
   }
 
   // --------------------------------------------- Getters --------------------------------------
@@ -111,56 +140,35 @@ public class ResultsView extends JFrame {
     this.frameTitle = frameTitle;
   }
 
-  /**
-   * Aplica el tamaño ideal para las celdas de la tabla.
-   */
-  public void setTableCellsSize() {
-    // Ajuste del ancho de las celdas
-    for (int column = 0; column < table.getColumnCount(); column++) {
-      table.getColumnModel()
-           .getColumn(column)
-           .setPreferredWidth(FIXED_CELL_WIDTH);
-    }
-
-    // Ajuste del alto de las celdas
-    for (int i = 0; i < table.getRowCount(); i++) {
-      int rowHeight = table.getRowHeight();
-
-      for (int j = 0; j < table.getColumnCount(); j++) {
-        Component component = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
-        rowHeight = Math.max(rowHeight, component.getPreferredSize()
-                                                 .height);
-      }
-
-      table
-      .setRowHeight(i, rowHeight);
-    }
-
-    pack();
-    setLocationRelativeTo(null);
-  }
-
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Métodos protegidos --------------------------------
 
   /**
-   * Coloca en el panel principal de la ventana los botones de navegación
-   * y de redistribución en caso de ser necesario.
+   * Coloca los botones en los paneles de la ventana.
    */
-  private void addButtons() {
+  @Override
+  protected void addButtons() {
     JButton backButton = new JButton("Atrás");
 
-    backButton.addActionListener(e -> ResultsController.backButtonEvent());
+    backButton.addActionListener(e ->
+        Main.getResultsController()
+            .backButtonEvent()
+    );
 
     if (Main.getDistribution() == Main.RANDOM_MIX) {
       JButton remixButton = new JButton("Redistribuir");
 
-      remixButton.addActionListener(e -> ResultsController.remixButtonEvent());
+      remixButton.addActionListener(e ->
+          Main.getResultsController()
+              .remixButtonEvent()
+      );
 
       panel.add(remixButton, "growx");
     }
 
     panel.add(backButton, "growx");
   }
+
+  // ---------------------------------------- Métodos privados ----------------------------------
 
   /**
    * Coloca en el panel principal de la ventana la tabla donde se mostrarán los jugadores

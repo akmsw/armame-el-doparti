@@ -1,5 +1,6 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.interfaces.Controller;
 import armameeldoparti.utils.Main;
 import armameeldoparti.views.HelpView;
 import java.io.BufferedReader;
@@ -19,7 +20,7 @@ import javax.swing.BorderFactory;
  *
  * @since 26/07/2022
  */
-public class HelpController {
+public class HelpController implements Controller {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -40,45 +41,59 @@ public class HelpController {
 
   // ---------------------------------------- Campos privados -----------------------------------
 
-  private static int pageNumber = 0;
+  private int pageNumber = 0;
 
-  private static HelpView helpView = new HelpView();
+  private HelpView helpView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Constructor vacío.
+   * Construye el controlador para la vista de ayuda.
+   *
+   * @param helpView Vista a controlar.
    */
-  private HelpController() {
-    // No necesita cuerpo
+  public HelpController(HelpView helpView) {
+    this.helpView = helpView;
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
 
   /**
-   * Hace visible la ventana de ayuda.
+   * Hace visible la ventana controlada.
    */
-  public static void showHelpView() {
+  @Override
+  public void showView() {
+    helpView.setLocationRelativeTo(null);
     helpView.setVisible(true);
   }
 
   /**
-   * Hace invisible la ventana de ayuda.
+   * Hace invisible la ventana controlada.
    */
-  public static void hideHelpView() {
+  @Override
+  public void hideView() {
     helpView.setVisible(false);
+  }
+
+  /**
+   * Reinicia la ventana controlada a sus valores por defecto.
+   */
+  @Override
+  public void resetView() {
+    // No es necesario implementarlo en esta ventana
   }
 
   /**
    * Controlador para la pulsación del botón de retorno.
    *
-   * <p>Hace invisible la ventana de ayuda y hace visible
-   * la ventana del menú principal.
+   * <p>Hace invisible la ventana controlada
+   * y hace visible la ventana anterior.
    */
-  public static void backButtonEvent() {
-    hideHelpView();
+  public void backButtonEvent() {
+    hideView();
 
-    MainMenuController.showMainMenuView();
+    Main.getMainMenuController()
+        .showView();
   }
 
   /**
@@ -87,7 +102,7 @@ public class HelpController {
    * <p>Incrementa el número de página actualizando el estado de los
    * botones y de la página mostrada en el área de texto.
    */
-  public static void nextPageButtonEvent() {
+  public void nextPageButtonEvent() {
     if (++pageNumber < TOTAL_PAGES - 1) {
       helpView.getPreviousPageButton()
               .setEnabled(true);
@@ -105,7 +120,7 @@ public class HelpController {
    * <p>Decrementa el número de página actualizando el estado de los
    * botones y de la página mostrada en el área de texto.
    */
-  public static void previousPageButtonEvent() {
+  public void previousPageButtonEvent() {
     if (--pageNumber > 0) {
       helpView.getNextPageButton()
               .setEnabled(true);
@@ -122,7 +137,7 @@ public class HelpController {
    *
    * <p>Busca el archivo correspondiente al número de página y muestra su contenido.
    */
-  public static void updatePage() {
+  public void updatePage() {
     helpView.getScrollPane()
             .setBorder(BorderFactory.createTitledBorder(pagesMap.get(pageNumber)
                                                                 .get(PAGE_TITLE_INDEX)));
@@ -153,7 +168,7 @@ public class HelpController {
   /**
    * Actualiza el texto mostrado en la etiqueta de progreso de lectura.
    */
-  private static void updateLabel() {
+  private void updateLabel() {
     helpView.getPagesCounter()
             .setText(pageNumber + 1 + "/" + TOTAL_PAGES);
   }

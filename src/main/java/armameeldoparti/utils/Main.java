@@ -1,8 +1,19 @@
 package armameeldoparti.utils;
 
+import armameeldoparti.controllers.AnchoragesController;
+import armameeldoparti.controllers.HelpController;
 import armameeldoparti.controllers.MainMenuController;
+import armameeldoparti.controllers.NamesInputController;
+import armameeldoparti.controllers.ResultsController;
+import armameeldoparti.controllers.SkillsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
+import armameeldoparti.views.AnchoragesView;
+import armameeldoparti.views.HelpView;
+import armameeldoparti.views.MainMenuView;
+import armameeldoparti.views.NamesInputView;
+import armameeldoparti.views.ResultsView;
+import armameeldoparti.views.SkillsInputView;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -34,6 +45,27 @@ public final class Main {
   public static final int BY_SKILLS_MIX = 1;
   public static final int PLAYERS_PER_TEAM = 7;
 
+  /**
+   * Valor inicial del campo de ingreso de puntuaciones.
+   */
+  public static final int SCORE_INI = 1;
+
+  /**
+   * Valor mínimo del campo de ingreso de puntuaciones.
+   */
+  public static final int SCORE_MIN = 1;
+
+  /**
+   * Valor máximo del campo de ingreso de puntuaciones.
+   */
+  public static final int SCORE_MAX = 5;
+
+  /**
+   * Paso utilizado para incremento y decremento
+   * en los campos de ingreso de puntuaciones.
+   */
+  public static final int SCORE_STEP = 1;
+
   public static final float FONT_SIZE = 18f;
 
   public static final String FONT_NAME = "comfortaa.ttf";
@@ -61,13 +93,20 @@ public final class Main {
   private static Map<Position, String> positions;
   private static Map<Position, List<Player>> playersSets;
 
+  private static MainMenuController mainMenuController;
+  private static HelpController helpController;
+  private static NamesInputController namesInputController;
+  private static AnchoragesController anchoragesController;
+  private static SkillsInputController skillsInputController;
+  private static ResultsController resultsController;
+
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
    * Constructor vacío.
    */
   private Main() {
-      // No utilizado
+    // No necesita cuerpo
   }
 
   // ---------------------------------------- Punto de entrada principal ------------------------
@@ -92,7 +131,14 @@ public final class Main {
     setAnchorages(false);
     setGraphicalProperties();
 
-    MainMenuController.showMainMenuView();
+    mainMenuController = new MainMenuController(new MainMenuView());
+    helpController = new HelpController(new HelpView());
+    namesInputController = new NamesInputController(new NamesInputView());
+    anchoragesController = new AnchoragesController(new AnchoragesView());
+    skillsInputController = new SkillsInputController(new SkillsInputView());
+    resultsController = new ResultsController(new ResultsView());
+
+    mainMenuController.showView();
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
@@ -144,6 +190,65 @@ public final class Main {
     return positions;
   }
 
+  /**
+   * Obtiene el controlador de la ventana del menú principal.
+   *
+   * @return El controlador de la ventana del menú principal.
+   */
+  public static MainMenuController getMainMenuController() {
+    return mainMenuController;
+  }
+
+
+  /**
+   * Obtiene el controlador de la ventana de ayuda.
+   *
+   * @return El controlador de la ventana de ayuda.
+   */
+  public static HelpController getHelpController() {
+    return helpController;
+  }
+
+
+  /**
+   * Obtiene el controlador de la ventana de ingreso de nombres.
+   *
+   * @return El controlador de la ventana de ingreso de nombres.
+   */
+  public static NamesInputController getNamesInputController() {
+    return namesInputController;
+  }
+
+
+  /**
+   * Obtiene el controlador de la ventana de anclajes.
+   *
+   * @return El controlador de la ventana de anclajes.
+   */
+  public static AnchoragesController getAnchoragesController() {
+    return anchoragesController;
+  }
+
+
+  /**
+   * Obtiene el controlador de la ventana de puntuaciones.
+   *
+   * @return El controlador de la ventana de puntuaciones.
+   */
+  public static SkillsInputController getSkillsInputController() {
+    return skillsInputController;
+  }
+
+
+  /**
+   * Obtiene el controlador de la ventana de resultados.
+   *
+   * @return El controlador de la ventana de resultados.
+   */
+  public static ResultsController getResultsController() {
+    return resultsController;
+  }
+
   // ---------------------------------------- Setters -------------------------------------------
 
   /**
@@ -164,7 +269,7 @@ public final class Main {
     anchorages = a;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // ---------------------------------------- Métodos privados ----------------------------------
 
   /**
    * Configura las propiedades de la interfaz gráfica del programa.

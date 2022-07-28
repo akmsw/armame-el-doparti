@@ -1,5 +1,6 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.interfaces.Controller;
 import armameeldoparti.models.Player;
 import armameeldoparti.utils.Main;
 import armameeldoparti.views.MainMenuView;
@@ -19,7 +20,7 @@ import javax.swing.JTextField;
  *
  * @since 26/07/2022
  */
-public class NamesInputController {
+public class NamesInputController implements Controller {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -34,37 +35,53 @@ public class NamesInputController {
 
   // ---------------------------------------- Campos privados -----------------------------------
 
-  private static NamesInputView namesInputView = new NamesInputView();
+  private NamesInputView namesInputView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Constructor vacío.
+   * Construye el controlador para la vista de ingreso de nombres.
+   *
+   * @param namesInputView Vista a controlar.
    */
-  private NamesInputController() {
-    // No necesita cuerpo
+  public NamesInputController(NamesInputView namesInputView) {
+    this.namesInputView = namesInputView;
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
 
   /**
-   * Actualiza el estado de la ventana de ingreso de nombres para
+   * Hace visible la ventana controlada.
+   *
+   * <p>Actualiza el estado de la ventana de ingreso de nombres para
    * coincidir con el estado inicial de la lista desplegable, y
-   * hace visible dicha ventana.
+   * la hace visible.
    */
-  public static void showNamesInputView() {
+  @Override
+  public void showView() {
     updateTextFields(namesInputView.getComboBox()
                                    .getSelectedItem()
                                    .toString());
 
+    namesInputView.setLocationRelativeTo(null);
     namesInputView.setVisible(true);
   }
 
   /**
-   * Hace invisible la ventana de ingreso de nombres.
+   * Hace invisible la ventana controlada.
    */
-  public static void hideNamesInputView() {
+  @Override
+  public void hideView() {
     namesInputView.setVisible(false);
+  }
+
+  /**
+   * Reinicia la ventana controlada a sus valores por defecto.
+   */
+  @Override
+  public void resetView() {
+    namesInputView.dispose();
+    namesInputView = new NamesInputView();
   }
 
   /**
@@ -73,10 +90,11 @@ public class NamesInputController {
    * <p>Elimina y reinstancia la ventana de ingreso de nombres,
    * y hace visible la ventana del menú principal.
    */
-  public static void backButtonEvent() {
-    disposeNamesInputFrame();
+  public void backButtonEvent() {
+    resetView();
 
-    MainMenuController.showMainMenuView();
+    Main.getMainMenuController()
+        .showView();
   }
 
   /**
@@ -85,7 +103,7 @@ public class NamesInputController {
    * <p>Solicita al usuario el criterio de distribución de jugadores y hace
    * visible la ventana que corresponda dependiendo de lo elegido.
    */
-  public static void mixButtonEvent() {
+  public void mixButtonEvent() {
     int distribution = JOptionPane.showOptionDialog(
         null, "Seleccione el criterio de distribución de jugadores",
         "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
@@ -99,17 +117,28 @@ public class NamesInputController {
     Main.setDistribution(distribution);
 
     if (Main.thereAreAnchorages()) {
-      AnchoragesController.showAnchoragesView();
+      Main.getAnchoragesController()
+          .updateCheckBoxesText();
+
+      Main.getAnchoragesController()
+          .showView();
     } else if (Main.getDistribution() == Main.RANDOM_MIX) {
       // Distribución aleatoria
-      ResultsController.setUp();
-      ResultsController.showResultsView();
+      Main.getResultsController()
+          .setUp();
+
+      Main.getResultsController()
+          .showView();
     } else {
       // Distribución por puntuaciones
-      SkillsInputController.showSkillsInputView();
+      Main.getSkillsInputController()
+          .updateNameLabels();
+
+      Main.getSkillsInputController()
+          .showView();
     }
 
-    hideNamesInputView();
+    hideView();
   }
 
   /**
@@ -122,7 +151,7 @@ public class NamesInputController {
    * <p>Si el nombre ingresado es válido, se lo aplica a un jugador de la posición
    * mostrada en la lista desplegable.
    */
-  public static void textFieldEvent(List<JTextField> textFieldSet, List<Player> playersSet,
+  public void textFieldEvent(List<JTextField> textFieldSet, List<Player> playersSet,
                                     JTextField tf, JTextField source) {
     if (!(Pattern.matches(NAMES_VALIDATION_REGEX, tf.getText()))) {
       JOptionPane.showMessageDialog(null,
@@ -167,7 +196,7 @@ public class NamesInputController {
    *
    * @param selectedOption Opción elegida de la lista desplegable.
    */
-  public static void comboBoxEvent(String selectedOption) {
+  public void comboBoxEvent(String selectedOption) {
     updateTextFields(selectedOption);
   }
 
@@ -181,7 +210,7 @@ public class NamesInputController {
    *
    * <p>El orden en el que se muestran es el mismo que el del enum de posiciones.
    */
-  private static void updateTextArea() {
+  private void updateTextArea() {
     var wrapperCounter = new Object() {
       private int counter;
     };
@@ -214,7 +243,7 @@ public class NamesInputController {
    *
    * @param text Ítem seleccionado de la lista desplegable.
    */
-  private static void updateTextFields(String text) {
+  private void updateTextFields(String text) {
     clearLeftPanel();
 
     for (int i = 0; i < namesInputView.getComboBoxOptions().length; i++) {
@@ -236,7 +265,7 @@ public class NamesInputController {
   /**
    * Quita los campos de texto del panel izquierdo de la ventana.
    */
-  private static void clearLeftPanel() {
+  private void clearLeftPanel() {
     namesInputView.getTextFields()
                   .stream()
                   .flatMap(Collection::stream)
@@ -246,22 +275,13 @@ public class NamesInputController {
   }
 
   /**
-   * Elimina la ventana y la reinstancia para que la próxima vez que se
-   * la requiera, tenga toda su información por defecto.
-   */
-  private static void disposeNamesInputFrame() {
-    namesInputView.dispose();
-    namesInputView = new NamesInputView();
-  }
-
-  /**
    * Revisa si ya existe algún jugador con el nombre recibido por parámetro.
    *
    * @param name Nombre a validar.
    *
    * @return Si ya existe algún jugador con el nombre recibido por parámetro.
    */
-  private static boolean alreadyExists(String name) {
+  private boolean alreadyExists(String name) {
     return Main.getPlayersSets()
                .values()
                .stream()
