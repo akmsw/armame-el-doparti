@@ -86,11 +86,12 @@ public class HelpController implements Controller {
   /**
    * Controlador para la pulsación del botón de retorno.
    *
-   * <p>Hace invisible la ventana controlada
-   * y hace visible la ventana anterior.
+   * <p>Reinicia la página al comienzo, hace invisible
+   * la ventana controlada y hace visible la ventana anterior.
    */
   public void backButtonEvent() {
     pageNumber = 0;
+
     updatePage();
     hideView();
 
