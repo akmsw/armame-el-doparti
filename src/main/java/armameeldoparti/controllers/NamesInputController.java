@@ -252,7 +252,8 @@ public class NamesInputController implements Controller {
     for (int i = 0; i < namesInputView.getComboBoxOptions().length; i++) {
       if (text.equals(namesInputView.getComboBoxOptions()[i])) {
         namesInputView.getTextFieldsMap()
-                      .get(Main.getCorrespondingPosition(Main.getPositionsMap(), text.toUpperCase()))
+                      .get(Main.getCorrespondingPosition(Main.getPositionsMap(),
+                                                         text.toUpperCase()))
                       .forEach(tf -> namesInputView.getLeftPanel()
                                                    .add(tf, "growx"));
         break;

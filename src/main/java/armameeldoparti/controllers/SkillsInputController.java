@@ -111,6 +111,7 @@ public class SkillsInputController implements Controller {
    */
   public void updateNameLabels() {
     skillsInputView.updateNameLabels();
+    skillsInputView.pack();
   }
 
   // ---------------------------------------- Métodos privados ----------------------------------

@@ -2,17 +2,15 @@
 
 ![portada](./src/main/res/img/readme/cover.png)
 
-[![releaseDateBadge](https://img.shields.io/badge/release%20date-tbd-yellow)]()
-
-#
-
 [![build](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
 [![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle10.3.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
-[![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen?logo=sonarlint)](https://www.sonarlint.org/)\
+[![sonarLintBadge](https://img.shields.io/badge/sonarlint-passing-brightgreen?logo=sonarlint)](https://www.sonarlint.org/)
+[![jUnit5Badge](https://img.shields.io/badge/junit5-passing-brightgreen?logo=junit5)](https://junit.org/junit5/)\
+[![releaseDateBadge](https://img.shields.io/badge/release%20date-tbd-yellow)]()
+[![maintainedBadge](https://img.shields.io/badge/maintained-yes-brightgreen)]()\
 [![openJDKTarget](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/11/)
 [![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange?logo=apachemaven)](https://maven.apache.org/)
-[![maintainedBadge](https://img.shields.io/badge/maintained-yes-brightgreen)]()\
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross--platform-blueviolet?logo=windows-terminal)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/gpl-3.0-blue?logo=gnu)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
@@ -97,20 +95,23 @@ Si el programa presenta algún error que debe ser reportado para arreglarlo, si 
 ![ventana_principal](./src/main/res/img/readme/ss1.png)\
 *Ventana principal*
 
-![ventana_ingreso_nombres](./src/main/res/img/readme/ss2.png)\
+![ventana_ayuda](./src/main/res/img/readme/ss2.png)\
+*Ventana de ayuda*
+
+![ventana_ingreso_nombres](./src/main/res/img/readme/ss3.png)\
 *Ventana de ingreso de nombres*
 
-![ventana_anclajes](./src/main/res/img/readme/ss3.png)\
+![ventana_anclajes](./src/main/res/img/readme/ss4.png)\
 *Ventana de anclajes*
 
-![ventana_puntuaciones](./src/main/res/img/readme/ss4.png)\
+![ventana_puntuaciones](./src/main/res/img/readme/ss5.png)\
 *Ventana de puntuaciones*
 
-![ventana_resultados_1](./src/main/res/img/readme/ss5.png)\
+![ventana_resultados_1](./src/main/res/img/readme/ss6.png)\
 *Ventana de muestra de resultado de distribución aleatoria sin anclajes*
 
-![ventana_resultados_2](./src/main/res/img/readme/ss6.png)\
+![ventana_resultados_2](./src/main/res/img/readme/ss7.png)\
 *Ventana de muestra de resultado de distribución aleatoria con tres anclajes distintos*
 
-![ventana_resultados_3](./src/main/res/img/readme/ss7.png)\
+![ventana_resultados_3](./src/main/res/img/readme/ss8.png)\
 *Ventana de muestra de resultado de distribución por puntuaciones sin anclajes*
