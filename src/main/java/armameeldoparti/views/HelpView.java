@@ -118,7 +118,7 @@ public class HelpView extends View {
     add(masterPanel);
     setTitle(FRAME_TITLE);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(MainMenuView.ICON.getImage());
+    setIconImage(Main.ICON.getImage());
     setResizable(false);
     pack();
     setLocationRelativeTo(null);

@@ -64,7 +64,7 @@ public class SkillsInputView extends View {
 
     setTitle(FRAME_TITLE);
     setResizable(false);
-    setIconImage(MainMenuView.ICON.getImage());
+    setIconImage(Main.ICON.getImage());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     addSpinners();
     addButtons();

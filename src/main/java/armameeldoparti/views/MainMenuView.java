@@ -2,7 +2,6 @@ package armameeldoparti.views;
 
 import armameeldoparti.abstracts.View;
 import armameeldoparti.utils.Main;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,24 +20,6 @@ import net.miginfocom.swing.MigLayout;
  * @since 27/02/2021
  */
 public class MainMenuView extends View {
-
-  // ---------------------------------------- Constantes públicas -------------------------------
-
-  /**
-   * Imagen estándar del icono de la aplicación.
-   */
-  public static final ImageIcon ICON = new ImageIcon(MainMenuView.class
-                                                                 .getClassLoader()
-                                                                 .getResource(
-                                                                            Main.IMG_PATH
-                                                                            + Main.ICON_FILENAME));
-
-  /**
-   * Imagen escalada del icono de la aplicación.
-   */
-  public static final ImageIcon SCALED_ICON = new ImageIcon(ICON.getImage()
-                                                                .getScaledInstance(
-                                                                  50, 50, Image.SCALE_SMOOTH));
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
@@ -73,7 +54,7 @@ public class MainMenuView extends View {
     setResizable(false);
     setTitle(FRAME_TITLE);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(ICON.getImage());
+    setIconImage(Main.ICON.getImage());
     pack();
     setLocationRelativeTo(null);
   }

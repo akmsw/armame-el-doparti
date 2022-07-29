@@ -18,12 +18,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
@@ -39,11 +41,17 @@ import javax.swing.plaf.FontUIResource;
  */
 public final class Main {
 
+  // ---------------------------------------- Constantes privadas -------------------------------
+
+  private static final int ICON_SCALE = 50;
+
   // ---------------------------------------- Constantes públicas -------------------------------
 
   public static final int RANDOM_MIX = 0;
   public static final int BY_SKILLS_MIX = 1;
   public static final int PLAYERS_PER_TEAM = 7;
+  public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
+  public static final int MAX_NAME_LEN = 10;
 
   /**
    * Valor inicial del campo de ingreso de puntuaciones.
@@ -77,11 +85,29 @@ public final class Main {
   public static final String TTF_PATH = "fonts/";
   public static final String DOCS_PATH = "docs/";
   public static final String HELP_DOCS_PATH = "docs/help/";
+  public static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
 
   public static final Color LIGHT_GREEN = new Color(176, 189, 162);
   public static final Color MEDIUM_GREEN = new Color(109, 130, 118);
   public static final Color DARK_GREEN = new Color(41, 71, 74);
   public static final Color LIGHT_ORANGE = new Color(255, 238, 153);
+
+  /**
+   * Imagen estándar del icono de la aplicación.
+   */
+  public static final ImageIcon ICON = new ImageIcon(
+      Main.class
+          .getClassLoader()
+          .getResource(Main.IMG_PATH + Main.ICON_FILENAME)
+  );
+
+  /**
+   * Imagen escalada del icono de la aplicación.
+   */
+  public static final ImageIcon SCALED_ICON = new ImageIcon(
+      ICON.getImage()
+          .getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH)
+  );
 
   // ---------------------------------------- Campos privados -----------------------------------
 

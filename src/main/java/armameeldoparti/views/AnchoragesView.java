@@ -220,7 +220,7 @@ public class AnchoragesView extends View {
     setTitle(FRAME_TITLE);
     setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(MainMenuView.ICON.getImage());
+    setIconImage(Main.ICON.getImage());
     pack();
     setLocationRelativeTo(null);
   }

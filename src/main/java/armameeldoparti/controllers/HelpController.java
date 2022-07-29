@@ -35,9 +35,9 @@ public class HelpController implements Controller {
       7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.txt")
   );
 
-  private static final int TOTAL_PAGES = pagesMap.size();
   private static final int PAGE_TITLE_INDEX = 0;
   private static final int PAGE_FILENAME_INDEX = 1;
+  private static final int TOTAL_PAGES = pagesMap.size();
 
   // ---------------------------------------- Campos privados -----------------------------------
 

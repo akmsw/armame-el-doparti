@@ -202,7 +202,7 @@ public class NamesInputView extends View {
 
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setTitle(FRAME_TITLE);
-    setIconImage(MainMenuView.ICON.getImage());
+    setIconImage(Main.ICON.getImage());
     setResizable(false);
     addComboBox();
     addTextFields(Position.CENTRAL_DEFENDER, centralDefendersTextFields, centralDefenders);

@@ -4,7 +4,6 @@ import armameeldoparti.interfaces.Controller;
 import armameeldoparti.models.Position;
 import armameeldoparti.utils.Main;
 import armameeldoparti.views.AnchoragesView;
-import armameeldoparti.views.MainMenuView;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JCheckBox;
@@ -20,10 +19,6 @@ import javax.swing.JOptionPane;
  * @since 26/07/2022
  */
 public class AnchoragesController implements Controller {
-
-  // ---------------------------------------- Constantes privadas -------------------------------
-
-  private static final int MAX_PLAYERS_PER_ANCHORAGE = Main.PLAYERS_PER_TEAM - 1;
 
   // ---------------------------------------- Campos privados -----------------------------------
 
@@ -107,7 +102,7 @@ public class AnchoragesController implements Controller {
                                                     .count();
 
     if (!validChecksAmount(playersToAnchorAmount)) {
-      showErrorMessage("No puede haber más de " + MAX_PLAYERS_PER_ANCHORAGE
+      showErrorMessage("No puede haber más de " + Main.MAX_PLAYERS_PER_ANCHORAGE
                        + " ni menos de 2 jugadores en un mismo anclaje");
       return;
     }
@@ -119,7 +114,7 @@ public class AnchoragesController implements Controller {
     }
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
-      showErrorMessage("No puede haber más de " + 2 * MAX_PLAYERS_PER_ANCHORAGE
+      showErrorMessage("No puede haber más de " + 2 * Main.MAX_PLAYERS_PER_ANCHORAGE
                        + " jugadores anclados en total");
       return;
     }
@@ -158,7 +153,7 @@ public class AnchoragesController implements Controller {
                                                          "Seleccione qué anclaje desea borrar",
                                                          "Antes de continuar...", 2,
                                                          JOptionPane.QUESTION_MESSAGE,
-                                                         MainMenuView.SCALED_ICON, optionsDelete,
+                                                         Main.SCALED_ICON, optionsDelete,
                                                          optionsDelete[0]);
 
     if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
@@ -301,7 +296,7 @@ public class AnchoragesController implements Controller {
                     .setEnabled(false);
     }
 
-    if (2 * MAX_PLAYERS_PER_ANCHORAGE - anchoredPlayersAmount < 2) {
+    if (2 * Main.MAX_PLAYERS_PER_ANCHORAGE - anchoredPlayersAmount < 2) {
       anchoragesView.getNewAnchorageButton()
                     .setEnabled(false);
       anchoragesView.getCheckBoxesMap()
@@ -428,15 +423,15 @@ public class AnchoragesController implements Controller {
 
   /**
    * Revisa si la cantidad de jugadores anclados es al menos 2
-   * y no más de MAX_PLAYERS_PER_ANCHORAGE.
+   * y no más de Main.MAX_PLAYERS_PER_ANCHORAGE.
    *
    * @param playersToAnchorAmount Cantidad de jugadores que se intenta anclar.
    *
    * @return Si la cantidad de jugadores anclados es al menos 2
-   *         y no más de MAX_PLAYERS_PER_ANCHORAGE.
+   *         y no más de Main.MAX_PLAYERS_PER_ANCHORAGE.
    */
   private boolean validChecksAmount(int playersToAnchorAmount) {
-    return playersToAnchorAmount <= MAX_PLAYERS_PER_ANCHORAGE && playersToAnchorAmount >= 2;
+    return playersToAnchorAmount <= Main.MAX_PLAYERS_PER_ANCHORAGE && playersToAnchorAmount >= 2;
   }
 
   /**
@@ -461,7 +456,7 @@ public class AnchoragesController implements Controller {
    * @return Si la cantidad de jugadores anclados en total no supera el máximo permitido.
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
-    return anchoredPlayersAmount + playersToAnchorAmount <= 2 * MAX_PLAYERS_PER_ANCHORAGE;
+    return anchoredPlayersAmount + playersToAnchorAmount <= 2 * Main.MAX_PLAYERS_PER_ANCHORAGE;
   }
 
   /**

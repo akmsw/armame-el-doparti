@@ -63,7 +63,7 @@ public class ResultsView extends View {
     panel = new JPanel(new MigLayout("wrap"));
 
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(MainMenuView.ICON.getImage());
+    setIconImage(Main.ICON.getImage());
     setTitle(getFrameTitle());
     setResizable(false);
     addTable();

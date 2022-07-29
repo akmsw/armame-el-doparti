@@ -3,7 +3,6 @@ package armameeldoparti.controllers;
 import armameeldoparti.interfaces.Controller;
 import armameeldoparti.models.Player;
 import armameeldoparti.utils.Main;
-import armameeldoparti.views.MainMenuView;
 import armameeldoparti.views.NamesInputView;
 import java.util.Collection;
 import java.util.List;
@@ -22,20 +21,17 @@ import javax.swing.JTextField;
  */
 public class NamesInputController implements Controller {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Campos privados -----------------------------------
 
-  private static final int MAX_NAME_LEN = 10;
+  private NamesInputView namesInputView;
 
-  private static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
-
+  /**
+   * Criterios de distribución de jugadores.
+   */
   private static final String[] OPTIONS_MIX = {
     "Aleatoriamente",
     "Por puntuaciones"
   };
-
-  // ---------------------------------------- Campos privados -----------------------------------
-
-  private NamesInputView namesInputView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -107,7 +103,7 @@ public class NamesInputController implements Controller {
     int distribution = JOptionPane.showOptionDialog(
         null, "Seleccione el criterio de distribución de jugadores",
         "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
-        MainMenuView.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0]
+        Main.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0]
     );
 
     if (distribution == JOptionPane.CLOSED_OPTION) {
@@ -152,13 +148,12 @@ public class NamesInputController implements Controller {
    * mostrada en la lista desplegable.
    */
   public void textFieldEvent(List<JTextField> textFieldSet, List<Player> playersSet,
-                                    JTextField tf, JTextField source) {
-    if (!(Pattern.matches(NAMES_VALIDATION_REGEX, tf.getText()))) {
+                             JTextField tf, JTextField source) {
+    if (!(Pattern.matches(Main.NAMES_VALIDATION_REGEX, tf.getText()))) {
       JOptionPane.showMessageDialog(null,
                                     "El nombre del jugador debe estar formado por letras"
                                     + " de la A a la Z", "¡Error!",
                                     JOptionPane.ERROR_MESSAGE, null);
-
       tf.setText(null);
     } else {
       String name = tf.getText()
@@ -166,14 +161,13 @@ public class NamesInputController implements Controller {
                       .toUpperCase()
                       .replace(" ", "_");
 
-      if ((name.length() > MAX_NAME_LEN) || name.isBlank()
+      if ((name.length() > Main.MAX_NAME_LEN) || name.isBlank()
           || name.isEmpty() || alreadyExists(name)) {
         JOptionPane.showMessageDialog(null,
                                       "El nombre del jugador no puede estar vacío,"
-                                      + " tener más de " + MAX_NAME_LEN
+                                      + " tener más de " + Main.MAX_NAME_LEN
                                       + " caracteres, o estar repetido",
                                       "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-
         tf.setText(null);
       } else {
         playersSet.get(textFieldSet.indexOf(source))
