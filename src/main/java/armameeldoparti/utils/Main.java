@@ -275,6 +275,25 @@ public final class Main {
     return resultsController;
   }
 
+  /**
+   * Obtiene la posición correspondiente del parámetro a buscar
+   * entre los valores del mapa genérico de posiciones.
+   *
+   * @param map Mapa genérico con posiciones como claves.
+   * @param valueToSearch Valor a buscar en el mapa.
+   *
+   * @return La posición correspondiente al parámetro recibido
+   *         a buscar en el mapa genérico de posiciones.
+   */
+  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T valueToSearch) {
+    return (Position) map.entrySet()
+                         .stream()
+                         .filter(e -> e.getValue()
+                                       .equals(valueToSearch))
+                         .map(Map.Entry::getKey)
+                         .toArray()[0];
+  }
+
   // ---------------------------------------- Setters -------------------------------------------
 
   /**
@@ -293,25 +312,6 @@ public final class Main {
    */
   public static void setAnchorages(boolean a) {
     anchorages = a;
-  }
-
-  /**
-   * Obtiene la posición correspondiente del parámetro a buscar
-   * entre los valores del mapa genérico de posiciones.
-   *
-   * @param map Mapa genérico con posiciones como claves.
-   * @param valueToSearch Valor a buscar en el mapa.
-   *
-   * @return La posición correspondiente al parámetro recibido
-   *         a buscar en el mapa genérico de posiciones.
-   */
-  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T valueToSearch) {
-    return (Position) map.entrySet()
-                         .stream()
-                         .filter(e -> e.getValue()
-                                       .equals(valueToSearch))
-                         .map(Map.Entry::getKey)
-                         .toArray()[0];
   }
 
   // ---------------------------------------- Métodos privados ----------------------------------

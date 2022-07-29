@@ -420,6 +420,31 @@ public class AnchoragesController implements Controller {
   }
 
   /**
+   * Aplica el número de anclaje correspondiente a cada jugador.
+   * Luego, deselecciona sus casillas y las hace invisibles para
+   * evitar que dos o más anclajes contengan uno o más jugadores iguales.
+   *
+   * @param cbSet Arreglo de casillas a recorrer.
+   */
+  private void setAnchorages(List<JCheckBox> cbSet) {
+    Main.getPlayersSets()
+        .get(Main.getCorrespondingPosition(anchoragesView.getCheckBoxesMap(), cbSet))
+        .stream()
+        .filter(p -> cbSet.stream()
+                          .filter(JCheckBox::isSelected)
+                          .anyMatch(cb -> cb.getText()
+                                            .equals(p.getName())))
+        .forEach(p -> p.setAnchor(anchoragesAmount));
+
+    cbSet.stream()
+         .filter(JCheckBox::isSelected)
+         .forEach(cb -> {
+           cb.setVisible(false);
+           cb.setSelected(false);
+         });
+  }
+
+  /**
    * Revisa si la cantidad de jugadores anclados es al menos 2
    * y no más de Main.MAX_PLAYERS_PER_ANCHORAGE.
    *
@@ -455,30 +480,5 @@ public class AnchoragesController implements Controller {
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
     return anchoredPlayersAmount + playersToAnchorAmount <= 2 * Main.MAX_PLAYERS_PER_ANCHORAGE;
-  }
-
-  /**
-   * Aplica el número de anclaje correspondiente a cada jugador.
-   * Luego, deselecciona sus casillas y las hace invisibles para
-   * evitar que dos o más anclajes contengan uno o más jugadores iguales.
-   *
-   * @param cbSet Arreglo de casillas a recorrer.
-   */
-  private void setAnchorages(List<JCheckBox> cbSet) {
-    Main.getPlayersSets()
-        .get(Main.getCorrespondingPosition(anchoragesView.getCheckBoxesMap(), cbSet))
-        .stream()
-        .filter(p -> cbSet.stream()
-                          .filter(JCheckBox::isSelected)
-                          .anyMatch(cb -> cb.getText()
-                                            .equals(p.getName())))
-        .forEach(p -> p.setAnchor(anchoragesAmount));
-
-    cbSet.stream()
-         .filter(JCheckBox::isSelected)
-         .forEach(cb -> {
-           cb.setVisible(false);
-           cb.setSelected(false);
-         });
   }
 }

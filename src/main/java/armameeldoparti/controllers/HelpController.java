@@ -80,7 +80,9 @@ public class HelpController implements Controller {
    */
   @Override
   public void resetView() {
-    // No es necesario implementarlo en esta ventana
+    pageNumber = 0;
+
+    updatePage();
   }
 
   /**
@@ -90,10 +92,8 @@ public class HelpController implements Controller {
    * la ventana controlada y hace visible la ventana anterior.
    */
   public void backButtonEvent() {
-    pageNumber = 0;
-
-    updatePage();
     hideView();
+    resetView();
 
     Main.getMainMenuController()
         .showView();

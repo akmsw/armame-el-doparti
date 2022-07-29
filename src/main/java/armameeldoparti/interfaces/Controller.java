@@ -36,7 +36,7 @@ public interface Controller {
    * Centra la ventana en la pantalla principal.
    *
    * <p>EN LINUX: Si no se utiliza la combinación de {@code setLocation}
-   * con Toolkit y luego {@code setLocationRelativeTo} con null, la ventana
+   * con Toolkit y luego {@code setLocationRelativeTo(null)}, la ventana
    * no se centra correctamente, presentando una desviación variable.
    *
    * @param frame Ventana a centrar.
