@@ -76,8 +76,17 @@ public class NamesInputController implements Controller {
    */
   @Override
   public void resetView() {
-    namesInputView.dispose();
-    namesInputView = new NamesInputView();
+    hideView();
+    clearPlayersNames();
+
+    namesInputView.getComboBox()
+                  .setSelectedIndex(0);
+
+    namesInputView.getTextArea()
+                  .setText(null);
+
+    updateTextFields(namesInputView.getComboBox()
+                                   .getItemAt(0));
   }
 
   /**
@@ -242,8 +251,8 @@ public class NamesInputController implements Controller {
 
     for (int i = 0; i < namesInputView.getComboBoxOptions().length; i++) {
       if (text.equals(namesInputView.getComboBoxOptions()[i])) {
-        namesInputView.getTextFields()
-                      .get(i)
+        namesInputView.getTextFieldsMap()
+                      .get(Main.getCorrespondingPosition(Main.getPositionsMap(), text.toUpperCase()))
                       .forEach(tf -> namesInputView.getLeftPanel()
                                                    .add(tf, "growx"));
         break;
@@ -252,15 +261,36 @@ public class NamesInputController implements Controller {
 
     namesInputView.getLeftPanel()
                   .revalidate();
+
     namesInputView.getLeftPanel()
                   .repaint();
+  }
+
+  /**
+   * Limpia los nombres de los jugadores y vacía los
+   * campos de texto.
+   */
+  private void clearPlayersNames() {
+    namesInputView.getTextFieldsMap()
+                  .values()
+                  .stream()
+                  .flatMap(List::stream)
+                  .forEach(tf -> tf.setText(null));
+
+    for (List<Player> playersSet : Main.getPlayersSets()
+                                       .values()) {
+      for (Player player : playersSet) {
+        player.setName("");
+      }
+    }
   }
 
   /**
    * Quita los campos de texto del panel izquierdo de la ventana.
    */
   private void clearLeftPanel() {
-    namesInputView.getTextFields()
+    namesInputView.getTextFieldsMap()
+                  .values()
                   .stream()
                   .flatMap(Collection::stream)
                   .filter(tf -> tf.getParent() == namesInputView.getLeftPanel())

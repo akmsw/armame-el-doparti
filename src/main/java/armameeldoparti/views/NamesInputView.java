@@ -7,8 +7,9 @@ import armameeldoparti.utils.Main;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -59,7 +60,7 @@ public class NamesInputView extends View {
 
   private JTextArea textArea;
 
-  private List<List<JTextField>> textFields;
+  private Map<Position, List<JTextField>> textFieldsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -121,14 +122,16 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Obtiene la lista de campos de texto
-   * para ingreso de nombres.
+   * Obtiene el mapa que asocia cada conjunto de campos de texto
+   * con la posición correspondiente de los jugadores a los que
+   * representa.
    *
-   * @return La lista de compos de texto
-   *         para ingreso de nombres.
+   * @return El mapa que asocia cada conjunto de campos de texto
+   *         con la posición correspondiente de los jugadores a
+   *         los que representa.
    */
-  public List<List<JTextField>> getTextFields() {
-    return textFields;
+  public Map<Position, List<JTextField>> getTextFieldsMap() {
+    return textFieldsMap;
   }
 
   // ---------------------------------------- Métodos protegidos --------------------------------
@@ -189,8 +192,13 @@ public class NamesInputView extends View {
     List<JTextField> forwardsTextFields = new ArrayList<>();
     List<JTextField> goalkeepersTextFields = new ArrayList<>();
 
-    textFields = Arrays.asList(centralDefendersTextFields, lateralDefendersTextFields,
-                               midfieldersTextFields, forwardsTextFields, goalkeepersTextFields);
+    textFieldsMap = new EnumMap<>(Position.class);
+
+    textFieldsMap.put(Position.CENTRAL_DEFENDER, centralDefendersTextFields);
+    textFieldsMap.put(Position.LATERAL_DEFENDER, lateralDefendersTextFields);
+    textFieldsMap.put(Position.MIDFIELDER, midfieldersTextFields);
+    textFieldsMap.put(Position.FORWARD, forwardsTextFields);
+    textFieldsMap.put(Position.GOALKEEPER, goalkeepersTextFields);
 
     leftPanel = new JPanel(new MigLayout("wrap"));
     rightPanel = new JPanel(new MigLayout("wrap"));
@@ -205,11 +213,11 @@ public class NamesInputView extends View {
     setIconImage(Main.ICON.getImage());
     setResizable(false);
     addComboBox();
-    addTextFields(Position.CENTRAL_DEFENDER, centralDefendersTextFields, centralDefenders);
-    addTextFields(Position.LATERAL_DEFENDER, lateralDefendersTextFields, lateralDefenders);
-    addTextFields(Position.MIDFIELDER, midfieldersTextFields, midfielders);
-    addTextFields(Position.FORWARD, forwardsTextFields, forwards);
-    addTextFields(Position.GOALKEEPER, goalkeepersTextFields, goalkeepers);
+    addTextFields(Position.CENTRAL_DEFENDER, centralDefenders);
+    addTextFields(Position.LATERAL_DEFENDER, lateralDefenders);
+    addTextFields(Position.MIDFIELDER, midfielders);
+    addTextFields(Position.FORWARD, forwards);
+    addTextFields(Position.GOALKEEPER, goalkeepers);
     addTextArea();
     addButtons();
     addAnchorCheckBox();
@@ -268,7 +276,8 @@ public class NamesInputView extends View {
     comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
         Main.getNamesInputController()
-            .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem()));
+            .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
+    );
 
     leftPanel.add(comboBox, "growx");
   }
@@ -301,21 +310,21 @@ public class NamesInputView extends View {
    * Crea, almacena y configura los campos de texto correspondientes a cada posición.
    *
    * @param position     Posición de los jugadores.
-   * @param textFieldSet Arreglo de campos de texto para dicha posición.
    * @param playersSet   Arreglo de jugadores con dicha posición.
    */
-  private void addTextFields(Position position,
-                             List<JTextField> textFieldSet, List<Player> playersSet) {
+  private void addTextFields(Position position, List<Player> playersSet) {
     for (int i = 0; i < Main.getPlayersAmountMap()
                             .get(position) * 2; i++) {
       JTextField tf = new JTextField();
 
       tf.addActionListener(e ->
           Main.getNamesInputController()
-              .textFieldEvent(textFieldSet, playersSet, tf, (JTextField) e.getSource())
+              .textFieldEvent(textFieldsMap.get(position), playersSet,
+                              tf, (JTextField) e.getSource())
       );
 
-      textFieldSet.add(tf);
+      textFieldsMap.get(position)
+                   .add(tf);
     }
   }
 

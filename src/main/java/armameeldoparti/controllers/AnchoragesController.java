@@ -1,11 +1,9 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.interfaces.Controller;
-import armameeldoparti.models.Position;
 import armameeldoparti.utils.Main;
 import armameeldoparti.views.AnchoragesView;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
@@ -460,25 +458,6 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Obtiene la posición correspondiente al conjunto de casillas
-   * recibido por parámetro.
-   *
-   * @param cbSet Conjunto de casillas de las cuales se quiere obtener
-   *              su posición asociada.
-   *
-   * @return Posición asociada al conjunto de casillas.
-   */
-  private Position getCorrespondingPosition(List<JCheckBox> cbSet) {
-    return (Position) anchoragesView.getCheckBoxesMap()
-                                    .entrySet()
-                                    .stream()
-                                    .filter(e -> e.getValue()
-                                                  .equals(cbSet))
-                                    .map(Map.Entry::getKey)
-                                    .toArray()[0];
-  }
-
-  /**
    * Aplica el número de anclaje correspondiente a cada jugador.
    * Luego, deselecciona sus casillas y las hace invisibles para
    * evitar que dos o más anclajes contengan uno o más jugadores iguales.
@@ -487,7 +466,7 @@ public class AnchoragesController implements Controller {
    */
   private void setAnchorages(List<JCheckBox> cbSet) {
     Main.getPlayersSets()
-        .get(getCorrespondingPosition(cbSet))
+        .get(Main.getCorrespondingPosition(anchoragesView.getCheckBoxesMap(), cbSet))
         .stream()
         .filter(p -> cbSet.stream()
                           .filter(JCheckBox::isSelected)
