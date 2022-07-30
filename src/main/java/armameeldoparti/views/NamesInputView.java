@@ -53,6 +53,8 @@ public class NamesInputView extends View {
 
   private JButton mixButton;
 
+  private JCheckBox anchoragesCheckBox;
+
   private JComboBox<String> comboBox;
 
   private JPanel leftPanel;
@@ -83,6 +85,15 @@ public class NamesInputView extends View {
    */
   public JButton getMixButton() {
     return mixButton;
+  }
+
+  /**
+   * Obtiene la casilla de selección de anclajes.
+   *
+   * @return La casilla de selección de anclajes.
+   */
+  public JCheckBox getAnchoragesCheckBox() {
+    return anchoragesCheckBox;
   }
 
   /**
@@ -220,7 +231,7 @@ public class NamesInputView extends View {
     addTextFields(Position.GOALKEEPER, goalkeepers);
     addTextArea();
     addButtons();
-    addAnchorCheckBox();
+    addanchoragesCheckBox();
     add(masterPanel);
     pack();
     setLocationRelativeTo(null);
@@ -298,12 +309,12 @@ public class NamesInputView extends View {
   /**
    * Agrega la casilla de anclaje de jugadores.
    */
-  private void addAnchorCheckBox() {
-    JCheckBox anchorCheckBox = new JCheckBox("Anclar jugadores", false);
+  private void addanchoragesCheckBox() {
+    anchoragesCheckBox = new JCheckBox("Anclar jugadores", false);
 
-    anchorCheckBox.addActionListener(e -> Main.setAnchorages(!Main.thereAreAnchorages()));
+    anchoragesCheckBox.addActionListener(e -> Main.setAnchorages(!Main.thereAreAnchorages()));
 
-    rightPanel.add(anchorCheckBox, "center");
+    rightPanel.add(anchoragesCheckBox, "center");
   }
 
   /**

@@ -79,6 +79,9 @@ public class NamesInputController implements Controller {
     hideView();
     clearPlayersNames();
 
+    namesInputView.getAnchoragesCheckBox()
+                  .setSelected(false);
+
     namesInputView.getComboBox()
                   .setSelectedIndex(0);
 

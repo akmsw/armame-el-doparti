@@ -78,9 +78,10 @@ public class AnchoragesController implements Controller {
    * establecidos y, si se cumplen, procede con la distribución.
    */
   public void finishButtonEvent() {
-    // if !validAnchoragesCombination()
-    //   showErrorMessage("Error message")
-    //   return
+    // if (!validAnchoragesCombination()) {
+    //   showErrorMessage("Error message");
+    //   return;
+    // }
 
     finish();
   }
@@ -481,4 +482,15 @@ public class AnchoragesController implements Controller {
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
     return anchoredPlayersAmount + playersToAnchorAmount <= 2 * Main.MAX_PLAYERS_PER_ANCHORAGE;
   }
+
+  // /**
+  //  * WIP.
+  //  *
+  //  * @return WIP.
+  //  */
+  // private boolean validAnchoragesCombination() {
+  //   // TODO
+
+  //   return false;
+  // }
 }
