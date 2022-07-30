@@ -43,6 +43,9 @@ public final class Main {
 
   // ---------------------------------------- Constantes privadas -------------------------------
 
+  /**
+   * Tamaño, en píxeles, del alto y ancho del icono escalado.
+   */
   private static final int ICON_SCALE = 50;
 
   // ---------------------------------------- Constantes públicas -------------------------------
@@ -51,6 +54,7 @@ public final class Main {
   public static final int BY_SKILLS_MIX = 1;
   public static final int PLAYERS_PER_TEAM = 7;
   public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
+  public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
   public static final int MAX_NAME_LEN = 10;
 
   /**
@@ -169,6 +173,25 @@ public final class Main {
 
   // ---------------------------------------- Métodos públicos ----------------------------------
 
+  /**
+   * Obtiene la posición correspondiente del parámetro a buscar
+   * entre los valores del mapa genérico de posiciones.
+   *
+   * @param map Mapa genérico con posiciones como claves.
+   * @param valueToSearch Valor a buscar en el mapa.
+   *
+   * @return La posición correspondiente al parámetro recibido
+   *         a buscar en el mapa genérico de posiciones.
+   */
+  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T valueToSearch) {
+    return (Position) map.entrySet()
+                         .stream()
+                         .filter(e -> e.getValue()
+                                       .equals(valueToSearch))
+                         .map(Map.Entry::getKey)
+                         .toArray()[0];
+  }
+
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
@@ -273,25 +296,6 @@ public final class Main {
    */
   public static ResultsController getResultsController() {
     return resultsController;
-  }
-
-  /**
-   * Obtiene la posición correspondiente del parámetro a buscar
-   * entre los valores del mapa genérico de posiciones.
-   *
-   * @param map Mapa genérico con posiciones como claves.
-   * @param valueToSearch Valor a buscar en el mapa.
-   *
-   * @return La posición correspondiente al parámetro recibido
-   *         a buscar en el mapa genérico de posiciones.
-   */
-  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T valueToSearch) {
-    return (Position) map.entrySet()
-                         .stream()
-                         .filter(e -> e.getValue()
-                                       .equals(valueToSearch))
-                         .map(Map.Entry::getKey)
-                         .toArray()[0];
   }
 
   // ---------------------------------------- Setters -------------------------------------------

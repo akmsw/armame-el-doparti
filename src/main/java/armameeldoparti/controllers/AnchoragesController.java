@@ -78,10 +78,10 @@ public class AnchoragesController implements Controller {
    * establecidos y, si se cumplen, procede con la distribución.
    */
   public void finishButtonEvent() {
-    // if (!validAnchoragesCombination()) {
-    //   showErrorMessage("Error message");
-    //   return;
-    // }
+    if (!validAnchoragesCombination()) {
+      showErrorMessage("Error message");
+      return;
+    }
 
     finish();
   }
@@ -113,7 +113,7 @@ public class AnchoragesController implements Controller {
     }
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
-      showErrorMessage("No puede haber más de " + 2 * Main.MAX_PLAYERS_PER_ANCHORAGE
+      showErrorMessage("No puede haber más de " + Main.MAX_ANCHORED_PLAYERS
                        + " jugadores anclados en total");
       return;
     }
@@ -295,7 +295,7 @@ public class AnchoragesController implements Controller {
                     .setEnabled(false);
     }
 
-    if (2 * Main.MAX_PLAYERS_PER_ANCHORAGE - anchoredPlayersAmount < 2) {
+    if (Main.MAX_ANCHORED_PLAYERS - anchoredPlayersAmount < 2) {
       anchoragesView.getNewAnchorageButton()
                     .setEnabled(false);
       anchoragesView.getCheckBoxesMap()
@@ -318,7 +318,7 @@ public class AnchoragesController implements Controller {
   /**
    * Borra todos los anclajes que se hayan generado.
    *
-   * @see armameeldoparti.frames.AnchoragesFrame#deleteAnchorage(int)
+   * @see armameeldoparti.controllers.AnchoragesController#deleteAnchorage(int)
    */
   private void clearAnchorages() {
     do {
@@ -480,17 +480,17 @@ public class AnchoragesController implements Controller {
    * @return Si la cantidad de jugadores anclados en total no supera el máximo permitido.
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
-    return anchoredPlayersAmount + playersToAnchorAmount <= 2 * Main.MAX_PLAYERS_PER_ANCHORAGE;
+    return anchoredPlayersAmount + playersToAnchorAmount <= Main.MAX_ANCHORED_PLAYERS;
   }
 
-  // /**
-  //  * WIP.
-  //  *
-  //  * @return WIP.
-  //  */
-  // private boolean validAnchoragesCombination() {
-  //   // TODO
+  /**
+   * WIP.
+   *
+   * @return WIP.
+   */
+  private boolean validAnchoragesCombination() {
+    // TODO
 
-  //   return false;
-  // }
+    return false;
+  }
 }

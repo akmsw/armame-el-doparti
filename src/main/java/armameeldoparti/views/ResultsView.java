@@ -50,7 +50,8 @@ public class ResultsView extends View {
     }
 
     setFrameTitle(getFrameTitle().concat(Main.thereAreAnchorages()
-                                         ? "Con anclajes" : "Sin anclajes"));
+                                         ? "Con anclajes"
+                                         : "Sin anclajes"));
   }
 
   // ---------------------------------------- Métodos públicos ----------------------------------
@@ -92,8 +93,7 @@ public class ResultsView extends View {
                                                  .height);
       }
 
-      table
-      .setRowHeight(i, rowHeight);
+      table.setRowHeight(i, rowHeight);
     }
 
     pack();

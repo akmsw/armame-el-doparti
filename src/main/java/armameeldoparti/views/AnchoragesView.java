@@ -37,7 +37,6 @@ public class AnchoragesView extends View {
 
   private static final String GROW = "grow";
   private static final String GROWX_SPAN = "growx, span";
-
   private static final String FRAME_TITLE = "Anclaje de jugadores";
 
   // ---------------------------------------- Campos privados -----------------------------------

@@ -346,6 +346,7 @@ public class ResultsController implements Controller {
   private void fillTableFields() {
     resultsView.getTable()
                .setValueAt("EQUIPO #1", 0, 1);
+
     resultsView.getTable()
                .setValueAt("EQUIPO #2", 0, 2);
 
