@@ -1,6 +1,6 @@
 package armameeldoparti.views;
 
-import armameeldoparti.abstracts.View;
+import armameeldoparti.abstractclasses.View;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.utils.Main;

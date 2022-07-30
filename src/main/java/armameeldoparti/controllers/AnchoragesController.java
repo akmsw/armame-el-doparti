@@ -232,16 +232,19 @@ public class AnchoragesController implements Controller {
                   .setText(null);
 
     var wrapperAnchorageNum = new Object() {
-      private int anchorageNum = 1;
+      private int anchorageNum;
     };
 
     var wrapperCounter = new Object() {
       private int counter = 1;
     };
 
-    for (int i = 1; i <= anchoragesAmount; i++) {
+    for (wrapperAnchorageNum.anchorageNum = 1;
+         wrapperAnchorageNum.anchorageNum <= anchoragesAmount;
+         wrapperAnchorageNum.anchorageNum++) {
       anchoragesView.getTextArea()
-                    .append(" ----- ANCLAJE #" + i + " -----" + System.lineSeparator());
+                    .append(" ----- ANCLAJE #" + wrapperAnchorageNum.anchorageNum
+                            + " -----" + System.lineSeparator());
 
       Main.getPlayersSets()
           .entrySet()
@@ -260,7 +263,6 @@ public class AnchoragesController implements Controller {
                       .append(System.lineSeparator());
       }
 
-      wrapperAnchorageNum.anchorageNum++;
       wrapperCounter.counter = 1;
     }
   }
@@ -447,15 +449,16 @@ public class AnchoragesController implements Controller {
 
   /**
    * Revisa si la cantidad de jugadores anclados es al menos 2
-   * y no más de Main.MAX_PLAYERS_PER_ANCHORAGE.
+   * y no más de MAX_PLAYERS_PER_ANCHORAGE.
    *
    * @param playersToAnchorAmount Cantidad de jugadores que se intenta anclar.
    *
    * @return Si la cantidad de jugadores anclados es al menos 2
-   *         y no más de Main.MAX_PLAYERS_PER_ANCHORAGE.
+   *         y no más de MAX_PLAYERS_PER_ANCHORAGE.
    */
   private boolean validChecksAmount(int playersToAnchorAmount) {
-    return playersToAnchorAmount <= Main.MAX_PLAYERS_PER_ANCHORAGE && playersToAnchorAmount >= 2;
+    return playersToAnchorAmount <= Main.MAX_PLAYERS_PER_ANCHORAGE
+           && playersToAnchorAmount >= 2;
   }
 
   /**
@@ -489,8 +492,6 @@ public class AnchoragesController implements Controller {
    * @return WIP.
    */
   private boolean validAnchoragesCombination() {
-    // TODO
-
     return false;
   }
 }
