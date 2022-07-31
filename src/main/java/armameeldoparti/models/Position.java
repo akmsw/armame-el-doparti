@@ -1,7 +1,7 @@
 package armameeldoparti.models;
 
 /**
- * Clase correspondiente a las posibles posiciones para los jugadores.
+ * Possible players positions.
  *
  * @author Bonino, Francisco Ignacio.
  *

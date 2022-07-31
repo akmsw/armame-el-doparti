@@ -31,7 +31,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
 
 /**
- * Clase principal, sólo para inicialización del programa y declaración de campos útiles.
+ * Main class, only for program initialization and useful fields declaration.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -41,14 +41,14 @@ import javax.swing.plaf.FontUIResource;
  */
 public final class Main {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Private constants ---------------------------------
 
   /**
-   * Tamaño, en píxeles, del alto y ancho del icono escalado.
+   * Size, in pixels, of the scaled icon (height and width).
    */
   private static final int ICON_SCALE = 50;
 
-  // ---------------------------------------- Constantes públicas -------------------------------
+  // ---------------------------------------- Public constants ----------------------------------
 
   public static final int RANDOM_MIX = 0;
   public static final int BY_SKILLS_MIX = 1;
@@ -58,25 +58,24 @@ public final class Main {
   public static final int MAX_NAME_LEN = 10;
 
   /**
-   * Valor inicial del campo de ingreso de puntuaciones.
+   * Skill points spinners initial value.
    */
-  public static final int SCORE_INI = 1;
+  public static final int SKILL_INI = 1;
 
   /**
-   * Valor mínimo del campo de ingreso de puntuaciones.
+   * Skill points spinners minimum value.
    */
-  public static final int SCORE_MIN = 1;
+  public static final int SKILL_MIN = 1;
 
   /**
-   * Valor máximo del campo de ingreso de puntuaciones.
+   * Skill points spinners maximum value.
    */
-  public static final int SCORE_MAX = 5;
+  public static final int SKILL_MAX = 5;
 
   /**
-   * Paso utilizado para incremento y decremento
-   * en los campos de ingreso de puntuaciones.
+   * Increment and decrement step in the skill points spinners.
    */
-  public static final int SCORE_STEP = 1;
+  public static final int SKILL_STEP = 1;
 
   public static final float FONT_SIZE = 18f;
 
@@ -97,7 +96,7 @@ public final class Main {
   public static final Color LIGHT_ORANGE = new Color(255, 238, 153);
 
   /**
-   * Imagen estándar del icono de la aplicación.
+   * Standard-size program icon.
    */
   public static final ImageIcon ICON = new ImageIcon(
       Main.class
@@ -106,14 +105,14 @@ public final class Main {
   );
 
   /**
-   * Imagen escalada del icono de la aplicación.
+   * Scaled program icon.
    */
   public static final ImageIcon SCALED_ICON = new ImageIcon(
       ICON.getImage()
           .getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH)
   );
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private static int distribution;
 
@@ -133,18 +132,18 @@ public final class Main {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Constructor vacío.
+   * Empty constructor.
    */
   private Main() {
-    // No necesita cuerpo
+    // No body needed
   }
 
-  // ---------------------------------------- Punto de entrada principal ------------------------
+  // ---------------------------------------- Main entry point ----------------------------------
 
   /**
-   * Instancia y ejecuta el programa.
+   * Runs the program.
    *
-   * @param args Argumentos para ejecutar el programa (no implementado).
+   * @param args Program arguments (not used yet).
    */
   public static void main(String[] args) {
     playersAmountMap = new EnumMap<>(Position.class);
@@ -171,17 +170,15 @@ public final class Main {
     mainMenuController.showView();
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Obtiene la posición correspondiente del parámetro a buscar
-   * entre los valores del mapa genérico de posiciones.
+   * Gets the valueToSearch corresponding position in a generic map received.
    *
-   * @param map Mapa genérico con posiciones como claves.
-   * @param valueToSearch Valor a buscar en el mapa.
+   * @param map           Generic map with positions as keys.
+   * @param valueToSearch Value to search in the map.
    *
-   * @return La posición correspondiente al parámetro recibido
-   *         a buscar en el mapa genérico de posiciones.
+   * @return The valueToSearch corresponding position.
    */
   public static <T> Position getCorrespondingPosition(Map<Position, T> map, T valueToSearch) {
     return (Position) map.entrySet()
@@ -195,79 +192,76 @@ public final class Main {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Obtiene la distribución elegida para los jugadores.
+   * The chosen players distribution.
    *
-   * @return Distribución elegida.
+   * @return The chosen players distribution.
    */
   public static int getDistribution() {
     return distribution;
   }
 
   /**
-   * Indica si la opción de anclajes fue elegida.
+   * Indicates if the anchorages checkbox is checked or not.
    *
-   * @return Si hay o debe haber anclajes.
+   * @return Whether the anchorages checkbox is checked or not.
    */
   public static boolean thereAreAnchorages() {
     return anchorages;
   }
 
   /**
-   * Obtiene el mapa que asocia las posiciones con la cantidad de jugadores para cada una.
+   * Gets the map that contains the total amount of players for each position.
    *
-   * @return Mapa que asocia las posiciones con la cantidad de jugadores para cada una.
+   * @return The map that contains the total amount of players for each position.
    */
   public static Map<Position, Integer> getPlayersAmountMap() {
     return playersAmountMap;
   }
 
   /**
-   * Obtiene el mapa que asocia las posiciones con los conjuntos de jugadores.
+   * Gets the map that associates each players set with its corresponding position.
    *
-   * @return Mapa que asocia las posiciones con los conjuntos de jugadores.
+   * @return The map that associates each players set with its corresponding position.
    */
   public static Map<Position, List<Player>> getPlayersSets() {
     return playersSets;
   }
 
   /**
-   * Obtiene el mapa con las posiciones y su representación en cadenas de caracteres.
+   * Gets the map that associates each position with its string representation.
    *
-   * @return Mapa con las posiciones y su representación en cadenas de caracteres.
+   * @return The map that associates each position with its string representation.
    */
   public static Map<Position, String> getPositionsMap() {
     return positions;
   }
 
   /**
-   * Obtiene el controlador de la ventana del menú principal.
+   * Gets the main menu view controller.
    *
-   * @return El controlador de la ventana del menú principal.
+   * @return The main menu controller.
    */
   public static MainMenuController getMainMenuController() {
     return mainMenuController;
   }
 
-
   /**
-   * Obtiene el controlador de la ventana de ayuda.
+   * Gets the help view controller.
    *
-   * @return El controlador de la ventana de ayuda.
+   * @return The help view controller.
    */
   public static HelpController getHelpController() {
     return helpController;
   }
 
-
   /**
-   * Obtiene el controlador de la ventana de ingreso de nombres.
+   * Gets the names input view controller.
    *
-   * @return El controlador de la ventana de ingreso de nombres.
+   * @return The names input view controller.
    */
   public static NamesInputController getNamesInputController() {
     return namesInputController;
   }
-
 
   /**
    * Obtiene el controlador de la ventana de anclajes.
@@ -278,21 +272,19 @@ public final class Main {
     return anchoragesController;
   }
 
-
   /**
-   * Obtiene el controlador de la ventana de puntuaciones.
+   * Gets the skills input view controller.
    *
-   * @return El controlador de la ventana de puntuaciones.
+   * @return The skills input view controller.
    */
   public static SkillsInputController getSkillsInputController() {
     return skillsInputController;
   }
 
-
   /**
-   * Obtiene el controlador de la ventana de resultados.
+   * Gets the results view controller.
    *
-   * @return El controlador de la ventana de resultados.
+   * @return The results view controller.
    */
   public static ResultsController getResultsController() {
     return resultsController;
@@ -301,27 +293,27 @@ public final class Main {
   // ---------------------------------------- Setters -------------------------------------------
 
   /**
-   * Actualiza la distribución de jugadores elegida.
+   * Updates the chosen players distribution.
    *
-   * @param d Distribución elegida.
+   * @param newDistribution The new chosen players distribution.
    */
-  public static void setDistribution(int d) {
-    distribution = d;
+  public static void setDistribution(int newDistribution) {
+    distribution = newDistribution;
   }
 
   /**
-   * Actualiza el estado de la opción de anclajes.
+   * Updates the anchorages option state.
    *
-   * @param a Si hay o debe haber anclajes.
+   * @param newAnchoragesState The new anchorages option state.
    */
-  public static void setAnchorages(boolean a) {
-    anchorages = a;
+  public static void setAnchorages(boolean newAnchoragesState) {
+    anchorages = newAnchoragesState;
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Configura las propiedades de la interfaz gráfica del programa.
+   * Sets up the program's GUI properties.
    */
   private static void setGraphicalProperties() {
     UIManager.put("OptionPane.background", Main.LIGHT_GREEN);
@@ -338,7 +330,7 @@ public final class Main {
 
 
     try {
-      // Se crea y registra la fuente para poder utilizarla
+      // In order to use the font, it must be created and registered first
       Font programFont = Font.createFont(Font.TRUETYPE_FONT,
                                          Main.class
                                              .getClassLoader()
@@ -356,9 +348,9 @@ public final class Main {
   }
 
   /**
-   * Aplica la fuente para el programa.
+   * Sets the program font.
    *
-   * @param font Fuente a utilizar.
+   * @param font Font to use.
    */
   private static void setProgramFont(Font font) {
     Enumeration<Object> keys = UIManager.getDefaults()

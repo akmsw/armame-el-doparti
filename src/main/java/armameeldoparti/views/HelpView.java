@@ -15,7 +15,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de ayuda.
+ * Help view class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -25,14 +25,14 @@ import net.miginfocom.swing.MigLayout;
  */
 public class HelpView extends View {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Private constants ---------------------------------
 
   private static final int TEXT_AREA_ROWS = 20;
   private static final int TEXT_AREA_COLUMNS = 30;
 
   private static final String FRAME_TITLE = "Ayuda";
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private JButton previousPageButton;
   private JButton nextPageButton;
@@ -48,65 +48,65 @@ public class HelpView extends View {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye la ventana de ayuda.
+   * Builds the help view.
    */
   public HelpView() {
     initializeInterface();
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Obtiene la etiqueta de progreso de lectura.
+   * Gets the reading progress label.
    *
-   * @return La etiqueta de progreso de lectura.
+   * @return The reading progress label.
    */
   public JLabel getPagesCounter() {
     return pagesCounter;
   }
 
   /**
-   * Obtiene el botón de página previa.
+   * Gets the 'previous page' button.
    *
-   * @return El botón de página previa.
+   * @return The 'previous page' button.
    */
   public JButton getPreviousPageButton() {
     return previousPageButton;
   }
 
   /**
-   * Obtiene el botón de página siguiente.
+   * Gets the 'next page' button.
    *
-   * @return El botón de página siguiente.
+   * @return The 'next page' button.
    */
   public JButton getNextPageButton() {
     return nextPageButton;
   }
 
   /**
-   * Obtiene el área de texto.
+   * Gets the text area.
    *
-   * @return El área de texto.
+   * @return The text area.
    */
   public JTextArea getTextArea() {
     return textArea;
   }
 
   /**
-   * Obtiene el área de texto.
+   * Gets the scroll pane.
    *
-   * @return El área de texto.
+   * @return The scroll pane.
    */
   public JScrollPane getScrollPane() {
     return scrollPane;
   }
 
-  // ---------------------------------------- Métodos protegidos --------------------------------
+  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de la ventana.
+   * Initializes the view and makes it visible.
    */
   @Override
   protected void initializeInterface() {
@@ -125,7 +125,7 @@ public class HelpView extends View {
   }
 
   /**
-   * Coloca los botones en los paneles de la ventana.
+   * Adds the buttons to their corresponding panel.
    */
   @Override
   protected void addButtons() {
@@ -156,10 +156,10 @@ public class HelpView extends View {
     masterPanel.add(backButton, "growx, span");
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Añade el área de texto para mostrar las instrucciones del programa.
+   * Adds the text area where to display the instructions of the program.
    */
   private void addTextArea() {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
@@ -186,7 +186,7 @@ public class HelpView extends View {
   }
 
   /**
-   * Agrega la etiqueta que muestra el progreso de lectura de las instrucciones.
+   * Adds the reading progress label.
    */
   private void addPagesLabel() {
     pagesCounter = new JLabel();

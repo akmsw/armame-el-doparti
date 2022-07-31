@@ -11,7 +11,7 @@ import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana del menú principal del programa.
+ * Main menu view class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -21,12 +21,12 @@ import net.miginfocom.swing.MigLayout;
  */
 public class MainMenuView extends View {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Private constants ---------------------------------
 
   private static final String GROWX = "growx";
   private static final String FRAME_TITLE = Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION;
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private JPanel masterPanel;
 
@@ -39,10 +39,10 @@ public class MainMenuView extends View {
     initializeInterface();
   }
 
-  // ---------------------------------------- Métodos protegidos --------------------------------
+  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de la ventana.
+   * Initializes the view and makes it visible.
    */
   @Override
   protected void initializeInterface() {
@@ -60,7 +60,7 @@ public class MainMenuView extends View {
   }
 
   /**
-   * Coloca los botones en los paneles de la ventana.
+   * Adds the buttons to their corresponding panel.
    */
   @Override
   protected void addButtons() {
@@ -81,10 +81,10 @@ public class MainMenuView extends View {
     masterPanel.add(helpButton, GROWX);
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Añade la imagen de fondo al panel de la ventana.
+   * Adds the background image to the panel.
    */
   private void addBackground() {
     ImageIcon bgImage = new ImageIcon(getClass().getClassLoader()

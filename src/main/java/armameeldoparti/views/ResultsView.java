@@ -11,7 +11,7 @@ import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de resultados de distribución de jugadores.
+ * Results view class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -22,13 +22,12 @@ import net.miginfocom.swing.MigLayout;
 public class ResultsView extends View {
 
   /**
-   * Tamaño de ancho (en píxeles) fijo para las celdas de la tabla de resultados.
-   * Valor ajustado a fuente del programa teniendo en cuenta su tamaño y la cantidad
-   * máxima de caracteres en los nombres de los jugadores.
+   * Fixed table cells width (in pixels).
+   * This value depends on the program's font and the maximum player name length.
    */
   private static final int FIXED_CELL_WIDTH = 250;
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private String frameTitle;
 
@@ -54,10 +53,10 @@ public class ResultsView extends View {
                                          : "Sin anclajes"));
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de la ventana.
+   * Initializes the view and makes it visible.
    */
   @Override
   public void initializeInterface() {
@@ -73,17 +72,15 @@ public class ResultsView extends View {
   }
 
   /**
-   * Aplica el tamaño ideal para las celdas de la tabla.
+   * Sets the ideal table cells size.
    */
   public void setTableCellsSize() {
-    // Ajuste del ancho de las celdas
     for (int column = 0; column < table.getColumnCount(); column++) {
       table.getColumnModel()
            .getColumn(column)
            .setPreferredWidth(FIXED_CELL_WIDTH);
     }
 
-    // Ajuste del alto de las celdas
     for (int i = 0; i < table.getRowCount(); i++) {
       int rowHeight = table.getRowHeight();
 
@@ -103,18 +100,18 @@ public class ResultsView extends View {
   // --------------------------------------------- Getters --------------------------------------
 
   /**
-   * Obtiene el título de la ventana.
+   * Gets the frame title.
    *
-   * @return El título de la ventana.
+   * @return The frame title.
    */
   public String getFrameTitle() {
     return frameTitle;
   }
 
   /**
-   * Obtiene la tabla que muestra los resultados de la distribución.
+   * Gets the results table.
    *
-   * @return La tabla que muestra los resultados de la distribución.
+   * @return The results table.
    */
   public JTable getTable() {
     return table;
@@ -123,27 +120,27 @@ public class ResultsView extends View {
   // --------------------------------------------- Setters --------------------------------------
 
   /**
-   * Actualiza el objeto tabla que muestra los resultados de la distribución.
+   * Updates the results table.
    *
-   * @param table El nuevo objeto tabla.
+   * @param table The new results table.
    */
   public void setTable(JTable table) {
     this.table = table;
   }
 
   /**
-   * Actualiza el título de la ventana.
+   * Updates the frame's title.
    *
-   * @param frameTitle El nuevo título para la ventana.
+   * @param table The frame's new title.
    */
   public void setFrameTitle(String frameTitle) {
     this.frameTitle = frameTitle;
   }
 
-  // ---------------------------------------- Métodos protegidos --------------------------------
+  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
-   * Coloca los botones en los paneles de la ventana.
+   * Adds the buttons to their corresponding panel.
    */
   @Override
   protected void addButtons() {
@@ -168,11 +165,10 @@ public class ResultsView extends View {
     panel.add(backButton, "growx");
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Coloca en el panel principal de la ventana la tabla donde se mostrarán los jugadores
-   * y sus respectivas posiciones para cada equipo armado.
+   * Adds the results table in the view panel.
    */
   private void addTable() {
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

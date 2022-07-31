@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- * Clase correspondiente al controlador de la ventana de ingreso de nombres.
+ * Names input view controller class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -21,37 +21,38 @@ import javax.swing.JTextField;
  */
 public class NamesInputController implements Controller {
 
-  // ---------------------------------------- Campos privados -----------------------------------
-
-  private NamesInputView namesInputView;
+  // ---------------------------------------- Private constants ---------------------------------
 
   /**
-   * Criterios de distribución de jugadores.
+   * Possible players distribution methods.
    */
   private static final String[] OPTIONS_MIX = {
     "Aleatoriamente",
     "Por puntuaciones"
   };
 
+  // ---------------------------------------- Private fields ------------------------------------
+
+  private NamesInputView namesInputView;
+
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye el controlador para la vista de ingreso de nombres.
+   * Builds the names input view controller.
    *
-   * @param namesInputView Vista a controlar.
+   * @param namesInputView View to control.
    */
   public NamesInputController(NamesInputView namesInputView) {
     this.namesInputView = namesInputView;
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Hace visible la ventana controlada.
+   * Makes the controlled view visible.
    *
-   * <p>Actualiza el estado de la ventana de ingreso de nombres para
-   * coincidir con el estado inicial de la lista desplegable, y
-   * la hace visible.
+   * <p>Updates the view state according to the combobox
+   * initial state, and makes it visible.
    */
   @Override
   public void showView() {
@@ -63,7 +64,7 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Hace invisible la ventana controlada.
+   * Makes the controlled view invisible.
    */
   @Override
   public void hideView() {
@@ -72,7 +73,8 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Reinicia la ventana controlada a sus valores por defecto.
+   * Resets the controlled view to its default values and
+   * makes it invisible
    */
   @Override
   public void resetView() {
@@ -93,10 +95,10 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de retorno.
+   * 'Back' button event handler.
    *
-   * <p>Elimina y reinstancia la ventana de ingreso de nombres,
-   * y hace visible la ventana del menú principal.
+   * <p>Resets the controlled view to its default values, makes
+   * it invisible and shows the main menu view.
    */
   public void backButtonEvent() {
     resetView();
@@ -106,10 +108,11 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de selección de distribución.
+   * 'Mix' button event handler.
    *
-   * <p>Solicita al usuario el criterio de distribución de jugadores y hace
-   * visible la ventana que corresponda dependiendo de lo elegido.
+   * <p>Asks the user for the players distribution method, makes
+   * the controlled view invisible and shows the corresponding
+   * following view.
    */
   public void mixButtonEvent() {
     int distribution = JOptionPane.showOptionDialog(
@@ -131,14 +134,14 @@ public class NamesInputController implements Controller {
       Main.getAnchoragesController()
           .showView();
     } else if (Main.getDistribution() == Main.RANDOM_MIX) {
-      // Distribución aleatoria
+      // Random distribution
       Main.getResultsController()
           .setUp();
 
       Main.getResultsController()
           .showView();
     } else {
-      // Distribución por puntuaciones
+      // By skill points distribution
       Main.getSkillsInputController()
           .updateNameLabels();
 
@@ -150,14 +153,15 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Controlador para la escritura en campos de texto para ingreso de nombres.
+   * Text fields input event handler.
    *
-   * <p>Valida lo escrito por el usuario con una expresión regular para letras en
-   * alfabeto latino de la A a la Z, mayúsculas o minúsculas, con tildes o sin tildes,
-   * con o sin espacios. Si el nombre es inválido o ya existe, se solicita un reingreso.
+   * <p>Validates the user input with a regular expression that checks if the string
+   * contains only latin characters from A to Z including Ñ, uppercase or lowercase,
+   * with or without accent mark, with or without spaces.
+   * If the input is not valid or already exists, the program asks for a new input.
    *
-   * <p>Si el nombre ingresado es válido, se lo aplica a un jugador de la posición
-   * mostrada en la lista desplegable.
+   * <p>If the input is valid, it will be applied as a player name in the players set
+   * corresponding to the combobox selected option.
    */
   public void textFieldEvent(List<JTextField> textFieldSet, List<Player> playersSet,
                              JTextField tf, JTextField source) {
@@ -187,7 +191,7 @@ public class NamesInputController implements Controller {
 
         updateTextArea();
 
-        // Se habilita el botón de mezcla sólo cuando todos los jugadores tengan nombre
+        // The mix button is enabled only when every player has a name
         namesInputView.getMixButton()
                       .setEnabled(!alreadyExists(""));
       }
@@ -195,26 +199,23 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Controlador para la selección de opciones en la lista desplegable
+   * Combobox option change event handler.
    *
-   * <p>Actualiza los campos de texto para ingreso de nombres en base a la
-   * opción elegida de la lista desplegada.
+   * <p>Updates the shown text field according to the selected combobox option.
    *
-   * @param selectedOption Opción elegida de la lista desplegable.
+   * @param selectedOption Combobox selected option.
    */
   public void comboBoxEvent(String selectedOption) {
     updateTextFields(selectedOption);
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Actualiza el texto mostrado en el área de sólo lectura.
+   * Updates the text displayed in the read-only text area.
    *
-   * <p>Se muestran los jugadores ingresados en el orden en el que estén posicionados en sus
-   * respectivos arreglos.
-   *
-   * <p>El orden en el que se muestran es el mismo que el del enum de posiciones.
+   * <p>The players names are shown in the order they are positioned in their respective list.
+   * The order is the same of the positions enum.
    */
   private void updateTextArea() {
     var wrapperCounter = new Object() {
@@ -245,18 +246,19 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Conmuta la visibilidad de los campos de texto de ingreso de jugadores.
+   * Toggles the text fields visibility.
    *
-   * @param text Ítem seleccionado de la lista desplegable.
+   * @param selectedOption Combobox selected option.
    */
-  private void updateTextFields(String text) {
+  private void updateTextFields(String selectedOption) {
     clearLeftPanel();
 
-    for (int i = 0; i < namesInputView.getComboBoxOptions().length; i++) {
-      if (text.equals(namesInputView.getComboBoxOptions()[i])) {
+    for (int i = 0; i < namesInputView.getComboBoxOptions()
+                                      .length; i++) {
+      if (selectedOption.equals(namesInputView.getComboBoxOptions()[i])) {
         namesInputView.getTextFieldsMap()
                       .get(Main.getCorrespondingPosition(Main.getPositionsMap(),
-                                                         text.toUpperCase()))
+                                                         selectedOption.toUpperCase()))
                       .forEach(tf -> namesInputView.getLeftPanel()
                                                    .add(tf, "growx"));
         break;
@@ -271,8 +273,7 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Limpia los nombres de los jugadores y vacía los
-   * campos de texto.
+   * Clears the players names and text fields.
    */
   private void clearPlayersNames() {
     namesInputView.getTextFieldsMap()
@@ -290,7 +291,7 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Quita los campos de texto del panel izquierdo de la ventana.
+   * Removes the text fields from the view's left panel.
    */
   private void clearLeftPanel() {
     namesInputView.getTextFieldsMap()
@@ -303,11 +304,11 @@ public class NamesInputController implements Controller {
   }
 
   /**
-   * Revisa si ya existe algún jugador con el nombre recibido por parámetro.
+   * Checks if there is already a player with the specified name.
    *
-   * @param name Nombre a validar.
+   * @param name Name to validate.
    *
-   * @return Si ya existe algún jugador con el nombre recibido por parámetro.
+   * @return Whether there is already a player with the specified name or not.
    */
   private boolean alreadyExists(String name) {
     return Main.getPlayersSets()

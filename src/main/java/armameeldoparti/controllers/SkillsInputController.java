@@ -5,7 +5,7 @@ import armameeldoparti.utils.Main;
 import armameeldoparti.views.SkillsInputView;
 
 /**
- * Clase correspondiente al controlador de la ventana de ingreso de puntuaciones.
+ * Skills input view controller class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -15,25 +15,25 @@ import armameeldoparti.views.SkillsInputView;
  */
 public class SkillsInputController implements Controller {
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private SkillsInputView skillsInputView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye el controlador para la vista de ingreso de puntuaciones.
+   * Builds the skills input view controller.
    *
-   * @param skillsInputView Vista a controlar.
+   * @param skillsInputView View to control.
    */
   public SkillsInputController(SkillsInputView skillsInputView) {
     this.skillsInputView = skillsInputView;
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Hace visible la ventana controlada.
+   * Makes the controlled view visible.
    */
   @Override
   public void showView() {
@@ -41,7 +41,7 @@ public class SkillsInputController implements Controller {
   }
 
   /**
-   * Hace invisible la ventana controlada.
+   * Makes the controlled view invisible.
    */
   @Override
   public void hideView() {
@@ -50,7 +50,8 @@ public class SkillsInputController implements Controller {
   }
 
   /**
-   * Reinicia la ventana controlada a sus valores por defecto.
+   * Resets the controlled view to its default values
+   * and makes it invisible.
    */
   @Override
   public void resetView() {
@@ -59,11 +60,10 @@ public class SkillsInputController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de finalización.
+   * 'Finish' button event handler.
    *
-   * <p>Aplica las puntuaciones establecidas a cada jugador,
-   * hace invisible la ventana de ingreso de puntuaciones y
-   * muestra la ventana de resultados.
+   * <p>Sets the entered skill points for each player, makes
+   * the controlled view invisible and shows the results view.
    */
   public void finishButtonEvent() {
     skillsInputView.getSpinnersMap()
@@ -79,20 +79,20 @@ public class SkillsInputController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de reinicio de puntuaciones.
+   * 'Reset skill points' button event handler.
    *
-   * <p>Aplica a todos los jugadores la puntuación por defecto (0) y
-   * reinicia el valor de todos los campos de ingreso de puntuación.
+   * <p>Sets 0 skill points to every player and resets every spinner
+   * value to the minimum skill point.
    */
   public void resetSkillsButtonEvent() {
     resetSkills();
   }
 
   /**
-   * Controlador para la pulsación del botón de retorno.
+   * 'Back' button event handler.
    *
-   * <p>Elimina la ventana de ingreso de puntuaciones
-   * y hace visible la ventana correspondiente.
+   * <p>Resets the controlled view to its default values
+   * and shows the corresponding next view.
    */
   public void backButtonEvent() {
     resetView();
@@ -107,24 +107,24 @@ public class SkillsInputController implements Controller {
   }
 
   /**
-   * Actualiza las etiquetas con los nombres de los jugadores.
+   * Updates the players name labels.
    */
   public void updateNameLabels() {
     skillsInputView.updateNameLabels();
     skillsInputView.pack();
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Aplica a todos los jugadores la puntuación por defecto (0) y
-   * reinicia el valor de todos los campos de ingreso de puntuación.
+   * Sets 0 skill points to every player and resets every spinner
+   * value to the minimum skill point.
    */
   private void resetSkills() {
     skillsInputView.getSpinnersMap()
                    .forEach((k, v) -> {
                      k.setSkill(0);
-                     v.setValue(Main.SCORE_MIN);
+                     v.setValue(Main.SKILL_MIN);
                    });
   }
 }

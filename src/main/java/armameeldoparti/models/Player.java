@@ -1,7 +1,7 @@
 package armameeldoparti.models;
 
 /**
- * Clase representativa de los jugadores.
+ * Players class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -11,11 +11,11 @@ package armameeldoparti.models;
  */
 public class Player {
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private int skill;
-  private int anchor;
-  private int team;
+  private int anchorageNumber;
+  private int teamNumber;
 
   private String name;
 
@@ -24,64 +24,64 @@ public class Player {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye un jugador básico con los parámetros recibidos.
+   * Builds a basic player with the received parameters.
    *
-   * @param name     Nombre del jugador.
-   * @param position Posición del jugador.
+   * @param name     Player name.
+   * @param position Player position.
    */
   public Player(String name, Position position) {
     setName(name);
     setSkill(0);
-    setAnchor(0);
+    setAnchorageNumber(0);
     setTeam(0);
 
     this.position = position;
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Obtiene el puntaje asignado al jugador.
+   * Gets the player's skill.
    *
-   * @return El puntaje asignado al jugador.
+   * @return The player's skill.
    */
   public int getSkill() {
     return skill;
   }
 
   /**
-   * Obtiene el número de anclaje al que corresponde el jugador.
+   * Gets the player's anchorage number.
    *
-   * @return El número de anclaje correspondiente.
+   * @return The player's anchorage number.
    */
-  public int getAnchor() {
-    return anchor;
+  public int getAnchorageNumber() {
+    return anchorageNumber;
   }
 
   /**
-   * Obtiene el número de equipo al que pertenece el jugador.
+   * Gets the player's team number.
    *
-   * @return El número de equipo al que pertenece el jugador.
+   * @return The player's team number.
    */
   public int getTeam() {
-    return team;
+    return teamNumber;
   }
 
   /**
-   * Obtiene el nombre del jugador.
+   * Gets the player's name.
    *
-   * @return El nombre del jugador.
+   * @return The player's name.
    */
   public String getName() {
     return name;
   }
 
   /**
-   * Obtiene la posición del jugador.
+   * Gets the player's position.
    *
-   * @return La posición del jugador.
+   * @return The player's position.
    */
   public Position getPosition() {
     return position;
@@ -90,38 +90,38 @@ public class Player {
   // ---------------------------------------- Setters -------------------------------------------
 
   /**
-   * Actualiza el nombre del jugador.
+   * Updates the player's name.
    *
-   * @param name Nombre del jugador.
+   * @param name The player's new name.
    */
   public void setName(String name) {
     this.name = name;
   }
 
   /**
-   * Actualiza la puntuación del jugador.
+   * Updates the player's skill.
    *
-   * @param skill Puntuación del jugador.
+   * @param skill The player's new skill.
    */
   public void setSkill(int skill) {
     this.skill = skill;
   }
 
   /**
-   * Actualiza el número de anclaje correspondiente.
+   * Updates the player's anchorage number.
    *
-   * @param anchor Número de anclaje correspondiente.
+   * @param anchorageNumber The player's new anchorage number.
    */
-  public void setAnchor(int anchor) {
-    this.anchor = anchor;
+  public void setAnchorageNumber(int anchorageNumber) {
+    this.anchorageNumber = anchorageNumber;
   }
 
   /**
-   * Actualiza el número de equipo al que pertenece el jugador.
+   * Updates the player's team number.
    *
-   * @param team Número de equipo al que pertenece el jugador.
+   * @param teamNumber The player's new team number.
    */
-  public void setTeam(int team) {
-    this.team = team;
+  public void setTeam(int teamNumber) {
+    this.teamNumber = teamNumber;
   }
 }

@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * Clase correspondiente a los algoritmos de distribución aleatoria de jugadores.
+ * Random distribution class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -20,42 +20,37 @@ import java.util.stream.Collectors;
  */
 public class RandomMixer implements PlayersMixer {
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private int index;
-  private int chosenTeam1;
-  private int chosenTeam2;
+  private int team1;
+  private int team2;
 
   private Random randomGenerator;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye el objeto repartidor de jugadores.
+   * Builds the random distributor.
    */
   public RandomMixer() {
     randomGenerator = new Random();
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Distribuye los jugadores de manera completamente aleatoria.
+   * Distributes the players randomly without considering anchorages.
    *
-   * <p>Se recorre la mitad de los jugadores del conjunto de manera aleatoria
-   * y se les asigna a los jugadores escogidos como equipo el número aleatorio
-   * generado al principio.
+   * <p>Half of the players of each players set are randomly assigned a team number.
    *
-   * <p>A medida que se van eligiendo jugadores, su índice en el arreglo se
-   * almacena para evitar reasignarle un equipo.
+   * <p>The rest of the players in the group without team (team == 0) are assigned
+   * the oppsing team number.
    *
-   * <p>Al resto de jugadores que quedaron sin elegir de manera aleatoria
-   * (aquellos con team == 0) del mismo grupo, se les asigna el número de equipo
-   * opuesto.
+   * @param teams List that contains the two teams.
    *
-   * @param teams Lista contenedora de equipos.
-   *
-   * @return Los equipos con los jugadores distribuidos de la manera deseada.
+   * @return The updated teams with the players distributed randomly
+   *         without considering anchorages.
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
@@ -74,9 +69,9 @@ public class RandomMixer implements PlayersMixer {
 
         Player chosenPlayer = playersSet.get(index);
 
-        chosenPlayer.setTeam(chosenTeam1 + 1);
+        chosenPlayer.setTeam(team1 + 1);
 
-        teams.get(chosenTeam1)
+        teams.get(team1)
              .getPlayers()
              .get(chosenPlayer.getPosition())
              .add(chosenPlayer);
@@ -85,9 +80,9 @@ public class RandomMixer implements PlayersMixer {
       playersSet.stream()
                 .filter(p -> p.getTeam() == 0)
                 .forEach(p -> {
-                  p.setTeam(chosenTeam2 + 1);
+                  p.setTeam(team2 + 1);
 
-                  teams.get(chosenTeam2)
+                  teams.get(team2)
                        .getPlayers()
                        .get(p.getPosition())
                        .add(p);
@@ -100,41 +95,38 @@ public class RandomMixer implements PlayersMixer {
   }
 
   /**
-   * Distribuye los jugadores de manera aleatoria considerando los anclajes establecidos.
+   * Distributes the players randomly considering anchorages.
    *
-   * <p>Se elige un número aleatorio entre 0 y 1 para asignarle como equipo a un conjunto
-   * de jugadores, y el resto tendrá asignado el equipo opuesto.
+   * <p>A random number between 0 and 1 is chosen to assign a team to a set of players,
+   * and the rest will be assigned the opposite team.
    *
-   * <p>Se comienza recorriendo cada posición. Mientras la posición en
-   * la que se está trabajando no tenga la cantidad de jugadores especificada para dicha
-   * posición por equipo, se seguirá iterando.
+   * <p>It begins by going through each position. As long as the position being worked on
+   * does not have the number of players specified for that position per team,
+   * it will continue to iterate.
    *
-   * <p>Se escoge un jugador de manera aleatoria del conjunto total de jugadores con la
-   * posición seleccionada, y se chequea si está disponible (equipo = 0) y si tiene anclajes
-   * (anclaje != 0).
+   * <p>A player is chosen randomly from the set of players with the selected position,
+   * and it is checked if it is available (team == 0) and if it is anchored (anchorageNumber != 0).
    *
-   * <p>Si el jugador está disponible y está anclado con otros jugadores, se toman los
-   * jugadores de todas las posiciones con su mismo número de anclaje y se valida si se
-   * pueden agregar al equipo sin sobrepasar la cantidad de jugadores permitida por cada
-   * posición. En caso de que sí se pueda, se los agrega. Si no, se los ignora y se
-   * continúa iterando.
+   * <p>If the player is available and is anchored with other players, the players of all positions
+   * with the same anchorage number are taken and it is validated if they can be added to the team
+   * without exceeding the number of players allowed for each position.
+   * If it is possible, they're added. If not, they are ignored and the iteration continues.
    *
-   * <p>Si el jugador no tiene anclaje y se lo puede agregar sin sobrepasar el límite de
-   * jugadores para su posición, se lo agrega.
+   * <p>If the player does not have an anchorage number and can be added without going
+   * over the player limit for their position, it is added.
    *
-   * <p>Cuando el primer equipo elegido está lleno, se deja de iterar. Se toman todos los
-   * jugadores restantes y se les asigna el número de equipo contrario al elegido en un
-   * principio.
+   * <p>When the first chosen team is full, the iteration stops and all remaining players are
+   * assigned the opposite team number.
    *
-   * @param teams Lista contenedora de equipos.
+   * @param teams List that contains the two teams.
    *
-   * @return Los equipos con los jugadores distribuidos de la manera deseada.
+   * @return The updated teams with the players distributed randomly considering anchorages.
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
     updateChosenTeams(teams.size());
 
-    Team currentWorkingTeam = teams.get(chosenTeam1);
+    Team currentWorkingTeam = teams.get(team1);
 
     List<Integer> indexesSet = new ArrayList<>();
 
@@ -158,16 +150,16 @@ public class RandomMixer implements PlayersMixer {
           continue;
         }
 
-        if (player.getAnchor() == 0
+        if (player.getAnchorageNumber() == 0
             && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
-          player.setTeam(chosenTeam1 + 1);
+          player.setTeam(team1 + 1);
           currentWorkingTeam.getPlayers()
                             .get(player.getPosition())
                             .add(player);
           indexesSet.add(index);
           /*
-           * Acá se debería actualizar teamFull y hacer un continue,
-           * pero se entra en conflicto con java:S135.
+           * Here we should update the teamFull flag and continue,
+           * but it conflicts with sonarlint java:S135.
            */
         }
 
@@ -175,12 +167,13 @@ public class RandomMixer implements PlayersMixer {
                                            .values()
                                            .stream()
                                            .flatMap(List::stream)
-                                           .filter(p -> p.getAnchor() == player.getAnchor())
+                                           .filter(p -> p.getAnchorageNumber()
+                                                        == player.getAnchorageNumber())
                                            .collect(Collectors.toList());
 
         if (validateAnchorage(currentWorkingTeam, anchoredPlayers)) {
           anchoredPlayers.forEach(p -> {
-            p.setTeam(chosenTeam1 + 1);
+            p.setTeam(team1 + 1);
             currentWorkingTeam.getPlayers()
                               .get(p.getPosition())
                               .add(p);
@@ -200,8 +193,8 @@ public class RandomMixer implements PlayersMixer {
         .flatMap(List::stream)
         .filter(p -> p.getTeam() == 0)
         .forEach(p -> {
-          p.setTeam(chosenTeam2 + 1);
-          teams.get(chosenTeam2)
+          p.setTeam(team2 + 1);
+          teams.get(team2)
                .getPlayers()
                .get(p.getPosition())
                .add(p);
@@ -210,13 +203,13 @@ public class RandomMixer implements PlayersMixer {
     return teams;
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Actualiza de manera aleatoria el valor del índice de jugador a seleccionar.
+   * Randomly updates the player selection index.
    *
-   * @param range      Límite superior (exclusive) para el generador aleatorio.
-   * @param indexesSet Conjunto donde revisar si el índice generado ya está presente.
+   * @param range      Upper limit (exclusive) for the random number generator.
+   * @param indexesSet Set where to check if the generated index is already present.
    */
   private void updateIndex(int range, List<Integer> indexesSet) {
     do {
@@ -225,29 +218,31 @@ public class RandomMixer implements PlayersMixer {
   }
 
   /**
-   * Actualiza de manera aleatoria el valor de los equipos con los que se trabajará.
+   * Randomly updates the team numbers.
    *
-   * @param range Límite superior (exclusive) para el generador aleatorio.
+   * @param range Upper limit (exclusive) for the random number generator.
    */
   private void updateChosenTeams(int range) {
-    chosenTeam1 = randomGenerator.nextInt(range);
-    chosenTeam2 = 1 - chosenTeam1;
+    team1 = randomGenerator.nextInt(range);
+    team2 = 1 - team1;
   }
 
   /**
-   * Valida si todos los jugadores anclados pueden ser agregados al equipo.
+   * Checks if all anchored players can be added to a team.
    *
-   * <p>Se evalúa si algún jugador ya tiene un equipo asignado o si la posición de alguno de
-   * los jugadores del anclaje en el equipo destino ya está completa.
+   * <p>It checks if any player already has an assigned team or
+   * if the position of any of the anchored players in the destination
+   * team is already complete.
    *
-   * <p>Finalmente, se evalúa si al agregarlos no se supera el número de jugadores permitidos
-   * por posición por equipo. Esto se hace con el fin de evitar que en un mismo equipo queden
-   * más de la mitad de jugadores registrados de una misma posición.
+   * <p>Finally, it checks if adding them does not exceed the number
+   * of players allowed per position per team. This is done in order to
+   * avoid more than half of the registered players of the same position
+   * remaining on the same team.
    *
-   * @param team            Equipo donde se desea registrar los jugadores anclados.
-   * @param anchoredPlayers Lista de jugadores con el mismo anclaje.
+   * @param team            Team where the anchored players should be added.
+   * @param anchoredPlayers List containing the players with the same anchorage number.
    *
-   * @return Si se pueden agregar al equipo los jugadores anclados especificados.
+   * @return Whether all anchored players can be added to the team or not.
    */
   private boolean validateAnchorage(Team team, List<Player> anchoredPlayers) {
     return team.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM

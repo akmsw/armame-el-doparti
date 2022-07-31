@@ -21,8 +21,7 @@ import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de ingreso de nombres de jugadores
- * y de parámetros de distribución.
+ * Names input view class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -32,7 +31,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class NamesInputView extends View {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Private constants ---------------------------------
 
   private static final int TEXT_AREA_ROWS = 14;
   private static final int TEXT_AREA_COLUMNS = 12;
@@ -49,7 +48,7 @@ public class NamesInputView extends View {
     "Arqueros"
   };
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private JButton mixButton;
 
@@ -67,149 +66,102 @@ public class NamesInputView extends View {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye una ventana de ingreso de jugadores.
+   * Builds the names input view.
    */
   public NamesInputView() {
     getPlayersDistributionData();
     initializeInterface();
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods -------------------------------------
 
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Obtiene el botón de selección de distribución.
+   * Gets the 'mix' button.
    *
-   * @return El botón de selección de distribución.
+   * @return The 'mix' button.
    */
   public JButton getMixButton() {
     return mixButton;
   }
 
   /**
-   * Obtiene la casilla de selección de anclajes.
+   * Gets the anchorages checkbox.
    *
-   * @return La casilla de selección de anclajes.
+   * @return The anchorages checkbox.
    */
   public JCheckBox getAnchoragesCheckBox() {
     return anchoragesCheckBox;
   }
 
   /**
-   * Obtiene la lista desplegable.
+   * Gets the combobox.
    *
-   * @return La lista desplegable.
+   * @return The combobox.
    */
   public JComboBox<String> getComboBox() {
     return comboBox;
   }
 
   /**
-   * Obtiene el área de texto.
+   * Gets the text area.
    *
-   * @return El área de texto.
+   * @return The text area.
    */
   public JTextArea getTextArea() {
     return textArea;
   }
 
   /**
-   * Obtiene el panel izquierdo de la ventana.
+   * Gets the view's left panel.
    *
-   * @return El panel izquierdo de la ventana.
+   * @return The view's left panel.
    */
   public JPanel getLeftPanel() {
     return leftPanel;
   }
 
   /**
-   * Obtiene las opciones de la lista desplegable.
+   * Gets the combobox options.
    *
-   * @return Las opciones de la lista desplegable.
+   * @return The combobox options.
    */
   public String[] getComboBoxOptions() {
     return OPTIONS_COMBOBOX;
   }
 
   /**
-   * Obtiene el mapa que asocia cada conjunto de campos de texto
-   * con la posición correspondiente de los jugadores a los que
-   * representa.
+   * Gets the map that associates each text fields set with its
+   * corresponding position.
    *
-   * @return El mapa que asocia cada conjunto de campos de texto
-   *         con la posición correspondiente de los jugadores a
-   *         los que representa.
+   * @return The map that associates each text fields set with its
+   *         corresponding position.
    */
   public Map<Position, List<JTextField>> getTextFieldsMap() {
     return textFieldsMap;
   }
 
-  // ---------------------------------------- Métodos protegidos --------------------------------
+  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de la ventana.
+   * Initializes the view and makes it visible.
    */
   @Override
   protected void initializeInterface() {
-    List<Player> centralDefenders = new ArrayList<>();
-
-    initializeSet(centralDefenders, Position.CENTRAL_DEFENDER,
-                  Main.getPlayersAmountMap()
-                      .get(Position.CENTRAL_DEFENDER) * 2);
-
-    List<Player> lateralDefenders = new ArrayList<>();
-
-    initializeSet(lateralDefenders, Position.LATERAL_DEFENDER,
-                  Main.getPlayersAmountMap()
-                      .get(Position.LATERAL_DEFENDER) * 2);
-
-    List<Player> midfielders = new ArrayList<>();
-
-    initializeSet(midfielders, Position.MIDFIELDER,
-                  Main.getPlayersAmountMap()
-                      .get(Position.MIDFIELDER) * 2);
-
-    List<Player> forwards = new ArrayList<>();
-
-    initializeSet(forwards, Position.FORWARD,
-                  Main.getPlayersAmountMap()
-                      .get(Position.FORWARD) * 2);
-
-    List<Player> goalkeepers = new ArrayList<>();
-
-    initializeSet(goalkeepers, Position.GOALKEEPER,
-                  Main.getPlayersAmountMap()
-                      .get(Position.GOALKEEPER) * 2);
-
-    Main.getPlayersSets()
-        .put(Position.CENTRAL_DEFENDER, centralDefenders);
-
-    Main.getPlayersSets()
-        .put(Position.LATERAL_DEFENDER, lateralDefenders);
-
-    Main.getPlayersSets()
-        .put(Position.MIDFIELDER, midfielders);
-
-    Main.getPlayersSets()
-        .put(Position.FORWARD, forwards);
-
-    Main.getPlayersSets()
-        .put(Position.GOALKEEPER, goalkeepers);
-
-    List<JTextField> centralDefendersTextFields = new ArrayList<>();
-    List<JTextField> lateralDefendersTextFields = new ArrayList<>();
-    List<JTextField> midfieldersTextFields = new ArrayList<>();
-    List<JTextField> forwardsTextFields = new ArrayList<>();
-    List<JTextField> goalkeepersTextFields = new ArrayList<>();
-
     textFieldsMap = new EnumMap<>(Position.class);
 
-    textFieldsMap.put(Position.CENTRAL_DEFENDER, centralDefendersTextFields);
-    textFieldsMap.put(Position.LATERAL_DEFENDER, lateralDefendersTextFields);
-    textFieldsMap.put(Position.MIDFIELDER, midfieldersTextFields);
-    textFieldsMap.put(Position.FORWARD, forwardsTextFields);
-    textFieldsMap.put(Position.GOALKEEPER, goalkeepersTextFields);
+    for (Position position : Position.values()) {
+      List<Player> playersSet = new ArrayList<>();
+
+      initializeSet(playersSet, position, Main.getPlayersAmountMap()
+                                              .get(position) * 2);
+
+      Main.getPlayersSets()
+          .put(position, playersSet);
+
+      textFieldsMap.put(position, new ArrayList<>());
+    }
 
     leftPanel = new JPanel(new MigLayout("wrap"));
     rightPanel = new JPanel(new MigLayout("wrap"));
@@ -224,21 +176,17 @@ public class NamesInputView extends View {
     setIconImage(Main.ICON.getImage());
     setResizable(false);
     addComboBox();
-    addTextFields(Position.CENTRAL_DEFENDER, centralDefenders);
-    addTextFields(Position.LATERAL_DEFENDER, lateralDefenders);
-    addTextFields(Position.MIDFIELDER, midfielders);
-    addTextFields(Position.FORWARD, forwards);
-    addTextFields(Position.GOALKEEPER, goalkeepers);
+    addTextFields();
     addTextArea();
     addButtons();
-    addanchoragesCheckBox();
+    addAnchoragesCheckBox();
     add(masterPanel);
     pack();
     setLocationRelativeTo(null);
   }
 
   /**
-   * Coloca los botones en los paneles de la ventana.
+   * Adds the buttons to their corresponding panel.
    */
   @Override
   protected void addButtons() {
@@ -262,15 +210,14 @@ public class NamesInputView extends View {
     rightPanel.add(backButton, "grow");
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Llena el conjunto de jugadores recibido con jugadores sin nombre ni puntuación,
-   * y con la posición especificada.
+   * Fills the set with players without name and skill points, with the specified position.
    *
-   * @param set      Arreglo de jugadores a inicializar.
-   * @param position Posición de los jugadores del arreglo.
-   * @param capacity Capacidad del arreglo.
+   * @param set      Players set to initialize.
+   * @param position Players position.
+   * @param capacity Set's initial capacity.
    */
   private void initializeSet(List<Player> set, Position position, int capacity) {
     for (int i = 0; i < capacity; i++) {
@@ -279,7 +226,7 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Agrega la lista desplegable y le establece el oyente de eventos.
+   * Adds the combobox.
    */
   private void addComboBox() {
     comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
@@ -294,8 +241,8 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Añade al panel de la ventan el campo de texto de sólo lectura donde se
-   * mostrarán en tiempo real los nombres de jugadores ingresados por el usuario.
+   * Adds the read-only text area where the entered players names will be displayed
+   * in real time.
    */
   private void addTextArea() {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
@@ -307,9 +254,9 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Agrega la casilla de anclaje de jugadores.
+   * Adds the anchorages checkbox.
    */
-  private void addanchoragesCheckBox() {
+  private void addAnchoragesCheckBox() {
     anchoragesCheckBox = new JCheckBox("Anclar jugadores", false);
 
     anchoragesCheckBox.addActionListener(e -> Main.setAnchorages(!Main.thereAreAnchorages()));
@@ -318,45 +265,43 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Crea, almacena y configura los campos de texto correspondientes a cada posición.
-   *
-   * @param position     Posición de los jugadores.
-   * @param playersSet   Arreglo de jugadores con dicha posición.
+   * Builds, stores and configures each position text fields.
    */
-  private void addTextFields(Position position, List<Player> playersSet) {
-    for (int i = 0; i < Main.getPlayersAmountMap()
-                            .get(position) * 2; i++) {
-      JTextField tf = new JTextField();
+  private void addTextFields() {
+    for (Position position : Position.values()) {
+      for (int i = 0; i < Main.getPlayersAmountMap()
+                              .get(position) * 2; i++) {
+        JTextField tf = new JTextField();
 
-      tf.addActionListener(e ->
+        tf.addActionListener(e ->
           Main.getNamesInputController()
-              .textFieldEvent(textFieldsMap.get(position), playersSet,
+              .textFieldEvent(textFieldsMap.get(position), Main.getPlayersSets()
+                                                               .get(position),
                               tf, (JTextField) e.getSource())
-      );
+        );
 
-      textFieldsMap.get(position)
-                   .add(tf);
+        textFieldsMap.get(position)
+                     .add(tf);
+      }
     }
   }
 
   /**
-   * Obtiene la cantidad de jugadores para cada posición por equipo
-   * mediante expresiones regulares.
+   * Gets the number of players for each position per team using regular expressions.
    *
-   * <p>[CLMFG].+>.+ : Obtiene las líneas que comiencen con C, L, M, F, ó W,
-   * seguido por al menos un caracter '>' (busca las líneas que nos importan en
-   * el archivo .pda).
+   * <p>[CLMFG].+>.+ : Retrieves the lines that start with C, L, M, F, or W,
+   * followed by at least one '>' character (these are the lines that matters in the
+   * .pda file).
    *
-   * <p>(?!(?<=X)\\d). : Obtiene el trozo de la línea que no sea un número que nos
-   * interesa (el número que nos interesa ocuparía el lugar de la X).
+   * <p>(?!(?<=X)\\d). : Gets the part of the line that is not a number that we are
+   * interested in (the number would take the place of the X).
    *
-   * <p>Si el archivo .pda es modificado en cuanto a orden de las líneas importantes,
-   * se debe tener en cuenta que Position.values()[index] confía en que lo hallado
-   * se corresponde con el orden en el que están declarados los valores en el enum
-   * Position. Idem, si se cambian de orden los valores del enum Position, se
-   * deberá tener en cuenta que Position.values()[index] confía en el orden en el
-   * que se leerán los datos del archivo .pda y, por consiguiente, se deberá rever
-   * el orden de las líneas importantes de dichos archivos.
+   * <p>If the .pda file is modified in terms of the order of the important lines,
+   * it must be taken into account that Position.values()[index] trusts that what is found
+   * corresponds to the order in which the values in the Position enum are declared.
+   * Idem, if the order of the Position enum values are changed, it should be noted that
+   * Position.values()[index] trusts the order in which the data will be retrieved from the
+   * .pda file and, therefore, you should review the order of the important lines in the file.
    */
   private void getPlayersDistributionData() {
     BufferedReader buff = new BufferedReader(

@@ -8,7 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 /**
- * Clase correspondiente al controlador de la ventana de anclaje de jugadores.
+ * Anchorages view controller class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class AnchoragesController implements Controller {
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private int anchoredPlayersAmount = 0;
   private int anchoragesAmount = 0;
@@ -28,18 +28,18 @@ public class AnchoragesController implements Controller {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye el controlador para la vista de anclajes.
+   * Builds the anchorages view controller.
    *
-   * @param anchoragesView Vista a controlar.
+   * @param anchoragesView View to control.
    */
   public AnchoragesController(AnchoragesView anchoragesView) {
     this.anchoragesView = anchoragesView;
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Hace visible la ventana controlada.
+   * Makes the controlled view visible.
    */
   @Override
   public void showView() {
@@ -47,7 +47,7 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Hace invisible la ventana controlada.
+   * Makes the controlled view invisible.
    */
   @Override
   public void hideView() {
@@ -56,7 +56,7 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Reinicia la ventana controlada a sus valores por defecto.
+   * Resets the controlled view to its default values.
    */
   @Override
   public void resetView() {
@@ -64,7 +64,7 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Actualiza las casillas con los nombres de los jugadores.
+   * Updates the checkboxes text with the players names.
    */
   public void updateCheckBoxesText() {
     anchoragesView.updateCheckBoxesText();
@@ -72,10 +72,10 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de finalización.
+   * 'Finish' button event handler.
    *
-   * <p>Corrobora las condiciones necesarias para los anclajes
-   * establecidos y, si se cumplen, procede con la distribución.
+   * <p>Checks if the necessary anchorages conditions are met.
+   * If so, it proceeds with the players distribution.
    */
   public void finishButtonEvent() {
     if (!validAnchoragesCombination()) {
@@ -87,10 +87,10 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de nuevo anclaje.
+   * 'New anchorage' button event handler.
    *
-   * <p>Corrobora las condiciones necesarias para poder realizar
-   * el anclaje deseado y, si se cumplen, lo aplica.
+   * <p>Checks if the necessary conditions to make a new anchorage
+   * are met. If so, it does.
    */
   public void newAnchorageButtonEvent() {
     int playersToAnchorAmount = (int) anchoragesView.getCheckBoxesMap()
@@ -124,10 +124,10 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de borrado de último anclaje.
+   * 'Delete last anchorage' button event handler.
    *
-   * <p>Borra el último anclaje realizado, actualizando el área de texto y
-   * el estado de los botones.
+   * <p>Deletes the last anchorage made, updating the text area and the
+   * state of the buttons.
    */
   public void deleteLastAnchorageButtonEvent() {
     deleteAnchorage(anchoragesAmount);
@@ -136,10 +136,10 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de borrado de un anclaje.
+   * 'Delete anchorage' button event handler.
    *
-   * <p>Solicita al usuario el número de anclaje a borrar, y lo elimina,
-   * actualizando el área de texto y el estado de los botones.
+   * <p>Prompts the user for the number of the anchorage to delete,
+   * and removes it, updating the text area and the state of the buttons.
    */
   public void deleteAnchorageButtonEvent() {
     String[] optionsDelete = new String[anchoragesAmount];
@@ -163,10 +163,10 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de limpieza de anclajes.
+   * 'Clear anchorages' button event handler.
    *
-   * <p>Borra todos los anclajes realizados, actualizando el área de texto y
-   * el estado de los botones.
+   * <p>Clears every anchorage made, updating the text area and the
+   * state of the buttons.
    */
   public void clearAnchoragesButtonEvent() {
     clearAnchorages();
@@ -175,11 +175,11 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de retorno.
+   * 'Back' button event handler.
    *
-   * <p>Borra todos los anclajes realizados y elimina la ventana
-   * de ingreso de anclajes, luego hace visible la ventana
-   * de ingreso de nombres.
+   * <p>Deletes every anchorage made, resets the controlled view
+   * to its default state, makes it invisible, and shows the
+   * names input view.
    */
   public void backButtonEvent() {
     resetView();
@@ -189,21 +189,19 @@ public class AnchoragesController implements Controller {
         .showView();
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Crea una ventana de error con un texto personalizado.
+   * Builds an error window with a custom message.
    *
-   * @param errorMessage Mensaje de error a mostrar en la ventana.
+   * @param errorMessage Custom error message to show.
    */
   private void showErrorMessage(String errorMessage) {
     JOptionPane.showMessageDialog(null, errorMessage, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
   }
 
   /**
-   * Crea un nuevo anclaje en base a los jugadores correspondientes
-   * a las casillas seleccionadas y actualiza el valor de jugadores
-   * anclados en total.
+   * Sets a new anchorage based on the players checked.
    */
   private void newAnchorage() {
     anchoragesAmount++;
@@ -219,13 +217,12 @@ public class AnchoragesController implements Controller {
                                       .values()
                                       .stream()
                                       .flatMap(List::stream)
-                                      .filter(p -> p.getAnchor() != 0)
+                                      .filter(p -> p.getAnchorageNumber() != 0)
                                       .count();
   }
 
   /**
-   * Actualiza el área de texto mostrando la cantidad de anclajes
-   * y los jugadores anclados a los mismos.
+   * Updates the text area showing the anchorages details.
    */
   private void updateTextArea() {
     anchoragesView.getTextArea()
@@ -250,7 +247,7 @@ public class AnchoragesController implements Controller {
           .entrySet()
           .forEach(ps -> ps.getValue()
                            .stream()
-                           .filter(p -> p.getAnchor() == wrapperAnchorageNum.anchorageNum)
+                           .filter(p -> p.getAnchorageNumber() == wrapperAnchorageNum.anchorageNum)
                            .forEach(p -> {
                              anchoragesView.getTextArea()
                                            .append(" " + wrapperCounter.counter + ". "
@@ -268,8 +265,7 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Conmuta la habilitación de los botones del panel derecho
-   * y las casillas del panel izquierdo de la ventana.
+   * Toggles the buttons and checkboxes states.
    */
   private void toggleButtons() {
     if (anchoragesAmount > 0 && anchoragesAmount < 2) {
@@ -318,7 +314,7 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Borra todos los anclajes que se hayan generado.
+   * Clears the anchorages made.
    *
    * @see armameeldoparti.controllers.AnchoragesController#deleteAnchorage(int)
    */
@@ -329,14 +325,16 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Borra un anclaje específico elegido por el usuario.
+   * Deletes a specific anchorage.
    *
-   * <p>Los que tenían ese anclaje, ahora tienen anclaje 0.
-   * Si se desea borrar un anclaje que no sea el último, entonces
-   * a los demás (desde el anclaje elegido + 1 hasta anchoragesAmount)
-   * se les decrementa en 1 su número de anclaje.
+   * <p>The players that have the specified anchorage, now
+   * will have anchorage number 0.
+   * If the anchorage number to delete is not the last one,
+   * then the remaining players (from the chosen anchor + 1
+   * to anchoragesAmount) will have their anchorage number
+   * decremented by 1.
    *
-   * @param anchorageToDelete Número de anclaje a borrar.
+   * @param anchorageToDelete Anchorage number to delete.
    */
   private void deleteAnchorage(int anchorageToDelete) {
     for (int j = 0; j < anchoragesView.getCheckBoxesMap()
@@ -357,24 +355,23 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Cambia el número de anclaje de los jugadores deseados.
+   * Changes the anchorage number of certain players.
    *
-   * <p>Si el nuevo anclaje a aplicar es 0 (se quiere borrar un anclaje),
-   * entonces las casillas de los jugadores del anclaje objetivo se vuelven
-   * a poner visibles y se decrementa el número de jugadores anclados en la
-   * cantidad que corresponda.
+   * <p>If the replacement is 0 (an anchorage must be removed),
+   * then the players corresponding checkboxes will be visible and enabled
+   * again, and the anchored players amount will be decremented as needed.
    *
-   * @param target      Anclaje a reemplazar.
-   * @param replacement Nuevo anclaje a aplicar.
+   * @param target      Anchorage to replace.
+   * @param replacement New anchorage number to set.
    */
   private void changeAnchorage(int target, int replacement) {
     Main.getPlayersSets()
         .values()
         .stream()
         .flatMap(List::stream)
-        .filter(p -> p.getAnchor() == target)
+        .filter(p -> p.getAnchorageNumber() == target)
         .forEach(p -> {
-          p.setAnchor(replacement);
+          p.setAnchorageNumber(replacement);
 
           if (replacement == 0) {
             anchoragesView.getCheckBoxesMap()
@@ -392,11 +389,8 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Crea una nueva ventana de ingreso de puntuaciones si se requiere, o
-   * una nueva ventana de muestra de resultados.
-   *
-   * <p>Aquellas casillas que quedaron seleccionadas cuyos jugadores no
-   * fueron anclados, se deseleccionan.
+   * The checkboxes that were selected whose players were not anchored,
+   * are deselected. Then, shows the corresponding following view.
    */
   private void finish() {
     anchoragesView.getCheckBoxesMap()
@@ -407,11 +401,11 @@ public class AnchoragesController implements Controller {
                   .forEach(cb -> cb.setSelected(false));
 
     if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
-      // Distribución por puntuaciones
+      // By skill points distribution
       Main.getSkillsInputController()
           .showView();
     } else {
-      // Distribución aleatoria
+      // Random distribution
       Main.getResultsController()
           .setUp();
 
@@ -423,11 +417,10 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Aplica el número de anclaje correspondiente a cada jugador.
-   * Luego, deselecciona sus casillas y las hace invisibles para
-   * evitar que dos o más anclajes contengan uno o más jugadores iguales.
+   * Sets the corresponding anchorage number to the selected players.
+   * Then, unchecks their checkboxes and makes them invisible.
    *
-   * @param cbSet Arreglo de casillas a recorrer.
+   * @param cbSet Checkboxes set with players checked.
    */
   private void setAnchorages(List<JCheckBox> cbSet) {
     Main.getPlayersSets()
@@ -437,7 +430,7 @@ public class AnchoragesController implements Controller {
                           .filter(JCheckBox::isSelected)
                           .anyMatch(cb -> cb.getText()
                                             .equals(p.getName())))
-        .forEach(p -> p.setAnchor(anchoragesAmount));
+        .forEach(p -> p.setAnchorageNumber(anchoragesAmount));
 
     cbSet.stream()
          .filter(JCheckBox::isSelected)
@@ -448,13 +441,13 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Revisa si la cantidad de jugadores anclados es al menos 2
-   * y no más de MAX_PLAYERS_PER_ANCHORAGE.
+   * Checks if the selected players amount is at least 2 and
+   * no more than MAX_PLAYERS_PER_ANCHORAGE.
    *
-   * @param playersToAnchorAmount Cantidad de jugadores que se intenta anclar.
+   * @param playersToAnchorAmount Checked players to anchor.
    *
-   * @return Si la cantidad de jugadores anclados es al menos 2
-   *         y no más de MAX_PLAYERS_PER_ANCHORAGE.
+   * @return Whether the checked players amount is at least 2 and
+   *         no more than MAX_PLAYERS_PER_ANCHORAGE or not.
    */
   private boolean validChecksAmount(int playersToAnchorAmount) {
     return playersToAnchorAmount <= Main.MAX_PLAYERS_PER_ANCHORAGE
@@ -462,9 +455,9 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Revisa si el anclaje no contiene más de la mitad de jugadores de algún conjunto.
+   * Checks if half of any players set is selected or not.
    *
-   * @return Si el anclaje no contiene más de la mitad de jugadores de algún conjunto.
+   * @return Whether half of any players set is checked or not.
    */
   private boolean validCheckedPlayersPerPosition() {
     return anchoragesView.getCheckBoxesMap()
@@ -476,11 +469,12 @@ public class AnchoragesController implements Controller {
   }
 
   /**
-   * Revisa si la cantidad de jugadores anclados en total no supera el máximo permitido.
+   * Checks if the selected players amount is less than the maximum allowed per anchorage.
    *
-   * @param playersToAnchorAmount Cantidad de jugadores que se intenta anclar.
+   * @param playersToAnchorAmount Checked players amount.
    *
-   * @return Si la cantidad de jugadores anclados en total no supera el máximo permitido.
+   * @return Whether the selected players amount is less than the maximum allowed per
+   *         anchorage or not.
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
     return anchoredPlayersAmount + playersToAnchorAmount <= Main.MAX_ANCHORED_PLAYERS;

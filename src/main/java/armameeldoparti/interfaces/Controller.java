@@ -4,8 +4,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
- * Interfaz que especifica los métodos básicos para la interacción
- * entre los controladores y sus vistas asignadas.
+ * Interface that specifies the basic methods for
+ * interaction between controllers and their assigned views.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -15,31 +15,31 @@ import javax.swing.JFrame;
  */
 public interface Controller {
 
-  // ---------------------------------------- Métodos públicos abstractos -----------------------
+  // ---------------------------------------- Abstract public methods ---------------------------
 
   /**
-   * Hace visible la ventana controlada.
+   * Makes the controlled view visible.
    */
   void showView();
 
   /**
-   * Hace invisible la ventana controlada.
+   * Makes the controlled view invisible.
    */
   void hideView();
 
   /**
-   * Reinicia la ventana controlada a sus valores por defecto.
+   * Resets the controlled view to its default values.
    */
   void resetView();
 
   /**
-   * Centra la ventana en la pantalla principal.
+   * Centers the controlled view on the main screen.
    *
-   * <p>EN LINUX: Si no se utiliza la combinación de {@code setLocation}
-   * con Toolkit y luego {@code setLocationRelativeTo(null)}, la ventana
-   * no se centra correctamente, presentando una desviación variable.
+   * <p>ON LINUX: If the combination between {@code setLocation} with
+   * Toolkit and {@code setLocationRelativeTo(null)} is not used,
+   * the frame won't be centered correctly.
    *
-   * @param frame Ventana a centrar.
+   * @param frame Frame to center.
    */
   static void centerView(JFrame frame) {
     frame.setLocation((Toolkit.getDefaultToolkit()

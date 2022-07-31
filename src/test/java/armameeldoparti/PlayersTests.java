@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 /**
- * Clase de pruebas unitarias para jugadores.
+ * Players unit tests class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -23,14 +23,14 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 class PlayersTests implements ArgumentsProvider {
 
   /**
-   * Pruebas unitarias simples para los métodos de un jugador.
+   * Simple unit tests for players creation.
    */
   @ParameterizedTest
   @ArgumentsSource(PlayersTests.class)
-  void creation(String name, Position position) {
+  void creationTest(String name, Position position) {
     Player player = new Player(name, position);
 
-    assertEquals(0, player.getAnchor());
+    assertEquals(0, player.getAnchorageNumber());
     assertEquals(0, player.getSkill());
     assertEquals(0, player.getTeam());
     assertEquals(name, player.getName());
@@ -38,18 +38,18 @@ class PlayersTests implements ArgumentsProvider {
   }
 
   /**
-   * Genera valores para las pruebas unitarias.
+   * Generates values for the tests.
    *
-   * @return Arreglo con parámetros para las pruebas unitarias.
+   * @return An array with parameters to be used in the unit tests.
    */
   @Override
   public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
     return Stream.of(
-      Arguments.of("jugador a", Position.CENTRAL_DEFENDER),
-      Arguments.of("jugador b", Position.LATERAL_DEFENDER),
-      Arguments.of("jugador c", Position.MIDFIELDER),
-      Arguments.of("jugador d", Position.FORWARD),
-      Arguments.of("jugador e", Position.GOALKEEPER)
+      Arguments.of("player a", Position.CENTRAL_DEFENDER),
+      Arguments.of("player b", Position.LATERAL_DEFENDER),
+      Arguments.of("player c", Position.MIDFIELDER),
+      Arguments.of("player d", Position.FORWARD),
+      Arguments.of("player e", Position.GOALKEEPER)
     );
   }
 }

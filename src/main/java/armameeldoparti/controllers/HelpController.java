@@ -12,7 +12,7 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 
 /**
- * Clase correspondiente al controlador de la ventana de ayuda.
+ * Help view controller class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -22,7 +22,7 @@ import javax.swing.BorderFactory;
  */
 public class HelpController implements Controller {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Private constants ---------------------------------
 
   private static final Map<Integer, List<String>> pagesMap = Map.of(
       0, Arrays.asList("INTRODUCCIÓN", "helpIntro.txt"),
@@ -39,7 +39,7 @@ public class HelpController implements Controller {
   private static final int PAGE_FILENAME_INDEX = 1;
   private static final int TOTAL_PAGES = pagesMap.size();
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private int pageNumber = 0;
 
@@ -48,18 +48,18 @@ public class HelpController implements Controller {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye el controlador para la vista de ayuda.
+   * Builds the help view controller.
    *
-   * @param helpView Vista a controlar.
+   * @param helpView View to control.
    */
   public HelpController(HelpView helpView) {
     this.helpView = helpView;
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Hace visible la ventana controlada.
+   * Makes the controlled view visible.
    */
   @Override
   public void showView() {
@@ -67,7 +67,7 @@ public class HelpController implements Controller {
   }
 
   /**
-   * Hace invisible la ventana controlada.
+   * Makes the controlled view invisible.
    */
   @Override
   public void hideView() {
@@ -76,7 +76,7 @@ public class HelpController implements Controller {
   }
 
   /**
-   * Reinicia la ventana controlada a sus valores por defecto.
+   * Resets the controlled view to its default values.
    */
   @Override
   public void resetView() {
@@ -86,10 +86,10 @@ public class HelpController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de retorno.
+   * 'Back' button event handler.
    *
-   * <p>Reinicia la página al comienzo, hace invisible
-   * la ventana controlada y hace visible la ventana anterior.
+   * <p>Resets the page to the beginning, makes the controlled view
+   * invisible and shows the main menu view.
    */
   public void backButtonEvent() {
     hideView();
@@ -100,10 +100,10 @@ public class HelpController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de página siguiente.
+   * 'Next page' button event handler.
    *
-   * <p>Incrementa el número de página actualizando el estado de los
-   * botones y de la página mostrada en el área de texto.
+   * <p>Increments the page number, updating the state of the buttons,
+   * the displayed page in the text area and the reading progress label.
    */
   public void nextPageButtonEvent() {
     if (++pageNumber < TOTAL_PAGES - 1) {
@@ -118,10 +118,10 @@ public class HelpController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de página previa.
+   * 'Previous page' button event handler.
    *
-   * <p>Decrementa el número de página actualizando el estado de los
-   * botones y de la página mostrada en el área de texto.
+   * <p>Decrements the page number, updating the state of the buttons,
+   * the displayed page in the text area and the reading progress label.
    */
   public void previousPageButtonEvent() {
     if (--pageNumber > 0) {
@@ -136,9 +136,9 @@ public class HelpController implements Controller {
   }
 
   /**
-   * Actualiza la página de instrucciones mostrada en el área de texto.
+   * Updates the displayed page in the text area.
    *
-   * <p>Busca el archivo correspondiente al número de página y muestra su contenido.
+   * <p>Finds the text file corresponding to the page number and displays its content.
    */
   public void updatePage() {
     helpView.getScrollPane()
@@ -166,10 +166,10 @@ public class HelpController implements Controller {
     }
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Actualiza el texto mostrado en la etiqueta de progreso de lectura.
+   * Updates the reading progress label text.
    */
   private void updateLabel() {
     helpView.getPagesCounter()

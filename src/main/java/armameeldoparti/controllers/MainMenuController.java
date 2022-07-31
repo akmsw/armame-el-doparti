@@ -5,7 +5,7 @@ import armameeldoparti.utils.Main;
 import armameeldoparti.views.MainMenuView;
 
 /**
- * Clase correspondiente al controlador de la ventana del menú principal.
+ * Main menu view controller class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -15,25 +15,25 @@ import armameeldoparti.views.MainMenuView;
  */
 public class MainMenuController implements Controller {
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private MainMenuView mainMenuView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye el controlador para la vista del menú principal.
+   * Builds the main menu view controller.
    *
-   * @param mainMenuView Vista a controlar.
+   * @param mainMenuView View to control.
    */
   public MainMenuController(MainMenuView mainMenuView) {
     this.mainMenuView = mainMenuView;
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Hace visible la ventana controlada.
+   * Makes the controlled view visible.
    */
   @Override
   public void showView() {
@@ -41,7 +41,7 @@ public class MainMenuController implements Controller {
   }
 
   /**
-   * Hace invisible la ventana controlada.
+   * Makes the controlled view invisible.
    */
   @Override
   public void hideView() {
@@ -50,18 +50,18 @@ public class MainMenuController implements Controller {
   }
 
   /**
-   * Reinicia la ventana controlada a sus valores por defecto.
+   * Resets the controlled view to its default values.
    */
   @Override
   public void resetView() {
-    // No es necesario implementarlo en esta ventana
+    // Not needed in this controller
   }
 
   /**
-   * Controlador para la pulsación del botón de ayuda.
+   * 'Help' button event handler.
    *
-   * <p>Hace invisible la ventana del menú principal
-   * y hace visible la ventana de ayuda.
+   * <p>Makes the controlled view invisible
+   * and shows the help view.
    */
   public void helpButtonEvent() {
     hideView();
@@ -74,10 +74,10 @@ public class MainMenuController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de ayuda.
+   * 'Start' button event handler.
    *
-   * <p>Hace invisible la ventana del menú principal
-   *  y hace visible la ventana de ingreso de nombres.
+   * <p>Makes the controlled view invisible
+   * and shows the names input view.
    */
   public void startButtonEvent() {
     Main.getNamesInputController()

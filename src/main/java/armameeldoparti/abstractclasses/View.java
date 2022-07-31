@@ -3,7 +3,7 @@ package armameeldoparti.abstractclasses;
 import javax.swing.JFrame;
 
 /**
- * Clase abstracta que especifica los métodos básicos para las vistas.
+ * Abstract class that specifies the basic views methods.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -13,15 +13,15 @@ import javax.swing.JFrame;
  */
 public abstract class View extends JFrame {
 
-  // ---------------------------------------- Métodos protegidos abstractos ---------------------
+  // ---------------------------------------- Abstract protected methods ------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de la ventana.
+   * Initializes the view and makes it visible.
    */
   protected abstract void initializeInterface();
 
   /**
-   * Coloca los botones en los paneles de la ventana.
+   * Adds the buttons to their corresponding panel.
    */
   protected abstract void addButtons();
 }

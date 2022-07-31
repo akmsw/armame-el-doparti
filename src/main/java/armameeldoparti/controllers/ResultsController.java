@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- * Clase correspondiente al controlador de la ventana de muestra de resultados.
+ * Results view controller
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -28,12 +28,12 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class ResultsController implements Controller {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Private constants ---------------------------------
 
   private static final int TABLE_COLUMNS = 3;
 
   /**
-   * Arreglo de colores utilizados para los distintos anclajes en la tabla de resultados.
+   * Anchorages colors array used as cell background colors.
    */
   private static final Color[] ANCHORAGES_COLORS = {
     new Color(255, 204, 153),
@@ -44,7 +44,7 @@ public class ResultsController implements Controller {
     new Color(219, 220, 218)
   };
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private List<Team> teams;
 
@@ -56,18 +56,18 @@ public class ResultsController implements Controller {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye el controlador para la vista de resultados.
+   * Builds the results view controller.
    *
-   * @param resultsView Vista a controlar.
+   * @param resultsView View to control.
    */
   public ResultsController(ResultsView resultsView) {
     this.resultsView = resultsView;
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Hace visible la ventana controlada.
+   * Makes the controlled view visible.
    */
   @Override
   public void showView() {
@@ -75,7 +75,7 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Hace invisible la ventana controlada.
+   * Makes the controlled view invisible.
    */
   @Override
   public void hideView() {
@@ -84,7 +84,8 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Reinicia la ventana controlada a sus valores por defecto.
+   * Resets the controlled view to its default values and
+   * makes it invisible.
    */
   @Override
   public void resetView() {
@@ -93,11 +94,9 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Crea los equipos y la tabla donde se mostrarán los resultados dependiendo de la
-   * distribución elegida y de si la opción de anclajes fue seleccionada. Aplica el
-   * formato necesario para la tabla, llena los campos no variables de la misma y
-   * coloca los resultados de la distribución. Finalmente, hace visible la ventana
-   * de muestra de resultados.
+   * Creates the teams and the results table, applies the needed table format, fills
+   * the non-variable table cells and displays the distribution results. Then, makes
+   * the controlled view visible.
    */
   public void setUp() {
     Team team1 = new Team();
@@ -126,10 +125,11 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de retorno.
+   * 'Back' button event handler.
    *
-   * <p>Reinicia los equipos, elimina y reinstancia la ventana
-   * de ingreso de nombres, y hace visible la correspondiente.
+   * <p>Resets the teams, resets the controlled view to its default
+   * values and makes it invisible, and shows the corresponding previous
+   * view.
    */
   public void backButtonEvent() {
     resetTeams();
@@ -150,11 +150,10 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Controlador para la pulsación del botón de redistribución.
+   * 'Remix' button event handler.
    *
-   * <p>Reinicia los equipos, redistribuye los jugadores con el
-   * criterio establecido y actualiza la tabla de muestra de
-   * resultados.
+   * <p>Resets the teams, redistributes the players with the
+   * specified method and updates the results table.
    */
   public void remixButtonEvent() {
     resetTeams();
@@ -165,16 +164,10 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Llena la tabla con los datos cargados de los jugadores en cada equipo.
+   * Fills the table with the distribution results.
    *
-   * <p>Aquí se llenan los recuadros de la tabla confiando en el orden en el
-   * que se escribieron las posiciones en las filas de la columna 0
-   * (el mismo orden del enum de posiciones).
-   * Es decir, los primeros jugadores a cargar serán defensores centrales,
-   * luego defensores laterales, mediocampistas, delanteros y por último arqueros.
-   *
-   * <p>Si se cambian de lugar las etiquetas de las posiciones en la tabla, deberá
-   * cambiarse esta manera de llenarla, ya que no se respetará el nuevo orden establecido.
+   * <p>The table cells are filled trusting the positions order in the
+   * first column (same order as the positions enum).
    */
   public void updateTable() {
     var wrapperColumn = new Object() {
@@ -224,12 +217,11 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Distribuye los jugadores de manera aleatoria.
+   * Distributes the players randomly.
    *
-   * @param thereAreAnchorages Si la distribución debe tener en cuenta anclajes.
+   * @param thereAreAnchorages Whether there are anchorages or not.
    *
-   * @return Los equipos actualizados con los jugadores distribuidos
-   *         con el criterio establecido.
+   * @return The updated teams with the players distributed.
    */
   public List<Team> randomMix(boolean thereAreAnchorages) {
     return thereAreAnchorages
@@ -238,12 +230,11 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Distribuye los jugadores en base a sus puntuaciones.
+   * Distributes the players based on their skill points.
    *
-   * @param thereAreAnchorages Si la distribución debe tener en cuenta anclajes.
+   * @param thereAreAnchorages Whether there are anchorages or not.
    *
-   * @return Los equipos actualizados con los jugadores distribuidos
-   *         con el criterio establecido.
+   * @return The updated teams with the players distributed.
    */
   public List<Team> bySkillsMix(boolean thereAreAnchorages) {
     return thereAreAnchorages
@@ -251,33 +242,35 @@ public class ResultsController implements Controller {
            : bySkillsMixer.withoutAnchorages(teams);
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Ajusta el formato de centrado de texto y de colores de fondo y letra
-   * para cada celda de la tabla de resultados.
+   * Sets the table cells format, including text alignment and background and
+   * foreground colors.
    *
-   * <p>Fila 0 y columna 0 tienen fondo verde oscuro con letras blancas.
-   * Las demás celdas tendrán letras negras.
+   * <p> Row 0 & column 0 have dark green background and white foreground.
+   * The remaining cells will have black foreground.
    *
-   * <p>El color de fondo será anaranjado si la celda muestra puntajes.
-   * Si la celda corresponde a un jugador con un anclaje establecido, se toma
-   * como color de fondo el color correspondiente a su número de anclaje.
+   * <p>The background color will be yellow-ish if the cell shows any skill points
+   * related information. If the cell contains an anchored player name, its background
+   * will be the corresponding from the ANCHORAGES_COLORS array. If not, its background
+   * will be white.
    *
-   * <p>Si la celda muestra un puntaje o un título de equipo, estará centrada.
-   * De lo contrario, estará alineada a la izquierda.
+   * <p>The cell text will be centered if it shows any skill points related information,
+   * or a team name. Otherwise, it will be left-aligned.
    */
   private void setTableFormat() {
-    resultsView.getTable().setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+    resultsView.getTable()
+               .setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
       /**
-       * Configura el color de fondo y de letra de las casillas de la tabla.
+       * Configures the table cells background and foreground colors.
        *
-       * @param table      Tabla fuente.
-       * @param value      El valor a configurar en la celda.
-       * @param isSelected Si la celda está seleccionada.
-       * @param hasFocus   Si la celda está en foco.
-       * @param row        Coordenada de fila de la celda.
-       * @param column     Coordenada de columna de la celda.
+       * @param table      Source table.
+       * @param value      Table cell value.
+       * @param isSelected If the cell is selected.
+       * @param hasFocus   If the cell is focused.
+       * @param row        Cell row number.
+       * @param column     Cell column number.
        */
       @Override
       public Component getTableCellRendererComponent(JTable myTable, Object value,
@@ -329,8 +322,8 @@ public class ResultsController implements Controller {
                                            .filter(p -> p.getName() == value)
                                            .toArray()[0];
 
-        c.setBackground(playerOnCell.getAnchor() != 0
-                        ? ANCHORAGES_COLORS[playerOnCell.getAnchor() - 1]
+        c.setBackground(playerOnCell.getAnchorageNumber() != 0
+                        ? ANCHORAGES_COLORS[playerOnCell.getAnchorageNumber() - 1]
                         : Color.WHITE);
         c.setForeground(Color.BLACK);
         ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
@@ -341,7 +334,7 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Llena las celdas fijas de la tabla, cuyos textos no cambian.
+   * Fills the table cells whose texts do not change.
    */
   private void fillTableFields() {
     resultsView.getTable()
@@ -352,27 +345,33 @@ public class ResultsController implements Controller {
 
     for (int i = 1; i < resultsView.getTable().getRowCount() - 1; i++) {
       if (i == 1) {
-        resultsView.getTable().setValueAt(Main.getPositionsMap()
-                             .get(Position.CENTRAL_DEFENDER), i, 0);
+        resultsView.getTable()
+                   .setValueAt(Main.getPositionsMap()
+                                   .get(Position.CENTRAL_DEFENDER), i, 0);
       } else if (i < 4) {
-        resultsView.getTable().setValueAt(Main.getPositionsMap()
-                             .get(Position.LATERAL_DEFENDER), i, 0);
+        resultsView.getTable()
+                   .setValueAt(Main.getPositionsMap()
+                                   .get(Position.LATERAL_DEFENDER), i, 0);
       } else if (i < 6) {
-        resultsView.getTable().setValueAt(Main.getPositionsMap()
-                             .get(Position.MIDFIELDER), i, 0);
+        resultsView.getTable()
+                   .setValueAt(Main.getPositionsMap()
+                                   .get(Position.MIDFIELDER), i, 0);
       } else if (i < 7) {
-        resultsView.getTable().setValueAt(Main.getPositionsMap()
-                             .get(Position.FORWARD), i, 0);
+        resultsView.getTable()
+                   .setValueAt(Main.getPositionsMap()
+                                   .get(Position.FORWARD), i, 0);
       }
     }
 
     if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
-      resultsView.getTable().setValueAt(Main.getPositionsMap()
-                           .get(Position.GOALKEEPER),
-                       resultsView.getTable().getRowCount() - 2, 0);
+      resultsView.getTable()
+                 .setValueAt(Main.getPositionsMap()
+                                 .get(Position.GOALKEEPER),
+                             resultsView.getTable()
+                                        .getRowCount() - 2, 0);
       resultsView.getTable()
                  .setValueAt("PUNTAJE DEL EQUIPO", resultsView.getTable()
-                                                              .getRowCount() - 1, 0);
+                                                                      .getRowCount() - 1, 0);
     } else {
       resultsView.getTable()
                  .setValueAt(Main.getPositionsMap()
@@ -383,8 +382,7 @@ public class ResultsController implements Controller {
   }
 
   /**
-   * Reinicia los equipos de todos los jugadores y vacía
-   * los arreglos representativos de cada equipo.
+   * Resets the teams and clears the players lists.
    */
   private void resetTeams() {
     teams.forEach(Team::clear);

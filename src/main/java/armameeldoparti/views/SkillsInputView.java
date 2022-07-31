@@ -19,7 +19,7 @@ import javax.swing.border.SoftBevelBorder;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de ingreso de puntuación de jugadores.
+ * Skill points input view
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -29,12 +29,12 @@ import net.miginfocom.swing.MigLayout;
  */
 public class SkillsInputView extends View {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Private constants ---------------------------------
 
   private static final String GROW_SPAN = "grow, span";
   private static final String FRAME_TITLE = "Ingreso de puntuaciones";
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields -------------------------------------
 
   private JPanel masterPanel;
 
@@ -44,16 +44,16 @@ public class SkillsInputView extends View {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye una ventana de ingreso de puntuaciones.
+   * Builds the skill points input view.
    */
   public SkillsInputView() {
     initializeInterface();
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Inicializa la interfaz gráfica de esta ventana.
+   * Initializes the view and makes it visible.
    */
   @Override
   public void initializeInterface() {
@@ -74,7 +74,7 @@ public class SkillsInputView extends View {
   }
 
   /**
-   * Actualiza las etiquetas con los nombres de los jugadores.
+   * Updates the labels with the players names.
    */
   public void updateNameLabels() {
     for (Position position : Position.values()) {
@@ -89,18 +89,18 @@ public class SkillsInputView extends View {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Obtiene el mapa que asocia cada jugador con su respectivo campo de puntuación.
+   * Gets the map that associates each player with its corresponding skill points spinner.
    *
-   * @return El mapa que asocia cada jugador con su respectivo campo de puntuación.
+   * @return The map that associates each player with its corresponding skill points spinner.
    */
   public Map<Player, JSpinner> getSpinnersMap() {
     return spinnersMap;
   }
 
-  // ---------------------------------------- Métodos protegidos --------------------------------
+  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
-   * Añade los botones al panel de la ventana.
+   * Adds the buttons to their corresponding panel.
    */
   @Override
   protected void addButtons() {
@@ -128,10 +128,10 @@ public class SkillsInputView extends View {
     masterPanel.add(backButton, GROW_SPAN);
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Añade los campos de puntuación al panel de la ventana.
+   * Adds the spinners to their corresponding panel.
    */
   private void addSpinners() {
     for (Position position : Position.values()) {
@@ -146,10 +146,10 @@ public class SkillsInputView extends View {
                                     .get(position);
 
       for (int j = 0; j < currentSet.size(); j++) {
-        JSpinner spinner = new JSpinner(new SpinnerNumberModel(Main.SCORE_INI,
-                                                               Main.SCORE_MIN,
-                                                               Main.SCORE_MAX,
-                                                               Main.SCORE_STEP));
+        JSpinner spinner = new JSpinner(new SpinnerNumberModel(Main.SKILL_INI,
+                                                               Main.SKILL_MIN,
+                                                               Main.SKILL_MAX,
+                                                               Main.SKILL_STEP));
         JLabel nameLabel = new JLabel(currentSet.get(j)
                                                 .getName());
 

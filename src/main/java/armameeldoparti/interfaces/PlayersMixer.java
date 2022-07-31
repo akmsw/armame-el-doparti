@@ -4,7 +4,7 @@ import armameeldoparti.models.Team;
 import java.util.List;
 
 /**
- * Interfaz que especifica los modos de distribución de jugadores.
+ * Interface that specifies the players distribution methods.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -14,23 +14,25 @@ import java.util.List;
  */
 public interface PlayersMixer {
 
-  // ---------------------------------------- Métodos públicos abstractos -----------------------
+  // ---------------------------------------- Abstract public methods ---------------------------
 
   /**
-   * Distribuye los jugadores sin tener en cuenta anclajes.
+   * Distributes the players without considering anchorages.
    *
-   * @param teams Lista contenedora de equipos.
+   * @param teams List that contains the two teams.
    *
-   * @return Los equipos con los jugadores distribuidos de la manera deseada.
+   * @return The updated teams with the players distributed
+   *         without considering anchorages.
    */
   List<Team> withoutAnchorages(List<Team> teams);
 
   /**
-   * Distribuye los jugadores teniendo en cuenta anclajes.
+   * Distributes the players considering anchorages.
    *
-   * @param teams Lista contenedora de equipos.
+   * @param teams List that contains the two teams.
    *
-   * @return Los equipos con los jugadores distribuidos de la manera deseada.
+   * @return The updated teams with the players distributed
+   *         considering anchorages.
    */
   List<Team> withAnchorages(List<Team> teams);
 }

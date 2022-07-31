@@ -32,7 +32,7 @@
       - [Minimum version](https://github.com/akmsw/armame-el-doparti#minimum-version)
       - [Recommended version](https://github.com/akmsw/armame-el-doparti#recommended-version)
   - [Download](https://github.com/akmsw/armame-el-doparti#-download)
-  - [Installation & execution](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-installation--execution)
+  - [Installing & running](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-installing--running)
   - [How to use it?](https://github.com/akmsw/armame-el-doparti#-how-to-use-it)
   - [New features](https://github.com/akmsw/armame-el-doparti#-new-features)
     - [Players anchoring](https://github.com/akmsw/armame-el-doparti#-players-anchoring)
@@ -56,7 +56,7 @@
   ## 📥 Download
   The latest stable version of the program is available for download in the [releases](https://github.com/akmsw/armame-el-doparti/releases) section.
 
-  ## ▶️ Installation & execution
+  ## ▶️ Installing & running
   Beyond the listed requirements, no further installation is needed to run this program.\
   Once the file with the ***.jar*** extension has been downloaded, and regardless of the operating system you use, you can go to the folder where it is located and open it with a simple *double click*.\
   In case you are on Linux and the program does not open, see the [troubleshooting on Linux](https://github.com/akmsw/armame-el-doparti#-en-linux) section.\
@@ -119,7 +119,7 @@
   *Anchorages window*
 
   ![skills_window](./src/main/res/img/readme/ss5.png)\
-  *Skills window*
+  *Skill points input window*
 
   ![results_window_1](./src/main/res/img/readme/ss6.png)\
   *Random distribution without anchorages*

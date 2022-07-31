@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Clase representativa de los equipos.
+ * Team class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class Team {
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private List<Player> goalkeepers;
   private List<Player> centralDefenders;
@@ -30,7 +30,7 @@ public class Team {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye un equipo con sus posiciones vacías.
+   * Builds a basic team with empty positions.
    */
   public Team() {
     goalkeepers = new ArrayList<>();
@@ -48,10 +48,10 @@ public class Team {
     teamPlayers.put(Position.FORWARD, forwards);
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods -------------------------------------
 
   /**
-   * Vacía las listas de jugadores de cada posición.
+   * Clears all players lists.
    */
   public void clear() {
     teamPlayers.values()
@@ -61,9 +61,9 @@ public class Team {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Obtiene la cantidad total de jugadores en el equipo.
+   * Gets the amount of players in this team.
    *
-   * @return Cantidad total de jugadores en el equipo.
+   * @return The amount of players in this team.
    */
   public int getPlayersCount() {
     return teamPlayers.values()
@@ -73,9 +73,9 @@ public class Team {
   }
 
   /**
-   * Obtiene la puntuación total acumulada hasta el momento en el equipo.
+   * Gets the team skill points accumulated so far.
    *
-   * @return La puntuación total acumulada hasta el momento en el equipo.
+   * @return The team skill points accumulated so far.
    */
   public int getTeamSkill() {
     return teamPlayers.values()
@@ -86,12 +86,11 @@ public class Team {
   }
 
   /**
-   * Revisa si una posición en particular del equipo ya tiene la cantidad de
-   * jugadores que debería.
+   * Checks if a particular position players list is full.
    *
-   * @param position Posición a revisar.
+   * @param position The position to check.
    *
-   * @return Si el equipo ya tiene la cantidad de jugadores necesaria para esa posición.
+   * @return Whether the position players list is full or not.
    */
   public boolean isPositionFull(Position position) {
     return teamPlayers.get(position)
@@ -100,9 +99,9 @@ public class Team {
   }
 
   /**
-   * Obtiene el mapa con los jugadores de este equipo para cada posición.
+   * Gets the map that associates each position with its corresponding players list.
    *
-   * @return Mapa con los jugadores de este equipo para cada posición.
+   * @return The map that associates each position with its corresponding players list.
    */
   public Map<Position, List<Player>> getPlayers() {
     return teamPlayers;

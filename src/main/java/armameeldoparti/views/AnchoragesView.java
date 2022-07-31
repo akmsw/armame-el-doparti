@@ -23,7 +23,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Clase correspondiente a la ventana de anclaje de jugadores.
+ * Anchorages view class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -33,13 +33,13 @@ import net.miginfocom.swing.MigLayout;
  */
 public class AnchoragesView extends View {
 
-  // ---------------------------------------- Constantes privadas -------------------------------
+  // ---------------------------------------- Private constants ---------------------------------
 
   private static final String GROW = "grow";
   private static final String GROWX_SPAN = "growx, span";
   private static final String FRAME_TITLE = "Anclaje de jugadores";
 
-  // ---------------------------------------- Campos privados -----------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private JButton finishButton;
   private JButton newAnchorageButton;
@@ -65,7 +65,7 @@ public class AnchoragesView extends View {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye una ventana de anclajes.
+   * Builds the anchorages view.
    */
   public AnchoragesView() {
     cdCheckboxes = new ArrayList<>();
@@ -85,10 +85,10 @@ public class AnchoragesView extends View {
     initializeInterface();
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Actualiza las casillas con los nombres de los jugadores.
+   * Updates the checkboxes text with the players names.
    */
   public void updateCheckBoxesText() {
     for (Position position : Position.values()) {
@@ -108,72 +108,72 @@ public class AnchoragesView extends View {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Obtiene el botón de finalización.
+   * Gets the 'finish' button.
    *
-   * @return El botón de finalización.
+   * @return The finish button.
    */
   public JButton getFinishButton() {
     return finishButton;
   }
 
   /**
-   * Obtiene el botón de nuevo anclaje.
+   * Gets the 'new anchorage' button.
    *
-   * @return El botón de nuevo anclaje.
+   * @return The new anchorage button.
    */
   public JButton getNewAnchorageButton() {
     return newAnchorageButton;
   }
 
   /**
-   * Obtiene el botón de borrado de un anclaje.
+   * Gets the 'delete anchorage' button.
    *
-   * @return El botón de borrado de un anclaje.
+   * @return The delete anchorage button.
    */
   public JButton getDeleteAnchorageButton() {
     return deleteAnchorageButton;
   }
 
   /**
-   * Obtiene el botón de borrado del último anclaje.
+   * Gets the 'delete last anchorage' button.
    *
-   * @return El botón de borrado del último anclaje.
+   * @return The delete last anchorage button.
    */
   public JButton getDeleteLastAnchorageButton() {
     return deleteLastAnchorageButton;
   }
 
   /**
-   * Obtiene el botón de limpieza de anclajes.
+   * Gets the 'clear anchorages' button.
    *
-   * @return El botón de limpieza de anclajes.
+   * @return The 'clear anchorages' button.
    */
   public JButton getClearAnchoragesButton() {
     return clearAnchoragesButton;
   }
 
   /**
-   * Obtiene el área de texto.
+   * Gets the text area.
    *
-   * @return El área de texto.
+   * @return The text area.
    */
   public JTextArea getTextArea() {
     return textArea;
   }
 
   /**
-   * Obtiene el mapa de casillas de selección.
+   * Gets the map that associates each checkboxes list with its corresponding position.
    *
-   * @return El mapa de casillas de selección.
+   * @return The map that associates each checkboxes list with its corresponding position.
    */
   public Map<Position, List<JCheckBox>> getCheckBoxesMap() {
     return checkBoxesMap;
   }
 
-  // ---------------------------------------- Métodos protegidos --------------------------------
+  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
-   * Inicializa y muestra la interfaz gráfica de la ventana.
+   * Initializes the view and makes it visible.
    */
   @Override
   protected void initializeInterface() {
@@ -225,7 +225,7 @@ public class AnchoragesView extends View {
   }
 
   /**
-   * Coloca los botones en los paneles de la ventana.
+   * Adds the buttons to their corresponding panel.
    */
   @Override
   protected void addButtons() {
@@ -282,27 +282,26 @@ public class AnchoragesView extends View {
     rightPanel.add(clearAnchoragesButton, GROW);
   }
 
-  // ---------------------------------------- Métodos privados ----------------------------------
+  // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Llena los arreglos de casillas correspondientes a cada posición.
+   * Fills the checkboxes sets.
    *
-   * @param playersSet Conjunto de jugadores de donde obtener los nombres.
-   * @param cbSet      Conjunto de casillas a llenar.
+   * @param playersSet Players sets from where to obtain the names.
+   * @param cbSet      Checkboxes set to fill.
    */
   private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
     playersSet.forEach(p -> cbSet.add(new JCheckBox(p.getName())));
   }
 
   /**
-   * Coloca en el panel las casillas correspondientes a cada posición
-   * junto con una etiqueta que los distinga.
+   * Adds the checkboxes to the view with a label that specifies the corresponding position.
    *
-   * @param cbSet Conjunto de casillas a colocar.
-   * @param title Texto de la etiqueta de acompañamiento.
+   * @param cbSet Checkboxes to add.
+   * @param title Label text.
    */
-  private void addCheckboxesSet(List<JCheckBox> cbSet, String title) {
-    JLabel label = new JLabel(title);
+  private void addCheckboxesSet(List<JCheckBox> cbSet, String text) {
+    JLabel label = new JLabel(text);
 
     label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 

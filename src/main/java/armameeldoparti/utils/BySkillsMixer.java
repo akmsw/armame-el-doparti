@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Clase correspondiente a los algoritmos de distribución de jugadores en base a sus puntuaciones.
+ * By-skill distribution class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -24,53 +24,37 @@ public class BySkillsMixer implements PlayersMixer {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye el objeto repartidor de jugadores.
+   * Builds the by-skill players distributor.
    */
   public BySkillsMixer() {
-      // No necesita cuerpo
+    // No body needed
   }
 
-  // ---------------------------------------- Métodos públicos ----------------------------------
+  // ---------------------------------------- Public methods ----------------------------------
 
   /**
-   * Distribuye los jugadores en base a sus puntuaciones de la manera más equitativa posible
-   * considerando los anclajes establecidos.
+   * Distributes the players by their skills without considering anchorages.
    *
-   * @param teams Lista contenedora de equipos.
+   * <p>Positions are traversed in reverse order to achieve the fairer distribution.
    *
-   * @return Los equipos con los jugadores distribuidos de la manera deseada.
-   */
-  @Override
-  public List<Team> withAnchorages(List<Team> teams) {
-    return teams;
-  }
-
-  /**
-   * Distribuye los jugadores en base a sus puntuaciones de la manera más equitativa posible
-   * sin considerar anclajes.
+   * <p>The players of each position are ordered based on their score, from highest to lowest.
+   * The teams are then ordered based on the sum of their players' scores so far, from lowest
+   * to highest.
    *
-   * <p>Se recorren las posiciones en orden inverso para lograr la mejor distribución.
+   * <p>If the number of players to distribute is 2, the team with less skill points is
+   * assigned the player with the highest skill points, and the team with more skill points
+   * is assigned the lowest skill points player.
    *
-   * <p>Se ordenan los jugadores de cada posición en base a su puntuación, de mayor a menor.
-   * Luego se ordenan los equipos en base a la suma de los puntuaciones de sus jugadores
-   * hasta el momento, de menor a mayor.
+   * <p>If the number of players to distribute is 4, two subgroups are made with the players
+   * at the list ends, from the outside to the inside.
+   * These subsets are then ordered based on their skill points, from highest to lowest.
+   * The team with less skill points is assigned the set of players with more skill points.
+   * The team with more skill points is assigned the set of players with the lowest skill points.
    *
-   * <p>Si la cantidad de jugadores a repartir es 2, al equipo con menor puntuación se le
-   * asigna el jugador de mayor puntuación. Al equipo con mayor puntuación se le asigna
-   * el jugador de menor puntuación.
+   * @param teams List that contains the two teams.
    *
-   * <p>Si la cantidad de jugadores a repartir es 4, se arman dos subconjuntos con
-   * los jugadores de los extremos, desde afuera hacia adentro, alternando entre
-   * subconjuntos. Luego se ordenan estos subconjuntos en base a sus puntuaciones,
-   * de mayor a menor.
-   *
-   * <p>Al equipo con menor puntuación se le asigna el conjunto de jugadores que sumen
-   * mayor puntuación. Al equipo con mayor puntuación se le asigna el conjunto de jugadores
-   * que sumen menor puntuación.
-   *
-   * @param teams Lista contenedora de equipos.
-   *
-   * @return Los equipos con los jugadores distribuidos de la manera deseada.
+   * @return The updated teams with the players distributed by their skill points, without
+   *         considering anchorages.
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
@@ -101,13 +85,6 @@ public class BySkillsMixer implements PlayersMixer {
         List<Player> playersSubset1 = new ArrayList<>();
         List<Player> playersSubset2 = new ArrayList<>();
 
-        /*
-         * Si la cantidad de jugadores a repartir no es 4, esto debería
-         * hacerse con un bucle que altere entre subconjuntos mediante
-         * una operación de la forma:
-         *
-         * (i % 2 == 0 ? playersSubset1 : playersSubset2).add(...)
-         */
         playersSubset1.add(currentSet.get(0));
         playersSubset1.add(currentSet.get(currentSet.size() - 1));
 
@@ -134,6 +111,19 @@ public class BySkillsMixer implements PlayersMixer {
       }
     }
 
+    return teams;
+  }
+
+  /**
+   * Distributes the players by their skills considering anchorages.
+   *
+   * @param teams List that contains the two teams.
+   *
+   * @return The updated teams with the players distributed by their skill points,
+   *         without considering anchorages.
+   */
+  @Override
+  public List<Team> withAnchorages(List<Team> teams) {
     return teams;
   }
 }
