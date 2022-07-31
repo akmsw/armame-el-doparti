@@ -21,20 +21,21 @@
   <summary>Click to expand</summary>
 
   ## 📜 Index
-  - [What is it?](https://github.com/akmsw/armame-el-doparti#-qu%C3%A9-es)
-  - [Requirements](https://github.com/akmsw/armame-el-doparti#-requisitos)
+  - [What is it?](https://github.com/akmsw/armame-el-doparti#-what-is-it)
+  - [Requirements](https://github.com/akmsw/armame-el-doparti#-requirements)
       - [Java](https://github.com/akmsw/armame-el-doparti#-java)
-          - [Minimum version](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-m%C3%ADnima)
-          - [Recommended version](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada)
-  - [Download](https://github.com/akmsw/armame-el-doparti#-descarga)
-  - [Installation & execution](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-instalaci%C3%B3n-y-ejecuci%C3%B3n)
-  - [How to use it?](https://github.com/akmsw/armame-el-doparti#-c%C3%B3mo-se-usa)
-  - [New features](https://github.com/akmsw/armame-el-doparti#-nuevas-funcionalidades)
-      - [Players anchoring](https://github.com/akmsw/armame-el-doparti#-anclaje-de-jugadores)
-  - [Improvements](https://github.com/akmsw/armame-el-doparti#-mejoras)
-  - [Troubleshooting](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-soluci%C3%B3n-de-problemas-comunes)
-      - [On Linux](https://github.com/akmsw/armame-el-doparti#-en-linux)
-  - [Screenshots](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
+          - [Minimum version](https://github.com/akmsw/armame-el-doparti#minimum-version)
+          - [Recommended version](https://github.com/akmsw/armame-el-doparti#recommended-version)
+  - [Download](https://github.com/akmsw/armame-el-doparti#-download)
+  - [Installation & execution](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-installation--execution)
+  - [How to use it?](https://github.com/akmsw/armame-el-doparti#-how-to-use-it)
+  - [New features](https://github.com/akmsw/armame-el-doparti#-new-features)
+      - [Players anchoring](https://github.com/akmsw/armame-el-doparti#-players-anchoring)
+  - [Improvements](https://github.com/akmsw/armame-el-doparti#-improvements)
+  - [Troubleshooting](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-troubleshooting)
+      - [On Linux](https://github.com/akmsw/armame-el-doparti#-on-linux)
+  - [Issues & suggestions](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-issues--suggestions)
+  - [Screenshots](https://github.com/akmsw/armame-el-doparti#-screenshots)
 
   ## 🔎 What is it?
   Completely developed in Java and fully refactored, the new version of this program offers a fast and intuitive way to generate teams for soccer matches with 7 players per team, distributed either randomly or based on their skill.\
@@ -126,8 +127,6 @@
 
 </details>
 
-#
-
 # Español
 <details>
   <summary>Presioná para desplegar</summary>
@@ -146,6 +145,7 @@
   - [Mejoras](https://github.com/akmsw/armame-el-doparti#-mejoras)
   - [Solución a problemas frecuentes](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-soluci%C3%B3n-de-problemas-comunes)
       - [En Linux](https://github.com/akmsw/armame-el-doparti#-en-linux)
+  - [Reportes y sugerencias](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-reportes-y-sugerencias)
   - [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
 
   ## 🔎 ¿Qué es?
@@ -212,7 +212,7 @@
 
   ## 📸 Capturas de pantalla
   ![ventana_principal](./src/main/res/img/readme/ss1.png)\
-  *Ventana principal*
+  *Menú principal*
 
   ![ventana_ayuda](./src/main/res/img/readme/ss2.png)\
   *Ventana de ayuda*
@@ -235,5 +235,3 @@
   ![ventana_resultados_3](./src/main/res/img/readme/ss8.png)\
   *Resultado de distribución por puntuaciones sin anclajes*
 </details>
-
-#
