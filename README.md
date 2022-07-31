@@ -20,20 +20,25 @@
 <details>
   <summary>Click to expand</summary>
 
+  ## 👉 Notice
+  At the moment, this program's language is only ***spanish***.\
+  Maybe in a future version I'll add a language-change button. Sorry about that.\
+  However, you can read the documentation and use the program anyway!
+
   ## 📜 Index
   - [What is it?](https://github.com/akmsw/armame-el-doparti#-what-is-it)
   - [Requirements](https://github.com/akmsw/armame-el-doparti#-requirements)
-      - [Java](https://github.com/akmsw/armame-el-doparti#-java)
-          - [Minimum version](https://github.com/akmsw/armame-el-doparti#minimum-version)
-          - [Recommended version](https://github.com/akmsw/armame-el-doparti#recommended-version)
+    - [Java](https://github.com/akmsw/armame-el-doparti#-java)
+      - [Minimum version](https://github.com/akmsw/armame-el-doparti#minimum-version)
+      - [Recommended version](https://github.com/akmsw/armame-el-doparti#recommended-version)
   - [Download](https://github.com/akmsw/armame-el-doparti#-download)
   - [Installation & execution](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-installation--execution)
   - [How to use it?](https://github.com/akmsw/armame-el-doparti#-how-to-use-it)
   - [New features](https://github.com/akmsw/armame-el-doparti#-new-features)
-      - [Players anchoring](https://github.com/akmsw/armame-el-doparti#-players-anchoring)
+    - [Players anchoring](https://github.com/akmsw/armame-el-doparti#-players-anchoring)
   - [Improvements](https://github.com/akmsw/armame-el-doparti#-improvements)
   - [Troubleshooting](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-troubleshooting)
-      - [On Linux](https://github.com/akmsw/armame-el-doparti#-on-linux)
+    - [On Linux](https://github.com/akmsw/armame-el-doparti#-on-linux)
   - [Issues & suggestions](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-issues--suggestions)
   - [Screenshots](https://github.com/akmsw/armame-el-doparti#-screenshots)
 
@@ -91,11 +96,11 @@
   ## 🛠️ Troubleshooting
   ### 🐧 On Linux
   - If the ***.jar*** file does not run when you double-click it, follow the steps below:
-      - Right click on the downloaded file
-      - Go to properties
-      - Open with...
-      - In the custom command input field, enter: `java -jar`
-      - Set as default option for execution of .jar files
+    - Right click on the downloaded file
+    - Go to properties
+    - Open with...
+    - In the custom command input field, enter: `java -jar`
+    - Set as default option for execution of .jar files
 
   ## ⚠️ Issues & suggestions
   If the program has an error that must be reported to fix it, if you have thought of any new functionality to add to the program, or if you think that something could be modified, the [issues](https://github.com/akmsw/armame-el-doparti/issues) section is open for you to make these reports and/or suggestions. A GitHub account is required to open a new issue in the repository. In order to work on it as quickly as possible, I provide you with some templates for each case where I ask you for all the information that will be useful to me.
@@ -134,17 +139,17 @@
   ## 📜 Índice
   - [¿Qué es?](https://github.com/akmsw/armame-el-doparti#-qu%C3%A9-es)
   - [Requisitos](https://github.com/akmsw/armame-el-doparti#-requisitos)
-      - [Java](https://github.com/akmsw/armame-el-doparti#-java)
-          - [Versión mínima](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-m%C3%ADnima)
-          - [Versión recomendada](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada)
+    - [Java](https://github.com/akmsw/armame-el-doparti#-java)
+      - [Versión mínima](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-m%C3%ADnima)
+      - [Versión recomendada](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada)
   - [Descarga](https://github.com/akmsw/armame-el-doparti#-descarga)
   - [Instalación y ejecución](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-instalaci%C3%B3n-y-ejecuci%C3%B3n)
   - [¿Cómo se usa?](https://github.com/akmsw/armame-el-doparti#-c%C3%B3mo-se-usa)
   - [Nuevas funcionalidades](https://github.com/akmsw/armame-el-doparti#-nuevas-funcionalidades)
-      - [Anclaje de jugadores](https://github.com/akmsw/armame-el-doparti#-anclaje-de-jugadores)
+    - [Anclaje de jugadores](https://github.com/akmsw/armame-el-doparti#-anclaje-de-jugadores)
   - [Mejoras](https://github.com/akmsw/armame-el-doparti#-mejoras)
   - [Solución a problemas frecuentes](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-soluci%C3%B3n-de-problemas-comunes)
-      - [En Linux](https://github.com/akmsw/armame-el-doparti#-en-linux)
+    - [En Linux](https://github.com/akmsw/armame-el-doparti#-en-linux)
   - [Reportes y sugerencias](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-reportes-y-sugerencias)
   - [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
 
@@ -201,11 +206,11 @@
   ## 🛠️ Solución a problemas frecuentes
   ### 🐧 En Linux
   - Si el archivo ***.jar*** no se ejecuta al hacerle doble click, hacé esto:
-      - Click derecho sobre el archivo descargado
-      - Propiedades
-      - Abrir con...
-      - En el campo de ingreso de comando personalizado, poné: `java -jar`
-      - Seleccionalo como opción predeterminada para la ejecución de archivos .jar
+    - Click derecho sobre el archivo descargado
+    - Propiedades
+    - Abrir con...
+    - En el campo de ingreso de comando personalizado, poné: `java -jar`
+    - Seleccionalo como opción predeterminada para la ejecución de archivos .jar
 
   ## ⚠️ Reportes y sugerencias
   Si el programa presenta algún error que debería ser reportado para arreglarlo, si se te ocurrió alguna nueva funcionalidad para agregar al programa, o si opinás que algo podría ser modificado, la sección de [issues](https://github.com/akmsw/armame-el-doparti/issues) está abierta para que hagas estos reportes y/o sugerencias. Es necesario tener una cuenta en GitHub para abrir un nuevo reporte en el repositorio. Para poder trabajar en eso lo más rápidamente posible, te proveo unas plantillas para cada caso donde te pido toda la información que necesito.
