@@ -59,7 +59,7 @@
   ## ▶️ Installing & running
   Beyond the listed requirements, no further installation is needed to run this program.\
   Once the file with the ***.jar*** extension has been downloaded, and regardless of the operating system you use, you can go to the folder where it is located and open it with a simple *double click*.\
-  In case you are on Linux and the program does not open, see the [troubleshooting on Linux](https://github.com/akmsw/armame-el-doparti#-en-linux) section.\
+  In case you are on Linux and the program does not open, see the [troubleshooting on Linux](https://github.com/akmsw/armame-el-doparti#-on-linux) section.\
   Another way to run this program is to open a terminal inside the file's containing folder and run the command:
   ```bash
   java -jar file_name.jar
