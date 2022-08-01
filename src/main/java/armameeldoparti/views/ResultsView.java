@@ -131,7 +131,7 @@ public class ResultsView extends View {
   /**
    * Updates the frame's title.
    *
-   * @param table The frame's new title.
+   * @param frameTitle The frame's new title.
    */
   public void setFrameTitle(String frameTitle) {
     this.frameTitle = frameTitle;

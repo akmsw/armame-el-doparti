@@ -74,7 +74,7 @@ public class NamesInputController implements Controller {
 
   /**
    * Resets the controlled view to its default values and
-   * makes it invisible
+   * makes it invisible.
    */
   @Override
   public void resetView() {

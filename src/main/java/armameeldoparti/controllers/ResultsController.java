@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- * Results view controller
+ * Results view controller.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -248,7 +248,7 @@ public class ResultsController implements Controller {
    * Sets the table cells format, including text alignment and background and
    * foreground colors.
    *
-   * <p> Row 0 & column 0 have dark green background and white foreground.
+   * <p>Row 0 & column 0 have dark green background and white foreground.
    * The remaining cells will have black foreground.
    *
    * <p>The background color will be yellow-ish if the cell shows any skill points
@@ -260,8 +260,7 @@ public class ResultsController implements Controller {
    * or a team name. Otherwise, it will be left-aligned.
    */
   private void setTableFormat() {
-    resultsView.getTable()
-               .setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+    resultsView.getTable().setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
       /**
        * Configures the table cells background and foreground colors.
        *

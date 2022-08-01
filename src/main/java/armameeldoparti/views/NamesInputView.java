@@ -274,10 +274,10 @@ public class NamesInputView extends View {
         JTextField tf = new JTextField();
 
         tf.addActionListener(e ->
-          Main.getNamesInputController()
-              .textFieldEvent(textFieldsMap.get(position), Main.getPlayersSets()
-                                                               .get(position),
-                              tf, (JTextField) e.getSource())
+            Main.getNamesInputController()
+                .textFieldEvent(textFieldsMap.get(position), Main.getPlayersSets()
+                                                                 .get(position),
+                                tf, (JTextField) e.getSource())
         );
 
         textFieldsMap.get(position)

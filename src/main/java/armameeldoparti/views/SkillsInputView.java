@@ -19,7 +19,7 @@ import javax.swing.border.SoftBevelBorder;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Skill points input view
+ * Skill points input view.
  *
  * @author Bonino, Francisco Ignacio.
  *
