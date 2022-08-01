@@ -1,6 +1,5 @@
 package armameeldoparti.views;
 
-import armameeldoparti.abstractclasses.View;
 import armameeldoparti.utils.Main;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;

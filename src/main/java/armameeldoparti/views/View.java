@@ -1,4 +1,4 @@
-package armameeldoparti.abstractclasses;
+package armameeldoparti.views;
 
 import javax.swing.JFrame;
 

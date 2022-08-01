@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,6 +22,7 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
  *
  * @since 23/07/2022
  */
+@TestInstance(Lifecycle.PER_CLASS)
 class PlayersTests implements ArgumentsProvider {
 
   /**
