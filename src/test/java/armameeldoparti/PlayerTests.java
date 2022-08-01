@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -23,14 +24,15 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
  * @since 23/07/2022
  */
 @TestInstance(Lifecycle.PER_CLASS)
-class PlayersTests implements ArgumentsProvider {
+class PlayerTests implements ArgumentsProvider {
 
   /**
    * Simple unit tests for players creation.
    */
+  @DisplayName("Default values in basic players creation")
   @ParameterizedTest
-  @ArgumentsSource(PlayersTests.class)
-  void creationTest(String name, Position position) {
+  @ArgumentsSource(PlayerTests.class)
+  void defaultValuesInPlayersCreation(String name, Position position) {
     Player player = new Player(name, position);
 
     assertEquals(0, player.getAnchorageNumber());
