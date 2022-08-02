@@ -17,6 +17,7 @@
         <maven-javadoc-plugin.version>3.3.2</maven-javadoc-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <maven-shade-plugin.version>3.3.0</maven-shade-plugin.version>
+        <miglayout.version>11.0</miglayout.version>
     </properties>
     <dependencies>
         <dependency>
@@ -40,12 +41,12 @@
         <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout-core</artifactId>
-            <version>11.0</version>
+            <version>${miglayout.version}</version>
         </dependency>
         <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout-swing</artifactId>
-            <version>11.0</version>
+            <version>${miglayout.version}</version>
         </dependency>
     </dependencies>
     <build>
