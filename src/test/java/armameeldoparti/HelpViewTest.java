@@ -19,12 +19,14 @@ import org.junit.jupiter.params.provider.MethodSource;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 1.0.0
+ * @version 0.0.1
  *
  * @since 01/08/2022
  */
 @TestInstance(Lifecycle.PER_CLASS)
 class HelpViewTest {
+
+  // ---------------------------------------- Private fields ------------------------------------
 
   private HelpView helpView;
   private HelpController helpController;
