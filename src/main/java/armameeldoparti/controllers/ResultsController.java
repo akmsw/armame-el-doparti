@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @since 26/07/2022
  */
-public class ResultsController implements Controller {
+public class ResultsController extends Controller {
 
   // ---------------------------------------- Private constants ---------------------------------
 

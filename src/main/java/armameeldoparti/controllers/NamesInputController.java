@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @since 26/07/2022
  */
-public class NamesInputController implements Controller {
+public class NamesInputController extends Controller {
 
   // ---------------------------------------- Private constants ---------------------------------
 

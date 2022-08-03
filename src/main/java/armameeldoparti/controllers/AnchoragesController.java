@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @since 26/07/2022
  */
-public class AnchoragesController implements Controller {
+public class AnchoragesController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 

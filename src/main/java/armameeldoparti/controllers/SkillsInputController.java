@@ -12,7 +12,7 @@ import armameeldoparti.views.SkillsInputView;
  *
  * @since 26/07/2022
  */
-public class SkillsInputController implements Controller {
+public class SkillsInputController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 

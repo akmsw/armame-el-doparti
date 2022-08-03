@@ -4,7 +4,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
- * Interface that specifies the basic methods for
+ * Abstract class that specifies the basic methods for
  * interaction between controllers and their assigned views.
  *
  * @author Bonino, Francisco Ignacio.
@@ -13,24 +13,24 @@ import javax.swing.JFrame;
  *
  * @since 28/07/2022
  */
-public interface Controller {
+public abstract class Controller {
 
-  // ---------------------------------------- Abstract public methods ---------------------------
+  // ---------------------------------------- Abstract protected methods ------------------------
 
   /**
    * Makes the controlled view visible.
    */
-  void showView();
+  protected abstract void showView();
 
   /**
    * Makes the controlled view invisible.
    */
-  void hideView();
+  protected abstract void hideView();
 
   /**
    * Resets the controlled view to its default values.
    */
-  void resetView();
+  protected abstract void resetView();
 
   /**
    * Centers the controlled view on the main screen.

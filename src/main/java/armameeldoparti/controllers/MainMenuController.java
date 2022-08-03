@@ -12,7 +12,7 @@ import armameeldoparti.views.MainMenuView;
  *
  * @since 26/07/2022
  */
-public class MainMenuController implements Controller {
+public class MainMenuController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 

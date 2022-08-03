@@ -19,7 +19,7 @@ import javax.swing.BorderFactory;
  *
  * @since 26/07/2022
  */
-public class HelpController implements Controller {
+public class HelpController extends Controller {
 
   // ---------------------------------------- Private constants ---------------------------------
 
