@@ -1,6 +1,6 @@
 package armameeldoparti.utils;
 
-import armameeldoparti.interfaces.PlayersMixer;
+import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;

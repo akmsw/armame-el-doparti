@@ -1,7 +1,6 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.interfaces.Controller;
-import armameeldoparti.utils.Main;
+import armameeldoparti.Main;
 import armameeldoparti.views.SkillsInputView;
 
 /**

@@ -1,11 +1,10 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.interfaces.Controller;
+import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
 import armameeldoparti.utils.BySkillsMixer;
-import armameeldoparti.utils.Main;
 import armameeldoparti.utils.RandomMixer;
 import armameeldoparti.views.ResultsView;
 import java.awt.Color;

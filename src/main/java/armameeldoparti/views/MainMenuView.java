@@ -1,6 +1,6 @@
 package armameeldoparti.views;
 
-import armameeldoparti.utils.Main;
+import armameeldoparti.Main;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;

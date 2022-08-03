@@ -1,8 +1,8 @@
 package armameeldoparti.views;
 
+import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.utils.Main;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

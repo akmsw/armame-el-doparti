@@ -1,8 +1,8 @@
 package armameeldoparti.views;
 
+import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.utils.Main;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;

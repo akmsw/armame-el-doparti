@@ -1,8 +1,7 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.interfaces.Controller;
+import armameeldoparti.Main;
 import armameeldoparti.models.Player;
-import armameeldoparti.utils.Main;
 import armameeldoparti.views.NamesInputView;
 import java.util.Collection;
 import java.util.List;

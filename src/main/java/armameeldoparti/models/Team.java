@@ -1,6 +1,6 @@
 package armameeldoparti.models;
 
-import armameeldoparti.utils.Main;
+import armameeldoparti.Main;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;

@@ -1,8 +1,8 @@
 package armameeldoparti.views;
 
+import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.utils.Main;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -197,12 +197,12 @@ public class AnchoragesView extends View {
         .entrySet()
         .forEach(ps -> {
           final Position currentPosition = ps.getValue()
-                                            .get(0)
-                                            .getPosition();
+                                             .get(0)
+                                             .getPosition();
 
           fillCheckboxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
           addCheckboxesSet(checkBoxesMap.get(currentPosition), Main.getPositionsMap()
-                                                                  .get(currentPosition));
+                                                                   .get(currentPosition));
         });
 
     textArea.setBorder(BorderFactory.createBevelBorder(1));

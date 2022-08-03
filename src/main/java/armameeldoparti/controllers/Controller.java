@@ -1,4 +1,4 @@
-package armameeldoparti.interfaces;
+package armameeldoparti.controllers;
 
 import java.awt.Toolkit;
 import javax.swing.JFrame;

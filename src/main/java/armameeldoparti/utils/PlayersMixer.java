@@ -1,4 +1,4 @@
-package armameeldoparti.interfaces;
+package armameeldoparti.utils;
 
 import armameeldoparti.models.Team;
 import java.util.List;

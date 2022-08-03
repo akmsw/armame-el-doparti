@@ -1,7 +1,6 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.interfaces.Controller;
-import armameeldoparti.utils.Main;
+import armameeldoparti.Main;
 import armameeldoparti.views.AnchoragesView;
 import java.util.List;
 import javax.swing.JCheckBox;

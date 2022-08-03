@@ -1,4 +1,4 @@
-package armameeldoparti.utils;
+package armameeldoparti;
 
 import armameeldoparti.controllers.AnchoragesController;
 import armameeldoparti.controllers.HelpController;
