@@ -30,10 +30,6 @@ public class NamesInputController extends Controller {
     "Por puntuaciones"
   };
 
-  // ---------------------------------------- Private fields ------------------------------------
-
-  private NamesInputView namesInputView;
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -42,7 +38,7 @@ public class NamesInputController extends Controller {
    * @param namesInputView View to control.
    */
   public NamesInputController(NamesInputView namesInputView) {
-    this.namesInputView = namesInputView;
+    super(namesInputView);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -55,20 +51,11 @@ public class NamesInputController extends Controller {
    */
   @Override
   public void showView() {
-    updateTextFields(namesInputView.getComboBox()
-                                   .getSelectedItem()
-                                   .toString());
+    updateTextFields(((NamesInputView) getView()).getComboBox()
+                                                 .getSelectedItem()
+                                                 .toString());
 
-    namesInputView.setVisible(true);
-  }
-
-  /**
-   * Makes the controlled view invisible.
-   */
-  @Override
-  public void hideView() {
-    namesInputView.setVisible(false);
-    Controller.centerView(namesInputView);
+    ((NamesInputView) getView()).setVisible(true);
   }
 
   /**
@@ -80,17 +67,17 @@ public class NamesInputController extends Controller {
     hideView();
     clearPlayersNames();
 
-    namesInputView.getAnchoragesCheckBox()
-                  .setSelected(false);
+    ((NamesInputView) getView()).getAnchoragesCheckBox()
+                                .setSelected(false);
 
-    namesInputView.getComboBox()
-                  .setSelectedIndex(0);
+    ((NamesInputView) getView()).getComboBox()
+                                .setSelectedIndex(0);
 
-    namesInputView.getTextArea()
-                  .setText(null);
+    ((NamesInputView) getView()).getTextArea()
+                                .setText(null);
 
-    updateTextFields(namesInputView.getComboBox()
-                                   .getItemAt(0));
+    updateTextFields(((NamesInputView) getView()).getComboBox()
+                                                 .getItemAt(0));
   }
 
   /**
@@ -191,8 +178,8 @@ public class NamesInputController extends Controller {
         updateTextArea();
 
         // The mix button is enabled only when every player has a name
-        namesInputView.getMixButton()
-                      .setEnabled(!alreadyExists(""));
+        ((NamesInputView) getView()).getMixButton()
+                                    .setEnabled(!alreadyExists(""));
       }
     }
   }
@@ -221,8 +208,8 @@ public class NamesInputController extends Controller {
       private int counter;
     };
 
-    namesInputView.getTextArea()
-                  .setText(null);
+    ((NamesInputView) getView()).getTextArea()
+                                .setText(null);
 
     Main.getPlayersSets()
         .entrySet()
@@ -233,14 +220,15 @@ public class NamesInputController extends Controller {
                          .forEach(p -> {
                            if (wrapperCounter.counter != 0
                                && Main.PLAYERS_PER_TEAM * 2 - wrapperCounter.counter != 0) {
-                             namesInputView.getTextArea()
-                                           .append(System.lineSeparator());
+                             ((NamesInputView) getView()).getTextArea()
+                                                         .append(System.lineSeparator());
                            }
 
                            wrapperCounter.counter++;
 
-                           namesInputView.getTextArea()
-                                         .append(wrapperCounter.counter + " - " + p.getName());
+                           ((NamesInputView) getView()).getTextArea()
+                                                       .append(wrapperCounter.counter
+                                                               + " - " + p.getName());
                          }));
   }
 
@@ -252,34 +240,34 @@ public class NamesInputController extends Controller {
   private void updateTextFields(String selectedOption) {
     clearLeftPanel();
 
-    for (int i = 0; i < namesInputView.getComboBoxOptions()
-                                      .length; i++) {
-      if (selectedOption.equals(namesInputView.getComboBoxOptions()[i])) {
-        namesInputView.getTextFieldsMap()
-                      .get(Main.getCorrespondingPosition(Main.getPositionsMap(),
-                                                         selectedOption.toUpperCase()))
-                      .forEach(tf -> namesInputView.getLeftPanel()
-                                                   .add(tf, "growx"));
+    for (int i = 0; i < ((NamesInputView) getView()).getComboBoxOptions()
+                                                    .length; i++) {
+      if (selectedOption.equals(((NamesInputView) getView()).getComboBoxOptions()[i])) {
+        ((NamesInputView) getView()).getTextFieldsMap()
+                                    .get(Main.getCorrespondingPosition(Main.getPositionsMap(),
+                                                                      selectedOption.toUpperCase()))
+                                    .forEach(tf -> ((NamesInputView) getView()).getLeftPanel()
+                                                                               .add(tf, "growx"));
         break;
       }
     }
 
-    namesInputView.getLeftPanel()
-                  .revalidate();
+    ((NamesInputView) getView()).getLeftPanel()
+                                .revalidate();
 
-    namesInputView.getLeftPanel()
-                  .repaint();
+    ((NamesInputView) getView()).getLeftPanel()
+                                .repaint();
   }
 
   /**
    * Clears the players names and text fields.
    */
   private void clearPlayersNames() {
-    namesInputView.getTextFieldsMap()
-                  .values()
-                  .stream()
-                  .flatMap(List::stream)
-                  .forEach(tf -> tf.setText(null));
+    ((NamesInputView) getView()).getTextFieldsMap()
+                                .values()
+                                .stream()
+                                .flatMap(List::stream)
+                                .forEach(tf -> tf.setText(null));
 
     for (List<Player> playersSet : Main.getPlayersSets()
                                        .values()) {
@@ -293,13 +281,14 @@ public class NamesInputController extends Controller {
    * Removes the text fields from the view's left panel.
    */
   private void clearLeftPanel() {
-    namesInputView.getTextFieldsMap()
-                  .values()
-                  .stream()
-                  .flatMap(Collection::stream)
-                  .filter(tf -> tf.getParent() == namesInputView.getLeftPanel())
-                  .forEach(tf -> namesInputView.getLeftPanel()
-                                               .remove(tf));
+    ((NamesInputView) getView()).getTextFieldsMap()
+                                .values()
+                                .stream()
+                                .flatMap(Collection::stream)
+                                .filter(tf -> tf.getParent()
+                                              == ((NamesInputView) getView()).getLeftPanel())
+                                .forEach(tf -> ((NamesInputView) getView()).getLeftPanel()
+                                                            .remove(tf));
   }
 
   /**

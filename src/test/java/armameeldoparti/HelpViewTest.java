@@ -2,7 +2,6 @@ package armameeldoparti;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import armameeldoparti.controllers.HelpController;
 import armameeldoparti.views.HelpView;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,11 +25,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 @TestInstance(Lifecycle.PER_CLASS)
 class HelpViewTest {
 
-  // ---------------------------------------- Private fields ------------------------------------
-
-  private HelpView helpView;
-  private HelpController helpController;
-
   /**
    * Setup made before running any test.
    *
@@ -38,8 +32,7 @@ class HelpViewTest {
    */
   @BeforeAll
   void setUp() {
-    helpView = new HelpView();
-    helpController = new HelpController(helpView);
+    Main.main(null);
   }
 
   /**
@@ -49,7 +42,8 @@ class HelpViewTest {
    */
   @BeforeEach
   void resetPages() {
-    helpController.resetView();
+    Main.getHelpController()
+        .resetView();
   }
 
   /**
@@ -63,15 +57,18 @@ class HelpViewTest {
     String expected = timesNext - timesPrevious + 1 + "/8";
 
     for (int i = 0; i < timesNext; i++) {
-      helpController.nextPageButtonEvent();
+      Main.getHelpController()
+          .nextPageButtonEvent();
     }
 
     for (int i = 0; i < timesPrevious; i++) {
-      helpController.previousPageButtonEvent();
+      Main.getHelpController()
+          .previousPageButtonEvent();
     }
 
-    assertEquals(expected, helpView.getPagesCounter()
-                                   .getText());
+    assertEquals(expected, ((HelpView) Main.getHelpController()
+                                           .getView()).getPagesCounter()
+                                                      .getText());
   }
 
   /**

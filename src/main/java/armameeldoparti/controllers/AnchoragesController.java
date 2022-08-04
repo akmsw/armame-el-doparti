@@ -22,8 +22,6 @@ public class AnchoragesController extends Controller {
   private int anchoredPlayersAmount = 0;
   private int anchoragesAmount = 0;
 
-  private AnchoragesView anchoragesView;
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -32,27 +30,10 @@ public class AnchoragesController extends Controller {
    * @param anchoragesView View to control.
    */
   public AnchoragesController(AnchoragesView anchoragesView) {
-    this.anchoragesView = anchoragesView;
+    super(anchoragesView);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
-
-  /**
-   * Makes the controlled view visible.
-   */
-  @Override
-  public void showView() {
-    anchoragesView.setVisible(true);
-  }
-
-  /**
-   * Makes the controlled view invisible.
-   */
-  @Override
-  public void hideView() {
-    anchoragesView.setVisible(false);
-    Controller.centerView(anchoragesView);
-  }
 
   /**
    * Resets the controlled view to its default values.
@@ -66,8 +47,8 @@ public class AnchoragesController extends Controller {
    * Updates the checkboxes text with the players names.
    */
   public void updateCheckBoxesText() {
-    anchoragesView.updateCheckBoxesText();
-    anchoragesView.pack();
+    ((AnchoragesView) getView()).updateCheckBoxesText();
+    getView().pack();
   }
 
   /**
@@ -92,12 +73,12 @@ public class AnchoragesController extends Controller {
    * are met. If so, it does.
    */
   public void newAnchorageButtonEvent() {
-    int playersToAnchorAmount = (int) anchoragesView.getCheckBoxesMap()
-                                                    .values()
-                                                    .stream()
-                                                    .flatMap(List::stream)
-                                                    .filter(JCheckBox::isSelected)
-                                                    .count();
+    int playersToAnchorAmount = (int) ((AnchoragesView) getView()).getCheckBoxesMap()
+                                                                  .values()
+                                                                  .stream()
+                                                                  .flatMap(List::stream)
+                                                                  .filter(JCheckBox::isSelected)
+                                                                  .count();
 
     if (!validChecksAmount(playersToAnchorAmount)) {
       showErrorMessage("No puede haber más de " + Main.MAX_PLAYERS_PER_ANCHORAGE
@@ -205,12 +186,12 @@ public class AnchoragesController extends Controller {
   private void newAnchorage() {
     anchoragesAmount++;
 
-    anchoragesView.getCheckBoxesMap()
-                  .values()
-                  .stream()
-                  .filter(cbs -> cbs.stream()
-                                    .anyMatch(JCheckBox::isSelected))
-                  .forEach(this::setAnchorages);
+    ((AnchoragesView) getView()).getCheckBoxesMap()
+                                .values()
+                                .stream()
+                                .filter(cbs -> cbs.stream()
+                                                  .anyMatch(JCheckBox::isSelected))
+                                .forEach(this::setAnchorages);
 
     anchoredPlayersAmount = (int) Main.getPlayersSets()
                                       .values()
@@ -224,8 +205,8 @@ public class AnchoragesController extends Controller {
    * Updates the text area showing the anchorages details.
    */
   private void updateTextArea() {
-    anchoragesView.getTextArea()
-                  .setText(null);
+    ((AnchoragesView) getView()).getTextArea()
+                                .setText(null);
 
     var wrapperAnchorageNum = new Object() {
       private int anchorageNum;
@@ -238,9 +219,9 @@ public class AnchoragesController extends Controller {
     for (wrapperAnchorageNum.anchorageNum = 1;
          wrapperAnchorageNum.anchorageNum <= anchoragesAmount;
          wrapperAnchorageNum.anchorageNum++) {
-      anchoragesView.getTextArea()
-                    .append(" ----- ANCLAJE #" + wrapperAnchorageNum.anchorageNum
-                            + " -----" + System.lineSeparator());
+      ((AnchoragesView) getView()).getTextArea()
+                                  .append(" ----- ANCLAJE #" + wrapperAnchorageNum.anchorageNum
+                                          + " -----" + System.lineSeparator());
 
       Main.getPlayersSets()
           .entrySet()
@@ -248,15 +229,16 @@ public class AnchoragesController extends Controller {
                            .stream()
                            .filter(p -> p.getAnchorageNumber() == wrapperAnchorageNum.anchorageNum)
                            .forEach(p -> {
-                             anchoragesView.getTextArea()
-                                           .append(" " + wrapperCounter.counter + ". "
-                                                   + p.getName() + System.lineSeparator());
+                             ((AnchoragesView) getView()).getTextArea()
+                                                         .append(" " + wrapperCounter.counter + ". "
+                                                                 + p.getName()
+                                                                 + System.lineSeparator());
                              wrapperCounter.counter++;
                            }));
 
       if (wrapperAnchorageNum.anchorageNum != anchoragesAmount) {
-        anchoragesView.getTextArea()
-                      .append(System.lineSeparator());
+        ((AnchoragesView) getView()).getTextArea()
+                                    .append(System.lineSeparator());
       }
 
       wrapperCounter.counter = 1;
@@ -268,47 +250,47 @@ public class AnchoragesController extends Controller {
    */
   private void toggleButtons() {
     if (anchoragesAmount > 0 && anchoragesAmount < 2) {
-      anchoragesView.getFinishButton()
-                    .setEnabled(true);
-      anchoragesView.getDeleteAnchorageButton()
-                    .setEnabled(false);
-      anchoragesView.getDeleteLastAnchorageButton()
-                    .setEnabled(true);
-      anchoragesView.getClearAnchoragesButton()
-                    .setEnabled(true);
+      ((AnchoragesView) getView()).getFinishButton()
+                                  .setEnabled(true);
+      ((AnchoragesView) getView()).getDeleteAnchorageButton()
+                                  .setEnabled(false);
+      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
+                                  .setEnabled(true);
+      ((AnchoragesView) getView()).getClearAnchoragesButton()
+                                  .setEnabled(true);
     } else if (anchoragesAmount >= 2) {
-      anchoragesView.getDeleteAnchorageButton()
-                    .setEnabled(true);
-      anchoragesView.getDeleteLastAnchorageButton()
-                    .setEnabled(true);
+      ((AnchoragesView) getView()).getDeleteAnchorageButton()
+                                  .setEnabled(true);
+      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
+                                  .setEnabled(true);
     } else {
-      anchoragesView.getFinishButton()
-                    .setEnabled(false);
-      anchoragesView.getDeleteAnchorageButton()
-                    .setEnabled(false);
-      anchoragesView.getDeleteLastAnchorageButton()
-                    .setEnabled(false);
-      anchoragesView.getClearAnchoragesButton()
-                    .setEnabled(false);
+      ((AnchoragesView) getView()).getFinishButton()
+                                  .setEnabled(false);
+      ((AnchoragesView) getView()).getDeleteAnchorageButton()
+                                  .setEnabled(false);
+      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
+                                  .setEnabled(false);
+      ((AnchoragesView) getView()).getClearAnchoragesButton()
+                                  .setEnabled(false);
     }
 
     if (Main.MAX_ANCHORED_PLAYERS - anchoredPlayersAmount < 2) {
-      anchoragesView.getNewAnchorageButton()
-                    .setEnabled(false);
-      anchoragesView.getCheckBoxesMap()
-                    .values()
-                    .stream()
-                    .flatMap(List::stream)
-                    .forEach(cb -> cb.setEnabled(!cb.isEnabled()));
+      ((AnchoragesView) getView()).getNewAnchorageButton()
+                                  .setEnabled(false);
+      ((AnchoragesView) getView()).getCheckBoxesMap()
+                                  .values()
+                                  .stream()
+                                  .flatMap(List::stream)
+                                  .forEach(cb -> cb.setEnabled(!cb.isEnabled()));
     } else {
-      anchoragesView.getNewAnchorageButton()
-                    .setEnabled(true);
-      anchoragesView.getCheckBoxesMap()
-                    .values()
-                    .stream()
-                    .flatMap(List::stream)
-                    .filter(cb -> !cb.isEnabled() && !cb.isSelected())
-                    .forEach(cb -> cb.setEnabled(true));
+      ((AnchoragesView) getView()).getNewAnchorageButton()
+                                  .setEnabled(true);
+      ((AnchoragesView) getView()).getCheckBoxesMap()
+                                  .values()
+                                  .stream()
+                                  .flatMap(List::stream)
+                                  .filter(cb -> !cb.isEnabled() && !cb.isSelected())
+                                  .forEach(cb -> cb.setEnabled(true));
     }
   }
 
@@ -336,15 +318,15 @@ public class AnchoragesController extends Controller {
    * @param anchorageToDelete Anchorage number to delete.
    */
   private void deleteAnchorage(int anchorageToDelete) {
-    for (int j = 0; j < anchoragesView.getCheckBoxesMap()
-                                      .size(); j++) {
+    for (int j = 0; j < ((AnchoragesView) getView()).getCheckBoxesMap()
+                                                    .size(); j++) {
       changeAnchorage(anchorageToDelete, 0);
     }
 
     if (anchorageToDelete != anchoragesAmount) {
       for (int k = anchorageToDelete + 1; k <= anchoragesAmount; k++) {
-        for (int j = 0; j < anchoragesView.getCheckBoxesMap()
-                                          .size(); j++) {
+        for (int j = 0; j < ((AnchoragesView) getView()).getCheckBoxesMap()
+                                                        .size(); j++) {
           changeAnchorage(k, k - 1);
         }
       }
@@ -373,16 +355,16 @@ public class AnchoragesController extends Controller {
           p.setAnchorageNumber(replacement);
 
           if (replacement == 0) {
-            anchoragesView.getCheckBoxesMap()
-                          .values()
-                          .stream()
-                          .flatMap(List::stream)
-                          .filter(cb -> cb.getText()
-                                          .equals(p.getName()))
-                          .forEach(cb -> {
-                            cb.setVisible(true);
-                            anchoredPlayersAmount--;
-                          });
+            ((AnchoragesView) getView()).getCheckBoxesMap()
+                                        .values()
+                                        .stream()
+                                        .flatMap(List::stream)
+                                        .filter(cb -> cb.getText()
+                                                        .equals(p.getName()))
+                                        .forEach(cb -> {
+                                          cb.setVisible(true);
+                                          anchoredPlayersAmount--;
+                                        });
           }
         });
   }
@@ -392,19 +374,17 @@ public class AnchoragesController extends Controller {
    * are deselected. Then, shows the corresponding following view.
    */
   private void finish() {
-    anchoragesView.getCheckBoxesMap()
-                  .values()
-                  .stream()
-                  .flatMap(List::stream)
-                  .filter(cb -> cb.isSelected() && cb.isVisible())
-                  .forEach(cb -> cb.setSelected(false));
+    ((AnchoragesView) getView()).getCheckBoxesMap()
+                                .values()
+                                .stream()
+                                .flatMap(List::stream)
+                                .filter(cb -> cb.isSelected() && cb.isVisible())
+                                .forEach(cb -> cb.setSelected(false));
 
     if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
-      // By skill points distribution
       Main.getSkillPointsInputController()
           .showView();
     } else {
-      // Random distribution
       Main.getResultsController()
           .setUp();
 
@@ -423,7 +403,7 @@ public class AnchoragesController extends Controller {
    */
   private void setAnchorages(List<JCheckBox> cbSet) {
     Main.getPlayersSets()
-        .get(Main.getCorrespondingPosition(anchoragesView.getCheckBoxesMap(), cbSet))
+        .get(Main.getCorrespondingPosition(((AnchoragesView) getView()).getCheckBoxesMap(), cbSet))
         .stream()
         .filter(p -> cbSet.stream()
                           .filter(JCheckBox::isSelected)
@@ -459,12 +439,12 @@ public class AnchoragesController extends Controller {
    * @return Whether half of any players set is checked or not.
    */
   private boolean validCheckedPlayersPerPosition() {
-    return anchoragesView.getCheckBoxesMap()
-                         .values()
-                         .stream()
-                         .noneMatch(cbs -> cbs.stream()
-                                              .filter(JCheckBox::isSelected)
-                                              .count() > cbs.size() / 2);
+    return ((AnchoragesView) getView()).getCheckBoxesMap()
+                                       .values()
+                                       .stream()
+                                       .noneMatch(cbs -> cbs.stream()
+                                                            .filter(JCheckBox::isSelected)
+                                                            .count() > cbs.size() / 2);
   }
 
   /**

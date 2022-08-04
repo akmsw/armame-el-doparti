@@ -14,10 +14,6 @@ import armameeldoparti.views.SkillPointsInputView;
  */
 public class SkillPointsInputController extends Controller {
 
-  // ---------------------------------------- Private fields ------------------------------------
-
-  private SkillPointsInputView skillPointsInputView;
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -26,27 +22,10 @@ public class SkillPointsInputController extends Controller {
    * @param skillPointsInputView View to control.
    */
   public SkillPointsInputController(SkillPointsInputView skillPointsInputView) {
-    this.skillPointsInputView = skillPointsInputView;
+    super(skillPointsInputView);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
-
-  /**
-   * Makes the controlled view visible.
-   */
-  @Override
-  public void showView() {
-    skillPointsInputView.setVisible(true);
-  }
-
-  /**
-   * Makes the controlled view invisible.
-   */
-  @Override
-  public void hideView() {
-    skillPointsInputView.setVisible(false);
-    Controller.centerView(skillPointsInputView);
-  }
 
   /**
    * Resets the controlled view to its default values
@@ -65,8 +44,8 @@ public class SkillPointsInputController extends Controller {
    * the controlled view invisible and shows the results view.
    */
   public void finishButtonEvent() {
-    skillPointsInputView.getSpinnersMap()
-                   .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
+    ((SkillPointsInputView) getView()).getSpinnersMap()
+                                      .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
 
     hideView();
 
@@ -109,8 +88,8 @@ public class SkillPointsInputController extends Controller {
    * Updates the players name labels.
    */
   public void updateNameLabels() {
-    skillPointsInputView.updateNameLabels();
-    skillPointsInputView.pack();
+    ((SkillPointsInputView) getView()).updateNameLabels();
+    getView().pack();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -120,10 +99,10 @@ public class SkillPointsInputController extends Controller {
    * value to the minimum skill point.
    */
   private void resetSkills() {
-    skillPointsInputView.getSpinnersMap()
-                   .forEach((k, v) -> {
-                     k.setSkillPoints(0);
-                     v.setValue(Main.SKILL_MIN);
-                   });
+    ((SkillPointsInputView) getView()).getSpinnersMap()
+                                      .forEach((k, v) -> {
+                                        k.setSkillPoints(0);
+                                        v.setValue(Main.SKILL_MIN);
+                                      });
   }
 }

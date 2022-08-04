@@ -14,10 +14,6 @@ import armameeldoparti.views.MainMenuView;
  */
 public class MainMenuController extends Controller {
 
-  // ---------------------------------------- Private fields ------------------------------------
-
-  private MainMenuView mainMenuView;
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -26,7 +22,7 @@ public class MainMenuController extends Controller {
    * @param mainMenuView View to control.
    */
   public MainMenuController(MainMenuView mainMenuView) {
-    this.mainMenuView = mainMenuView;
+    super(mainMenuView);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -36,16 +32,7 @@ public class MainMenuController extends Controller {
    */
   @Override
   public void showView() {
-    mainMenuView.setVisible(true);
-  }
-
-  /**
-   * Makes the controlled view invisible.
-   */
-  @Override
-  public void hideView() {
-    mainMenuView.setVisible(false);
-    Controller.centerView(mainMenuView);
+    getView().setVisible(true);
   }
 
   /**

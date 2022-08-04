@@ -1,5 +1,6 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.views.View;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 
@@ -15,22 +16,22 @@ import javax.swing.JFrame;
  */
 public abstract class Controller {
 
-  // ---------------------------------------- Abstract protected methods ------------------------
+  // ---------------------------------------- Private fields ------------------------------------
+
+  private View controlledView;
+
+  // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Makes the controlled view visible.
+   * Builds the view controller.
+   *
+   * @param controlledView View to control.
    */
-  protected abstract void showView();
+  protected Controller(View controlledView) {
+    setView(controlledView);
+  }
 
-  /**
-   * Makes the controlled view invisible.
-   */
-  protected abstract void hideView();
-
-  /**
-   * Resets the controlled view to its default values.
-   */
-  protected abstract void resetView();
+  // ---------------------------------------- Static methods ------------------------------------
 
   /**
    * Centers the controlled view on the main screen.
@@ -48,4 +49,48 @@ public abstract class Controller {
                               .getScreenSize().height - frame.getSize().height) / 2);
     frame.setLocationRelativeTo(null);
   }
+
+  // ---------------------------------------- Public methods ------------------------------------
+
+  /**
+   * Gets the controlled view.
+   *
+   * @return The controlled view.
+   */
+  public View getView() {
+    return controlledView;
+  }
+
+  // ---------------------------------------- Protected methods ---------------------------------
+
+  /**
+   * Updates the controlled view object.
+   *
+   * @param controlledView The new controlled view.
+   */
+  protected void setView(View controlledView) {
+    this.controlledView = controlledView;
+  }
+
+  /**
+   * Makes the controlled view visible.
+   */
+  protected void showView() {
+    controlledView.setVisible(true);
+  }
+
+  /**
+   * Makes the controlled view invisible.
+   */
+  protected void hideView() {
+    controlledView.setVisible(false);
+    centerView(controlledView);
+  }
+
+  // ---------------------------------------- Abstract protected methods ------------------------
+
+  /**
+   * Resets the controlled view to its default values.
+   */
+  protected abstract void resetView();
 }

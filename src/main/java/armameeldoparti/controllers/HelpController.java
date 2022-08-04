@@ -42,8 +42,6 @@ public class HelpController extends Controller {
 
   private int pageNumber = 0;
 
-  private HelpView helpView;
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -52,27 +50,10 @@ public class HelpController extends Controller {
    * @param helpView View to control.
    */
   public HelpController(HelpView helpView) {
-    this.helpView = helpView;
+    super(helpView);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
-
-  /**
-   * Makes the controlled view visible.
-   */
-  @Override
-  public void showView() {
-    helpView.setVisible(true);
-  }
-
-  /**
-   * Makes the controlled view invisible.
-   */
-  @Override
-  public void hideView() {
-    helpView.setVisible(false);
-    Controller.centerView(helpView);
-  }
 
   /**
    * Resets the controlled view to its default values.
@@ -106,11 +87,11 @@ public class HelpController extends Controller {
    */
   public void nextPageButtonEvent() {
     if (++pageNumber < TOTAL_PAGES - 1) {
-      helpView.getPreviousPageButton()
-              .setEnabled(true);
+      ((HelpView) getView()).getPreviousPageButton()
+                            .setEnabled(true);
     } else {
-      helpView.getNextPageButton()
-              .setEnabled(false);
+      ((HelpView) getView()).getNextPageButton()
+                            .setEnabled(false);
     }
 
     updatePage();
@@ -124,11 +105,11 @@ public class HelpController extends Controller {
    */
   public void previousPageButtonEvent() {
     if (--pageNumber > 0) {
-      helpView.getNextPageButton()
-              .setEnabled(true);
+      ((HelpView) getView()).getNextPageButton()
+                            .setEnabled(true);
     } else {
-      helpView.getPreviousPageButton()
-              .setEnabled(false);
+      ((HelpView) getView()).getPreviousPageButton()
+                            .setEnabled(false);
     }
 
     updatePage();
@@ -140,11 +121,14 @@ public class HelpController extends Controller {
    * <p>Finds the text file corresponding to the page number and displays its content.
    */
   public void updatePage() {
-    helpView.getScrollPane()
-            .setBorder(BorderFactory.createTitledBorder(pagesMap.get(pageNumber)
-                                                                .get(PAGE_TITLE_INDEX)));
-    helpView.getTextArea()
-            .setText(null);
+    ((HelpView) getView()).getScrollPane()
+                          .setBorder(BorderFactory.createTitledBorder(
+                            pagesMap.get(pageNumber)
+                                    .get(PAGE_TITLE_INDEX)
+                          ));
+
+    ((HelpView) getView()).getTextArea()
+                          .setText(null);
 
     updateLabel();
 
@@ -157,8 +141,8 @@ public class HelpController extends Controller {
                                                        .get(PAGE_FILENAME_INDEX)),
           StandardCharsets.UTF_8)
     )) {
-      helpView.getTextArea()
-              .read(reader, null);
+      ((HelpView) getView()).getTextArea()
+                            .read(reader, null);
     } catch (Exception ex) {
       ex.printStackTrace();
       System.exit(-1);
@@ -171,7 +155,7 @@ public class HelpController extends Controller {
    * Updates the reading progress label text.
    */
   private void updateLabel() {
-    helpView.getPagesCounter()
-            .setText(pageNumber + 1 + "/" + TOTAL_PAGES);
+    ((HelpView) getView()).getPagesCounter()
+                          .setText(pageNumber + 1 + "/" + TOTAL_PAGES);
   }
 }
