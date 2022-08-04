@@ -36,14 +36,6 @@ public class MainMenuController extends Controller {
   }
 
   /**
-   * Resets the controlled view to its default values.
-   */
-  @Override
-  public void resetView() {
-    // Not needed in this controller
-  }
-
-  /**
    * 'Help' button event handler.
    *
    * <p>Makes the controlled view invisible
@@ -70,5 +62,15 @@ public class MainMenuController extends Controller {
         .showView();
 
     hideView();
+  }
+
+  // ---------------------------------------- Protected methods ---------------------------------
+
+  /**
+   * Resets the controlled view to its default values.
+   */
+  @Override
+  protected void resetView() {
+    // Not needed in this controller
   }
 }

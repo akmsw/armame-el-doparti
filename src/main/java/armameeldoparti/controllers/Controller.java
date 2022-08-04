@@ -50,18 +50,16 @@ public abstract class Controller {
     frame.setLocationRelativeTo(null);
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
    * Gets the controlled view.
    *
    * @return The controlled view.
    */
-  public View getView() {
+  protected View getView() {
     return controlledView;
   }
-
-  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
    * Updates the controlled view object.

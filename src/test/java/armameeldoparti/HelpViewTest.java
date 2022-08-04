@@ -67,8 +67,6 @@ class HelpViewTest {
   @ParameterizedTest
   @MethodSource("navigationProvider")
   void pageNumberChangeOnNavigation(int timesNext, int timesPrevious) {
-    String expected = timesNext - timesPrevious + 1 + "/8";
-
     for (int i = 0; i < timesNext; i++) {
       helpController.nextPageButtonEvent();
     }
@@ -76,6 +74,8 @@ class HelpViewTest {
     for (int i = 0; i < timesPrevious; i++) {
       helpController.previousPageButtonEvent();
     }
+
+    String expected = timesNext - timesPrevious + 1 + "/8";
 
     assertEquals(timesNext - timesPrevious, helpController.getPageNumber());
     assertEquals(expected, helpView.getPagesCounter()
