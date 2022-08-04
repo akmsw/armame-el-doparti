@@ -401,7 +401,7 @@ public class AnchoragesController extends Controller {
 
     if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
       // By skill points distribution
-      Main.getSkillsInputController()
+      Main.getSkillPointsInputController()
           .showView();
     } else {
       // Random distribution

@@ -13,7 +13,7 @@ public class Player {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private int skill;
+  private int skillPoints;
   private int anchorageNumber;
   private int teamNumber;
 
@@ -31,7 +31,7 @@ public class Player {
    */
   public Player(String name, Position position) {
     setName(name);
-    setSkill(0);
+    setSkillPoints(0);
     setAnchorageNumber(0);
     setTeam(0);
 
@@ -43,12 +43,12 @@ public class Player {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * Gets the player's skill.
+   * Gets the player's skill points.
    *
-   * @return The player's skill.
+   * @return The player's skill points.
    */
-  public int getSkill() {
-    return skill;
+  public int getSkillPoints() {
+    return skillPoints;
   }
 
   /**
@@ -99,12 +99,12 @@ public class Player {
   }
 
   /**
-   * Updates the player's skill.
+   * Updates the player's skill points.
    *
-   * @param skill The player's new skill.
+   * @param skillPoints The player's new skill points.
    */
-  public void setSkill(int skill) {
-    this.skill = skill;
+  public void setSkillPoints(int skillPoints) {
+    this.skillPoints = skillPoints;
   }
 
   /**

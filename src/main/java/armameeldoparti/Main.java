@@ -5,7 +5,7 @@ import armameeldoparti.controllers.HelpController;
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.controllers.ResultsController;
-import armameeldoparti.controllers.SkillsInputController;
+import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.views.AnchoragesView;
@@ -13,7 +13,7 @@ import armameeldoparti.views.HelpView;
 import armameeldoparti.views.MainMenuView;
 import armameeldoparti.views.NamesInputView;
 import armameeldoparti.views.ResultsView;
-import armameeldoparti.views.SkillsInputView;
+import armameeldoparti.views.SkillPointsInputView;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -126,7 +126,7 @@ public final class Main {
   private static HelpController helpController;
   private static NamesInputController namesInputController;
   private static AnchoragesController anchoragesController;
-  private static SkillsInputController skillsInputController;
+  private static SkillPointsInputController skillPointsInputController;
   private static ResultsController resultsController;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -164,7 +164,7 @@ public final class Main {
     helpController = new HelpController(new HelpView());
     namesInputController = new NamesInputController(new NamesInputView());
     anchoragesController = new AnchoragesController(new AnchoragesView());
-    skillsInputController = new SkillsInputController(new SkillsInputView());
+    skillPointsInputController = new SkillPointsInputController(new SkillPointsInputView());
     resultsController = new ResultsController(new ResultsView());
 
     mainMenuController.showView();
@@ -277,8 +277,8 @@ public final class Main {
    *
    * @return The skills input view controller.
    */
-  public static SkillsInputController getSkillsInputController() {
-    return skillsInputController;
+  public static SkillPointsInputController getSkillPointsInputController() {
+    return skillPointsInputController;
   }
 
   /**

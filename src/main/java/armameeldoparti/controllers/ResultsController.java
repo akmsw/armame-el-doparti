@@ -143,7 +143,7 @@ public class ResultsController extends Controller {
             .showView();
       }
     } else {
-      Main.getSkillsInputController()
+      Main.getSkillPointsInputController()
           .showView();
     }
   }
@@ -197,7 +197,7 @@ public class ResultsController extends Controller {
                                   .values()
                                   .stream()
                                   .flatMap(List::stream)
-                                  .mapToInt(Player::getSkill)
+                                  .mapToInt(Player::getSkillPoints)
                                   .reduce(0, Math::addExact),
                              resultsView.getTable()
                                         .getRowCount() - 1, 1);
@@ -208,7 +208,7 @@ public class ResultsController extends Controller {
                                   .values()
                                   .stream()
                                   .flatMap(List::stream)
-                                  .mapToInt(Player::getSkill)
+                                  .mapToInt(Player::getSkillPoints)
                                   .reduce(0, Math::addExact),
                              resultsView.getTable()
                                         .getRowCount() - 1, 2);

@@ -18,7 +18,7 @@ import javax.swing.border.SoftBevelBorder;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Skill points input view.
+ * Skill points input view class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -26,7 +26,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 06/03/2021
  */
-public class SkillsInputView extends View {
+public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private constants ---------------------------------
 
@@ -45,7 +45,7 @@ public class SkillsInputView extends View {
   /**
    * Builds the skill points input view.
    */
-  public SkillsInputView() {
+  public SkillPointsInputView() {
     initializeInterface();
   }
 
@@ -104,26 +104,26 @@ public class SkillsInputView extends View {
   @Override
   protected void addButtons() {
     JButton finishButton = new JButton("Finalizar");
-    JButton resetSkillsButton = new JButton("Reiniciar puntuaciones");
+    JButton resetSkillPointsButton = new JButton("Reiniciar puntuaciones");
     JButton backButton = new JButton("Atrás");
 
     finishButton.addActionListener(e ->
-        Main.getSkillsInputController()
+        Main.getSkillPointsInputController()
             .finishButtonEvent()
     );
 
-    resetSkillsButton.addActionListener(e ->
-        Main.getSkillsInputController()
+    resetSkillPointsButton.addActionListener(e ->
+        Main.getSkillPointsInputController()
             .resetSkillsButtonEvent()
     );
 
     backButton.addActionListener(e ->
-        Main.getSkillsInputController()
+        Main.getSkillPointsInputController()
             .backButtonEvent()
     );
 
     masterPanel.add(finishButton, GROW_SPAN);
-    masterPanel.add(resetSkillsButton, GROW_SPAN);
+    masterPanel.add(resetSkillPointsButton, GROW_SPAN);
     masterPanel.add(backButton, GROW_SPAN);
   }
 

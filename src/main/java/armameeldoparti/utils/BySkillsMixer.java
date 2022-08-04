@@ -66,7 +66,7 @@ public class BySkillsMixer implements PlayersMixer {
       List<Player> currentSet = Main.getPlayersSets()
                                     .get(position);
 
-      currentSet.sort(Comparator.comparingInt(Player::getSkill)
+      currentSet.sort(Comparator.comparingInt(Player::getSkillPoints)
                                 .reversed());
 
       teams.sort(Comparator.comparingInt(Team::getTeamSkill));
@@ -96,7 +96,7 @@ public class BySkillsMixer implements PlayersMixer {
         playersSubsets.add(playersSubset1);
         playersSubsets.add(playersSubset2);
         playersSubsets.sort(Comparator.comparingInt(ps -> ps.stream()
-                                                            .mapToInt(Player::getSkill)
+                                                            .mapToInt(Player::getSkillPoints)
                                                             .reduce(0, Math::addExact)));
 
         teams.get(0)

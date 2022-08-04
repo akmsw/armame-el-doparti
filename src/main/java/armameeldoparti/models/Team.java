@@ -81,7 +81,7 @@ public class Team {
     return teamPlayers.values()
                       .stream()
                       .flatMap(List::stream)
-                      .mapToInt(Player::getSkill)
+                      .mapToInt(Player::getSkillPoints)
                       .sum();
   }
 

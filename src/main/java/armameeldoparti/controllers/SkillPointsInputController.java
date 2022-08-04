@@ -1,10 +1,10 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
-import armameeldoparti.views.SkillsInputView;
+import armameeldoparti.views.SkillPointsInputView;
 
 /**
- * Skills input view controller class.
+ * Skill points input view controller class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -12,21 +12,21 @@ import armameeldoparti.views.SkillsInputView;
  *
  * @since 26/07/2022
  */
-public class SkillsInputController extends Controller {
+public class SkillPointsInputController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private SkillsInputView skillsInputView;
+  private SkillPointsInputView skillPointsInputView;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
    * Builds the skills input view controller.
    *
-   * @param skillsInputView View to control.
+   * @param skillPointsInputView View to control.
    */
-  public SkillsInputController(SkillsInputView skillsInputView) {
-    this.skillsInputView = skillsInputView;
+  public SkillPointsInputController(SkillPointsInputView skillPointsInputView) {
+    this.skillPointsInputView = skillPointsInputView;
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -36,7 +36,7 @@ public class SkillsInputController extends Controller {
    */
   @Override
   public void showView() {
-    skillsInputView.setVisible(true);
+    skillPointsInputView.setVisible(true);
   }
 
   /**
@@ -44,8 +44,8 @@ public class SkillsInputController extends Controller {
    */
   @Override
   public void hideView() {
-    skillsInputView.setVisible(false);
-    Controller.centerView(skillsInputView);
+    skillPointsInputView.setVisible(false);
+    Controller.centerView(skillPointsInputView);
   }
 
   /**
@@ -65,8 +65,8 @@ public class SkillsInputController extends Controller {
    * the controlled view invisible and shows the results view.
    */
   public void finishButtonEvent() {
-    skillsInputView.getSpinnersMap()
-                   .forEach((k, v) -> k.setSkill((int) v.getValue()));
+    skillPointsInputView.getSpinnersMap()
+                   .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
 
     hideView();
 
@@ -109,8 +109,8 @@ public class SkillsInputController extends Controller {
    * Updates the players name labels.
    */
   public void updateNameLabels() {
-    skillsInputView.updateNameLabels();
-    skillsInputView.pack();
+    skillPointsInputView.updateNameLabels();
+    skillPointsInputView.pack();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -120,9 +120,9 @@ public class SkillsInputController extends Controller {
    * value to the minimum skill point.
    */
   private void resetSkills() {
-    skillsInputView.getSpinnersMap()
+    skillPointsInputView.getSpinnersMap()
                    .forEach((k, v) -> {
-                     k.setSkill(0);
+                     k.setSkillPoints(0);
                      v.setValue(Main.SKILL_MIN);
                    });
   }

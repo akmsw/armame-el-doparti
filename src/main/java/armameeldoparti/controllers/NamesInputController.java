@@ -141,10 +141,10 @@ public class NamesInputController extends Controller {
           .showView();
     } else {
       // By skill points distribution
-      Main.getSkillsInputController()
+      Main.getSkillPointsInputController()
           .updateNameLabels();
 
-      Main.getSkillsInputController()
+      Main.getSkillPointsInputController()
           .showView();
     }
 
