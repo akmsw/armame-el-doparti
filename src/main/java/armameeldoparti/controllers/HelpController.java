@@ -149,6 +149,15 @@ public class HelpController extends Controller {
     }
   }
 
+  /**
+   * Gets the current page number.
+   *
+   * @return The current page number.
+   */
+  public int getPageNumber() {
+    return pageNumber;
+  }
+
   // ---------------------------------------- Private methods -----------------------------------
 
   /**

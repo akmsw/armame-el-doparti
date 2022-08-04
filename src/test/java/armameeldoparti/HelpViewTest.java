@@ -2,6 +2,7 @@ package armameeldoparti;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import armameeldoparti.controllers.HelpController;
 import armameeldoparti.views.HelpView;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
@@ -25,6 +26,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 @TestInstance(Lifecycle.PER_CLASS)
 class HelpViewTest {
 
+  // ---------------------------------------- Private fields ------------------------------------
+
+  private HelpView helpView;
+  private HelpController helpController;
+
+  // ---------------------------------------- Tests setup ---------------------------------------
+
   /**
    * Setup made before running any test.
    *
@@ -32,7 +40,8 @@ class HelpViewTest {
    */
   @BeforeAll
   void setUp() {
-    Main.main(null);
+    helpView = new HelpView();
+    helpController = new HelpController(helpView);
   }
 
   /**
@@ -42,13 +51,17 @@ class HelpViewTest {
    */
   @BeforeEach
   void resetPages() {
-    Main.getHelpController()
-        .resetView();
+    helpController.resetView();
   }
+
+  // ---------------------------------------- Test bodies ---------------------------------------
 
   /**
    * Tests if the page number shown on the label is correct
    * after navigating between pages.
+   *
+   * @param timesNext     How many times the next page button is pressed.
+   * @param timesPrevious How many times the previous page button is pressed.
    */
   @DisplayName("The page number should change when navigating")
   @ParameterizedTest
@@ -57,18 +70,16 @@ class HelpViewTest {
     String expected = timesNext - timesPrevious + 1 + "/8";
 
     for (int i = 0; i < timesNext; i++) {
-      Main.getHelpController()
-          .nextPageButtonEvent();
+      helpController.nextPageButtonEvent();
     }
 
     for (int i = 0; i < timesPrevious; i++) {
-      Main.getHelpController()
-          .previousPageButtonEvent();
+      helpController.previousPageButtonEvent();
     }
 
-    assertEquals(expected, ((HelpView) Main.getHelpController()
-                                           .getView()).getPagesCounter()
-                                                      .getText());
+    assertEquals(timesNext - timesPrevious, helpController.getPageNumber());
+    assertEquals(expected, helpView.getPagesCounter()
+                                   .getText());
   }
 
   /**
