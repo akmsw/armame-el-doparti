@@ -161,18 +161,19 @@ public class NamesInputController extends Controller {
                              List<Player> playersSet,
                              JTextField textField)
                              throws InvalidNameException {
-    if (!validateString(textField.getText())) {
+    if (!Pattern.matches(Main.NAMES_VALIDATION_REGEX, textField.getText())) {
       textField.setText(null);
 
       throw new IllegalArgumentException();
     }
 
     String name = textField.getText()
-                            .trim()
-                            .toUpperCase()
-                            .replace(" ", "_");
+                           .trim()
+                           .toUpperCase()
+                           .replace(" ", "_");
 
-    if (!validateName(name)) {
+    if (name.length() > Main.MAX_NAME_LEN || name.isBlank()
+        || name.isEmpty() || alreadyExists(name)) {
       textField.setText(null);
 
       throw new InvalidNameException();
@@ -200,15 +201,6 @@ public class NamesInputController extends Controller {
   }
 
   // ---------------------------------------- Private methods -----------------------------------
-
-  private boolean validateString(String string) {
-    return Pattern.matches(Main.NAMES_VALIDATION_REGEX, string);
-  }
-
-  private boolean validateName(String name) {
-    return name.length() > Main.MAX_NAME_LEN || name.isBlank()
-           || name.isEmpty() || alreadyExists(name);
-  }
 
   /**
    * Updates the text displayed in the read-only text area.
