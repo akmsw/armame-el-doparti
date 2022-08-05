@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import javax.naming.InvalidNameException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -272,11 +274,30 @@ public class NamesInputView extends View {
                               .get(position) * 2; i++) {
         JTextField tf = new JTextField();
 
-        tf.addActionListener(e ->
-            Main.getNamesInputController()
-                .textFieldEvent(textFieldsMap.get(position), Main.getPlayersSets()
-                                                                 .get(position),
-                                tf, (JTextField) e.getSource())
+        tf.addActionListener(e -> {
+              try {
+                Main.getNamesInputController()
+                    .textFieldEvent(textFieldsMap.get(position)
+                                                 .indexOf(tf), Main.getPlayersSets()
+                                                                   .get(position),
+                                    tf);
+              } catch (IllegalArgumentException stringEx) {
+                JOptionPane.showMessageDialog(null,
+                                              "El nombre del jugador debe estar formado por letras"
+                                              + " de la A a la Z", "¡Error!",
+                                              JOptionPane.ERROR_MESSAGE, null);
+
+                return;
+              } catch (InvalidNameException nameEx) {
+                JOptionPane.showMessageDialog(null,
+                                              "El nombre del jugador no puede estar vacío,"
+                                              + " tener más de " + Main.MAX_NAME_LEN
+                                              + " caracteres, o estar repetido",
+                                              "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+
+                return;
+              }
+            }
         );
 
         textFieldsMap.get(position)

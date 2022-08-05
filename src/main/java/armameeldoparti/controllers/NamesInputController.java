@@ -6,6 +6,7 @@ import armameeldoparti.views.NamesInputView;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
+import javax.naming.InvalidNameException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -148,40 +149,43 @@ public class NamesInputController extends Controller {
    *
    * <p>If the input is valid, it will be applied as a player name in the players set
    * corresponding to the combobox selected option.
+   *
+   * @param playerIndex  The index of the player which name will be the text filed input.
+   * @param playersSet   The set of players corresponding to the selected combobox option.
+   * @param textField    The edited text field.
+   *
+   * @throws IllegalArgumentException When the input is an invalid string.
+   * @throws InvalidNameException     When the input is an invalid name.
    */
-  public void textFieldEvent(List<JTextField> textFieldSet, List<Player> playersSet,
-                             JTextField tf, JTextField source) {
-    if (!(Pattern.matches(Main.NAMES_VALIDATION_REGEX, tf.getText()))) {
-      JOptionPane.showMessageDialog(null,
-                                    "El nombre del jugador debe estar formado por letras"
-                                    + " de la A a la Z", "¡Error!",
-                                    JOptionPane.ERROR_MESSAGE, null);
-      tf.setText(null);
-    } else {
-      String name = tf.getText()
-                      .trim()
-                      .toUpperCase()
-                      .replace(" ", "_");
+  public void textFieldEvent(int playerIndex,
+                             List<Player> playersSet,
+                             JTextField textField)
+                             throws InvalidNameException {
+    if (!validateString(textField.getText())) {
+      textField.setText(null);
 
-      if ((name.length() > Main.MAX_NAME_LEN) || name.isBlank()
-          || name.isEmpty() || alreadyExists(name)) {
-        JOptionPane.showMessageDialog(null,
-                                      "El nombre del jugador no puede estar vacío,"
-                                      + " tener más de " + Main.MAX_NAME_LEN
-                                      + " caracteres, o estar repetido",
-                                      "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-        tf.setText(null);
-      } else {
-        playersSet.get(textFieldSet.indexOf(source))
-                  .setName(name);
-
-        updateTextArea();
-
-        // The mix button is enabled only when every player has a name
-        ((NamesInputView) getView()).getMixButton()
-                                    .setEnabled(!alreadyExists(""));
-      }
+      throw new IllegalArgumentException();
     }
+
+    String name = textField.getText()
+                            .trim()
+                            .toUpperCase()
+                            .replace(" ", "_");
+
+    if (!validateName(name)) {
+      textField.setText(null);
+
+      throw new InvalidNameException();
+    }
+
+    playersSet.get(playerIndex)
+              .setName(name);
+
+    updateTextArea();
+
+    // The mix button is enabled only when every player has a name
+    ((NamesInputView) getView()).getMixButton()
+                                .setEnabled(!alreadyExists(""));
   }
 
   /**
@@ -196,6 +200,15 @@ public class NamesInputController extends Controller {
   }
 
   // ---------------------------------------- Private methods -----------------------------------
+
+  private boolean validateString(String string) {
+    return Pattern.matches(Main.NAMES_VALIDATION_REGEX, string);
+  }
+
+  private boolean validateName(String name) {
+    return name.length() > Main.MAX_NAME_LEN || name.isBlank()
+           || name.isEmpty() || alreadyExists(name);
+  }
 
   /**
    * Updates the text displayed in the read-only text area.
