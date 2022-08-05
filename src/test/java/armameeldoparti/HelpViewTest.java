@@ -1,6 +1,8 @@
 package armameeldoparti;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import armameeldoparti.controllers.HelpController;
 import armameeldoparti.views.HelpView;
@@ -8,6 +10,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +18,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
- * Help view unit tests class.
+ * Help view-controller unit tests class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -54,7 +57,7 @@ class HelpViewTest {
     helpController.resetView();
   }
 
-  // ---------------------------------------- Test bodies ---------------------------------------
+  // ---------------------------------------- Tests bodies --------------------------------------
 
   /**
    * Tests if the page number shown on the label is correct
@@ -75,12 +78,40 @@ class HelpViewTest {
       helpController.previousPageButtonEvent();
     }
 
-    String expected = timesNext - timesPrevious + 1 + "/8";
+    int expectedPageNumber = timesNext - timesPrevious;
 
-    assertEquals(timesNext - timesPrevious, helpController.getPageNumber());
-    assertEquals(expected, helpView.getPagesCounter()
-                                   .getText());
+    String expectedLabel = expectedPageNumber + 1 + "/8";
+
+    assertEquals(expectedPageNumber, helpController.getPageNumber());
+
+    assertEquals(expectedLabel, helpView.getPagesCounter()
+                                        .getText());
   }
+
+  /**
+   * Bla.
+   */
+  @DisplayName("Tests the limits for the navigation buttons")
+  @Test
+  void navigationButtonsLimits() {
+    assertFalse(helpView.getPreviousPageButton()
+                        .isEnabled());
+
+    assertTrue(helpView.getNextPageButton()
+                       .isEnabled());
+
+    for (int i = 0; i < helpController.getTotalPagesAmount() - 1; i++) {
+      helpController.nextPageButtonEvent();
+    }
+
+    assertFalse(helpView.getNextPageButton()
+                        .isEnabled());
+
+    assertTrue(helpView.getPreviousPageButton()
+                       .isEnabled());
+  }
+
+  // ---------------------------------------- Arguments providers -------------------------------
 
   /**
    * Provides how many times the test should navigate

@@ -63,6 +63,7 @@ public class HelpController extends Controller {
     pageNumber = 0;
 
     updatePage();
+    resetButtons();
   }
 
   /**
@@ -149,6 +150,8 @@ public class HelpController extends Controller {
     }
   }
 
+  // ---------------------------------------- Getters -------------------------------------------
+
   /**
    * Gets the current page number.
    *
@@ -156,6 +159,15 @@ public class HelpController extends Controller {
    */
   public int getPageNumber() {
     return pageNumber;
+  }
+
+  /**
+   * Gets the total amount of help pages.
+   *
+   * @return The total amount of help pages.
+   */
+  public int getTotalPagesAmount() {
+    return TOTAL_PAGES;
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -166,5 +178,16 @@ public class HelpController extends Controller {
   private void updateLabel() {
     ((HelpView) getView()).getPagesCounter()
                           .setText(pageNumber + 1 + "/" + TOTAL_PAGES);
+  }
+
+  /**
+   * Resets the navigation buttons to their initial state.
+   */
+  private void resetButtons() {
+    ((HelpView) getView()).getPreviousPageButton()
+                          .setEnabled(false);
+
+    ((HelpView) getView()).getNextPageButton()
+                          .setEnabled(true);
   }
 }

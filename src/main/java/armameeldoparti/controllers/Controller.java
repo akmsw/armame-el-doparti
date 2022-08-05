@@ -2,7 +2,6 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.views.View;
 import java.awt.Toolkit;
-import javax.swing.JFrame;
 
 /**
  * Abstract class that specifies the basic methods for
@@ -31,35 +30,18 @@ public abstract class Controller {
     setView(controlledView);
   }
 
-  // ---------------------------------------- Static methods ------------------------------------
-
-  /**
-   * Centers the controlled view on the main screen.
-   *
-   * <p>ON LINUX: If the combination between {@code setLocation} with
-   * Toolkit and {@code setLocationRelativeTo(null)} is not used,
-   * the frame won't be centered correctly.
-   *
-   * @param frame Frame to center.
-   */
-  static void centerView(JFrame frame) {
-    frame.setLocation((Toolkit.getDefaultToolkit()
-                              .getScreenSize().width - frame.getSize().width) / 2,
-                      (Toolkit.getDefaultToolkit()
-                              .getScreenSize().height - frame.getSize().height) / 2);
-    frame.setLocationRelativeTo(null);
-  }
-
-  // ---------------------------------------- Protected methods ---------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   /**
    * Gets the controlled view.
    *
    * @return The controlled view.
    */
-  protected View getView() {
+  public View getView() {
     return controlledView;
   }
+
+  // ---------------------------------------- Protected methods ---------------------------------
 
   /**
    * Updates the controlled view object.
@@ -82,7 +64,28 @@ public abstract class Controller {
    */
   protected void hideView() {
     controlledView.setVisible(false);
-    centerView(controlledView);
+    centerView();
+  }
+
+  // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Centers the controlled view on the main screen.
+   *
+   * <p>ON LINUX: If the combination between {@code setLocation} with
+   * Toolkit and {@code setLocationRelativeTo(null)} is not used,
+   * the frame won't be centered correctly.
+   */
+  private void centerView() {
+    controlledView.setLocation((Toolkit.getDefaultToolkit()
+                                       .getScreenSize()
+                                       .width - controlledView.getSize()
+                                                              .width) / 2,
+                               (Toolkit.getDefaultToolkit()
+                                       .getScreenSize()
+                                       .height - controlledView.getSize()
+                                                               .height) / 2);
+    controlledView.setLocationRelativeTo(null);
   }
 
   // ---------------------------------------- Abstract protected methods ------------------------

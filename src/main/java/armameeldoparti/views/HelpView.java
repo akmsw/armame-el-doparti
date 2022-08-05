@@ -35,6 +35,7 @@ public class HelpView extends View {
 
   private JButton previousPageButton;
   private JButton nextPageButton;
+  private JButton backButton;
 
   private JLabel pagesCounter;
 
@@ -85,6 +86,15 @@ public class HelpView extends View {
   }
 
   /**
+   * Gets the back button.
+   *
+   * @return The back button.
+   */
+  public JButton getBackButton() {
+    return backButton;
+  }
+
+  /**
    * Gets the text area.
    *
    * @return The text area.
@@ -131,7 +141,7 @@ public class HelpView extends View {
     previousPageButton = new JButton("Anterior");
     nextPageButton = new JButton("Siguiente");
 
-    JButton backButton = new JButton("Volver al menú principal");
+    backButton = new JButton("Volver al menú principal");
 
     previousPageButton.addActionListener(e ->
         Main.getHelpController()

@@ -26,6 +26,8 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 @TestInstance(Lifecycle.PER_CLASS)
 class PlayerTests implements ArgumentsProvider {
 
+  // ---------------------------------------- Tests bodies --------------------------------------
+
   /**
    * Simple unit tests for players creation.
    */
@@ -41,6 +43,8 @@ class PlayerTests implements ArgumentsProvider {
     assertEquals(name, player.getName());
     assertEquals(position, player.getPosition());
   }
+
+  // ---------------------------------------- Arguments providers -------------------------------
 
   /**
    * Generates values for the tests.

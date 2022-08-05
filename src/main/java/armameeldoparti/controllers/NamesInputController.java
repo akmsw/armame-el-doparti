@@ -288,7 +288,7 @@ public class NamesInputController extends Controller {
                                 .filter(tf -> tf.getParent()
                                               == ((NamesInputView) getView()).getLeftPanel())
                                 .forEach(tf -> ((NamesInputView) getView()).getLeftPanel()
-                                                            .remove(tf));
+                                                                           .remove(tf));
   }
 
   /**
