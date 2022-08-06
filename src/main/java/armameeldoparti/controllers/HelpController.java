@@ -129,7 +129,7 @@ public class HelpController extends Controller {
                           ));
 
     ((HelpView) getView()).getTextArea()
-                          .setText(null);
+                          .setText("");
 
     updateLabel();
 

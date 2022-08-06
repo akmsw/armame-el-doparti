@@ -278,14 +278,17 @@ public class NamesInputView extends View {
               try {
                 Main.getNamesInputController()
                     .textFieldEvent(textFieldsMap.get(position)
-                                                 .indexOf(tf), Main.getPlayersSets()
-                                                                   .get(position),
-                                    tf);
+                                                 .indexOf(tf),
+                                    Main.getPlayersSets()
+                                        .get(position),
+                                    tf.getText());
               } catch (IllegalArgumentException stringEx) {
                 JOptionPane.showMessageDialog(null,
                                               "El nombre del jugador debe estar formado por letras"
                                               + " de la A a la Z", "¡Error!",
                                               JOptionPane.ERROR_MESSAGE, null);
+
+                tf.setText("");
 
                 return;
               } catch (InvalidNameException nameEx) {
@@ -295,7 +298,9 @@ public class NamesInputView extends View {
                                               + " caracteres, o estar repetido",
                                               "¡Error!", JOptionPane.ERROR_MESSAGE, null);
 
-                return;
+              tf.setText("");
+
+              return;
               }
             }
         );

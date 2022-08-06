@@ -8,7 +8,6 @@ import armameeldoparti.models.Position;
 import java.util.List;
 import java.util.stream.Stream;
 import javax.naming.InvalidNameException;
-import javax.swing.JTextField;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -65,12 +64,10 @@ class NamesInputTest {
     List<Player> playersSet = Main.getPlayersSets()
                                   .get(Position.CENTRAL_DEFENDER);
 
-    JTextField testTextField = new JTextField(invalidString);
-
     NamesInputController testNamesInputController = Main.getNamesInputController();
 
     assertThrows(IllegalArgumentException.class, () -> {
-      testNamesInputController.textFieldEvent(0, playersSet, testTextField);
+      testNamesInputController.textFieldEvent(0, playersSet, invalidString);
     });
   }
 
@@ -87,12 +84,10 @@ class NamesInputTest {
     List<Player> playersSet = Main.getPlayersSets()
                                   .get(Position.CENTRAL_DEFENDER);
 
-    JTextField testTextField = new JTextField(invalidName);
-
     NamesInputController testNamesInputController = Main.getNamesInputController();
 
     assertThrows(InvalidNameException.class, () -> {
-      testNamesInputController.textFieldEvent(0, playersSet, testTextField);
+      testNamesInputController.textFieldEvent(0, playersSet, invalidName);
     });
   }
 
@@ -104,6 +99,6 @@ class NamesInputTest {
    * @return A stream of invalid strings for testing.
    */
   static Stream<String> invalidStringsProvider() {
-    return Stream.of("", "123", "!a._,|°}zY", "nam3", null);
+    return Stream.of("", "123", "!a._,|°}zY", "nam3");
   }
 }

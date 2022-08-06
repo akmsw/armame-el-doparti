@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.naming.InvalidNameException;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  * Names input view controller class.
@@ -75,7 +74,7 @@ public class NamesInputController extends Controller {
                                 .setSelectedIndex(0);
 
     ((NamesInputView) getView()).getTextArea()
-                                .setText(null);
+                                .setText("");
 
     updateTextFields(((NamesInputView) getView()).getComboBox()
                                                  .getItemAt(0));
@@ -152,30 +151,25 @@ public class NamesInputController extends Controller {
    *
    * @param playerIndex  The index of the player which name will be the text filed input.
    * @param playersSet   The set of players corresponding to the selected combobox option.
-   * @param textField    The edited text field.
+   * @param text         The user input in the text field.
    *
    * @throws IllegalArgumentException When the input is an invalid string.
    * @throws InvalidNameException     When the input is an invalid name.
    */
   public void textFieldEvent(int playerIndex,
                              List<Player> playersSet,
-                             JTextField textField)
+                             String text)
                              throws InvalidNameException {
-    if (!Pattern.matches(Main.NAMES_VALIDATION_REGEX, textField.getText())) {
-      textField.setText(null);
-
+    if (!Pattern.matches(Main.NAMES_VALIDATION_REGEX, text)) {
       throw new IllegalArgumentException();
     }
 
-    String name = textField.getText()
-                           .trim()
-                           .toUpperCase()
-                           .replace(" ", "_");
+    String name = text.trim()
+                      .toUpperCase()
+                      .replace(" ", "_");
 
     if (name.length() > Main.MAX_NAME_LEN || name.isBlank()
         || name.isEmpty() || alreadyExists(name)) {
-      textField.setText(null);
-
       throw new InvalidNameException();
     }
 
@@ -214,7 +208,7 @@ public class NamesInputController extends Controller {
     };
 
     ((NamesInputView) getView()).getTextArea()
-                                .setText(null);
+                                .setText("");
 
     Main.getPlayersSets()
         .entrySet()

@@ -206,7 +206,7 @@ public class AnchoragesController extends Controller {
    */
   private void updateTextArea() {
     ((AnchoragesView) getView()).getTextArea()
-                                .setText(null);
+                                .setText("");
 
     var wrapperAnchorageNum = new Object() {
       private int anchorageNum;
