@@ -25,7 +25,7 @@ public class Team {
   private List<Player> midfielders;
   private List<Player> forwards;
 
-  private Map<Position, List<Player>> teamPlayers;
+  private Map<Positions, List<Player>> teamPlayers;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -39,13 +39,13 @@ public class Team {
     midfielders = new ArrayList<>();
     forwards = new ArrayList<>();
 
-    teamPlayers = new EnumMap<>(Position.class);
+    teamPlayers = new EnumMap<>(Positions.class);
 
-    teamPlayers.put(Position.GOALKEEPER, goalkeepers);
-    teamPlayers.put(Position.CENTRAL_DEFENDER, centralDefenders);
-    teamPlayers.put(Position.LATERAL_DEFENDER, lateralDefenders);
-    teamPlayers.put(Position.MIDFIELDER, midfielders);
-    teamPlayers.put(Position.FORWARD, forwards);
+    teamPlayers.put(Positions.GOALKEEPER, goalkeepers);
+    teamPlayers.put(Positions.CENTRAL_DEFENDER, centralDefenders);
+    teamPlayers.put(Positions.LATERAL_DEFENDER, lateralDefenders);
+    teamPlayers.put(Positions.MIDFIELDER, midfielders);
+    teamPlayers.put(Positions.FORWARD, forwards);
   }
 
   // ---------------------------------------- Public methods -------------------------------------
@@ -92,7 +92,7 @@ public class Team {
    *
    * @return Whether the position players list is full or not.
    */
-  public boolean isPositionFull(Position position) {
+  public boolean isPositionFull(Positions position) {
     return teamPlayers.get(position)
                       .size() == Main.getPlayersAmountMap()
                                      .get(position);
@@ -103,7 +103,7 @@ public class Team {
    *
    * @return The map that associates each position with its corresponding players list.
    */
-  public Map<Position, List<Player>> getPlayers() {
+  public Map<Positions, List<Player>> getPlayers() {
     return teamPlayers;
   }
 }

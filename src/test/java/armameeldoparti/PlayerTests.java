@@ -3,7 +3,7 @@ package armameeldoparti;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Position;
+import armameeldoparti.models.Positions;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
@@ -34,7 +34,7 @@ class PlayerTests implements ArgumentsProvider {
   @DisplayName("Default values in basic players creation")
   @ParameterizedTest
   @ArgumentsSource(PlayerTests.class)
-  void defaultValuesInPlayersCreation(String name, Position position) {
+  void defaultValuesInPlayersCreation(String name, Positions position) {
     Player player = new Player(name, position);
 
     assertEquals(0, player.getAnchorageNumber());
@@ -54,11 +54,11 @@ class PlayerTests implements ArgumentsProvider {
   @Override
   public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
     return Stream.of(
-      Arguments.of("player a", Position.CENTRAL_DEFENDER),
-      Arguments.of("player b", Position.LATERAL_DEFENDER),
-      Arguments.of("player c", Position.MIDFIELDER),
-      Arguments.of("player d", Position.FORWARD),
-      Arguments.of("player e", Position.GOALKEEPER)
+      Arguments.of("player a", Positions.CENTRAL_DEFENDER),
+      Arguments.of("player b", Positions.LATERAL_DEFENDER),
+      Arguments.of("player c", Positions.MIDFIELDER),
+      Arguments.of("player d", Positions.FORWARD),
+      Arguments.of("player e", Positions.GOALKEEPER)
     );
   }
 }

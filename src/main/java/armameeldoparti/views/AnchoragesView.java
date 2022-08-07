@@ -1,8 +1,10 @@
 package armameeldoparti.views;
 
 import armameeldoparti.Main;
+import armameeldoparti.controllers.AnchoragesController;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Position;
+import armameeldoparti.models.Positions;
+import armameeldoparti.models.Views;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -59,7 +61,7 @@ public class AnchoragesView extends View {
   private List<JCheckBox> fwCheckboxes;
   private List<JCheckBox> gkCheckboxes;
 
-  private Map<Position, List<JCheckBox>> checkBoxesMap;
+  private Map<Positions, List<JCheckBox>> checkBoxesMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -73,13 +75,13 @@ public class AnchoragesView extends View {
     fwCheckboxes = new ArrayList<>();
     gkCheckboxes = new ArrayList<>();
 
-    checkBoxesMap = new EnumMap<>(Position.class);
+    checkBoxesMap = new EnumMap<>(Positions.class);
 
-    checkBoxesMap.put(Position.CENTRAL_DEFENDER, cdCheckboxes);
-    checkBoxesMap.put(Position.LATERAL_DEFENDER, ldCheckboxes);
-    checkBoxesMap.put(Position.MIDFIELDER, mfCheckboxes);
-    checkBoxesMap.put(Position.FORWARD, fwCheckboxes);
-    checkBoxesMap.put(Position.GOALKEEPER, gkCheckboxes);
+    checkBoxesMap.put(Positions.CENTRAL_DEFENDER, cdCheckboxes);
+    checkBoxesMap.put(Positions.LATERAL_DEFENDER, ldCheckboxes);
+    checkBoxesMap.put(Positions.MIDFIELDER, mfCheckboxes);
+    checkBoxesMap.put(Positions.FORWARD, fwCheckboxes);
+    checkBoxesMap.put(Positions.GOALKEEPER, gkCheckboxes);
 
     initializeInterface();
   }
@@ -90,7 +92,7 @@ public class AnchoragesView extends View {
    * Updates the checkboxes text with the players names.
    */
   public void updateCheckBoxesText() {
-    for (Position position : Position.values()) {
+    for (Positions position : Positions.values()) {
       for (int i = 0; i < Main.getPlayersSets()
                               .get(position)
                               .size(); i++) {
@@ -165,7 +167,7 @@ public class AnchoragesView extends View {
    *
    * @return The map that associates each checkboxes list with its corresponding position.
    */
-  public Map<Position, List<JCheckBox>> getCheckBoxesMap() {
+  public Map<Positions, List<JCheckBox>> getCheckBoxesMap() {
     return checkBoxesMap;
   }
 
@@ -196,7 +198,7 @@ public class AnchoragesView extends View {
     Main.getPlayersSets()
         .entrySet()
         .forEach(ps -> {
-          final Position currentPosition = ps.getValue()
+          final Positions currentPosition = ps.getValue()
                                              .get(0)
                                              .getPosition();
 
@@ -232,43 +234,38 @@ public class AnchoragesView extends View {
 
     finishButton.setEnabled(false);
     finishButton.addActionListener(e ->
-        Main.getAnchoragesController()
-            .finishButtonEvent()
+        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).finishButtonEvent()
     );
 
     newAnchorageButton = new JButton("Anclar");
 
     newAnchorageButton.addActionListener(e ->
-        Main.getAnchoragesController()
-            .newAnchorageButtonEvent()
+        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).newAnchorageButtonEvent()
     );
 
     deleteAnchorageButton = new JButton("Borrar un anclaje");
 
     deleteAnchorageButton.addActionListener(e ->
-        Main.getAnchoragesController()
-            .deleteAnchorageButtonEvent()
+        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).deleteAnchorageButtonEvent()
     );
 
     deleteLastAnchorageButton = new JButton("Borrar último anclaje");
 
     deleteLastAnchorageButton.addActionListener(e ->
-        Main.getAnchoragesController()
-            .deleteLastAnchorageButtonEvent()
+        ((AnchoragesController) Main.getController(Views.ANCHORAGES))
+        .deleteLastAnchorageButtonEvent()
     );
 
     clearAnchoragesButton = new JButton("Limpiar anclajes");
 
     clearAnchoragesButton.addActionListener(e ->
-        Main.getAnchoragesController()
-            .clearAnchoragesButtonEvent()
+        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).clearAnchoragesButtonEvent()
     );
 
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        Main.getAnchoragesController()
-            .backButtonEvent()
+        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).backButtonEvent()
     );
 
     leftPanel.add(finishButton, GROWX_SPAN);

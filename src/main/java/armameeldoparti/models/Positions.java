@@ -9,7 +9,7 @@ package armameeldoparti.models;
  *
  * @since 15/02/2020
  */
-public enum Position {
+public enum Positions {
   CENTRAL_DEFENDER,
   LATERAL_DEFENDER,
   MIDFIELDER,

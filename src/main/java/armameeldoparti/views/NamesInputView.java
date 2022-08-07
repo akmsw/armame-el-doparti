@@ -1,8 +1,10 @@
 package armameeldoparti.views;
 
 import armameeldoparti.Main;
+import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Position;
+import armameeldoparti.models.Positions;
+import armameeldoparti.models.Views;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -62,7 +64,7 @@ public class NamesInputView extends View {
 
   private JTextArea textArea;
 
-  private Map<Position, List<JTextField>> textFieldsMap;
+  private Map<Positions, List<JTextField>> textFieldsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -139,7 +141,7 @@ public class NamesInputView extends View {
    * @return The map that associates each text fields set with its
    *         corresponding position.
    */
-  public Map<Position, List<JTextField>> getTextFieldsMap() {
+  public Map<Positions, List<JTextField>> getTextFieldsMap() {
     return textFieldsMap;
   }
 
@@ -150,9 +152,9 @@ public class NamesInputView extends View {
    */
   @Override
   protected void initializeInterface() {
-    textFieldsMap = new EnumMap<>(Position.class);
+    textFieldsMap = new EnumMap<>(Positions.class);
 
-    for (Position position : Position.values()) {
+    for (Positions position : Positions.values()) {
       List<Player> playersSet = new ArrayList<>();
 
       initializeSet(playersSet, position, Main.getPlayersAmountMap()
@@ -198,13 +200,11 @@ public class NamesInputView extends View {
     mixButton.setEnabled(false);
 
     mixButton.addActionListener(e ->
-        Main.getNamesInputController()
-            .mixButtonEvent()
+        ((NamesInputController) Main.getController(Views.NAMES_INPUT)).mixButtonEvent()
     );
 
     backButton.addActionListener(e ->
-        Main.getNamesInputController()
-            .backButtonEvent()
+        ((NamesInputController) Main.getController(Views.NAMES_INPUT)).backButtonEvent()
     );
 
     rightPanel.add(mixButton, "grow");
@@ -220,7 +220,7 @@ public class NamesInputView extends View {
    * @param position Players position.
    * @param capacity Set's initial capacity.
    */
-  private void initializeSet(List<Player> set, Position position, int capacity) {
+  private void initializeSet(List<Player> set, Positions position, int capacity) {
     for (int i = 0; i < capacity; i++) {
       set.add(new Player("", position));
     }
@@ -234,7 +234,7 @@ public class NamesInputView extends View {
 
     comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
-        Main.getNamesInputController()
+        ((NamesInputController) Main.getController(Views.NAMES_INPUT))
             .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
     );
 
@@ -269,14 +269,14 @@ public class NamesInputView extends View {
    * Builds, stores and configures each position text fields.
    */
   private void addTextFields() {
-    for (Position position : Position.values()) {
+    for (Positions position : Positions.values()) {
       for (int i = 0; i < Main.getPlayersAmountMap()
                               .get(position) * 2; i++) {
         JTextField tf = new JTextField();
 
         tf.addActionListener(e -> {
               try {
-                Main.getNamesInputController()
+                ((NamesInputController) Main.getController(Views.NAMES_INPUT))
                     .textFieldEvent(textFieldsMap.get(position)
                                                  .indexOf(tf),
                                     Main.getPlayersSets()
@@ -298,9 +298,9 @@ public class NamesInputView extends View {
                                               + " caracteres, o estar repetido",
                                               "¡Error!", JOptionPane.ERROR_MESSAGE, null);
 
-              tf.setText("");
+                tf.setText("");
 
-              return;
+                return;
               }
             }
         );
@@ -342,7 +342,7 @@ public class NamesInputView extends View {
         .forEach(l -> {
           if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
             Main.getPlayersAmountMap()
-                .put(Position.values()[wrapperIndex.index],
+                .put(Positions.values()[wrapperIndex.index],
                     Integer.parseInt(l.replaceAll("(?!(?<="
                                                   + Main.PLAYERS_PER_TEAM
                                                   + ")\\d).", "")));

@@ -1,6 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
+import armameeldoparti.models.Views;
 import armameeldoparti.views.SkillPointsInputView;
 
 /**
@@ -49,10 +50,9 @@ public class SkillPointsInputController extends Controller {
 
     hideView();
 
-    Main.getResultsController()
-        .setUp();
+    ((ResultsController) Main.getController(Views.RESULTS)).setUp();
 
-    Main.getResultsController()
+    Main.getController(Views.RESULTS)
         .showView();
   }
 
@@ -76,10 +76,10 @@ public class SkillPointsInputController extends Controller {
     resetView();
 
     if (Main.thereAreAnchorages()) {
-      Main.getAnchoragesController()
+      Main.getController(Views.ANCHORAGES)
           .showView();
     } else {
-      Main.getNamesInputController()
+      Main.getController(Views.NAMES_INPUT)
           .showView();
     }
   }

@@ -1,8 +1,10 @@
 package armameeldoparti.views;
 
 import armameeldoparti.Main;
+import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Position;
+import armameeldoparti.models.Positions;
+import armameeldoparti.models.Views;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +78,7 @@ public class SkillPointsInputView extends View {
    * Updates the labels with the players names.
    */
   public void updateNameLabels() {
-    for (Position position : Position.values()) {
+    for (Positions position : Positions.values()) {
       for (Player player : Main.getPlayersSets()
                                .get(position)) {
         labelsMap.get(spinnersMap.get(player))
@@ -108,18 +110,16 @@ public class SkillPointsInputView extends View {
     JButton backButton = new JButton("Atrás");
 
     finishButton.addActionListener(e ->
-        Main.getSkillPointsInputController()
-            .finishButtonEvent()
+        ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).finishButtonEvent()
     );
 
     resetSkillPointsButton.addActionListener(e ->
-        Main.getSkillPointsInputController()
-            .resetSkillsButtonEvent()
+        ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS))
+        .resetSkillsButtonEvent()
     );
 
     backButton.addActionListener(e ->
-        Main.getSkillPointsInputController()
-            .backButtonEvent()
+        ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).backButtonEvent()
     );
 
     masterPanel.add(finishButton, GROW_SPAN);
@@ -133,7 +133,7 @@ public class SkillPointsInputView extends View {
    * Adds the spinners to their corresponding panel.
    */
   private void addSpinners() {
-    for (Position position : Position.values()) {
+    for (Positions position : Positions.values()) {
       JLabel positionLabel = new JLabel(Main.getPositionsMap()
                                             .get(position));
 

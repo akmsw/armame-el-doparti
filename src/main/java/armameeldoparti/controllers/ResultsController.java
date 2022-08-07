@@ -2,8 +2,9 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Position;
+import armameeldoparti.models.Positions;
 import armameeldoparti.models.Team;
+import armameeldoparti.models.Views;
 import armameeldoparti.utils.BySkillsMixer;
 import armameeldoparti.utils.RandomMixer;
 import armameeldoparti.views.ResultsView;
@@ -116,14 +117,14 @@ public class ResultsController extends Controller {
 
     if (Main.getDistribution() == Main.RANDOM_MIX) {
       if (Main.thereAreAnchorages()) {
-        Main.getAnchoragesController()
+        Main.getController(Views.ANCHORAGES)
             .showView();
       } else {
-        Main.getNamesInputController()
+        Main.getController(Views.NAMES_INPUT)
             .showView();
       }
     } else {
-      Main.getSkillPointsInputController()
+      Main.getController(Views.SKILL_POINTS)
           .showView();
     }
   }
@@ -158,7 +159,7 @@ public class ResultsController extends Controller {
     };
 
     teams.forEach(team -> {
-      Arrays.stream(Position.values())
+      Arrays.stream(Positions.values())
             .forEach(position ->
               team.getPlayers()
                   .get(position)
@@ -328,26 +329,26 @@ public class ResultsController extends Controller {
       if (i == 1) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(Main.getPositionsMap()
-                                                 .get(Position.CENTRAL_DEFENDER), i, 0);
+                                                 .get(Positions.CENTRAL_DEFENDER), i, 0);
       } else if (i < 4) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(Main.getPositionsMap()
-                                                 .get(Position.LATERAL_DEFENDER), i, 0);
+                                                 .get(Positions.LATERAL_DEFENDER), i, 0);
       } else if (i < 6) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(Main.getPositionsMap()
-                                                 .get(Position.MIDFIELDER), i, 0);
+                                                 .get(Positions.MIDFIELDER), i, 0);
       } else if (i < 7) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(Main.getPositionsMap()
-                                                 .get(Position.FORWARD), i, 0);
+                                                 .get(Positions.FORWARD), i, 0);
       }
     }
 
     if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
       ((ResultsView) getView()).getTable()
                                .setValueAt(Main.getPositionsMap()
-                                               .get(Position.GOALKEEPER),
+                                               .get(Positions.GOALKEEPER),
                                            ((ResultsView) getView()).getTable()
                                                                     .getRowCount() - 2, 0);
       ((ResultsView) getView()).getTable()
@@ -357,7 +358,7 @@ public class ResultsController extends Controller {
     } else {
       ((ResultsView) getView()).getTable()
                                .setValueAt(Main.getPositionsMap()
-                                               .get(Position.GOALKEEPER),
+                                               .get(Positions.GOALKEEPER),
                                            ((ResultsView) getView()).getTable()
                                                                     .getRowCount() - 1, 0);
     }

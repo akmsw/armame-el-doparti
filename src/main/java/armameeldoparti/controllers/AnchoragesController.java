@@ -1,6 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
+import armameeldoparti.models.Views;
 import armameeldoparti.views.AnchoragesView;
 import java.util.List;
 import javax.swing.JCheckBox;
@@ -165,8 +166,7 @@ public class AnchoragesController extends Controller {
     resetView();
     hideView();
 
-    Main.getNamesInputController()
-        .showView();
+    ((NamesInputController) Main.getController(Views.NAMES_INPUT)).showView();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -384,13 +384,12 @@ public class AnchoragesController extends Controller {
                                 .forEach(cb -> cb.setSelected(false));
 
     if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
-      Main.getSkillPointsInputController()
+      Main.getController(Views.SKILL_POINTS)
           .showView();
     } else {
-      Main.getResultsController()
-          .setUp();
+      ((ResultsController) Main.getController(Views.RESULTS)).setUp();
 
-      Main.getResultsController()
+      Main.getController(Views.RESULTS)
           .showView();
     }
 

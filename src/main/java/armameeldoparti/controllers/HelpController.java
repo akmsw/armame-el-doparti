@@ -1,6 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
+import armameeldoparti.models.Views;
 import armameeldoparti.views.HelpView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -76,7 +77,7 @@ public class HelpController extends Controller {
     hideView();
     resetView();
 
-    Main.getMainMenuController()
+    Main.getController(Views.MAIN_MENU)
         .showView();
   }
 

@@ -1,6 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
+import armameeldoparti.models.Views;
 import armameeldoparti.views.MainMenuView;
 
 /**
@@ -44,10 +45,9 @@ public class MainMenuController extends Controller {
   public void helpButtonEvent() {
     hideView();
 
-    Main.getHelpController()
-        .updatePage();
+    ((HelpController) Main.getController(Views.HELP)).updatePage();
 
-    Main.getHelpController()
+    Main.getController(Views.HELP)
         .showView();
   }
 
@@ -58,7 +58,7 @@ public class MainMenuController extends Controller {
    * and shows the names input view.
    */
   public void startButtonEvent() {
-    Main.getNamesInputController()
+    Main.getController(Views.NAMES_INPUT)
         .showView();
 
     hideView();

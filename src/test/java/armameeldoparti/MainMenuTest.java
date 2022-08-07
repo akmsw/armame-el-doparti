@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import armameeldoparti.controllers.HelpController;
+import armameeldoparti.controllers.MainMenuController;
+import armameeldoparti.controllers.NamesInputController;
+import armameeldoparti.models.Views;
 import armameeldoparti.views.HelpView;
 import armameeldoparti.views.NamesInputView;
 import org.junit.jupiter.api.BeforeAll;
@@ -44,28 +48,25 @@ class MainMenuTest {
   @DisplayName("Tests the initial state of the help view and the navigation")
   @Test
   void helpViewInitialState() {
-    Main.getMainMenuController()
-        .helpButtonEvent();
+    ((MainMenuController) Main.getController(Views.MAIN_MENU)).helpButtonEvent();
 
-    assertEquals(0, Main.getHelpController()
-                        .getPageNumber());
+    assertEquals(0, ((HelpController) Main.getController(Views.HELP)).getPageNumber());
 
-    assertTrue(Main.getHelpController()
+    assertTrue(Main.getController(Views.HELP)
                    .getView()
                    .isVisible());
 
-    assertTrue(((HelpView) Main.getHelpController()
+    assertTrue(((HelpView) Main.getController(Views.HELP)
                                .getView()).getBackButton()
                                           .isEnabled());
 
-    Main.getHelpController()
-        .backButtonEvent();
+    ((HelpController) Main.getController(Views.HELP)).backButtonEvent();
 
-    assertTrue(Main.getMainMenuController()
+    assertTrue(Main.getController(Views.MAIN_MENU)
                    .getView()
                    .isVisible());
 
-    assertFalse(Main.getHelpController()
+    assertFalse(Main.getController(Views.HELP)
                     .getView()
                     .isVisible());
   }
@@ -80,49 +81,48 @@ class MainMenuTest {
   @DisplayName("Tests the initial state of the names input view and the navigation")
   @Test
   void namesInputViewInitialState() {
-    Main.getMainMenuController()
+    ((MainMenuController) Main.getController(Views.MAIN_MENU))
         .startButtonEvent();
 
-    assertTrue(Main.getNamesInputController()
+    assertTrue(Main.getController(Views.NAMES_INPUT)
                    .getView()
                    .isVisible());
 
-    assertFalse(Main.getMainMenuController()
+    assertFalse(Main.getController(Views.MAIN_MENU)
                     .getView()
                     .isVisible());
 
-    assertEquals(0, ((NamesInputView) Main.getNamesInputController()
+    assertEquals(0, ((NamesInputView) Main.getController(Views.NAMES_INPUT)
                                           .getView()).getComboBox()
                                                      .getSelectedIndex());
 
-    assertEquals("", ((NamesInputView) Main.getNamesInputController()
+    assertEquals("", ((NamesInputView) Main.getController(Views.NAMES_INPUT)
                                            .getView()).getTextArea()
                                                       .getText());
 
-    assertFalse(((NamesInputView) Main.getNamesInputController()
+    assertFalse(((NamesInputView) Main.getController(Views.NAMES_INPUT)
                                       .getView()).getAnchoragesCheckBox()
                                                  .isSelected());
 
 
-    assertFalse(((NamesInputView) Main.getNamesInputController()
+    assertFalse(((NamesInputView) Main.getController(Views.NAMES_INPUT)
                                       .getView()).getMixButton()
                                                  .isEnabled());
 
-    ((NamesInputView) Main.getNamesInputController()
+    ((NamesInputView) Main.getController(Views.NAMES_INPUT)
                           .getView()).getTextFieldsMap()
                                      .values()
                                      .forEach(tfl -> {
                                        tfl.forEach(tf -> assertEquals("", tf.getText()));
                                      });
 
-    Main.getNamesInputController()
-        .backButtonEvent();
+    ((NamesInputController) Main.getController(Views.NAMES_INPUT)).backButtonEvent();
 
-    assertTrue(Main.getMainMenuController()
+    assertTrue(Main.getController(Views.MAIN_MENU)
                    .getView()
                    .isVisible());
 
-    assertFalse(Main.getNamesInputController()
+    assertFalse(Main.getController(Views.NAMES_INPUT)
                     .getView()
                     .isVisible());
   }

@@ -1,13 +1,15 @@
 package armameeldoparti;
 
 import armameeldoparti.controllers.AnchoragesController;
+import armameeldoparti.controllers.Controller;
 import armameeldoparti.controllers.HelpController;
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.controllers.ResultsController;
 import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Position;
+import armameeldoparti.models.Positions;
+import armameeldoparti.models.Views;
 import armameeldoparti.views.AnchoragesView;
 import armameeldoparti.views.HelpView;
 import armameeldoparti.views.MainMenuView;
@@ -118,16 +120,10 @@ public final class Main {
 
   private static boolean anchorages;
 
-  private static Map<Position, Integer> playersAmountMap;
-  private static Map<Position, String> positions;
-  private static Map<Position, List<Player>> playersSets;
-
-  private static MainMenuController mainMenuController;
-  private static HelpController helpController;
-  private static NamesInputController namesInputController;
-  private static AnchoragesController anchoragesController;
-  private static SkillPointsInputController skillPointsInputController;
-  private static ResultsController resultsController;
+  private static Map<Positions, Integer> playersAmountMap;
+  private static Map<Positions, String> positions;
+  private static Map<Positions, List<Player>> playersSets;
+  private static Map<Views, Controller> controllersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -146,28 +142,42 @@ public final class Main {
    * @param args Program arguments (not used yet).
    */
   public static void main(String[] args) {
-    playersAmountMap = new EnumMap<>(Position.class);
-    positions = new EnumMap<>(Position.class);
+    playersAmountMap = new EnumMap<>(Positions.class);
+    positions = new EnumMap<>(Positions.class);
+    controllersMap = new EnumMap<>(Views.class);
 
     playersSets = new TreeMap<>();
 
-    positions.put(Position.CENTRAL_DEFENDER, "DEFENSORES CENTRALES");
-    positions.put(Position.LATERAL_DEFENDER, "DEFENSORES LATERALES");
-    positions.put(Position.MIDFIELDER, "MEDIOCAMPISTAS");
-    positions.put(Position.FORWARD, "DELANTEROS");
-    positions.put(Position.GOALKEEPER, "ARQUEROS");
+    positions.put(Positions.CENTRAL_DEFENDER, "DEFENSORES CENTRALES");
+    positions.put(Positions.LATERAL_DEFENDER, "DEFENSORES LATERALES");
+    positions.put(Positions.MIDFIELDER, "MEDIOCAMPISTAS");
+    positions.put(Positions.FORWARD, "DELANTEROS");
+    positions.put(Positions.GOALKEEPER, "ARQUEROS");
 
     setAnchorages(false);
     setGraphicalProperties();
 
-    mainMenuController = new MainMenuController(new MainMenuView());
-    helpController = new HelpController(new HelpView());
-    namesInputController = new NamesInputController(new NamesInputView());
-    anchoragesController = new AnchoragesController(new AnchoragesView());
-    skillPointsInputController = new SkillPointsInputController(new SkillPointsInputView());
-    resultsController = new ResultsController(new ResultsView());
+    Controller mainMenuController = new MainMenuController(new MainMenuView());
+    controllersMap.put(Views.MAIN_MENU, mainMenuController);
 
-    mainMenuController.showView();
+    Controller helpController = new HelpController(new HelpView());
+    controllersMap.put(Views.HELP, helpController);
+
+    Controller namesInputController = new NamesInputController(new NamesInputView());
+    controllersMap.put(Views.NAMES_INPUT, namesInputController);
+
+    Controller anchoragesController = new AnchoragesController(new AnchoragesView());
+    controllersMap.put(Views.ANCHORAGES, anchoragesController);
+
+    Controller skillPointsInputController = new SkillPointsInputController(
+        new SkillPointsInputView()
+    );
+    controllersMap.put(Views.SKILL_POINTS, skillPointsInputController);
+
+    Controller resultsController = new ResultsController(new ResultsView());
+    controllersMap.put(Views.RESULTS, resultsController);
+
+    ((MainMenuController) mainMenuController).showView();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -180,8 +190,8 @@ public final class Main {
    *
    * @return The valueToSearch corresponding position.
    */
-  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T valueToSearch) {
-    return (Position) map.entrySet()
+  public static <T> Positions getCorrespondingPosition(Map<Positions, T> map, T valueToSearch) {
+    return (Positions) map.entrySet()
                          .stream()
                          .filter(e -> e.getValue()
                                        .equals(valueToSearch))
@@ -214,7 +224,7 @@ public final class Main {
    *
    * @return The map that contains the total amount of players for each position.
    */
-  public static Map<Position, Integer> getPlayersAmountMap() {
+  public static Map<Positions, Integer> getPlayersAmountMap() {
     return playersAmountMap;
   }
 
@@ -223,7 +233,7 @@ public final class Main {
    *
    * @return The map that associates each players set with its corresponding position.
    */
-  public static Map<Position, List<Player>> getPlayersSets() {
+  public static Map<Positions, List<Player>> getPlayersSets() {
     return playersSets;
   }
 
@@ -232,62 +242,19 @@ public final class Main {
    *
    * @return The map that associates each position with its string representation.
    */
-  public static Map<Position, String> getPositionsMap() {
+  public static Map<Positions, String> getPositionsMap() {
     return positions;
   }
 
   /**
-   * Gets the main menu view controller.
+   * Gets the corresponding controller to the requested view.
    *
-   * @return The main menu controller.
-   */
-  public static MainMenuController getMainMenuController() {
-    return mainMenuController;
-  }
-
-  /**
-   * Gets the help view controller.
+   * @param view The view whose controller is needed.
    *
-   * @return The help view controller.
-   */
-  public static HelpController getHelpController() {
-    return helpController;
-  }
-
-  /**
-   * Gets the names input view controller.
-   *
-   * @return The names input view controller.
-   */
-  public static NamesInputController getNamesInputController() {
-    return namesInputController;
-  }
-
-  /**
-   * Obtiene el controlador de la ventana de anclajes.
-   *
-   * @return El controlador de la ventana de anclajes.
-   */
-  public static AnchoragesController getAnchoragesController() {
-    return anchoragesController;
-  }
-
-  /**
-   * Gets the skills input view controller.
-   *
-   * @return The skills input view controller.
-   */
-  public static SkillPointsInputController getSkillPointsInputController() {
-    return skillPointsInputController;
-  }
-
-  /**
-   * Gets the results view controller.
-   *
-   * @return The results view controller.
-   */
-  public static ResultsController getResultsController() {
-    return resultsController;
+   * @return The requested view's controller.
+  */
+  public static Controller getController(Views view) {
+    return controllersMap.get(view);
   }
 
   // ---------------------------------------- Setters -------------------------------------------
@@ -327,7 +294,6 @@ public final class Main {
     UIManager.put("TitledBorder.border", new LineBorder(Main.DARK_GREEN));
     UIManager.put("Button.foreground", Color.WHITE);
     UIManager.put("ComboBox.focus", Color.WHITE);
-
 
     try {
       // In order to use the font, it must be created and registered first

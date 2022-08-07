@@ -1,6 +1,8 @@
 package armameeldoparti.views;
 
 import armameeldoparti.Main;
+import armameeldoparti.controllers.ResultsController;
+import armameeldoparti.models.Views;
 import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -146,16 +148,14 @@ public class ResultsView extends View {
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        Main.getResultsController()
-            .backButtonEvent()
+        ((ResultsController) Main.getController(Views.RESULTS)).backButtonEvent()
     );
 
     if (Main.getDistribution() == Main.RANDOM_MIX) {
       JButton remixButton = new JButton("Redistribuir");
 
       remixButton.addActionListener(e ->
-          Main.getResultsController()
-              .remixButtonEvent()
+          ((ResultsController) Main.getController(Views.RESULTS)).remixButtonEvent()
       );
 
       panel.add(remixButton, "growx");

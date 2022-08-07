@@ -1,6 +1,8 @@
 package armameeldoparti.views;
 
 import armameeldoparti.Main;
+import armameeldoparti.controllers.MainMenuController;
+import armameeldoparti.models.Views;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -67,13 +69,11 @@ public class MainMenuView extends View {
     JButton helpButton = new JButton("Ayuda");
 
     startButton.addActionListener(e ->
-        Main.getMainMenuController()
-            .startButtonEvent()
+        ((MainMenuController) Main.getController(Views.MAIN_MENU)).startButtonEvent()
     );
 
     helpButton.addActionListener(e ->
-        Main.getMainMenuController()
-            .helpButtonEvent()
+        ((MainMenuController) Main.getController(Views.MAIN_MENU)).helpButtonEvent()
     );
 
     masterPanel.add(startButton, GROWX);

@@ -2,6 +2,7 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Player;
+import armameeldoparti.models.Views;
 import armameeldoparti.views.NamesInputView;
 import java.util.Collection;
 import java.util.List;
@@ -89,7 +90,7 @@ public class NamesInputController extends Controller {
   public void backButtonEvent() {
     resetView();
 
-    Main.getMainMenuController()
+    Main.getController(Views.MAIN_MENU)
         .showView();
   }
 
@@ -114,24 +115,21 @@ public class NamesInputController extends Controller {
     Main.setDistribution(distribution);
 
     if (Main.thereAreAnchorages()) {
-      Main.getAnchoragesController()
-          .updateCheckBoxesText();
+      ((AnchoragesController) Main.getController(Views.ANCHORAGES)).updateCheckBoxesText();
 
-      Main.getAnchoragesController()
+      Main.getController(Views.ANCHORAGES)
           .showView();
     } else if (Main.getDistribution() == Main.RANDOM_MIX) {
       // Random distribution
-      Main.getResultsController()
-          .setUp();
+      ((ResultsController) Main.getController(Views.RESULTS)).setUp();
 
-      Main.getResultsController()
+      Main.getController(Views.RESULTS)
           .showView();
     } else {
       // By skill points distribution
-      Main.getSkillPointsInputController()
-          .updateNameLabels();
+      ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).updateNameLabels();
 
-      Main.getSkillPointsInputController()
+      Main.getController(Views.SKILL_POINTS)
           .showView();
     }
 
