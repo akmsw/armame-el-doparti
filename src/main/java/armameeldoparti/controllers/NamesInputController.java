@@ -159,8 +159,9 @@ public class NamesInputController extends Controller {
   public void textFieldEvent(int playerIndex,
                              List<Player> playersSet,
                              String text)
-                             throws InvalidNameException {
-    if (!Pattern.matches(Main.NAMES_VALIDATION_REGEX, text)) {
+                             throws IllegalArgumentException,
+                                    InvalidNameException {
+    if (!validString(text)) {
       throw new IllegalArgumentException();
     }
 
@@ -168,8 +169,7 @@ public class NamesInputController extends Controller {
                       .toUpperCase()
                       .replace(" ", "_");
 
-    if (name.length() > Main.MAX_NAME_LEN || name.isBlank()
-        || name.isEmpty() || alreadyExists(name)) {
+    if (!validName(name)) {
       throw new InvalidNameException();
     }
 
@@ -304,5 +304,31 @@ public class NamesInputController extends Controller {
                .flatMap(Collection::stream)
                .anyMatch(p -> p.getName()
                                .equals(name));
+  }
+
+  /**
+   * Checks if the given string matches the string validation regex.
+   *
+   * @param string The string to validate.
+   *
+   * @return Whether the string matches the string validation regex or not.
+   */
+  private boolean validString(String string) {
+    return Pattern.matches(Main.NAMES_VALIDATION_REGEX, string);
+  }
+
+  /**
+   * Checks if the given name has at most MAX_NAME_LEN characters,
+   * is not empty or blank and if there isn't already a player
+   * with that name.
+   *
+   * @param name The name to validate.
+   *
+   * @return If the given name is valid according to
+   *         the specified conditions.
+   */
+  private boolean validName(String name) {
+    return name.length() <= Main.MAX_NAME_LEN && !name.isBlank()
+           && !name.isEmpty() && !alreadyExists(name);
   }
 }

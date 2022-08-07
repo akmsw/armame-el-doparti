@@ -70,7 +70,7 @@ public class AnchoragesController extends Controller {
    * 'New anchorage' button event handler.
    *
    * <p>Checks if the necessary conditions to make a new anchorage
-   * are met. If so, it does.
+   * are met. If so, it does it.
    */
   public void newAnchorageButtonEvent() {
     int playersToAnchorAmount = (int) ((AnchoragesView) getView()).getCheckBoxesMap()
@@ -182,6 +182,8 @@ public class AnchoragesController extends Controller {
 
   /**
    * Sets a new anchorage based on the players checked.
+   *
+   * @see #setAnchorages(List)
    */
   private void newAnchorage() {
     anchoragesAmount++;
@@ -297,7 +299,7 @@ public class AnchoragesController extends Controller {
   /**
    * Clears the anchorages made.
    *
-   * @see armameeldoparti.controllers.AnchoragesController#deleteAnchorage(int)
+   * @see #deleteAnchorage(int)
    */
   private void clearAnchorages() {
     do {
@@ -342,7 +344,7 @@ public class AnchoragesController extends Controller {
    * then the players corresponding checkboxes will be visible and enabled
    * again, and the anchored players amount will be decremented as needed.
    *
-   * @param target      Anchorage to replace.
+   * @param target      Anchorage number to replace.
    * @param replacement New anchorage number to set.
    */
   private void changeAnchorage(int target, int replacement) {

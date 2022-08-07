@@ -75,8 +75,7 @@ public class ResultsController extends Controller {
 
   /**
    * Creates the teams and the results table, applies the needed table format, fills
-   * the non-variable table cells and displays the distribution results. Then, makes
-   * the controlled view visible.
+   * the non-variable table cells and displays the distribution results.
    */
   public void setUp() {
     Team team1 = new Team();
