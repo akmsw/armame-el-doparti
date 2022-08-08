@@ -21,7 +21,10 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Enumeration;
 import java.util.List;
@@ -120,6 +123,9 @@ public final class Main {
 
   private static boolean anchorages;
 
+  private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
+  private static final String PDA_FILENAME = "dist.pda";
+
   private static Map<Positions, Integer> playersAmountMap;
   private static Map<Positions, String> positions;
   private static Map<Positions, List<Player>> playersSets;
@@ -154,30 +160,13 @@ public final class Main {
     positions.put(Positions.FORWARD, "DELANTEROS");
     positions.put(Positions.GOALKEEPER, "ARQUEROS");
 
-    setAnchorages(false);
     setGraphicalProperties();
+    getPlayersDistributionData();
+    populatePlayersSets();
+    setUpControllers();
+    setAnchorages(false);
 
-    Controller mainMenuController = new MainMenuController(new MainMenuView());
-    controllersMap.put(Views.MAIN_MENU, mainMenuController);
-
-    Controller helpController = new HelpController(new HelpView());
-    controllersMap.put(Views.HELP, helpController);
-
-    Controller namesInputController = new NamesInputController(new NamesInputView());
-    controllersMap.put(Views.NAMES_INPUT, namesInputController);
-
-    Controller anchoragesController = new AnchoragesController(new AnchoragesView());
-    controllersMap.put(Views.ANCHORAGES, anchoragesController);
-
-    Controller skillPointsInputController = new SkillPointsInputController(
-        new SkillPointsInputView()
-    );
-    controllersMap.put(Views.SKILL_POINTS, skillPointsInputController);
-
-    Controller resultsController = new ResultsController(new ResultsView());
-    controllersMap.put(Views.RESULTS, resultsController);
-
-    ((MainMenuController) mainMenuController).showView();
+    ((MainMenuController) getController(Views.MAIN_MENU)).showView();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -192,11 +181,11 @@ public final class Main {
    */
   public static <T> Positions getCorrespondingPosition(Map<Positions, T> map, T valueToSearch) {
     return (Positions) map.entrySet()
-                         .stream()
-                         .filter(e -> e.getValue()
-                                       .equals(valueToSearch))
-                         .map(Map.Entry::getKey)
-                         .toArray()[0];
+                          .stream()
+                          .filter(e -> e.getValue()
+                                        .equals(valueToSearch))
+                          .map(Map.Entry::getKey)
+                          .toArray()[0];
   }
 
   // ---------------------------------------- Getters -------------------------------------------
@@ -273,16 +262,98 @@ public final class Main {
    *
    * @param newAnchoragesState The new anchorages option state.
    */
-  public static void setAnchorages(boolean newAnchoragesState) {
+  public static final void setAnchorages(boolean newAnchoragesState) {
     anchorages = newAnchoragesState;
   }
 
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
+   * Populates the players sets with empty players.
+   */
+  private static final void populatePlayersSets() {
+    for (Positions position : Positions.values()) {
+      List<Player> playersSet = new ArrayList<>();
+
+      for (int i = 0; i < playersAmountMap.get(position) * 2; i++) {
+        playersSet.add(new Player("", position));
+      }
+
+      playersSets.put(position, playersSet);
+    }
+  }
+
+  /**
+   * Creates the controllers and assigns their corresponding view to control.
+   */
+  private static final void setUpControllers() {
+    Controller mainMenuController = new MainMenuController(new MainMenuView());
+    controllersMap.put(Views.MAIN_MENU, mainMenuController);
+
+    Controller helpController = new HelpController(new HelpView());
+    controllersMap.put(Views.HELP, helpController);
+
+    Controller namesInputController = new NamesInputController(new NamesInputView());
+    controllersMap.put(Views.NAMES_INPUT, namesInputController);
+
+    Controller anchoragesController = new AnchoragesController(new AnchoragesView());
+    controllersMap.put(Views.ANCHORAGES, anchoragesController);
+
+    Controller skillPointsInputController = new SkillPointsInputController(
+        new SkillPointsInputView()
+    );
+    controllersMap.put(Views.SKILL_POINTS, skillPointsInputController);
+
+    Controller resultsController = new ResultsController(new ResultsView());
+    controllersMap.put(Views.RESULTS, resultsController);
+  }
+
+  /**
+   * Gets the number of players for each position per team using regular expressions.
+   *
+   * <p>[CLMFG].+>.+ : Retrieves the lines that start with C, L, M, F, or W,
+   * followed by at least one '>' character (these are the lines that matters in the
+   * .pda file).
+   *
+   * <p>(?!(?<=X)\\d). : Gets the part of the line that is not a number that we are
+   * interested in (the number would take the place of the X).
+   *
+   * <p>If the .pda file is modified in terms of the order of the important lines,
+   * it must be taken into account that Position.values()[index] trusts that what is found
+   * corresponds to the order in which the values in the Position enum are declared.
+   * Idem, if the order of the Position enum values are changed, it should be noted that
+   * Position.values()[index] trusts the order in which the data will be retrieved from the
+   * .pda file and, therefore, you should review the order of the important lines in the file.
+   */
+  private static final void getPlayersDistributionData() {
+    BufferedReader buff = new BufferedReader(
+        new InputStreamReader(Main.class
+                                  .getClassLoader()
+                                  .getResourceAsStream(Main.DOCS_PATH + PDA_FILENAME))
+    );
+
+    var wrapperIndex = new Object() {
+      private int index;
+    };
+
+    buff.lines()
+        .forEach(l -> {
+          if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
+            Main.getPlayersAmountMap()
+                .put(Positions.values()[wrapperIndex.index],
+                     Integer.parseInt(l.replaceAll("(?!(?<="
+                                                   + Main.PLAYERS_PER_TEAM
+                                                   + ")\\d).", "")));
+
+            wrapperIndex.index++;
+          }
+        });
+  }
+
+  /**
    * Sets up the program's GUI properties.
    */
-  private static void setGraphicalProperties() {
+  private static final void setGraphicalProperties() {
     UIManager.put("OptionPane.background", Main.LIGHT_GREEN);
     UIManager.put("Panel.background", Main.LIGHT_GREEN);
     UIManager.put("CheckBox.background", Main.LIGHT_GREEN);
@@ -318,7 +389,7 @@ public final class Main {
    *
    * @param font Font to use.
    */
-  private static void setProgramFont(Font font) {
+  private static final void setProgramFont(Font font) {
     Enumeration<Object> keys = UIManager.getDefaults()
                                         .keys();
 
