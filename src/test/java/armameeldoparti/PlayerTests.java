@@ -19,7 +19,7 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 1.0.0
+ * @version 0.0.1
  *
  * @since 23/07/2022
  */
@@ -29,9 +29,9 @@ class PlayerTests implements ArgumentsProvider {
   // ---------------------------------------- Tests bodies --------------------------------------
 
   /**
-   * Simple unit tests for players creation.
+   * Tests the default values when creating a player.
    */
-  @DisplayName("Default values in basic players creation")
+  @DisplayName("Tests the default values when creating a player")
   @ParameterizedTest
   @ArgumentsSource(PlayerTests.class)
   void defaultValuesInPlayersCreation(String name, Positions position) {

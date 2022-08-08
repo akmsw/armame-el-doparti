@@ -44,7 +44,7 @@ class NamesInputTest {
   // ---------------------------------------- Tests bodies --------------------------------------
 
   /**
-   * Tests if names with numbers and/or symbols are correctly detected
+   * Tests whether names with numbers and/or symbols are correctly detected
    * and they all trigger their corresponding exception.
    *
    * @param invalidName The string that shouldn't pass the name check.
@@ -66,7 +66,7 @@ class NamesInputTest {
   }
 
   /**
-   * Tests if empty names, blank names and long names (more than 10 characters),
+   * Tests whether empty names, blank names and long names (more than 10 characters),
    * are correctly detected and they all trigger their corresponding exception.
    *
    * @param invalidName The string that shouldn't pass the name check.
@@ -88,7 +88,7 @@ class NamesInputTest {
   }
 
   /**
-   * Tests if valid strings are correctly stored as players names.
+   * Tests whether valid names are correctly stored as players names.
    *
    * @param playerIndex    The index of the player to test in its corresponding list.
    * @param playerPosition The position of the player to test.
@@ -99,7 +99,7 @@ class NamesInputTest {
    * @throws IllegalArgumentException This exception is never thrown since
    *                                  every test string is a valid name.
    */
-  @DisplayName("Brief test explanation")
+  @DisplayName("Tests whether valid names are correctly stored as players names")
   @ParameterizedTest
   @MethodSource("validParamsProvider")
   void validNamesShouldPass(int playerIndex, Positions playerPosition, String playerName)

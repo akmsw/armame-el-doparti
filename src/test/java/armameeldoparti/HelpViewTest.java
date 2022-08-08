@@ -60,7 +60,7 @@ class HelpViewTest {
   // ---------------------------------------- Tests bodies --------------------------------------
 
   /**
-   * Tests if the page number shown on the label is correct
+   * Tests whether the page number shown on the label is correct
    * after navigating between pages.
    *
    * @param timesNext     How many times the next page button is pressed.
@@ -89,7 +89,7 @@ class HelpViewTest {
   }
 
   /**
-   * Bla.
+   * Tests the limits for the navigation buttons.
    */
   @DisplayName("Tests the limits for the navigation buttons")
   @Test
