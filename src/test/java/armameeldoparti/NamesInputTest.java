@@ -44,8 +44,8 @@ class NamesInputTest {
   // ---------------------------------------- Tests bodies --------------------------------------
 
   /**
-   * Tests whether names with numbers and/or symbols are correctly detected
-   * and they all trigger their corresponding exception.
+   * Tests whether empty names and names with numbers and/or symbols are correctly
+   * detected and if they all trigger their corresponding exception.
    *
    * @param invalidName The string that shouldn't pass the name check.
    */
@@ -67,7 +67,7 @@ class NamesInputTest {
 
   /**
    * Tests whether empty names, blank names and long names (more than 10 characters),
-   * are correctly detected and they all trigger their corresponding exception.
+   * are correctly detected and if they all trigger their corresponding exception.
    *
    * @param invalidName The string that shouldn't pass the name check.
    */
@@ -84,6 +84,30 @@ class NamesInputTest {
 
     assertThrows(InvalidNameException.class, () -> {
       testNamesInputController.textFieldEvent(0, playersSet, invalidName);
+    });
+  }
+
+  /**
+   * Tests whether repeated names are correctly detected and if they all trigger
+   * their corresponding exception.
+   *
+   * @param playerIndex    The index of the player to test in its corresponding list.
+   * @param playerPosition The position of the player to test.
+   * @param playerName     The name to apply to the player.
+   */
+  @DisplayName("Tests if repeated names throw the expected exception")
+  @ParameterizedTest
+  @MethodSource("repeatedParamsProvider")
+  void repeatedNamesShouldThrowException(int playerIndex, Positions playerPosition, String playerName) {
+    List<Player> playersSet = Main.getPlayersSets()
+                                  .get(Positions.CENTRAL_DEFENDER);
+
+    NamesInputController testNamesInputController = (
+        (NamesInputController) Main.getController(Views.NAMES_INPUT)
+    );
+
+    assertThrows(InvalidNameException.class, () -> {
+      testNamesInputController.textFieldEvent(0, playersSet, playerName);
     });
   }
 
@@ -120,6 +144,18 @@ class NamesInputTest {
   }
 
   // ---------------------------------------- Arguments providers -------------------------------
+
+  /**
+   * Provides repeated names for testing.
+   *
+   * @return Repeated names for testing.
+   */
+  static Stream<Arguments> repeatedParamsProvider() {
+    return Stream.of(
+      Arguments.of(0, Positions.CENTRAL_DEFENDER, "PLAYER A"),
+      Arguments.of(1, Positions.MIDFIELDER, "PLAYER A")
+    );
+  }
 
   /**
    * Provides valid params for testing.
