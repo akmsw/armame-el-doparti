@@ -42,16 +42,7 @@ public class ResultsView extends View {
    * Construye una ventana de resultados.
    */
   public ResultsView() {
-
-    if (Main.getDistribution() == Main.RANDOM_MIX) {
-      setFrameTitle("Aleatorio - ");
-    } else {
-      setFrameTitle("Por puntuaciones - ");
-    }
-
-    setFrameTitle(getFrameTitle().concat(Main.thereAreAnchorages()
-                                         ? "Con anclajes"
-                                         : "Sin anclajes"));
+    // No body needed
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -65,8 +56,13 @@ public class ResultsView extends View {
 
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Main.ICON.getImage());
-    setTitle(getFrameTitle());
     setResizable(false);
+    setFrameTitle((Main.getDistribution() == Main.RANDOM_MIX
+                   ? "Aleatorio - "
+                   : "Por puntuaciones - ").concat(Main.thereAreAnchorages()
+                                                   ? "Con anclajes"
+                                                   : "Sin anclajes"));
+    setTitle(getFrameTitle());
     addTable();
     addButtons();
     add(panel);

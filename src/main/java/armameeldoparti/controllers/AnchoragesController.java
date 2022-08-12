@@ -38,10 +38,15 @@ public class AnchoragesController extends Controller {
 
   /**
    * Resets the controlled view to its default values.
+   *
+   * <p>Clears every anchorage made, updating the text area
+   * and the state of the buttons.
    */
   @Override
   public void resetView() {
-    clearAnchoragesButtonEvent();
+    clearAnchorages();
+    updateTextArea();
+    toggleButtons();
   }
 
   /**
@@ -59,10 +64,10 @@ public class AnchoragesController extends Controller {
    * If so, it proceeds with the players distribution.
    */
   public void finishButtonEvent() {
-    if (!validAnchoragesCombination()) {
-      showErrorMessage("Error message");
-      return;
-    }
+    // if (!validAnchoragesCombination()) {
+    //   showErrorMessage("Error message");
+    //   return;
+    // }
 
     finish();
   }
@@ -146,13 +151,10 @@ public class AnchoragesController extends Controller {
   /**
    * 'Clear anchorages' button event handler.
    *
-   * <p>Clears every anchorage made, updating the text area and the
-   * state of the buttons.
+   * <p>Resets the controlled view to its default values.
    */
   public void clearAnchoragesButtonEvent() {
-    clearAnchorages();
-    updateTextArea();
-    toggleButtons();
+    resetView();
   }
 
   /**
