@@ -50,17 +50,22 @@ public final class Main {
   // ---------------------------------------- Private constants ---------------------------------
 
   /**
-   * Size, in pixels, of the scaled icon (height and width).
+   * Size, in pixels, of the scaled icon (for height and width).
    */
   private static final int ICON_SCALE = 50;
 
+  private static final float FONT_SIZE = 18f;
+
   private static final String ERROR_MESSAGE_TITLE = "¡Error!";
   private static final String ERROR_GUI_SETUP_INFO = "ERROR EN CONFIGURACIÓN DE INTERFAZ GRÁFICA";
+  private static final String FONT_NAME = "comfortaa.ttf";
+  private static final String ICON_FILENAME = "icon.png";
+  private static final String TTF_PATH = "fonts/";
 
   // ---------------------------------------- Public constants ----------------------------------
 
   public static final int RANDOM_MIX = 0;
-  public static final int BY_SKILLS_MIX = 1;
+  public static final int BY_SKILL_MIX = 1;
   public static final int PLAYERS_PER_TEAM = 7;
   public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
   public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
@@ -86,17 +91,12 @@ public final class Main {
    */
   public static final int SKILL_STEP = 1;
 
-  public static final float FONT_SIZE = 18f;
-
-  public static final String FONT_NAME = "comfortaa.ttf";
   public static final String PROGRAM_TITLE = "Armame el doparti";
   public static final String PROGRAM_VERSION = "v3.0";
-  public static final String ICON_FILENAME = "icon.png";
   public static final String BG_IMG_FILENAME = "bg.png";
   public static final String IMG_PATH = "img/";
-  public static final String TTF_PATH = "fonts/";
   public static final String DOCS_PATH = "docs/";
-  public static final String HELP_DOCS_PATH = "docs/help/";
+  public static final String HELP_DOCS_PATH = DOCS_PATH + "help/";
   public static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
 
   public static final Color LIGHT_GREEN = new Color(176, 189, 162);

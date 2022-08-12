@@ -373,7 +373,7 @@ public class AnchoragesController extends Controller {
   private void finish() {
     clearCheckboxes();
 
-    if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
+    if (Main.getDistribution() == Main.BY_SKILL_MIX) {
       Main.getController(Views.SKILL_POINTS)
           .showView();
     } else {

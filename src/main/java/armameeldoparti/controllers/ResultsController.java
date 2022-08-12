@@ -171,7 +171,7 @@ public class ResultsController extends Controller {
       wrapperRow.row = 1;
     });
 
-    if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
+    if (Main.getDistribution() == Main.BY_SKILL_MIX) {
       ((ResultsView) getView()).getTable()
                                .setValueAt(teams.get(0)
                                                  .getPlayers()
@@ -260,7 +260,7 @@ public class ResultsController extends Controller {
             final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
                                                                     hasFocus, row, column);
 
-            boolean byScoresMixFlag = Main.getDistribution() == Main.BY_SKILLS_MIX
+            boolean byScoresMixFlag = Main.getDistribution() == Main.BY_SKILL_MIX
                                       && row == ((ResultsView) getView()).getTable()
                                                                          .getRowCount() - 1;
 
@@ -345,7 +345,7 @@ public class ResultsController extends Controller {
       }
     }
 
-    if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
+    if (Main.getDistribution() == Main.BY_SKILL_MIX) {
       ((ResultsView) getView()).getTable()
                                .setValueAt(Main.getPositionsMap()
                                                .get(Positions.GOALKEEPER),
