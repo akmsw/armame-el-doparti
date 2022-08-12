@@ -40,10 +40,18 @@ public class AnchoragesController extends Controller {
    * Resets the controlled view to its default values.
    *
    * <p>Clears every anchorage made, updating the text area
-   * and the state of the buttons.
+   * and the state of the buttons, and the checkboxes that
+   * were selected whose players were not anchored, re deselected.
    */
   @Override
   public void resetView() {
+    ((AnchoragesView) getView()).getCheckBoxesMap()
+                                .values()
+                                .stream()
+                                .flatMap(List::stream)
+                                .filter(cb -> cb.isSelected() && cb.isVisible())
+                                .forEach(cb -> cb.setSelected(false));
+
     clearAnchorages();
     updateTextArea();
     toggleButtons();
