@@ -41,17 +41,11 @@ public class AnchoragesController extends Controller {
    *
    * <p>Clears every anchorage made, updating the text area
    * and the state of the buttons, and the checkboxes that
-   * were selected whose players were not anchored, re deselected.
+   * were selected whose players were not anchored, are deselected.
    */
   @Override
   public void resetView() {
-    ((AnchoragesView) getView()).getCheckBoxesMap()
-                                .values()
-                                .stream()
-                                .flatMap(List::stream)
-                                .filter(cb -> cb.isSelected() && cb.isVisible())
-                                .forEach(cb -> cb.setSelected(false));
-
+    clearCheckboxes();
     clearAnchorages();
     updateTextArea();
     toggleButtons();
@@ -386,12 +380,7 @@ public class AnchoragesController extends Controller {
    * are deselected. Then, shows the corresponding following view.
    */
   private void finish() {
-    ((AnchoragesView) getView()).getCheckBoxesMap()
-                                .values()
-                                .stream()
-                                .flatMap(List::stream)
-                                .filter(cb -> cb.isSelected() && cb.isVisible())
-                                .forEach(cb -> cb.setSelected(false));
+    clearCheckboxes();
 
     if (Main.getDistribution() == Main.BY_SKILLS_MIX) {
       Main.getController(Views.SKILL_POINTS)
@@ -428,6 +417,18 @@ public class AnchoragesController extends Controller {
            cb.setVisible(false);
            cb.setSelected(false);
          });
+  }
+
+  /**
+   * Unchecks every checked checkbox.
+   */
+  private void clearCheckboxes() {
+    ((AnchoragesView) getView()).getCheckBoxesMap()
+                                .values()
+                                .stream()
+                                .flatMap(List::stream)
+                                .filter(cb -> cb.isSelected() && cb.isVisible())
+                                .forEach(cb -> cb.setSelected(false));
   }
 
   /**
