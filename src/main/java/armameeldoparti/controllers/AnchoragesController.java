@@ -299,14 +299,14 @@ public class AnchoragesController extends Controller {
   }
 
   /**
-   * Clears the anchorages made.
+   * Clears the anchorages made (if there are any).
    *
    * @see #deleteAnchorage(int)
    */
   private void clearAnchorages() {
-    do {
+    while (anchoragesAmount > 0) {
       deleteAnchorage(anchoragesAmount);
-    } while (anchoragesAmount > 0);
+    }
   }
 
   /**

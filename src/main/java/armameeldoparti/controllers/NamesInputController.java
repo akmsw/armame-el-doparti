@@ -84,12 +84,14 @@ public class NamesInputController extends Controller {
   /**
    * 'Back' button event handler.
    *
-   * <p>Resets the controlled view to its default values, makes
-   * it invisible and shows the main menu view.
+   * <p>Resets the controlled view to its default values,
+   * turns the anchorages flags to false, makes the
+   * controlled view invisible and shows the main menu view.
    */
   public void backButtonEvent() {
     resetView();
 
+    Main.setAnchorages(false);
     Main.getController(Views.MAIN_MENU)
         .showView();
   }
