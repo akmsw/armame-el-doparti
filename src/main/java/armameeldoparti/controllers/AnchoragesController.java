@@ -66,10 +66,10 @@ public class AnchoragesController extends Controller {
    * If so, it proceeds with the players distribution.
    */
   public void finishButtonEvent() {
-    // if (!validAnchoragesCombination()) {
-    //   showErrorMessage("Error message");
-    //   return;
-    // }
+    if (!validAnchoragesCombination()) {
+      Main.showErrorMessage("Error message");
+      return;
+    }
 
     finish();
   }
@@ -89,20 +89,20 @@ public class AnchoragesController extends Controller {
                                                                   .count();
 
     if (!validChecksAmount(playersToAnchorAmount)) {
-      showErrorMessage("No puede haber más de " + Main.MAX_PLAYERS_PER_ANCHORAGE
-                       + " ni menos de 2 jugadores en un mismo anclaje");
+      Main.showErrorMessage("No puede haber más de " + Main.MAX_PLAYERS_PER_ANCHORAGE
+                            + " ni menos de 2 jugadores en un mismo anclaje");
       return;
     }
 
     if (!validCheckedPlayersPerPosition()) {
-      showErrorMessage("No puede haber más de la mitad de jugadores de una misma posición "
-                       + "en un mismo anclaje");
+      Main.showErrorMessage("No puede haber más de la mitad de jugadores de una misma posición "
+                            + "en un mismo anclaje");
       return;
     }
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
-      showErrorMessage("No puede haber más de " + Main.MAX_ANCHORED_PLAYERS
-                       + " jugadores anclados en total");
+      Main.showErrorMessage("No puede haber más de " + Main.MAX_ANCHORED_PLAYERS
+                            + " jugadores anclados en total");
       return;
     }
 
@@ -174,15 +174,6 @@ public class AnchoragesController extends Controller {
   }
 
   // ---------------------------------------- Private methods -----------------------------------
-
-  /**
-   * Builds an error window with a custom message.
-   *
-   * @param errorMessage Custom error message to show.
-   */
-  private void showErrorMessage(String errorMessage) {
-    JOptionPane.showMessageDialog(null, errorMessage, "¡Error!", JOptionPane.ERROR_MESSAGE, null);
-  }
 
   /**
    * Sets a new anchorage based on the players checked.

@@ -39,6 +39,8 @@ public class HelpController extends Controller {
   private static final int PAGE_FILENAME_INDEX = 1;
   private static final int TOTAL_PAGES = pagesMap.size();
 
+  private static final String ERROR_READING_INFO = "ERROR FATAL EN LECTURA DE ARCHIVOS INTERNOS";
+
   // ---------------------------------------- Private fields ------------------------------------
 
   private int pageNumber = 0;
@@ -147,6 +149,7 @@ public class HelpController extends Controller {
                             .read(reader, null);
     } catch (Exception ex) {
       ex.printStackTrace();
+      Main.showErrorMessage(ERROR_READING_INFO);
       System.exit(-1);
     }
   }

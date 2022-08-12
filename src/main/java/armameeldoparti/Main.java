@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
@@ -52,6 +53,9 @@ public final class Main {
    * Size, in pixels, of the scaled icon (height and width).
    */
   private static final int ICON_SCALE = 50;
+
+  private static final String ERROR_MESSAGE_TITLE = "¡Error!";
+  private static final String ERROR_GUI_SETUP_INFO = "ERROR EN CONFIGURACIÓN DE INTERFAZ GRÁFICA";
 
   // ---------------------------------------- Public constants ----------------------------------
 
@@ -170,6 +174,16 @@ public final class Main {
   }
 
   // ---------------------------------------- Public methods ------------------------------------
+
+  /**
+   * Builds an error window with a custom message.
+   *
+   * @param errorMessage Custom error message to show.
+   */
+  public static void showErrorMessage(String errorMessage) {
+    JOptionPane.showMessageDialog(null, errorMessage, ERROR_MESSAGE_TITLE,
+                                  JOptionPane.ERROR_MESSAGE, null);
+  }
 
   /**
    * Gets the valueToSearch corresponding position in a generic map received.
@@ -380,6 +394,7 @@ public final class Main {
       setProgramFont(programFont);
     } catch (IOException | FontFormatException ex) {
       ex.printStackTrace();
+      showErrorMessage(ERROR_GUI_SETUP_INFO);
       System.exit(-1);
     }
   }
