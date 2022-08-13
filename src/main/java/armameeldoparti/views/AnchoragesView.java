@@ -199,8 +199,8 @@ public class AnchoragesView extends View {
         .entrySet()
         .forEach(ps -> {
           final Positions currentPosition = ps.getValue()
-                                             .get(0)
-                                             .getPosition();
+                                              .get(0)
+                                              .getPosition();
 
           fillCheckboxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
           addCheckboxesSet(checkBoxesMap.get(currentPosition), Main.getPositionsMap()

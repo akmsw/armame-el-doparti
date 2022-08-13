@@ -49,6 +49,7 @@ public class ResultsController extends Controller {
   private List<Team> teams;
 
   private RandomMixer randomMixer = new RandomMixer();
+
   private BySkillsMixer bySkillsMixer = new BySkillsMixer();
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -71,6 +72,7 @@ public class ResultsController extends Controller {
   @Override
   public void resetView() {
     getView().dispose();
+
     setView(new ResultsView());
   }
 
@@ -89,9 +91,11 @@ public class ResultsController extends Controller {
 
     if (Main.getDistribution() == Main.RANDOM_MIX) {
       teams = randomMix(Main.thereAreAnchorages());
+
       ((ResultsView) getView()).setTable(new JTable(Main.PLAYERS_PER_TEAM + 1, TABLE_COLUMNS));
     } else {
       teams = bySkillsMix(Main.thereAreAnchorages());
+
       ((ResultsView) getView()).setTable(new JTable(Main.PLAYERS_PER_TEAM + 2, TABLE_COLUMNS));
     }
 
@@ -167,7 +171,9 @@ public class ResultsController extends Controller {
                                                               .setValueAt(player.getName(),
                                                                           wrapperRow.row++,
                                                                           wrapperColumn.column)));
+
       wrapperColumn.column++;
+
       wrapperRow.row = 1;
     });
 

@@ -394,7 +394,9 @@ public final class Main {
       setProgramFont(programFont);
     } catch (IOException | FontFormatException ex) {
       ex.printStackTrace();
+
       showErrorMessage(ERROR_GUI_SETUP_INFO);
+
       System.exit(-1);
     }
   }

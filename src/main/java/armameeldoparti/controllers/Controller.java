@@ -64,6 +64,7 @@ public abstract class Controller {
    */
   protected void hideView() {
     controlledView.setVisible(false);
+
     centerView();
   }
 

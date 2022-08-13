@@ -68,6 +68,7 @@ public class AnchoragesController extends Controller {
   public void finishButtonEvent() {
     if (!validAnchoragesCombination()) {
       Main.showErrorMessage("Error message");
+
       return;
     }
 
@@ -91,18 +92,21 @@ public class AnchoragesController extends Controller {
     if (!validChecksAmount(playersToAnchorAmount)) {
       Main.showErrorMessage("No puede haber más de " + Main.MAX_PLAYERS_PER_ANCHORAGE
                             + " ni menos de 2 jugadores en un mismo anclaje");
+
       return;
     }
 
     if (!validCheckedPlayersPerPosition()) {
       Main.showErrorMessage("No puede haber más de la mitad de jugadores de una misma posición "
                             + "en un mismo anclaje");
+
       return;
     }
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
       Main.showErrorMessage("No puede haber más de " + Main.MAX_ANCHORED_PLAYERS
                             + " jugadores anclados en total");
+
       return;
     }
 
@@ -167,8 +171,8 @@ public class AnchoragesController extends Controller {
    * names input view.
    */
   public void backButtonEvent() {
-    resetView();
     hideView();
+    resetView();
 
     ((NamesInputController) Main.getController(Views.NAMES_INPUT)).showView();
   }
@@ -230,6 +234,7 @@ public class AnchoragesController extends Controller {
                                                          .append(" " + wrapperCounter.counter + ". "
                                                                  + p.getName()
                                                                  + System.lineSeparator());
+
                              wrapperCounter.counter++;
                            }));
 
@@ -371,6 +376,7 @@ public class AnchoragesController extends Controller {
    * are deselected. Then, shows the corresponding following view.
    */
   private void finish() {
+    hideView();
     clearCheckboxes();
 
     if (Main.getDistribution() == Main.BY_SKILL_MIX) {
@@ -382,8 +388,6 @@ public class AnchoragesController extends Controller {
       Main.getController(Views.RESULTS)
           .showView();
     }
-
-    hideView();
   }
 
   /**

@@ -208,7 +208,7 @@ public class NamesInputView extends View {
     comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
         ((NamesInputController) Main.getController(Views.NAMES_INPUT))
-            .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
+        .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
     );
 
     leftPanel.add(comboBox, "growx");
@@ -251,7 +251,7 @@ public class NamesInputView extends View {
               try {
                 ((NamesInputController) Main.getController(Views.NAMES_INPUT))
                     .textFieldEvent(textFieldsMap.get(position)
-                                                 .indexOf(tf),
+                                                .indexOf(tf),
                                     Main.getPlayersSets()
                                         .get(position),
                                     tf.getText());

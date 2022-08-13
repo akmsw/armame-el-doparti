@@ -58,10 +58,10 @@ public class MainMenuController extends Controller {
    * and shows the names input view.
    */
   public void startButtonEvent() {
+    hideView();
+
     Main.getController(Views.NAMES_INPUT)
         .showView();
-
-    hideView();
   }
 
   // ---------------------------------------- Protected methods ---------------------------------

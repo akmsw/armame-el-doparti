@@ -178,7 +178,7 @@ public class HelpView extends View {
     textArea.setWrapStyleWord(true);
 
     scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     scrollPane.setBackground(Main.LIGHT_GREEN);
     scrollPane.getVerticalScrollBar()

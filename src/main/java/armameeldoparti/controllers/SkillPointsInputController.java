@@ -45,10 +45,10 @@ public class SkillPointsInputController extends Controller {
    * the controlled view invisible and shows the results view.
    */
   public void finishButtonEvent() {
+    hideView();
+
     ((SkillPointsInputView) getView()).getSpinnersMap()
                                       .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
-
-    hideView();
 
     ((ResultsController) Main.getController(Views.RESULTS)).setUp();
 

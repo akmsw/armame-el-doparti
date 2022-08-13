@@ -130,7 +130,6 @@ public class HelpController extends Controller {
                             pagesMap.get(pageNumber)
                                     .get(PAGE_TITLE_INDEX)
                           ));
-
     ((HelpView) getView()).getTextArea()
                           .setText("");
 
@@ -149,7 +148,9 @@ public class HelpController extends Controller {
                             .read(reader, null);
     } catch (Exception ex) {
       ex.printStackTrace();
+
       Main.showErrorMessage(ERROR_READING_INFO);
+
       System.exit(-1);
     }
   }
@@ -190,7 +191,6 @@ public class HelpController extends Controller {
   private void resetButtons() {
     ((HelpView) getView()).getPreviousPageButton()
                           .setEnabled(false);
-
     ((HelpView) getView()).getNextPageButton()
                           .setEnabled(true);
   }

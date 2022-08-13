@@ -149,6 +149,7 @@ public class SkillPointsInputView extends View {
                                                                Main.SKILL_MIN,
                                                                Main.SKILL_MAX,
                                                                Main.SKILL_STEP));
+
         JLabel nameLabel = new JLabel(currentSet.get(j)
                                                 .getName());
 

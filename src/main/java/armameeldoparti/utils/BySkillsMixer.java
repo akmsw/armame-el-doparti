@@ -38,7 +38,7 @@ public class BySkillsMixer implements PlayersMixer {
    * <p>Positions are traversed in reverse order to achieve the fairer distribution.
    *
    * <p>The players of each position are ordered based on their score, from highest to lowest.
-   * The teams are then ordered based on the sum of their players' scores so far, from lowest
+   * The teams are then ordered based on the sum of their players scores so far, from lowest
    * to highest.
    *
    * <p>If the number of players to distribute is 2, the team with less skill points is

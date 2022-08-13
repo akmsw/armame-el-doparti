@@ -133,7 +133,7 @@ public class RandomMixer implements PlayersMixer {
     boolean teamFull = false;
 
     for (int i = 0; i < Positions.values()
-                                .length && !teamFull; i++) {
+                                 .length && !teamFull; i++) {
       List<Player> playersSet = Main.getPlayersSets()
                                     .get(Positions.values()[i]);
 
@@ -153,9 +153,11 @@ public class RandomMixer implements PlayersMixer {
         if (player.getAnchorageNumber() == 0
             && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
           player.setTeam(team1 + 1);
+
           currentWorkingTeam.getPlayers()
                             .get(player.getPosition())
                             .add(player);
+
           indexesSet.add(index);
           /*
            * Here we should update the teamFull flag and continue,
@@ -178,6 +180,7 @@ public class RandomMixer implements PlayersMixer {
                               .get(p.getPosition())
                               .add(p);
           });
+
           indexesSet.add(index);
         }
 
@@ -194,6 +197,7 @@ public class RandomMixer implements PlayersMixer {
         .filter(p -> p.getTeam() == 0)
         .forEach(p -> {
           p.setTeam(team2 + 1);
+
           teams.get(team2)
                .getPlayers()
                .get(p.getPosition())

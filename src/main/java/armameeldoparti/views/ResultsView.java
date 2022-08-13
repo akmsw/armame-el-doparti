@@ -83,6 +83,7 @@ public class ResultsView extends View {
 
       for (int j = 0; j < table.getColumnCount(); j++) {
         Component component = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
+
         rowHeight = Math.max(rowHeight, component.getPreferredSize()
                                                  .height);
       }

@@ -70,10 +70,8 @@ public class NamesInputController extends Controller {
 
     ((NamesInputView) getView()).getAnchoragesCheckBox()
                                 .setSelected(false);
-
     ((NamesInputView) getView()).getComboBox()
                                 .setSelectedIndex(0);
-
     ((NamesInputView) getView()).getTextArea()
                                 .setText("");
 
@@ -114,6 +112,8 @@ public class NamesInputController extends Controller {
       return;
     }
 
+    hideView();
+
     Main.setDistribution(distribution);
 
     if (Main.thereAreAnchorages()) {
@@ -134,8 +134,6 @@ public class NamesInputController extends Controller {
       Main.getController(Views.SKILL_POINTS)
           .showView();
     }
-
-    hideView();
   }
 
   /**
@@ -243,17 +241,18 @@ public class NamesInputController extends Controller {
                                                     .length; i++) {
       if (selectedOption.equals(((NamesInputView) getView()).getComboBoxOptions()[i])) {
         ((NamesInputView) getView()).getTextFieldsMap()
-                                    .get(Main.getCorrespondingPosition(Main.getPositionsMap(),
-                                                                      selectedOption.toUpperCase()))
+                                    .get(Main.getCorrespondingPosition(
+                                      Main.getPositionsMap(),
+                                      selectedOption.toUpperCase()))
                                     .forEach(tf -> ((NamesInputView) getView()).getLeftPanel()
                                                                                .add(tf, "growx"));
+
         break;
       }
     }
 
     ((NamesInputView) getView()).getLeftPanel()
                                 .revalidate();
-
     ((NamesInputView) getView()).getLeftPanel()
                                 .repaint();
   }
