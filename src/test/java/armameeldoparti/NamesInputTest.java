@@ -98,7 +98,9 @@ class NamesInputTest {
   @DisplayName("Tests if repeated names throw the expected exception")
   @ParameterizedTest
   @MethodSource("repeatedParamsProvider")
-  void repeatedNamesShouldThrowException(int playerIndex, Positions playerPosition, String playerName) {
+  void repeatedNamesShouldThrowException(int playerIndex,
+                                         Positions playerPosition,
+                                         String playerName) {
     List<Player> playersSet = Main.getPlayersSets()
                                   .get(Positions.CENTRAL_DEFENDER);
 

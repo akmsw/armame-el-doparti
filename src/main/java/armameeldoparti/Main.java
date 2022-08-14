@@ -57,7 +57,6 @@ public final class Main {
   private static final float FONT_SIZE = 18f;
 
   private static final String ERROR_MESSAGE_TITLE = "¡Error!";
-  private static final String ERROR_GUI_SETUP_INFO = "ERROR EN CONFIGURACIÓN DE INTERFAZ GRÁFICA";
   private static final String FONT_NAME = "comfortaa.ttf";
   private static final String ICON_FILENAME = "icon.png";
   private static final String TTF_PATH = "fonts/";
@@ -276,7 +275,7 @@ public final class Main {
    *
    * @param newAnchoragesState The new anchorages option state.
    */
-  public static final void setAnchorages(boolean newAnchoragesState) {
+  public static void setAnchorages(boolean newAnchoragesState) {
     anchorages = newAnchoragesState;
   }
 
@@ -395,7 +394,7 @@ public final class Main {
     } catch (IOException | FontFormatException ex) {
       ex.printStackTrace();
 
-      showErrorMessage(ERROR_GUI_SETUP_INFO);
+      showErrorMessage("ERROR EN CONFIGURACIÓN DE INTERFAZ GRÁFICA");
 
       System.exit(-1);
     }
