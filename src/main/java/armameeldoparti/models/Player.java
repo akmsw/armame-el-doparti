@@ -17,6 +17,8 @@ public class Player {
   private int anchorageNumber;
   private int teamNumber;
 
+  private boolean isAnchored;
+
   private String name;
 
   private Positions position;
@@ -34,6 +36,7 @@ public class Player {
     setSkillPoints(0);
     setAnchorageNumber(0);
     setTeam(0);
+    setAnchored(false);
 
     this.position = position;
   }
@@ -67,6 +70,15 @@ public class Player {
    */
   public int getTeam() {
     return teamNumber;
+  }
+
+  /**
+   * Gets the player's anchorage state.
+   *
+   * @return The player's anchorage state.
+   */
+  public boolean isAnchored() {
+    return isAnchored;
   }
 
   /**
@@ -123,5 +135,14 @@ public class Player {
    */
   public void setTeam(int teamNumber) {
     this.teamNumber = teamNumber;
+  }
+
+  /**
+   * Updates the player's anchorage state.
+   *
+   * @param isAnchored The player's new anchorage state.
+   */
+  public void setAnchored(boolean isAnchored) {
+    this.isAnchored = isAnchored;
   }
 }

@@ -1,6 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
+import armameeldoparti.models.Player;
 import armameeldoparti.models.Views;
 import armameeldoparti.views.AnchoragesView;
 import java.util.List;
@@ -198,7 +199,7 @@ public class AnchoragesController extends Controller {
                                       .values()
                                       .stream()
                                       .flatMap(List::stream)
-                                      .filter(p -> p.getAnchorageNumber() != 0)
+                                      .filter(Player::isAnchored)
                                       .count();
   }
 
@@ -340,9 +341,10 @@ public class AnchoragesController extends Controller {
   /**
    * Changes the anchorage number of certain players.
    *
-   * <p>If the replacement is 0 (an anchorage must be removed),
-   * then the players corresponding checkboxes will be visible and enabled
-   * again, and the anchored players amount will be decremented as needed.
+   * <p>If the replacement is 0 (an anchorage must be removed), then
+   * those players will be set as unanchored, the players corresponding
+   * checkboxes will be visible and enabled again, and the anchored players
+   * amount will be decremented as needed.
    *
    * @param target      Anchorage number to replace.
    * @param replacement New anchorage number to set.
@@ -355,6 +357,7 @@ public class AnchoragesController extends Controller {
         .filter(p -> p.getAnchorageNumber() == target)
         .forEach(p -> {
           p.setAnchorageNumber(replacement);
+          p.setAnchored(false);
 
           if (replacement == 0) {
             ((AnchoragesView) getView()).getCheckBoxesMap()
@@ -404,7 +407,10 @@ public class AnchoragesController extends Controller {
                           .filter(JCheckBox::isSelected)
                           .anyMatch(cb -> cb.getText()
                                             .equals(p.getName())))
-        .forEach(p -> p.setAnchorageNumber(anchoragesAmount));
+        .forEach(p -> {
+          p.setAnchorageNumber(anchoragesAmount);
+          p.setAnchored(true);
+        });
 
     cbSet.stream()
          .filter(JCheckBox::isSelected)
