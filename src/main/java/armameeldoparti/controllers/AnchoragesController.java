@@ -321,17 +321,11 @@ public class AnchoragesController extends Controller {
    * @param anchorageToDelete Anchorage number to delete.
    */
   private void deleteAnchorage(int anchorageToDelete) {
-    for (int j = 0; j < ((AnchoragesView) getView()).getCheckBoxesMap()
-                                                    .size(); j++) {
-      changeAnchorage(anchorageToDelete, 0);
-    }
+    changeAnchorage(anchorageToDelete, 0);
 
     if (anchorageToDelete != anchoragesAmount) {
       for (int k = anchorageToDelete + 1; k <= anchoragesAmount; k++) {
-        for (int j = 0; j < ((AnchoragesView) getView()).getCheckBoxesMap()
-                                                        .size(); j++) {
-          changeAnchorage(k, k - 1);
-        }
+        changeAnchorage(k, k - 1);
       }
     }
 
@@ -357,9 +351,10 @@ public class AnchoragesController extends Controller {
         .filter(p -> p.getAnchorageNumber() == target)
         .forEach(p -> {
           p.setAnchorageNumber(replacement);
-          p.setAnchored(false);
 
           if (replacement == 0) {
+            p.setAnchored(false);
+
             ((AnchoragesView) getView()).getCheckBoxesMap()
                                         .values()
                                         .stream()
@@ -421,7 +416,7 @@ public class AnchoragesController extends Controller {
   }
 
   /**
-   * Unchecks every checked checkbox.
+   * Unchecks the remaining checked checkboxes.
    */
   private void clearCheckboxes() {
     ((AnchoragesView) getView()).getCheckBoxesMap()
@@ -478,6 +473,6 @@ public class AnchoragesController extends Controller {
    * @return WIP.
    */
   private boolean validAnchoragesCombination() {
-    return false;
+    return true;
   }
 }

@@ -97,26 +97,14 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Distributes the players randomly considering anchorages.
    *
-   * <p>A random number between 0 and 1 is chosen to assign a team to a set of players,
-   * and the rest will be assigned the opposite team.
+   * <p>First, the anchored players are distributed among the teams
+   * randomly. If a set of anchored players cannot be added to one
+   * team, it will be added to the other.
    *
-   * <p>It begins by going through each position. As long as the position being worked on
-   * does not have the number of players specified for that position per team,
-   * it will continue to iterate.
-   *
-   * <p>A player is chosen randomly from the set of players with the selected position,
-   * and it is checked if it is available (team == 0) and if it is anchored (anchorageNumber != 0).
-   *
-   * <p>If the player is available and is anchored with other players, the players of all positions
-   * with the same anchorage number are taken and it is validated if they can be added to the team
-   * without exceeding the number of players allowed for each position.
-   * If it is possible, they're added. If not, they are ignored and the iteration continues.
-   *
-   * <p>If the player does not have an anchorage number and can be added without going
-   * over the player limit for their position, it is added.
-   *
-   * <p>When the first chosen team is full, the iteration stops and all remaining players are
-   * assigned the opposite team number.
+   * <p>Then, the players that are not anchored are distributed
+   * randomly. They will be added to a team only if the players
+   * amount per position or the players per team amount are not
+   * exceeded.
    *
    * @param teams List that contains the two teams.
    *
@@ -124,71 +112,39 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    updateChosenTeams(teams.size());
+    Main.getPlayersSets()
+        .values()
+        .stream()
+        .flatMap(List::stream)
+        .filter(Player::isAnchored)
+        .forEach(player -> {
+          if (player.getTeam() == 0) { // To avoid duplication
+            List<Player> anchoredPlayers = Main.getPlayersSets()
+                                               .values()
+                                               .stream()
+                                               .flatMap(List::stream)
+                                               .filter(p -> p.getAnchorageNumber()
+                                                            == player.getAnchorageNumber())
+                                               .collect(Collectors.toList());
 
-    Team currentWorkingTeam = teams.get(team1);
+            updateChosenTeams(teams.size());
 
-    List<Integer> indexesSet = new ArrayList<>();
+            int teamNumber = team1;
 
-    boolean teamFull = false;
+            if (!anchorageCanBeAdded(teams.get(teamNumber), anchoredPlayers)) {
+              teamNumber = team2;
+            }
 
-    for (int i = 0; i < Positions.values()
-                                 .length && !teamFull; i++) {
-      List<Player> playersSet = Main.getPlayersSets()
-                                    .get(Positions.values()[i]);
+            for (Player p : anchoredPlayers) {
+              p.setTeam(teamNumber + 1);
 
-      while (currentWorkingTeam.getPlayers()
-                               .get(Positions.values()[i])
-                               .size() < Main.getPlayersAmountMap()
-                                             .get(Positions.values()[i])
-             && !teamFull) {
-        updateIndex(playersSet.size(), indexesSet);
-
-        Player player = playersSet.get(index);
-
-        if (player.getTeam() != 0) {
-          continue;
-        }
-
-        if (player.getAnchorageNumber() == 0
-            && currentWorkingTeam.getPlayersCount() + 1 <= Main.PLAYERS_PER_TEAM) {
-          player.setTeam(team1 + 1);
-
-          currentWorkingTeam.getPlayers()
-                            .get(player.getPosition())
-                            .add(player);
-
-          indexesSet.add(index);
-          /*
-           * Here we should update the teamFull flag and continue,
-           * but it conflicts with sonarlint java:S135.
-           */
-        }
-
-        List<Player> anchoredPlayers = Main.getPlayersSets()
-                                           .values()
-                                           .stream()
-                                           .flatMap(List::stream)
-                                           .filter(p -> p.getAnchorageNumber()
-                                                        == player.getAnchorageNumber())
-                                           .collect(Collectors.toList());
-
-        if (validateAnchorage(currentWorkingTeam, anchoredPlayers)) {
-          anchoredPlayers.forEach(p -> {
-            p.setTeam(team1 + 1);
-            currentWorkingTeam.getPlayers()
-                              .get(p.getPosition())
-                              .add(p);
-          });
-
-          indexesSet.add(index);
-        }
-
-        teamFull = currentWorkingTeam.getPlayersCount() == Main.PLAYERS_PER_TEAM;
-      }
-
-      indexesSet.clear();
-    }
+              teams.get(teamNumber)
+                   .getPlayers()
+                   .get(p.getPosition())
+                   .add(p);
+            }
+          }
+        });
 
     Main.getPlayersSets()
         .values()
@@ -196,9 +152,20 @@ public class RandomMixer implements PlayersMixer {
         .flatMap(List::stream)
         .filter(p -> p.getTeam() == 0)
         .forEach(p -> {
-          p.setTeam(team2 + 1);
+          updateChosenTeams(teams.size());
 
-          teams.get(team2)
+          int teamNumber = team1;
+
+          if (teams.get(teamNumber)
+                    .isPositionFull(p.getPosition())
+              || teams.get(teamNumber)
+                      .getPlayersCount() + 1 > Main.PLAYERS_PER_TEAM) {
+            teamNumber = team2;
+          }
+
+          p.setTeam(teamNumber + 1);
+
+          teams.get(teamNumber)
                .getPlayers()
                .get(p.getPosition())
                .add(p);
@@ -234,13 +201,11 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Checks if all anchored players can be added to a team.
    *
-   * <p>It checks if any player already has an assigned team or
-   * if the position of any of the anchored players in the destination
-   * team is already complete.
-   *
-   * <p>Finally, it checks if adding them does not exceed the number
-   * of players allowed per position per team. This is done in order to
-   * avoid more than half of the registered players of the same position
+   * <p>It checks if the position of any of the anchored players
+   * in the destination team is already complete, and it checks
+   * if adding them does not exceed the number of players allowed
+   * per position per team. This is done in order to avoid more
+   * than half of the registered players of the same position
    * remaining on the same team.
    *
    * @param team            Team where the anchored players should be added.
@@ -248,11 +213,10 @@ public class RandomMixer implements PlayersMixer {
    *
    * @return Whether all anchored players can be added to the team or not.
    */
-  private boolean validateAnchorage(Team team, List<Player> anchoredPlayers) {
+  private boolean anchorageCanBeAdded(Team team, List<Player> anchoredPlayers) {
     return team.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM
            && anchoredPlayers.stream()
-                             .noneMatch(p -> p.getTeam() != 0
-                                             || team.isPositionFull(p.getPosition())
+                             .noneMatch(p -> team.isPositionFull(p.getPosition())
                                              || team.getPlayers()
                                                     .get(p.getPosition())
                                                     .size()

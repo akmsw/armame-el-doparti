@@ -371,13 +371,15 @@ public class ResultsController extends Controller {
   }
 
   /**
-   * Resets the teams and clears the players lists.
+   * Resets the teams.
    */
   private void resetTeams() {
     teams.forEach(Team::clear);
 
     Main.getPlayersSets()
         .values()
-        .forEach(ps -> ps.forEach(p -> p.setTeam(0)));
+        .stream()
+        .flatMap(List::stream)
+        .forEach(p -> p.setTeam(0));
   }
 }
