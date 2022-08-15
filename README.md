@@ -1,4 +1,4 @@
-# Armame el doparti v3.0 ⚽
+# ⚽ Armame el doparti v3.0 **[WIP]**
 
 ![portada](./src/main/res/img/readme/cover.png)
 
