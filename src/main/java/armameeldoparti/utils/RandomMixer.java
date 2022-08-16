@@ -23,8 +23,8 @@ public class RandomMixer implements PlayersMixer {
   // ---------------------------------------- Private fields ------------------------------------
 
   private int index;
-  private int team1;
-  private int team2;
+  private int randomTeam1;
+  private int randomTeam2;
 
   private Random randomGenerator;
 
@@ -69,9 +69,9 @@ public class RandomMixer implements PlayersMixer {
 
         Player chosenPlayer = playersSet.get(index);
 
-        chosenPlayer.setTeam(team1 + 1);
+        chosenPlayer.setTeam(randomTeam1 + 1);
 
-        teams.get(team1)
+        teams.get(randomTeam1)
              .getPlayers()
              .get(chosenPlayer.getPosition())
              .add(chosenPlayer);
@@ -80,9 +80,9 @@ public class RandomMixer implements PlayersMixer {
       playersSet.stream()
                 .filter(p -> p.getTeam() == 0)
                 .forEach(p -> {
-                  p.setTeam(team2 + 1);
+                  p.setTeam(randomTeam2 + 1);
 
-                  teams.get(team2)
+                  teams.get(randomTeam2)
                        .getPlayers()
                        .get(p.getPosition())
                        .add(p);
@@ -129,10 +129,10 @@ public class RandomMixer implements PlayersMixer {
 
             updateChosenTeams(teams.size());
 
-            int teamNumber = team1;
+            int teamNumber = randomTeam1;
 
             if (!anchorageCanBeAdded(teams.get(teamNumber), anchoredPlayers)) {
-              teamNumber = team2;
+              teamNumber = randomTeam2;
             }
 
             for (Player p : anchoredPlayers) {
@@ -154,13 +154,13 @@ public class RandomMixer implements PlayersMixer {
         .forEach(p -> {
           updateChosenTeams(teams.size());
 
-          int teamNumber = team1;
+          int teamNumber = randomTeam1;
 
           if (teams.get(teamNumber)
-                    .isPositionFull(p.getPosition())
+                   .isPositionFull(p.getPosition())
               || teams.get(teamNumber)
                       .getPlayersCount() + 1 > Main.PLAYERS_PER_TEAM) {
-            teamNumber = team2;
+            teamNumber = randomTeam2;
           }
 
           p.setTeam(teamNumber + 1);
@@ -194,8 +194,8 @@ public class RandomMixer implements PlayersMixer {
    * @param range Upper limit (exclusive) for the random number generator.
    */
   private void updateChosenTeams(int range) {
-    team1 = randomGenerator.nextInt(range);
-    team2 = 1 - team1;
+    randomTeam1 = randomGenerator.nextInt(range);
+    randomTeam2 = 1 - randomTeam1;
   }
 
   /**

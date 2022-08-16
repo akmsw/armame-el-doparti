@@ -175,7 +175,8 @@ public class AnchoragesController extends Controller {
     hideView();
     resetView();
 
-    ((NamesInputController) Main.getController(Views.NAMES_INPUT)).showView();
+    Main.getController(Views.NAMES_INPUT)
+        .showView();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
