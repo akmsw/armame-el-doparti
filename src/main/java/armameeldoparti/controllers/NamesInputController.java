@@ -74,6 +74,8 @@ public class NamesInputController extends Controller {
                                 .setSelectedIndex(0);
     ((NamesInputView) getView()).getTextArea()
                                 .setText("");
+    ((NamesInputView) getView()).getMixButton()
+                                .setEnabled(false);
 
     updateTextFields(((NamesInputView) getView()).getComboBox()
                                                  .getItemAt(0));
