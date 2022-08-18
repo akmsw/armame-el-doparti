@@ -81,30 +81,23 @@ class MainMenuTest {
   @DisplayName("Tests the initial state of the names input view and the navigation")
   @Test
   void namesInputViewInitialState() {
-    ((MainMenuController) Main.getController(Views.MAIN_MENU))
-        .startButtonEvent();
+    ((MainMenuController) Main.getController(Views.MAIN_MENU)).startButtonEvent();
 
     assertTrue(Main.getController(Views.NAMES_INPUT)
                    .getView()
                    .isVisible());
-
     assertFalse(Main.getController(Views.MAIN_MENU)
                     .getView()
                     .isVisible());
-
     assertEquals(0, ((NamesInputView) Main.getController(Views.NAMES_INPUT)
                                           .getView()).getComboBox()
                                                      .getSelectedIndex());
-
     assertEquals("", ((NamesInputView) Main.getController(Views.NAMES_INPUT)
                                            .getView()).getTextArea()
                                                       .getText());
-
     assertFalse(((NamesInputView) Main.getController(Views.NAMES_INPUT)
                                       .getView()).getAnchoragesCheckBox()
                                                  .isSelected());
-
-
     assertFalse(((NamesInputView) Main.getController(Views.NAMES_INPUT)
                                       .getView()).getMixButton()
                                                  .isEnabled());
@@ -121,7 +114,6 @@ class MainMenuTest {
     assertTrue(Main.getController(Views.MAIN_MENU)
                    .getView()
                    .isVisible());
-
     assertFalse(Main.getController(Views.NAMES_INPUT)
                     .getView()
                     .isVisible());

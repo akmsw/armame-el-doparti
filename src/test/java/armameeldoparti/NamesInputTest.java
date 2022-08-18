@@ -129,7 +129,8 @@ class NamesInputTest {
   @ParameterizedTest
   @MethodSource("validParamsProvider")
   void validNamesShouldPass(int playerIndex, Positions playerPosition, String playerName)
-                            throws IllegalArgumentException, InvalidNameException {
+                            throws IllegalArgumentException,
+                                   InvalidNameException {
     List<Player> playersSet = Main.getPlayersSets()
                                   .get(playerPosition);
 

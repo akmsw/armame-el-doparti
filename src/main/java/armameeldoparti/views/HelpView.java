@@ -182,13 +182,13 @@ public class HelpView extends View {
 
     scrollPane.setBackground(Main.LIGHT_GREEN);
     scrollPane.getVerticalScrollBar()
-        .setUI(new BasicScrollBarUI() {
-          @Override
-          protected void configureScrollBarColors() {
-            this.thumbColor = Main.DARK_GREEN;
-            this.trackColor = Main.MEDIUM_GREEN;
-          }
-        });
+              .setUI(new BasicScrollBarUI() {
+                @Override
+                protected void configureScrollBarColors() {
+                  this.thumbColor = Main.DARK_GREEN;
+                  this.trackColor = Main.MEDIUM_GREEN;
+                }
+              });
 
     masterPanel.add(scrollPane);
   }

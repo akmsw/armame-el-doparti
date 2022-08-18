@@ -72,7 +72,6 @@ public class ResultsController extends Controller {
   @Override
   public void resetView() {
     getView().dispose();
-
     setView(new ResultsView());
   }
 
@@ -180,23 +179,23 @@ public class ResultsController extends Controller {
     if (Main.getDistribution() == Main.BY_SKILL_MIX) {
       ((ResultsView) getView()).getTable()
                                .setValueAt(teams.get(0)
-                                                 .getPlayers()
-                                                 .values()
-                                                 .stream()
-                                                 .flatMap(List::stream)
-                                                 .mapToInt(Player::getSkillPoints)
-                                                 .reduce(0, Math::addExact),
+                                                .getPlayers()
+                                                .values()
+                                                .stream()
+                                                .flatMap(List::stream)
+                                                .mapToInt(Player::getSkillPoints)
+                                                .reduce(0, Math::addExact),
                                            ((ResultsView) getView()).getTable()
                                                                     .getRowCount() - 1, 1);
 
       ((ResultsView) getView()).getTable()
                                .setValueAt(teams.get(1)
-                                                 .getPlayers()
-                                                 .values()
-                                                 .stream()
-                                                 .flatMap(List::stream)
-                                                 .mapToInt(Player::getSkillPoints)
-                                                 .reduce(0, Math::addExact),
+                                                .getPlayers()
+                                                .values()
+                                                .stream()
+                                                .flatMap(List::stream)
+                                                .mapToInt(Player::getSkillPoints)
+                                                .reduce(0, Math::addExact),
                                            ((ResultsView) getView()).getTable()
                                                                     .getRowCount() - 1, 2);
     }

@@ -57,12 +57,11 @@ public class ResultsView extends View {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Main.ICON.getImage());
     setResizable(false);
-    setFrameTitle((Main.getDistribution() == Main.RANDOM_MIX
-                   ? "Aleatorio - "
-                   : "Por puntuaciones - ").concat(Main.thereAreAnchorages()
-                                                   ? "Con anclajes"
-                                                   : "Sin anclajes"));
-    setTitle(getFrameTitle());
+    setTitle((Main.getDistribution() == Main.RANDOM_MIX
+              ? "Aleatorio - "
+              : "Por puntuaciones - ").concat(Main.thereAreAnchorages()
+                                              ? "Con anclajes"
+                                              : "Sin anclajes"));
     addTable();
     addButtons();
     add(panel);
@@ -98,15 +97,6 @@ public class ResultsView extends View {
   // --------------------------------------------- Getters --------------------------------------
 
   /**
-   * Gets the frame title.
-   *
-   * @return The frame title.
-   */
-  public String getFrameTitle() {
-    return frameTitle;
-  }
-
-  /**
    * Gets the results table.
    *
    * @return The results table.
@@ -124,15 +114,6 @@ public class ResultsView extends View {
    */
   public void setTable(JTable table) {
     this.table = table;
-  }
-
-  /**
-   * Updates the frame's title.
-   *
-   * @param frameTitle The frame's new title.
-   */
-  public void setFrameTitle(String frameTitle) {
-    this.frameTitle = frameTitle;
   }
 
   // ---------------------------------------- Protected methods ---------------------------------

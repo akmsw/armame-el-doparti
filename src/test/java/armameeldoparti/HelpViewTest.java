@@ -83,7 +83,6 @@ class HelpViewTest {
     String expectedLabel = expectedPageNumber + 1 + "/8";
 
     assertEquals(expectedPageNumber, helpController.getPageNumber());
-
     assertEquals(expectedLabel, helpView.getPagesCounter()
                                         .getText());
   }
@@ -96,7 +95,6 @@ class HelpViewTest {
   void navigationButtonsLimits() {
     assertFalse(helpView.getPreviousPageButton()
                         .isEnabled());
-
     assertTrue(helpView.getNextPageButton()
                        .isEnabled());
 
@@ -106,7 +104,6 @@ class HelpViewTest {
 
     assertFalse(helpView.getNextPageButton()
                         .isEnabled());
-
     assertTrue(helpView.getPreviousPageButton()
                        .isEnabled());
   }

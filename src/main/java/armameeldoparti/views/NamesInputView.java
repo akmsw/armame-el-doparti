@@ -250,11 +250,11 @@ public class NamesInputView extends View {
         tf.addActionListener(e -> {
               try {
                 ((NamesInputController) Main.getController(Views.NAMES_INPUT))
-                    .textFieldEvent(textFieldsMap.get(position)
-                                                .indexOf(tf),
-                                    Main.getPlayersSets()
-                                        .get(position),
-                                    tf.getText());
+                                            .textFieldEvent(textFieldsMap.get(position)
+                                                                         .indexOf(tf),
+                                                            Main.getPlayersSets()
+                                                                .get(position),
+                                                            tf.getText());
               } catch (IllegalArgumentException stringEx) {
                 JOptionPane.showMessageDialog(null,
                                               "El nombre del jugador debe estar formado por letras"

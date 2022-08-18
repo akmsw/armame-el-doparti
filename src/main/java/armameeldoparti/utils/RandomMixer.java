@@ -124,16 +124,16 @@ public class RandomMixer implements PlayersMixer {
                                              .stream()
                                              .collect(Collectors.toList());
 
-    for (List<Player> ps : anchoredPlayers) {
+    for (List<Player> aps : anchoredPlayers) {
       updateChosenTeams(teams.size());
 
       int team = chosenTeam1;
 
-      if (!anchorageCanBeAdded(teams.get(team), ps)) {
+      if (!anchorageCanBeAdded(teams.get(team), aps)) {
         team = chosenTeam2;
       }
 
-      for (Player p : ps) {
+      for (Player p : aps) {
         p.setTeam(team + 1);
 
         teams.get(team)
@@ -222,7 +222,7 @@ public class RandomMixer implements PlayersMixer {
                                                                    ap.getPosition()
                                                                    == p.getPosition())
                                                                  .count()
-                                                                 > Main.getPlayersAmountMap()
-                                                                       .get(p.getPosition()));
+                                                > Main.getPlayersAmountMap()
+                                                      .get(p.getPosition()));
   }
 }
