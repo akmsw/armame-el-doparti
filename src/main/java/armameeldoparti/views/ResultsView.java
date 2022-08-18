@@ -30,8 +30,6 @@ public class ResultsView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private String frameTitle;
-
   private JPanel panel;
 
   private JTable table;
