@@ -97,18 +97,15 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Distributes the players randomly considering anchorages.
    *
-   * <p>First, the anchored players are distributed among the teams
-   * randomly. If a set of anchored players cannot be added to one
-   * team, it will be added to the other.
-   *
-   * <p>The anchored players are grouped in different lists by their
-   * anchorage number, and they're distributed starting from the sets
-   * with most anchored players in order to avoid inconsistencies.
+   * <p>First, the anchored players are grouped in different lists by their
+   * anchorage number, and they are distributed randomly starting from the
+   * sets with most anchored players in order to avoid inconsistencies.
+   * If a set of anchored players cannot be added to one team, it will be
+   * added to the other.
    *
    * <p>Then, the players that are not anchored are distributed
    * randomly. They will be added to a team only if the players
-   * amount per position or the players per team amount are not
-   * exceeded.
+   * per position or the players per team amounts are not exceeded.
    *
    * @param teams List that contains the two teams.
    *
