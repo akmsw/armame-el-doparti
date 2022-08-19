@@ -81,6 +81,7 @@ No se pueden anclar a un mismo equipo todos los jugadores de un mismo tipo (por 
 - Se implementaron algoritmos más eficientes para las distribuciones.
 - Se prescindió de clases y métodos que no eran vitales, mejorando significativamente la abstracción, la modularización del código, su mantenibilidad y la velocidad de ejecución del programa.
 - Se implementarion expresiones regulares para alivianar tareas.
+- Se implementó un enfoque de programación funcional para agilizar la manipulación de datos.
 - Importantes cambios de refactorización.
 
 ## 🛠️ Solución a problemas frecuentes
