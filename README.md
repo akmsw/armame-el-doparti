@@ -76,13 +76,13 @@ Para esto, hay una casilla rotulada con el texto "*Anclar jugadores*" en la vent
 No se pueden anclar a un mismo equipo todos los jugadores de un mismo tipo (por ejemplo, si se anclan todos los mediocampistas para un mismo equipo, el otro equipo no va a tener mediocampistas y esto no es posible). Lo mismo sucede con anclar a un mismo equipo más de la mitad de jugadores registrados para una posición particular.
 
 ## ✅ Mejoras
-- GUI mucho más cómoda, intuitiva y agradable que en versiones anteriores.
-- Arreglo de importantes bugs de la GUI.
+- GUI mucho más cómoda, intuitiva y agradable que en versiones anteriores, con arreglo de importantes bugs.
 - Se implementaron algoritmos más eficientes para las distribuciones.
+- Se implementó un patrón de diseño MVC para mejor organización del proyecto.
 - Se prescindió de clases y métodos que no eran vitales, mejorando significativamente la abstracción, la modularización del código, su mantenibilidad y la velocidad de ejecución del programa.
-- Se implementarion expresiones regulares para alivianar tareas.
+- Se implementaron expresiones regulares para alivianar tareas.
 - Se implementó un enfoque de programación funcional para agilizar la manipulación de datos.
-- Importantes cambios de refactorización.
+- Importantes cambios generales de refactorización.
 
 ## 🛠️ Solución a problemas frecuentes
 ### 🐧 En Linux
