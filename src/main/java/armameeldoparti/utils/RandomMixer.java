@@ -23,8 +23,8 @@ public class RandomMixer implements PlayersMixer {
   // ---------------------------------------- Private fields ------------------------------------
 
   private int index;
-  private int chosenTeam1;
-  private int chosenTeam2;
+  private int randomTeam1;
+  private int randomTeam2;
 
   private Random randomGenerator;
 
@@ -54,7 +54,7 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    updateChosenTeams(teams.size());
+    updateTeamNumbers(teams.size());
 
     List<Integer> alreadySetted = new ArrayList<>();
 
@@ -69,20 +69,20 @@ public class RandomMixer implements PlayersMixer {
 
         Player chosenPlayer = playersSet.get(index);
 
-        chosenPlayer.setTeam(chosenTeam1 + 1);
+        chosenPlayer.setTeamNumber(randomTeam1 + 1);
 
-        teams.get(chosenTeam1)
+        teams.get(randomTeam1)
              .getPlayers()
              .get(chosenPlayer.getPosition())
              .add(chosenPlayer);
       }
 
       playersSet.stream()
-                .filter(p -> p.getTeam() == 0)
+                .filter(p -> p.getTeamNumber() == 0)
                 .forEach(p -> {
-                  p.setTeam(chosenTeam2 + 1);
+                  p.setTeamNumber(randomTeam2 + 1);
 
-                  teams.get(chosenTeam2)
+                  teams.get(randomTeam2)
                        .getPlayers()
                        .get(p.getPosition())
                        .add(p);
@@ -125,18 +125,14 @@ public class RandomMixer implements PlayersMixer {
                                              .collect(Collectors.toList());
 
     for (List<Player> aps : anchoredPlayers) {
-      updateChosenTeams(teams.size());
+      updateTeamNumbers(teams.size());
 
-      int team = chosenTeam1;
-
-      if (!anchorageCanBeAdded(teams.get(team), aps)) {
-        team = chosenTeam2;
-      }
+      int teamNumber = anchorageCanBeAdded(teams.get(randomTeam1), aps) ? randomTeam1 : randomTeam2;
 
       for (Player p : aps) {
-        p.setTeam(team + 1);
+        p.setTeamNumber(teamNumber + 1);
 
-        teams.get(team)
+        teams.get(teamNumber)
              .getPlayers()
              .get(p.getPosition())
              .add(p);
@@ -147,20 +143,20 @@ public class RandomMixer implements PlayersMixer {
         .values()
         .stream()
         .flatMap(List::stream)
-        .filter(p -> p.getTeam() == 0)
+        .filter(p -> p.getTeamNumber() == 0)
         .forEach(p -> {
-          updateChosenTeams(teams.size());
+          updateTeamNumbers(teams.size());
 
-          int teamNumber = chosenTeam1;
+          int teamNumber = randomTeam1;
 
           if (teams.get(teamNumber)
                    .isPositionFull(p.getPosition())
               || teams.get(teamNumber)
                       .getPlayersCount() + 1 > Main.PLAYERS_PER_TEAM) {
-            teamNumber = chosenTeam2;
+            teamNumber = randomTeam2;
           }
 
-          p.setTeam(teamNumber + 1);
+          p.setTeamNumber(teamNumber + 1);
 
           teams.get(teamNumber)
                .getPlayers()
@@ -190,9 +186,9 @@ public class RandomMixer implements PlayersMixer {
    *
    * @param range Upper limit (exclusive) for the random number generator.
    */
-  private void updateChosenTeams(int range) {
-    chosenTeam1 = randomGenerator.nextInt(range);
-    chosenTeam2 = 1 - chosenTeam1;
+  private void updateTeamNumbers(int range) {
+    randomTeam1 = randomGenerator.nextInt(range);
+    randomTeam2 = 1 - randomTeam1;
   }
 
   /**

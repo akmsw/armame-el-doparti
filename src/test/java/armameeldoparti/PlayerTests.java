@@ -39,7 +39,7 @@ class PlayerTests implements ArgumentsProvider {
 
     assertEquals(0, player.getAnchorageNumber());
     assertEquals(0, player.getSkillPoints());
-    assertEquals(0, player.getTeam());
+    assertEquals(0, player.getTeamNumber());
     assertEquals(name, player.getName());
     assertEquals(position, player.getPosition());
   }

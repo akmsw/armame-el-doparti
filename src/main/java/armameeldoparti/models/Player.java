@@ -35,7 +35,7 @@ public class Player {
     setName(name);
     setSkillPoints(0);
     setAnchorageNumber(0);
-    setTeam(0);
+    setTeamNumber(0);
     setAnchored(false);
 
     this.position = position;
@@ -68,7 +68,7 @@ public class Player {
    *
    * @return The player's team number.
    */
-  public int getTeam() {
+  public int getTeamNumber() {
     return teamNumber;
   }
 
@@ -133,7 +133,7 @@ public class Player {
    *
    * @param teamNumber The player's new team number.
    */
-  public void setTeam(int teamNumber) {
+  public void setTeamNumber(int teamNumber) {
     this.teamNumber = teamNumber;
   }
 

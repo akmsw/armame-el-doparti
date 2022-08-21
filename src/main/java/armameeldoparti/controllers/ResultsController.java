@@ -379,6 +379,6 @@ public class ResultsController extends Controller {
         .values()
         .stream()
         .flatMap(List::stream)
-        .forEach(p -> p.setTeam(0));
+        .forEach(p -> p.setTeamNumber(0));
   }
 }
