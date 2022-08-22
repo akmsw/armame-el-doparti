@@ -99,7 +99,7 @@
                     </excludes>
                     <archive>
                         <manifest>
-                            <mainClass>armameeldoparti.utils.Main</mainClass>
+                            <mainClass>armameeldoparti.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

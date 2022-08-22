@@ -1,4 +1,4 @@
-Si encontraste algún problema que quieras reportar, o si querés sugerir algún cambio o una nueva funcionalidad, podés hacerlo mediante el botón "Reportes y sugerencias" del menú principal.
+Si encontraste algún problema que quieras reportar, o si querés sugerir algún cambio o una nueva funcionalidad, podés hacerlo mediante el botón 'Reportes y sugerencias' del menú principal.
 
 Este botón te va a llevar a la página de GitHub donde está almacenado el código fuente de este programa. Más precisamente, a la sección 'issues'.
 
@@ -6,7 +6,7 @@ Ahí vas a poder crear un nuevo reporte explicando qué bug encontraste o qué n
 
 Tené en cuenta que para poder hacer esto, es necesario tener una cuenta de GitHub.
 
-Si preferís contactarte directamente conmigo, podés hacerlo mediante el botón "Contacto" del menú principal, que te va a llevar a mi perfil de GitHub donde vas a encontrar más información de contacto.
+Si preferís contactarte directamente conmigo, podés hacerlo mediante el botón 'Contacto' del menú principal, que te va a llevar a mi perfil de GitHub donde vas a encontrar más información de contacto.
 
 Nuevamente, gracias por descargar 'Armame el Doparti v3.0'.
 
