@@ -7,7 +7,6 @@ import armameeldoparti.models.Team;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * Random distribution class.
@@ -113,16 +112,7 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    List<List<Player>> anchoredPlayers = Main.getPlayersSets()
-                                             .values()
-                                             .stream()
-                                             .flatMap(List::stream)
-                                             .filter(Player::isAnchored)
-                                             .collect(
-                                               Collectors.groupingBy(Player::getAnchorageNumber))
-                                             .values()
-                                             .stream()
-                                             .collect(Collectors.toList());
+    List<List<Player>> anchoredPlayers = PlayersMixer.getAnchoredPlayers();
 
     for (List<Player> aps : anchoredPlayers) {
       updateTeamNumbers(teams.size());
