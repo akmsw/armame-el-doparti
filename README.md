@@ -122,4 +122,4 @@ Si el programa presenta algún error que debería ser reportado para arreglarlo,
 *Ejemplo de resultado de distribución por puntuaciones sin anclajes*
 
 ![ventana_resultados_4](./src/main/res/img/readme/ss9.png)\
-**Ejemplo de resultado de distribución por puntuaciones con anclajes*
+**Ejemplo de resultado de distribución por puntuaciones con tres anclajes distintos*
