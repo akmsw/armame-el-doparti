@@ -2,7 +2,7 @@
 
 ![portada](./src/main/res/img/readme/cover.png)
 
-[![releaseDateBadge](https://img.shields.io/badge/release%20date-tbd-yellow)]()
+[![releaseDateBadge](https://img.shields.io/badge/status-prealpha-yellow)]()
 [![maintainedBadge](https://img.shields.io/badge/maintained-yes-brightgreen)]()
 
 [![build](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
