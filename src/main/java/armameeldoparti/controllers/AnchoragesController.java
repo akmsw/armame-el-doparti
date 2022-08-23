@@ -379,6 +379,8 @@ public class AnchoragesController extends Controller {
     clearCheckboxes();
 
     if (Main.getDistribution() == Main.BY_SKILL_MIX) {
+      ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).updateNameLabels();
+
       Main.getController(Views.SKILL_POINTS)
           .showView();
     } else {

@@ -19,6 +19,8 @@ public class Team {
 
   // ---------------------------------------- Private fields ------------------------------------
 
+  private int teamNumber;
+
   private List<Player> goalkeepers;
   private List<Player> centralDefenders;
   private List<Player> lateralDefenders;
@@ -32,7 +34,7 @@ public class Team {
   /**
    * Builds a basic team with empty positions.
    */
-  public Team() {
+  public Team(int teamNumber) {
     goalkeepers = new ArrayList<>();
     centralDefenders = new ArrayList<>();
     lateralDefenders = new ArrayList<>();
@@ -46,6 +48,8 @@ public class Team {
     teamPlayers.put(Positions.LATERAL_DEFENDER, lateralDefenders);
     teamPlayers.put(Positions.MIDFIELDER, midfielders);
     teamPlayers.put(Positions.FORWARD, forwards);
+
+    setTeamNumber(teamNumber);
   }
 
   // ---------------------------------------- Public methods -------------------------------------
@@ -59,6 +63,15 @@ public class Team {
   }
 
   // ---------------------------------------- Getters -------------------------------------------
+
+  /**
+   * Gets the corresponding team number.
+   *
+   * @return The corresponding team number.
+   */
+  public int getTeamNumber() {
+    return teamNumber;
+  }
 
   /**
    * Gets the amount of players in this team.
@@ -105,5 +118,16 @@ public class Team {
    */
   public Map<Positions, List<Player>> getPlayers() {
     return teamPlayers;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  /**
+   * Updates the team number.
+   *
+   * @param teamNumber The new team number.
+   */
+  public void setTeamNumber(int teamNumber) {
+    this.teamNumber = teamNumber;
   }
 }

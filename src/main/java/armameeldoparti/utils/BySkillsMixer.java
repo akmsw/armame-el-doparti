@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+// import java.util.stream.Collectors;
 
 /**
  * By-skill distribution class.
@@ -99,6 +100,14 @@ public class BySkillsMixer implements PlayersMixer {
                                                             .mapToInt(Player::getSkillPoints)
                                                             .reduce(0, Math::addExact)));
 
+        playersSubsets.get(0)
+                      .forEach(p -> p.setTeamNumber(teams.get(1)
+                                                         .getTeamNumber()));
+
+        playersSubsets.get(1)
+                      .forEach(p -> p.setTeamNumber(teams.get(0)
+                                                         .getTeamNumber()));
+
         teams.get(0)
              .getPlayers()
              .get(position)
@@ -124,6 +133,28 @@ public class BySkillsMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
+    // List<List<Player>> anchoredPlayers = Main.getPlayersSets()
+    //                                          .values()
+    //                                          .stream()
+    //                                          .flatMap(List::stream)
+    //                                          .filter(Player::isAnchored)
+    //                                          .collect(
+    //                                            Collectors.groupingBy(Player::getAnchorageNumber))
+    //                                          .values()
+    //                                          .stream()
+    //                                          .collect(Collectors.toList());
+
+    // for (List<Player> aps : anchoredPlayers) {
+    //   teams.sort(Comparator.comparingInt(Team::getTeamSkill));
+
+    //   for (Player p : aps) {
+    //     teams.get(0)
+    //          .getPlayers()
+    //          .get(p.getPosition())
+    //          .add(p);
+    //   }
+    // }
+
     return teams;
   }
 }

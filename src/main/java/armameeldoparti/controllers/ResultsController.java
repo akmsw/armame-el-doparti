@@ -80,8 +80,8 @@ public class ResultsController extends Controller {
    * the non-variable table cells and displays the distribution results.
    */
   public void setUp() {
-    Team team1 = new Team();
-    Team team2 = new Team();
+    Team team1 = new Team(1);
+    Team team2 = new Team(2);
 
     teams = new ArrayList<>();
 
