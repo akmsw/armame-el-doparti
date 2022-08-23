@@ -170,6 +170,9 @@ public class BySkillsMixer implements PlayersMixer {
                                               .collect(Collectors.toList());
 
     for (List<Player> ps : remainingPlayers) {
+      ps.sort(Comparator.comparingInt(Player::getSkillPoints)
+                        .reversed());
+
       if (ps.size() == 4) {
         teams.sort(Comparator.comparingInt(Team::getTeamSkill));
 
