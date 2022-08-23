@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * By-skill distribution class.
@@ -125,6 +126,15 @@ public class BySkillsMixer implements PlayersMixer {
   /**
    * Distributes the players by their skills considering anchorages.
    *
+   * <p>First, the anchored players are grouped in different lists by their
+   * anchorage number, and they are distributed as fair as possible starting
+   * with the sets with most anchored players in order to avoid inconsistencies.
+   *
+   * <p>Then, the players that are not anchored are distributed between the teams
+   * as fair as possible based on their skill points.
+   * They will be added to a team only if the players per position or the players
+   * per team amounts are not exceeded.
+   *
    * @param teams List that contains the two teams.
    *
    * @return The updated teams with the players distributed by their skill points,
@@ -132,21 +142,96 @@ public class BySkillsMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    // List<List<Player>> anchoredPlayers = PlayersMixer.getAnchoredPlayers();
+    List<List<Player>> anchoredPlayers = PlayersMixer.getAnchoredPlayers();
 
-    // for (List<Player> aps : anchoredPlayers) {
-    //   teams.sort(Comparator.comparingInt(Team::getTeamSkill));
+    for (List<Player> aps : anchoredPlayers) {
+      teams.sort(Comparator.comparingInt(Team::getTeamSkill));
 
-    //   for (Player p : aps) {
-    //     p.setTeamNumber(teams.get(0)
-    //                          .getTeamNumber());
+      for (Player p : aps) {
+        p.setTeamNumber(teams.get(0)
+                             .getTeamNumber());
 
-    //     teams.get(0)
-    //          .getPlayers()
-    //          .get(p.getPosition())
-    //          .add(p);
-    //   }
-    // }
+        teams.get(0)
+             .getPlayers()
+             .get(p.getPosition())
+             .add(p);
+      }
+    }
+
+    List<List<Player>> remainingPlayers = Main.getPlayersSets()
+                                              .values()
+                                              .stream()
+                                              .flatMap(List::stream)
+                                              .filter(p -> p.getTeamNumber() == 0)
+                                              .collect(
+                                                Collectors.groupingBy(Player::getPosition))
+                                              .values()
+                                              .stream()
+                                              .collect(Collectors.toList());
+
+    for (List<Player> ps : remainingPlayers) {
+      if (ps.size() == 4) {
+        teams.sort(Comparator.comparingInt(Team::getTeamSkill));
+
+        Positions currentPosition = ps.get(0)
+                                      .getPosition();
+
+        List<Player> playersSubset1 = new ArrayList<>();
+        List<Player> playersSubset2 = new ArrayList<>();
+
+        playersSubset1.add(ps.get(0));
+        playersSubset1.add(ps.get(ps.size() - 1));
+
+        playersSubset2.add(ps.get(1));
+        playersSubset2.add(ps.get(ps.size() - 2));
+
+        List<List<Player>> playersSubsets = new ArrayList<>();
+
+        playersSubsets.add(playersSubset1);
+        playersSubsets.add(playersSubset2);
+        playersSubsets.sort(Comparator.comparingInt(pss -> pss.stream()
+                                                              .mapToInt(Player::getSkillPoints)
+                                                              .reduce(0, Math::addExact)));
+
+        playersSubsets.get(0)
+                      .forEach(p -> p.setTeamNumber(teams.get(1)
+                                                         .getTeamNumber()));
+
+        playersSubsets.get(1)
+                      .forEach(p -> p.setTeamNumber(teams.get(0)
+                                                         .getTeamNumber()));
+
+        teams.get(0)
+             .getPlayers()
+             .get(currentPosition)
+             .addAll(playersSubsets.get(1));
+
+        teams.get(1)
+             .getPlayers()
+             .get(currentPosition)
+             .addAll(playersSubsets.get(0));
+      } else {
+        for (Player p : ps) {
+          teams.sort(Comparator.comparingInt(Team::getTeamSkill));
+
+          int teamNumber = 0;
+
+          if (teams.get(teamNumber)
+                   .isPositionFull(p.getPosition())
+              || teams.get(teamNumber)
+                      .getPlayersCount() + 1 > Main.PLAYERS_PER_TEAM) {
+            teamNumber = 1;
+          }
+
+          p.setTeamNumber(teamNumber + 1);
+
+          teams.get(teamNumber)
+               .getPlayers()
+               .get(p.getPosition())
+               .add(p);
+        }
+      }
+    }
 
     return teams;
   }
