@@ -113,10 +113,13 @@ Si el programa presenta algún error que debería ser reportado para arreglarlo,
 *Ventana de puntuaciones*
 
 ![ventana_resultados_1](./src/main/res/img/readme/ss6.png)\
-*Resultado de distribución aleatoria sin anclajes*
+*Ejemplo de resultado de distribución aleatoria sin anclajes*
 
 ![ventana_resultados_2](./src/main/res/img/readme/ss7.png)\
-*Resultado de distribución aleatoria con tres anclajes distintos*
+*Ejemplo de resultado de distribución aleatoria con tres anclajes distintos*
 
 ![ventana_resultados_3](./src/main/res/img/readme/ss8.png)\
-*Resultado de distribución por puntuaciones sin anclajes*
+*Ejemplo de resultado de distribución por puntuaciones sin anclajes*
+
+![ventana_resultados_4](./src/main/res/img/readme/ss9.png)\
+**Ejemplo de resultado de distribución por puntuaciones con anclajes*
