@@ -169,6 +169,8 @@ public class BySkillsMixer implements PlayersMixer {
                                               .stream()
                                               .collect(Collectors.toList());
 
+    remainingPlayers.sort(Comparator.comparingInt(List::size));
+
     for (List<Player> ps : remainingPlayers) {
       ps.sort(Comparator.comparingInt(Player::getSkillPoints)
                         .reversed());
