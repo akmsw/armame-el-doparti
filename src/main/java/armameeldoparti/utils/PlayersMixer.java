@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public interface PlayersMixer {
 
-  // ---------------------------------------- Abstract public methods ---------------------------
+  // ---------------------------------------- Public abstract methods ---------------------------
 
   /**
    * Distributes the players without considering anchorages.
@@ -38,6 +38,8 @@ public interface PlayersMixer {
    *         considering anchorages.
    */
   List<Team> withAnchorages(List<Team> teams);
+
+  // ---------------------------------------- Public static methods -----------------------------
 
   /**
    * Gets a list containing the anchored players

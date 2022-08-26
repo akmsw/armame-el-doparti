@@ -83,40 +83,7 @@ public class BySkillsMixer implements PlayersMixer {
              .get(position)
              .add(currentSet.get(1));
       } else {
-        List<Player> outerSubset = new ArrayList<>();
-        List<Player> innerSubset = new ArrayList<>();
-
-        outerSubset.add(currentSet.get(0));
-        outerSubset.add(currentSet.get(currentSet.size() - 1));
-
-        innerSubset.add(currentSet.get(1));
-        innerSubset.add(currentSet.get(currentSet.size() - 2));
-
-        List<List<Player>> playersSubsets = new ArrayList<>();
-
-        playersSubsets.add(outerSubset);
-        playersSubsets.add(innerSubset);
-        playersSubsets.sort(Comparator.comparingInt(ps -> ps.stream()
-                                                            .mapToInt(Player::getSkillPoints)
-                                                            .reduce(0, Math::addExact)));
-
-        playersSubsets.get(0)
-                      .forEach(p -> p.setTeamNumber(teams.get(1)
-                                                         .getTeamNumber()));
-
-        playersSubsets.get(1)
-                      .forEach(p -> p.setTeamNumber(teams.get(0)
-                                                         .getTeamNumber()));
-
-        teams.get(0)
-             .getPlayers()
-             .get(position)
-             .addAll(playersSubsets.get(1));
-
-        teams.get(1)
-             .getPlayers()
-             .get(position)
-             .addAll(playersSubsets.get(0));
+        distributeSubsets(teams, currentSet, position);
       }
     }
 
@@ -178,43 +145,8 @@ public class BySkillsMixer implements PlayersMixer {
       if (ps.size() == 4) {
         teams.sort(Comparator.comparingInt(Team::getTeamSkill));
 
-        List<Player> outerSubset = new ArrayList<>();
-        List<Player> innerSubset = new ArrayList<>();
-
-        outerSubset.add(ps.get(0));
-        outerSubset.add(ps.get(ps.size() - 1));
-
-        innerSubset.add(ps.get(1));
-        innerSubset.add(ps.get(ps.size() - 2));
-
-        List<List<Player>> playersSubsets = new ArrayList<>();
-
-        playersSubsets.add(outerSubset);
-        playersSubsets.add(innerSubset);
-        playersSubsets.sort(Comparator.comparingInt(pss -> pss.stream()
-                                                              .mapToInt(Player::getSkillPoints)
-                                                              .reduce(0, Math::addExact)));
-
-        playersSubsets.get(0)
-                      .forEach(p -> p.setTeamNumber(teams.get(1)
-                                                         .getTeamNumber()));
-
-        playersSubsets.get(1)
-                      .forEach(p -> p.setTeamNumber(teams.get(0)
-                                                         .getTeamNumber()));
-
-        Positions currentPosition = ps.get(0)
-                                      .getPosition();
-
-        teams.get(0)
-             .getPlayers()
-             .get(currentPosition)
-             .addAll(playersSubsets.get(1));
-
-        teams.get(1)
-             .getPlayers()
-             .get(currentPosition)
-             .addAll(playersSubsets.get(0));
+        distributeSubsets(teams, ps, ps.get(0)
+                                       .getPosition());
       } else {
         for (Player p : ps) {
           teams.sort(Comparator.comparingInt(Team::getTeamSkill));
@@ -239,5 +171,53 @@ public class BySkillsMixer implements PlayersMixer {
     }
 
     return teams;
+  }
+
+  // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Performs the subsets distribution in sets with 4 players as explained
+   * in {@link #withAnchorages(List)}.
+   *
+   * @param teams      List that contains the two teams.
+   * @param playersSet Current working players set.
+   * @param position   Current working players position.
+   */
+  private void distributeSubsets(List<Team> teams, List<Player> playersSet, Positions position) {
+    List<Player> outerSubset = new ArrayList<>();
+    List<Player> innerSubset = new ArrayList<>();
+
+    outerSubset.add(playersSet.get(0));
+    outerSubset.add(playersSet.get(playersSet.size() - 1));
+
+    innerSubset.add(playersSet.get(1));
+    innerSubset.add(playersSet.get(playersSet.size() - 2));
+
+    List<List<Player>> playersSubsets = new ArrayList<>();
+
+    playersSubsets.add(outerSubset);
+    playersSubsets.add(innerSubset);
+
+    playersSubsets.sort(Comparator.comparingInt(ps -> ps.stream()
+                                                        .mapToInt(Player::getSkillPoints)
+                                                        .reduce(0, Math::addExact)));
+
+    playersSubsets.get(0)
+                  .forEach(p -> p.setTeamNumber(teams.get(1)
+                                                      .getTeamNumber()));
+
+    playersSubsets.get(1)
+                  .forEach(p -> p.setTeamNumber(teams.get(0)
+                                                      .getTeamNumber()));
+
+    teams.get(0)
+         .getPlayers()
+         .get(position)
+         .addAll(playersSubsets.get(1));
+
+    teams.get(1)
+         .getPlayers()
+         .get(position)
+         .addAll(playersSubsets.get(0));
   }
 }
