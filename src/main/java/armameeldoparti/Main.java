@@ -30,6 +30,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -257,6 +258,26 @@ public final class Main {
   */
   public static Controller getController(Views view) {
     return controllersMap.get(view);
+  }
+
+  /**
+   * Gets a list containing the anchored players
+   * grouped by their anchorage number.
+   *
+   * @return A list containing the anchored players
+   *         grouped by their anchorage number.
+  */
+  public static List<List<Player>> getAnchoredPlayers() {
+    return Main.getPlayersSets()
+               .values()
+               .stream()
+               .flatMap(List::stream)
+               .filter(Player::isAnchored)
+               .collect(
+                 Collectors.groupingBy(Player::getAnchorageNumber))
+               .values()
+               .stream()
+               .collect(Collectors.toList());
   }
 
   // ---------------------------------------- Setters -------------------------------------------

@@ -109,7 +109,7 @@ public class BySkillsMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    List<List<Player>> anchoredPlayers = PlayersMixer.getAnchoredPlayers();
+    List<List<Player>> anchoredPlayers = Main.getAnchoredPlayers();
 
     for (List<Player> aps : anchoredPlayers) {
       teams.sort(Comparator.comparingInt(Team::getTeamSkill));

@@ -1,10 +1,7 @@
 package armameeldoparti.utils;
 
-import armameeldoparti.Main;
-import armameeldoparti.models.Player;
 import armameeldoparti.models.Team;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Interface that specifies the players distribution methods.
@@ -38,26 +35,4 @@ public interface PlayersMixer {
    *         considering anchorages.
    */
   List<Team> withAnchorages(List<Team> teams);
-
-  // ---------------------------------------- Public static methods -----------------------------
-
-  /**
-   * Gets a list containing the anchored players
-   * grouped by their anchorage number.
-   *
-   * @return A list containing the anchored players
-   *         grouped by their anchorage number.
-  */
-  static List<List<Player>> getAnchoredPlayers() {
-    return Main.getPlayersSets()
-               .values()
-               .stream()
-               .flatMap(List::stream)
-               .filter(Player::isAnchored)
-               .collect(
-                 Collectors.groupingBy(Player::getAnchorageNumber))
-               .values()
-               .stream()
-               .collect(Collectors.toList());
-  }
 }
