@@ -34,7 +34,7 @@ public class MainMenuView extends View {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Construye la ventana principal.
+   * Builds the main menu view.
    */
   public MainMenuView() {
     initializeInterface();
@@ -86,11 +86,10 @@ public class MainMenuView extends View {
    * Adds the background image to the panel.
    */
   private void addBackground() {
-    ImageIcon bgImage = new ImageIcon(getClass().getClassLoader()
-                                                .getResource(Main.IMG_PATH
-                                                             + Main.BG_IMG_FILENAME));
+    ImageIcon bgImg = new ImageIcon(getClass().getClassLoader()
+                                              .getResource(Main.IMG_PATH + Main.BG_IMG_FILENAME));
 
-    JLabel bgLabel = new JLabel("", bgImage, SwingConstants.CENTER);
+    JLabel bgLabel = new JLabel("", bgImg, SwingConstants.CENTER);
 
     masterPanel.add(bgLabel, GROWX);
   }

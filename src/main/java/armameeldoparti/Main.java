@@ -51,7 +51,7 @@ public final class Main {
   // ---------------------------------------- Private constants ---------------------------------
 
   /**
-   * Size, in pixels, of the scaled icon (for height and width).
+   * Size, in pixels, of the scaled icon (height and width).
    */
   private static final int ICON_SCALE = 50;
 
@@ -191,7 +191,7 @@ public final class Main {
    * @param map           Generic map with positions as keys.
    * @param valueToSearch Value to search in the map.
    *
-   * @return The valueToSearch corresponding position.
+   * @return The value-to-search corresponding position.
    */
   public static <T> Positions getCorrespondingPosition(Map<Positions, T> map, T valueToSearch) {
     return (Positions) map.entrySet()
@@ -205,7 +205,7 @@ public final class Main {
   // ---------------------------------------- Getters -------------------------------------------
 
   /**
-   * The chosen players distribution.
+   * Gets the chosen players distribution.
    *
    * @return The chosen players distribution.
    */
@@ -273,8 +273,7 @@ public final class Main {
                .stream()
                .flatMap(List::stream)
                .filter(Player::isAnchored)
-               .collect(
-                 Collectors.groupingBy(Player::getAnchorageNumber))
+               .collect(Collectors.groupingBy(Player::getAnchorageNumber))
                .values()
                .stream()
                .collect(Collectors.toList());
@@ -370,14 +369,14 @@ public final class Main {
       private int index;
     };
 
+    String playersAmountRegex = "(?!(?<=" + Main.PLAYERS_PER_TEAM + ")\\d).";
+
     buff.lines()
         .forEach(l -> {
           if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
             Main.getPlayersAmountMap()
                 .put(Positions.values()[wrapperIndex.index],
-                     Integer.parseInt(l.replaceAll("(?!(?<="
-                                                   + Main.PLAYERS_PER_TEAM
-                                                   + ")\\d).", "")));
+                     Integer.parseInt(l.replaceAll(playersAmountRegex, "")));
 
             wrapperIndex.index++;
           }

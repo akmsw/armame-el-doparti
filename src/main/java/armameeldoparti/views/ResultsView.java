@@ -87,9 +87,6 @@ public class ResultsView extends View {
 
       table.setRowHeight(i, rowHeight);
     }
-
-    pack();
-    setLocationRelativeTo(null);
   }
 
   // --------------------------------------------- Getters --------------------------------------

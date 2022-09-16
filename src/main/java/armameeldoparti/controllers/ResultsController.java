@@ -105,6 +105,8 @@ public class ResultsController extends Controller {
     updateTable();
 
     ((ResultsView) getView()).setTableCellsSize();
+    getView().pack();
+    getView().setLocationRelativeTo(null);
   }
 
   /**

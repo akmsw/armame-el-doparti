@@ -13,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -256,20 +255,16 @@ public class NamesInputView extends View {
                                                                 .get(position),
                                                             tf.getText());
               } catch (IllegalArgumentException stringEx) {
-                JOptionPane.showMessageDialog(null,
-                                              "El nombre del jugador debe estar formado por letras"
-                                              + " de la A a la Z", "¡Error!",
-                                              JOptionPane.ERROR_MESSAGE, null);
+                Main.showErrorMessage("El nombre del jugador debe estar formado "
+                                      + "por letras de la A a la Z");
 
                 tf.setText("");
 
                 return;
               } catch (InvalidNameException nameEx) {
-                JOptionPane.showMessageDialog(null,
-                                              "El nombre del jugador no puede estar vacío,"
-                                              + " tener más de " + Main.MAX_NAME_LEN
-                                              + " caracteres, o estar repetido",
-                                              "¡Error!", JOptionPane.ERROR_MESSAGE, null);
+                Main.showErrorMessage("El nombre del jugador no puede estar vacío,"
+                                      + " tener más de " + Main.MAX_NAME_LEN
+                                      + " caracteres, o estar repetido");
 
                 tf.setText("");
 

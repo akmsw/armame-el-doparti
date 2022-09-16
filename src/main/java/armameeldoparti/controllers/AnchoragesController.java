@@ -98,8 +98,8 @@ public class AnchoragesController extends Controller {
     }
 
     if (!validCheckedPlayersPerPosition()) {
-      Main.showErrorMessage("No puede haber más de la mitad de jugadores de una misma posición "
-                            + "en un mismo anclaje");
+      Main.showErrorMessage("No puede haber más de la mitad de jugadores de una misma posición"
+                            + " en un mismo anclaje");
 
       return;
     }

@@ -156,9 +156,7 @@ public class NamesInputController extends Controller {
    * @throws IllegalArgumentException When the input is an invalid string.
    * @throws InvalidNameException     When the input is an invalid name.
    */
-  public void textFieldEvent(int playerIndex,
-                             List<Player> playersSet,
-                             String text)
+  public void textFieldEvent(int playerIndex, List<Player> playersSet, String text)
                              throws IllegalArgumentException,
                                     InvalidNameException {
     if (!validString(text)) {

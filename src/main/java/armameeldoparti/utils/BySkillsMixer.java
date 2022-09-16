@@ -130,8 +130,7 @@ public class BySkillsMixer implements PlayersMixer {
                                               .stream()
                                               .flatMap(List::stream)
                                               .filter(p -> p.getTeamNumber() == 0)
-                                              .collect(
-                                                Collectors.groupingBy(Player::getPosition))
+                                              .collect(Collectors.groupingBy(Player::getPosition))
                                               .values()
                                               .stream()
                                               .collect(Collectors.toList());
