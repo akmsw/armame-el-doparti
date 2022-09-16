@@ -97,7 +97,8 @@ public final class Main {
   public static final String IMG_PATH = "img/";
   public static final String DOCS_PATH = "docs/";
   public static final String HELP_DOCS_PATH = DOCS_PATH + "help/";
-  public static final String NAMES_VALIDATION_REGEX = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
+  public static final String REGEX_NAMES_VALIDATION = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
+  public static final String REGEX_PLAYERS_AMOUNT = "(?!(?<=" + PLAYERS_PER_TEAM + ")\\d).";
 
   public static final Color LIGHT_GREEN = new Color(176, 189, 162);
   public static final Color MEDIUM_GREEN = new Color(109, 130, 118);
@@ -110,7 +111,7 @@ public final class Main {
   public static final ImageIcon ICON = new ImageIcon(
       Main.class
           .getClassLoader()
-          .getResource(Main.IMG_PATH + Main.ICON_FILENAME)
+          .getResource(IMG_PATH + ICON_FILENAME)
   );
 
   /**
@@ -268,15 +269,14 @@ public final class Main {
    *         grouped by their anchorage number.
   */
   public static List<List<Player>> getAnchoredPlayers() {
-    return Main.getPlayersSets()
-               .values()
-               .stream()
-               .flatMap(List::stream)
-               .filter(Player::isAnchored)
-               .collect(Collectors.groupingBy(Player::getAnchorageNumber))
-               .values()
-               .stream()
-               .collect(Collectors.toList());
+    return getPlayersSets().values()
+                           .stream()
+                           .flatMap(List::stream)
+                           .filter(Player::isAnchored)
+                           .collect(Collectors.groupingBy(Player::getAnchorageNumber))
+                           .values()
+                           .stream()
+                           .collect(Collectors.toList());
   }
 
   // ---------------------------------------- Setters -------------------------------------------
@@ -362,21 +362,18 @@ public final class Main {
     BufferedReader buff = new BufferedReader(
         new InputStreamReader(Main.class
                                   .getClassLoader()
-                                  .getResourceAsStream(Main.DOCS_PATH + PDA_FILENAME))
+                                  .getResourceAsStream(DOCS_PATH + PDA_FILENAME))
     );
 
     var wrapperIndex = new Object() {
       private int index;
     };
 
-    String playersAmountRegex = "(?!(?<=" + Main.PLAYERS_PER_TEAM + ")\\d).";
-
     buff.lines()
         .forEach(l -> {
           if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
-            Main.getPlayersAmountMap()
-                .put(Positions.values()[wrapperIndex.index],
-                     Integer.parseInt(l.replaceAll(playersAmountRegex, "")));
+            getPlayersAmountMap().put(Positions.values()[wrapperIndex.index],
+                                      Integer.parseInt(l.replaceAll(REGEX_PLAYERS_AMOUNT, "")));
 
             wrapperIndex.index++;
           }
@@ -387,25 +384,25 @@ public final class Main {
    * Sets up the program's GUI properties.
    */
   private static final void setGraphicalProperties() {
-    UIManager.put("OptionPane.background", Main.LIGHT_GREEN);
-    UIManager.put("Panel.background", Main.LIGHT_GREEN);
-    UIManager.put("CheckBox.background", Main.LIGHT_GREEN);
-    UIManager.put("Separator.background", Main.LIGHT_GREEN);
-    UIManager.put("CheckBox.focus", Main.LIGHT_GREEN);
-    UIManager.put("Button.background", Main.DARK_GREEN);
-    UIManager.put("Button.focus", Main.DARK_GREEN);
-    UIManager.put("ToggleButton.focus", Main.DARK_GREEN);
-    UIManager.put("TitledBorder.border", new LineBorder(Main.DARK_GREEN));
+    UIManager.put("OptionPane.background", LIGHT_GREEN);
+    UIManager.put("Panel.background", LIGHT_GREEN);
+    UIManager.put("CheckBox.background", LIGHT_GREEN);
+    UIManager.put("Separator.background", LIGHT_GREEN);
+    UIManager.put("CheckBox.focus", LIGHT_GREEN);
+    UIManager.put("Button.background", DARK_GREEN);
+    UIManager.put("Button.focus", DARK_GREEN);
+    UIManager.put("ToggleButton.focus", DARK_GREEN);
+    UIManager.put("TitledBorder.border", new LineBorder(DARK_GREEN));
     UIManager.put("Button.foreground", Color.WHITE);
     UIManager.put("ComboBox.focus", Color.WHITE);
 
     try {
-      // In order to use the font, it must be created and registered first
+      // In order to use the font, it must be created and registered
       Font programFont = Font.createFont(Font.TRUETYPE_FONT,
                                          Main.class
                                              .getClassLoader()
-                                             .getResourceAsStream(Main.TTF_PATH + Main.FONT_NAME))
-                                             .deriveFont(Main.FONT_SIZE);
+                                             .getResourceAsStream(TTF_PATH + FONT_NAME))
+                                             .deriveFont(FONT_SIZE);
 
       GraphicsEnvironment.getLocalGraphicsEnvironment()
                          .registerFont(programFont);

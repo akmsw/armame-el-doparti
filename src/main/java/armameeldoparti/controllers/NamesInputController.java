@@ -313,7 +313,7 @@ public class NamesInputController extends Controller {
    * @return Whether the string matches the string validation regex or not.
    */
   private boolean validString(String string) {
-    return Pattern.matches(Main.NAMES_VALIDATION_REGEX, string);
+    return Pattern.matches(Main.REGEX_NAMES_VALIDATION, string);
   }
 
   /**
