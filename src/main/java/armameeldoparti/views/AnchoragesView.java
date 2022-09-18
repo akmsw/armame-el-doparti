@@ -165,11 +165,11 @@ public class AnchoragesView extends View {
   }
 
   /**
-   * Gets the anchorage buttons related.
+   * Gets the anchorage-related buttons.
    *
-   * @return The anchorage buttons related.
+   * @return The anchorage-related buttons.
    */
-  public List<JButton> getAnchorageButtons() {
+  public List<JButton> getAnchoragesButtons() {
     return anchorageButtons;
   }
 
