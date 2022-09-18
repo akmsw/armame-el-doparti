@@ -254,29 +254,19 @@ public class AnchoragesController extends Controller {
    * Toggles the buttons and checkboxes states.
    */
   private void toggleButtons() {
-    if (anchoragesAmount == 0) {
-      ((AnchoragesView) getView()).getFinishButton()
-                                  .setEnabled(false);
-      ((AnchoragesView) getView()).getDeleteAnchorageButton()
-                                  .setEnabled(false);
-      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
-                                  .setEnabled(false);
-      ((AnchoragesView) getView()).getClearAnchoragesButton()
-                                  .setEnabled(false);
-    } else if (anchoragesAmount == 1) {
+    ((AnchoragesView) getView()).getAnchorageButtons()
+                                .forEach(b -> b.setEnabled(false));
+
+    if (anchoragesAmount == 1) {
       ((AnchoragesView) getView()).getFinishButton()
                                   .setEnabled(true);
-      ((AnchoragesView) getView()).getDeleteAnchorageButton()
-                                  .setEnabled(false);
       ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
                                   .setEnabled(true);
       ((AnchoragesView) getView()).getClearAnchoragesButton()
                                   .setEnabled(true);
     } else if (anchoragesAmount > 1) {
-      ((AnchoragesView) getView()).getDeleteAnchorageButton()
-                                  .setEnabled(true);
-      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
-                                  .setEnabled(true);
+      ((AnchoragesView) getView()).getAnchorageButtons()
+                                  .forEach(b -> b.setEnabled(true));
     }
 
     if (Main.MAX_ANCHORED_PLAYERS - anchoredPlayersAmount < 2) {

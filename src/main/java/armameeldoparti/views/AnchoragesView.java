@@ -60,6 +60,7 @@ public class AnchoragesView extends View {
   private List<JCheckBox> mfCheckboxes;
   private List<JCheckBox> fwCheckboxes;
   private List<JCheckBox> gkCheckboxes;
+  private List<JButton> anchorageButtons;
 
   private Map<Positions, List<JCheckBox>> checkBoxesMap;
 
@@ -74,6 +75,7 @@ public class AnchoragesView extends View {
     mfCheckboxes = new ArrayList<>();
     fwCheckboxes = new ArrayList<>();
     gkCheckboxes = new ArrayList<>();
+    anchorageButtons = new ArrayList<>();
 
     checkBoxesMap = new EnumMap<>(Positions.class);
 
@@ -160,6 +162,15 @@ public class AnchoragesView extends View {
    */
   public JTextArea getTextArea() {
     return textArea;
+  }
+
+  /**
+   * Gets the anchorage buttons related.
+   *
+   * @return The anchorage buttons related.
+   */
+  public List<JButton> getAnchorageButtons() {
+    return anchorageButtons;
   }
 
   /**
@@ -267,6 +278,12 @@ public class AnchoragesView extends View {
     backButton.addActionListener(e ->
         ((AnchoragesController) Main.getController(Views.ANCHORAGES)).backButtonEvent()
     );
+
+    anchorageButtons.add(finishButton);
+    anchorageButtons.add(newAnchorageButton);
+    anchorageButtons.add(deleteAnchorageButton);
+    anchorageButtons.add(deleteLastAnchorageButton);
+    anchorageButtons.add(clearAnchoragesButton);
 
     leftPanel.add(finishButton, GROWX_SPAN);
     leftPanel.add(backButton, GROWX_SPAN);
