@@ -33,6 +33,7 @@ public class AnchoragesController extends Controller {
    */
   public AnchoragesController(AnchoragesView anchoragesView) {
     super(anchoragesView);
+    toggleButtons();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -253,21 +254,7 @@ public class AnchoragesController extends Controller {
    * Toggles the buttons and checkboxes states.
    */
   private void toggleButtons() {
-    if (anchoragesAmount > 0 && anchoragesAmount < 2) {
-      ((AnchoragesView) getView()).getFinishButton()
-                                  .setEnabled(true);
-      ((AnchoragesView) getView()).getDeleteAnchorageButton()
-                                  .setEnabled(false);
-      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
-                                  .setEnabled(true);
-      ((AnchoragesView) getView()).getClearAnchoragesButton()
-                                  .setEnabled(true);
-    } else if (anchoragesAmount >= 2) {
-      ((AnchoragesView) getView()).getDeleteAnchorageButton()
-                                  .setEnabled(true);
-      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
-                                  .setEnabled(true);
-    } else {
+    if (anchoragesAmount == 0) {
       ((AnchoragesView) getView()).getFinishButton()
                                   .setEnabled(false);
       ((AnchoragesView) getView()).getDeleteAnchorageButton()
@@ -276,6 +263,20 @@ public class AnchoragesController extends Controller {
                                   .setEnabled(false);
       ((AnchoragesView) getView()).getClearAnchoragesButton()
                                   .setEnabled(false);
+    } else if (anchoragesAmount == 1) {
+      ((AnchoragesView) getView()).getFinishButton()
+                                  .setEnabled(true);
+      ((AnchoragesView) getView()).getDeleteAnchorageButton()
+                                  .setEnabled(false);
+      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
+                                  .setEnabled(true);
+      ((AnchoragesView) getView()).getClearAnchoragesButton()
+                                  .setEnabled(true);
+    } else if (anchoragesAmount > 1) {
+      ((AnchoragesView) getView()).getDeleteAnchorageButton()
+                                  .setEnabled(true);
+      ((AnchoragesView) getView()).getDeleteLastAnchorageButton()
+                                  .setEnabled(true);
     }
 
     if (Main.MAX_ANCHORED_PLAYERS - anchoredPlayersAmount < 2) {
