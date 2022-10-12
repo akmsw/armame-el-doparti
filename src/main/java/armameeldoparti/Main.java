@@ -10,6 +10,7 @@ import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Positions;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.Errors;
 import armameeldoparti.views.AnchoragesView;
 import armameeldoparti.views.HelpView;
 import armameeldoparti.views.MainMenuView;
@@ -120,6 +121,16 @@ public final class Main {
   public static final ImageIcon SCALED_ICON = new ImageIcon(
       ICON.getImage()
           .getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH)
+  );
+
+  public static final Map<Errors, Integer> errorCodes = Map.of(
+      Errors.GUI_INITIALIZATION_ERROR, -1,
+      Errors.INTERNAL_FILES_ERROR, -2
+  );
+
+  public static final Map<Errors, String> errorMessages = Map.of(
+      Errors.GUI_INITIALIZATION_ERROR, "ERROR EN CONFIGURACIÓN DE INTERFAZ GRÁFICA",
+      Errors.INTERNAL_FILES_ERROR, "ERROR EN LECTURA DE ARCHIVOS INTERNOS"
   );
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -408,12 +419,12 @@ public final class Main {
                          .registerFont(programFont);
 
       setProgramFont(programFont);
-    } catch (IOException | FontFormatException ex) {
-      ex.printStackTrace();
+    } catch (IOException | FontFormatException e) {
+      e.printStackTrace();
 
-      showErrorMessage("ERROR EN CONFIGURACIÓN DE INTERFAZ GRÁFICA");
+      showErrorMessage(errorMessages.get(Errors.GUI_INITIALIZATION_ERROR));
 
-      System.exit(-1);
+      System.exit(errorCodes.get(Errors.GUI_INITIALIZATION_ERROR));
     }
   }
 

@@ -2,6 +2,7 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.Errors;
 import armameeldoparti.views.HelpView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -144,12 +145,14 @@ public class HelpController extends Controller {
     )) {
       ((HelpView) getView()).getTextArea()
                             .read(reader, null);
-    } catch (Exception ex) {
-      ex.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
 
-      Main.showErrorMessage("ERROR EN LECTURA DE ARCHIVOS INTERNOS");
+      Main.showErrorMessage(Main.errorMessages
+                                .get(Errors.INTERNAL_FILES_ERROR));
 
-      System.exit(-1);
+      System.exit(Main.errorCodes
+                      .get(Errors.INTERNAL_FILES_ERROR));
     }
   }
 
