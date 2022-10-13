@@ -124,13 +124,13 @@ public final class Main {
   );
 
   public static final Map<Errors, Integer> errorCodes = Map.of(
-      Errors.GUI_INITIALIZATION_ERROR, -1,
+      Errors.GUI_ERROR, -1,
       Errors.INTERNAL_FILES_ERROR, -2
   );
 
   public static final Map<Errors, String> errorMessages = Map.of(
-      Errors.GUI_INITIALIZATION_ERROR, "ERROR EN CONFIGURACIÓN DE INTERFAZ GRÁFICA",
-      Errors.INTERNAL_FILES_ERROR, "ERROR EN LECTURA DE ARCHIVOS INTERNOS"
+      Errors.GUI_ERROR, "ERROR DE INTERFAZ GRÁFICA",
+      Errors.INTERNAL_FILES_ERROR, "ERROR LECTURA DE ARCHIVOS INTERNOS"
   );
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -192,7 +192,7 @@ public final class Main {
    *
    * @param errorMessage Custom error message to show.
    */
-  public static void showErrorMessage(String errorMessage) {
+  public static final void showErrorMessage(String errorMessage) {
     JOptionPane.showMessageDialog(null, errorMessage, ERROR_MESSAGE_TITLE,
                                   JOptionPane.ERROR_MESSAGE, null);
   }
@@ -212,6 +212,18 @@ public final class Main {
                                         .equals(valueToSearch))
                           .map(Map.Entry::getKey)
                           .toArray()[0];
+  }
+
+  /**
+   * Exits the program with the corresponding error message
+   * and error code according to the occurred exception.
+   *
+   * @param e The error that causes the program to end.
+   */
+  public static void exitProgram(Errors e) {
+    showErrorMessage(errorMessages.get(e));
+
+    System.exit(errorCodes.get(e));
   }
 
   // ---------------------------------------- Getters -------------------------------------------
@@ -355,11 +367,11 @@ public final class Main {
   /**
    * Gets the number of players for each position per team using regular expressions.
    *
-   * <p>[CLMFG].+>.+ : Retrieves the lines that start with C, L, M, F, or W,
+   * <p>{@code [CLMFG].+>.+}: Retrieves the lines that start with C, L, M, F, or W,
    * followed by at least one '>' character (these are the lines that matters in the
    * .pda file).
    *
-   * <p>(?!(?<=X)\\d). : Gets the part of the line that is not a number that we are
+   * <p>{@code (?!(?<=X)\\d).}: Gets the part of the line that is not a number that we are
    * interested in (the number would take the place of the X).
    *
    * <p>If the .pda file is modified in terms of the order of the important lines,
@@ -408,7 +420,7 @@ public final class Main {
     UIManager.put("ComboBox.focus", Color.WHITE);
 
     try {
-      // In order to use the font, it must be created and registered
+      // In order to use the font, it must be first created and registered
       Font programFont = Font.createFont(Font.TRUETYPE_FONT,
                                          Main.class
                                              .getClassLoader()
@@ -422,9 +434,7 @@ public final class Main {
     } catch (IOException | FontFormatException e) {
       e.printStackTrace();
 
-      showErrorMessage(errorMessages.get(Errors.GUI_INITIALIZATION_ERROR));
-
-      System.exit(errorCodes.get(Errors.GUI_INITIALIZATION_ERROR));
+      exitProgram(Errors.GUI_ERROR);
     }
   }
 

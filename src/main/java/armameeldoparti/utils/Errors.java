@@ -10,6 +10,6 @@ package armameeldoparti.utils;
  * @since 10/11/2022
  */
 public enum Errors {
-  GUI_INITIALIZATION_ERROR,
+  GUI_ERROR,
   INTERNAL_FILES_ERROR
 }

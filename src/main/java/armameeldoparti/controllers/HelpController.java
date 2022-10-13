@@ -148,11 +148,7 @@ public class HelpController extends Controller {
     } catch (Exception e) {
       e.printStackTrace();
 
-      Main.showErrorMessage(Main.errorMessages
-                                .get(Errors.INTERNAL_FILES_ERROR));
-
-      System.exit(Main.errorCodes
-                      .get(Errors.INTERNAL_FILES_ERROR));
+      Main.exitProgram(Errors.INTERNAL_FILES_ERROR);
     }
   }
 
