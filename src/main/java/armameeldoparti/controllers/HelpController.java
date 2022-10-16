@@ -2,7 +2,7 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.Errors;
+import armameeldoparti.utils.Error;
 import armameeldoparti.views.HelpView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -148,7 +148,7 @@ public class HelpController extends Controller {
     } catch (Exception e) {
       e.printStackTrace();
 
-      Main.exitProgram(Errors.INTERNAL_FILES_ERROR);
+      Main.exitProgram(Error.INTERNAL_FILES_ERROR);
     }
   }
 

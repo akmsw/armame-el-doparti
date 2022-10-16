@@ -10,7 +10,7 @@ import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Positions;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.Errors;
+import armameeldoparti.utils.Error;
 import armameeldoparti.views.AnchoragesView;
 import armameeldoparti.views.HelpView;
 import armameeldoparti.views.MainMenuView;
@@ -123,14 +123,14 @@ public final class Main {
           .getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH)
   );
 
-  public static final Map<Errors, Integer> errorCodes = Map.of(
-      Errors.GUI_ERROR, -1,
-      Errors.INTERNAL_FILES_ERROR, -2
+  public static final Map<Error, Integer> errorCodes = Map.of(
+      Error.GUI_ERROR, -1,
+      Error.INTERNAL_FILES_ERROR, -2
   );
 
-  public static final Map<Errors, String> errorMessages = Map.of(
-      Errors.GUI_ERROR, "ERROR DE INTERFAZ GRÁFICA",
-      Errors.INTERNAL_FILES_ERROR, "ERROR LECTURA DE ARCHIVOS INTERNOS"
+  public static final Map<Error, String> errorMessages = Map.of(
+      Error.GUI_ERROR, "ERROR DE INTERFAZ GRÁFICA",
+      Error.INTERNAL_FILES_ERROR, "ERROR DE LECTURA DE ARCHIVOS INTERNOS"
   );
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -220,7 +220,7 @@ public final class Main {
    *
    * @param e The error that causes the program to end.
    */
-  public static void exitProgram(Errors e) {
+  public static void exitProgram(Error e) {
     showErrorMessage(errorMessages.get(e));
 
     System.exit(errorCodes.get(e));
@@ -434,7 +434,7 @@ public final class Main {
     } catch (IOException | FontFormatException e) {
       e.printStackTrace();
 
-      exitProgram(Errors.GUI_ERROR);
+      exitProgram(Error.GUI_ERROR);
     }
   }
 

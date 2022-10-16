@@ -57,9 +57,8 @@ public class ResultsView extends View {
     setResizable(false);
     setTitle((Main.getDistribution() == Main.RANDOM_MIX
               ? "Aleatorio - "
-              : "Por puntuaciones - ").concat(Main.thereAreAnchorages()
-                                              ? "Con anclajes"
-                                              : "Sin anclajes"));
+              : "Por puntuaciones - ").concat(Main.thereAreAnchorages() ? "Con anclajes"
+                                                                        : "Sin anclajes"));
     addTable();
     addButtons();
     add(panel);

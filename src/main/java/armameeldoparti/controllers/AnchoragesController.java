@@ -168,9 +168,9 @@ public class AnchoragesController extends Controller {
   /**
    * 'Back' button event handler.
    *
-   * <p>Deletes every anchorage made, resets the controlled view
-   * to its default state, makes it invisible, and shows the
-   * names input view.
+   * <p>Makes the controlled view invisible, deletes every anchorage made,
+   * resets the controlled view to its default state and shows the names
+   * input view.
    */
   public void backButtonEvent() {
     hideView();
@@ -423,12 +423,12 @@ public class AnchoragesController extends Controller {
 
   /**
    * Checks if the selected players amount is at least 2 and
-   * no more than MAX_PLAYERS_PER_ANCHORAGE.
+   * at most MAX_PLAYERS_PER_ANCHORAGE.
    *
    * @param playersToAnchorAmount Checked players to anchor.
    *
-   * @return Whether the checked players amount is at least 2 and
-   *         no more than MAX_PLAYERS_PER_ANCHORAGE or not.
+   * @return Whether the checked players amount is at least 2
+   *         and at most MAX_PLAYERS_PER_ANCHORAGE, or not.
    */
   private boolean validChecksAmount(int playersToAnchorAmount) {
     return playersToAnchorAmount <= Main.MAX_PLAYERS_PER_ANCHORAGE
@@ -436,9 +436,9 @@ public class AnchoragesController extends Controller {
   }
 
   /**
-   * Checks if half of any players set is selected or not.
+   * Checks if half (or more) of any players set is selected or not.
    *
-   * @return Whether half of any players set is checked or not.
+   * @return Whether half (or more) of any players set is checked, or not.
    */
   private boolean validCheckedPlayersPerPosition() {
     return ((AnchoragesView) getView()).getCheckBoxesMap()
@@ -450,19 +450,19 @@ public class AnchoragesController extends Controller {
   }
 
   /**
-   * Checks if the selected players amount is less than the maximum allowed per anchorage.
+   * Checks if the selected players amount is at most the maximum allowed per anchorage.
    *
    * @param playersToAnchorAmount Checked players amount.
    *
-   * @return Whether the selected players amount is less than the maximum allowed per
-   *         anchorage or not.
+   * @return Whether the selected players amount is at most the maximum allowed
+   *         per anchorage, or not.
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
     return anchoredPlayersAmount + playersToAnchorAmount <= Main.MAX_ANCHORED_PLAYERS;
   }
 
   /**
-   * WIP.
+   * TODO.
    *
    * @return WIP.
    */

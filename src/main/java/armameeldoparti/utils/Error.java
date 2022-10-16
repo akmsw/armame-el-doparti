@@ -9,7 +9,7 @@ package armameeldoparti.utils;
  *
  * @since 10/11/2022
  */
-public enum Errors {
+public enum Error {
   GUI_ERROR,
   INTERNAL_FILES_ERROR
 }

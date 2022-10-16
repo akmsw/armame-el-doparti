@@ -158,8 +158,7 @@ public class SkillPointsInputView extends View {
         labelsMap.put(spinner, nameLabel);
 
         masterPanel.add(nameLabel, "pushx");
-        masterPanel.add(spinnersMap.get(currentSet.get(j)),
-                        j % 2 != 0 ? "wrap" : null);
+        masterPanel.add(spinnersMap.get(currentSet.get(j)), j % 2 != 0 ? "wrap" : null);
       }
 
       spinnersMap.values()

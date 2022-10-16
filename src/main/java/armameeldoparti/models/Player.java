@@ -37,8 +37,7 @@ public class Player {
     setAnchorageNumber(0);
     setTeamNumber(0);
     setAnchored(false);
-
-    this.position = position;
+    setPosition(position);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -144,5 +143,14 @@ public class Player {
    */
   public void setAnchored(boolean isAnchored) {
     this.isAnchored = isAnchored;
+  }
+
+  /**
+   * Updates the player's position.
+   *
+   * @param position The player's new position.
+   */
+  public void setPosition(Positions position) {
+    this.position = position;
   }
 }

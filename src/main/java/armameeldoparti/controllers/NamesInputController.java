@@ -149,9 +149,9 @@ public class NamesInputController extends Controller {
    * <p>If the input is valid, it will be applied as a player name in the players set
    * corresponding to the combobox selected option.
    *
-   * @param playerIndex  The index of the player which name will be the text filed input.
-   * @param playersSet   The set of players corresponding to the selected combobox option.
-   * @param text         The user input in the text field.
+   * @param playerIndex The index of the player which name will be the text filed input.
+   * @param playersSet  The set of players corresponding to the selected combobox option.
+   * @param text        The user input in the text field.
    *
    * @throws IllegalArgumentException When the input is an invalid string.
    * @throws InvalidNameException     When the input is an invalid name.
