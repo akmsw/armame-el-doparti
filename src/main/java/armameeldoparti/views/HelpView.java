@@ -3,6 +3,7 @@ package armameeldoparti.views;
 import armameeldoparti.Main;
 import armameeldoparti.controllers.HelpController;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.Constants;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -129,7 +130,8 @@ public class HelpView extends View {
     add(masterPanel);
     setTitle(FRAME_TITLE);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Main.ICON.getImage());
+    setIconImage(Constants.ICON
+                          .getImage());
     setResizable(false);
     pack();
     setLocationRelativeTo(null);
@@ -160,8 +162,8 @@ public class HelpView extends View {
     previousPageButton.setEnabled(false);
 
     masterPanel.add(previousPageButton, "growx, span, split 2, center");
-    masterPanel.add(nextPageButton, "growx");
-    masterPanel.add(backButton, "growx, span");
+    masterPanel.add(nextPageButton, Constants.GROWX);
+    masterPanel.add(backButton, Constants.GROWX_SPAN);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -172,7 +174,7 @@ public class HelpView extends View {
   private void addTextArea() {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
-    textArea.setBackground(Main.LIGHT_GREEN);
+    textArea.setBackground(Constants.LIGHT_GREEN);
     textArea.setEditable(false);
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
@@ -180,13 +182,13 @@ public class HelpView extends View {
     scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                                  ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    scrollPane.setBackground(Main.LIGHT_GREEN);
+    scrollPane.setBackground(Constants.LIGHT_GREEN);
     scrollPane.getVerticalScrollBar()
               .setUI(new BasicScrollBarUI() {
                 @Override
                 protected void configureScrollBarColors() {
-                  this.thumbColor = Main.DARK_GREEN;
-                  this.trackColor = Main.MEDIUM_GREEN;
+                  this.thumbColor = Constants.DARK_GREEN;
+                  this.trackColor = Constants.MEDIUM_GREEN;
                 }
               });
 
@@ -202,6 +204,6 @@ public class HelpView extends View {
     pagesCounter.setBorder(BorderFactory.createLoweredSoftBevelBorder());
     pagesCounter.setHorizontalAlignment(SwingConstants.CENTER);
 
-    masterPanel.add(pagesCounter, "growx");
+    masterPanel.add(pagesCounter, Constants.GROWX);
   }
 }

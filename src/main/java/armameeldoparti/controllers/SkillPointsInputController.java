@@ -2,6 +2,7 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.Constants;
 import armameeldoparti.views.SkillPointsInputView;
 
 /**
@@ -97,7 +98,7 @@ public class SkillPointsInputController extends Controller {
     ((SkillPointsInputView) getView()).getSpinnersMap()
                                       .forEach((k, v) -> {
                                         k.setSkillPoints(0);
-                                        v.setValue(Main.SKILL_MIN);
+                                        v.setValue(Constants.SKILL_MIN);
                                       });
   }
 }

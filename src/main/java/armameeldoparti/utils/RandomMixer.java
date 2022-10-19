@@ -142,7 +142,7 @@ public class RandomMixer implements PlayersMixer {
           if (teams.get(teamNumber)
                    .isPositionFull(p.getPosition())
               || teams.get(teamNumber)
-                      .getPlayersCount() + 1 > Main.PLAYERS_PER_TEAM) {
+                      .getPlayersCount() + 1 > Constants.PLAYERS_PER_TEAM) {
             teamNumber = randomTeam2;
           }
 
@@ -197,7 +197,7 @@ public class RandomMixer implements PlayersMixer {
    * @return Whether all anchored players can be added to the team or not.
    */
   private boolean anchorageCanBeAdded(Team team, List<Player> anchoredPlayers) {
-    return team.getPlayersCount() + anchoredPlayers.size() <= Main.PLAYERS_PER_TEAM
+    return team.getPlayersCount() + anchoredPlayers.size() <= Constants.PLAYERS_PER_TEAM
            && anchoredPlayers.stream()
                              .noneMatch(p -> team.isPositionFull(p.getPosition())
                                              || team.getPlayers()

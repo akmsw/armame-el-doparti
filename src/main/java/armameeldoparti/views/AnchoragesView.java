@@ -5,6 +5,7 @@ import armameeldoparti.controllers.AnchoragesController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Positions;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.Constants;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -36,8 +37,6 @@ public class AnchoragesView extends View {
 
   // ---------------------------------------- Private constants ---------------------------------
 
-  private static final String GROW = "grow";
-  private static final String GROWX_SPAN = "growx, span";
   private static final String FRAME_TITLE = "Anclaje de jugadores";
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -201,8 +200,8 @@ public class AnchoragesView extends View {
               .setUI(new BasicScrollBarUI() {
                 @Override
                 protected void configureScrollBarColors() {
-                  this.thumbColor = Main.DARK_GREEN;
-                  this.trackColor = Main.MEDIUM_GREEN;
+                  this.thumbColor = Constants.DARK_GREEN;
+                  this.trackColor = Constants.MEDIUM_GREEN;
                 }
               });
 
@@ -231,7 +230,8 @@ public class AnchoragesView extends View {
     setTitle(FRAME_TITLE);
     setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Main.ICON.getImage());
+    setIconImage(Constants.ICON
+                          .getImage());
     pack();
     setLocationRelativeTo(null);
   }
@@ -285,14 +285,14 @@ public class AnchoragesView extends View {
     anchorageButtons.add(deleteLastAnchorageButton);
     anchorageButtons.add(clearAnchoragesButton);
 
-    leftPanel.add(finishButton, GROWX_SPAN);
-    leftPanel.add(backButton, GROWX_SPAN);
+    leftPanel.add(finishButton, Constants.GROWX_SPAN);
+    leftPanel.add(backButton, Constants.GROWX_SPAN);
 
     rightPanel.add(scrollPane, "span2, push, grow");
-    rightPanel.add(newAnchorageButton, GROW);
-    rightPanel.add(deleteAnchorageButton, GROW);
-    rightPanel.add(deleteLastAnchorageButton, GROW);
-    rightPanel.add(clearAnchoragesButton, GROW);
+    rightPanel.add(newAnchorageButton, Constants.GROW);
+    rightPanel.add(deleteAnchorageButton, Constants.GROW);
+    rightPanel.add(deleteLastAnchorageButton, Constants.GROW);
+    rightPanel.add(clearAnchoragesButton, Constants.GROW);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -318,7 +318,7 @@ public class AnchoragesView extends View {
 
     label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-    leftPanel.add(label, GROWX_SPAN);
+    leftPanel.add(label, Constants.GROWX_SPAN);
 
     cbSet.forEach(cb -> leftPanel.add(cb, "align left, pushx"));
   }

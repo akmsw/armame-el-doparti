@@ -3,6 +3,8 @@ package armameeldoparti.controllers;
 import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFunctions;
+import armameeldoparti.utils.Constants;
 import armameeldoparti.views.AnchoragesView;
 import java.util.List;
 import javax.swing.JCheckBox;
@@ -21,8 +23,8 @@ public class AnchoragesController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private int anchoredPlayersAmount = 0;
   private int anchoragesAmount = 0;
+  private int anchoredPlayersAmount = 0;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -69,7 +71,7 @@ public class AnchoragesController extends Controller {
    */
   public void finishButtonEvent() {
     if (!validAnchoragesCombination()) {
-      Main.showErrorMessage("Error message");
+      CommonFunctions.showErrorMessage("Error message");
 
       return;
     }
@@ -92,22 +94,23 @@ public class AnchoragesController extends Controller {
                                                                   .count();
 
     if (!validChecksAmount(playersToAnchorAmount)) {
-      Main.showErrorMessage("No puede haber más de " + Main.MAX_PLAYERS_PER_ANCHORAGE
-                            + " ni menos de 2 jugadores en un mismo anclaje");
+      CommonFunctions.showErrorMessage("No puede haber más de "
+                                       + Constants.MAX_PLAYERS_PER_ANCHORAGE
+                                       + " ni menos de 2 jugadores en un mismo anclaje");
 
       return;
     }
 
     if (!validCheckedPlayersPerPosition()) {
-      Main.showErrorMessage("No puede haber más de la mitad de jugadores de una misma posición"
-                            + " en un mismo anclaje");
+      CommonFunctions.showErrorMessage("No puede haber más de la mitad de jugadores"
+                                       + " de una misma posición en un mismo anclaje");
 
       return;
     }
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
-      Main.showErrorMessage("No puede haber más de " + Main.MAX_ANCHORED_PLAYERS
-                            + " jugadores anclados en total");
+      CommonFunctions.showErrorMessage("No puede haber más de " + Constants.MAX_ANCHORED_PLAYERS
+                                       + " jugadores anclados en total");
 
       return;
     }
@@ -146,7 +149,7 @@ public class AnchoragesController extends Controller {
                                                          "Seleccione qué anclaje desea borrar",
                                                          "Antes de continuar...", 2,
                                                          JOptionPane.QUESTION_MESSAGE,
-                                                         Main.SCALED_ICON, optionsDelete,
+                                                         Constants.ICON_SCALED, optionsDelete,
                                                          optionsDelete[0]);
 
     if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
@@ -269,7 +272,7 @@ public class AnchoragesController extends Controller {
                                   .forEach(b -> b.setEnabled(true));
     }
 
-    if (Main.MAX_ANCHORED_PLAYERS - anchoredPlayersAmount < 2) {
+    if (Constants.MAX_ANCHORED_PLAYERS - anchoredPlayersAmount < 2) {
       ((AnchoragesView) getView()).getNewAnchorageButton()
                                   .setEnabled(false);
       ((AnchoragesView) getView()).getCheckBoxesMap()
@@ -316,8 +319,8 @@ public class AnchoragesController extends Controller {
     changeAnchorage(anchorageToDelete, 0);
 
     if (anchorageToDelete != anchoragesAmount) {
-      for (int k = anchorageToDelete + 1; k <= anchoragesAmount; k++) {
-        changeAnchorage(k, k - 1);
+      for (int i = anchorageToDelete + 1; i <= anchoragesAmount; i++) {
+        changeAnchorage(i, i - 1);
       }
     }
 
@@ -369,7 +372,7 @@ public class AnchoragesController extends Controller {
     hideView();
     clearCheckboxes();
 
-    if (Main.getDistribution() == Main.BY_SKILL_MIX) {
+    if (Main.getDistribution() == Constants.MIX_BY_SKILL) {
       ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).updateNameLabels();
 
       Main.getController(Views.SKILL_POINTS)
@@ -390,7 +393,8 @@ public class AnchoragesController extends Controller {
    */
   private void setAnchorages(List<JCheckBox> cbSet) {
     Main.getPlayersSets()
-        .get(Main.getCorrespondingPosition(((AnchoragesView) getView()).getCheckBoxesMap(), cbSet))
+        .get(CommonFunctions.getCorrespondingPosition(
+          ((AnchoragesView) getView()).getCheckBoxesMap(), cbSet))
         .stream()
         .filter(p -> cbSet.stream()
                           .filter(JCheckBox::isSelected)
@@ -431,7 +435,7 @@ public class AnchoragesController extends Controller {
    *         and at most MAX_PLAYERS_PER_ANCHORAGE, or not.
    */
   private boolean validChecksAmount(int playersToAnchorAmount) {
-    return playersToAnchorAmount <= Main.MAX_PLAYERS_PER_ANCHORAGE
+    return playersToAnchorAmount <= Constants.MAX_PLAYERS_PER_ANCHORAGE
            && playersToAnchorAmount >= 2;
   }
 
@@ -458,7 +462,7 @@ public class AnchoragesController extends Controller {
    *         per anchorage, or not.
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
-    return anchoredPlayersAmount + playersToAnchorAmount <= Main.MAX_ANCHORED_PLAYERS;
+    return anchoredPlayersAmount + playersToAnchorAmount <= Constants.MAX_ANCHORED_PLAYERS;
   }
 
   /**

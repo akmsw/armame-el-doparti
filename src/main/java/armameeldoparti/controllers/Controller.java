@@ -44,6 +44,15 @@ public abstract class Controller {
   // ---------------------------------------- Protected methods ---------------------------------
 
   /**
+   * Makes the controlled view invisible.
+   */
+  protected void hideView() {
+    controlledView.setVisible(false);
+
+    centerView();
+  }
+
+  /**
    * Updates the controlled view object.
    *
    * @param controlledView The new controlled view.
@@ -57,15 +66,6 @@ public abstract class Controller {
    */
   protected void showView() {
     controlledView.setVisible(true);
-  }
-
-  /**
-   * Makes the controlled view invisible.
-   */
-  protected void hideView() {
-    controlledView.setVisible(false);
-
-    centerView();
   }
 
   // ---------------------------------------- Private methods -----------------------------------

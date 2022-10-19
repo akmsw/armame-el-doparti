@@ -6,6 +6,7 @@ import armameeldoparti.models.Positions;
 import armameeldoparti.models.Team;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.BySkillsMixer;
+import armameeldoparti.utils.Constants;
 import armameeldoparti.utils.RandomMixer;
 import armameeldoparti.views.ResultsView;
 import java.awt.Color;
@@ -89,7 +90,7 @@ public class ResultsController extends Controller {
     teams.add(team1);
     teams.add(team2);
 
-    if (Main.getDistribution() == Main.RANDOM_MIX) {
+    if (Main.getDistribution() == Constants.MIX_RANDOM) {
       teams = randomMix();
 
       addRows = 1;
@@ -99,7 +100,8 @@ public class ResultsController extends Controller {
       addRows = 2;
     }
 
-    ((ResultsView) getView()).setTable(new JTable(Main.PLAYERS_PER_TEAM + addRows, TABLE_COLUMNS));
+    ((ResultsView) getView()).setTable(new JTable(Constants.PLAYERS_PER_TEAM + addRows,
+                                                  TABLE_COLUMNS));
     ((ResultsView) getView()).initializeInterface();
 
     setTableFormat();
@@ -125,7 +127,7 @@ public class ResultsController extends Controller {
 
     Views previousView;
 
-    if (Main.getDistribution() == Main.RANDOM_MIX) {
+    if (Main.getDistribution() == Constants.MIX_RANDOM) {
       previousView = Main.thereAreAnchorages() ? Views.ANCHORAGES : Views.NAMES_INPUT;
     } else {
       previousView = Views.SKILL_POINTS;
@@ -175,7 +177,7 @@ public class ResultsController extends Controller {
       wrapper.row = 1;
     });
 
-    if (Main.getDistribution() == Main.BY_SKILL_MIX) {
+    if (Main.getDistribution() == Constants.MIX_BY_SKILL) {
       for (int i = 0; i < 2; i++) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(teams.get(i)
@@ -250,12 +252,12 @@ public class ResultsController extends Controller {
             final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
                                                                     hasFocus, row, column);
 
-            boolean byScoresMixFlag = Main.getDistribution() == Main.BY_SKILL_MIX
+            boolean byScoresMixFlag = Main.getDistribution() == Constants.MIX_BY_SKILL
                                       && row == ((ResultsView) getView()).getTable()
                                                                          .getRowCount() - 1;
 
             if (row == 0) {
-              c.setBackground(Main.DARK_GREEN);
+              c.setBackground(Constants.DARK_GREEN);
               c.setForeground(Color.WHITE);
 
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -265,7 +267,7 @@ public class ResultsController extends Controller {
 
             if (column == 0) {
               if (byScoresMixFlag) {
-                c.setBackground(Main.LIGHT_ORANGE);
+                c.setBackground(Constants.LIGHT_YELLOW);
                 c.setForeground(Color.BLACK);
 
                 ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -273,7 +275,7 @@ public class ResultsController extends Controller {
                 return c;
               }
 
-              c.setBackground(Main.DARK_GREEN);
+              c.setBackground(Constants.DARK_GREEN);
               c.setForeground(Color.WHITE);
 
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
@@ -282,7 +284,7 @@ public class ResultsController extends Controller {
             }
 
             if (byScoresMixFlag) {
-              c.setBackground(Main.LIGHT_ORANGE);
+              c.setBackground(Constants.LIGHT_YELLOW);
               c.setForeground(Color.BLACK);
 
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -338,7 +340,7 @@ public class ResultsController extends Controller {
       }
     }
 
-    if (Main.getDistribution() == Main.BY_SKILL_MIX) {
+    if (Main.getDistribution() == Constants.MIX_BY_SKILL) {
       for (int i = 0; i < 2; i++) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(i == 0 ? Main.getPositionsMap()

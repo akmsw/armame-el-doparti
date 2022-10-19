@@ -5,6 +5,7 @@ import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Positions;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.Constants;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,6 @@ public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private constants ---------------------------------
 
-  private static final String GROW_SPAN = "grow, span";
   private static final String FRAME_TITLE = "Ingreso de puntuaciones";
 
   // ---------------------------------------- Private fields -------------------------------------
@@ -65,7 +65,8 @@ public class SkillPointsInputView extends View {
 
     setTitle(FRAME_TITLE);
     setResizable(false);
-    setIconImage(Main.ICON.getImage());
+    setIconImage(Constants.ICON
+                          .getImage());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     addSpinners();
     addButtons();
@@ -122,9 +123,9 @@ public class SkillPointsInputView extends View {
         ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).backButtonEvent()
     );
 
-    masterPanel.add(finishButton, GROW_SPAN);
-    masterPanel.add(resetSkillPointsButton, GROW_SPAN);
-    masterPanel.add(backButton, GROW_SPAN);
+    masterPanel.add(finishButton, Constants.GROW_SPAN);
+    masterPanel.add(resetSkillPointsButton, Constants.GROW_SPAN);
+    masterPanel.add(backButton, Constants.GROW_SPAN);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -139,16 +140,16 @@ public class SkillPointsInputView extends View {
 
       positionLabel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-      masterPanel.add(positionLabel, GROW_SPAN);
+      masterPanel.add(positionLabel, Constants.GROW_SPAN);
 
       List<Player> currentSet = Main.getPlayersSets()
                                     .get(position);
 
       for (int j = 0; j < currentSet.size(); j++) {
-        JSpinner spinner = new JSpinner(new SpinnerNumberModel(Main.SKILL_INI,
-                                                               Main.SKILL_MIN,
-                                                               Main.SKILL_MAX,
-                                                               Main.SKILL_STEP));
+        JSpinner spinner = new JSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
+                                                               Constants.SKILL_MIN,
+                                                               Constants.SKILL_MAX,
+                                                               Constants.SKILL_STEP));
 
         JLabel nameLabel = new JLabel(currentSet.get(j)
                                                 .getName());

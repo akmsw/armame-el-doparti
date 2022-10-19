@@ -4,6 +4,8 @@ import armameeldoparti.Main;
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Positions;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFunctions;
+import armameeldoparti.utils.Constants;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -161,7 +163,8 @@ public class NamesInputView extends View {
 
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setTitle(FRAME_TITLE);
-    setIconImage(Main.ICON.getImage());
+    setIconImage(Constants.ICON
+                          .getImage());
     setResizable(false);
     addComboBox();
     addTextFields();
@@ -192,8 +195,8 @@ public class NamesInputView extends View {
         ((NamesInputController) Main.getController(Views.NAMES_INPUT)).backButtonEvent()
     );
 
-    rightPanel.add(mixButton, "grow");
-    rightPanel.add(backButton, "grow");
+    rightPanel.add(mixButton, Constants.GROW);
+    rightPanel.add(backButton, Constants.GROW);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -210,7 +213,7 @@ public class NamesInputView extends View {
         .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
     );
 
-    leftPanel.add(comboBox, "growx");
+    leftPanel.add(comboBox, Constants.GROWX);
   }
 
   /**
@@ -255,15 +258,15 @@ public class NamesInputView extends View {
                                                                 .get(position),
                                                             tf.getText());
               } catch (IllegalArgumentException stringEx) {
-                Main.showErrorMessage("El nombre del jugador debe estar formado "
+                CommonFunctions.showErrorMessage("El nombre del jugador debe estar formado "
                                       + "por letras de la A a la Z");
 
                 tf.setText("");
 
                 return;
               } catch (InvalidNameException nameEx) {
-                Main.showErrorMessage("El nombre del jugador no puede estar vacío,"
-                                      + " tener más de " + Main.MAX_NAME_LEN
+                CommonFunctions.showErrorMessage("El nombre del jugador no puede estar vacío,"
+                                      + " tener más de " + Constants.MAX_NAME_LEN
                                       + " caracteres, o estar repetido");
 
                 tf.setText("");

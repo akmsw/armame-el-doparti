@@ -3,6 +3,7 @@ package armameeldoparti.views;
 import armameeldoparti.Main;
 import armameeldoparti.controllers.ResultsController;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.Constants;
 import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -53,9 +54,10 @@ public class ResultsView extends View {
     panel = new JPanel(new MigLayout("wrap"));
 
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Main.ICON.getImage());
+    setIconImage(Constants.ICON
+                          .getImage());
     setResizable(false);
-    setTitle((Main.getDistribution() == Main.RANDOM_MIX
+    setTitle((Main.getDistribution() == Constants.MIX_RANDOM
               ? "Aleatorio - "
               : "Por puntuaciones - ").concat(Main.thereAreAnchorages() ? "Con anclajes"
                                                                         : "Sin anclajes"));
@@ -123,17 +125,17 @@ public class ResultsView extends View {
         ((ResultsController) Main.getController(Views.RESULTS)).backButtonEvent()
     );
 
-    if (Main.getDistribution() == Main.RANDOM_MIX) {
+    if (Main.getDistribution() == Constants.MIX_RANDOM) {
       JButton remixButton = new JButton("Redistribuir");
 
       remixButton.addActionListener(e ->
           ((ResultsController) Main.getController(Views.RESULTS)).remixButtonEvent()
       );
 
-      panel.add(remixButton, "growx");
+      panel.add(remixButton, Constants.GROWX);
     }
 
-    panel.add(backButton, "growx");
+    panel.add(backButton, Constants.GROWX);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -146,7 +148,7 @@ public class ResultsView extends View {
     table.setCellSelectionEnabled(false);
     table.setRowSelectionAllowed(false);
     table.setColumnSelectionAllowed(false);
-    table.setBorder(BorderFactory.createLineBorder(Main.DARK_GREEN));
+    table.setBorder(BorderFactory.createLineBorder(Constants.DARK_GREEN));
     table.setEnabled(false);
 
     panel.add(table, "push, grow, span, center");

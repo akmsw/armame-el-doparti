@@ -3,6 +3,8 @@ package armameeldoparti.controllers;
 import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFunctions;
+import armameeldoparti.utils.Constants;
 import armameeldoparti.views.NamesInputView;
 import java.util.Collection;
 import java.util.List;
@@ -107,7 +109,7 @@ public class NamesInputController extends Controller {
     int distribution = JOptionPane.showOptionDialog(
         null, "Seleccione el criterio de distribución de jugadores",
         "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
-        Main.SCALED_ICON, OPTIONS_MIX, OPTIONS_MIX[0]
+        Constants.ICON_SCALED, OPTIONS_MIX, OPTIONS_MIX[0]
     );
 
     if (distribution == JOptionPane.CLOSED_OPTION) {
@@ -123,7 +125,7 @@ public class NamesInputController extends Controller {
 
       Main.getController(Views.ANCHORAGES)
           .showView();
-    } else if (Main.getDistribution() == Main.RANDOM_MIX) {
+    } else if (Main.getDistribution() == Constants.MIX_RANDOM) {
       // Random distribution
       ((ResultsController) Main.getController(Views.RESULTS)).setUp();
 
@@ -216,7 +218,7 @@ public class NamesInputController extends Controller {
                                         .equals(""))
                          .forEach(p -> {
                            if (wrapperCounter.counter != 0
-                               && Main.PLAYERS_PER_TEAM * 2 - wrapperCounter.counter != 0) {
+                               && Constants.PLAYERS_PER_TEAM * 2 - wrapperCounter.counter != 0) {
                              ((NamesInputView) getView()).getTextArea()
                                                          .append(System.lineSeparator());
                            }
@@ -241,11 +243,13 @@ public class NamesInputController extends Controller {
                                                     .length; i++) {
       if (selectedOption.equals(((NamesInputView) getView()).getComboBoxOptions()[i])) {
         ((NamesInputView) getView()).getTextFieldsMap()
-                                    .get(Main.getCorrespondingPosition(
+                                    .get(CommonFunctions.getCorrespondingPosition(
                                       Main.getPositionsMap(),
                                       selectedOption.toUpperCase()))
                                     .forEach(tf -> ((NamesInputView) getView()).getLeftPanel()
-                                                                               .add(tf, "growx"));
+                                                                               .add(
+                                                                                 tf, Constants.GROWX
+                                                                               ));
 
         break;
       }
@@ -313,7 +317,7 @@ public class NamesInputController extends Controller {
    * @return Whether the string matches the string validation regex or not.
    */
   private boolean validString(String string) {
-    return Pattern.matches(Main.REGEX_NAMES_VALIDATION, string);
+    return Pattern.matches(Constants.REGEX_NAMES_VALIDATION, string);
   }
 
   /**
@@ -327,7 +331,7 @@ public class NamesInputController extends Controller {
    *         the specified conditions.
    */
   private boolean validName(String name) {
-    return name.length() <= Main.MAX_NAME_LEN && !name.isBlank()
+    return name.length() <= Constants.MAX_NAME_LEN && !name.isBlank()
            && !name.isEmpty() && !alreadyExists(name);
   }
 }

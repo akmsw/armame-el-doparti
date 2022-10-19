@@ -2,9 +2,12 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFunctions;
+import armameeldoparti.utils.Constants;
 import armameeldoparti.utils.Error;
 import armameeldoparti.views.HelpView;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -36,8 +39,8 @@ public class HelpController extends Controller {
       7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.txt")
   );
 
-  private static final int PAGE_TITLE_INDEX = 0;
   private static final int PAGE_FILENAME_INDEX = 1;
+  private static final int PAGE_TITLE_INDEX = 0;
   private static final int TOTAL_PAGES = pagesMap.size();
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -138,17 +141,17 @@ public class HelpController extends Controller {
         new InputStreamReader(
           HelpController.class
                         .getClassLoader()
-                        .getResourceAsStream(Main.HELP_DOCS_PATH
+                        .getResourceAsStream(Constants.HELP_DOCS_PATH
                                              + pagesMap.get(pageNumber)
                                                        .get(PAGE_FILENAME_INDEX)),
           StandardCharsets.UTF_8)
     )) {
       ((HelpView) getView()).getTextArea()
                             .read(reader, null);
-    } catch (Exception e) {
+    } catch (IOException e) {
       e.printStackTrace();
 
-      Main.exitProgram(Error.INTERNAL_FILES_ERROR);
+      CommonFunctions.exitProgram(Error.INTERNAL_FILES_ERROR);
     }
   }
 

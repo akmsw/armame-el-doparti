@@ -152,7 +152,7 @@ public class BySkillsMixer implements PlayersMixer {
           if (teams.get(teamNumber)
                    .isPositionFull(p.getPosition())
               || teams.get(teamNumber)
-                      .getPlayersCount() + 1 > Main.PLAYERS_PER_TEAM) {
+                      .getPlayersCount() + 1 > Constants.PLAYERS_PER_TEAM) {
             teamNumber = 1;
           }
 

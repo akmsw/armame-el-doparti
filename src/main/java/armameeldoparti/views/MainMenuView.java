@@ -3,6 +3,7 @@ package armameeldoparti.views;
 import armameeldoparti.Main;
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.Constants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,8 +25,8 @@ public class MainMenuView extends View {
 
   // ---------------------------------------- Private constants ---------------------------------
 
-  private static final String GROWX = "growx";
-  private static final String FRAME_TITLE = Main.PROGRAM_TITLE + " " + Main.PROGRAM_VERSION;
+  private static final String FRAME_TITLE = Constants.PROGRAM_TITLE + " "
+                                            + Constants.PROGRAM_VERSION;
 
   // ---------------------------------------- Private fields ------------------------------------
 
@@ -55,7 +56,8 @@ public class MainMenuView extends View {
     setResizable(false);
     setTitle(FRAME_TITLE);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Main.ICON.getImage());
+    setIconImage(Constants.ICON
+                          .getImage());
     pack();
     setLocationRelativeTo(null);
   }
@@ -76,8 +78,8 @@ public class MainMenuView extends View {
         ((MainMenuController) Main.getController(Views.MAIN_MENU)).helpButtonEvent()
     );
 
-    masterPanel.add(startButton, GROWX);
-    masterPanel.add(helpButton, GROWX);
+    masterPanel.add(startButton, Constants.GROWX);
+    masterPanel.add(helpButton, Constants.GROWX);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -87,10 +89,11 @@ public class MainMenuView extends View {
    */
   private void addBackground() {
     ImageIcon bgImg = new ImageIcon(getClass().getClassLoader()
-                                              .getResource(Main.IMG_PATH + Main.BG_IMG_FILENAME));
+                                              .getResource(Constants.IMG_PATH
+                                                           + Constants.BG_IMG_FILENAME));
 
     JLabel bgLabel = new JLabel("", bgImg, SwingConstants.CENTER);
 
-    masterPanel.add(bgLabel, GROWX);
+    masterPanel.add(bgLabel, Constants.GROWX);
   }
 }

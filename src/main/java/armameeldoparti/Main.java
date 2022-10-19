@@ -10,6 +10,8 @@ import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Positions;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFunctions;
+import armameeldoparti.utils.Constants;
 import armameeldoparti.utils.Error;
 import armameeldoparti.views.AnchoragesView;
 import armameeldoparti.views.HelpView;
@@ -21,7 +23,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
-import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,8 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
@@ -49,102 +48,15 @@ import javax.swing.plaf.FontUIResource;
  */
 public final class Main {
 
-  // ---------------------------------------- Private constants ---------------------------------
-
-  /**
-   * Size, in pixels, of the scaled icon (height and width).
-   */
-  private static final int ICON_SCALE = 50;
-
-  private static final float FONT_SIZE = 18f;
-
-  private static final String ERROR_MESSAGE_TITLE = "¡Error!";
-  private static final String FONT_NAME = "comfortaa.ttf";
-  private static final String ICON_FILENAME = "icon.png";
-  private static final String TTF_PATH = "fonts/";
-
-  // ---------------------------------------- Public constants ----------------------------------
-
-  public static final int RANDOM_MIX = 0;
-  public static final int BY_SKILL_MIX = 1;
-  public static final int PLAYERS_PER_TEAM = 7;
-  public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
-  public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
-  public static final int MAX_NAME_LEN = 10;
-
-  /**
-   * Skill points spinners initial value.
-   */
-  public static final int SKILL_INI = 1;
-
-  /**
-   * Skill points spinners minimum value.
-   */
-  public static final int SKILL_MIN = 1;
-
-  /**
-   * Skill points spinners maximum value.
-   */
-  public static final int SKILL_MAX = 5;
-
-  /**
-   * Increment and decrement step in the skill points spinners.
-   */
-  public static final int SKILL_STEP = 1;
-
-  public static final String PROGRAM_TITLE = "Armame el doparti";
-  public static final String PROGRAM_VERSION = "v3.0";
-  public static final String BG_IMG_FILENAME = "bg.png";
-  public static final String IMG_PATH = "img/";
-  public static final String DOCS_PATH = "docs/";
-  public static final String HELP_DOCS_PATH = DOCS_PATH + "help/";
-  public static final String REGEX_NAMES_VALIDATION = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
-  public static final String REGEX_PLAYERS_AMOUNT = "(?!(?<=" + PLAYERS_PER_TEAM + ")\\d).";
-
-  public static final Color LIGHT_GREEN = new Color(176, 189, 162);
-  public static final Color MEDIUM_GREEN = new Color(109, 130, 118);
-  public static final Color DARK_GREEN = new Color(41, 71, 74);
-  public static final Color LIGHT_ORANGE = new Color(255, 238, 153);
-
-  /**
-   * Standard-size program icon.
-   */
-  public static final ImageIcon ICON = new ImageIcon(
-      Main.class
-          .getClassLoader()
-          .getResource(IMG_PATH + ICON_FILENAME)
-  );
-
-  /**
-   * Scaled program icon.
-   */
-  public static final ImageIcon SCALED_ICON = new ImageIcon(
-      ICON.getImage()
-          .getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH)
-  );
-
-  public static final Map<Error, Integer> errorCodes = Map.of(
-      Error.GUI_ERROR, -1,
-      Error.INTERNAL_FILES_ERROR, -2
-  );
-
-  public static final Map<Error, String> errorMessages = Map.of(
-      Error.GUI_ERROR, "ERROR DE INTERFAZ GRÁFICA",
-      Error.INTERNAL_FILES_ERROR, "ERROR DE LECTURA DE ARCHIVOS INTERNOS"
-  );
-
   // ---------------------------------------- Private fields ------------------------------------
 
   private static int distribution;
 
   private static boolean anchorages;
 
-  private static final String PDA_DATA_RETRIEVE_REGEX = "[CLMFG].+>.+";
-  private static final String PDA_FILENAME = "dist.pda";
-
   private static Map<Positions, Integer> playersAmountMap;
-  private static Map<Positions, String> positions;
   private static Map<Positions, List<Player>> playersSets;
+  private static Map<Positions, String> positions;
   private static Map<Views, Controller> controllersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -164,9 +76,9 @@ public final class Main {
    * @param args Program arguments (not used yet).
    */
   public static void main(String[] args) {
+    controllersMap = new EnumMap<>(Views.class);
     playersAmountMap = new EnumMap<>(Positions.class);
     positions = new EnumMap<>(Positions.class);
-    controllersMap = new EnumMap<>(Views.class);
 
     playersSets = new TreeMap<>();
 
@@ -183,47 +95,6 @@ public final class Main {
     setAnchorages(false);
 
     ((MainMenuController) getController(Views.MAIN_MENU)).showView();
-  }
-
-  // ---------------------------------------- Public methods ------------------------------------
-
-  /**
-   * Builds an error window with a custom message.
-   *
-   * @param errorMessage Custom error message to show.
-   */
-  public static final void showErrorMessage(String errorMessage) {
-    JOptionPane.showMessageDialog(null, errorMessage, ERROR_MESSAGE_TITLE,
-                                  JOptionPane.ERROR_MESSAGE, null);
-  }
-
-  /**
-   * Gets the valueToSearch corresponding position in a generic map received.
-   *
-   * @param map           Generic map with positions as keys.
-   * @param valueToSearch Value to search in the map.
-   *
-   * @return The value-to-search corresponding position.
-   */
-  public static <T> Positions getCorrespondingPosition(Map<Positions, T> map, T valueToSearch) {
-    return (Positions) map.entrySet()
-                          .stream()
-                          .filter(e -> e.getValue()
-                                        .equals(valueToSearch))
-                          .map(Map.Entry::getKey)
-                          .toArray()[0];
-  }
-
-  /**
-   * Exits the program with the corresponding error message
-   * and error code according to the occurred exception.
-   *
-   * @param e The error that causes the program to end.
-   */
-  public static void exitProgram(Error e) {
-    showErrorMessage(errorMessages.get(e));
-
-    System.exit(errorCodes.get(e));
   }
 
   // ---------------------------------------- Getters -------------------------------------------
@@ -385,7 +256,8 @@ public final class Main {
     BufferedReader buff = new BufferedReader(
         new InputStreamReader(Main.class
                                   .getClassLoader()
-                                  .getResourceAsStream(DOCS_PATH + PDA_FILENAME))
+                                  .getResourceAsStream(Constants.DOCS_PATH
+                                                       + Constants.PDA_FILENAME))
     );
 
     var wrapperIndex = new Object() {
@@ -394,9 +266,10 @@ public final class Main {
 
     buff.lines()
         .forEach(l -> {
-          if (l.matches(PDA_DATA_RETRIEVE_REGEX)) {
+          if (l.matches(Constants.PDA_DATA_RETRIEVE_REGEX)) {
             getPlayersAmountMap().put(Positions.values()[wrapperIndex.index],
-                                      Integer.parseInt(l.replaceAll(REGEX_PLAYERS_AMOUNT, "")));
+                                      Integer.parseInt(l.replaceAll(Constants.REGEX_PLAYERS_AMOUNT,
+                                                                    "")));
 
             wrapperIndex.index++;
           }
@@ -407,15 +280,15 @@ public final class Main {
    * Sets up the program's GUI properties.
    */
   private static final void setGraphicalProperties() {
-    UIManager.put("OptionPane.background", LIGHT_GREEN);
-    UIManager.put("Panel.background", LIGHT_GREEN);
-    UIManager.put("CheckBox.background", LIGHT_GREEN);
-    UIManager.put("Separator.background", LIGHT_GREEN);
-    UIManager.put("CheckBox.focus", LIGHT_GREEN);
-    UIManager.put("Button.background", DARK_GREEN);
-    UIManager.put("Button.focus", DARK_GREEN);
-    UIManager.put("ToggleButton.focus", DARK_GREEN);
-    UIManager.put("TitledBorder.border", new LineBorder(DARK_GREEN));
+    UIManager.put("OptionPane.background", Constants.LIGHT_GREEN);
+    UIManager.put("Panel.background", Constants.LIGHT_GREEN);
+    UIManager.put("CheckBox.background", Constants.LIGHT_GREEN);
+    UIManager.put("Separator.background", Constants.LIGHT_GREEN);
+    UIManager.put("CheckBox.focus", Constants.LIGHT_GREEN);
+    UIManager.put("Button.background", Constants.DARK_GREEN);
+    UIManager.put("Button.focus", Constants.DARK_GREEN);
+    UIManager.put("ToggleButton.focus", Constants.DARK_GREEN);
+    UIManager.put("TitledBorder.border", new LineBorder(Constants.DARK_GREEN));
     UIManager.put("Button.foreground", Color.WHITE);
     UIManager.put("ComboBox.focus", Color.WHITE);
 
@@ -424,8 +297,9 @@ public final class Main {
       Font programFont = Font.createFont(Font.TRUETYPE_FONT,
                                          Main.class
                                              .getClassLoader()
-                                             .getResourceAsStream(TTF_PATH + FONT_NAME))
-                                             .deriveFont(FONT_SIZE);
+                                             .getResourceAsStream(Constants.TTF_PATH
+                                                                  + Constants.FONT_NAME))
+                                             .deriveFont(Constants.FONT_SIZE);
 
       GraphicsEnvironment.getLocalGraphicsEnvironment()
                          .registerFont(programFont);
@@ -434,7 +308,7 @@ public final class Main {
     } catch (IOException | FontFormatException e) {
       e.printStackTrace();
 
-      exitProgram(Error.GUI_ERROR);
+      CommonFunctions.exitProgram(Error.GUI_ERROR);
     }
   }
 
