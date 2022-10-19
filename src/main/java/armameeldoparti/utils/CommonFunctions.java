@@ -26,6 +26,20 @@ public class CommonFunctions {
   // ---------------------------------------- Public methods ------------------------------------
 
   /**
+   * Exits the program with the corresponding error message
+   * and error code according to the occurred exception.
+   *
+   * @param e The error that caused the program to end.
+   */
+  public static final void exitProgram(Error e) {
+    showErrorMessage(Constants.errorMessages
+                              .get(e));
+
+    System.exit(Constants.errorCodes
+                         .get(e));
+  }
+
+  /**
    * Builds an error window with a custom message.
    *
    * @param errorMessage Custom error message to show.
@@ -50,19 +64,5 @@ public class CommonFunctions {
                                         .equals(search))
                           .map(Map.Entry::getKey)
                           .toArray()[0];
-  }
-
-  /**
-   * Exits the program with the corresponding error message
-   * and error code according to the occurred exception.
-   *
-   * @param e The error that caused the program to end.
-   */
-  public static final void exitProgram(Error e) {
-    showErrorMessage(Constants.errorMessages
-                              .get(e));
-
-    System.exit(Constants.errorCodes
-                         .get(e));
   }
 }
