@@ -7,6 +7,7 @@ import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import armameeldoparti.views.AnchoragesView;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
@@ -311,7 +312,7 @@ public class AnchoragesController extends Controller {
    * If the anchorage number to delete is not the last one,
    * then the remaining players (from the chosen anchor + 1
    * to anchoragesAmount) will have their anchorage number
-   * decremented by 1.
+   * decreased by 1.
    *
    * @param anchorageToDelete Anchorage number to delete.
    */
@@ -333,7 +334,7 @@ public class AnchoragesController extends Controller {
    * <p>If the replacement is 0 (an anchorage must be removed), then
    * those players will be set as unanchored, the players corresponding
    * checkboxes will be visible and enabled again, and the anchored players
-   * amount will be decremented as needed.
+   * amount will be decreased as needed.
    *
    * @param target      Anchorage number to replace.
    * @param replacement New anchorage number to set.
@@ -356,10 +357,11 @@ public class AnchoragesController extends Controller {
                                         .flatMap(List::stream)
                                         .filter(cb -> cb.getText()
                                                         .equals(p.getName()))
-                                        .forEach(cb -> {
-                                          cb.setVisible(true);
-                                          anchoredPlayersAmount--;
-                                        });
+                                        .collect(Collectors.toList())
+                                        .get(0)
+                                        .setVisible(true);
+
+            anchoredPlayersAmount--;
           }
         });
   }
