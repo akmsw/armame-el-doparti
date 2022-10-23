@@ -1,7 +1,11 @@
 package armameeldoparti.utils;
 
+import armameeldoparti.Main;
+import armameeldoparti.models.Player;
 import armameeldoparti.models.Positions;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +18,7 @@ import javax.swing.JOptionPane;
  * @since 18/10/2022
  */
 public class CommonFunctions {
+
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -47,6 +52,25 @@ public class CommonFunctions {
   public static final void showErrorMessage(String errorMessage) {
     JOptionPane.showMessageDialog(null, errorMessage, Constants.ERROR_MESSAGE_TITLE,
                                   JOptionPane.ERROR_MESSAGE, null);
+  }
+
+  /**
+   * Gets a list containing the anchored players
+   * grouped by their anchorage number.
+   *
+   * @return A list containing the anchored players
+   *         grouped by their anchorage number.
+  */
+  public static final List<List<Player>> getAnchoredPlayers() {
+    return Main.getPlayersSets()
+               .values()
+               .stream()
+               .flatMap(List::stream)
+               .filter(Player::isAnchored)
+               .collect(Collectors.groupingBy(Player::getAnchorageNumber))
+               .values()
+               .stream()
+               .collect(Collectors.toList());
   }
 
   /**

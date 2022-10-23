@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.naming.InvalidNameException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  * Names input view controller class.
@@ -237,28 +238,30 @@ public class NamesInputController extends Controller {
    * @param selectedOption Combobox selected option.
    */
   private void updateTextFields(String selectedOption) {
-    clearLeftPanel();
+    JPanel leftPanel = ((NamesInputView) getView()).getLeftPanel();
+
+    // Removes the text fields from the view's left panel.
+    ((NamesInputView) getView()).getTextFieldsMap()
+                                .values()
+                                .stream()
+                                .flatMap(Collection::stream)
+                                .filter(tf -> tf.getParent() == leftPanel)
+                                .forEach(leftPanel::remove);
 
     for (int i = 0; i < ((NamesInputView) getView()).getComboBoxOptions()
                                                     .length; i++) {
       if (selectedOption.equals(((NamesInputView) getView()).getComboBoxOptions()[i])) {
         ((NamesInputView) getView()).getTextFieldsMap()
                                     .get(CommonFunctions.getCorrespondingPosition(
-                                      Main.getPositionsMap(),
-                                      selectedOption.toUpperCase()))
-                                    .forEach(tf -> ((NamesInputView) getView()).getLeftPanel()
-                                                                               .add(
-                                                                                 tf, Constants.GROWX
-                                                                               ));
+                                      Main.getPositionsMap(), selectedOption.toUpperCase()))
+                                    .forEach(tf -> leftPanel.add(tf, Constants.GROWX));
 
         break;
       }
     }
 
-    ((NamesInputView) getView()).getLeftPanel()
-                                .revalidate();
-    ((NamesInputView) getView()).getLeftPanel()
-                                .repaint();
+    leftPanel.revalidate();
+    leftPanel.repaint();
   }
 
   /**
@@ -277,20 +280,6 @@ public class NamesInputController extends Controller {
         player.setName("");
       }
     }
-  }
-
-  /**
-   * Removes the text fields from the view's left panel.
-   */
-  private void clearLeftPanel() {
-    ((NamesInputView) getView()).getTextFieldsMap()
-                                .values()
-                                .stream()
-                                .flatMap(Collection::stream)
-                                .filter(tf -> tf.getParent()
-                                              == ((NamesInputView) getView()).getLeftPanel())
-                                .forEach(tf -> ((NamesInputView) getView()).getLeftPanel()
-                                                                           .remove(tf));
   }
 
   /**
@@ -331,7 +320,7 @@ public class NamesInputController extends Controller {
    *         the specified conditions.
    */
   private boolean validName(String name) {
-    return name.length() <= Constants.MAX_NAME_LEN && !name.isBlank()
-           && !name.isEmpty() && !alreadyExists(name);
+    return name.length() <= Constants.MAX_NAME_LEN
+           && !(name.isBlank() || name.isEmpty() || alreadyExists(name));
   }
 }

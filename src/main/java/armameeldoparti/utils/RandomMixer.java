@@ -112,7 +112,7 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    List<List<Player>> anchoredPlayers = Main.getAnchoredPlayers();
+    List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
 
     for (List<Player> aps : anchoredPlayers) {
       updateTeamNumbers(teams.size());

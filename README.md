@@ -7,7 +7,6 @@
 
 [![buildBadge](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
 [![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
-[![locBadge](https://img.shields.io/badge/LOC-%2B3.3k-lightgrey)](https://en.wikipedia.org/wiki/Source_lines_of_code)
 
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle10.3.4-passing-brightgreen)](https://checkstyle.sourceforge.io/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-1-yellow?logo=sonarlint)](https://www.sonarlint.org/)
