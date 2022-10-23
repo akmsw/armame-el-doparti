@@ -274,12 +274,11 @@ public class NamesInputController extends Controller {
                                 .flatMap(List::stream)
                                 .forEach(tf -> tf.setText(null));
 
-    for (List<Player> playersSet : Main.getPlayersSets()
-                                       .values()) {
-      for (Player player : playersSet) {
-        player.setName("");
-      }
-    }
+    Main.getPlayersSets()
+        .values()
+        .stream()
+        .flatMap(List::stream)
+        .forEach(p -> p.setName(""));
   }
 
   /**
