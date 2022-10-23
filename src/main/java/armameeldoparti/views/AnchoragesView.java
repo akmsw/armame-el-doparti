@@ -3,7 +3,7 @@ package armameeldoparti.views;
 import armameeldoparti.Main;
 import armameeldoparti.controllers.AnchoragesController;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.Constants;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class AnchoragesView extends View {
   private List<JCheckBox> gkCheckboxes;
   private List<JButton> anchorageButtons;
 
-  private Map<Positions, List<JCheckBox>> checkBoxesMap;
+  private Map<Position, List<JCheckBox>> checkBoxesMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -76,13 +76,13 @@ public class AnchoragesView extends View {
     gkCheckboxes = new ArrayList<>();
     anchorageButtons = new ArrayList<>();
 
-    checkBoxesMap = new EnumMap<>(Positions.class);
+    checkBoxesMap = new EnumMap<>(Position.class);
 
-    checkBoxesMap.put(Positions.CENTRAL_DEFENDER, cdCheckboxes);
-    checkBoxesMap.put(Positions.LATERAL_DEFENDER, ldCheckboxes);
-    checkBoxesMap.put(Positions.MIDFIELDER, mfCheckboxes);
-    checkBoxesMap.put(Positions.FORWARD, fwCheckboxes);
-    checkBoxesMap.put(Positions.GOALKEEPER, gkCheckboxes);
+    checkBoxesMap.put(Position.CENTRAL_DEFENDER, cdCheckboxes);
+    checkBoxesMap.put(Position.LATERAL_DEFENDER, ldCheckboxes);
+    checkBoxesMap.put(Position.MIDFIELDER, mfCheckboxes);
+    checkBoxesMap.put(Position.FORWARD, fwCheckboxes);
+    checkBoxesMap.put(Position.GOALKEEPER, gkCheckboxes);
 
     initializeInterface();
   }
@@ -93,7 +93,7 @@ public class AnchoragesView extends View {
    * Updates the checkboxes text with the players names.
    */
   public void updateCheckBoxesText() {
-    for (Positions position : Positions.values()) {
+    for (Position position : Position.values()) {
       for (int i = 0; i < Main.getPlayersSets()
                               .get(position)
                               .size(); i++) {
@@ -177,7 +177,7 @@ public class AnchoragesView extends View {
    *
    * @return The map that associates each checkboxes list with its corresponding position.
    */
-  public Map<Positions, List<JCheckBox>> getCheckBoxesMap() {
+  public Map<Position, List<JCheckBox>> getCheckBoxesMap() {
     return checkBoxesMap;
   }
 
@@ -208,7 +208,7 @@ public class AnchoragesView extends View {
     Main.getPlayersSets()
         .entrySet()
         .forEach(ps -> {
-          final Positions currentPosition = ps.getValue()
+          final Position currentPosition = ps.getValue()
                                               .get(0)
                                               .getPosition();
 

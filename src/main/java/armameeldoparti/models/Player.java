@@ -21,7 +21,7 @@ public class Player {
 
   private String name;
 
-  private Positions position;
+  private Position position;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -31,7 +31,7 @@ public class Player {
    * @param name     Player name.
    * @param position Player position.
    */
-  public Player(String name, Positions position) {
+  public Player(String name, Position position) {
     setName(name);
     setSkillPoints(0);
     setAnchorageNumber(0);
@@ -94,7 +94,7 @@ public class Player {
    *
    * @return The player's position.
    */
-  public Positions getPosition() {
+  public Position getPosition() {
     return position;
   }
 
@@ -150,7 +150,7 @@ public class Player {
    *
    * @param position The player's new position.
    */
-  public void setPosition(Positions position) {
+  public void setPosition(Position position) {
     this.position = position;
   }
 }

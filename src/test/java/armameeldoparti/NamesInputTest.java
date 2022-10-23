@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
 import java.util.List;
 import java.util.stream.Stream;
@@ -54,7 +54,7 @@ class NamesInputTest {
   @ValueSource(strings = { "", "123", "!a._,|°}zY", "nam3" })
   void invalidStringsShouldThrowException(String invalidString) {
     List<Player> playersSet = Main.getPlayersSets()
-                                  .get(Positions.CENTRAL_DEFENDER);
+                                  .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
         (NamesInputController) Main.getController(Views.NAMES_INPUT)
@@ -76,7 +76,7 @@ class NamesInputTest {
   @ValueSource(strings = { "   ", "thisNameIsTooLong" })
   void invalidNamesShouldThrowException(String invalidName) {
     List<Player> playersSet = Main.getPlayersSets()
-                                  .get(Positions.CENTRAL_DEFENDER);
+                                  .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
         (NamesInputController) Main.getController(Views.NAMES_INPUT)
@@ -99,10 +99,10 @@ class NamesInputTest {
   @ParameterizedTest
   @MethodSource("repeatedParamsProvider")
   void repeatedNamesShouldThrowException(int playerIndex,
-                                         Positions playerPosition,
+                                         Position playerPosition,
                                          String playerName) {
     List<Player> playersSet = Main.getPlayersSets()
-                                  .get(Positions.CENTRAL_DEFENDER);
+                                  .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
         (NamesInputController) Main.getController(Views.NAMES_INPUT)
@@ -128,7 +128,7 @@ class NamesInputTest {
   @DisplayName("Tests whether valid names are correctly stored as players names")
   @ParameterizedTest
   @MethodSource("validParamsProvider")
-  void validNamesShouldPass(int playerIndex, Positions playerPosition, String playerName)
+  void validNamesShouldPass(int playerIndex, Position playerPosition, String playerName)
                             throws IllegalArgumentException,
                                    InvalidNameException {
     List<Player> playersSet = Main.getPlayersSets()
@@ -155,8 +155,8 @@ class NamesInputTest {
    */
   static Stream<Arguments> repeatedParamsProvider() {
     return Stream.of(
-      Arguments.of(0, Positions.CENTRAL_DEFENDER, "PLAYER A"),
-      Arguments.of(1, Positions.MIDFIELDER, "PLAYER A")
+      Arguments.of(0, Position.CENTRAL_DEFENDER, "PLAYER A"),
+      Arguments.of(1, Position.MIDFIELDER, "PLAYER A")
     );
   }
 
@@ -167,20 +167,20 @@ class NamesInputTest {
    */
   static Stream<Arguments> validParamsProvider() {
     return Stream.of(
-      Arguments.of(0, Positions.CENTRAL_DEFENDER, "PLAYER A"),
-      Arguments.of(1, Positions.CENTRAL_DEFENDER, "PLAYER B"),
-      Arguments.of(0, Positions.LATERAL_DEFENDER, "PLAYER C"),
-      Arguments.of(1, Positions.LATERAL_DEFENDER, "PLAYER D"),
-      Arguments.of(2, Positions.LATERAL_DEFENDER, "PLAYER E"),
-      Arguments.of(3, Positions.LATERAL_DEFENDER, "PLAYER F"),
-      Arguments.of(0, Positions.MIDFIELDER, "PLAYER G"),
-      Arguments.of(1, Positions.MIDFIELDER, "PLAYER H"),
-      Arguments.of(2, Positions.MIDFIELDER, "PLAYER I"),
-      Arguments.of(3, Positions.MIDFIELDER, "PLAYER J"),
-      Arguments.of(0, Positions.FORWARD, "PLAYER K"),
-      Arguments.of(1, Positions.FORWARD, "PLAYER L"),
-      Arguments.of(0, Positions.GOALKEEPER, "PLAYER M"),
-      Arguments.of(1, Positions.GOALKEEPER, "PLAYER N")
+      Arguments.of(0, Position.CENTRAL_DEFENDER, "PLAYER A"),
+      Arguments.of(1, Position.CENTRAL_DEFENDER, "PLAYER B"),
+      Arguments.of(0, Position.LATERAL_DEFENDER, "PLAYER C"),
+      Arguments.of(1, Position.LATERAL_DEFENDER, "PLAYER D"),
+      Arguments.of(2, Position.LATERAL_DEFENDER, "PLAYER E"),
+      Arguments.of(3, Position.LATERAL_DEFENDER, "PLAYER F"),
+      Arguments.of(0, Position.MIDFIELDER, "PLAYER G"),
+      Arguments.of(1, Position.MIDFIELDER, "PLAYER H"),
+      Arguments.of(2, Position.MIDFIELDER, "PLAYER I"),
+      Arguments.of(3, Position.MIDFIELDER, "PLAYER J"),
+      Arguments.of(0, Position.FORWARD, "PLAYER K"),
+      Arguments.of(1, Position.FORWARD, "PLAYER L"),
+      Arguments.of(0, Position.GOALKEEPER, "PLAYER M"),
+      Arguments.of(1, Position.GOALKEEPER, "PLAYER N")
     );
   }
 }

@@ -2,7 +2,7 @@ package armameeldoparti.views;
 
 import armameeldoparti.Main;
 import armameeldoparti.controllers.NamesInputController;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
@@ -60,7 +60,7 @@ public class NamesInputView extends View {
 
   private JTextArea textArea;
 
-  private Map<Positions, List<JTextField>> textFieldsMap;
+  private Map<Position, List<JTextField>> textFieldsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -68,9 +68,9 @@ public class NamesInputView extends View {
    * Builds the names input view.
    */
   public NamesInputView() {
-    textFieldsMap = new EnumMap<>(Positions.class);
+    textFieldsMap = new EnumMap<>(Position.class);
 
-    for (Positions position : Positions.values()) {
+    for (Position position : Position.values()) {
       textFieldsMap.put(position, new ArrayList<>());
     }
 
@@ -142,7 +142,7 @@ public class NamesInputView extends View {
    * @return The map that associates each text fields set with its
    *         corresponding position.
    */
-  public Map<Positions, List<JTextField>> getTextFieldsMap() {
+  public Map<Position, List<JTextField>> getTextFieldsMap() {
     return textFieldsMap;
   }
 
@@ -244,7 +244,7 @@ public class NamesInputView extends View {
    * Builds, stores and configures each position text fields.
    */
   private void addTextFields() {
-    for (Positions position : Positions.values()) {
+    for (Position position : Position.values()) {
       for (int i = 0; i < Main.getPlayersAmountMap()
                               .get(position) * 2; i++) {
         JTextField tf = new JTextField();

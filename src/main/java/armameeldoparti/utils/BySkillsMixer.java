@@ -2,7 +2,7 @@ package armameeldoparti.utils;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,11 +59,11 @@ public class BySkillsMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    List<Positions> reversedEnum = Arrays.asList(Positions.values());
+    List<Position> reversedEnum = Arrays.asList(Position.values());
 
     Collections.reverse(reversedEnum);
 
-    for (Positions position : reversedEnum) {
+    for (Position position : reversedEnum) {
       List<Player> currentSet = Main.getPlayersSets()
                                     .get(position);
 
@@ -179,7 +179,7 @@ public class BySkillsMixer implements PlayersMixer {
    * @param playersSet Current working players set.
    * @param position   Current working players position.
    */
-  private void distributeSubsets(List<Team> teams, List<Player> playersSet, Positions position) {
+  private void distributeSubsets(List<Team> teams, List<Player> playersSet, Position position) {
     List<Player> outerSubset = new ArrayList<>();
     List<Player> innerSubset = new ArrayList<>();
 

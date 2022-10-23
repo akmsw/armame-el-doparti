@@ -2,7 +2,7 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.BySkillsMixer;
@@ -164,7 +164,7 @@ public class ResultsController extends Controller {
     };
 
     teams.forEach(team -> {
-      Arrays.stream(Positions.values())
+      Arrays.stream(Position.values())
             .forEach(position ->
               team.getPlayers()
                   .get(position)
@@ -324,19 +324,19 @@ public class ResultsController extends Controller {
       if (i == 1) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(Main.getPositionsMap()
-                                                 .get(Positions.CENTRAL_DEFENDER), i, 0);
+                                                 .get(Position.CENTRAL_DEFENDER), i, 0);
       } else if (i < 4) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(Main.getPositionsMap()
-                                                 .get(Positions.LATERAL_DEFENDER), i, 0);
+                                                 .get(Position.LATERAL_DEFENDER), i, 0);
       } else if (i < 6) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(Main.getPositionsMap()
-                                                 .get(Positions.MIDFIELDER), i, 0);
+                                                 .get(Position.MIDFIELDER), i, 0);
       } else if (i < 7) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(Main.getPositionsMap()
-                                                 .get(Positions.FORWARD), i, 0);
+                                                 .get(Position.FORWARD), i, 0);
       }
     }
 
@@ -344,7 +344,7 @@ public class ResultsController extends Controller {
       for (int i = 0; i < 2; i++) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(i == 0 ? Main.getPositionsMap()
-                                                          .get(Positions.GOALKEEPER)
+                                                          .get(Position.GOALKEEPER)
                                                     : "PUNTAJE DEL EQUIPO",
                                              ((ResultsView) getView()).getTable()
                                                                       .getRowCount() + i - 2, 0);
@@ -352,7 +352,7 @@ public class ResultsController extends Controller {
     } else {
       ((ResultsView) getView()).getTable()
                                .setValueAt(Main.getPositionsMap()
-                                               .get(Positions.GOALKEEPER),
+                                               .get(Position.GOALKEEPER),
                                            ((ResultsView) getView()).getTable()
                                                                     .getRowCount() - 1, 0);
     }

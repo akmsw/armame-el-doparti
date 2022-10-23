@@ -8,7 +8,7 @@ import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.controllers.ResultsController;
 import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
@@ -53,9 +53,9 @@ public final class Main {
 
   private static boolean anchorages;
 
-  private static Map<Positions, Integer> playersAmountMap;
-  private static Map<Positions, List<Player>> playersSets;
-  private static Map<Positions, String> positions;
+  private static Map<Position, Integer> playersAmountMap;
+  private static Map<Position, List<Player>> playersSets;
+  private static Map<Position, String> positions;
   private static Map<Views, Controller> controllersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -76,16 +76,16 @@ public final class Main {
    */
   public static void main(String[] args) {
     controllersMap = new EnumMap<>(Views.class);
-    playersAmountMap = new EnumMap<>(Positions.class);
-    positions = new EnumMap<>(Positions.class);
+    playersAmountMap = new EnumMap<>(Position.class);
+    positions = new EnumMap<>(Position.class);
 
     playersSets = new TreeMap<>();
 
-    positions.put(Positions.CENTRAL_DEFENDER, "DEFENSORES CENTRALES");
-    positions.put(Positions.LATERAL_DEFENDER, "DEFENSORES LATERALES");
-    positions.put(Positions.MIDFIELDER, "MEDIOCAMPISTAS");
-    positions.put(Positions.FORWARD, "DELANTEROS");
-    positions.put(Positions.GOALKEEPER, "ARQUEROS");
+    positions.put(Position.CENTRAL_DEFENDER, "DEFENSORES CENTRALES");
+    positions.put(Position.LATERAL_DEFENDER, "DEFENSORES LATERALES");
+    positions.put(Position.MIDFIELDER, "MEDIOCAMPISTAS");
+    positions.put(Position.FORWARD, "DELANTEROS");
+    positions.put(Position.GOALKEEPER, "ARQUEROS");
 
     setGraphicalProperties();
     getPlayersDistributionData();
@@ -121,7 +121,7 @@ public final class Main {
    *
    * @return The map that contains the total amount of players for each position.
    */
-  public static Map<Positions, Integer> getPlayersAmountMap() {
+  public static Map<Position, Integer> getPlayersAmountMap() {
     return playersAmountMap;
   }
 
@@ -130,7 +130,7 @@ public final class Main {
    *
    * @return The map that associates each players set with its corresponding position.
    */
-  public static Map<Positions, List<Player>> getPlayersSets() {
+  public static Map<Position, List<Player>> getPlayersSets() {
     return playersSets;
   }
 
@@ -139,7 +139,7 @@ public final class Main {
    *
    * @return The map that associates each position with its string representation.
    */
-  public static Map<Positions, String> getPositionsMap() {
+  public static Map<Position, String> getPositionsMap() {
     return positions;
   }
 
@@ -180,7 +180,7 @@ public final class Main {
    * Populates the players sets with empty players.
    */
   private static final void populatePlayersSets() {
-    for (Positions position : Positions.values()) {
+    for (Position position : Position.values()) {
       List<Player> playersSet = new ArrayList<>();
 
       for (int i = 0; i < playersAmountMap.get(position) * 2; i++) {
@@ -248,7 +248,7 @@ public final class Main {
     buff.lines()
         .forEach(l -> {
           if (l.matches(Constants.PDA_DATA_RETRIEVE_REGEX)) {
-            getPlayersAmountMap().put(Positions.values()[wrapperIndex.index],
+            getPlayersAmountMap().put(Position.values()[wrapperIndex.index],
                                       Integer.parseInt(l.replaceAll(Constants.REGEX_PLAYERS_AMOUNT,
                                                                     "")));
 

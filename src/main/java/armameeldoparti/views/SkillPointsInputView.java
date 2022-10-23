@@ -3,7 +3,7 @@ package armameeldoparti.views;
 import armameeldoparti.Main;
 import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.Constants;
 import java.util.HashMap;
@@ -79,7 +79,7 @@ public class SkillPointsInputView extends View {
    * Updates the labels with the players names.
    */
   public void updateNameLabels() {
-    for (Positions position : Positions.values()) {
+    for (Position position : Position.values()) {
       for (Player player : Main.getPlayersSets()
                                .get(position)) {
         labelsMap.get(spinnersMap.get(player))
@@ -134,7 +134,7 @@ public class SkillPointsInputView extends View {
    * Adds the spinners to their corresponding panel.
    */
   private void addSpinners() {
-    for (Positions position : Positions.values()) {
+    for (Position position : Position.values()) {
       JLabel positionLabel = new JLabel(Main.getPositionsMap()
                                             .get(position));
 

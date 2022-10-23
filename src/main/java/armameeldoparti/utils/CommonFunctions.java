@@ -2,7 +2,7 @@ package armameeldoparti.utils;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -81,12 +81,13 @@ public class CommonFunctions {
    *
    * @return The value-to-search corresponding position.
    */
-  public static final <T> Positions getCorrespondingPosition(Map<Positions, T> map, T search) {
-    return (Positions) map.entrySet()
-                          .stream()
-                          .filter(e -> e.getValue()
-                                        .equals(search))
-                          .map(Map.Entry::getKey)
-                          .toArray()[0];
+  public static final <T> Position getCorrespondingPosition(Map<Position, T> map, T search) {
+    return map.entrySet()
+              .stream()
+              .filter(e -> e.getValue()
+                            .equals(search))
+              .map(Map.Entry::getKey)
+              .collect(Collectors.toList())
+              .get(0);
   }
 }

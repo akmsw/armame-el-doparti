@@ -2,7 +2,7 @@ package armameeldoparti.utils;
 
 import armameeldoparti.Main;
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Positions;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class RandomMixer implements PlayersMixer {
 
     List<Integer> alreadySetted = new ArrayList<>();
 
-    for (Positions position : Positions.values()) {
+    for (Position position : Position.values()) {
       List<Player> playersSet = Main.getPlayersSets()
                                     .get(position);
 
