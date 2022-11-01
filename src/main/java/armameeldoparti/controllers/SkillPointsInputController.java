@@ -1,7 +1,8 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.Main;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFields;
+import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import armameeldoparti.views.SkillPointsInputView;
 
@@ -51,10 +52,10 @@ public class SkillPointsInputController extends Controller {
     ((SkillPointsInputView) getView()).getSpinnersMap()
                                       .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
 
-    ((ResultsController) Main.getController(Views.RESULTS)).setUp();
+    ((ResultsController) CommonFunctions.getController(Views.RESULTS)).setUp();
 
-    Main.getController(Views.RESULTS)
-        .showView();
+    CommonFunctions.getController(Views.RESULTS)
+                   .showView();
   }
 
   /**
@@ -76,8 +77,9 @@ public class SkillPointsInputController extends Controller {
   public void backButtonEvent() {
     resetView();
 
-    Main.getController(Main.thereAreAnchorages() ? Views.ANCHORAGES : Views.NAMES_INPUT)
-        .showView();
+    CommonFunctions.getController(CommonFields.thereAreAnchorages() ? Views.ANCHORAGES
+                                                                    : Views.NAMES_INPUT)
+                   .showView();
   }
 
   /**
@@ -85,6 +87,7 @@ public class SkillPointsInputController extends Controller {
    */
   public void updateNameLabels() {
     ((SkillPointsInputView) getView()).updateNameLabels();
+
     getView().pack();
   }
 

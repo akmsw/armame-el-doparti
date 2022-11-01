@@ -1,6 +1,5 @@
 package armameeldoparti.utils;
 
-import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
@@ -58,8 +57,8 @@ public class RandomMixer implements PlayersMixer {
     List<Integer> alreadySetted = new ArrayList<>();
 
     for (Position position : Position.values()) {
-      List<Player> playersSet = Main.getPlayersSets()
-                                    .get(position);
+      List<Player> playersSet = CommonFields.getPlayersSets()
+                                            .get(position);
 
       for (int i = 0; i < playersSet.size() / 2; i++) {
         updateIndex(playersSet.size(), alreadySetted);
@@ -129,30 +128,30 @@ public class RandomMixer implements PlayersMixer {
       }
     }
 
-    Main.getPlayersSets()
-        .values()
-        .stream()
-        .flatMap(List::stream)
-        .filter(p -> p.getTeamNumber() == 0)
-        .forEach(p -> {
-          updateTeamNumbers(teams.size());
+    CommonFields.getPlayersSets()
+                .values()
+                .stream()
+                .flatMap(List::stream)
+                .filter(p -> p.getTeamNumber() == 0)
+                .forEach(p -> {
+                  updateTeamNumbers(teams.size());
 
-          int teamNumber = randomTeam1;
+                  int teamNumber = randomTeam1;
 
-          if (teams.get(teamNumber)
-                   .isPositionFull(p.getPosition())
-              || teams.get(teamNumber)
-                      .getPlayersCount() + 1 > Constants.PLAYERS_PER_TEAM) {
-            teamNumber = randomTeam2;
-          }
+                  if (teams.get(teamNumber)
+                           .isPositionFull(p.getPosition())
+                      || teams.get(teamNumber)
+                              .getPlayersCount() + 1 > Constants.PLAYERS_PER_TEAM) {
+                    teamNumber = randomTeam2;
+                  }
 
-          p.setTeamNumber(teamNumber + 1);
+                  p.setTeamNumber(teamNumber + 1);
 
-          teams.get(teamNumber)
-               .getPlayers()
-               .get(p.getPosition())
-               .add(p);
-        });
+                  teams.get(teamNumber)
+                       .getPlayers()
+                       .get(p.getPosition())
+                       .add(p);
+                });
 
     return teams;
   }
@@ -208,7 +207,7 @@ public class RandomMixer implements PlayersMixer {
                                                                    ap.getPosition()
                                                                    == p.getPosition())
                                                                  .count()
-                                                > Main.getPlayersAmountMap()
-                                                      .get(p.getPosition()));
+                                                > CommonFields.getPlayersAmountMap()
+                                                              .get(p.getPosition()));
   }
 }

@@ -1,10 +1,11 @@
 package armameeldoparti.views;
 
-import armameeldoparti.Main;
 import armameeldoparti.controllers.AnchoragesController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFields;
+import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -94,15 +95,15 @@ public class AnchoragesView extends View {
    */
   public void updateCheckBoxesText() {
     for (Position position : Position.values()) {
-      for (int i = 0; i < Main.getPlayersSets()
-                              .get(position)
-                              .size(); i++) {
+      for (int i = 0; i < CommonFields.getPlayersSets()
+                                      .get(position)
+                                      .size(); i++) {
         checkBoxesMap.get(position)
                      .get(i)
-                     .setText(Main.getPlayersSets()
-                                  .get(position)
-                                  .get(i)
-                                  .getName());
+                     .setText(CommonFields.getPlayersSets()
+                                          .get(position)
+                                          .get(i)
+                                          .getName());
       }
     }
   }
@@ -200,22 +201,23 @@ public class AnchoragesView extends View {
               .setUI(new BasicScrollBarUI() {
                 @Override
                 protected void configureScrollBarColors() {
-                  this.thumbColor = Constants.DARK_GREEN;
-                  this.trackColor = Constants.MEDIUM_GREEN;
+                  this.thumbColor = Constants.GREEN_DARK;
+                  this.trackColor = Constants.GREEN_MEDIUM;
                 }
               });
 
-    Main.getPlayersSets()
-        .entrySet()
-        .forEach(ps -> {
-          final Position currentPosition = ps.getValue()
-                                              .get(0)
-                                              .getPosition();
+    CommonFields.getPlayersSets()
+                .entrySet()
+                .forEach(ps -> {
+                  final Position currentPosition = ps.getValue()
+                                                      .get(0)
+                                                      .getPosition();
 
-          fillCheckboxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
-          addCheckboxesSet(checkBoxesMap.get(currentPosition), Main.getPositionsMap()
-                                                                   .get(currentPosition));
-        });
+                  fillCheckboxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
+                  addCheckboxesSet(checkBoxesMap.get(currentPosition),
+                                   CommonFields.getPositionsMap()
+                                               .get(currentPosition));
+                });
 
     textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setEditable(false);
@@ -245,38 +247,43 @@ public class AnchoragesView extends View {
 
     finishButton.setEnabled(false);
     finishButton.addActionListener(e ->
-        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).finishButtonEvent()
+        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        .finishButtonEvent()
     );
 
     newAnchorageButton = new JButton("Anclar");
 
     newAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).newAnchorageButtonEvent()
+        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        .newAnchorageButtonEvent()
     );
 
     deleteAnchorageButton = new JButton("Borrar un anclaje");
 
     deleteAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).deleteAnchorageButtonEvent()
+        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        .deleteAnchorageButtonEvent()
     );
 
     deleteLastAnchorageButton = new JButton("Borrar último anclaje");
 
     deleteLastAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) Main.getController(Views.ANCHORAGES))
+        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
         .deleteLastAnchorageButtonEvent()
     );
 
     clearAnchoragesButton = new JButton("Limpiar anclajes");
 
     clearAnchoragesButton.addActionListener(e ->
-        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).clearAnchoragesButtonEvent()
+        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        .clearAnchoragesButtonEvent()
     );
 
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        ((AnchoragesController) Main.getController(Views.ANCHORAGES)).backButtonEvent()
+        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        .backButtonEvent()
     );
 
     anchorageButtons.add(finishButton);

@@ -1,8 +1,8 @@
 package armameeldoparti.views;
 
-import armameeldoparti.Main;
 import armameeldoparti.controllers.HelpController;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -148,15 +148,15 @@ public class HelpView extends View {
     backButton = new JButton("Volver al menú principal");
 
     previousPageButton.addActionListener(e ->
-        ((HelpController) Main.getController(Views.HELP)).previousPageButtonEvent()
+        ((HelpController) CommonFunctions.getController(Views.HELP)).previousPageButtonEvent()
     );
 
     nextPageButton.addActionListener(e ->
-        ((HelpController) Main.getController(Views.HELP)).nextPageButtonEvent()
+        ((HelpController) CommonFunctions.getController(Views.HELP)).nextPageButtonEvent()
     );
 
     backButton.addActionListener(e ->
-        ((HelpController) Main.getController(Views.HELP)).backButtonEvent()
+        ((HelpController) CommonFunctions.getController(Views.HELP)).backButtonEvent()
     );
 
     previousPageButton.setEnabled(false);
@@ -174,21 +174,22 @@ public class HelpView extends View {
   private void addTextArea() {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
-    textArea.setBackground(Constants.LIGHT_GREEN);
+    textArea.setBackground(Constants.GREEN_LIGHT);
     textArea.setEditable(false);
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
 
-    scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+    scrollPane = new JScrollPane(textArea,
+                                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                                  ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    scrollPane.setBackground(Constants.LIGHT_GREEN);
+    scrollPane.setBackground(Constants.GREEN_LIGHT);
     scrollPane.getVerticalScrollBar()
               .setUI(new BasicScrollBarUI() {
                 @Override
                 protected void configureScrollBarColors() {
-                  this.thumbColor = Constants.DARK_GREEN;
-                  this.trackColor = Constants.MEDIUM_GREEN;
+                  this.thumbColor = Constants.GREEN_DARK;
+                  this.trackColor = Constants.GREEN_MEDIUM;
                 }
               });
 

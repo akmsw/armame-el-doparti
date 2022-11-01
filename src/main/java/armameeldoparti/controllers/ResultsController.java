@@ -1,11 +1,12 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.BySkillsMixer;
+import armameeldoparti.utils.CommonFields;
+import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import armameeldoparti.utils.RandomMixer;
 import armameeldoparti.views.ResultsView;
@@ -90,7 +91,7 @@ public class ResultsController extends Controller {
     teams.add(team1);
     teams.add(team2);
 
-    if (Main.getDistribution() == Constants.MIX_RANDOM) {
+    if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
       teams = randomMix();
 
       addRows = 1;
@@ -127,14 +128,14 @@ public class ResultsController extends Controller {
 
     Views previousView;
 
-    if (Main.getDistribution() == Constants.MIX_RANDOM) {
-      previousView = Main.thereAreAnchorages() ? Views.ANCHORAGES : Views.NAMES_INPUT;
+    if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
+      previousView = CommonFields.thereAreAnchorages() ? Views.ANCHORAGES : Views.NAMES_INPUT;
     } else {
       previousView = Views.SKILL_POINTS;
     }
 
-    Main.getController(previousView)
-        .showView();
+    CommonFunctions.getController(previousView)
+                   .showView();
   }
 
   /**
@@ -177,16 +178,16 @@ public class ResultsController extends Controller {
       wrapper.row = 1;
     });
 
-    if (Main.getDistribution() == Constants.MIX_BY_SKILL) {
+    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
       for (int i = 0; i < 2; i++) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(teams.get(i)
-                                                 .getPlayers()
-                                                 .values()
-                                                 .stream()
-                                                 .flatMap(List::stream)
-                                                 .mapToInt(Player::getSkillPoints)
-                                                 .reduce(0, Math::addExact),
+                                                  .getPlayers()
+                                                  .values()
+                                                  .stream()
+                                                  .flatMap(List::stream)
+                                                  .mapToInt(Player::getSkillPoints)
+                                                  .reduce(0, Math::addExact),
                                              ((ResultsView) getView()).getTable()
                                                                       .getRowCount() - 1,
                                              i + 1);
@@ -200,8 +201,8 @@ public class ResultsController extends Controller {
    * @return The updated teams with the players distributed.
    */
   public List<Team> randomMix() {
-    return Main.thereAreAnchorages() ? randomMixer.withAnchorages(teams)
-                                     : randomMixer.withoutAnchorages(teams);
+    return CommonFields.thereAreAnchorages() ? randomMixer.withAnchorages(teams)
+                                             : randomMixer.withoutAnchorages(teams);
   }
 
   /**
@@ -210,8 +211,8 @@ public class ResultsController extends Controller {
    * @return The updated teams with the players distributed.
    */
   public List<Team> bySkillsMix() {
-    return Main.thereAreAnchorages() ? bySkillsMixer.withAnchorages(teams)
-                                     : bySkillsMixer.withoutAnchorages(teams);
+    return CommonFields.thereAreAnchorages() ? bySkillsMixer.withAnchorages(teams)
+                                             : bySkillsMixer.withoutAnchorages(teams);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -252,12 +253,12 @@ public class ResultsController extends Controller {
             final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
                                                                     hasFocus, row, column);
 
-            boolean byScoresMixFlag = Main.getDistribution() == Constants.MIX_BY_SKILL
+            boolean byScoresMixFlag = CommonFields.getDistribution() == Constants.MIX_BY_SKILLS
                                       && row == ((ResultsView) getView()).getTable()
                                                                          .getRowCount() - 1;
 
             if (row == 0) {
-              c.setBackground(Constants.DARK_GREEN);
+              c.setBackground(Constants.GREEN_DARK);
               c.setForeground(Color.WHITE);
 
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -267,7 +268,7 @@ public class ResultsController extends Controller {
 
             if (column == 0) {
               if (byScoresMixFlag) {
-                c.setBackground(Constants.LIGHT_YELLOW);
+                c.setBackground(Constants.YELLOW_LIGHT);
                 c.setForeground(Color.BLACK);
 
                 ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -275,7 +276,7 @@ public class ResultsController extends Controller {
                 return c;
               }
 
-              c.setBackground(Constants.DARK_GREEN);
+              c.setBackground(Constants.GREEN_DARK);
               c.setForeground(Color.WHITE);
 
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
@@ -284,7 +285,7 @@ public class ResultsController extends Controller {
             }
 
             if (byScoresMixFlag) {
-              c.setBackground(Constants.LIGHT_YELLOW);
+              c.setBackground(Constants.YELLOW_LIGHT);
               c.setForeground(Color.BLACK);
 
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -292,12 +293,12 @@ public class ResultsController extends Controller {
               return c;
             }
 
-            Player playerOnCell = (Player) Main.getPlayersSets()
-                                               .values()
-                                               .stream()
-                                               .flatMap(List::stream)
-                                               .filter(p -> p.getName() == value)
-                                               .toArray()[0];
+            Player playerOnCell = (Player) CommonFields.getPlayersSets()
+                                                       .values()
+                                                       .stream()
+                                                       .flatMap(List::stream)
+                                                       .filter(p -> p.getName() == value)
+                                                       .toArray()[0];
 
             c.setBackground(playerOnCell.getAnchorageNumber() != 0
                             ? ANCHORAGES_COLORS[playerOnCell.getAnchorageNumber() - 1]
@@ -323,36 +324,36 @@ public class ResultsController extends Controller {
                                                  .getRowCount() - 1; i++) {
       if (i == 1) {
         ((ResultsView) getView()).getTable()
-                                 .setValueAt(Main.getPositionsMap()
-                                                 .get(Position.CENTRAL_DEFENDER), i, 0);
+                                 .setValueAt(CommonFields.getPositionsMap()
+                                                         .get(Position.CENTRAL_DEFENDER), i, 0);
       } else if (i < 4) {
         ((ResultsView) getView()).getTable()
-                                 .setValueAt(Main.getPositionsMap()
-                                                 .get(Position.LATERAL_DEFENDER), i, 0);
+                                 .setValueAt(CommonFields.getPositionsMap()
+                                                         .get(Position.LATERAL_DEFENDER), i, 0);
       } else if (i < 6) {
         ((ResultsView) getView()).getTable()
-                                 .setValueAt(Main.getPositionsMap()
-                                                 .get(Position.MIDFIELDER), i, 0);
+                                 .setValueAt(CommonFields.getPositionsMap()
+                                                         .get(Position.MIDFIELDER), i, 0);
       } else if (i < 7) {
         ((ResultsView) getView()).getTable()
-                                 .setValueAt(Main.getPositionsMap()
-                                                 .get(Position.FORWARD), i, 0);
+                                 .setValueAt(CommonFields.getPositionsMap()
+                                                         .get(Position.FORWARD), i, 0);
       }
     }
 
-    if (Main.getDistribution() == Constants.MIX_BY_SKILL) {
+    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
       for (int i = 0; i < 2; i++) {
         ((ResultsView) getView()).getTable()
-                                 .setValueAt(i == 0 ? Main.getPositionsMap()
-                                                          .get(Position.GOALKEEPER)
+                                 .setValueAt(i == 0 ? CommonFields.getPositionsMap()
+                                                                  .get(Position.GOALKEEPER)
                                                     : "PUNTAJE DEL EQUIPO",
                                              ((ResultsView) getView()).getTable()
                                                                       .getRowCount() + i - 2, 0);
       }
     } else {
       ((ResultsView) getView()).getTable()
-                               .setValueAt(Main.getPositionsMap()
-                                               .get(Position.GOALKEEPER),
+                               .setValueAt(CommonFields.getPositionsMap()
+                                                       .get(Position.GOALKEEPER),
                                            ((ResultsView) getView()).getTable()
                                                                     .getRowCount() - 1, 0);
     }
@@ -364,10 +365,10 @@ public class ResultsController extends Controller {
   private void resetTeams() {
     teams.forEach(Team::clear);
 
-    Main.getPlayersSets()
-        .values()
-        .stream()
-        .flatMap(List::stream)
-        .forEach(p -> p.setTeamNumber(0));
+    CommonFields.getPlayersSets()
+                .values()
+                .stream()
+                .flatMap(List::stream)
+                .forEach(p -> p.setTeamNumber(0));
   }
 }

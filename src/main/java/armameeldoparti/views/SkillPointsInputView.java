@@ -1,10 +1,11 @@
 package armameeldoparti.views;
 
-import armameeldoparti.Main;
 import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFields;
+import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import java.util.HashMap;
 import java.util.List;
@@ -80,8 +81,8 @@ public class SkillPointsInputView extends View {
    */
   public void updateNameLabels() {
     for (Position position : Position.values()) {
-      for (Player player : Main.getPlayersSets()
-                               .get(position)) {
+      for (Player player : CommonFields.getPlayersSets()
+                                       .get(position)) {
         labelsMap.get(spinnersMap.get(player))
                  .setText(player.getName());
       }
@@ -111,16 +112,18 @@ public class SkillPointsInputView extends View {
     JButton backButton = new JButton("Atrás");
 
     finishButton.addActionListener(e ->
-        ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).finishButtonEvent()
+        ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+        .finishButtonEvent()
     );
 
     resetSkillPointsButton.addActionListener(e ->
-        ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS))
+        ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
         .resetSkillsButtonEvent()
     );
 
     backButton.addActionListener(e ->
-        ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).backButtonEvent()
+        ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+        .backButtonEvent()
     );
 
     masterPanel.add(finishButton, Constants.GROW_SPAN);
@@ -135,15 +138,15 @@ public class SkillPointsInputView extends View {
    */
   private void addSpinners() {
     for (Position position : Position.values()) {
-      JLabel positionLabel = new JLabel(Main.getPositionsMap()
-                                            .get(position));
+      JLabel positionLabel = new JLabel(CommonFields.getPositionsMap()
+                                                    .get(position));
 
       positionLabel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
       masterPanel.add(positionLabel, Constants.GROW_SPAN);
 
-      List<Player> currentSet = Main.getPlayersSets()
-                                    .get(position);
+      List<Player> currentSet = CommonFields.getPlayersSets()
+                                            .get(position);
 
       for (int j = 0; j < currentSet.size(); j++) {
         JSpinner spinner = new JSpinner(new SpinnerNumberModel(Constants.SKILL_INI,

@@ -1,6 +1,5 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.Main;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
@@ -35,7 +34,7 @@ public class HelpController extends Controller {
       3, Arrays.asList("ANCLAJES", "helpAnchorages.txt"),
       4, Arrays.asList("PUNTUACIONES", "helpScores.txt"),
       5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.txt"),
-      6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpByScoresMix.txt"),
+      6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpBySkillsMix.txt"),
       7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.txt")
   );
 
@@ -81,8 +80,8 @@ public class HelpController extends Controller {
     hideView();
     resetView();
 
-    Main.getController(Views.MAIN_MENU)
-        .showView();
+    CommonFunctions.getController(Views.MAIN_MENU)
+                   .showView();
   }
 
   /**
@@ -141,7 +140,7 @@ public class HelpController extends Controller {
         new InputStreamReader(
           HelpController.class
                         .getClassLoader()
-                        .getResourceAsStream(Constants.HELP_DOCS_PATH
+                        .getResourceAsStream(Constants.PATH_HELP_DOCS
                                              + pagesMap.get(pageNumber)
                                                        .get(PAGE_FILENAME_INDEX)),
           StandardCharsets.UTF_8)

@@ -1,6 +1,5 @@
 package armameeldoparti.utils;
 
-import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
@@ -64,8 +63,8 @@ public class BySkillsMixer implements PlayersMixer {
     Collections.reverse(reversedEnum);
 
     for (Position position : reversedEnum) {
-      List<Player> currentSet = Main.getPlayersSets()
-                                    .get(position);
+      List<Player> currentSet = CommonFields.getPlayersSets()
+                                            .get(position);
 
       currentSet.sort(Comparator.comparingInt(Player::getSkillPoints)
                                 .reversed());
@@ -122,15 +121,16 @@ public class BySkillsMixer implements PlayersMixer {
       }
     }
 
-    List<List<Player>> remainingPlayers = Main.getPlayersSets()
-                                              .values()
-                                              .stream()
-                                              .flatMap(List::stream)
-                                              .filter(p -> p.getTeamNumber() == 0)
-                                              .collect(Collectors.groupingBy(Player::getPosition))
-                                              .values()
-                                              .stream()
-                                              .collect(Collectors.toList());
+    List<List<Player>> remainingPlayers = CommonFields.getPlayersSets()
+                                                      .values()
+                                                      .stream()
+                                                      .flatMap(List::stream)
+                                                      .filter(p -> p.getTeamNumber() == 0)
+                                                      .collect(Collectors.groupingBy(
+                                                               Player::getPosition))
+                                                      .values()
+                                                      .stream()
+                                                      .collect(Collectors.toList());
 
     remainingPlayers.sort(Comparator.comparingInt(List::size));
 

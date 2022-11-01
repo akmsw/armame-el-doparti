@@ -1,9 +1,9 @@
 package armameeldoparti.views;
 
-import armameeldoparti.Main;
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFields;
 import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import java.util.ArrayList;
@@ -188,11 +188,11 @@ public class NamesInputView extends View {
     mixButton.setEnabled(false);
 
     mixButton.addActionListener(e ->
-        ((NamesInputController) Main.getController(Views.NAMES_INPUT)).mixButtonEvent()
+        ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)).mixButtonEvent()
     );
 
     backButton.addActionListener(e ->
-        ((NamesInputController) Main.getController(Views.NAMES_INPUT)).backButtonEvent()
+        ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)).backButtonEvent()
     );
 
     rightPanel.add(mixButton, Constants.GROW);
@@ -209,7 +209,7 @@ public class NamesInputView extends View {
 
     comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
-        ((NamesInputController) Main.getController(Views.NAMES_INPUT))
+        ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT))
         .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
     );
 
@@ -235,7 +235,8 @@ public class NamesInputView extends View {
   private void addAnchoragesCheckBox() {
     anchoragesCheckBox = new JCheckBox("Anclar jugadores", false);
 
-    anchoragesCheckBox.addActionListener(e -> Main.setAnchorages(!Main.thereAreAnchorages()));
+    anchoragesCheckBox.addActionListener(e -> CommonFields.setAnchorages(
+                                              !CommonFields.thereAreAnchorages()));
 
     rightPanel.add(anchoragesCheckBox, "center");
   }
@@ -245,29 +246,29 @@ public class NamesInputView extends View {
    */
   private void addTextFields() {
     for (Position position : Position.values()) {
-      for (int i = 0; i < Main.getPlayersAmountMap()
-                              .get(position) * 2; i++) {
+      for (int i = 0; i < CommonFields.getPlayersAmountMap()
+                                      .get(position) * 2; i++) {
         JTextField tf = new JTextField();
 
         tf.addActionListener(e -> {
               try {
-                ((NamesInputController) Main.getController(Views.NAMES_INPUT))
-                                            .textFieldEvent(textFieldsMap.get(position)
-                                                                         .indexOf(tf),
-                                                            Main.getPlayersSets()
-                                                                .get(position),
-                                                            tf.getText());
+                ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT))
+                                                       .textFieldEvent(textFieldsMap.get(position)
+                                                                                    .indexOf(tf),
+                                                                       CommonFields.getPlayersSets()
+                                                                                   .get(position),
+                                                                       tf.getText());
               } catch (IllegalArgumentException stringEx) {
                 CommonFunctions.showErrorMessage("El nombre del jugador debe estar formado "
-                                      + "por letras de la A a la Z");
+                                                 + "por letras de la A a la Z");
 
                 tf.setText("");
 
                 return;
               } catch (InvalidNameException nameEx) {
                 CommonFunctions.showErrorMessage("El nombre del jugador no puede estar vacío,"
-                                      + " tener más de " + Constants.MAX_NAME_LEN
-                                      + " caracteres, o estar repetido");
+                                                 + " tener más de " + Constants.MAX_NAME_LEN
+                                                 + " caracteres, o estar repetido");
 
                 tf.setText("");
 

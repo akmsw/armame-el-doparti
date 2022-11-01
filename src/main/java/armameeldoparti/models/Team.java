@@ -1,6 +1,6 @@
 package armameeldoparti.models;
 
-import armameeldoparti.Main;
+import armameeldoparti.utils.CommonFields;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -107,8 +107,8 @@ public class Team {
    */
   public boolean isPositionFull(Position position) {
     return teamPlayers.get(position)
-                      .size() == Main.getPlayersAmountMap()
-                                     .get(position);
+                      .size() == CommonFields.getPlayersAmountMap()
+                                             .get(position);
   }
 
   /**

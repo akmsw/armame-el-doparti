@@ -1,8 +1,9 @@
 package armameeldoparti.views;
 
-import armameeldoparti.Main;
 import armameeldoparti.controllers.ResultsController;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFields;
+import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import java.awt.Component;
 import javax.swing.BorderFactory;
@@ -57,10 +58,10 @@ public class ResultsView extends View {
     setIconImage(Constants.ICON
                           .getImage());
     setResizable(false);
-    setTitle((Main.getDistribution() == Constants.MIX_RANDOM
+    setTitle((CommonFields.getDistribution() == Constants.MIX_RANDOM
               ? "Aleatorio - "
-              : "Por puntuaciones - ").concat(Main.thereAreAnchorages() ? "Con anclajes"
-                                                                        : "Sin anclajes"));
+              : "Por puntuaciones - ").concat(CommonFields.thereAreAnchorages() ? "Con anclajes"
+                                                                                : "Sin anclajes"));
     addTable();
     addButtons();
     add(panel);
@@ -122,14 +123,14 @@ public class ResultsView extends View {
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        ((ResultsController) Main.getController(Views.RESULTS)).backButtonEvent()
+        ((ResultsController) CommonFunctions.getController(Views.RESULTS)).backButtonEvent()
     );
 
-    if (Main.getDistribution() == Constants.MIX_RANDOM) {
+    if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
       JButton remixButton = new JButton("Redistribuir");
 
       remixButton.addActionListener(e ->
-          ((ResultsController) Main.getController(Views.RESULTS)).remixButtonEvent()
+          ((ResultsController) CommonFunctions.getController(Views.RESULTS)).remixButtonEvent()
       );
 
       panel.add(remixButton, Constants.GROWX);
@@ -148,7 +149,7 @@ public class ResultsView extends View {
     table.setCellSelectionEnabled(false);
     table.setRowSelectionAllowed(false);
     table.setColumnSelectionAllowed(false);
-    table.setBorder(BorderFactory.createLineBorder(Constants.DARK_GREEN));
+    table.setBorder(BorderFactory.createLineBorder(Constants.GREEN_DARK));
     table.setEnabled(false);
 
     panel.add(table, "push, grow, span, center");

@@ -7,6 +7,8 @@ import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFields;
+import armameeldoparti.utils.CommonFunctions;
 import java.util.List;
 import java.util.stream.Stream;
 import javax.naming.InvalidNameException;
@@ -53,11 +55,11 @@ class NamesInputTest {
   @ParameterizedTest
   @ValueSource(strings = { "", "123", "!a._,|°}zY", "nam3" })
   void invalidStringsShouldThrowException(String invalidString) {
-    List<Player> playersSet = Main.getPlayersSets()
-                                  .get(Position.CENTRAL_DEFENDER);
+    List<Player> playersSet = CommonFields.getPlayersSets()
+                                          .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
-        (NamesInputController) Main.getController(Views.NAMES_INPUT)
+        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     assertThrows(IllegalArgumentException.class, () -> {
@@ -75,11 +77,11 @@ class NamesInputTest {
   @ParameterizedTest
   @ValueSource(strings = { "   ", "thisNameIsTooLong" })
   void invalidNamesShouldThrowException(String invalidName) {
-    List<Player> playersSet = Main.getPlayersSets()
-                                  .get(Position.CENTRAL_DEFENDER);
+    List<Player> playersSet = CommonFields.getPlayersSets()
+                                          .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
-        (NamesInputController) Main.getController(Views.NAMES_INPUT)
+        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     assertThrows(InvalidNameException.class, () -> {
@@ -101,11 +103,11 @@ class NamesInputTest {
   void repeatedNamesShouldThrowException(int playerIndex,
                                          Position playerPosition,
                                          String playerName) {
-    List<Player> playersSet = Main.getPlayersSets()
-                                  .get(Position.CENTRAL_DEFENDER);
+    List<Player> playersSet = CommonFields.getPlayersSets()
+                                          .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
-        (NamesInputController) Main.getController(Views.NAMES_INPUT)
+        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     assertThrows(InvalidNameException.class, () -> {
@@ -131,19 +133,19 @@ class NamesInputTest {
   void validNamesShouldPass(int playerIndex, Position playerPosition, String playerName)
                             throws IllegalArgumentException,
                                    InvalidNameException {
-    List<Player> playersSet = Main.getPlayersSets()
-                                  .get(playerPosition);
+    List<Player> playersSet = CommonFields.getPlayersSets()
+                                          .get(playerPosition);
 
     NamesInputController testNamesInputController = (
-        (NamesInputController) Main.getController(Views.NAMES_INPUT)
+        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     testNamesInputController.textFieldEvent(playerIndex, playersSet, playerName);
 
-    assertEquals(playerName.replace(" ", "_"), Main.getPlayersSets()
-                                                   .get(playerPosition)
-                                                   .get(playerIndex)
-                                                   .getName());
+    assertEquals(playerName.replace(" ", "_"), CommonFields.getPlayersSets()
+                                                           .get(playerPosition)
+                                                           .get(playerIndex)
+                                                           .getName());
   }
 
   // ---------------------------------------- Arguments providers -------------------------------

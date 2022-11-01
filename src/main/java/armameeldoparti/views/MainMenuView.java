@@ -1,8 +1,8 @@
 package armameeldoparti.views;
 
-import armameeldoparti.Main;
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -71,11 +71,11 @@ public class MainMenuView extends View {
     JButton helpButton = new JButton("Ayuda");
 
     startButton.addActionListener(e ->
-        ((MainMenuController) Main.getController(Views.MAIN_MENU)).startButtonEvent()
+        ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).startButtonEvent()
     );
 
     helpButton.addActionListener(e ->
-        ((MainMenuController) Main.getController(Views.MAIN_MENU)).helpButtonEvent()
+        ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).helpButtonEvent()
     );
 
     masterPanel.add(startButton, Constants.GROWX);
@@ -89,8 +89,8 @@ public class MainMenuView extends View {
    */
   private void addBackground() {
     ImageIcon bgImg = new ImageIcon(getClass().getClassLoader()
-                                              .getResource(Constants.IMG_PATH
-                                                           + Constants.BG_IMG_FILENAME));
+                                              .getResource(Constants.PATH_IMG
+                                                           + Constants.FILENAME_BG_IMG));
 
     JLabel bgLabel = new JLabel("", bgImg, SwingConstants.CENTER);
 

@@ -1,8 +1,8 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFields;
 import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import armameeldoparti.views.NamesInputView;
@@ -30,8 +30,8 @@ public class NamesInputController extends Controller {
    * Possible players distribution methods.
    */
   private static final String[] OPTIONS_MIX = {
-    "Aleatoriamente",
-    "Por puntuaciones"
+    Constants.MIX_OPTION_RANDOM,
+    Constants.MIX_OPTION_BY_SKILL
   };
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -94,9 +94,10 @@ public class NamesInputController extends Controller {
   public void backButtonEvent() {
     resetView();
 
-    Main.setAnchorages(false);
-    Main.getController(Views.MAIN_MENU)
-        .showView();
+    CommonFields.setAnchorages(false);
+
+    CommonFunctions.getController(Views.MAIN_MENU)
+                   .showView();
   }
 
   /**
@@ -119,25 +120,27 @@ public class NamesInputController extends Controller {
 
     hideView();
 
-    Main.setDistribution(distribution);
+    CommonFields.setDistribution(distribution);
 
-    if (Main.thereAreAnchorages()) {
-      ((AnchoragesController) Main.getController(Views.ANCHORAGES)).updateCheckBoxesText();
+    if (CommonFields.thereAreAnchorages()) {
+      ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+      .updateCheckBoxesText();
 
-      Main.getController(Views.ANCHORAGES)
-          .showView();
-    } else if (Main.getDistribution() == Constants.MIX_RANDOM) {
+      CommonFunctions.getController(Views.ANCHORAGES)
+                     .showView();
+    } else if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
       // Random distribution
-      ((ResultsController) Main.getController(Views.RESULTS)).setUp();
+      ((ResultsController) CommonFunctions.getController(Views.RESULTS)).setUp();
 
-      Main.getController(Views.RESULTS)
-          .showView();
+      CommonFunctions.getController(Views.RESULTS)
+                     .showView();
     } else {
       // By skill points distribution
-      ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).updateNameLabels();
+      ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+      .updateNameLabels();
 
-      Main.getController(Views.SKILL_POINTS)
-          .showView();
+      CommonFunctions.getController(Views.SKILL_POINTS)
+                     .showView();
     }
   }
 
@@ -211,25 +214,27 @@ public class NamesInputController extends Controller {
     ((NamesInputView) getView()).getTextArea()
                                 .setText("");
 
-    Main.getPlayersSets()
-        .entrySet()
-        .forEach(ps -> ps.getValue()
-                         .stream()
-                         .filter(p -> !p.getName()
-                                        .equals(""))
-                         .forEach(p -> {
-                           if (wrapperCounter.counter != 0
-                               && Constants.PLAYERS_PER_TEAM * 2 - wrapperCounter.counter != 0) {
-                             ((NamesInputView) getView()).getTextArea()
-                                                         .append(System.lineSeparator());
-                           }
+    CommonFields.getPlayersSets()
+                .entrySet()
+                .forEach(ps -> ps.getValue()
+                                 .stream()
+                                 .filter(p -> !p.getName()
+                                                .equals(""))
+                                 .forEach(p -> {
+                                   if (wrapperCounter.counter != 0
+                                       && Constants.PLAYERS_PER_TEAM * 2
+                                          - wrapperCounter.counter != 0) {
+                                     ((NamesInputView) getView()).getTextArea()
+                                                                 .append(System.lineSeparator());
+                                   }
 
-                           wrapperCounter.counter++;
+                                   wrapperCounter.counter++;
 
-                           ((NamesInputView) getView()).getTextArea()
-                                                       .append(wrapperCounter.counter
-                                                               + " - " + p.getName());
-                         }));
+                                   ((NamesInputView) getView()).getTextArea()
+                                                               .append(wrapperCounter.counter
+                                                                       + " - "
+                                                                       + p.getName());
+                                 }));
   }
 
   /**
@@ -253,7 +258,7 @@ public class NamesInputController extends Controller {
       if (selectedOption.equals(((NamesInputView) getView()).getComboBoxOptions()[i])) {
         ((NamesInputView) getView()).getTextFieldsMap()
                                     .get(CommonFunctions.getCorrespondingPosition(
-                                      Main.getPositionsMap(), selectedOption.toUpperCase()))
+                                      CommonFields.getPositionsMap(), selectedOption.toUpperCase()))
                                     .forEach(tf -> leftPanel.add(tf, Constants.GROWX));
 
         break;
@@ -274,11 +279,11 @@ public class NamesInputController extends Controller {
                                 .flatMap(List::stream)
                                 .forEach(tf -> tf.setText(null));
 
-    Main.getPlayersSets()
-        .values()
-        .stream()
-        .flatMap(List::stream)
-        .forEach(p -> p.setName(""));
+    CommonFields.getPlayersSets()
+                .values()
+                .stream()
+                .flatMap(List::stream)
+                .forEach(p -> p.setName(""));
   }
 
   /**
@@ -289,12 +294,12 @@ public class NamesInputController extends Controller {
    * @return Whether there is already a player with the specified name or not.
    */
   private boolean alreadyExists(String name) {
-    return Main.getPlayersSets()
-               .values()
-               .stream()
-               .flatMap(Collection::stream)
-               .anyMatch(p -> p.getName()
-                               .equals(name));
+    return CommonFields.getPlayersSets()
+                       .values()
+                       .stream()
+                       .flatMap(Collection::stream)
+                       .anyMatch(p -> p.getName()
+                                       .equals(name));
   }
 
   /**

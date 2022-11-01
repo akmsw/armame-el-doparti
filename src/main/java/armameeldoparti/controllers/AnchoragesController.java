@@ -1,8 +1,8 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.Main;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFields;
 import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.utils.Constants;
 import armameeldoparti.views.AnchoragesView;
@@ -180,8 +180,8 @@ public class AnchoragesController extends Controller {
     hideView();
     resetView();
 
-    Main.getController(Views.NAMES_INPUT)
-        .showView();
+    CommonFunctions.getController(Views.NAMES_INPUT)
+                   .showView();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -201,12 +201,12 @@ public class AnchoragesController extends Controller {
                                                   .anyMatch(JCheckBox::isSelected))
                                 .forEach(this::setAnchorages);
 
-    anchoredPlayersAmount = (int) Main.getPlayersSets()
-                                      .values()
-                                      .stream()
-                                      .flatMap(List::stream)
-                                      .filter(Player::isAnchored)
-                                      .count();
+    anchoredPlayersAmount = (int) CommonFields.getPlayersSets()
+                                              .values()
+                                              .stream()
+                                              .flatMap(List::stream)
+                                              .filter(Player::isAnchored)
+                                              .count();
   }
 
   /**
@@ -231,19 +231,22 @@ public class AnchoragesController extends Controller {
                                   .append(" ----- ANCLAJE #" + wrapperAnchorageNum.anchorageNum
                                           + " -----" + System.lineSeparator());
 
-      Main.getPlayersSets()
-          .entrySet()
-          .forEach(ps -> ps.getValue()
-                           .stream()
-                           .filter(p -> p.getAnchorageNumber() == wrapperAnchorageNum.anchorageNum)
-                           .forEach(p -> {
-                             ((AnchoragesView) getView()).getTextArea()
-                                                         .append(" " + wrapperCounter.counter + ". "
-                                                                 + p.getName()
-                                                                 + System.lineSeparator());
+      CommonFields.getPlayersSets()
+                  .entrySet()
+                  .forEach(ps -> ps.getValue()
+                                   .stream()
+                                   .filter(p ->
+                                     p.getAnchorageNumber() == wrapperAnchorageNum.anchorageNum)
+                                   .forEach(p -> {
+                                     ((AnchoragesView) getView()).getTextArea()
+                                                                 .append(" "
+                                                                         + wrapperCounter.counter
+                                                                         + ". "
+                                                                         + p.getName()
+                                                                         + System.lineSeparator());
 
-                             wrapperCounter.counter++;
-                           }));
+                                     wrapperCounter.counter++;
+                                   }));
 
       if (wrapperAnchorageNum.anchorageNum != anchoragesAmount) {
         ((AnchoragesView) getView()).getTextArea()
@@ -340,30 +343,30 @@ public class AnchoragesController extends Controller {
    * @param replacement New anchorage number to set.
    */
   private void changeAnchorage(int target, int replacement) {
-    Main.getPlayersSets()
-        .values()
-        .stream()
-        .flatMap(List::stream)
-        .filter(p -> p.getAnchorageNumber() == target)
-        .forEach(p -> {
-          p.setAnchorageNumber(replacement);
+    CommonFields.getPlayersSets()
+                .values()
+                .stream()
+                .flatMap(List::stream)
+                .filter(p -> p.getAnchorageNumber() == target)
+                .forEach(p -> {
+                  p.setAnchorageNumber(replacement);
 
-          if (replacement == 0) {
-            p.setAnchored(false);
+                  if (replacement == 0) {
+                    p.setAnchored(false);
 
-            ((AnchoragesView) getView()).getCheckBoxesMap()
-                                        .values()
-                                        .stream()
-                                        .flatMap(List::stream)
-                                        .filter(cb -> cb.getText()
-                                                        .equals(p.getName()))
-                                        .collect(Collectors.toList())
-                                        .get(0)
-                                        .setVisible(true);
+                    ((AnchoragesView) getView()).getCheckBoxesMap()
+                                                .values()
+                                                .stream()
+                                                .flatMap(List::stream)
+                                                .filter(cb -> cb.getText()
+                                                                .equals(p.getName()))
+                                                .collect(Collectors.toList())
+                                                .get(0)
+                                                .setVisible(true);
 
-            anchoredPlayersAmount--;
-          }
-        });
+                    anchoredPlayersAmount--;
+                  }
+                });
   }
 
   /**
@@ -374,16 +377,17 @@ public class AnchoragesController extends Controller {
     hideView();
     clearCheckboxes();
 
-    if (Main.getDistribution() == Constants.MIX_BY_SKILL) {
-      ((SkillPointsInputController) Main.getController(Views.SKILL_POINTS)).updateNameLabels();
+    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
+      ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+      .updateNameLabels();
 
-      Main.getController(Views.SKILL_POINTS)
-          .showView();
+      CommonFunctions.getController(Views.SKILL_POINTS)
+                     .showView();
     } else {
-      ((ResultsController) Main.getController(Views.RESULTS)).setUp();
+      ((ResultsController) CommonFunctions.getController(Views.RESULTS)).setUp();
 
-      Main.getController(Views.RESULTS)
-          .showView();
+      CommonFunctions.getController(Views.RESULTS)
+                     .showView();
     }
   }
 
@@ -394,18 +398,18 @@ public class AnchoragesController extends Controller {
    * @param cbSet Checkboxes set with players checked.
    */
   private void setAnchorages(List<JCheckBox> cbSet) {
-    Main.getPlayersSets()
-        .get(CommonFunctions.getCorrespondingPosition(
-          ((AnchoragesView) getView()).getCheckBoxesMap(), cbSet))
-        .stream()
-        .filter(p -> cbSet.stream()
-                          .filter(JCheckBox::isSelected)
-                          .anyMatch(cb -> cb.getText()
-                                            .equals(p.getName())))
-        .forEach(p -> {
-          p.setAnchorageNumber(anchoragesAmount);
-          p.setAnchored(true);
-        });
+    CommonFields.getPlayersSets()
+                .get(CommonFunctions.getCorrespondingPosition(
+                  ((AnchoragesView) getView()).getCheckBoxesMap(), cbSet))
+                .stream()
+                .filter(p -> cbSet.stream()
+                                  .filter(JCheckBox::isSelected)
+                                  .anyMatch(cb -> cb.getText()
+                                                    .equals(p.getName())))
+                .forEach(p -> {
+                  p.setAnchorageNumber(anchoragesAmount);
+                  p.setAnchored(true);
+                });
 
     cbSet.stream()
          .filter(JCheckBox::isSelected)

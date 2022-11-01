@@ -8,6 +8,7 @@ import armameeldoparti.controllers.HelpController;
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Views;
+import armameeldoparti.utils.CommonFunctions;
 import armameeldoparti.views.HelpView;
 import armameeldoparti.views.NamesInputView;
 import org.junit.jupiter.api.BeforeAll;
@@ -48,27 +49,27 @@ class MainMenuTest {
   @DisplayName("Tests the initial state of the help view and the navigation")
   @Test
   void helpViewInitialState() {
-    ((MainMenuController) Main.getController(Views.MAIN_MENU)).helpButtonEvent();
+    ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).helpButtonEvent();
 
-    assertEquals(0, ((HelpController) Main.getController(Views.HELP)).getPageNumber());
+    assertEquals(0, ((HelpController) CommonFunctions.getController(Views.HELP)).getPageNumber());
 
-    assertTrue(Main.getController(Views.HELP)
-                   .getView()
-                   .isVisible());
+    assertTrue(CommonFunctions.getController(Views.HELP)
+                              .getView()
+                              .isVisible());
 
-    assertTrue(((HelpView) Main.getController(Views.HELP)
-                               .getView()).getBackButton()
-                                          .isEnabled());
+    assertTrue(((HelpView) CommonFunctions.getController(Views.HELP)
+                                          .getView()).getBackButton()
+                                                     .isEnabled());
 
-    ((HelpController) Main.getController(Views.HELP)).backButtonEvent();
+    ((HelpController) CommonFunctions.getController(Views.HELP)).backButtonEvent();
 
-    assertTrue(Main.getController(Views.MAIN_MENU)
-                   .getView()
-                   .isVisible());
+    assertTrue(CommonFunctions.getController(Views.MAIN_MENU)
+                              .getView()
+                              .isVisible());
 
-    assertFalse(Main.getController(Views.HELP)
-                    .getView()
-                    .isVisible());
+    assertFalse(CommonFunctions.getController(Views.HELP)
+                               .getView()
+                               .isVisible());
   }
 
   /**
@@ -81,41 +82,41 @@ class MainMenuTest {
   @DisplayName("Tests the initial state of the names input view and the navigation")
   @Test
   void namesInputViewInitialState() {
-    ((MainMenuController) Main.getController(Views.MAIN_MENU)).startButtonEvent();
+    ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).startButtonEvent();
 
-    assertTrue(Main.getController(Views.NAMES_INPUT)
-                   .getView()
-                   .isVisible());
-    assertFalse(Main.getController(Views.MAIN_MENU)
-                    .getView()
-                    .isVisible());
-    assertEquals(0, ((NamesInputView) Main.getController(Views.NAMES_INPUT)
-                                          .getView()).getComboBox()
-                                                     .getSelectedIndex());
-    assertEquals("", ((NamesInputView) Main.getController(Views.NAMES_INPUT)
-                                           .getView()).getTextArea()
-                                                      .getText());
-    assertFalse(((NamesInputView) Main.getController(Views.NAMES_INPUT)
-                                      .getView()).getAnchoragesCheckBox()
-                                                 .isSelected());
-    assertFalse(((NamesInputView) Main.getController(Views.NAMES_INPUT)
-                                      .getView()).getMixButton()
-                                                 .isEnabled());
+    assertTrue(CommonFunctions.getController(Views.NAMES_INPUT)
+                              .getView()
+                              .isVisible());
+    assertFalse(CommonFunctions.getController(Views.MAIN_MENU)
+                               .getView()
+                               .isVisible());
+    assertEquals(0, ((NamesInputView) CommonFunctions.getController(Views.NAMES_INPUT)
+                                                     .getView()).getComboBox()
+                                                                .getSelectedIndex());
+    assertEquals("", ((NamesInputView) CommonFunctions.getController(Views.NAMES_INPUT)
+                                                      .getView()).getTextArea()
+                                                                 .getText());
+    assertFalse(((NamesInputView) CommonFunctions.getController(Views.NAMES_INPUT)
+                                                 .getView()).getAnchoragesCheckBox()
+                                                            .isSelected());
+    assertFalse(((NamesInputView) CommonFunctions.getController(Views.NAMES_INPUT)
+                                                 .getView()).getMixButton()
+                                                            .isEnabled());
 
-    ((NamesInputView) Main.getController(Views.NAMES_INPUT)
-                          .getView()).getTextFieldsMap()
-                                     .values()
-                                     .forEach(tfl -> {
-                                       tfl.forEach(tf -> assertEquals("", tf.getText()));
-                                     });
+    ((NamesInputView) CommonFunctions.getController(Views.NAMES_INPUT)
+                                     .getView()).getTextFieldsMap()
+                                                .values()
+                                                .forEach(tfl -> {
+                                                  tfl.forEach(tf -> assertEquals("", tf.getText()));
+                                                });
 
-    ((NamesInputController) Main.getController(Views.NAMES_INPUT)).backButtonEvent();
+    ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)).backButtonEvent();
 
-    assertTrue(Main.getController(Views.MAIN_MENU)
-                   .getView()
-                   .isVisible());
-    assertFalse(Main.getController(Views.NAMES_INPUT)
-                    .getView()
-                    .isVisible());
+    assertTrue(CommonFunctions.getController(Views.MAIN_MENU)
+                              .getView()
+                              .isVisible());
+    assertFalse(CommonFunctions.getController(Views.NAMES_INPUT)
+                               .getView()
+                               .isVisible());
   }
 }
