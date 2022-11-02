@@ -43,7 +43,7 @@ Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizand
 - #### Versión mínima
     🟡 [Java 11](https://www.oracle.com/ar/java/technologies/javase/jdk11-archive-downloads.html)
 - #### Versión recomendada
-    🟢 [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) *(o más reciente)*
+    🟢 [Java 19](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) *(o más reciente)*
 
 ## 📥 Descarga
 La versión estable más reciente del programa se encuentra disponible para descargar en la sección [releases](https://github.com/akmsw/armame-el-doparti/releases) de este proyecto.
