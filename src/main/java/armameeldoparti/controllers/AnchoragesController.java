@@ -2,9 +2,9 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFields;
-import armameeldoparti.utils.CommonFunctions;
-import armameeldoparti.utils.Constants;
+import armameeldoparti.utils.common.CommonFields;
+import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.AnchoragesView;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -216,19 +216,16 @@ public class AnchoragesController extends Controller {
     ((AnchoragesView) getView()).getTextArea()
                                 .setText("");
 
-    var wrapperAnchorageNum = new Object() {
+    var wrapper = new Object() {
       private int anchorageNum;
-    };
-
-    var wrapperCounter = new Object() {
       private int counter = 1;
     };
 
-    for (wrapperAnchorageNum.anchorageNum = 1;
-         wrapperAnchorageNum.anchorageNum <= anchoragesAmount;
-         wrapperAnchorageNum.anchorageNum++) {
+    for (wrapper.anchorageNum = 1;
+         wrapper.anchorageNum <= anchoragesAmount;
+         wrapper.anchorageNum++) {
       ((AnchoragesView) getView()).getTextArea()
-                                  .append(" ----- ANCLAJE #" + wrapperAnchorageNum.anchorageNum
+                                  .append(" ----- ANCLAJE #" + wrapper.anchorageNum
                                           + " -----" + System.lineSeparator());
 
       CommonFields.getPlayersSets()
@@ -236,24 +233,24 @@ public class AnchoragesController extends Controller {
                   .forEach(ps -> ps.getValue()
                                    .stream()
                                    .filter(p ->
-                                     p.getAnchorageNumber() == wrapperAnchorageNum.anchorageNum)
+                                     p.getAnchorageNumber() == wrapper.anchorageNum)
                                    .forEach(p -> {
                                      ((AnchoragesView) getView()).getTextArea()
                                                                  .append(" "
-                                                                         + wrapperCounter.counter
+                                                                         + wrapper.counter
                                                                          + ". "
                                                                          + p.getName()
                                                                          + System.lineSeparator());
 
-                                     wrapperCounter.counter++;
+                                     wrapper.counter++;
                                    }));
 
-      if (wrapperAnchorageNum.anchorageNum != anchoragesAmount) {
+      if (wrapper.anchorageNum != anchoragesAmount) {
         ((AnchoragesView) getView()).getTextArea()
                                     .append(System.lineSeparator());
       }
 
-      wrapperCounter.counter = 1;
+      wrapper.counter = 1;
     }
   }
 

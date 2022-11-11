@@ -2,9 +2,9 @@ package armameeldoparti.views;
 
 import armameeldoparti.controllers.ResultsController;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFields;
-import armameeldoparti.utils.CommonFunctions;
-import armameeldoparti.utils.Constants;
+import armameeldoparti.utils.common.CommonFields;
+import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;

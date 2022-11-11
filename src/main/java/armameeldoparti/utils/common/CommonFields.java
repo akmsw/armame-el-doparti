@@ -1,4 +1,4 @@
-package armameeldoparti.utils;
+package armameeldoparti.utils.common;
 
 import armameeldoparti.controllers.Controller;
 import armameeldoparti.models.Player;

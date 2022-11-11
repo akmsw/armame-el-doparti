@@ -1,5 +1,6 @@
-package armameeldoparti.utils;
+package armameeldoparti.utils.common;
 
+import armameeldoparti.models.Error;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.Map;
@@ -48,7 +49,6 @@ public final class Constants {
   public static final String ERROR_MESSAGE_TITLE = "¡Error!";
   public static final String FILENAME_BG_IMG = "bg.png";
   public static final String FILENAME_FONT = "comfortaa.ttf";
-
   public static final String FILENAME_PDA = "dist.pda";
   public static final String GROW = "grow";
   public static final String GROW_SPAN = "grow, span";

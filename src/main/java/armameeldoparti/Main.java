@@ -2,8 +2,8 @@ package armameeldoparti;
 
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFields;
-import armameeldoparti.utils.CommonFunctions;
+import armameeldoparti.utils.common.CommonFields;
+import armameeldoparti.utils.common.CommonFunctions;
 
 /**
  * Main class, only for program and useful fields initialization.

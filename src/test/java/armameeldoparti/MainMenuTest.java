@@ -8,7 +8,7 @@ import armameeldoparti.controllers.HelpController;
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFunctions;
+import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.views.HelpView;
 import armameeldoparti.views.NamesInputView;
 import org.junit.jupiter.api.BeforeAll;

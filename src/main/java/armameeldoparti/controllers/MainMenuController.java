@@ -1,7 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFunctions;
+import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.views.MainMenuView;
 
 /**

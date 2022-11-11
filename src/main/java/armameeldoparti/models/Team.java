@@ -1,6 +1,6 @@
 package armameeldoparti.models;
 
-import armameeldoparti.utils.CommonFields;
+import armameeldoparti.utils.common.CommonFields;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;

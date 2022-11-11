@@ -13,8 +13,8 @@ public class Player {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private int skillPoints;
   private int anchorageNumber;
+  private int skillPoints;
   private int teamNumber;
 
   private boolean isAnchored;

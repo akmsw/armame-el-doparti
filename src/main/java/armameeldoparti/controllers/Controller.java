@@ -27,7 +27,7 @@ public abstract class Controller {
    * @param controlledView View to control.
    */
   protected Controller(View controlledView) {
-    setView(controlledView);
+    setControlledView(controlledView);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -57,7 +57,7 @@ public abstract class Controller {
    *
    * @param controlledView The new controlled view.
    */
-  protected void setView(View controlledView) {
+  protected void setControlledView(View controlledView) {
     this.controlledView = controlledView;
   }
 

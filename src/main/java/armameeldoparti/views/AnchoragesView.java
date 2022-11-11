@@ -4,9 +4,9 @@ import armameeldoparti.controllers.AnchoragesController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFields;
-import armameeldoparti.utils.CommonFunctions;
-import armameeldoparti.utils.Constants;
+import armameeldoparti.utils.common.CommonFields;
+import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -210,8 +210,8 @@ public class AnchoragesView extends View {
                 .entrySet()
                 .forEach(ps -> {
                   final Position currentPosition = ps.getValue()
-                                                      .get(0)
-                                                      .getPosition();
+                                                     .get(0)
+                                                     .getPosition();
 
                   fillCheckboxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
                   addCheckboxesSet(checkBoxesMap.get(currentPosition),

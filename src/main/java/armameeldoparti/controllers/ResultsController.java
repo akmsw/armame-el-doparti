@@ -5,10 +5,10 @@ import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.BySkillsMixer;
-import armameeldoparti.utils.CommonFields;
-import armameeldoparti.utils.CommonFunctions;
-import armameeldoparti.utils.Constants;
 import armameeldoparti.utils.RandomMixer;
+import armameeldoparti.utils.common.CommonFields;
+import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.ResultsView;
 import java.awt.Color;
 import java.awt.Component;
@@ -73,7 +73,7 @@ public class ResultsController extends Controller {
   @Override
   public void resetView() {
     getView().dispose();
-    setView(new ResultsView());
+    setControlledView(new ResultsView());
   }
 
   /**

@@ -2,8 +2,8 @@ package armameeldoparti.views;
 
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFunctions;
-import armameeldoparti.utils.Constants;
+import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
