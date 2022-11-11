@@ -2,9 +2,9 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFields;
-import armameeldoparti.utils.CommonFunctions;
-import armameeldoparti.utils.Constants;
+import armameeldoparti.utils.common.CommonFields;
+import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.NamesInputView;
 import java.util.Collection;
 import java.util.List;

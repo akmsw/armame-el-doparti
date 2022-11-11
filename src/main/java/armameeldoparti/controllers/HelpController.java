@@ -1,9 +1,9 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.models.Error;
 import armameeldoparti.models.Views;
-import armameeldoparti.utils.CommonFunctions;
-import armameeldoparti.utils.Constants;
-import armameeldoparti.utils.Error;
+import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.HelpView;
 import java.io.BufferedReader;
 import java.io.IOException;
