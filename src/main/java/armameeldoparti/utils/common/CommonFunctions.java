@@ -81,22 +81,6 @@ public final class CommonFunctions {
   }
 
   /**
-   * Starts the program by initializing the fields needed along with
-   * the program's graphical properties, and making the main menu view visible.
-   */
-  public static final void start() {
-    CommonFields.initializeMaps();
-    CommonFields.setAnchorages(false);
-
-    setGraphicalProperties();
-    getPlayersDistributionData();
-    populatePlayersSets();
-    setUpControllers();
-
-    ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).showView();
-  }
-
-  /**
    * Gets a list containing the anchored players
    * grouped by their anchorage number.
    *

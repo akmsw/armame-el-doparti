@@ -1,5 +1,8 @@
 package armameeldoparti;
 
+import armameeldoparti.controllers.MainMenuController;
+import armameeldoparti.models.Views;
+import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 
 /**
@@ -25,11 +28,20 @@ public final class Main {
   // ---------------------------------------- Main entry point ----------------------------------
 
   /**
-   * Runs the program.
+   * Starts the program by initializing the fields needed along with
+   * the program's graphical properties, and making the main menu view visible.
    *
    * @param args Program arguments (not used yet).
    */
   public static void main(String[] args) {
-    CommonFunctions.start();
+    CommonFields.initializeMaps();
+    CommonFields.setAnchorages(false);
+
+    CommonFunctions.setGraphicalProperties();
+    CommonFunctions.getPlayersDistributionData();
+    CommonFunctions.populatePlayersSets();
+    CommonFunctions.setUpControllers();
+
+    ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).showView();
   }
 }
