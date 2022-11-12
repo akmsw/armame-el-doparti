@@ -77,7 +77,23 @@ public final class CommonFunctions {
    */
   public static final void showErrorMessage(String errorMessage) {
     JOptionPane.showMessageDialog(null, errorMessage, Constants.ERROR_MESSAGE_TITLE,
-                                  JOptionPane.ERROR_MESSAGE, null);
+        JOptionPane.ERROR_MESSAGE, null);
+  }
+
+  /**
+   * Starts the program by initializing the fields needed along with
+   * the program's graphical properties, and making the main menu view visible.
+   */
+  public static final void start() {
+    CommonFields.initializeMaps();
+    CommonFields.setAnchorages(false);
+
+    setGraphicalProperties();
+    getPlayersDistributionData();
+    populatePlayersSets();
+    setUpControllers();
+
+    ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).showView();
   }
 
   /**
