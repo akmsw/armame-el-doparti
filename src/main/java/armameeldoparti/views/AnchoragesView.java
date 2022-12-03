@@ -55,12 +55,13 @@ public class AnchoragesView extends View {
 
   private JTextArea textArea;
 
+  private List<JButton> anchorageButtons;
+
   private List<JCheckBox> cdCheckboxes;
   private List<JCheckBox> ldCheckboxes;
   private List<JCheckBox> mfCheckboxes;
   private List<JCheckBox> fwCheckboxes;
   private List<JCheckBox> gkCheckboxes;
-  private List<JButton> anchorageButtons;
 
   private Map<Position, List<JCheckBox>> checkBoxesMap;
 

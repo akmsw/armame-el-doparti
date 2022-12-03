@@ -161,7 +161,8 @@ public final class Main {
                 .put(Views.SKILL_POINTS, skillPointsInputController);
 
     Controller resultsController = new ResultsController(new ResultsView());
-    CommonFields.getControllersMap().put(Views.RESULTS, resultsController);
+    CommonFields.getControllersMap()
+                .put(Views.RESULTS, resultsController);
   }
 
   /**

@@ -48,11 +48,11 @@ public class ResultsController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private List<Team> teams;
+  private BySkillsMixer bySkillsMixer = new BySkillsMixer();
 
   private RandomMixer randomMixer = new RandomMixer();
 
-  private BySkillsMixer bySkillsMixer = new BySkillsMixer();
+  private List<Team> teams;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
