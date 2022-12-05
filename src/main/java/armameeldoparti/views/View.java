@@ -20,8 +20,7 @@ public abstract class View extends JFrame {
   // ---------------------------------------- Protected constructor -----------------------------
 
   /**
-   * Simple constructor.
-   * Sets the frame title.
+   * Basic view constructor.
    *
    * @param frameTitle The frame title.
    */
