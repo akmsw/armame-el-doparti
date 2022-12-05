@@ -32,8 +32,6 @@ public class HelpView extends View {
   private static final int TEXT_AREA_ROWS = 20;
   private static final int TEXT_AREA_COLUMNS = 30;
 
-  private static final String FRAME_TITLE = "Ayuda";
-
   // ---------------------------------------- Private fields ------------------------------------
 
   private JButton previousPageButton;
@@ -54,6 +52,7 @@ public class HelpView extends View {
    * Builds the help view.
    */
   public HelpView() {
+    super("Ayuda");
     initializeInterface();
   }
 
@@ -128,7 +127,7 @@ public class HelpView extends View {
     addPagesLabel();
     addButtons();
     add(masterPanel);
-    setTitle(FRAME_TITLE);
+    setTitle(getFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Constants.ICON
                           .getImage());

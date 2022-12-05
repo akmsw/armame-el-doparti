@@ -32,11 +32,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class SkillPointsInputView extends View {
 
-  // ---------------------------------------- Private constants ---------------------------------
-
-  private static final String FRAME_TITLE = "Ingreso de puntuaciones";
-
-  // ---------------------------------------- Private fields -------------------------------------
+  // ---------------------------------------- Private fields ------------------------------------
 
   private JPanel masterPanel;
 
@@ -49,6 +45,7 @@ public class SkillPointsInputView extends View {
    * Builds the skill points input view.
    */
   public SkillPointsInputView() {
+    super("Ingreso de puntuaciones");
     initializeInterface();
   }
 
@@ -64,7 +61,7 @@ public class SkillPointsInputView extends View {
     spinnersMap = new HashMap<>();
     labelsMap = new HashMap<>();
 
-    setTitle(FRAME_TITLE);
+    setTitle(getFrameTitle());
     setResizable(false);
     setIconImage(Constants.ICON
                           .getImage());

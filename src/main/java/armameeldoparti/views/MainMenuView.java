@@ -23,11 +23,6 @@ import net.miginfocom.swing.MigLayout;
  */
 public class MainMenuView extends View {
 
-  // ---------------------------------------- Private constants ---------------------------------
-
-  private static final String FRAME_TITLE = Constants.PROGRAM_TITLE + " "
-                                            + Constants.PROGRAM_VERSION;
-
   // ---------------------------------------- Private fields ------------------------------------
 
   private JPanel masterPanel;
@@ -38,6 +33,7 @@ public class MainMenuView extends View {
    * Builds the main menu view.
    */
   public MainMenuView() {
+    super(Constants.PROGRAM_TITLE + " " + Constants.PROGRAM_VERSION);
     initializeInterface();
   }
 
@@ -54,7 +50,7 @@ public class MainMenuView extends View {
     addButtons();
     add(masterPanel);
     setResizable(false);
-    setTitle(FRAME_TITLE);
+    setTitle(getFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Constants.ICON
                           .getImage());

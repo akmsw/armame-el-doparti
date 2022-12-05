@@ -34,7 +34,7 @@ public final class CommonFields {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Empty private constructor. Not needed.
+   * Empty, private constructor. Not needed.
    */
   private CommonFields() {
     // Not needed.

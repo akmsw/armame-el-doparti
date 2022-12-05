@@ -48,7 +48,7 @@ public final class Main {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Empty constructor.
+   * Empty, private constructor. Not needed.
    */
   private Main() {
     // No body needed
@@ -114,7 +114,7 @@ public final class Main {
         new InputStreamReader(CommonFunctions.class
                                              .getClassLoader()
                                              .getResourceAsStream(Constants.PATH_DOCS
-                                                                 + Constants.FILENAME_PDA))
+                                                                  + Constants.FILENAME_PDA))
     );
 
     var wrapperIndex = new Object() {

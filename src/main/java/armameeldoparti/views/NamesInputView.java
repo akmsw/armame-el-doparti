@@ -37,8 +37,6 @@ public class NamesInputView extends View {
   private static final int TEXT_AREA_ROWS = 14;
   private static final int TEXT_AREA_COLUMNS = 12;
 
-  private static final String FRAME_TITLE = "Ingreso de jugadores";
-
   private static final String[] OPTIONS_COMBOBOX = {
     "Defensores centrales",
     "Defensores laterales",
@@ -68,16 +66,12 @@ public class NamesInputView extends View {
    * Builds the names input view.
    */
   public NamesInputView() {
-    textFieldsMap = new EnumMap<>(Position.class);
-
-    for (Position position : Position.values()) {
-      textFieldsMap.put(position, new ArrayList<>());
-    }
-
+    super("Ingreso de jugadores");
+    initializeTextFieldsMap();
     initializeInterface();
   }
 
-  // ---------------------------------------- Public methods -------------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
   // ---------------------------------------- Getters -------------------------------------------
 
@@ -162,7 +156,7 @@ public class NamesInputView extends View {
     masterPanel.add(rightPanel, "east");
 
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setTitle(FRAME_TITLE);
+    setTitle(getFrameTitle());
     setIconImage(Constants.ICON
                           .getImage());
     setResizable(false);
@@ -280,6 +274,17 @@ public class NamesInputView extends View {
         textFieldsMap.get(position)
                      .add(tf);
       }
+    }
+  }
+
+  /**
+   * Initializes the textfields map.
+   */
+  private void initializeTextFieldsMap() {
+    textFieldsMap = new EnumMap<>(Position.class);
+
+    for (Position position : Position.values()) {
+      textFieldsMap.put(position, new ArrayList<>());
     }
   }
 }

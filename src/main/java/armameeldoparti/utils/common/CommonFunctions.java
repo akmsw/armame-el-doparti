@@ -24,7 +24,7 @@ public final class CommonFunctions {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Empty private constructor. Not needed.
+   * Empty, private constructor. Not needed.
    */
   private CommonFunctions() {
     // Not needed.
@@ -53,7 +53,7 @@ public final class CommonFunctions {
    */
   public static final void showErrorMessage(String errorMessage) {
     JOptionPane.showMessageDialog(null, errorMessage, Constants.ERROR_MESSAGE_TITLE,
-        JOptionPane.ERROR_MESSAGE, null);
+                                  JOptionPane.ERROR_MESSAGE, null);
   }
 
   /**

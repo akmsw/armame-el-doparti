@@ -36,10 +36,6 @@ import net.miginfocom.swing.MigLayout;
  */
 public class AnchoragesView extends View {
 
-  // ---------------------------------------- Private constants ---------------------------------
-
-  private static final String FRAME_TITLE = "Anclaje de jugadores";
-
   // ---------------------------------------- Private fields ------------------------------------
 
   private JButton finishButton;
@@ -71,6 +67,8 @@ public class AnchoragesView extends View {
    * Builds the anchorages view.
    */
   public AnchoragesView() {
+    super("Anclaje de jugadores");
+
     cdCheckboxes = new ArrayList<>();
     ldCheckboxes = new ArrayList<>();
     mfCheckboxes = new ArrayList<>();
@@ -230,7 +228,7 @@ public class AnchoragesView extends View {
 
     addButtons();
     add(masterPanel);
-    setTitle(FRAME_TITLE);
+    setTitle(getFrameTitle());
     setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Constants.ICON

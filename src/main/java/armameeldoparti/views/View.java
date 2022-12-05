@@ -13,6 +13,22 @@ import javax.swing.JFrame;
  */
 public abstract class View extends JFrame {
 
+  // ---------------------------------------- Protected fields ----------------------------------
+
+  protected String frameTitle;
+
+  // ---------------------------------------- Protected constructor -----------------------------
+
+  /**
+   * Simple constructor.
+   * Sets the frame title.
+   *
+   * @param frameTitle The frame title.
+   */
+  protected View(String frameTitle) {
+    setFrameTitle(frameTitle);
+  }
+
   // ---------------------------------------- Abstract protected methods ------------------------
 
   /**
@@ -24,4 +40,28 @@ public abstract class View extends JFrame {
    * Adds the buttons to their corresponding panel.
    */
   protected abstract void addButtons();
+
+  // ---------------------------------------- Protected methods ---------------------------------
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  /**
+   * Gets the frame title.
+   *
+   * @return The frame title.
+   */
+  protected String getFrameTitle() {
+    return frameTitle;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  /**
+   * Sets the frame title.
+   *
+   * @param frameTitle The new frame title.
+   */
+  protected void setFrameTitle(String frameTitle) {
+    this.frameTitle = frameTitle;
+  }
 }

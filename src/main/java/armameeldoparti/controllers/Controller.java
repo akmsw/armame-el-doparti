@@ -1,7 +1,8 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.views.View;
 import java.awt.Toolkit;
+
+import armameeldoparti.views.View;
 
 /**
  * Abstract class that specifies the basic methods for

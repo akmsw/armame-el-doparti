@@ -13,11 +13,11 @@ public class Player {
 
   // ---------------------------------------- Private fields ------------------------------------
 
+  private boolean isAnchored;
+
   private int anchorageNumber;
   private int skillPoints;
   private int teamNumber;
-
-  private boolean isAnchored;
 
   private String name;
 
