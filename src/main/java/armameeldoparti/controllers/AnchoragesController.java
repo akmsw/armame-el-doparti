@@ -50,7 +50,7 @@ public class AnchoragesController extends Controller {
    */
   @Override
   public void resetView() {
-    clearCheckboxes();
+    clearCheckBoxes();
     clearAnchorages();
     updateTextArea();
     toggleButtons();
@@ -372,7 +372,7 @@ public class AnchoragesController extends Controller {
    */
   private void finish() {
     hideView();
-    clearCheckboxes();
+    clearCheckBoxes();
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
       ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
@@ -392,7 +392,7 @@ public class AnchoragesController extends Controller {
    * Sets the corresponding anchorage number to the selected players.
    * Then, unchecks their checkboxes and makes them invisible.
    *
-   * @param cbSet Checkboxes set with players checked.
+   * @param cbSet Check boxes set with players checked.
    */
   private void setAnchorages(List<JCheckBox> cbSet) {
     CommonFields.getPlayersSets()
@@ -419,7 +419,7 @@ public class AnchoragesController extends Controller {
   /**
    * Unchecks the remaining checked checkboxes.
    */
-  private void clearCheckboxes() {
+  private void clearCheckBoxes() {
     ((AnchoragesView) getView()).getCheckBoxesMap()
                                 .values()
                                 .stream()

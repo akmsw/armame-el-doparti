@@ -42,7 +42,7 @@ public class ResultsView extends View {
    * Builds an empty results view.
    */
   public ResultsView() {
-    super(updateFrameTitle());
+    super(getUpdatedFrameTitle());
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -54,7 +54,7 @@ public class ResultsView extends View {
   public void initializeInterface() {
     panel = new JPanel(new MigLayout("wrap"));
 
-    setFrameTitle(updateFrameTitle());
+    setFrameTitle(getUpdatedFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Constants.ICON
                           .getImage());
@@ -140,12 +140,12 @@ public class ResultsView extends View {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Updates the frame title based on the chosen distribution
-   * and the anchorages option.
+   * Updates and returns the frame title based on the
+   * chosen distribution and the anchorages option.
    *
    * @return The updated frame title.
    */
-  private static String updateFrameTitle() {
+  private static String getUpdatedFrameTitle() {
     return (CommonFields.getDistribution() == Constants.MIX_RANDOM
             ? "Aleatorio - "
             : "Por puntuaciones - ").concat(CommonFields.thereAreAnchorages() ? "Con anclajes"

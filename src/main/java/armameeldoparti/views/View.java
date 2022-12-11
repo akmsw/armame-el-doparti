@@ -3,7 +3,7 @@ package armameeldoparti.views;
 import javax.swing.JFrame;
 
 /**
- * Abstract class that specifies the basic views methods.
+ * Abstract class that specifies the basic views methods and fields.
  *
  * @author Bonino, Francisco Ignacio.
  *

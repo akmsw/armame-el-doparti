@@ -67,7 +67,7 @@ public final class Main {
     CommonFields.setAnchorages(false);
 
     setGraphicalProperties();
-    getPlayersDistributionData();
+    setPlayersDistribution();
     populatePlayersSets();
     setUpControllers();
 
@@ -83,7 +83,8 @@ public final class Main {
     for (Position position : Position.values()) {
       List<Player> playersSet = new ArrayList<>();
 
-      for (int i = 0; i < CommonFields.getPlayersAmountMap().get(position) * 2; i++) {
+      for (int i = 0; i < CommonFields.getPlayersAmountMap()
+                                      .get(position) * 2; i++) {
         playersSet.add(new Player("", position));
       }
 
@@ -109,7 +110,7 @@ public final class Main {
    * Position.values()[index] trusts the order in which the data will be retrieved from the
    * .pda file and, therefore, you should review the order of the important lines in the file.
    */
-  private static final void getPlayersDistributionData() {
+  private static final void setPlayersDistribution() {
     BufferedReader buff = new BufferedReader(
         new InputStreamReader(CommonFunctions.class
                                              .getClassLoader()
@@ -118,19 +119,17 @@ public final class Main {
     );
 
     var wrapperIndex = new Object() {
-      private int index;
+      private int index = 0;
     };
 
     buff.lines()
+        .filter(l -> l.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
         .forEach(l -> {
-          if (l.matches(Constants.REGEX_PDA_DATA_RETRIEVE)) {
-            CommonFields.getPlayersAmountMap()
-                        .put(Position.values()[wrapperIndex.index],
-                             Integer.parseInt(l.replaceAll(Constants.REGEX_PLAYERS_AMOUNT,
-                             "")));
+          CommonFields.getPlayersAmountMap()
+                      .put(Position.values()[wrapperIndex.index],
+                           Integer.parseInt(l.replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")));
 
-            wrapperIndex.index++;
-          }
+          wrapperIndex.index++;
         });
   }
 

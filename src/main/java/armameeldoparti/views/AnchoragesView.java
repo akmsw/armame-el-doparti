@@ -53,11 +53,11 @@ public class AnchoragesView extends View {
 
   private List<JButton> anchorageButtons;
 
-  private List<JCheckBox> cdCheckboxes;
-  private List<JCheckBox> ldCheckboxes;
-  private List<JCheckBox> mfCheckboxes;
-  private List<JCheckBox> fwCheckboxes;
-  private List<JCheckBox> gkCheckboxes;
+  private List<JCheckBox> cdCheckBoxes;
+  private List<JCheckBox> ldCheckBoxes;
+  private List<JCheckBox> mfCheckBoxes;
+  private List<JCheckBox> fwCheckBoxes;
+  private List<JCheckBox> gkCheckBoxes;
 
   private Map<Position, List<JCheckBox>> checkBoxesMap;
 
@@ -69,20 +69,20 @@ public class AnchoragesView extends View {
   public AnchoragesView() {
     super("Anclaje de jugadores");
 
-    cdCheckboxes = new ArrayList<>();
-    ldCheckboxes = new ArrayList<>();
-    mfCheckboxes = new ArrayList<>();
-    fwCheckboxes = new ArrayList<>();
-    gkCheckboxes = new ArrayList<>();
+    cdCheckBoxes = new ArrayList<>();
+    ldCheckBoxes = new ArrayList<>();
+    mfCheckBoxes = new ArrayList<>();
+    fwCheckBoxes = new ArrayList<>();
+    gkCheckBoxes = new ArrayList<>();
     anchorageButtons = new ArrayList<>();
 
     checkBoxesMap = new EnumMap<>(Position.class);
 
-    checkBoxesMap.put(Position.CENTRAL_DEFENDER, cdCheckboxes);
-    checkBoxesMap.put(Position.LATERAL_DEFENDER, ldCheckboxes);
-    checkBoxesMap.put(Position.MIDFIELDER, mfCheckboxes);
-    checkBoxesMap.put(Position.FORWARD, fwCheckboxes);
-    checkBoxesMap.put(Position.GOALKEEPER, gkCheckboxes);
+    checkBoxesMap.put(Position.CENTRAL_DEFENDER, cdCheckBoxes);
+    checkBoxesMap.put(Position.LATERAL_DEFENDER, ldCheckBoxes);
+    checkBoxesMap.put(Position.MIDFIELDER, mfCheckBoxes);
+    checkBoxesMap.put(Position.FORWARD, fwCheckBoxes);
+    checkBoxesMap.put(Position.GOALKEEPER, gkCheckBoxes);
 
     initializeInterface();
   }
@@ -212,8 +212,8 @@ public class AnchoragesView extends View {
                                                      .get(0)
                                                      .getPosition();
 
-                  fillCheckboxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
-                  addCheckboxesSet(checkBoxesMap.get(currentPosition),
+                  fillCheckBoxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
+                  addCheckBoxesSet(checkBoxesMap.get(currentPosition),
                                    CommonFields.getPositionsMap()
                                                .get(currentPosition));
                 });
@@ -307,19 +307,19 @@ public class AnchoragesView extends View {
    * Fills the checkboxes sets.
    *
    * @param playersSet Players sets from where to obtain the names.
-   * @param cbSet      Checkboxes set to fill.
+   * @param cbSet      Check boxes set to fill.
    */
-  private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
+  private void fillCheckBoxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
     playersSet.forEach(p -> cbSet.add(new JCheckBox(p.getName())));
   }
 
   /**
    * Adds the checkboxes to the view with a label that specifies the corresponding position.
    *
-   * @param cbSet Checkboxes to add.
+   * @param cbSet Check boxes to add.
    * @param title Label text.
    */
-  private void addCheckboxesSet(List<JCheckBox> cbSet, String text) {
+  private void addCheckBoxesSet(List<JCheckBox> cbSet, String text) {
     JLabel label = new JLabel(text);
 
     label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
