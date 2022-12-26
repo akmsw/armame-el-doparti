@@ -67,6 +67,10 @@ public class NamesInputView extends View {
    */
   public NamesInputView() {
     super("Ingreso de jugadores");
+
+    leftPanel = new JPanel(new MigLayout("wrap"));
+    rightPanel = new JPanel(new MigLayout("wrap"));
+
     initializeTextFieldsMap();
     initializeInterface();
   }
@@ -147,9 +151,6 @@ public class NamesInputView extends View {
    */
   @Override
   protected void initializeInterface() {
-    leftPanel = new JPanel(new MigLayout("wrap"));
-    rightPanel = new JPanel(new MigLayout("wrap"));
-
     JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
 
     masterPanel.add(leftPanel, "west");

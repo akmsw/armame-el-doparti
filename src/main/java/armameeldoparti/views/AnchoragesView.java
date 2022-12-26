@@ -69,6 +69,14 @@ public class AnchoragesView extends View {
   public AnchoragesView() {
     super("Anclaje de jugadores");
 
+    leftPanel = new JPanel(new MigLayout("wrap 2"));
+    rightPanel = new JPanel(new MigLayout("wrap"));
+
+    textArea = new JTextArea();
+
+    scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
     cdCheckBoxes = new ArrayList<>();
     ldCheckBoxes = new ArrayList<>();
     mfCheckBoxes = new ArrayList<>();
@@ -188,14 +196,6 @@ public class AnchoragesView extends View {
    */
   @Override
   protected void initializeInterface() {
-    leftPanel = new JPanel(new MigLayout("wrap 2"));
-    rightPanel = new JPanel(new MigLayout("wrap"));
-
-    textArea = new JTextArea();
-
-    scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
     scrollPane.getVerticalScrollBar()
               .setUI(new BasicScrollBarUI() {
                 @Override

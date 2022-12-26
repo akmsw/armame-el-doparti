@@ -46,6 +46,12 @@ public class SkillPointsInputView extends View {
    */
   public SkillPointsInputView() {
     super("Ingreso de puntuaciones");
+
+    masterPanel = new JPanel(new MigLayout());
+
+    spinnersMap = new HashMap<>();
+    labelsMap = new HashMap<>();
+
     initializeInterface();
   }
 
@@ -56,11 +62,6 @@ public class SkillPointsInputView extends View {
    */
   @Override
   public void initializeInterface() {
-    masterPanel = new JPanel(new MigLayout());
-
-    spinnersMap = new HashMap<>();
-    labelsMap = new HashMap<>();
-
     setTitle(getFrameTitle());
     setResizable(false);
     setIconImage(Constants.ICON

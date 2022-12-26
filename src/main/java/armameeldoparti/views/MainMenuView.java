@@ -34,6 +34,9 @@ public class MainMenuView extends View {
    */
   public MainMenuView() {
     super(Constants.PROGRAM_TITLE + " " + Constants.PROGRAM_VERSION);
+
+    masterPanel = new JPanel(new MigLayout("wrap"));
+
     initializeInterface();
   }
 
@@ -44,8 +47,6 @@ public class MainMenuView extends View {
    */
   @Override
   protected void initializeInterface() {
-    masterPanel = new JPanel(new MigLayout("wrap"));
-
     addBackground();
     addButtons();
     add(masterPanel);

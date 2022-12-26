@@ -53,6 +53,9 @@ public class HelpView extends View {
    */
   public HelpView() {
     super("Ayuda");
+
+    masterPanel = new JPanel(new MigLayout("wrap"));
+
     initializeInterface();
   }
 
@@ -121,8 +124,6 @@ public class HelpView extends View {
    */
   @Override
   protected void initializeInterface() {
-    masterPanel = new JPanel(new MigLayout("wrap"));
-
     addTextArea();
     addPagesLabel();
     addButtons();

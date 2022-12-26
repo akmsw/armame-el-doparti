@@ -48,9 +48,9 @@ public class ResultsController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private BySkillsMixer bySkillsMixer = new BySkillsMixer();
+  private BySkillsMixer bySkillsMixer;
 
-  private RandomMixer randomMixer = new RandomMixer();
+  private RandomMixer randomMixer;
 
   private List<Team> teams;
 
@@ -63,6 +63,12 @@ public class ResultsController extends Controller {
    */
   public ResultsController(ResultsView resultsView) {
     super(resultsView);
+
+    bySkillsMixer = new BySkillsMixer();
+
+    randomMixer = new RandomMixer();
+
+    teams = new ArrayList<>();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -81,13 +87,12 @@ public class ResultsController extends Controller {
    * the non-variable table cells and displays the distribution results.
    */
   public void setUp() {
+    int addRows;
+
     Team team1 = new Team(1);
     Team team2 = new Team(2);
 
-    int addRows;
-
-    teams = new ArrayList<>();
-
+    teams.clear();
     teams.add(team1);
     teams.add(team2);
 

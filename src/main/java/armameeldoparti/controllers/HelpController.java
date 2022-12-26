@@ -44,7 +44,7 @@ public class HelpController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private int pageNumber = 0;
+  private int pageNumber;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -55,6 +55,8 @@ public class HelpController extends Controller {
    */
   public HelpController(HelpView helpView) {
     super(helpView);
+
+    pageNumber = 0;
   }
 
   // ---------------------------------------- Public methods ------------------------------------

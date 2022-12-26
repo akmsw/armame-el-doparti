@@ -36,6 +36,10 @@ public class AnchoragesController extends Controller {
    */
   public AnchoragesController(AnchoragesView anchoragesView) {
     super(anchoragesView);
+
+    anchoragesAmount = 0;
+    anchoredPlayersAmount = 0;
+
     toggleButtons();
   }
 

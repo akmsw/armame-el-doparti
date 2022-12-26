@@ -6,7 +6,6 @@ import armameeldoparti.models.Team;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,7 +22,6 @@ public class RandomMixer implements PlayersMixer {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private int index;
   private int randomTeam1;
   private int randomTeam2;
 
@@ -57,18 +55,18 @@ public class RandomMixer implements PlayersMixer {
   public List<Team> withoutAnchorages(List<Team> teams) {
     updateTeamNumbers(teams.size());
 
-    List<Integer> alreadySetted = new ArrayList<>();
-
     for (Position position : Position.values()) {
       List<Player> playersSet = CommonFields.getPlayersSets()
                                             .get(position);
 
       for (int i = 0; i < playersSet.size() / 2; i++) {
-        updateIndex(playersSet.size(), alreadySetted);
-
-        alreadySetted.add(index);
-
-        Player chosenPlayer = playersSet.get(index);
+        Player chosenPlayer = playersSet.get(
+          playersSet.indexOf(
+            getRandomUnassignedPlayer(playersSet.stream()
+                                                .filter(p -> p.getTeamNumber() == 0)
+                                                .toList())
+          )
+        );
 
         chosenPlayer.setTeamNumber(randomTeam1 + 1);
 
@@ -78,6 +76,7 @@ public class RandomMixer implements PlayersMixer {
              .add(chosenPlayer);
       }
 
+      // Remaining unassigned players
       playersSet.stream()
                 .filter(p -> p.getTeamNumber() == 0)
                 .forEach(p -> {
@@ -88,8 +87,6 @@ public class RandomMixer implements PlayersMixer {
                        .get(p.getPosition())
                        .add(p);
                 });
-
-      alreadySetted.clear();
     }
 
     return teams;
@@ -162,18 +159,6 @@ public class RandomMixer implements PlayersMixer {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Randomly updates the player selection index.
-   *
-   * @param range      Upper limit (exclusive) for the random number generator.
-   * @param indexesSet Set where to check if the generated index is already present.
-   */
-  private void updateIndex(int range, List<Integer> indexesSet) {
-    do {
-      index = randomGenerator.nextInt(range);
-    } while (indexesSet.contains(index));
-  }
-
-  /**
    * Randomly updates the team numbers.
    *
    * @param range Upper limit (exclusive) for the random number generator.
@@ -212,5 +197,16 @@ public class RandomMixer implements PlayersMixer {
                                                                  .count()
                                                 > CommonFields.getPlayersAmountMap()
                                                               .get(p.getPosition()));
+  }
+
+  /**
+   * Gets a random player from a list containing players that have not been assigned a team yet.
+   *
+   * @param unassignedPlayersList List containing players without any team assigned yet.
+   *
+   * @return A random player that has not been assigned a team yet.
+   */
+  private Player getRandomUnassignedPlayer(List<Player> unassignedPlayersList) {
+    return unassignedPlayersList.get(randomGenerator.nextInt(unassignedPlayersList.size()));
   }
 }

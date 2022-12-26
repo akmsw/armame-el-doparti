@@ -43,6 +43,8 @@ public class ResultsView extends View {
    */
   public ResultsView() {
     super(getUpdatedFrameTitle());
+
+    panel = new JPanel(new MigLayout("wrap"));
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -52,8 +54,6 @@ public class ResultsView extends View {
    */
   @Override
   public void initializeInterface() {
-    panel = new JPanel(new MigLayout("wrap"));
-
     setFrameTitle(getUpdatedFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Constants.ICON
