@@ -53,6 +53,8 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
+    Player chosenPlayer;
+
     updateTeamNumbers(teams.size());
 
     for (Position position : Position.values()) {
@@ -60,7 +62,7 @@ public class RandomMixer implements PlayersMixer {
                                             .get(position);
 
       for (int i = 0; i < playersSet.size() / 2; i++) {
-        Player chosenPlayer = playersSet.get(
+        chosenPlayer = playersSet.get(
           playersSet.indexOf(
             getRandomUnassignedPlayer(playersSet.stream()
                                                 .filter(p -> p.getTeamNumber() == 0)
