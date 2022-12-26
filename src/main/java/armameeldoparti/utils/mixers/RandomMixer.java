@@ -8,6 +8,7 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Random distribution class.
@@ -66,7 +67,7 @@ public class RandomMixer implements PlayersMixer {
           playersSet.indexOf(
             getRandomUnassignedPlayer(playersSet.stream()
                                                 .filter(p -> p.getTeamNumber() == 0)
-                                                .toList())
+                                                .collect(Collectors.toList()))
           )
         );
 
