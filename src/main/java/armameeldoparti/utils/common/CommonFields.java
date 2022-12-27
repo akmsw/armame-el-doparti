@@ -28,10 +28,10 @@ public final class CommonFields {
 
   private static @Getter @Setter boolean anchorages;
 
-  private static @Getter  Map<Position, Integer> playersAmountMap;
-  private static @Getter  Map<Position, List<Player>> playersSets;
-  private static @Getter  Map<Position, String> positionsMap;
-  private static @Getter  Map<Views, Controller> controllersMap;
+  private static @Getter Map<Position, Integer> playersAmountMap;
+  private static @Getter Map<Position, List<Player>> playersSets;
+  private static @Getter Map<Position, String> positionsMap;
+  private static @Getter Map<Views, Controller> controllersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
