@@ -12,8 +12,9 @@
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-1-yellow?logo=sonarlint)](https://www.sonarlint.org/)
 [![jUnit5Badge](https://img.shields.io/badge/junit5-passing-brightgreen?logo=junit5)](https://junit.org/junit5/)
 
-[![openJDKTarget](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/11/)
-[![apacheMavenBadge](https://img.shields.io/badge/apache-maven-orange?logo=apachemaven)](https://maven.apache.org/)
+[![openJDKTargetBadge](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/11/)
+[![apacheMavenBadge](https://img.shields.io/badge/apache%20maven-3.8.6-orange?logo=apachemaven)](https://maven.apache.org/)
+[![lombokBadge](https://img.shields.io/badge/lombok-1.18.24-red?logo=opensourceinitiative)](https://projectlombok.org/)
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross--platform-blueviolet?logo=windows-terminal)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/gpl-3.0-blue?logo=gnu)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
