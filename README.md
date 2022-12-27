@@ -106,13 +106,13 @@ Si el programa presenta algún error que debería ser reportado para arreglarlo,
 *Ventana de ayuda*
 
 ![ventana_ingreso_nombres](./src/main/res/img/readme/ss3.png)\
-*Ventana de ingreso de nombres*
+*Ventana de ingreso de jugadores*
 
 ![ventana_anclajes](./src/main/res/img/readme/ss4.png)\
-*Ventana de anclajes*
+*Ventana de selección de anclajes*
 
 ![ventana_puntuaciones](./src/main/res/img/readme/ss5.png)\
-*Ventana de puntuaciones*
+*Ventana de ingreso de puntuaciones*
 
 ![ventana_resultados_1](./src/main/res/img/readme/ss6.png)\
 *Ejemplo de resultado de distribución aleatoria sin anclajes*
