@@ -63,8 +63,6 @@ class HelpViewTest {
                            .toFile()
                            .list()
                            .length;
-
-    System.out.println("helpPagesAmount = " + helpPagesAmount);
   }
 
   /**
