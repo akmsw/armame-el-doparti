@@ -122,7 +122,7 @@ public class NamesInputController extends Controller {
 
     CommonFields.setDistribution(distribution);
 
-    if (CommonFields.thereAreAnchorages()) {
+    if (CommonFields.isAnchorages()) {
       ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
       .updateCheckBoxesText();
 
@@ -253,9 +253,9 @@ public class NamesInputController extends Controller {
                                 .filter(tf -> tf.getParent() == leftPanel)
                                 .forEach(leftPanel::remove);
 
-    for (int i = 0; i < ((NamesInputView) getView()).getComboBoxOptions()
-                                                    .length; i++) {
-      if (selectedOption.equals(((NamesInputView) getView()).getComboBoxOptions()[i])) {
+    for (int i = 0; i < NamesInputView.getOPTIONS_COMBOBOX()
+                                      .length; i++) {
+      if (selectedOption.equals(NamesInputView.getOPTIONS_COMBOBOX()[i])) {
         ((NamesInputView) getView()).getTextFieldsMap()
                                     .get(CommonFunctions.getCorrespondingPosition(
                                       CommonFields.getPositionsMap(), selectedOption.toUpperCase()))

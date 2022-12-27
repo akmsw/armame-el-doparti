@@ -74,7 +74,7 @@ public class RandomMixer implements PlayersMixer {
         chosenPlayer.setTeamNumber(randomTeam1 + 1);
 
         teams.get(randomTeam1)
-             .getPlayers()
+             .getTeamPlayers()
              .get(chosenPlayer.getPosition())
              .add(chosenPlayer);
       }
@@ -86,7 +86,7 @@ public class RandomMixer implements PlayersMixer {
                   p.setTeamNumber(randomTeam2 + 1);
 
                   teams.get(randomTeam2)
-                       .getPlayers()
+                       .getTeamPlayers()
                        .get(p.getPosition())
                        .add(p);
                 });
@@ -125,7 +125,7 @@ public class RandomMixer implements PlayersMixer {
         p.setTeamNumber(teamNumber + 1);
 
         teams.get(teamNumber)
-             .getPlayers()
+             .getTeamPlayers()
              .get(p.getPosition())
              .add(p);
       }
@@ -151,7 +151,7 @@ public class RandomMixer implements PlayersMixer {
                   p.setTeamNumber(teamNumber + 1);
 
                   teams.get(teamNumber)
-                       .getPlayers()
+                       .getTeamPlayers()
                        .get(p.getPosition())
                        .add(p);
                 });
@@ -190,7 +190,7 @@ public class RandomMixer implements PlayersMixer {
     return team.getPlayersCount() + anchoredPlayers.size() <= Constants.PLAYERS_PER_TEAM
            && anchoredPlayers.stream()
                              .noneMatch(p -> team.isPositionFull(p.getPosition())
-                                             || team.getPlayers()
+                                             || team.getTeamPlayers()
                                                     .get(p.getPosition())
                                                     .size()
                                                 + anchoredPlayers.stream()

@@ -2,6 +2,9 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.views.View;
 import java.awt.Toolkit;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Abstract class that specifies the basic methods for
@@ -17,28 +20,17 @@ public abstract class Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private View controlledView;
+  private @Getter @Setter(AccessLevel.PROTECTED) View view;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
    * Builds the view controller.
    *
-   * @param controlledView View to control.
+   * @param view View to control.
    */
-  protected Controller(View controlledView) {
-    setControlledView(controlledView);
-  }
-
-  // ---------------------------------------- Public methods ------------------------------------
-
-  /**
-   * Gets the controlled view.
-   *
-   * @return The controlled view.
-   */
-  public View getView() {
-    return controlledView;
+  protected Controller(View view) {
+    setView(view);
   }
 
   // ---------------------------------------- Protected methods ---------------------------------
@@ -47,25 +39,16 @@ public abstract class Controller {
    * Makes the controlled view invisible.
    */
   protected void hideView() {
-    controlledView.setVisible(false);
+    view.setVisible(false);
 
     centerView();
-  }
-
-  /**
-   * Updates the controlled view object.
-   *
-   * @param controlledView The new controlled view.
-   */
-  protected void setControlledView(View controlledView) {
-    this.controlledView = controlledView;
   }
 
   /**
    * Makes the controlled view visible.
    */
   protected void showView() {
-    controlledView.setVisible(true);
+    view.setVisible(true);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -78,15 +61,15 @@ public abstract class Controller {
    * the frame won't be centered correctly.
    */
   private void centerView() {
-    controlledView.setLocation((Toolkit.getDefaultToolkit()
-                                       .getScreenSize()
-                                       .width - controlledView.getSize()
-                                                              .width) / 2,
-                               (Toolkit.getDefaultToolkit()
-                                       .getScreenSize()
-                                       .height - controlledView.getSize()
-                                                               .height) / 2);
-    controlledView.setLocationRelativeTo(null);
+    view.setLocation((Toolkit.getDefaultToolkit()
+                             .getScreenSize()
+                             .width - view.getSize()
+                                         .width) / 2,
+                     (Toolkit.getDefaultToolkit()
+                             .getScreenSize()
+                             .height - view.getSize()
+                                           .height) / 2);
+    view.setLocationRelativeTo(null);
   }
 
   // ---------------------------------------- Abstract protected methods ------------------------

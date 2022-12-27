@@ -51,7 +51,8 @@ class MainMenuTest {
   void helpViewInitialState() {
     ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).helpButtonEvent();
 
-    assertEquals(0, ((HelpController) CommonFunctions.getController(Views.HELP)).getPageNumber());
+    assertEquals(0, ((HelpController) CommonFunctions.getController(Views.HELP))
+                    .getCurrentPageNumber());
 
     assertTrue(CommonFunctions.getController(Views.HELP)
                               .getView()

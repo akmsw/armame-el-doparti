@@ -14,6 +14,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -34,17 +35,17 @@ public class HelpView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private JButton previousPageButton;
-  private JButton nextPageButton;
-  private JButton backButton;
+  private @Getter JButton previousPageButton;
+  private @Getter JButton nextPageButton;
+  private @Getter JButton backButton;
 
-  private JLabel pagesCounter;
+  private @Getter JLabel pagesCounter;
 
   private JPanel masterPanel;
 
-  private JScrollPane scrollPane;
+  private @Getter JScrollPane scrollPane;
 
-  private JTextArea textArea;
+  private @Getter JTextArea textArea;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -57,64 +58,6 @@ public class HelpView extends View {
     masterPanel = new JPanel(new MigLayout("wrap"));
 
     initializeInterface();
-  }
-
-  // ---------------------------------------- Public methods ------------------------------------
-
-  // ---------------------------------------- Getters -------------------------------------------
-
-  /**
-   * Gets the reading progress label.
-   *
-   * @return The reading progress label.
-   */
-  public JLabel getPagesCounter() {
-    return pagesCounter;
-  }
-
-  /**
-   * Gets the 'previous page' button.
-   *
-   * @return The 'previous page' button.
-   */
-  public JButton getPreviousPageButton() {
-    return previousPageButton;
-  }
-
-  /**
-   * Gets the 'next page' button.
-   *
-   * @return The 'next page' button.
-   */
-  public JButton getNextPageButton() {
-    return nextPageButton;
-  }
-
-  /**
-   * Gets the back button.
-   *
-   * @return The back button.
-   */
-  public JButton getBackButton() {
-    return backButton;
-  }
-
-  /**
-   * Gets the text area.
-   *
-   * @return The text area.
-   */
-  public JTextArea getTextArea() {
-    return textArea;
-  }
-
-  /**
-   * Gets the scroll pane.
-   *
-   * @return The scroll pane.
-   */
-  public JScrollPane getScrollPane() {
-    return scrollPane;
   }
 
   // ---------------------------------------- Protected methods ---------------------------------

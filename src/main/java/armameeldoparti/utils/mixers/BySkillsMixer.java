@@ -77,7 +77,7 @@ public class BySkillsMixer implements PlayersMixer {
       if (currentSet.size() == 2) {
         for (int i = 0; i < 2; i++) {
           teams.get(i)
-               .getPlayers()
+               .getTeamPlayers()
                .get(position)
                .add(currentSet.get(i));
         }
@@ -118,7 +118,7 @@ public class BySkillsMixer implements PlayersMixer {
                              .getTeamNumber());
 
         teams.get(0)
-             .getPlayers()
+             .getTeamPlayers()
              .get(p.getPosition())
              .add(p);
       }
@@ -162,7 +162,7 @@ public class BySkillsMixer implements PlayersMixer {
           p.setTeamNumber(teamNumber + 1);
 
           teams.get(teamNumber)
-               .getPlayers()
+               .getTeamPlayers()
                .get(p.getPosition())
                .add(p);
         }
@@ -211,7 +211,7 @@ public class BySkillsMixer implements PlayersMixer {
                                                        .getTeamNumber()));
 
       teams.get(wrapper.index)
-           .getPlayers()
+           .getTeamPlayers()
            .get(position)
            .addAll(playersSubsets.get(1 - wrapper.index));
     }

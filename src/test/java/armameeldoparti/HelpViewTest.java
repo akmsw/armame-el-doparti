@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import armameeldoparti.controllers.HelpController;
+import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.HelpView;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,6 +35,8 @@ class HelpViewTest {
 
   // ---------------------------------------- Private fields ------------------------------------
 
+  private long helpPagesAmount;
+
   private HelpView helpView;
   private HelpController helpController;
 
@@ -40,11 +46,25 @@ class HelpViewTest {
    * Setup made before running any test.
    *
    * <p>Instantiates the help view and its controller.
+   *
+   * @throws IOException If the method is unable to retrieve how many
+   *                     help pages are in the corresponding directory.
+   * @throws URISyntaxException If the specified URI for the help pages
+   *                            directory is not correctly formatted.
    */
   @BeforeAll
-  void setUp() {
+  void setUp() throws IOException, URISyntaxException {
     helpView = new HelpView();
     helpController = new HelpController(helpView);
+
+    helpPagesAmount = Paths.get(getClass().getClassLoader()
+                                          .getResource(Constants.PATH_HELP_DOCS)
+                                          .toURI())
+                           .toFile()
+                           .list()
+                           .length;
+
+    System.out.println("helpPagesAmount = " + helpPagesAmount);
   }
 
   /**
@@ -69,7 +89,7 @@ class HelpViewTest {
   @DisplayName("The page number should change when navigating")
   @ParameterizedTest
   @MethodSource("navigationProvider")
-  void pageNumberChangeOnNavigation(int timesNext, int timesPrevious) {
+  void currentPageNumberChangeOnNavigation(int timesNext, int timesPrevious) {
     for (int i = 0; i < timesNext; i++) {
       helpController.nextPageButtonEvent();
     }
@@ -78,11 +98,11 @@ class HelpViewTest {
       helpController.previousPageButtonEvent();
     }
 
-    int expectedPageNumber = timesNext - timesPrevious;
+    int expectedCurrentPageNumber = timesNext - timesPrevious;
 
-    String expectedLabel = expectedPageNumber + 1 + "/8";
+    String expectedLabel = expectedCurrentPageNumber + 1 + "/" + helpPagesAmount;
 
-    assertEquals(expectedPageNumber, helpController.getPageNumber());
+    assertEquals(expectedCurrentPageNumber, helpController.getCurrentPageNumber());
     assertEquals(expectedLabel, helpView.getPagesCounter()
                                         .getText());
   }
@@ -98,7 +118,7 @@ class HelpViewTest {
     assertTrue(helpView.getNextPageButton()
                        .isEnabled());
 
-    for (int i = 0; i < helpController.getTotalPagesAmount() - 1; i++) {
+    for (int i = 0; i < helpPagesAmount - 1; i++) {
       helpController.nextPageButtonEvent();
     }
 

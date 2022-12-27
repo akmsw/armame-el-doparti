@@ -262,7 +262,7 @@ public class AnchoragesController extends Controller {
    * Toggles the buttons and checkboxes states.
    */
   private void toggleButtons() {
-    ((AnchoragesView) getView()).getAnchoragesButtons()
+    ((AnchoragesView) getView()).getAnchorageButtons()
                                 .forEach(b -> b.setEnabled(false));
 
     if (anchoragesAmount == 1) {
@@ -273,7 +273,7 @@ public class AnchoragesController extends Controller {
       ((AnchoragesView) getView()).getClearAnchoragesButton()
                                   .setEnabled(true);
     } else if (anchoragesAmount > 1) {
-      ((AnchoragesView) getView()).getAnchoragesButtons()
+      ((AnchoragesView) getView()).getAnchorageButtons()
                                   .forEach(b -> b.setEnabled(true));
     }
 

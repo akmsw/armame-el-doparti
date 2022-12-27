@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
+import lombok.Getter;
 
 /**
  * Help view controller class.
@@ -44,7 +45,7 @@ public class HelpController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private int pageNumber;
+  private @Getter int currentPageNumber;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -56,7 +57,7 @@ public class HelpController extends Controller {
   public HelpController(HelpView helpView) {
     super(helpView);
 
-    pageNumber = 0;
+    currentPageNumber = 0;
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -66,7 +67,7 @@ public class HelpController extends Controller {
    */
   @Override
   public void resetView() {
-    pageNumber = 0;
+    currentPageNumber = 0;
 
     updatePage();
     resetButtons();
@@ -93,7 +94,7 @@ public class HelpController extends Controller {
    * the displayed page in the text area and the reading progress label.
    */
   public void nextPageButtonEvent() {
-    if (++pageNumber < TOTAL_PAGES - 1) {
+    if (++currentPageNumber < TOTAL_PAGES - 1) {
       ((HelpView) getView()).getPreviousPageButton()
                             .setEnabled(true);
     } else {
@@ -111,7 +112,7 @@ public class HelpController extends Controller {
    * the displayed page in the text area and the reading progress label.
    */
   public void previousPageButtonEvent() {
-    if (--pageNumber > 0) {
+    if (--currentPageNumber > 0) {
       ((HelpView) getView()).getNextPageButton()
                             .setEnabled(true);
     } else {
@@ -130,7 +131,7 @@ public class HelpController extends Controller {
   public void updatePage() {
     ((HelpView) getView()).getScrollPane()
                           .setBorder(BorderFactory.createTitledBorder(
-                            pagesMap.get(pageNumber)
+                            pagesMap.get(currentPageNumber)
                                     .get(PAGE_TITLE_INDEX)
                           ));
     ((HelpView) getView()).getTextArea()
@@ -143,7 +144,7 @@ public class HelpController extends Controller {
           HelpController.class
                         .getClassLoader()
                         .getResourceAsStream(Constants.PATH_HELP_DOCS
-                                             + pagesMap.get(pageNumber)
+                                             + pagesMap.get(currentPageNumber)
                                                        .get(PAGE_FILENAME_INDEX)),
           StandardCharsets.UTF_8)
     )) {
@@ -156,26 +157,6 @@ public class HelpController extends Controller {
     }
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
-
-  /**
-   * Gets the current page number.
-   *
-   * @return The current page number.
-   */
-  public int getPageNumber() {
-    return pageNumber;
-  }
-
-  /**
-   * Gets the total amount of help pages.
-   *
-   * @return The total amount of help pages.
-   */
-  public int getTotalPagesAmount() {
-    return TOTAL_PAGES;
-  }
-
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
@@ -183,7 +164,7 @@ public class HelpController extends Controller {
    */
   private void updateLabel() {
     ((HelpView) getView()).getPagesCounter()
-                          .setText(pageNumber + 1 + "/" + TOTAL_PAGES);
+                          .setText(currentPageNumber + 1 + "/" + TOTAL_PAGES);
   }
 
   /**

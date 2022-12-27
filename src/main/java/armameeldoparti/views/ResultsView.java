@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
+import lombok.Getter;
+import lombok.Setter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -34,7 +36,7 @@ public class ResultsView extends View {
 
   private JPanel panel;
 
-  private JTable table;
+  private @Getter @Setter JTable table;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -89,28 +91,6 @@ public class ResultsView extends View {
     }
   }
 
-  // --------------------------------------------- Getters --------------------------------------
-
-  /**
-   * Gets the results table.
-   *
-   * @return The results table.
-   */
-  public JTable getTable() {
-    return table;
-  }
-
-  // --------------------------------------------- Setters --------------------------------------
-
-  /**
-   * Updates the results table.
-   *
-   * @param table The new results table.
-   */
-  public void setTable(JTable table) {
-    this.table = table;
-  }
-
   // ---------------------------------------- Protected methods ---------------------------------
 
   /**
@@ -148,8 +128,8 @@ public class ResultsView extends View {
   private static String getUpdatedFrameTitle() {
     return (CommonFields.getDistribution() == Constants.MIX_RANDOM
             ? "Aleatorio - "
-            : "Por puntuaciones - ").concat(CommonFields.thereAreAnchorages() ? "Con anclajes"
-                                                                              : "Sin anclajes");
+            : "Por puntuaciones - ").concat(CommonFields.isAnchorages() ? "Con anclajes"
+                                                                        : "Sin anclajes");
   }
 
   /**

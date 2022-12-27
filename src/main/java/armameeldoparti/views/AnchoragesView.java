@@ -23,6 +23,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -38,20 +39,20 @@ public class AnchoragesView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private JButton finishButton;
-  private JButton newAnchorageButton;
-  private JButton deleteAnchorageButton;
-  private JButton deleteLastAnchorageButton;
-  private JButton clearAnchoragesButton;
+  private @Getter JButton finishButton;
+  private @Getter JButton newAnchorageButton;
+  private @Getter JButton deleteAnchorageButton;
+  private @Getter JButton deleteLastAnchorageButton;
+  private @Getter JButton clearAnchoragesButton;
 
   private JPanel leftPanel;
   private JPanel rightPanel;
 
   private JScrollPane scrollPane;
 
-  private JTextArea textArea;
+  private @Getter JTextArea textArea;
 
-  private List<JButton> anchorageButtons;
+  private @Getter List<JButton> anchorageButtons;
 
   private List<JCheckBox> cdCheckBoxes;
   private List<JCheckBox> ldCheckBoxes;
@@ -59,7 +60,10 @@ public class AnchoragesView extends View {
   private List<JCheckBox> fwCheckBoxes;
   private List<JCheckBox> gkCheckBoxes;
 
-  private Map<Position, List<JCheckBox>> checkBoxesMap;
+  /**
+   * Map that associates each checkboxes list with its corresponding position.
+   */
+  private @Getter Map<Position, List<JCheckBox>> checkBoxesMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -113,80 +117,6 @@ public class AnchoragesView extends View {
                                           .getName());
       }
     }
-  }
-
-  // ---------------------------------------- Getters -------------------------------------------
-
-  /**
-   * Gets the 'finish' button.
-   *
-   * @return The finish button.
-   */
-  public JButton getFinishButton() {
-    return finishButton;
-  }
-
-  /**
-   * Gets the 'new anchorage' button.
-   *
-   * @return The new anchorage button.
-   */
-  public JButton getNewAnchorageButton() {
-    return newAnchorageButton;
-  }
-
-  /**
-   * Gets the 'delete anchorage' button.
-   *
-   * @return The delete anchorage button.
-   */
-  public JButton getDeleteAnchorageButton() {
-    return deleteAnchorageButton;
-  }
-
-  /**
-   * Gets the 'delete last anchorage' button.
-   *
-   * @return The delete last anchorage button.
-   */
-  public JButton getDeleteLastAnchorageButton() {
-    return deleteLastAnchorageButton;
-  }
-
-  /**
-   * Gets the 'clear anchorages' button.
-   *
-   * @return The 'clear anchorages' button.
-   */
-  public JButton getClearAnchoragesButton() {
-    return clearAnchoragesButton;
-  }
-
-  /**
-   * Gets the text area.
-   *
-   * @return The text area.
-   */
-  public JTextArea getTextArea() {
-    return textArea;
-  }
-
-  /**
-   * Gets the anchorage-related buttons.
-   *
-   * @return The anchorage-related buttons.
-   */
-  public List<JButton> getAnchoragesButtons() {
-    return anchorageButtons;
-  }
-
-  /**
-   * Gets the map that associates each checkboxes list with its corresponding position.
-   *
-   * @return The map that associates each checkboxes list with its corresponding position.
-   */
-  public Map<Position, List<JCheckBox>> getCheckBoxesMap() {
-    return checkBoxesMap;
   }
 
   // ---------------------------------------- Protected methods ---------------------------------

@@ -79,7 +79,7 @@ public class ResultsController extends Controller {
   @Override
   public void resetView() {
     getView().dispose();
-    setControlledView(new ResultsView());
+    setView(new ResultsView());
   }
 
   /**
@@ -134,7 +134,7 @@ public class ResultsController extends Controller {
     Views previousView;
 
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
-      previousView = CommonFields.thereAreAnchorages() ? Views.ANCHORAGES : Views.NAMES_INPUT;
+      previousView = CommonFields.isAnchorages() ? Views.ANCHORAGES : Views.NAMES_INPUT;
     } else {
       previousView = Views.SKILL_POINTS;
     }
@@ -172,7 +172,7 @@ public class ResultsController extends Controller {
     teams.forEach(team -> {
       Arrays.stream(Position.values())
             .forEach(position ->
-              team.getPlayers()
+              team.getTeamPlayers()
                   .get(position)
                   .forEach(player -> ((ResultsView) getView()).getTable()
                                                               .setValueAt(player.getName(),
@@ -187,7 +187,7 @@ public class ResultsController extends Controller {
       for (int i = 0; i < 2; i++) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(teams.get(i)
-                                                  .getPlayers()
+                                                  .getTeamPlayers()
                                                   .values()
                                                   .stream()
                                                   .flatMap(List::stream)
@@ -206,8 +206,8 @@ public class ResultsController extends Controller {
    * @return The updated teams with the players distributed.
    */
   public List<Team> randomMix() {
-    return CommonFields.thereAreAnchorages() ? randomMixer.withAnchorages(teams)
-                                             : randomMixer.withoutAnchorages(teams);
+    return CommonFields.isAnchorages() ? randomMixer.withAnchorages(teams)
+                                       : randomMixer.withoutAnchorages(teams);
   }
 
   /**
@@ -216,8 +216,8 @@ public class ResultsController extends Controller {
    * @return The updated teams with the players distributed.
    */
   public List<Team> bySkillsMix() {
-    return CommonFields.thereAreAnchorages() ? bySkillsMixer.withAnchorages(teams)
-                                             : bySkillsMixer.withoutAnchorages(teams);
+    return CommonFields.isAnchorages() ? bySkillsMixer.withAnchorages(teams)
+                                       : bySkillsMixer.withoutAnchorages(teams);
   }
 
   // ---------------------------------------- Private methods -----------------------------------

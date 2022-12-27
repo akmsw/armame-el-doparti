@@ -1,6 +1,9 @@
 package armameeldoparti.views;
 
 import javax.swing.JFrame;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Abstract class that specifies the basic views methods and fields.
@@ -11,6 +14,8 @@ import javax.swing.JFrame;
  *
  * @since 28/07/2022
  */
+@Getter(AccessLevel.PROTECTED)
+@Setter(AccessLevel.PROTECTED)
 public abstract class View extends JFrame {
 
   // ---------------------------------------- Protected fields ----------------------------------
@@ -39,28 +44,4 @@ public abstract class View extends JFrame {
    * Adds the buttons to their corresponding panel.
    */
   protected abstract void addButtons();
-
-  // ---------------------------------------- Protected methods ---------------------------------
-
-  // ---------------------------------------- Getters -------------------------------------------
-
-  /**
-   * Gets the frame title.
-   *
-   * @return The frame title.
-   */
-  protected String getFrameTitle() {
-    return frameTitle;
-  }
-
-  // ---------------------------------------- Setters -------------------------------------------
-
-  /**
-   * Sets the frame title.
-   *
-   * @param frameTitle The new frame title.
-   */
-  protected void setFrameTitle(String frameTitle) {
-    this.frameTitle = frameTitle;
-  }
 }

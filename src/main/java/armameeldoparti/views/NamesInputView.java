@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -37,7 +38,7 @@ public class NamesInputView extends View {
   private static final int TEXT_AREA_ROWS = 14;
   private static final int TEXT_AREA_COLUMNS = 12;
 
-  private static final String[] OPTIONS_COMBOBOX = {
+  private static final @Getter String[] OPTIONS_COMBOBOX = {
     "Defensores centrales",
     "Defensores laterales",
     "Mediocampistas",
@@ -47,18 +48,18 @@ public class NamesInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private JButton mixButton;
+  private @Getter JButton mixButton;
 
-  private JCheckBox anchoragesCheckBox;
+  private @Getter JCheckBox anchoragesCheckBox;
 
-  private JComboBox<String> comboBox;
+  private @Getter JComboBox<String> comboBox;
 
-  private JPanel leftPanel;
+  private @Getter JPanel leftPanel;
   private JPanel rightPanel;
 
-  private JTextArea textArea;
+  private @Getter JTextArea textArea;
 
-  private Map<Position, List<JTextField>> textFieldsMap;
+  private @Getter Map<Position, List<JTextField>> textFieldsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -73,75 +74,6 @@ public class NamesInputView extends View {
 
     initializeTextFieldsMap();
     initializeInterface();
-  }
-
-  // ---------------------------------------- Public methods ------------------------------------
-
-  // ---------------------------------------- Getters -------------------------------------------
-
-  /**
-   * Gets the 'mix' button.
-   *
-   * @return The 'mix' button.
-   */
-  public JButton getMixButton() {
-    return mixButton;
-  }
-
-  /**
-   * Gets the anchorages checkbox.
-   *
-   * @return The anchorages checkbox.
-   */
-  public JCheckBox getAnchoragesCheckBox() {
-    return anchoragesCheckBox;
-  }
-
-  /**
-   * Gets the combobox.
-   *
-   * @return The combobox.
-   */
-  public JComboBox<String> getComboBox() {
-    return comboBox;
-  }
-
-  /**
-   * Gets the text area.
-   *
-   * @return The text area.
-   */
-  public JTextArea getTextArea() {
-    return textArea;
-  }
-
-  /**
-   * Gets the view's left panel.
-   *
-   * @return The view's left panel.
-   */
-  public JPanel getLeftPanel() {
-    return leftPanel;
-  }
-
-  /**
-   * Gets the combobox options.
-   *
-   * @return The combobox options.
-   */
-  public String[] getComboBoxOptions() {
-    return OPTIONS_COMBOBOX;
-  }
-
-  /**
-   * Gets the map that associates each text fields set with its
-   * corresponding position.
-   *
-   * @return The map that associates each text fields set with its
-   *         corresponding position.
-   */
-  public Map<Position, List<JTextField>> getTextFieldsMap() {
-    return textFieldsMap;
   }
 
   // ---------------------------------------- Protected methods ---------------------------------
@@ -229,8 +161,9 @@ public class NamesInputView extends View {
   private void addAnchoragesCheckBox() {
     anchoragesCheckBox = new JCheckBox("Anclar jugadores", false);
 
-    anchoragesCheckBox.addActionListener(e -> CommonFields.setAnchorages(
-                                              !CommonFields.thereAreAnchorages()));
+    anchoragesCheckBox.addActionListener(
+        e -> CommonFields.setAnchorages(!CommonFields.isAnchorages())
+    );
 
     rightPanel.add(anchoragesCheckBox, "center");
   }

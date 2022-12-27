@@ -19,6 +19,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -36,7 +37,7 @@ public class SkillPointsInputView extends View {
 
   private JPanel masterPanel;
 
-  private transient Map<Player, JSpinner> spinnersMap;
+  private transient @Getter Map<Player, JSpinner> spinnersMap;
   private transient Map<JSpinner, JLabel> labelsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -85,17 +86,6 @@ public class SkillPointsInputView extends View {
                  .setText(player.getName());
       }
     }
-  }
-
-  // ---------------------------------------- Getters -------------------------------------------
-
-  /**
-   * Gets the map that associates each player with its corresponding skill points spinner.
-   *
-   * @return The map that associates each player with its corresponding skill points spinner.
-   */
-  public Map<Player, JSpinner> getSpinnersMap() {
-    return spinnersMap;
   }
 
   // ---------------------------------------- Protected methods ---------------------------------
