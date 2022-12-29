@@ -21,10 +21,6 @@ import java.net.URISyntaxException;
  */
 public class MainMenuController extends Controller {
 
-  // ---------------------------------------- Private fields ------------------------------------
-
-  private Desktop desktop;
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -34,8 +30,6 @@ public class MainMenuController extends Controller {
    */
   public MainMenuController(MainMenuView mainMenuView) {
     super(mainMenuView);
-
-    desktop = Desktop.getDesktop();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -113,7 +107,8 @@ public class MainMenuController extends Controller {
    */
   private void browserRedirect(String link) {
     try {
-      desktop.browse(new URI(link));
+      Desktop.getDesktop()
+             .browse(new URI(link));
     } catch (IOException | URISyntaxException e) {
       CommonFunctions.exitProgram(Error.BROWSER_ERROR);
     }
