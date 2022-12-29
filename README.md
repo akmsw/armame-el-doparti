@@ -20,10 +20,13 @@
 
 ## 📜 Índice
 - [¿Qué es?](https://github.com/akmsw/armame-el-doparti#-qu%C3%A9-es)
-- [Requisitos](https://github.com/akmsw/armame-el-doparti#-requisitos)
+- [Requisitos generales](https://github.com/akmsw/armame-el-doparti#-requisitos-generales)
   - [Java](https://github.com/akmsw/armame-el-doparti#-java)
     - [Versión mínima](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-m%C3%ADnima)
     - [Versión recomendada](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada)
+- [Requisitos para compilación](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n)
+  - [Apache Maven](https://github.com/akmsw/armame-el-doparti#-apache-maven)
+    - [Versión recomendada](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada-1)
 - [Descarga](https://github.com/akmsw/armame-el-doparti#-descarga)
 - [Instalación y ejecución](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-instalaci%C3%B3n-y-ejecuci%C3%B3n)
 - [¿Cómo se usa?](https://github.com/akmsw/armame-el-doparti#-c%C3%B3mo-se-usa)
@@ -39,12 +42,17 @@
 Desarrollado completamente en Java y refactorizado en su totalidad, la nueva versión de este programa ofrece una rápida e intuitiva manera de generar equipos para partidos de fútbol 7, ya sea con distribución aleatoria de jugadores o basada en puntuaciones.\
 Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizando de esta forma que queden en el mismo equipo sin importar el método de distribución elegido.
 
-## 📦 Requisitos
+## 📦 Requisitos generales
 ### ☕ Java
 - #### Versión mínima
     🟡 [Java 11](https://www.oracle.com/ar/java/technologies/javase/jdk11-archive-downloads.html)
 - #### Versión recomendada
     🟢 [Java 19](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) *(o más reciente)*
+
+## ⚙️ Requisitos para compilación
+### 🪶 Apache Maven
+- #### Versión recomendada
+    🟢 [Apache Maven 3.8.6](https://maven.apache.org/download.cgi) *(o más reciente)*
 
 ## 📥 Descarga
 La versión estable más reciente del programa se encuentra disponible para descargar en la sección [releases](https://github.com/akmsw/armame-el-doparti/releases) de este proyecto.
@@ -55,6 +63,21 @@ Una vez descargado el archivo con extensión ***.jar***, e independientemente de
 Una alternativa es abrir una terminal dentro de la carpeta contenedora del archivo y ejecutar el comando:
 ```bash
 java -jar nombre_del_archivo.jar
+```
+
+## 🛠️ Compilación manual
+Para compilar manualmente el programa, asumiendo que tanto los [requisitos generales](https://github.com/akmsw/armame-el-doparti#-requisitos-generales) como los [requisitos para compilación](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n) han sido instalados correctamente, se debe dirigir a la carpeta contenedora del proyecto y ejecutar Apache Maven haciendo uso del archivo `pom.xml` con el siguiente comando:
+```bash
+mvn package --file pom.xml
+```
+o, simplemente:
+```bash
+mvn package
+```
+
+Esto creará una carpeta llamada `target`. Dentro de esa carpeta estará el archivo ejecutable en formato `.jar`. Para ejecutarlo se le puede hacer doble click o, dentro de la carpeta contenedora, ejecutar mediante la terminal el comando indicado anteriormente:
+```bash
+java -jar armame-el-doparti-3.0.jar
 ```
 
 ## 📝 ¿Cómo se usa?
