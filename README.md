@@ -24,7 +24,7 @@
   - [Java](https://github.com/akmsw/armame-el-doparti#-java)
     - [Versión mínima](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-m%C3%ADnima)
     - [Versión recomendada](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada)
-- [Requisitos para compilación](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n)
+- [Requisitos para compilación manual](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n-manual)
   - [Apache Maven](https://github.com/akmsw/armame-el-doparti#-apache-maven)
     - [Versión recomendada](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada-1)
 - [Descarga](https://github.com/akmsw/armame-el-doparti#-descarga)
@@ -49,7 +49,7 @@ Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizand
 - #### Versión recomendada
     🟢 [Java 19](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) *(o más reciente)*
 
-## ⚙️ Requisitos para compilación
+## ⚙️ Requisitos para compilación manual
 ### 🪶 Apache Maven
 - #### Versión recomendada
     🟢 [Apache Maven 3.8.6](https://maven.apache.org/download.cgi) *(o más reciente)*
@@ -66,7 +66,7 @@ java -jar nombre_del_archivo.jar
 ```
 
 ## 🛠️ Compilación manual
-Para compilar manualmente el programa, asumiendo que tanto los [requisitos generales](https://github.com/akmsw/armame-el-doparti#-requisitos-generales) como los [requisitos para compilación](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n) han sido instalados correctamente, se debe dirigir a la carpeta contenedora del proyecto y ejecutar Apache Maven haciendo uso del archivo `pom.xml` con el siguiente comando:
+Para compilar manualmente el programa, asumiendo que tanto los [requisitos generales](https://github.com/akmsw/armame-el-doparti#-requisitos-generales) como los [requisitos para compilación manual](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n-manual) han sido instalados correctamente, se debe dirigir a la carpeta contenedora del proyecto y ejecutar Apache Maven haciendo uso del archivo `pom.xml` con el siguiente comando:
 ```bash
 mvn package --file pom.xml
 ```
