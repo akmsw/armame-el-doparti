@@ -66,7 +66,7 @@ java -jar nombre_del_archivo.jar
 ```
 
 ## 🛠️ Compilación manual
-Para compilar manualmente el programa, asumiendo que tanto los [requisitos generales](https://github.com/akmsw/armame-el-doparti#-requisitos-generales) como los [requisitos para compilación manual](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n-manual) han sido instalados correctamente, se debe dirigir a la carpeta contenedora del proyecto y ejecutar Apache Maven haciendo uso del archivo `pom.xml` con el siguiente comando:
+Para compilar manualmente el programa, asumiendo que tanto los [requisitos generales](https://github.com/akmsw/armame-el-doparti#-requisitos-generales) como los [requisitos para compilación manual](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n-manual) fueron instalados correctamente, tenés que [descargar el proyecto en formato ZIP](https://github.com/akmsw/armame-el-doparti/archive/refs/heads/develop-v3.0.zip), extraer el archivo, abrir la carpeta extraída, y ejecutar Apache Maven haciendo uso del archivo `pom.xml` con el siguiente comando:
 ```bash
 mvn package --file pom.xml
 ```
@@ -75,9 +75,9 @@ o, simplemente:
 mvn package
 ```
 
-Esto creará una carpeta llamada `target`. Dentro de esa carpeta estará el archivo ejecutable en formato `.jar`. Para ejecutarlo se le puede hacer doble click o, dentro de la carpeta contenedora, ejecutar mediante la terminal el comando indicado anteriormente:
+Esto va a crear una carpeta llamada `target`. Dentro de esa carpeta va a estar el archivo ejecutable en formato `.jar`. Para ejecutarlo, se le puede hacer doble click o ejecutar, mediante la terminal, el comando indicado anteriormente:
 ```bash
-java -jar armame-el-doparti-3.0.jar
+java -jar armameeldoparti-3.0.jar
 ```
 
 ## 📝 ¿Cómo se usa?
