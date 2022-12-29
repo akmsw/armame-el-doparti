@@ -171,6 +171,7 @@ public class AnchoragesView extends View {
    * Adds the buttons to their corresponding panel.
    */
   @Override
+  @SuppressWarnings("java:S1192")
   protected void addButtons() {
     finishButton = new JButton("Finalizar");
 
@@ -221,14 +222,14 @@ public class AnchoragesView extends View {
     anchorageButtons.add(deleteLastAnchorageButton);
     anchorageButtons.add(clearAnchoragesButton);
 
-    leftPanel.add(finishButton, Constants.GROWX_SPAN);
-    leftPanel.add(backButton, Constants.GROWX_SPAN);
+    leftPanel.add(finishButton, "growx, span");
+    leftPanel.add(backButton, "growx, span");
 
     rightPanel.add(scrollPane, "span2, push, grow");
-    rightPanel.add(newAnchorageButton, Constants.GROW);
-    rightPanel.add(deleteAnchorageButton, Constants.GROW);
-    rightPanel.add(deleteLastAnchorageButton, Constants.GROW);
-    rightPanel.add(clearAnchoragesButton, Constants.GROW);
+    rightPanel.add(newAnchorageButton, "grow");
+    rightPanel.add(deleteAnchorageButton, "grow");
+    rightPanel.add(deleteLastAnchorageButton, "grow");
+    rightPanel.add(clearAnchoragesButton, "grow");
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -254,7 +255,7 @@ public class AnchoragesView extends View {
 
     label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-    leftPanel.add(label, Constants.GROWX_SPAN);
+    leftPanel.add(label, "growx, span");
 
     cbSet.forEach(cb -> leftPanel.add(cb, "align left, pushx"));
   }

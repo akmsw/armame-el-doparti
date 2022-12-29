@@ -28,6 +28,7 @@ public final class Constants {
   private static final int ICON_SCALE = 50;
 
   private static final String FILENAME_ICON = "icon.png";
+  private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
   private static final String MSG_ERROR_GUI = "ERROR DE INTERFAZ GRÁFICA";
   private static final String MSG_ERROR_INTERNAL_FILES = "ERROR DE LECTURA DE ARCHIVOS INTERNOS";
 
@@ -50,10 +51,6 @@ public final class Constants {
   public static final String FILENAME_BG_IMG = "bg.png";
   public static final String FILENAME_FONT = "comfortaa.ttf";
   public static final String FILENAME_PDA = "dist.pda";
-  public static final String GROW = "grow";
-  public static final String GROW_SPAN = "grow, span";
-  public static final String GROWX = "growx";
-  public static final String GROWX_SPAN = "growx, span";
   public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
   public static final String MIX_OPTION_BY_SKILL = "Por puntuaciones";
   public static final String PATH_DOCS = "docs/";
@@ -70,6 +67,8 @@ public final class Constants {
   public static final String REGEX_NAMES_VALIDATION = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
   public static final String REGEX_PDA_DATA_RETRIEVE = "[CLMFG].+>.+";
   public static final String REGEX_PLAYERS_AMOUNT = "(?!(?<=" + PLAYERS_PER_TEAM + ")\\d).";
+  public static final String URL_CONTACT = "https://github.com/akmsw";
+  public static final String URL_ISSUES = "https://github.com/akmsw/armame-el-doparti/issues";
 
   public static final Color GREEN_DARK = new Color(41, 71, 74);
   public static final Color GREEN_MEDIUM = new Color(109, 130, 118);
@@ -106,7 +105,8 @@ public final class Constants {
    */
   public static final Map<Error, String> errorMessages = Map.of(
       Error.GUI_ERROR, MSG_ERROR_GUI,
-      Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
+      Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES,
+      Error.BROWSER_ERROR, MSG_ERROR_BROWSER
   );
 
   // ---------------------------------------- Constructor ---------------------------------------

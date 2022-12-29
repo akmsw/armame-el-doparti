@@ -11,5 +11,6 @@ package armameeldoparti.models;
  */
 public enum Error {
   GUI_ERROR,
-  INTERNAL_FILES_ERROR
+  INTERNAL_FILES_ERROR,
+  BROWSER_ERROR
 }

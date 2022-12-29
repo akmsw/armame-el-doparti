@@ -111,10 +111,10 @@ public class ResultsView extends View {
           ((ResultsController) CommonFunctions.getController(Views.RESULTS)).remixButtonEvent()
       );
 
-      panel.add(remixButton, Constants.GROWX);
+      panel.add(remixButton, "growx");
     }
 
-    panel.add(backButton, Constants.GROWX);
+    panel.add(backButton, "growx");
   }
 
   // ---------------------------------------- Private methods -----------------------------------

@@ -75,7 +75,7 @@ o, simplemente:
 mvn package
 ```
 
-Esto va a crear una carpeta llamada `target`. Dentro de esa carpeta va a estar el archivo ejecutable en formato `.jar`. Para ejecutarlo, se le puede hacer doble click o ejecutar, mediante la terminal, el comando indicado anteriormente:
+Esto va a crear una carpeta llamada `target` a la cual tenés que entrar. Ahí va a estar el archivo ejecutable en formato `.jar`. Para correr el programa se le puede hacer doble click o ejecutar, mediante la terminal, el comando indicado anteriormente:
 ```bash
 java -jar armameeldoparti-3.0.jar
 ```

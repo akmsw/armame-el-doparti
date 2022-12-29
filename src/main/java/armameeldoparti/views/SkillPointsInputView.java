@@ -94,6 +94,7 @@ public class SkillPointsInputView extends View {
    * Adds the buttons to their corresponding panel.
    */
   @Override
+  @SuppressWarnings("java:S1192")
   protected void addButtons() {
     JButton finishButton = new JButton("Finalizar");
     JButton resetSkillPointsButton = new JButton("Reiniciar puntuaciones");
@@ -114,9 +115,9 @@ public class SkillPointsInputView extends View {
         .backButtonEvent()
     );
 
-    masterPanel.add(finishButton, Constants.GROW_SPAN);
-    masterPanel.add(resetSkillPointsButton, Constants.GROW_SPAN);
-    masterPanel.add(backButton, Constants.GROW_SPAN);
+    masterPanel.add(finishButton, "grow, span");
+    masterPanel.add(resetSkillPointsButton, "grow, span");
+    masterPanel.add(backButton, "grow, span");
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -131,7 +132,7 @@ public class SkillPointsInputView extends View {
 
       positionLabel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-      masterPanel.add(positionLabel, Constants.GROW_SPAN);
+      masterPanel.add(positionLabel, "grow, span");
 
       List<Player> currentSet = CommonFields.getPlayersSets()
                                             .get(position);

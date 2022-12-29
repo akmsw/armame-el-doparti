@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import net.miginfocom.layout.CC;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -63,20 +64,37 @@ public class MainMenuView extends View {
    * Adds the buttons to their corresponding panel.
    */
   @Override
+  @SuppressWarnings("java:S1192")
   protected void addButtons() {
     JButton startButton = new JButton("Comenzar");
-    JButton helpButton = new JButton("Ayuda");
 
     startButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).startButtonEvent()
     );
 
+    JButton helpButton = new JButton("Ayuda");
+
     helpButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).helpButtonEvent()
     );
 
-    masterPanel.add(startButton, Constants.GROWX);
-    masterPanel.add(helpButton, Constants.GROWX);
+    JButton contactButton = new JButton("Contacto");
+
+    contactButton.addActionListener(e ->
+        ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).contactButtonEvent()
+    );
+
+    JButton issuesButton = new JButton("Reportes y sugerencias");
+
+    issuesButton.addActionListener(e ->
+        ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).issuesButtonEvent()
+    );
+
+    masterPanel.add(startButton, "growx");
+    masterPanel.add(helpButton, "growx");
+    masterPanel.add(contactButton, new CC().width("50%")
+                                           .split());
+    masterPanel.add(issuesButton, new CC().width("50%"));
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -91,6 +109,6 @@ public class MainMenuView extends View {
 
     JLabel bgLabel = new JLabel("", bgImg, SwingConstants.CENTER);
 
-    masterPanel.add(bgLabel, Constants.GROWX);
+    masterPanel.add(bgLabel, "growx");
   }
 }

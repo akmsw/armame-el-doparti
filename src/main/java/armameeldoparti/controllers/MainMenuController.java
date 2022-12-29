@@ -1,8 +1,14 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.models.Error;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.MainMenuView;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Main menu view controller class.
@@ -15,6 +21,10 @@ import armameeldoparti.views.MainMenuView;
  */
 public class MainMenuController extends Controller {
 
+  // ---------------------------------------- Private fields ------------------------------------
+
+  private Desktop desktop;
+
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -24,6 +34,8 @@ public class MainMenuController extends Controller {
    */
   public MainMenuController(MainMenuView mainMenuView) {
     super(mainMenuView);
+
+    desktop = Desktop.getDesktop();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -64,6 +76,24 @@ public class MainMenuController extends Controller {
                    .showView();
   }
 
+  /**
+   * 'Contact' button event handler.
+   *
+   * <p>Opens the browser on the contact URL.
+   */
+  public void contactButtonEvent() {
+    browserRedirect(Constants.URL_CONTACT);
+  }
+
+  /**
+   * 'Reports & suggestions' button event handler.
+   *
+   * <p>Opens the browser on the issues URL.
+   */
+  public void issuesButtonEvent() {
+    browserRedirect(Constants.URL_ISSUES);
+  }
+
   // ---------------------------------------- Protected methods ---------------------------------
 
   /**
@@ -72,5 +102,20 @@ public class MainMenuController extends Controller {
   @Override
   protected void resetView() {
     // Not needed in this controller
+  }
+
+  // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Opens a new tab in the default web browser with the specified URL.
+   *
+   * @param link Destination URL.
+   */
+  private void browserRedirect(String link) {
+    try {
+      desktop.browse(new URI(link));
+    } catch (IOException | URISyntaxException e) {
+      CommonFunctions.exitProgram(Error.BROWSER_ERROR);
+    }
   }
 }

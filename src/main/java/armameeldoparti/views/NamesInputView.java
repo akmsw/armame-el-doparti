@@ -121,8 +121,8 @@ public class NamesInputView extends View {
         ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)).backButtonEvent()
     );
 
-    rightPanel.add(mixButton, Constants.GROW);
-    rightPanel.add(backButton, Constants.GROW);
+    rightPanel.add(mixButton, "grow");
+    rightPanel.add(backButton, "grow");
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -139,7 +139,7 @@ public class NamesInputView extends View {
         .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
     );
 
-    leftPanel.add(comboBox, Constants.GROWX);
+    leftPanel.add(comboBox, "growx");
   }
 
   /**

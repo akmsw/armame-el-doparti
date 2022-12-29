@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import lombok.Getter;
+import net.miginfocom.layout.CC;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -104,9 +105,11 @@ public class HelpView extends View {
 
     previousPageButton.setEnabled(false);
 
-    masterPanel.add(previousPageButton, "growx, span, split 2, center");
-    masterPanel.add(nextPageButton, Constants.GROWX);
-    masterPanel.add(backButton, Constants.GROWX_SPAN);
+    masterPanel.add(previousPageButton, new CC().width("50%")
+                                                .split());
+    masterPanel.add(nextPageButton, new CC().width("50%")
+                                            .wrap());
+    masterPanel.add(backButton, "growx, span");
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -148,6 +151,6 @@ public class HelpView extends View {
     pagesCounter.setBorder(BorderFactory.createLoweredSoftBevelBorder());
     pagesCounter.setHorizontalAlignment(SwingConstants.CENTER);
 
-    masterPanel.add(pagesCounter, Constants.GROWX);
+    masterPanel.add(pagesCounter, "growx");
   }
 }

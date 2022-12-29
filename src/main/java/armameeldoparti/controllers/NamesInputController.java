@@ -259,7 +259,7 @@ public class NamesInputController extends Controller {
         ((NamesInputView) getView()).getTextFieldsMap()
                                     .get(CommonFunctions.getCorrespondingPosition(
                                       CommonFields.getPositionsMap(), selectedOption.toUpperCase()))
-                                    .forEach(tf -> leftPanel.add(tf, Constants.GROWX));
+                                    .forEach(tf -> leftPanel.add(tf, "growx"));
 
         break;
       }
