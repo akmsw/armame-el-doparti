@@ -10,7 +10,8 @@ package armameeldoparti.models;
  * @since 10/11/2022
  */
 public enum Error {
+  BROWSER_ERROR,
+  FATAL_INTERNAL_ERROR,
   GUI_ERROR,
   INTERNAL_FILES_ERROR,
-  BROWSER_ERROR
 }

@@ -19,8 +19,10 @@ public final class Constants {
 
   // ---------------------------------------- Private constants ---------------------------------
 
-  private static final int EXIT_CODE_ERROR_GUI = -1;
-  private static final int EXIT_CODE_ERROR_INTERNAL_FILES = -2;
+  private static final int EXIT_CODE_ERROR_BROWSER = -1;
+  private static final int EXIT_CODE_ERROR_FATAL_INTERNAL = -2;
+  private static final int EXIT_CODE_ERROR_GUI = -3;
+  private static final int EXIT_CODE_ERROR_INTERNAL_FILES = -4;
 
   /**
    * Size, in pixels, of the scaled program icon (height and width).
@@ -29,6 +31,7 @@ public final class Constants {
 
   private static final String FILENAME_ICON = "icon.png";
   private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
+  private static final String MSG_ERROR_FATAL_INTERNAL = "ERROR FATAL";
   private static final String MSG_ERROR_GUI = "ERROR DE INTERFAZ GRÁFICA";
   private static final String MSG_ERROR_INTERNAL_FILES = "ERROR DE LECTURA DE ARCHIVOS INTERNOS";
 
@@ -96,6 +99,8 @@ public final class Constants {
    * Map of errors and their corresponding exit code.
    */
   public static final Map<Error, Integer> errorCodes = Map.of(
+      Error.BROWSER_ERROR, EXIT_CODE_ERROR_BROWSER,
+      Error.FATAL_INTERNAL_ERROR, EXIT_CODE_ERROR_FATAL_INTERNAL,
       Error.GUI_ERROR, EXIT_CODE_ERROR_GUI,
       Error.INTERNAL_FILES_ERROR, EXIT_CODE_ERROR_INTERNAL_FILES
   );
@@ -104,9 +109,10 @@ public final class Constants {
    * Map of errors and their corresponding error message to display.
    */
   public static final Map<Error, String> errorMessages = Map.of(
+      Error.BROWSER_ERROR, MSG_ERROR_BROWSER,
+      Error.FATAL_INTERNAL_ERROR, MSG_ERROR_FATAL_INTERNAL,
       Error.GUI_ERROR, MSG_ERROR_GUI,
-      Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES,
-      Error.BROWSER_ERROR, MSG_ERROR_BROWSER
+      Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
   );
 
   // ---------------------------------------- Constructor ---------------------------------------

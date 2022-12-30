@@ -1,5 +1,6 @@
 package armameeldoparti.utils.mixers;
 
+import armameeldoparti.models.Error;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
@@ -119,7 +120,15 @@ public class RandomMixer implements PlayersMixer {
     for (List<Player> aps : anchoredPlayers) {
       updateTeamNumbers(teams.size());
 
-      int teamNumber = anchorageCanBeAdded(teams.get(randomTeam1), aps) ? randomTeam1 : randomTeam2;
+      int teamNumber = -1;
+
+      if (anchorageCanBeAdded(teams.get(randomTeam1), aps)) {
+        teamNumber = randomTeam1;
+      } else if (anchorageCanBeAdded(teams.get(randomTeam2), aps)) {
+        teamNumber = randomTeam2;
+      } else {
+        CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
+      }
 
       for (Player p : aps) {
         p.setTeamNumber(teamNumber + 1);
