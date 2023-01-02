@@ -29,6 +29,7 @@
     - [Versión recomendada](https://github.com/akmsw/armame-el-doparti#versi%C3%B3n-recomendada-1)
 - [Descarga](https://github.com/akmsw/armame-el-doparti#-descarga)
 - [Instalación y ejecución](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-instalaci%C3%B3n-y-ejecuci%C3%B3n)
+- [Compilación manual y ejecución](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-compilaci%C3%B3n-manual-y-ejecuci%C3%B3n)
 - [¿Cómo se usa?](https://github.com/akmsw/armame-el-doparti#-c%C3%B3mo-se-usa)
 - [Nuevas funcionalidades](https://github.com/akmsw/armame-el-doparti#-nuevas-funcionalidades)
   - [Anclaje de jugadores](https://github.com/akmsw/armame-el-doparti#-anclaje-de-jugadores)
@@ -65,7 +66,7 @@ Una alternativa es abrir una terminal dentro de la carpeta contenedora del archi
 java -jar nombre_del_archivo.jar
 ```
 
-## 🛠️ Compilación manual
+## 🛠️ Compilación manual y ejecución
 Para compilar manualmente el programa, asumiendo que instalaste correctamente tanto los [requisitos generales](https://github.com/akmsw/armame-el-doparti#-requisitos-generales) como los [requisitos para compilación manual](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-requisitos-para-compilaci%C3%B3n-manual), tenés que [descargar el proyecto en formato ZIP](https://github.com/akmsw/armame-el-doparti/archive/refs/heads/develop-v3.0.zip), extraer el archivo y, dentro de la carpeta extraída, ejecutar Apache Maven haciendo uso del archivo `pom.xml` mediante la terminal, con el siguiente comando:
 ```bash
 mvn package --file pom.xml
