@@ -63,7 +63,7 @@ Más allá de los requisitos listados, no hace falta ninguna instalación para c
 Una vez descargado el archivo con extensión ***.jar***, e independientemente del sistema operativo que uses, podés dirigirte a la carpeta donde está situado y abrirlo con un simple *doble click*. En caso de estar en Linux y que el programa no se abra, revisá la sección de [solución a problemas frecuentes en Linux](https://github.com/akmsw/armame-el-doparti#-en-Linux).\
 Una alternativa es abrir una terminal dentro de la carpeta contenedora del archivo y ejecutar el comando:
 ```bash
-java -jar nombre_del_archivo.jar
+java -jar armameeldoparti-3.0.jar
 ```
 
 ## 🛠️ Compilación manual y ejecución
