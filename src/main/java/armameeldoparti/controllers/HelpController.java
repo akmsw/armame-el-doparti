@@ -29,14 +29,14 @@ public class HelpController extends Controller {
   // ---------------------------------------- Private constants ---------------------------------
 
   private static final Map<Integer, List<String>> pagesMap = Map.of(
-      0, Arrays.asList("INTRODUCCIÓN", "helpIntro.txt"),
-      1, Arrays.asList("CRITERIOS ESTABLECIDOS", "helpCriteria.txt"),
-      2, Arrays.asList("INGRESO DE JUGADORES", "helpNames.txt"),
-      3, Arrays.asList("ANCLAJES", "helpAnchorages.txt"),
-      4, Arrays.asList("PUNTUACIONES", "helpScores.txt"),
-      5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.txt"),
-      6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpBySkillsMix.txt"),
-      7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.txt")
+      0, Arrays.asList("INTRODUCCIÓN", "helpIntro.hlp"),
+      1, Arrays.asList("CRITERIOS ESTABLECIDOS", "helpCriteria.hlp"),
+      2, Arrays.asList("INGRESO DE JUGADORES", "helpNames.hlp"),
+      3, Arrays.asList("ANCLAJES", "helpAnchorages.hlp"),
+      4, Arrays.asList("PUNTUACIONES", "helpScores.hlp"),
+      5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.hlp"),
+      6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpBySkillsMix.hlp"),
+      7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.hlp")
   );
 
   private static final int PAGE_FILENAME_INDEX = 1;
