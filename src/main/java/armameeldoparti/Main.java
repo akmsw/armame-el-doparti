@@ -72,8 +72,6 @@ public final class Main {
     setUpControllers();
 
     ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).showView();
-
-    // dummy commit to test gpg key
   }
 
   // ---------------------------------------- Private methods -----------------------------------
