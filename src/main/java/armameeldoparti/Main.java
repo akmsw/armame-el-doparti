@@ -52,7 +52,6 @@ public final class Main {
    */
   private Main() {
     // No body needed
-    //test
   }
 
   // ---------------------------------------- Main entry point ----------------------------------
