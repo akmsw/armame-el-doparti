@@ -30,6 +30,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
@@ -51,7 +52,7 @@ public final class Main {
    * Empty, private constructor. Not needed.
    */
   private Main() {
-    // No body needed
+    // Body not needed
   }
 
   // ---------------------------------------- Main entry point ----------------------------------
@@ -79,7 +80,7 @@ public final class Main {
   /**
    * Populates the players sets with empty players.
    */
-  private static final void populatePlayersSets() {
+  private static void populatePlayersSets() {
     for (Position position : Position.values()) {
       List<Player> playersSet = new ArrayList<>();
 
@@ -110,12 +111,15 @@ public final class Main {
    * Position.values()[index] trusts the order in which the data will be retrieved from the
    * .pda file and, therefore, you should review the order of the important lines in the file.
    */
-  private static final void setPlayersDistribution() {
+  private static void setPlayersDistribution() {
     BufferedReader buff = new BufferedReader(
-        new InputStreamReader(CommonFunctions.class
-                                             .getClassLoader()
-                                             .getResourceAsStream(Constants.PATH_DOCS
-                                                                  + Constants.FILENAME_PDA))
+        new InputStreamReader(
+          Objects.requireNonNull(
+            CommonFunctions.class
+                           .getClassLoader()
+                           .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
+          )
+        )
     );
 
     var wrapperIndex = new Object() {
@@ -136,7 +140,7 @@ public final class Main {
   /**
    * Creates the controllers and assigns their corresponding view to control.
    */
-  private static final void setUpControllers() {
+  private static void setUpControllers() {
     Controller mainMenuController = new MainMenuController(new MainMenuView());
     CommonFields.getControllersMap()
                 .put(Views.MAIN_MENU, mainMenuController);
@@ -167,7 +171,7 @@ public final class Main {
   /**
    * Sets up the program's GUI properties.
    */
-  private static final void setGraphicalProperties() {
+  private static void setGraphicalProperties() {
     UIManager.put("OptionPane.background", Constants.GREEN_LIGHT);
     UIManager.put("Panel.background", Constants.GREEN_LIGHT);
     UIManager.put("CheckBox.background", Constants.GREEN_LIGHT);
@@ -182,13 +186,15 @@ public final class Main {
 
     try {
       // In order to use the font, it must be first created and registered
-      Font programFont = Font.createFont(Font.TRUETYPE_FONT,
-                                         CommonFunctions.class
-                                                        .getClassLoader()
-                                                        .getResourceAsStream(
-                                                          Constants.PATH_TTF
-                                                          + Constants.FILENAME_FONT))
-                                                        .deriveFont(Constants.FONT_SIZE);
+      Font programFont = Font.createFont(
+          Font.TRUETYPE_FONT,
+          Objects.requireNonNull(
+            CommonFunctions.class
+                           .getClassLoader()
+                           .getResourceAsStream(Constants.PATH_TTF + Constants.FILENAME_FONT),
+            Constants.MSG_ERROR_NULL_RESOURCE
+          )
+      ).deriveFont(Constants.FONT_SIZE);
 
       GraphicsEnvironment.getLocalGraphicsEnvironment()
                          .registerFont(programFont);
@@ -206,7 +212,7 @@ public final class Main {
    *
    * @param font Font to use.
    */
-  private static final void setProgramFont(Font font) {
+  private static void setProgramFont(Font font) {
     final Enumeration<Object> keys = UIManager.getDefaults()
                                               .keys();
 

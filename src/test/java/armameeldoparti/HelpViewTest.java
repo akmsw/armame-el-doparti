@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import armameeldoparti.controllers.HelpController;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.HelpView;
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,22 +47,24 @@ class HelpViewTest {
    *
    * <p>Instantiates the help view and its controller.
    *
-   * @throws IOException If the method is unable to retrieve how many
-   *                     help pages are in the corresponding directory.
    * @throws URISyntaxException If the specified URI for the help pages
    *                            directory is not correctly formatted.
    */
   @BeforeAll
-  void setUp() throws IOException, URISyntaxException {
+  void setUp() throws URISyntaxException {
     helpView = new HelpView();
     helpController = new HelpController(helpView);
 
-    helpPagesAmount = Paths.get(getClass().getClassLoader()
-                                          .getResource(Constants.PATH_HELP_DOCS)
-                                          .toURI())
-                           .toFile()
-                           .list()
-                           .length;
+    helpPagesAmount = Objects.requireNonNull(
+                        Paths.get(Objects.requireNonNull(
+                            getClass().getClassLoader()
+                                      .getResource(Constants.PATH_HELP_DOCS),
+                            Constants.MSG_ERROR_NULL_RESOURCE
+                          ).toURI()
+                        ).toFile()
+                         .list(),
+                        Constants.MSG_ERROR_NULL_RESOURCE
+                      ).length;
   }
 
   /**

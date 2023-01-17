@@ -5,6 +5,7 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.SkillPointsInputView;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Skill points input view controller class.
@@ -24,7 +25,7 @@ public class SkillPointsInputController extends Controller {
    *
    * @param skillPointsInputView View to control.
    */
-  public SkillPointsInputController(SkillPointsInputView skillPointsInputView) {
+  public SkillPointsInputController(@NotNull SkillPointsInputView skillPointsInputView) {
     super(skillPointsInputView);
   }
 

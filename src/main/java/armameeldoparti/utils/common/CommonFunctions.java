@@ -5,10 +5,12 @@ import armameeldoparti.models.Error;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Common-use functions class.
@@ -38,7 +40,7 @@ public final class CommonFunctions {
    *
    * @param e The error that caused the program to end.
    */
-  public static final void exitProgram(Error e) {
+  public static void exitProgram(Error e) {
     showErrorMessage(Constants.errorMessages
                               .get(e));
 
@@ -51,7 +53,7 @@ public final class CommonFunctions {
    *
    * @param errorMessage Custom error message to show.
    */
-  public static final void showErrorMessage(String errorMessage) {
+  public static void showErrorMessage(@NotNull String errorMessage) {
     JOptionPane.showMessageDialog(null, errorMessage, Constants.ERROR_MESSAGE_TITLE,
                                   JOptionPane.ERROR_MESSAGE, null);
   }
@@ -63,16 +65,15 @@ public final class CommonFunctions {
    * @return A list containing the anchored players
    *         grouped by their anchorage number.
   */
-  public static final List<List<Player>> getAnchoredPlayers() {
-    return CommonFields.getPlayersSets()
-                       .values()
-                       .stream()
-                       .flatMap(List::stream)
-                       .filter(Player::isAnchored)
-                       .collect(Collectors.groupingBy(Player::getAnchorageNumber))
-                       .values()
-                       .stream()
-                       .collect(Collectors.toList());
+  @NotNull
+  public static List<List<Player>> getAnchoredPlayers() {
+    return new ArrayList<>(CommonFields.getPlayersSets()
+                                       .values()
+                                       .stream()
+                                       .flatMap(List::stream)
+                                       .filter(Player::isAnchored)
+                                       .collect(Collectors.groupingBy(Player::getAnchorageNumber))
+                                       .values());
   }
 
   /**
@@ -83,7 +84,9 @@ public final class CommonFunctions {
    *
    * @return The value-to-search corresponding position.
    */
-  public static final <T> Position getCorrespondingPosition(Map<Position, T> map, T search) {
+  @NotNull
+  public static <T> Position getCorrespondingPosition(@NotNull Map<Position, T> map,
+                                                      @NotNull T search) {
     return map.entrySet()
               .stream()
               .filter(e -> e.getValue()
@@ -100,7 +103,8 @@ public final class CommonFunctions {
    *
    * @return The requested view's controller.
   */
-  public static final Controller getController(Views view) {
+  @NotNull
+  public static Controller getController(@NotNull Views view) {
     return CommonFields.getControllersMap()
                        .get(view);
   }

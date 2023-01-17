@@ -2,6 +2,7 @@ package armameeldoparti.utils.mixers;
 
 import armameeldoparti.models.Team;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Interface that specifies the players distribution methods.
@@ -20,19 +21,19 @@ public interface PlayersMixer {
    * Distributes the players without considering anchorages.
    *
    * @param teams List that contains the two teams.
-   *
    * @return The updated teams with the players distributed
    *         without considering anchorages.
    */
-  List<Team> withoutAnchorages(List<Team> teams);
+  @NotNull
+  List<Team> withoutAnchorages(@NotNull List<Team> teams);
 
   /**
    * Distributes the players considering anchorages.
    *
    * @param teams List that contains the two teams.
-   *
    * @return The updated teams with the players distributed
    *         considering anchorages.
    */
-  List<Team> withAnchorages(List<Team> teams);
+  @NotNull
+  List<Team> withAnchorages(@NotNull List<Team> teams);
 }

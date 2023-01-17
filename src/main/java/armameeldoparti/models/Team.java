@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Team class.
@@ -25,12 +26,6 @@ public class Team {
 
   private int teamNumber;
 
-  private List<Player> goalkeepers;
-  private List<Player> centralDefenders;
-  private List<Player> lateralDefenders;
-  private List<Player> midfielders;
-  private List<Player> forwards;
-
   private Map<Position, List<Player>> teamPlayers;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -39,19 +34,11 @@ public class Team {
    * Builds a basic team with empty positions.
    */
   public Team(int teamNumber) {
-    goalkeepers = new ArrayList<>();
-    centralDefenders = new ArrayList<>();
-    lateralDefenders = new ArrayList<>();
-    midfielders = new ArrayList<>();
-    forwards = new ArrayList<>();
-
     teamPlayers = new EnumMap<>(Position.class);
 
-    teamPlayers.put(Position.GOALKEEPER, goalkeepers);
-    teamPlayers.put(Position.CENTRAL_DEFENDER, centralDefenders);
-    teamPlayers.put(Position.LATERAL_DEFENDER, lateralDefenders);
-    teamPlayers.put(Position.MIDFIELDER, midfielders);
-    teamPlayers.put(Position.FORWARD, forwards);
+    for (Position position : Position.values()) {
+      teamPlayers.put(position, new ArrayList<>());
+    }
 
     setTeamNumber(teamNumber);
   }
@@ -98,7 +85,7 @@ public class Team {
    *
    * @return Whether the position players list is full or not.
    */
-  public boolean isPositionFull(Position position) {
+  public boolean isPositionFull(@NotNull Position position) {
     return teamPlayers.get(position)
                       .size() == CommonFields.getPlayersAmountMap()
                                              .get(position);

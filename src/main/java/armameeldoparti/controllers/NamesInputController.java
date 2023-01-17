@@ -8,10 +8,12 @@ import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.NamesInputView;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import javax.naming.InvalidNameException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Names input view controller class.
@@ -41,7 +43,7 @@ public class NamesInputController extends Controller {
    *
    * @param namesInputView View to control.
    */
-  public NamesInputController(NamesInputView namesInputView) {
+  public NamesInputController(@NotNull NamesInputView namesInputView) {
     super(namesInputView);
   }
 
@@ -55,11 +57,14 @@ public class NamesInputController extends Controller {
    */
   @Override
   public void showView() {
-    updateTextFields(((NamesInputView) getView()).getComboBox()
-                                                 .getSelectedItem()
-                                                 .toString());
+    updateTextFields(Objects.requireNonNull(
+        ((NamesInputView) getView()).getComboBox()
+                                    .getSelectedItem(),
+        Constants.MSG_ERROR_NULL_RESOURCE
+      ).toString()
+    );
 
-    ((NamesInputView) getView()).setVisible(true);
+    getView().setVisible(true);
   }
 
   /**
@@ -110,8 +115,9 @@ public class NamesInputController extends Controller {
   public void mixButtonEvent() {
     int distribution = JOptionPane.showOptionDialog(
         null, "Seleccione el criterio de distribución de jugadores",
-        "Antes de continuar...", 2, JOptionPane.QUESTION_MESSAGE,
-        Constants.ICON_SCALED, OPTIONS_MIX, OPTIONS_MIX[0]
+        "Antes de continuar...", JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE, Constants.ICON_SCALED,
+        OPTIONS_MIX, OPTIONS_MIX[0]
     );
 
     if (distribution == JOptionPane.CLOSED_OPTION) {
@@ -162,7 +168,9 @@ public class NamesInputController extends Controller {
    * @throws IllegalArgumentException When the input is an invalid string.
    * @throws InvalidNameException     When the input is an invalid name.
    */
-  public void textFieldEvent(int playerIndex, List<Player> playersSet, String text)
+  public void textFieldEvent(int playerIndex,
+                             @NotNull List<Player> playersSet,
+                             @NotNull String text)
                              throws IllegalArgumentException,
                                     InvalidNameException {
     if (!validString(text)) {
@@ -194,7 +202,7 @@ public class NamesInputController extends Controller {
    *
    * @param selectedOption Combobox selected option.
    */
-  public void comboBoxEvent(String selectedOption) {
+  public void comboBoxEvent(@NotNull String selectedOption) {
     updateTextFields(selectedOption);
   }
 
@@ -215,26 +223,25 @@ public class NamesInputController extends Controller {
                                 .setText("");
 
     CommonFields.getPlayersSets()
-                .entrySet()
-                .forEach(ps -> ps.getValue()
-                                 .stream()
-                                 .filter(p -> !p.getName()
-                                                .equals(""))
-                                 .forEach(p -> {
-                                   if (wrapperCounter.counter != 0
-                                       && Constants.PLAYERS_PER_TEAM * 2
-                                          - wrapperCounter.counter != 0) {
-                                     ((NamesInputView) getView()).getTextArea()
-                                                                 .append(System.lineSeparator());
-                                   }
+                .forEach((key, value) -> value.stream()
+                                              .filter(p -> !p.getName()
+                                                             .equals(""))
+                                              .forEach(p -> {
+                                                if (wrapperCounter.counter != 0
+                                                    && Constants.PLAYERS_PER_TEAM * 2
+                                                       - wrapperCounter.counter != 0) {
+                                                  ((NamesInputView) getView())
+                                                      .getTextArea()
+                                                      .append(System.lineSeparator());
+                                                }
 
-                                   wrapperCounter.counter++;
+                                                wrapperCounter.counter++;
 
-                                   ((NamesInputView) getView()).getTextArea()
-                                                               .append(wrapperCounter.counter
-                                                                       + " - "
-                                                                       + p.getName());
-                                 }));
+                                                ((NamesInputView) getView())
+                                                    .getTextArea()
+                                                    .append(wrapperCounter.counter
+                                                            + " - " + p.getName());
+                                              }));
   }
 
   /**
@@ -242,7 +249,7 @@ public class NamesInputController extends Controller {
    *
    * @param selectedOption Combobox selected option.
    */
-  private void updateTextFields(String selectedOption) {
+  private void updateTextFields(@NotNull String selectedOption) {
     JPanel leftPanel = ((NamesInputView) getView()).getLeftPanel();
 
     // Removes the text fields from the view's left panel.
@@ -258,7 +265,8 @@ public class NamesInputController extends Controller {
       if (selectedOption.equals(NamesInputView.getOPTIONS_COMBOBOX()[i])) {
         ((NamesInputView) getView()).getTextFieldsMap()
                                     .get(CommonFunctions.getCorrespondingPosition(
-                                      CommonFields.getPositionsMap(), selectedOption.toUpperCase()))
+                                          CommonFields.getPositionsMap(),
+                                          selectedOption.toUpperCase()))
                                     .forEach(tf -> leftPanel.add(tf, "growx"));
 
         break;
@@ -293,7 +301,7 @@ public class NamesInputController extends Controller {
    *
    * @return Whether there is already a player with the specified name or not.
    */
-  private boolean alreadyExists(String name) {
+  private boolean alreadyExists(@NotNull String name) {
     return CommonFields.getPlayersSets()
                        .values()
                        .stream()
@@ -309,7 +317,7 @@ public class NamesInputController extends Controller {
    *
    * @return Whether the string matches the string validation regex or not.
    */
-  private boolean validString(String string) {
+  private boolean validString(@NotNull String string) {
     return Pattern.matches(Constants.REGEX_NAMES_VALIDATION, string);
   }
 
@@ -323,7 +331,7 @@ public class NamesInputController extends Controller {
    * @return If the given name is valid according to
    *         the specified conditions.
    */
-  private boolean validName(String name) {
+  private boolean validName(@NotNull String name) {
     return name.length() <= Constants.MAX_NAME_LEN
            && !(name.isBlank() || name.isEmpty() || alreadyExists(name));
   }

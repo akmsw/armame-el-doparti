@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Anchorages view controller class.
@@ -24,8 +25,8 @@ public class AnchoragesController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private int anchoragesAmount = 0;
-  private int anchoredPlayersAmount = 0;
+  private int anchoragesAmount;
+  private int anchoredPlayersAmount;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -34,7 +35,7 @@ public class AnchoragesController extends Controller {
    *
    * @param anchoragesView View to control.
    */
-  public AnchoragesController(AnchoragesView anchoragesView) {
+  public AnchoragesController(@NotNull AnchoragesView anchoragesView) {
     super(anchoragesView);
 
     anchoragesAmount = 0;
@@ -72,7 +73,7 @@ public class AnchoragesController extends Controller {
    * 'Finish' button event handler.
    *
    * <p>Checks if the necessary anchorages conditions are met.
-   * If so, it proceeds with the players distribution.
+   * If so, it proceeds with the distribution.
    */
   public void finishButtonEvent() {
     if (!validAnchoragesCombination()) {
@@ -152,7 +153,8 @@ public class AnchoragesController extends Controller {
 
     int anchorageToDelete = JOptionPane.showOptionDialog(null,
                                                          "Seleccione qué anclaje desea borrar",
-                                                         "Antes de continuar...", 2,
+                                                         "Antes de continuar...",
+                                                         JOptionPane.OK_CANCEL_OPTION,
                                                          JOptionPane.QUESTION_MESSAGE,
                                                          Constants.ICON_SCALED, optionsDelete,
                                                          optionsDelete[0]);
@@ -233,21 +235,17 @@ public class AnchoragesController extends Controller {
                                           + " -----" + System.lineSeparator());
 
       CommonFields.getPlayersSets()
-                  .entrySet()
-                  .forEach(ps -> ps.getValue()
-                                   .stream()
-                                   .filter(p ->
-                                     p.getAnchorageNumber() == wrapper.anchorageNum)
-                                   .forEach(p -> {
-                                     ((AnchoragesView) getView()).getTextArea()
-                                                                 .append(" "
-                                                                         + wrapper.counter
-                                                                         + ". "
-                                                                         + p.getName()
-                                                                         + System.lineSeparator());
+                  .forEach((key, value) -> value.stream()
+                                                .filter(p -> p.getAnchorageNumber()
+                                                             == wrapper.anchorageNum)
+                                                .forEach(p -> {
+                                                  ((AnchoragesView) getView()).getTextArea()
+                                                      .append(" " + wrapper.counter
+                                                              + ". " + p.getName()
+                                                              + System.lineSeparator());
 
-                                     wrapper.counter++;
-                                   }));
+                                                  wrapper.counter++;
+                                                }));
 
       if (wrapper.anchorageNum != anchoragesAmount) {
         ((AnchoragesView) getView()).getTextArea()
@@ -336,7 +334,7 @@ public class AnchoragesController extends Controller {
    * Changes the anchorage number of certain players.
    *
    * <p>If the replacement is 0 (an anchorage must be removed), then
-   * those players will be set as unanchored, the players corresponding
+   * those players will be set as not-anchored, the players corresponding
    * checkboxes will be visible and enabled again, and the anchored players
    * amount will be decreased as needed.
    *
@@ -398,7 +396,7 @@ public class AnchoragesController extends Controller {
    *
    * @param cbSet Check boxes set with players checked.
    */
-  private void setAnchorages(List<JCheckBox> cbSet) {
+  private void setAnchorages(@NotNull List<JCheckBox> cbSet) {
     CommonFields.getPlayersSets()
                 .get(CommonFunctions.getCorrespondingPosition(
                   ((AnchoragesView) getView()).getCheckBoxesMap(), cbSet))

@@ -4,6 +4,7 @@ import armameeldoparti.models.Error;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.Map;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 
 /**
@@ -56,6 +57,12 @@ public final class Constants {
   public static final String FILENAME_PDA = "dist.pda";
   public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
   public static final String MIX_OPTION_BY_SKILL = "Por puntuaciones";
+  public static final String MSG_ERROR_NULL_RESOURCE = "ERROR EN OBTENCIÓN DE RECURSOS GRÁFICOS";
+  public static final String MSG_ERROR_INVALID_STRING = "El nombre del jugador debe estar formado "
+                                                        + "por letras de la A a la Z";
+  public static final String MSG_ERROR_INVALID_NAME = "El nombre del jugador no puede estar vacío,"
+                                                      + " tener más de " + Constants.MAX_NAME_LEN
+                                                      + " caracteres, o estar repetido";
   public static final String PATH_DOCS = "docs/";
   public static final String PATH_HELP_DOCS = PATH_DOCS + "help/";
   public static final String PATH_IMG = "img/";
@@ -82,9 +89,11 @@ public final class Constants {
    * Standard-size program icon.
    */
   public static final ImageIcon ICON = new ImageIcon(
-      Constants.class
-               .getClassLoader()
-               .getResource(PATH_IMG + FILENAME_ICON)
+      Objects.requireNonNull(Constants.class
+                                      .getClassLoader()
+                                      .getResource(PATH_IMG + FILENAME_ICON),
+                             Constants.MSG_ERROR_NULL_RESOURCE
+      )
   );
 
   /**
@@ -121,6 +130,6 @@ public final class Constants {
    * Empty, private constructor. Not needed.
    */
   private Constants() {
-    // No body needed.
+    // Body not needed.
   }
 }

@@ -9,6 +9,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Main menu view controller class.
@@ -28,7 +29,7 @@ public class MainMenuController extends Controller {
    *
    * @param mainMenuView View to control.
    */
-  public MainMenuController(MainMenuView mainMenuView) {
+  public MainMenuController(@NotNull MainMenuView mainMenuView) {
     super(mainMenuView);
   }
 
@@ -105,7 +106,7 @@ public class MainMenuController extends Controller {
    *
    * @param link Destination URL.
    */
-  private void browserRedirect(String link) {
+  private void browserRedirect(@NotNull String link) {
     try {
       Desktop.getDesktop()
              .browse(new URI(link));

@@ -7,6 +7,7 @@ import armameeldoparti.models.Views;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,10 +36,10 @@ public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private JPanel masterPanel;
+  private final JPanel masterPanel;
 
   private transient @Getter Map<Player, JSpinner> spinnersMap;
-  private transient Map<JSpinner, JLabel> labelsMap;
+  private final transient Map<JSpinner, JLabel> labelsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -94,7 +95,6 @@ public class SkillPointsInputView extends View {
    * Adds the buttons to their corresponding panel.
    */
   @Override
-  @SuppressWarnings("java:S1192")
   protected void addButtons() {
     JButton finishButton = new JButton("Finalizar");
     JButton resetSkillPointsButton = new JButton("Reiniciar puntuaciones");
@@ -115,9 +115,9 @@ public class SkillPointsInputView extends View {
         .backButtonEvent()
     );
 
-    masterPanel.add(finishButton, "grow, span");
-    masterPanel.add(resetSkillPointsButton, "grow, span");
-    masterPanel.add(backButton, "grow, span");
+    for (JButton button : Arrays.asList(finishButton, resetSkillPointsButton, backButton)) {
+      masterPanel.add(button, "grow, span");
+    }
   }
 
   // ---------------------------------------- Private methods -----------------------------------

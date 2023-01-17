@@ -47,17 +47,17 @@ public final class CommonFields {
   /**
    * Initializes the common-used maps.
    */
-  public static final void initializeMaps() {
+  public static void initializeMaps() {
     controllersMap = new EnumMap<>(Views.class);
     playersAmountMap = new EnumMap<>(Position.class);
     positionsMap = new EnumMap<>(Position.class);
 
     playersSets = new TreeMap<>();
 
-    positionsMap.put(Position.CENTRAL_DEFENDER, "DEFENSORES CENTRALES");
-    positionsMap.put(Position.LATERAL_DEFENDER, "DEFENSORES LATERALES");
-    positionsMap.put(Position.MIDFIELDER, "MEDIOCAMPISTAS");
-    positionsMap.put(Position.FORWARD, "DELANTEROS");
-    positionsMap.put(Position.GOALKEEPER, "ARQUEROS");
+    positionsMap.put(Position.CENTRAL_DEFENDER, Constants.POSITION_CENTRAL_DEFENDERS);
+    positionsMap.put(Position.LATERAL_DEFENDER, Constants.POSITION_LATERAL_DEFENDERS);
+    positionsMap.put(Position.MIDFIELDER, Constants.POSITION_MIDFIELDERS);
+    positionsMap.put(Position.FORWARD, Constants.POSITION_FORWARDS);
+    positionsMap.put(Position.GOALKEEPER, Constants.POSITION_GOALKEEPERS);
   }
 }

@@ -1,8 +1,5 @@
 package armameeldoparti;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
@@ -12,14 +9,15 @@ import armameeldoparti.utils.common.CommonFunctions;
 import java.util.List;
 import java.util.stream.Stream;
 import javax.naming.InvalidNameException;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.TestInstance;
+import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Names input view-controller unit tests class.
@@ -49,12 +47,12 @@ class NamesInputTest {
    * Tests whether empty names and names with numbers and/or symbols are correctly
    * detected and if they all trigger their corresponding exception.
    *
-   * @param invalidName The string that shouldn't pass the name check.
+   * @param invalidString The string that shouldn't pass the name check.
    */
   @DisplayName("Tests if invalid strings throw the expected exception")
   @ParameterizedTest
   @ValueSource(strings = { "", "123", "!a._,|°}zY", "nam3" })
-  void invalidStringsShouldThrowException(String invalidString) {
+  void invalidStringsShouldThrowException(@NotNull String invalidString) {
     List<Player> playersSet = CommonFields.getPlayersSets()
                                           .get(Position.CENTRAL_DEFENDER);
 
@@ -62,9 +60,7 @@ class NamesInputTest {
         (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
-    assertThrows(IllegalArgumentException.class, () -> {
-      testNamesInputController.textFieldEvent(0, playersSet, invalidString);
-    });
+    assertThrows(IllegalArgumentException.class, () -> testNamesInputController.textFieldEvent(0, playersSet, invalidString));
   }
 
   /**
@@ -76,7 +72,7 @@ class NamesInputTest {
   @DisplayName("Tests if invalid names throw the expected exception")
   @ParameterizedTest
   @ValueSource(strings = { "   ", "thisNameIsTooLong" })
-  void invalidNamesShouldThrowException(String invalidName) {
+  void invalidNamesShouldThrowException(@NotNull String invalidName) {
     List<Player> playersSet = CommonFields.getPlayersSets()
                                           .get(Position.CENTRAL_DEFENDER);
 
@@ -84,35 +80,36 @@ class NamesInputTest {
         (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
-    assertThrows(InvalidNameException.class, () -> {
-      testNamesInputController.textFieldEvent(0, playersSet, invalidName);
-    });
+    assertThrows(InvalidNameException.class, () -> testNamesInputController.textFieldEvent(0, playersSet, invalidName));
   }
 
   /**
    * Tests whether repeated names are correctly detected and if they all trigger
    * their corresponding exception.
-   *
-   * @param playerIndex    The index of the player to test in its corresponding list.
-   * @param playerPosition The position of the player to test.
-   * @param playerName     The name to apply to the player.
    */
   @DisplayName("Tests if repeated names throw the expected exception")
-  @ParameterizedTest
-  @MethodSource("repeatedParamsProvider")
-  void repeatedNamesShouldThrowException(int playerIndex,
-                                         Position playerPosition,
-                                         String playerName) {
+  @Test
+  void repeatedNamesShouldThrowException() {
     List<Player> playersSet = CommonFields.getPlayersSets()
                                           .get(Position.CENTRAL_DEFENDER);
+
+    playersSet.forEach(p -> {
+      p.setName("");
+      p.setPosition(null);
+      p.setAnchored(false);
+      p.setTeamNumber(0);
+      p.setAnchorageNumber(0);
+      p.setSkillPoints(0);
+    });
 
     NamesInputController testNamesInputController = (
         (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
-    assertThrows(InvalidNameException.class, () -> {
-      testNamesInputController.textFieldEvent(0, playersSet, playerName);
-    });
+    String repeatedPlayerName = "PLAYER A";
+
+    assertDoesNotThrow(() -> testNamesInputController.textFieldEvent(0, playersSet, repeatedPlayerName));
+    assertThrows(InvalidNameException.class, () -> testNamesInputController.textFieldEvent(1, playersSet, repeatedPlayerName));
   }
 
   /**
@@ -130,7 +127,9 @@ class NamesInputTest {
   @DisplayName("Tests whether valid names are correctly stored as players names")
   @ParameterizedTest
   @MethodSource("validParamsProvider")
-  void validNamesShouldPass(int playerIndex, Position playerPosition, String playerName)
+  void validNamesShouldPass(int playerIndex,
+                            @NotNull Position playerPosition,
+                            @NotNull String playerName)
                             throws IllegalArgumentException,
                                    InvalidNameException {
     List<Player> playersSet = CommonFields.getPlayersSets()
@@ -142,31 +141,21 @@ class NamesInputTest {
 
     testNamesInputController.textFieldEvent(playerIndex, playersSet, playerName);
 
-    assertEquals(playerName.replace(" ", "_"), CommonFields.getPlayersSets()
-                                                           .get(playerPosition)
-                                                           .get(playerIndex)
-                                                           .getName());
+    assertEquals(playerName.replace(" ", "_"),
+                 CommonFields.getPlayersSets()
+                             .get(playerPosition)
+                             .get(playerIndex)
+                             .getName());
   }
 
   // ---------------------------------------- Arguments providers -------------------------------
-
-  /**
-   * Provides repeated names for testing.
-   *
-   * @return Repeated names for testing.
-   */
-  static Stream<Arguments> repeatedParamsProvider() {
-    return Stream.of(
-      Arguments.of(0, Position.CENTRAL_DEFENDER, "PLAYER A"),
-      Arguments.of(1, Position.MIDFIELDER, "PLAYER A")
-    );
-  }
 
   /**
    * Provides valid params for testing.
    *
    * @return Valid params for testing.
    */
+  @NotNull
   static Stream<Arguments> validParamsProvider() {
     return Stream.of(
       Arguments.of(0, Position.CENTRAL_DEFENDER, "PLAYER A"),

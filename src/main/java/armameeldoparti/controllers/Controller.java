@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Abstract class that specifies the basic methods for
@@ -29,7 +30,7 @@ public abstract class Controller {
    *
    * @param view View to control.
    */
-  protected Controller(View view) {
+  protected Controller(@NotNull View view) {
     setView(view);
   }
 

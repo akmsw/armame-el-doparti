@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Results view controller.
@@ -48,9 +49,9 @@ public class ResultsController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private BySkillsMixer bySkillsMixer;
+  private final BySkillsMixer bySkillsMixer;
 
-  private RandomMixer randomMixer;
+  private final RandomMixer randomMixer;
 
   private List<Team> teams;
 
@@ -61,7 +62,7 @@ public class ResultsController extends Controller {
    *
    * @param resultsView View to control.
    */
-  public ResultsController(ResultsView resultsView) {
+  public ResultsController(@NotNull ResultsView resultsView) {
     super(resultsView);
 
     bySkillsMixer = new BySkillsMixer();
@@ -205,6 +206,7 @@ public class ResultsController extends Controller {
    *
    * @return The updated teams with the players distributed.
    */
+  @NotNull
   public List<Team> randomMix() {
     return CommonFields.isAnchorages() ? randomMixer.withAnchorages(teams)
                                        : randomMixer.withoutAnchorages(teams);
@@ -215,6 +217,7 @@ public class ResultsController extends Controller {
    *
    * @return The updated teams with the players distributed.
    */
+  @NotNull
   public List<Team> bySkillsMix() {
     return CommonFields.isAnchorages() ? bySkillsMixer.withAnchorages(teams)
                                        : bySkillsMixer.withoutAnchorages(teams);
@@ -244,7 +247,7 @@ public class ResultsController extends Controller {
           /**
            * Configures the table cells background and foreground colors.
            *
-           * @param table      Source table.
+           * @param myTable    Source table.
            * @param value      Table cell value.
            * @param isSelected If the cell is selected.
            * @param hasFocus   If the cell is focused.

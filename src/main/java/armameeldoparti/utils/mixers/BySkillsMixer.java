@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * By-skill distribution class.
@@ -30,7 +31,7 @@ public class BySkillsMixer implements PlayersMixer {
    * Builds the by-skill players distributor.
    */
   public BySkillsMixer() {
-    // No body needed
+    // Body not needed
   }
 
   // ---------------------------------------- Public methods ----------------------------------
@@ -55,12 +56,12 @@ public class BySkillsMixer implements PlayersMixer {
    * The team with more skill points is assigned the set of players with the lowest skill points.
    *
    * @param teams List that contains the two teams.
-   *
    * @return The updated teams with the players distributed by their skill points, without
    *         considering anchorages.
    */
   @Override
-  public List<Team> withoutAnchorages(List<Team> teams) {
+  @NotNull
+  public List<Team> withoutAnchorages(@NotNull List<Team> teams) {
     List<Position> reversedEnum = Arrays.asList(Position.values());
 
     Collections.reverse(reversedEnum);
@@ -102,12 +103,12 @@ public class BySkillsMixer implements PlayersMixer {
    * per team amounts are not exceeded.
    *
    * @param teams List that contains the two teams.
-   *
    * @return The updated teams with the players distributed by their skill points,
    *         without considering anchorages.
    */
   @Override
-  public List<Team> withAnchorages(List<Team> teams) {
+  @NotNull
+  public List<Team> withAnchorages(@NotNull List<Team> teams) {
     List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
 
     for (List<Player> aps : anchoredPlayers) {
@@ -124,16 +125,18 @@ public class BySkillsMixer implements PlayersMixer {
       }
     }
 
-    List<List<Player>> remainingPlayers = CommonFields.getPlayersSets()
-                                                      .values()
-                                                      .stream()
-                                                      .flatMap(List::stream)
-                                                      .filter(p -> p.getTeamNumber() == 0)
-                                                      .collect(Collectors.groupingBy(
-                                                               Player::getPosition))
-                                                      .values()
-                                                      .stream()
-                                                      .collect(Collectors.toList());
+    List<List<Player>> remainingPlayers = new ArrayList<>(CommonFields.getPlayersSets()
+                                                                      .values()
+                                                                      .stream()
+                                                                      .flatMap(List::stream)
+                                                                      .filter(
+                                                                        p -> p.getTeamNumber() == 0
+                                                                      )
+                                                                      .collect(
+                                                                        Collectors.groupingBy(
+                                                                          Player::getPosition)
+                                                                      )
+                                                                      .values());
 
     remainingPlayers.sort(Comparator.comparingInt(List::size));
 
@@ -182,7 +185,9 @@ public class BySkillsMixer implements PlayersMixer {
    * @param playersSet Current working players set.
    * @param position   Current working players position.
    */
-  private void distributeSubsets(List<Team> teams, List<Player> playersSet, Position position) {
+  private void distributeSubsets(@NotNull List<Team> teams,
+                                 @NotNull List<Player> playersSet,
+                                 @NotNull Position position) {
     List<Player> outerSubset = new ArrayList<>();
     List<Player> innerSubset = new ArrayList<>();
 

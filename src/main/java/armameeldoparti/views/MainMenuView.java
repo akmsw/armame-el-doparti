@@ -4,6 +4,8 @@ import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.models.Views;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import java.util.Arrays;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,7 +28,7 @@ public class MainMenuView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private JPanel masterPanel;
+  private final JPanel masterPanel;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -64,7 +66,6 @@ public class MainMenuView extends View {
    * Adds the buttons to their corresponding panel.
    */
   @Override
-  @SuppressWarnings("java:S1192")
   protected void addButtons() {
     JButton startButton = new JButton("Comenzar");
 
@@ -90,8 +91,10 @@ public class MainMenuView extends View {
         ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).issuesButtonEvent()
     );
 
-    masterPanel.add(startButton, "growx");
-    masterPanel.add(helpButton, "growx");
+    for (JButton button : Arrays.asList(startButton, helpButton)) {
+      masterPanel.add(button, "growx");
+    }
+
     masterPanel.add(contactButton, new CC().width("50%")
                                            .split());
     masterPanel.add(issuesButton, new CC().width("50%"));
@@ -103,9 +106,12 @@ public class MainMenuView extends View {
    * Adds the background image to the panel.
    */
   private void addBackground() {
-    ImageIcon bgImg = new ImageIcon(getClass().getClassLoader()
-                                              .getResource(Constants.PATH_IMG
-                                                           + Constants.FILENAME_BG_IMG));
+    ImageIcon bgImg = new ImageIcon(Objects.requireNonNull(
+        getClass().getClassLoader()
+                  .getResource(Constants.PATH_IMG + Constants.FILENAME_BG_IMG),
+        Constants.MSG_ERROR_NULL_RESOURCE
+      )
+    );
 
     JLabel bgLabel = new JLabel("", bgImg, SwingConstants.CENTER);
 

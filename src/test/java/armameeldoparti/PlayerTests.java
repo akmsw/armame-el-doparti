@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import java.util.stream.Stream;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -34,7 +35,8 @@ class PlayerTests implements ArgumentsProvider {
   @DisplayName("Tests the default values when creating a player")
   @ParameterizedTest
   @ArgumentsSource(PlayerTests.class)
-  void defaultValuesInPlayersCreation(String name, Position position) {
+  void defaultValuesInPlayersCreation(@NotNull String name,
+                                      @NotNull Position position) {
     Player player = new Player(name, position);
 
     assertEquals(0, player.getAnchorageNumber());
@@ -52,7 +54,8 @@ class PlayerTests implements ArgumentsProvider {
    * @return An array with parameters to be used in the unit tests.
    */
   @Override
-  public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
+  @NotNull
+  public Stream<? extends Arguments> provideArguments(@NotNull ExtensionContext context) {
     return Stream.of(
       Arguments.of("player a", Position.CENTRAL_DEFENDER),
       Arguments.of("player b", Position.LATERAL_DEFENDER),

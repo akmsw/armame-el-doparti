@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.naming.InvalidNameException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -55,7 +56,7 @@ public class NamesInputView extends View {
   private @Getter JComboBox<String> comboBox;
 
   private @Getter JPanel leftPanel;
-  private JPanel rightPanel;
+  private final JPanel rightPanel;
 
   private @Getter JTextArea textArea;
 
@@ -136,14 +137,16 @@ public class NamesInputView extends View {
     comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT))
-        .comboBoxEvent((String) ((JComboBox<?>) e.getSource()).getSelectedItem())
+                                               .comboBoxEvent((String) Objects.requireNonNull(
+                                                 ((JComboBox<?>) e.getSource()).getSelectedItem())
+                                               )
     );
 
     leftPanel.add(comboBox, "growx");
   }
 
   /**
-   * Adds the read-only text area where the entered players names will be displayed
+   * Adds the read-only text area where the entered player names will be displayed
    * in real time.
    */
   private void addTextArea() {
@@ -156,7 +159,7 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Adds the anchorages checkbox.
+   * Adds the anchorages enablement checkbox.
    */
   private void addAnchoragesCheckBox() {
     anchoragesCheckBox = new JCheckBox("Anclar jugadores", false);
@@ -186,20 +189,13 @@ public class NamesInputView extends View {
                                                                                    .get(position),
                                                                        tf.getText());
               } catch (IllegalArgumentException stringEx) {
-                CommonFunctions.showErrorMessage("El nombre del jugador debe estar formado "
-                                                 + "por letras de la A a la Z");
+                CommonFunctions.showErrorMessage(Constants.MSG_ERROR_INVALID_STRING);
 
                 tf.setText("");
-
-                return;
               } catch (InvalidNameException nameEx) {
-                CommonFunctions.showErrorMessage("El nombre del jugador no puede estar vacío,"
-                                                 + " tener más de " + Constants.MAX_NAME_LEN
-                                                 + " caracteres, o estar repetido");
+                CommonFunctions.showErrorMessage(Constants.MSG_ERROR_INVALID_NAME);
 
                 tf.setText("");
-
-                return;
               }
             }
         );
@@ -211,7 +207,7 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Initializes the textfields map.
+   * Initializes the text fields map.
    */
   private void initializeTextFieldsMap() {
     textFieldsMap = new EnumMap<>(Position.class);

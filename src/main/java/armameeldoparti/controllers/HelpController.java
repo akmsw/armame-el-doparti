@@ -12,8 +12,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.swing.BorderFactory;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Help view controller class.
@@ -54,7 +56,7 @@ public class HelpController extends Controller {
    *
    * @param helpView View to control.
    */
-  public HelpController(HelpView helpView) {
+  public HelpController(@NotNull HelpView helpView) {
     super(helpView);
 
     currentPageNumber = 0;
@@ -141,11 +143,14 @@ public class HelpController extends Controller {
 
     try (BufferedReader reader = new BufferedReader(
         new InputStreamReader(
-          HelpController.class
-                        .getClassLoader()
-                        .getResourceAsStream(Constants.PATH_HELP_DOCS
-                                             + pagesMap.get(currentPageNumber)
-                                                       .get(PAGE_FILENAME_INDEX)),
+          Objects.requireNonNull(
+            HelpController.class
+                          .getClassLoader()
+                          .getResourceAsStream(Constants.PATH_HELP_DOCS
+                                  + pagesMap.get(currentPageNumber)
+                                  .get(PAGE_FILENAME_INDEX)),
+            Constants.MSG_ERROR_NULL_RESOURCE
+          ),
           StandardCharsets.UTF_8)
     )) {
       ((HelpView) getView()).getTextArea()

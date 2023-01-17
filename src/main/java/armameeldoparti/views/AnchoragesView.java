@@ -8,6 +8,7 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Anchorages view class.
@@ -45,23 +47,17 @@ public class AnchoragesView extends View {
   private @Getter JButton deleteLastAnchorageButton;
   private @Getter JButton clearAnchoragesButton;
 
-  private JPanel leftPanel;
-  private JPanel rightPanel;
+  private final JPanel leftPanel;
+  private final JPanel rightPanel;
 
-  private JScrollPane scrollPane;
+  private final JScrollPane scrollPane;
 
   private @Getter JTextArea textArea;
 
   private @Getter List<JButton> anchorageButtons;
 
-  private List<JCheckBox> cdCheckBoxes;
-  private List<JCheckBox> ldCheckBoxes;
-  private List<JCheckBox> mfCheckBoxes;
-  private List<JCheckBox> fwCheckBoxes;
-  private List<JCheckBox> gkCheckBoxes;
-
   /**
-   * Map that associates each checkboxes list with its corresponding position.
+   * Map that associates each checkboxes-list with its corresponding position.
    */
   private @Getter Map<Position, List<JCheckBox>> checkBoxesMap;
 
@@ -81,20 +77,13 @@ public class AnchoragesView extends View {
     scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                                  ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-    cdCheckBoxes = new ArrayList<>();
-    ldCheckBoxes = new ArrayList<>();
-    mfCheckBoxes = new ArrayList<>();
-    fwCheckBoxes = new ArrayList<>();
-    gkCheckBoxes = new ArrayList<>();
     anchorageButtons = new ArrayList<>();
 
     checkBoxesMap = new EnumMap<>(Position.class);
 
-    checkBoxesMap.put(Position.CENTRAL_DEFENDER, cdCheckBoxes);
-    checkBoxesMap.put(Position.LATERAL_DEFENDER, ldCheckBoxes);
-    checkBoxesMap.put(Position.MIDFIELDER, mfCheckBoxes);
-    checkBoxesMap.put(Position.FORWARD, fwCheckBoxes);
-    checkBoxesMap.put(Position.GOALKEEPER, gkCheckBoxes);
+    for (Position position : Position.values()) {
+      checkBoxesMap.put(position, new ArrayList<>());
+    }
 
     initializeInterface();
   }
@@ -136,13 +125,11 @@ public class AnchoragesView extends View {
               });
 
     CommonFields.getPlayersSets()
-                .entrySet()
-                .forEach(ps -> {
-                  final Position currentPosition = ps.getValue()
-                                                     .get(0)
-                                                     .getPosition();
+                .forEach((key, value) -> {
+                  final Position currentPosition = value.get(0)
+                                                        .getPosition();
 
-                  fillCheckBoxesSet(ps.getValue(), checkBoxesMap.get(currentPosition));
+                  fillCheckBoxesSet(value, checkBoxesMap.get(currentPosition));
                   addCheckBoxesSet(checkBoxesMap.get(currentPosition),
                                    CommonFields.getPositionsMap()
                                                .get(currentPosition));
@@ -171,7 +158,6 @@ public class AnchoragesView extends View {
    * Adds the buttons to their corresponding panel.
    */
   @Override
-  @SuppressWarnings("java:S1192")
   protected void addButtons() {
     finishButton = new JButton("Finalizar");
 
@@ -222,8 +208,9 @@ public class AnchoragesView extends View {
     anchorageButtons.add(deleteLastAnchorageButton);
     anchorageButtons.add(clearAnchoragesButton);
 
-    leftPanel.add(finishButton, "growx, span");
-    leftPanel.add(backButton, "growx, span");
+    for (JButton button : Arrays.asList(finishButton, backButton)) {
+      leftPanel.add(button, "growx, span");
+    }
 
     rightPanel.add(scrollPane, "span2, push, grow");
     rightPanel.add(newAnchorageButton, "grow");
@@ -240,18 +227,20 @@ public class AnchoragesView extends View {
    * @param playersSet Players sets from where to obtain the names.
    * @param cbSet      Check boxes set to fill.
    */
-  private void fillCheckBoxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
+  private void fillCheckBoxesSet(@NotNull List<Player> playersSet,
+                                 @NotNull List<JCheckBox> cbSet) {
     playersSet.forEach(p -> cbSet.add(new JCheckBox(p.getName())));
   }
 
   /**
    * Adds the checkboxes to the view with a label that specifies the corresponding position.
    *
-   * @param cbSet Check boxes to add.
-   * @param title Label text.
+   * @param cbSet      Check boxes to add.
+   * @param labelText  Label text.
    */
-  private void addCheckBoxesSet(List<JCheckBox> cbSet, String text) {
-    JLabel label = new JLabel(text);
+  private void addCheckBoxesSet(@NotNull List<JCheckBox> cbSet,
+                                @NotNull String labelText) {
+    JLabel label = new JLabel(labelText);
 
     label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 

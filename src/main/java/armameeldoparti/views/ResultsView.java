@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 import lombok.Getter;
 import lombok.Setter;
 import net.miginfocom.swing.MigLayout;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Results view class.
@@ -34,7 +35,7 @@ public class ResultsView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private JPanel panel;
+  private final JPanel panel;
 
   private @Getter @Setter JTable table;
 
@@ -125,6 +126,7 @@ public class ResultsView extends View {
    *
    * @return The updated frame title.
    */
+  @NotNull
   private static String getUpdatedFrameTitle() {
     return (CommonFields.getDistribution() == Constants.MIX_RANDOM
             ? "Aleatorio - "

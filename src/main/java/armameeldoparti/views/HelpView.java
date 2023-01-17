@@ -42,7 +42,7 @@ public class HelpView extends View {
 
   private @Getter JLabel pagesCounter;
 
-  private JPanel masterPanel;
+  private final JPanel masterPanel;
 
   private @Getter JScrollPane scrollPane;
 

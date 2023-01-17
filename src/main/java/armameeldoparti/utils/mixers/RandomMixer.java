@@ -10,6 +10,7 @@ import armameeldoparti.utils.common.Constants;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Random distribution class.
@@ -27,7 +28,7 @@ public class RandomMixer implements PlayersMixer {
   private int randomTeam1;
   private int randomTeam2;
 
-  private Random randomGenerator;
+  private final Random randomGenerator;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -43,10 +44,10 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Distributes the players randomly without considering anchorages.
    *
-   * <p>Half of the players of each players set are randomly assigned a team number.
+   * <p>Half of the players of each players-set are randomly assigned a team number.
    *
    * <p>The rest of the players in the group without team (team == 0) are assigned
-   * the oppsing team number.
+   * the opposing team number.
    *
    * @param teams List that contains the two teams.
    *
@@ -54,7 +55,8 @@ public class RandomMixer implements PlayersMixer {
    *         without considering anchorages.
    */
   @Override
-  public List<Team> withoutAnchorages(List<Team> teams) {
+  @NotNull
+  public List<Team> withoutAnchorages(@NotNull List<Team> teams) {
     Player chosenPlayer;
 
     updateTeamNumbers(teams.size());
@@ -110,11 +112,11 @@ public class RandomMixer implements PlayersMixer {
    * per position or the players per team amounts are not exceeded.
    *
    * @param teams List that contains the two teams.
-   *
    * @return The updated teams with the players distributed randomly considering anchorages.
    */
   @Override
-  public List<Team> withAnchorages(List<Team> teams) {
+  @NotNull
+  public List<Team> withAnchorages(@NotNull List<Team> teams) {
     List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
 
     for (List<Player> aps : anchoredPlayers) {
@@ -183,7 +185,7 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Checks if all anchored players can be added to a team.
    *
-   * <p>It checks if the position of any of the anchored players
+   * <p>It checks if any of the positions of the anchored players
    * in the destination team is already complete, and it checks
    * if adding them does not exceed the number of players allowed
    * per position per team. This is done in order to avoid more
@@ -195,7 +197,8 @@ public class RandomMixer implements PlayersMixer {
    *
    * @return Whether all anchored players can be added to the team or not.
    */
-  private boolean anchorageCanBeAdded(Team team, List<Player> anchoredPlayers) {
+  private boolean anchorageCanBeAdded(@NotNull Team team,
+                                      @NotNull List<Player> anchoredPlayers) {
     return team.getPlayersCount() + anchoredPlayers.size() <= Constants.PLAYERS_PER_TEAM
            && anchoredPlayers.stream()
                              .noneMatch(p -> team.isPositionFull(p.getPosition())
@@ -218,7 +221,8 @@ public class RandomMixer implements PlayersMixer {
    *
    * @return A random player that has not been assigned a team yet.
    */
-  private Player getRandomUnassignedPlayer(List<Player> unassignedPlayersList) {
+  @NotNull
+  private Player getRandomUnassignedPlayer(@NotNull List<Player> unassignedPlayersList) {
     return unassignedPlayersList.get(randomGenerator.nextInt(unassignedPlayersList.size()));
   }
 }
