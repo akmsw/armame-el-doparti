@@ -92,11 +92,11 @@ class MainMenuTest {
                                .getView()
                                .isVisible());
     assertEquals(0, ((NamesInputView) CommonFunctions.getController(Views.NAMES_INPUT)
-                                                              .getView()).getComboBox()
-                                                                         .getSelectedIndex());
+                                                     .getView()).getComboBox()
+                                                                .getSelectedIndex());
     assertEquals("", ((NamesInputView) CommonFunctions.getController(Views.NAMES_INPUT)
-                                                               .getView()).getTextArea()
-                                                                          .getText());
+                                                     .getView()).getTextArea()
+                                                                .getText());
     assertFalse(((NamesInputView) CommonFunctions.getController(Views.NAMES_INPUT)
                                                  .getView()).getAnchoragesCheckBox()
                                                             .isSelected());
