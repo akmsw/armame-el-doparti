@@ -1,5 +1,9 @@
 package armameeldoparti;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
@@ -10,14 +14,15 @@ import java.util.List;
 import java.util.stream.Stream;
 import javax.naming.InvalidNameException;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Names input view-controller unit tests class.
@@ -57,10 +62,11 @@ class NamesInputTest {
                                           .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
-        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
+      (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
-    assertThrows(IllegalArgumentException.class, () -> testNamesInputController.textFieldEvent(0, playersSet, invalidString));
+    assertThrows(IllegalArgumentException.class,
+                 () -> testNamesInputController.textFieldEvent(0, playersSet, invalidString));
   }
 
   /**
@@ -77,10 +83,11 @@ class NamesInputTest {
                                           .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
-        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
+      (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
-    assertThrows(InvalidNameException.class, () -> testNamesInputController.textFieldEvent(0, playersSet, invalidName));
+    assertThrows(InvalidNameException.class,
+                 () -> testNamesInputController.textFieldEvent(0, playersSet, invalidName));
   }
 
   /**
@@ -103,13 +110,16 @@ class NamesInputTest {
     });
 
     NamesInputController testNamesInputController = (
-        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
+      (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     String repeatedPlayerName = "PLAYER A";
 
-    assertDoesNotThrow(() -> testNamesInputController.textFieldEvent(0, playersSet, repeatedPlayerName));
-    assertThrows(InvalidNameException.class, () -> testNamesInputController.textFieldEvent(1, playersSet, repeatedPlayerName));
+    assertDoesNotThrow(
+      () -> testNamesInputController.textFieldEvent(0, playersSet, repeatedPlayerName)
+    );
+    assertThrows(InvalidNameException.class,
+                 () -> testNamesInputController.textFieldEvent(1, playersSet, repeatedPlayerName));
   }
 
   /**
@@ -130,13 +140,13 @@ class NamesInputTest {
   void validNamesShouldPass(int playerIndex,
                             @NotNull Position playerPosition,
                             @NotNull String playerName)
-                            throws IllegalArgumentException,
-                                   InvalidNameException {
+    throws IllegalArgumentException,
+    InvalidNameException {
     List<Player> playersSet = CommonFields.getPlayersSets()
                                           .get(playerPosition);
 
     NamesInputController testNamesInputController = (
-        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
+      (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     testNamesInputController.textFieldEvent(playerIndex, playersSet, playerName);
