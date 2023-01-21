@@ -10,7 +10,7 @@
 
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle%2010.6.0-passing-brightgreen)](https://checkstyle.sourceforge.io/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-1-yellow?logo=sonarlint)](https://www.sonarlint.org/)
-[![jUnit5Badge](https://img.shields.io/badge/junit%205.9.1-passing-brightgreen?logo=junit5)](https://junit.org/junit5/)
+[![jUnit5Badge](https://img.shields.io/badge/junit%205.9.2-passing-brightgreen?logo=junit5)](https://junit.org/junit5/)
 
 [![openJDKTargetBadge](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/11/)
 [![apacheMavenBadge](https://img.shields.io/badge/apache%20maven-3.8.7-orange?logo=apachemaven)](https://maven.apache.org/)

@@ -62,7 +62,7 @@ class NamesInputTest {
                                           .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
-      (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
+        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     assertThrows(IllegalArgumentException.class,
@@ -83,7 +83,7 @@ class NamesInputTest {
                                           .get(Position.CENTRAL_DEFENDER);
 
     NamesInputController testNamesInputController = (
-      (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
+        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     assertThrows(InvalidNameException.class,
@@ -110,13 +110,13 @@ class NamesInputTest {
     });
 
     NamesInputController testNamesInputController = (
-      (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
+        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     String repeatedPlayerName = "PLAYER A";
 
     assertDoesNotThrow(
-      () -> testNamesInputController.textFieldEvent(0, playersSet, repeatedPlayerName)
+        () -> testNamesInputController.textFieldEvent(0, playersSet, repeatedPlayerName)
     );
     assertThrows(InvalidNameException.class,
                  () -> testNamesInputController.textFieldEvent(1, playersSet, repeatedPlayerName));
@@ -140,13 +140,13 @@ class NamesInputTest {
   void validNamesShouldPass(int playerIndex,
                             @NotNull Position playerPosition,
                             @NotNull String playerName)
-    throws IllegalArgumentException,
-    InvalidNameException {
+                            throws IllegalArgumentException,
+                                   InvalidNameException {
     List<Player> playersSet = CommonFields.getPlayersSets()
                                           .get(playerPosition);
 
     NamesInputController testNamesInputController = (
-      (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
+        (NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)
     );
 
     testNamesInputController.textFieldEvent(playerIndex, playersSet, playerName);
