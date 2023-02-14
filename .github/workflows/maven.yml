@@ -21,5 +21,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Set up Maven version
+      uses: stCarolas/setup-maven@v4.5
+      with:
+        maven-version: 3.9.0
     - name: Build with Maven
       run: xvfb-run mvn -B package --file pom.xml
