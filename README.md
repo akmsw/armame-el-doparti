@@ -51,7 +51,7 @@ Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizand
 ## ⚙️ Requisitos para compilación manual
 ### 🪶 Apache Maven
 - #### Versión recomendada
-    🟢 [Apache Maven 3.8.7](https://maven.apache.org/download.cgi) *(o más reciente)*
+    🟢 [Apache Maven 3.9.0](https://maven.apache.org/download.cgi) *(o más reciente)*
 
 ## 📥 Descarga
 La versión estable más reciente del programa se encuentra disponible para descargar en la sección [releases](https://github.com/akmsw/armame-el-doparti/releases) de este proyecto.
