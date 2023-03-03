@@ -40,6 +40,7 @@ public class MainMenuController extends Controller {
    */
   @Override
   public void showView() {
+    centerView();
     getView().setVisible(true);
   }
 

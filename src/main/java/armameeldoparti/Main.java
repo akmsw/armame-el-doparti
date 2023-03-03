@@ -64,6 +64,7 @@ public final class Main {
    * @param args Program arguments (not used yet).
    */
   public static void main(String[] args) {
+    CommonFields.initializeActiveMonitor();
     CommonFields.initializeMaps();
     CommonFields.setAnchorages(false);
 

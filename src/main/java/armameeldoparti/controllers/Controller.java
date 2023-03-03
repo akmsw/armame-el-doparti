@@ -1,7 +1,9 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.utils.common.CommonFields;
+import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.views.View;
-import java.awt.Toolkit;
+import java.awt.Rectangle;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,40 +39,32 @@ public abstract class Controller {
   // ---------------------------------------- Protected methods ---------------------------------
 
   /**
+   * Centers the controlled view on the current active monitor.
+   */
+  protected void centerView() {
+    Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
+                                                .getDefaultConfiguration()
+                                                .getBounds();
+
+    getView().setLocation((activeMonitorBounds.width - getView().getWidth()) / 2 + activeMonitorBounds.x, 
+                          (activeMonitorBounds.height - getView().getHeight()) / 2 + activeMonitorBounds.y);
+  }
+
+  /**
    * Makes the controlled view invisible.
    */
   protected void hideView() {
-    view.setVisible(false);
+    getView().setVisible(false);
 
-    centerView();
+    CommonFunctions.updateActiveMonitorFromView(view);
   }
 
   /**
    * Makes the controlled view visible.
    */
   protected void showView() {
-    view.setVisible(true);
-  }
-
-  // ---------------------------------------- Private methods -----------------------------------
-
-  /**
-   * Centers the controlled view on the main screen.
-   *
-   * <p>ON LINUX: If the combination between {@code setLocation} with
-   * Toolkit and {@code setLocationRelativeTo(null)} is not used,
-   * the frame won't be centered correctly.
-   */
-  private void centerView() {
-    view.setLocation((Toolkit.getDefaultToolkit()
-                             .getScreenSize()
-                             .width - view.getSize()
-                                         .width) / 2,
-                     (Toolkit.getDefaultToolkit()
-                             .getScreenSize()
-                             .height - view.getSize()
-                                           .height) / 2);
-    view.setLocationRelativeTo(null);
+    centerView();
+    getView().setVisible(true);
   }
 
   // ---------------------------------------- Abstract protected methods ------------------------

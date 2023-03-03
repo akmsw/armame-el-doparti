@@ -5,11 +5,14 @@ import armameeldoparti.models.Error;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
+import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
+import armameeldoparti.views.View;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -56,6 +59,23 @@ public final class CommonFunctions {
   public static void showErrorMessage(@NotNull String errorMessage) {
     JOptionPane.showMessageDialog(null, errorMessage, Constants.ERROR_MESSAGE_TITLE,
                                   JOptionPane.ERROR_MESSAGE, null);
+  }
+
+  /**
+   * Establishes the monitor where the given view is displayed, as the active monitor.
+   *
+   * @param view Reference view from which the active monitor will be retrieved.
+   */
+  public static void updateActiveMonitorFromView(@NotNull View view) {
+    CommonFields.setActiveMonitor(
+      Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
+                                       .getScreenDevices())
+            .filter(s -> s.getDefaultConfiguration()
+                          .getBounds()
+                          .contains(view.getLocation()))
+            .collect(Collectors.toList())
+            .get(0)
+    );
   }
 
   /**

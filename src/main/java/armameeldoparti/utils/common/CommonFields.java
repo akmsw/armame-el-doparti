@@ -4,6 +4,8 @@ import armameeldoparti.controllers.Controller;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
+
+import java.awt.*;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,8 @@ public final class CommonFields {
 
   private static @Getter @Setter boolean anchorages;
 
+  private static @Getter @Setter GraphicsDevice activeMonitor;
+
   private static @Getter Map<Position, Integer> playersAmountMap;
   private static @Getter Map<Position, List<Player>> playersSets;
   private static @Getter Map<Position, String> positionsMap;
@@ -43,6 +47,14 @@ public final class CommonFields {
   }
 
   // ---------------------------------------- Public methods ------------------------------------
+
+  /**
+   * Establishes the main monitor as active monitor by default.
+   */
+  public static void initializeActiveMonitor() {
+    setActiveMonitor(GraphicsEnvironment.getLocalGraphicsEnvironment()
+                                        .getDefaultScreenDevice());
+  }
 
   /**
    * Initializes the common-used maps.

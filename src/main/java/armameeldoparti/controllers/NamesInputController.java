@@ -64,6 +64,7 @@ public class NamesInputController extends Controller {
       ).toString()
     );
 
+    centerView();
     getView().setVisible(true);
   }
 
