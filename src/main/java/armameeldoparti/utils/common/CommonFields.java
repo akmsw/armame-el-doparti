@@ -4,8 +4,8 @@ import armameeldoparti.controllers.Controller;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Views;
-
-import java.awt.*;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
