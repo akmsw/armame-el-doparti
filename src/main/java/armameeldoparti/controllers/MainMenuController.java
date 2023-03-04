@@ -1,7 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.models.Error;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.MainMenuView;
@@ -53,9 +53,9 @@ public class MainMenuController extends Controller {
   public void helpButtonEvent() {
     hideView();
 
-    ((HelpController) CommonFunctions.getController(Views.HELP)).updatePage();
+    ((HelpController) CommonFunctions.getController(ProgramView.HELP)).updatePage();
 
-    CommonFunctions.getController(Views.HELP)
+    CommonFunctions.getController(ProgramView.HELP)
                    .showView();
   }
 
@@ -68,7 +68,7 @@ public class MainMenuController extends Controller {
   public void startButtonEvent() {
     hideView();
 
-    CommonFunctions.getController(Views.NAMES_INPUT)
+    CommonFunctions.getController(ProgramView.NAMES_INPUT)
                    .showView();
   }
 

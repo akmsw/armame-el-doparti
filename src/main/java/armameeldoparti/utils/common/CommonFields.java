@@ -3,7 +3,7 @@ package armameeldoparti.utils.common;
 import armameeldoparti.controllers.Controller;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.util.EnumMap;
@@ -35,7 +35,7 @@ public final class CommonFields {
   private static @Getter Map<Position, Integer> playersAmountMap;
   private static @Getter Map<Position, List<Player>> playersSets;
   private static @Getter Map<Position, String> positionsMap;
-  private static @Getter Map<Views, Controller> controllersMap;
+  private static @Getter Map<ProgramView, Controller> controllersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -60,7 +60,7 @@ public final class CommonFields {
    * Initializes the common-used maps.
    */
   public static void initializeMaps() {
-    controllersMap = new EnumMap<>(Views.class);
+    controllersMap = new EnumMap<>(ProgramView.class);
     playersAmountMap = new EnumMap<>(Position.class);
     positionsMap = new EnumMap<>(Position.class);
 

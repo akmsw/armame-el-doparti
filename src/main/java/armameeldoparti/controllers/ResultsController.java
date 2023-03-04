@@ -3,7 +3,7 @@ package armameeldoparti.controllers;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -132,12 +132,12 @@ public class ResultsController extends Controller {
     resetTeams();
     resetView();
 
-    Views previousView;
+    ProgramView previousView;
 
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
-      previousView = CommonFields.isAnchorages() ? Views.ANCHORAGES : Views.NAMES_INPUT;
+      previousView = CommonFields.isAnchorages() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT;
     } else {
-      previousView = Views.SKILL_POINTS;
+      previousView = ProgramView.SKILL_POINTS;
     }
 
     CommonFunctions.getController(previousView)

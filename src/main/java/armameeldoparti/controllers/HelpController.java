@@ -1,7 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.models.Error;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.HelpView;
@@ -85,7 +85,7 @@ public class HelpController extends Controller {
     hideView();
     resetView();
 
-    CommonFunctions.getController(Views.MAIN_MENU)
+    CommonFunctions.getController(ProgramView.MAIN_MENU)
                    .showView();
   }
 

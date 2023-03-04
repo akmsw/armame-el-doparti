@@ -2,7 +2,7 @@ package armameeldoparti.views;
 
 import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -113,13 +113,13 @@ public class NamesInputView extends View {
 
     mixButton.setEnabled(false);
     mixButton.addActionListener(e ->
-        ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)).mixButtonEvent()
+        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT)).mixButtonEvent()
     );
 
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT)).backButtonEvent()
+        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT)).backButtonEvent()
     );
 
     rightPanel.add(mixButton, "grow");
@@ -136,7 +136,7 @@ public class NamesInputView extends View {
 
     comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
-        ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT))
+        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
                                                .comboBoxEvent((String) Objects.requireNonNull(
                                                  ((JComboBox<?>) e.getSource()).getSelectedItem())
                                                )
@@ -182,7 +182,7 @@ public class NamesInputView extends View {
 
         tf.addActionListener(e -> {
               try {
-                ((NamesInputController) CommonFunctions.getController(Views.NAMES_INPUT))
+                ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
                                                        .textFieldEvent(textFieldsMap.get(position)
                                                                                     .indexOf(tf),
                                                                        CommonFields.getPlayersSets()

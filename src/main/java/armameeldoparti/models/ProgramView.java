@@ -9,7 +9,7 @@ package armameeldoparti.models;
  *
  * @since 07/08/2022
  */
-public enum Views {
+public enum ProgramView {
   MAIN_MENU,
   HELP,
   NAMES_INPUT,

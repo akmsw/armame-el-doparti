@@ -1,7 +1,7 @@
 package armameeldoparti.views;
 
 import armameeldoparti.controllers.MainMenuController;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.util.Arrays;
@@ -70,25 +70,25 @@ public class MainMenuView extends View {
     JButton startButton = new JButton("Comenzar");
 
     startButton.addActionListener(e ->
-        ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).startButtonEvent()
+        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU)).startButtonEvent()
     );
 
     JButton helpButton = new JButton("Ayuda");
 
     helpButton.addActionListener(e ->
-        ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).helpButtonEvent()
+        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU)).helpButtonEvent()
     );
 
     JButton contactButton = new JButton("Contacto");
 
     contactButton.addActionListener(e ->
-        ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).contactButtonEvent()
+        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU)).contactButtonEvent()
     );
 
     JButton issuesButton = new JButton("Reportes y sugerencias");
 
     issuesButton.addActionListener(e ->
-        ((MainMenuController) CommonFunctions.getController(Views.MAIN_MENU)).issuesButtonEvent()
+        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU)).issuesButtonEvent()
     );
 
     for (JButton button : Arrays.asList(startButton, helpButton)) {

@@ -3,7 +3,7 @@ package armameeldoparti.views;
 import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -101,17 +101,17 @@ public class SkillPointsInputView extends View {
     JButton backButton = new JButton("Atrás");
 
     finishButton.addActionListener(e ->
-        ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+        ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .finishButtonEvent()
     );
 
     resetSkillPointsButton.addActionListener(e ->
-        ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+        ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .resetSkillsButtonEvent()
     );
 
     backButton.addActionListener(e ->
-        ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+        ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .backButtonEvent()
     );
 

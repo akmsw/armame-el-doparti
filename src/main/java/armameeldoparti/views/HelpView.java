@@ -1,7 +1,7 @@
 package armameeldoparti.views;
 
 import armameeldoparti.controllers.HelpController;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import javax.swing.BorderFactory;
@@ -92,15 +92,15 @@ public class HelpView extends View {
     backButton = new JButton("Volver al menú principal");
 
     previousPageButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(Views.HELP)).previousPageButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).previousPageButtonEvent()
     );
 
     nextPageButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(Views.HELP)).nextPageButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).nextPageButtonEvent()
     );
 
     backButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(Views.HELP)).backButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).backButtonEvent()
     );
 
     previousPageButton.setEnabled(false);

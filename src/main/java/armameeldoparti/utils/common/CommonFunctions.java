@@ -4,7 +4,7 @@ import armameeldoparti.controllers.Controller;
 import armameeldoparti.models.Error;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -124,7 +124,7 @@ public final class CommonFunctions {
    * @return The requested view's controller.
   */
   @NotNull
-  public static Controller getController(@NotNull Views view) {
+  public static Controller getController(@NotNull ProgramView view) {
     return CommonFields.getControllersMap()
                        .get(view);
   }

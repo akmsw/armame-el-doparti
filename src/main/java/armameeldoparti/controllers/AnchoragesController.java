@@ -1,7 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -186,7 +186,7 @@ public class AnchoragesController extends Controller {
     hideView();
     resetView();
 
-    CommonFunctions.getController(Views.NAMES_INPUT)
+    CommonFunctions.getController(ProgramView.NAMES_INPUT)
                    .showView();
   }
 
@@ -377,15 +377,15 @@ public class AnchoragesController extends Controller {
     clearCheckBoxes();
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
-      ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+      ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
       .updateNameLabels();
 
-      CommonFunctions.getController(Views.SKILL_POINTS)
+      CommonFunctions.getController(ProgramView.SKILL_POINTS)
                      .showView();
     } else {
-      ((ResultsController) CommonFunctions.getController(Views.RESULTS)).setUp();
+      ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).setUp();
 
-      CommonFunctions.getController(Views.RESULTS)
+      CommonFunctions.getController(ProgramView.RESULTS)
                      .showView();
     }
   }

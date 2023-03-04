@@ -3,7 +3,7 @@ package armameeldoparti.views;
 import armameeldoparti.controllers.AnchoragesController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -163,42 +163,42 @@ public class AnchoragesView extends View {
 
     finishButton.setEnabled(false);
     finishButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .finishButtonEvent()
     );
 
     newAnchorageButton = new JButton("Anclar");
 
     newAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .newAnchorageButtonEvent()
     );
 
     deleteAnchorageButton = new JButton("Borrar un anclaje");
 
     deleteAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .deleteAnchorageButtonEvent()
     );
 
     deleteLastAnchorageButton = new JButton("Borrar último anclaje");
 
     deleteLastAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .deleteLastAnchorageButtonEvent()
     );
 
     clearAnchoragesButton = new JButton("Limpiar anclajes");
 
     clearAnchoragesButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .clearAnchoragesButtonEvent()
     );
 
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .backButtonEvent()
     );
 

@@ -1,7 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.models.Player;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -102,7 +102,7 @@ public class NamesInputController extends Controller {
 
     CommonFields.setAnchorages(false);
 
-    CommonFunctions.getController(Views.MAIN_MENU)
+    CommonFunctions.getController(ProgramView.MAIN_MENU)
                    .showView();
   }
 
@@ -130,23 +130,23 @@ public class NamesInputController extends Controller {
     CommonFields.setDistribution(distribution);
 
     if (CommonFields.isAnchorages()) {
-      ((AnchoragesController) CommonFunctions.getController(Views.ANCHORAGES))
+      ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
       .updateCheckBoxesText();
 
-      CommonFunctions.getController(Views.ANCHORAGES)
+      CommonFunctions.getController(ProgramView.ANCHORAGES)
                      .showView();
     } else if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
       // Random distribution
-      ((ResultsController) CommonFunctions.getController(Views.RESULTS)).setUp();
+      ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).setUp();
 
-      CommonFunctions.getController(Views.RESULTS)
+      CommonFunctions.getController(ProgramView.RESULTS)
                      .showView();
     } else {
       // By skill points distribution
-      ((SkillPointsInputController) CommonFunctions.getController(Views.SKILL_POINTS))
+      ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
       .updateNameLabels();
 
-      CommonFunctions.getController(Views.SKILL_POINTS)
+      CommonFunctions.getController(ProgramView.SKILL_POINTS)
                      .showView();
     }
   }

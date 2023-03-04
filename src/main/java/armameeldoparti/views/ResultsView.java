@@ -1,7 +1,7 @@
 package armameeldoparti.views;
 
 import armameeldoparti.controllers.ResultsController;
-import armameeldoparti.models.Views;
+import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -102,14 +102,14 @@ public class ResultsView extends View {
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        ((ResultsController) CommonFunctions.getController(Views.RESULTS)).backButtonEvent()
+        ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).backButtonEvent()
     );
 
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
       JButton remixButton = new JButton("Redistribuir");
 
       remixButton.addActionListener(e ->
-          ((ResultsController) CommonFunctions.getController(Views.RESULTS)).remixButtonEvent()
+          ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).remixButtonEvent()
       );
 
       panel.add(remixButton, "growx");
