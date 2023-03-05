@@ -111,14 +111,16 @@ public class NamesInputView extends View {
     mixButton = new JButton("Distribuir");
 
     mixButton.setEnabled(false);
-    mixButton.addActionListener(e ->
-        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT)).mixButtonEvent()
+    mixButton.addActionListener(
+        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
+        ::mixButtonEvent
     );
 
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT)).backButtonEvent()
+        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
+        .backButtonEvent()
     );
 
     rightPanel.add(mixButton, "grow");
@@ -188,11 +190,11 @@ public class NamesInputView extends View {
                                                                                    .get(position),
                                                                        tf.getText());
               } catch (IllegalArgumentException stringEx) {
-                CommonFunctions.showErrorMessage(Constants.MSG_ERROR_INVALID_STRING);
+                CommonFunctions.showErrorMessage(Constants.MSG_ERROR_INVALID_STRING, e);
 
                 tf.setText("");
               } catch (InvalidNameException nameEx) {
-                CommonFunctions.showErrorMessage(Constants.MSG_ERROR_INVALID_NAME);
+                CommonFunctions.showErrorMessage(Constants.MSG_ERROR_INVALID_NAME, e);
 
                 tf.setText("");
               }

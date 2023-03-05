@@ -6,10 +6,13 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.AnchoragesView;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -75,9 +78,9 @@ public class AnchoragesController extends Controller {
    * <p>Checks if the necessary anchorages conditions are met.
    * If so, it proceeds with the distribution.
    */
-  public void finishButtonEvent() {
+  public void finishButtonEvent(ActionEvent e) {
     if (!validAnchoragesCombination()) {
-      CommonFunctions.showErrorMessage("Error message");
+      CommonFunctions.showErrorMessage("Error message", e);
 
       return;
     }
@@ -91,7 +94,7 @@ public class AnchoragesController extends Controller {
    * <p>Checks if the necessary conditions to make a new anchorage
    * are met. If so, it does it.
    */
-  public void newAnchorageButtonEvent() {
+  public void newAnchorageButtonEvent(ActionEvent e) {
     int playersToAnchorAmount = (int) ((AnchoragesView) getView()).getCheckBoxesMap()
                                                                   .values()
                                                                   .stream()
@@ -102,21 +105,21 @@ public class AnchoragesController extends Controller {
     if (!validChecksAmount(playersToAnchorAmount)) {
       CommonFunctions.showErrorMessage("No puede haber más de "
                                        + Constants.MAX_PLAYERS_PER_ANCHORAGE
-                                       + " ni menos de 2 jugadores en un mismo anclaje");
+                                       + " ni menos de 2 jugadores en un mismo anclaje", e);
 
       return;
     }
 
     if (!validCheckedPlayersPerPosition()) {
       CommonFunctions.showErrorMessage("No puede haber más de la mitad de jugadores"
-                                       + " de una misma posición en un mismo anclaje");
+                                       + " de una misma posición en un mismo anclaje", e);
 
       return;
     }
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
       CommonFunctions.showErrorMessage("No puede haber más de " + Constants.MAX_ANCHORED_PLAYERS
-                                       + " jugadores anclados en total");
+                                       + " jugadores anclados en total", e);
 
       return;
     }
@@ -144,20 +147,22 @@ public class AnchoragesController extends Controller {
    * <p>Prompts the user for the number of the anchorage to delete,
    * and removes it, updating the text area and the state of the buttons.
    */
-  public void deleteAnchorageButtonEvent() {
+  public void deleteAnchorageButtonEvent(@NotNull ActionEvent e) {
     String[] optionsDelete = new String[anchoragesAmount];
 
     for (int i = 0; i < anchoragesAmount; i++) {
       optionsDelete[i] = Integer.toString(i + 1);
     }
 
-    int anchorageToDelete = JOptionPane.showOptionDialog(null,
-                                                         "Seleccione qué anclaje desea borrar",
-                                                         "Antes de continuar...",
-                                                         JOptionPane.OK_CANCEL_OPTION,
-                                                         JOptionPane.QUESTION_MESSAGE,
-                                                         Constants.ICON_SCALED, optionsDelete,
-                                                         optionsDelete[0]);
+    int anchorageToDelete = JOptionPane.showOptionDialog(
+        SwingUtilities.windowForComponent((Component) e.getSource()),
+        "Seleccione qué anclaje desea borrar",
+        "Antes de continuar...",
+        JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        Constants.ICON_SCALED, optionsDelete,
+        optionsDelete[0]
+    );
 
     if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
       deleteAnchorage(anchorageToDelete + 1);

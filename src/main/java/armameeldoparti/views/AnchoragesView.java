@@ -161,23 +161,23 @@ public class AnchoragesView extends View {
     finishButton = new JButton("Finalizar");
 
     finishButton.setEnabled(false);
-    finishButton.addActionListener(e ->
+    finishButton.addActionListener(
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .finishButtonEvent()
+        ::finishButtonEvent
     );
 
     newAnchorageButton = new JButton("Anclar");
 
-    newAnchorageButton.addActionListener(e ->
+    newAnchorageButton.addActionListener(
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .newAnchorageButtonEvent()
+        ::newAnchorageButtonEvent
     );
 
     deleteAnchorageButton = new JButton("Borrar un anclaje");
 
-    deleteAnchorageButton.addActionListener(e ->
+    deleteAnchorageButton.addActionListener(
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .deleteAnchorageButtonEvent()
+        ::deleteAnchorageButtonEvent
     );
 
     deleteLastAnchorageButton = new JButton("Borrar último anclaje");

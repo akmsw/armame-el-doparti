@@ -2,8 +2,8 @@ package armameeldoparti.controllers;
 
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.Team;
 import armameeldoparti.models.ProgramView;
+import armameeldoparti.models.Team;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -88,8 +88,6 @@ public class ResultsController extends Controller {
    * the non-variable table cells and displays the distribution results.
    */
   public void setUp() {
-    int addRows;
-
     Team team1 = new Team(1);
     Team team2 = new Team(2);
 
@@ -99,9 +97,8 @@ public class ResultsController extends Controller {
 
     teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM ? randomMix() : bySkillsMix());
 
-    addRows = 1 + CommonFields.getDistribution();
-
-    ((ResultsView) getView()).setTable(new JTable(Constants.PLAYERS_PER_TEAM + addRows,
+    ((ResultsView) getView()).setTable(new JTable(Constants.PLAYERS_PER_TEAM + 1
+                                                  + CommonFields.getDistribution(),
                                                   TABLE_COLUMNS));
     ((ResultsView) getView()).initializeInterface();
 
@@ -128,7 +125,8 @@ public class ResultsController extends Controller {
     ProgramView previousView;
 
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
-      previousView = CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT;
+      previousView = CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES
+                                                        : ProgramView.NAMES_INPUT;
     } else {
       previousView = ProgramView.SKILL_POINTS;
     }

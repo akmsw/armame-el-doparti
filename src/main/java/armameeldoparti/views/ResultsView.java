@@ -102,14 +102,16 @@ public class ResultsView extends View {
     JButton backButton = new JButton("Atrás");
 
     backButton.addActionListener(e ->
-        ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).backButtonEvent()
+        ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))
+        .backButtonEvent()
     );
 
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
       JButton remixButton = new JButton("Redistribuir");
 
       remixButton.addActionListener(e ->
-          ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).remixButtonEvent()
+          ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))
+          .remixButtonEvent()
       );
 
       panel.add(remixButton, "growx");

@@ -6,6 +6,8 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.NamesInputView;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +15,7 @@ import java.util.regex.Pattern;
 import javax.naming.InvalidNameException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -112,12 +115,13 @@ public class NamesInputController extends Controller {
    * the controlled view invisible and shows the corresponding
    * following view.
    */
-  public void mixButtonEvent() {
+  public void mixButtonEvent(@NotNull ActionEvent e) {
     int distribution = JOptionPane.showOptionDialog(
-      null, "Seleccione el criterio de distribución de jugadores",
-      "Antes de continuar...", JOptionPane.OK_CANCEL_OPTION,
-      JOptionPane.QUESTION_MESSAGE, Constants.ICON_SCALED,
-      OPTIONS_MIX, OPTIONS_MIX[0]
+        SwingUtilities.windowForComponent((Component) e.getSource()),
+        "Seleccione el criterio de distribución de jugadores",
+        "Antes de continuar...", JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE, Constants.ICON_SCALED,
+        OPTIONS_MIX, OPTIONS_MIX[0]
     );
 
     if (distribution == JOptionPane.CLOSED_OPTION) {

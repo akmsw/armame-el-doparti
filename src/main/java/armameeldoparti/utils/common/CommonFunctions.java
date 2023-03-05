@@ -5,14 +5,17 @@ import armameeldoparti.models.Error;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
+import armameeldoparti.views.View;
+import java.awt.Component;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
-import armameeldoparti.views.View;
+import javax.swing.SwingUtilities;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -45,7 +48,8 @@ public final class CommonFunctions {
    */
   public static void exitProgram(Error e) {
     showErrorMessage(Constants.errorMessages
-                              .get(e));
+                              .get(e),
+                     null);
 
     System.exit(Constants.errorCodes
                          .get(e));
@@ -55,10 +59,15 @@ public final class CommonFunctions {
    * Builds an error window with a custom message.
    *
    * @param errorMessage Custom error message to show.
+   * @param e Event that triggered the error, used to get the parent component
+   *          to display the error message in the active monitor.
    */
-  public static void showErrorMessage(@NotNull String errorMessage) {
-    JOptionPane.showMessageDialog(null, errorMessage, Constants.ERROR_MESSAGE_TITLE,
-                                  JOptionPane.ERROR_MESSAGE, null);
+  public static void showErrorMessage(@NotNull String errorMessage, ActionEvent e) {
+    JOptionPane.showMessageDialog(
+        e == null ? null : SwingUtilities.windowForComponent((Component) e.getSource()),
+        errorMessage, Constants.ERROR_MESSAGE_TITLE,
+        JOptionPane.ERROR_MESSAGE, null
+    );
   }
 
   /**
@@ -68,13 +77,13 @@ public final class CommonFunctions {
    */
   public static void updateActiveMonitorFromView(@NotNull View view) {
     CommonFields.setActiveMonitor(
-      Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
-                                       .getScreenDevices())
-            .filter(s -> s.getDefaultConfiguration()
-                          .getBounds()
-                          .contains(view.getLocation()))
-            .collect(Collectors.toList())
-            .get(0)
+        Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
+                                         .getScreenDevices())
+              .filter(s -> s.getDefaultConfiguration()
+                            .getBounds()
+                            .contains(view.getLocation()))
+              .collect(Collectors.toList())
+              .get(0)
     );
   }
 
