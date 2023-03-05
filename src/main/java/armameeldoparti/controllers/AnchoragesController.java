@@ -77,6 +77,8 @@ public class AnchoragesController extends Controller {
    *
    * <p>Checks if the necessary anchorages conditions are met.
    * If so, it proceeds with the distribution.
+   *
+   * @param e Event that triggered the action.
    */
   public void finishButtonEvent(ActionEvent e) {
     if (!validAnchoragesCombination()) {
@@ -93,6 +95,8 @@ public class AnchoragesController extends Controller {
    *
    * <p>Checks if the necessary conditions to make a new anchorage
    * are met. If so, it does it.
+   *
+   * @param e Event that triggered the action.
    */
   public void newAnchorageButtonEvent(ActionEvent e) {
     int playersToAnchorAmount = (int) ((AnchoragesView) getView()).getCheckBoxesMap()
@@ -146,8 +150,10 @@ public class AnchoragesController extends Controller {
    *
    * <p>Prompts the user for the number of the anchorage to delete,
    * and removes it, updating the text area and the state of the buttons.
+   *
+   * @param e Event that triggered the action.
    */
-  public void deleteAnchorageButtonEvent(@NotNull ActionEvent e) {
+  public void deleteAnchorageButtonEvent(ActionEvent e) {
     String[] optionsDelete = new String[anchoragesAmount];
 
     for (int i = 0; i < anchoragesAmount; i++) {
@@ -155,7 +161,7 @@ public class AnchoragesController extends Controller {
     }
 
     int anchorageToDelete = JOptionPane.showOptionDialog(
-        SwingUtilities.windowForComponent((Component) e.getSource()),
+        e == null ? null : SwingUtilities.windowForComponent((Component) e.getSource()),
         "Seleccione qué anclaje desea borrar",
         "Antes de continuar...",
         JOptionPane.OK_CANCEL_OPTION,
