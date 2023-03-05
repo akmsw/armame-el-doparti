@@ -66,7 +66,7 @@ public final class Main {
   public static void main(String[] args) {
     CommonFields.initializeActiveMonitor();
     CommonFields.initializeMaps();
-    CommonFields.setAnchorages(false);
+    CommonFields.setAnchoragesEnabled(false);
 
     setGraphicalProperties();
     setPlayersDistribution();

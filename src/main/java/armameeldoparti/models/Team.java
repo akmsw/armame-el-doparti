@@ -18,15 +18,13 @@ import org.jetbrains.annotations.NotNull;
  *
  * @since 10/07/2022
  */
-@Getter
-@Setter
 public class Team {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private int teamNumber;
+  private @Getter @Setter int teamNumber;
 
-  private Map<Position, List<Player>> teamPlayers;
+  private @Getter Map<Position, List<Player>> teamPlayers;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

@@ -38,7 +38,7 @@ public class SkillPointsInputView extends View {
 
   private final JPanel masterPanel;
 
-  private transient @Getter Map<Player, JSpinner> spinnersMap;
+  private final transient @Getter Map<Player, JSpinner> spinnersMap;
   private final transient Map<JSpinner, JLabel> labelsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -73,7 +73,7 @@ public class SkillPointsInputView extends View {
     addButtons();
     add(masterPanel);
     pack();
-    setLocationRelativeTo(null);
+    
   }
 
   /**

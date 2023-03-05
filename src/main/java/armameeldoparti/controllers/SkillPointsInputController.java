@@ -78,8 +78,8 @@ public class SkillPointsInputController extends Controller {
   public void backButtonEvent() {
     resetView();
 
-    CommonFunctions.getController(CommonFields.isAnchorages() ? ProgramView.ANCHORAGES
-                                                              : ProgramView.NAMES_INPUT)
+    CommonFunctions.getController(CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES
+                                                                     : ProgramView.NAMES_INPUT)
                    .showView();
   }
 

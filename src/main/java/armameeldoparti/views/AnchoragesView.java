@@ -151,7 +151,6 @@ public class AnchoragesView extends View {
     setIconImage(Constants.ICON
                           .getImage());
     pack();
-    setLocationRelativeTo(null);
   }
 
   /**

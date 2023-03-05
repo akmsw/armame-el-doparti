@@ -97,15 +97,9 @@ public class ResultsController extends Controller {
     teams.add(team1);
     teams.add(team2);
 
-    if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
-      teams = randomMix();
+    teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM ? randomMix() : bySkillsMix());
 
-      addRows = 1;
-    } else {
-      teams = bySkillsMix();
-
-      addRows = 2;
-    }
+    addRows = 1 + CommonFields.getDistribution();
 
     ((ResultsView) getView()).setTable(new JTable(Constants.PLAYERS_PER_TEAM + addRows,
                                                   TABLE_COLUMNS));
@@ -118,7 +112,6 @@ public class ResultsController extends Controller {
     ((ResultsView) getView()).setTableCellsSize();
 
     getView().pack();
-    getView().setLocationRelativeTo(null);
   }
 
   /**
@@ -135,7 +128,7 @@ public class ResultsController extends Controller {
     ProgramView previousView;
 
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
-      previousView = CommonFields.isAnchorages() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT;
+      previousView = CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT;
     } else {
       previousView = ProgramView.SKILL_POINTS;
     }
@@ -208,8 +201,8 @@ public class ResultsController extends Controller {
    */
   @NotNull
   public List<Team> randomMix() {
-    return CommonFields.isAnchorages() ? randomMixer.withAnchorages(teams)
-                                       : randomMixer.withoutAnchorages(teams);
+    return CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams)
+                                              : randomMixer.withoutAnchorages(teams);
   }
 
   /**
@@ -219,8 +212,8 @@ public class ResultsController extends Controller {
    */
   @NotNull
   public List<Team> bySkillsMix() {
-    return CommonFields.isAnchorages() ? bySkillsMixer.withAnchorages(teams)
-                                       : bySkillsMixer.withoutAnchorages(teams);
+    return CommonFields.isAnchoragesEnabled() ? bySkillsMixer.withAnchorages(teams)
+                                              : bySkillsMixer.withoutAnchorages(teams);
   }
 
   // ---------------------------------------- Private methods -----------------------------------

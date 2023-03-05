@@ -78,7 +78,6 @@ public class HelpView extends View {
                           .getImage());
     setResizable(false);
     pack();
-    setLocationRelativeTo(null);
   }
 
   /**

@@ -147,8 +147,8 @@ public class HelpController extends Controller {
             HelpController.class
                           .getClassLoader()
                           .getResourceAsStream(Constants.PATH_HELP_DOCS
-                                  + pagesMap.get(currentPageNumber)
-                                  .get(PAGE_FILENAME_INDEX)),
+                                               + pagesMap.get(currentPageNumber)
+                                                         .get(PAGE_FILENAME_INDEX)),
             Constants.MSG_ERROR_NULL_RESOURCE
           ),
           StandardCharsets.UTF_8)

@@ -101,7 +101,6 @@ public class NamesInputView extends View {
     addAnchoragesCheckBox();
     add(masterPanel);
     pack();
-    setLocationRelativeTo(null);
   }
 
   /**
@@ -165,7 +164,7 @@ public class NamesInputView extends View {
     anchoragesCheckBox = new JCheckBox("Anclar jugadores", false);
 
     anchoragesCheckBox.addActionListener(
-        e -> CommonFields.setAnchorages(!CommonFields.isAnchorages())
+        e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled())
     );
 
     rightPanel.add(anchoragesCheckBox, "center");

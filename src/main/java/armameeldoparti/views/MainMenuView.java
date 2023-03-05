@@ -59,7 +59,6 @@ public class MainMenuView extends View {
     setIconImage(Constants.ICON
                           .getImage());
     pack();
-    setLocationRelativeTo(null);
   }
 
   /**

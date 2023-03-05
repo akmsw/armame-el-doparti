@@ -130,8 +130,8 @@ public class ResultsView extends View {
   private static String getUpdatedFrameTitle() {
     return (CommonFields.getDistribution() == Constants.MIX_RANDOM
             ? "Aleatorio - "
-            : "Por puntuaciones - ").concat(CommonFields.isAnchorages() ? "Con anclajes"
-                                                                        : "Sin anclajes");
+            : "Por puntuaciones - ").concat(CommonFields.isAnchoragesEnabled() ? "Con anclajes"
+                                                                               : "Sin anclajes");
   }
 
   /**

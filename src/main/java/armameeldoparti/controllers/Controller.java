@@ -46,15 +46,15 @@ public abstract class Controller {
                                                 .getDefaultConfiguration()
                                                 .getBounds();
 
-    getView().setLocation((activeMonitorBounds.width - getView().getWidth()) / 2 + activeMonitorBounds.x, 
-                          (activeMonitorBounds.height - getView().getHeight()) / 2 + activeMonitorBounds.y);
+    view.setLocation((activeMonitorBounds.width - view.getWidth()) / 2 + activeMonitorBounds.x, 
+                  (activeMonitorBounds.height - view.getHeight()) / 2 + activeMonitorBounds.y);
   }
 
   /**
    * Makes the controlled view invisible.
    */
   protected void hideView() {
-    getView().setVisible(false);
+    view.setVisible(false);
 
     CommonFunctions.updateActiveMonitorFromView(view);
   }
@@ -64,7 +64,8 @@ public abstract class Controller {
    */
   protected void showView() {
     centerView();
-    getView().setVisible(true);
+
+    view.setVisible(true);
   }
 
   // ---------------------------------------- Abstract protected methods ------------------------

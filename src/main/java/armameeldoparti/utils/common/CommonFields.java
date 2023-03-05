@@ -28,7 +28,7 @@ public final class CommonFields {
 
   private static @Getter @Setter int distribution;
 
-  private static @Getter @Setter boolean anchorages;
+  private static @Getter @Setter boolean anchoragesEnabled;
 
   private static @Getter @Setter GraphicsDevice activeMonitor;
 

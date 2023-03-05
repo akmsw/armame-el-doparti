@@ -63,7 +63,6 @@ public class NamesInputController extends Controller {
         Constants.MSG_ERROR_NULL_RESOURCE
       ).toString()
     );
-
     centerView();
     getView().setVisible(true);
   }
@@ -100,7 +99,7 @@ public class NamesInputController extends Controller {
   public void backButtonEvent() {
     resetView();
 
-    CommonFields.setAnchorages(false);
+    CommonFields.setAnchoragesEnabled(false);
 
     CommonFunctions.getController(ProgramView.MAIN_MENU)
                    .showView();
@@ -115,10 +114,10 @@ public class NamesInputController extends Controller {
    */
   public void mixButtonEvent() {
     int distribution = JOptionPane.showOptionDialog(
-        null, "Seleccione el criterio de distribución de jugadores",
-        "Antes de continuar...", JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.QUESTION_MESSAGE, Constants.ICON_SCALED,
-        OPTIONS_MIX, OPTIONS_MIX[0]
+      null, "Seleccione el criterio de distribución de jugadores",
+      "Antes de continuar...", JOptionPane.OK_CANCEL_OPTION,
+      JOptionPane.QUESTION_MESSAGE, Constants.ICON_SCALED,
+      OPTIONS_MIX, OPTIONS_MIX[0]
     );
 
     if (distribution == JOptionPane.CLOSED_OPTION) {
@@ -129,7 +128,7 @@ public class NamesInputController extends Controller {
 
     CommonFields.setDistribution(distribution);
 
-    if (CommonFields.isAnchorages()) {
+    if (CommonFields.isAnchoragesEnabled()) {
       ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
       .updateCheckBoxesText();
 
