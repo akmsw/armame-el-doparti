@@ -59,13 +59,12 @@ public final class CommonFunctions {
    * Builds an error window with a custom message.
    *
    * @param errorMessage Custom error message to show.
-   * @param e Event that triggered the error, used to get the parent component
-   *          to display the error message in the active monitor.
+   * @param c Graphical component where the dialogs associated with the event should be displayed.
    */
-  public static void showErrorMessage(@NotNull String errorMessage, ActionEvent e) {
+  public static void showErrorMessage(@NotNull String errorMessage, Component c) {
     JOptionPane.showMessageDialog(
-        e == null ? null : SwingUtilities.windowForComponent((Component) e.getSource()),
-        errorMessage, Constants.ERROR_MESSAGE_TITLE,
+        c, errorMessage,
+        Constants.ERROR_MESSAGE_TITLE,
         JOptionPane.ERROR_MESSAGE, null
     );
   }
@@ -85,6 +84,17 @@ public final class CommonFunctions {
               .collect(Collectors.toList())
               .get(0)
     );
+  }
+
+  /**
+   * Given an action event, this method returns the graphical component associated with it.
+   *
+   * @param e The triggered action event.
+   *
+   * @return the graphical component associated to the action event.
+   */
+  public static Component getComponentFromEvent(ActionEvent e) {
+    return e == null ? null : SwingUtilities.windowForComponent((Component) e.getSource());
   }
 
   /**

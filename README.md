@@ -9,7 +9,7 @@
 [![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
 
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle%2010.7.0-passing-brightgreen)](https://checkstyle.sourceforge.io/)
-[![sonarLintBadge](https://img.shields.io/badge/sonarlint-2-yellow?logo=sonarlint)](https://www.sonarlint.org/)
+[![sonarLintBadge](https://img.shields.io/badge/sonarlint-3-yellow?logo=sonarlint)](https://www.sonarlint.org/)
 [![jUnit5Badge](https://img.shields.io/badge/junit%205.9.2-passing-brightgreen?logo=junit5)](https://junit.org/junit5/)
 
 [![openJDKTargetBadge](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/11/)
