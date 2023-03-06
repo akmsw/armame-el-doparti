@@ -112,10 +112,13 @@ public class NamesInputController extends Controller {
    * <p>Asks the user for the players distribution method, makes
    * the controlled view invisible and shows the corresponding
    * following view.
+   *
+   * @param parentComponent Graphical component where the dialogs associated
+   *                        with the event should be displayed.
    */
-  public void mixButtonEvent(Component c) {
+  public void mixButtonEvent(Component parentComponent) {
     int distribution = JOptionPane.showOptionDialog(
-        c,
+        parentComponent,
         "Seleccione el criterio de distribución de jugadores",
         "Antes de continuar...", JOptionPane.OK_CANCEL_OPTION,
         JOptionPane.QUESTION_MESSAGE, Constants.ICON_SCALED,

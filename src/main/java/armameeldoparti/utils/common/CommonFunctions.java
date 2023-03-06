@@ -59,11 +59,12 @@ public final class CommonFunctions {
    * Builds an error window with a custom message.
    *
    * @param errorMessage Custom error message to show.
-   * @param c Graphical component where the dialogs associated with the event should be displayed.
+   * @param parentComponent Graphical component where the dialogs associated
+ *                          with the event should be displayed.
    */
-  public static void showErrorMessage(@NotNull String errorMessage, Component c) {
+  public static void showErrorMessage(@NotNull String errorMessage, Component parentComponent) {
     JOptionPane.showMessageDialog(
-        c, errorMessage,
+        parentComponent, errorMessage,
         Constants.ERROR_MESSAGE_TITLE,
         JOptionPane.ERROR_MESSAGE, null
     );

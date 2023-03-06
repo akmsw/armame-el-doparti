@@ -76,11 +76,12 @@ public class AnchoragesController extends Controller {
    * <p>Checks if the necessary anchorages conditions are met.
    * If so, it proceeds with the distribution.
    *
-   * @param c Graphical component where the dialogs associated with the event should be displayed.
+   * @param parentComponent Graphical component where the dialogs associated
+   *                        with the event should be displayed.
    */
-  public void finishButtonEvent(Component c) {
+  public void finishButtonEvent(Component parentComponent) {
     if (!validAnchoragesCombination()) {
-      CommonFunctions.showErrorMessage("Error message", c);
+      CommonFunctions.showErrorMessage("Error message", parentComponent);
 
       return;
     }
@@ -94,9 +95,10 @@ public class AnchoragesController extends Controller {
    * <p>Checks if the necessary conditions to make a new anchorage
    * are met. If so, it does it.
    *
-   * @param c Graphical component where the dialogs associated with the event should be displayed.
+   * @param parentComponent Graphical component where the dialogs associated
+   *                        with the event should be displayed.
    */
-  public void newAnchorageButtonEvent(Component c) {
+  public void newAnchorageButtonEvent(Component parentComponent) {
     int playersToAnchorAmount = (int) ((AnchoragesView) getView()).getCheckBoxesMap()
                                                                   .values()
                                                                   .stream()
@@ -107,21 +109,24 @@ public class AnchoragesController extends Controller {
     if (!validChecksAmount(playersToAnchorAmount)) {
       CommonFunctions.showErrorMessage("No puede haber más de "
                                        + Constants.MAX_PLAYERS_PER_ANCHORAGE
-                                       + " ni menos de 2 jugadores en un mismo anclaje", c);
+                                       + " ni menos de 2 jugadores en un mismo anclaje",
+                                       parentComponent);
 
       return;
     }
 
     if (!validCheckedPlayersPerPosition()) {
       CommonFunctions.showErrorMessage("No puede haber más de la mitad de jugadores"
-                                       + " de una misma posición en un mismo anclaje", c);
+                                       + " de una misma posición en un mismo anclaje",
+                                       parentComponent);
 
       return;
     }
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
       CommonFunctions.showErrorMessage("No puede haber más de " + Constants.MAX_ANCHORED_PLAYERS
-                                       + " jugadores anclados en total", c);
+                                       + " jugadores anclados en total",
+                                       parentComponent);
 
       return;
     }
@@ -149,9 +154,10 @@ public class AnchoragesController extends Controller {
    * <p>Prompts the user for the number of the anchorage to delete,
    * and removes it, updating the text area and the state of the buttons.
    *
-   * @param c Graphical component where the dialogs associated with the event should be displayed.
+   * @param parentComponent Graphical component where the dialogs associated
+   *                        with the event should be displayed.
    */
-  public void deleteAnchorageButtonEvent(Component c) {
+  public void deleteAnchorageButtonEvent(Component parentComponent) {
     String[] optionsDelete = new String[anchoragesAmount];
 
     for (int i = 0; i < anchoragesAmount; i++) {
@@ -159,7 +165,8 @@ public class AnchoragesController extends Controller {
     }
 
     int anchorageToDelete = JOptionPane.showOptionDialog(
-        c, "Seleccione qué anclaje desea borrar",
+        parentComponent,
+        "Seleccione qué anclaje desea borrar",
         "Antes de continuar...",
         JOptionPane.OK_CANCEL_OPTION,
         JOptionPane.QUESTION_MESSAGE,
