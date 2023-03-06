@@ -91,7 +91,7 @@ public final class CommonFunctions {
    *
    * @param e The triggered action event.
    *
-   * @return the graphical component associated to the action event.
+   * @return The graphical component associated to the action event.
    */
   public static Component getComponentFromEvent(ActionEvent e) {
     return e == null ? null : SwingUtilities.windowForComponent((Component) e.getSource());
