@@ -124,7 +124,8 @@ public class AnchoragesController extends Controller {
     }
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
-      CommonFunctions.showErrorMessage("No puede haber más de " + Constants.MAX_ANCHORED_PLAYERS
+      CommonFunctions.showErrorMessage("No puede haber más de "
+                                       + Constants.MAX_ANCHORED_PLAYERS
                                        + " jugadores anclados en total",
                                        parentComponent);
 

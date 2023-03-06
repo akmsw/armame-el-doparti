@@ -202,16 +202,33 @@ public class RandomMixer implements PlayersMixer {
     return team.getPlayersCount() + anchoredPlayers.size() <= Constants.PLAYERS_PER_TEAM
            && anchoredPlayers.stream()
                              .noneMatch(p -> team.isPositionFull(p.getPosition())
-                                             || team.getTeamPlayers()
-                                                    .get(p.getPosition())
-                                                    .size()
-                                                + anchoredPlayers.stream()
-                                                                 .filter(ap ->
-                                                                   ap.getPosition()
-                                                                   == p.getPosition())
-                                                                 .count()
-                                                > CommonFields.getPlayersAmountMap()
-                                                              .get(p.getPosition()));
+                                             || anchorageOverflowsSet(team, anchoredPlayers, p.getPosition()));
+  }
+
+  /**
+   * Checks if the amount of anchored players to be added to a team would
+   * exceed the maximum allowed amount of players per team for that particular
+   * position.
+   *
+   * @param team Team to check if the anchored players can be added.
+   * @param anchoredPlayers Anchored players to check.
+   * @param position Position to check.
+   *
+   * @return If the amount of anchored players to be added to a team would
+   *         exceed the maximum allowed amount of players per team for that
+   *         particular position.
+   */
+  private boolean anchorageOverflowsSet(@NotNull Team team,
+                                        @NotNull List<Player> anchoredPlayers,
+                                        @NotNull Position position) {
+    return team.getTeamPlayers()
+               .get(position)
+               .size()
+           + anchoredPlayers.stream()
+                          .filter(ap -> ap.getPosition() == position)
+                          .count()
+           > CommonFields.getPlayersAmountMap()
+                         .get(position);
   }
 
   /**
