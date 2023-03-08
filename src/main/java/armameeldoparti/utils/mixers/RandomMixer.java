@@ -216,7 +216,7 @@ public class RandomMixer implements PlayersMixer {
    */
   private boolean anchorageOverflowsTeamSize(@NotNull Team team,
                                              @NotNull List<Player> anchoredPlayers) {
-    return team.getPlayersCount() + anchoredPlayers.size() <= Constants.PLAYERS_PER_TEAM;
+    return team.getPlayersCount() + anchoredPlayers.size() > Constants.PLAYERS_PER_TEAM;
   }
 
   /**
