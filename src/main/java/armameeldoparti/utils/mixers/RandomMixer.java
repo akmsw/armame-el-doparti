@@ -59,7 +59,7 @@ public class RandomMixer implements PlayersMixer {
   public List<Team> withoutAnchorages(@NotNull List<Team> teams) {
     Player chosenPlayer;
 
-    updateTeamNumbers(teams.size());
+    shuffleTeamNumbers(teams.size());
 
     for (Position position : Position.values()) {
       List<Player> playersSet = CommonFields.getPlayersSets()
@@ -120,7 +120,7 @@ public class RandomMixer implements PlayersMixer {
     List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
 
     for (List<Player> aps : anchoredPlayers) {
-      updateTeamNumbers(teams.size());
+      shuffleTeamNumbers(teams.size());
 
       int teamNumber = -1;
 
@@ -148,7 +148,7 @@ public class RandomMixer implements PlayersMixer {
                 .flatMap(List::stream)
                 .filter(p -> p.getTeamNumber() == 0)
                 .forEach(p -> {
-                  updateTeamNumbers(teams.size());
+                  shuffleTeamNumbers(teams.size());
 
                   int teamNumber = randomTeam1;
 
@@ -173,17 +173,17 @@ public class RandomMixer implements PlayersMixer {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Randomly updates the team numbers.
+   * Randomly shuffles the team numbers.
    *
    * @param range Upper limit (exclusive) for the random number generator.
    */
-  private void updateTeamNumbers(int range) {
+  private void shuffleTeamNumbers(int range) {
     randomTeam1 = randomGenerator.nextInt(range);
     randomTeam2 = 1 - randomTeam1;
   }
 
   /**
-   * Checks if all anchored players can be added to a team.
+   * Checks if a set of anchored players can be added to a team.
    *
    * <p>It checks if any of the positions of the anchored players
    * in the destination team is already complete, and it checks
@@ -195,38 +195,72 @@ public class RandomMixer implements PlayersMixer {
    * @param team            Team where the anchored players should be added.
    * @param anchoredPlayers List containing the players with the same anchorage number.
    *
-   * @return Whether all anchored players can be added to the team or not.
+   * @return If a set of anchored players can be added to a team.
    */
   private boolean anchorageCanBeAdded(@NotNull Team team,
                                       @NotNull List<Player> anchoredPlayers) {
-    return team.getPlayersCount() + anchoredPlayers.size() <= Constants.PLAYERS_PER_TEAM
-           && anchoredPlayers.stream()
-                             .noneMatch(p -> team.isPositionFull(p.getPosition())
-                                             || anchorageOverflowsSet(team, anchoredPlayers, p.getPosition()));
+    return !(anchorageOverflowsTeamSize(team, anchoredPlayers)
+             || anchorageOverflowsAnyPositionSet(team, anchoredPlayers));
   }
 
   /**
-   * Checks if the amount of anchored players to be added to a team would
-   * exceed the maximum allowed amount of players per team for that particular
-   * position.
+   * Checks if the amount of anchored players to be added to a
+   * team would exceed the maximum allowed amount of players
+   * per team.
    *
    * @param team Team to check if the anchored players can be added.
    * @param anchoredPlayers Anchored players to check.
-   * @param position Position to check.
    *
-   * @return If the amount of anchored players to be added to a team would
-   *         exceed the maximum allowed amount of players per team for that
-   *         particular position.
+   *  @return If the amount of anchored players to be added to a team
+   *          would exceed the maximum allowed amount of players per team.
    */
-  private boolean anchorageOverflowsSet(@NotNull Team team,
-                                        @NotNull List<Player> anchoredPlayers,
-                                        @NotNull Position position) {
+  private boolean anchorageOverflowsTeamSize(@NotNull Team team,
+                                             @NotNull List<Player> anchoredPlayers) {
+    return team.getPlayersCount() + anchoredPlayers.size() <= Constants.PLAYERS_PER_TEAM;
+  }
+
+  /**
+   * Checks if the amount of anchored players to be added to a
+   * team would exceed the maximum allowed amount of players
+   * per team in any position set.
+   *
+   * @param team Team to check if the anchored players can be added.
+   * @param anchoredPlayers Anchored players to check.
+   *
+   *  @return If the amount of anchored players to be added to a
+   *          team would exceed the maximum allowed amount of players
+   *          per team in any position set.
+   */
+  private boolean anchorageOverflowsAnyPositionSet(@NotNull Team team,
+                                                   @NotNull List<Player> anchoredPlayers) {
+    return anchoredPlayers.stream()
+                          .anyMatch(p -> team.isPositionFull(p.getPosition())
+                                         || anchorageOverflowsPositionSet(team, anchoredPlayers,
+                                                                          p.getPosition()));
+  }
+
+  /**
+   * Checks if the amount of anchored players to be added to a
+   * position set in a team would exceed the maximum allowed
+   * amount of players per team for that particular position.
+   *
+   * @param team Team to check if the anchored players can be added.
+   * @param anchoredPlayers Anchored players to check.
+   * @param position Anchored players position.
+   *
+   * @return If the amount of anchored players to be added to a
+   *         position set in a team would exceed the maximum allowed
+   *         amount of players per team for that particular position.
+   */
+  private boolean anchorageOverflowsPositionSet(@NotNull Team team,
+                                                @NotNull List<Player> anchoredPlayers,
+                                                @NotNull Position position) {
     return team.getTeamPlayers()
                .get(position)
                .size()
            + anchoredPlayers.stream()
-                          .filter(ap -> ap.getPosition() == position)
-                          .count()
+                            .filter(ap -> ap.getPosition() == position)
+                            .count()
            > CommonFields.getPlayersAmountMap()
                          .get(position);
   }

@@ -29,7 +29,7 @@ public class Team {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Builds a basic team with empty positions.
+   * Builds a basic team with empty position sets.
    */
   public Team(int teamNumber) {
     teamPlayers = new EnumMap<>(Position.class);
@@ -44,7 +44,7 @@ public class Team {
   // ---------------------------------------- Public methods -------------------------------------
 
   /**
-   * Clears all players lists.
+   * Clears all players sets in the team.
    */
   public void clear() {
     teamPlayers.values()
@@ -77,11 +77,11 @@ public class Team {
   }
 
   /**
-   * Checks if a particular position players list is full.
+   * Checks if a particular position set in the team is full.
    *
-   * @param position The position to check.
+   * @param position The position of the set to check.
    *
-   * @return Whether the position players list is full or not.
+   * @return Whether the position set in the team is full.
    */
   public boolean isPositionFull(@NotNull Position position) {
     return teamPlayers.get(position)
