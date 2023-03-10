@@ -107,9 +107,12 @@ class MainMenuTest {
     ((NamesInputView) CommonFunctions.getController(ProgramView.NAMES_INPUT)
                                      .getView()).getTextFieldsMap()
                                                 .values()
-                                                .forEach(tfl -> tfl.forEach(tf -> assertEquals("", tf.getText())));
+                                                .forEach(tfl -> tfl.forEach(
+                                                    tf -> assertEquals("", tf.getText())
+                                                ));
 
-    ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT)).backButtonEvent();
+    ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
+    .backButtonEvent();
 
     assertTrue(CommonFunctions.getController(ProgramView.MAIN_MENU)
                               .getView()
