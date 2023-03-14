@@ -113,29 +113,31 @@ public final class Main {
    * .pda file and, therefore, you should review the order of the important lines in the file.
    */
   private static void setPlayersDistribution() {
-    BufferedReader buff = new BufferedReader(
-        new InputStreamReader(
-          Objects.requireNonNull(
-            CommonFunctions.class
-                           .getClassLoader()
-                           .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
-          )
-        )
-    );
+    try (BufferedReader buff = new BufferedReader(
+         new InputStreamReader(
+           Objects.requireNonNull(
+             CommonFunctions.class
+                             .getClassLoader()
+                             .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
+           )
+         )
+      )) {
+      var wrapperIndex = new Object() {
+        private int index = 0;
+      };
 
-    var wrapperIndex = new Object() {
-      private int index = 0;
-    };
+      buff.lines()
+          .filter(l -> l.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
+          .forEach(l -> {
+            CommonFields.getPlayersAmountMap()
+                        .put(Position.values()[wrapperIndex.index],
+                             Integer.parseInt(l.replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")));
 
-    buff.lines()
-        .filter(l -> l.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
-        .forEach(l -> {
-          CommonFields.getPlayersAmountMap()
-                      .put(Position.values()[wrapperIndex.index],
-                           Integer.parseInt(l.replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")));
-
-          wrapperIndex.index++;
-        });
+            wrapperIndex.index++;
+          });
+    } catch (IOException e) {
+      CommonFunctions.exitProgram(Error.INTERNAL_FILES_ERROR);
+    }
   }
 
   /**
