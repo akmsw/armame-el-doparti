@@ -6,8 +6,8 @@ import armameeldoparti.views.View;
 import java.awt.Rectangle;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Abstract class that specifies the basic methods for
@@ -32,7 +32,7 @@ public abstract class Controller {
    *
    * @param view View to control.
    */
-  protected Controller(@NotNull View view) {
+  protected Controller(@NonNull View view) {
     setView(view);
   }
 

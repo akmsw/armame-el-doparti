@@ -13,7 +13,7 @@ import armameeldoparti.utils.common.CommonFunctions;
 import java.util.List;
 import java.util.stream.Stream;
 import javax.naming.InvalidNameException;
-import org.jetbrains.annotations.NotNull;
+import lombok.NonNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,7 +57,7 @@ class NamesInputTest {
   @DisplayName("Tests if invalid strings throw the expected exception")
   @ParameterizedTest
   @ValueSource(strings = { "", "123", "!a._,|°}zY", "nam3" })
-  void invalidStringsShouldThrowException(@NotNull String invalidString) {
+  void invalidStringsShouldThrowException(@NonNull String invalidString) {
     List<Player> playersSet = CommonFields.getPlayersSets()
                                           .get(Position.CENTRAL_DEFENDER);
 
@@ -78,7 +78,7 @@ class NamesInputTest {
   @DisplayName("Tests if invalid names throw the expected exception")
   @ParameterizedTest
   @ValueSource(strings = { "   ", "thisNameIsTooLong" })
-  void invalidNamesShouldThrowException(@NotNull String invalidName) {
+  void invalidNamesShouldThrowException(@NonNull String invalidName) {
     List<Player> playersSet = CommonFields.getPlayersSets()
                                           .get(Position.CENTRAL_DEFENDER);
 
@@ -138,8 +138,8 @@ class NamesInputTest {
   @ParameterizedTest
   @MethodSource("validParamsProvider")
   void validNamesShouldPass(int playerIndex,
-                            @NotNull Position playerPosition,
-                            @NotNull String playerName)
+                            @NonNull Position playerPosition,
+                            @NonNull String playerName)
                             throws IllegalArgumentException,
                                    InvalidNameException {
     List<Player> playersSet = CommonFields.getPlayersSets()
@@ -165,7 +165,7 @@ class NamesInputTest {
    *
    * @return Valid params for testing.
    */
-  @NotNull
+  @NonNull
   static Stream<Arguments> validParamsProvider() {
     return Stream.of(
       Arguments.of(0, Position.CENTRAL_DEFENDER, "PLAYER A"),

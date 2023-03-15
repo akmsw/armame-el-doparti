@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
-import org.jetbrains.annotations.NotNull;
+import lombok.NonNull;
 
 /**
  * Anchorages view controller class.
@@ -36,7 +36,7 @@ public class AnchoragesController extends Controller {
    *
    * @param anchoragesView View to control.
    */
-  public AnchoragesController(@NotNull AnchoragesView anchoragesView) {
+  public AnchoragesController(@NonNull AnchoragesView anchoragesView) {
     super(anchoragesView);
 
     anchoragesAmount = 0;
@@ -412,7 +412,7 @@ public class AnchoragesController extends Controller {
    *
    * @param cbSet Check boxes set with players checked.
    */
-  private void setAnchorages(@NotNull List<JCheckBox> cbSet) {
+  private void setAnchorages(@NonNull List<JCheckBox> cbSet) {
     CommonFields.getPlayersSets()
                 .get(CommonFunctions.getCorrespondingPosition(
                   ((AnchoragesView) getView()).getCheckBoxesMap(), cbSet))

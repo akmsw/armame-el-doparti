@@ -25,8 +25,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import lombok.Getter;
+import lombok.NonNull;
 import net.miginfocom.swing.MigLayout;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Anchorages view class.
@@ -226,8 +226,8 @@ public class AnchoragesView extends View {
    * @param playersSet Players sets from where to obtain the names.
    * @param cbSet      Check boxes set to fill.
    */
-  private void fillCheckBoxesSet(@NotNull List<Player> playersSet,
-                                 @NotNull List<JCheckBox> cbSet) {
+  private void fillCheckBoxesSet(@NonNull List<Player> playersSet,
+                                 @NonNull List<JCheckBox> cbSet) {
     playersSet.forEach(p -> cbSet.add(new JCheckBox(p.getName())));
   }
 
@@ -237,8 +237,8 @@ public class AnchoragesView extends View {
    * @param cbSet      Check boxes to add.
    * @param labelText  Label text.
    */
-  private void addCheckBoxesSet(@NotNull List<JCheckBox> cbSet,
-                                @NotNull String labelText) {
+  private void addCheckBoxesSet(@NonNull List<JCheckBox> cbSet,
+                                @NonNull String labelText) {
     JLabel label = new JLabel(labelText);
 
     label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));

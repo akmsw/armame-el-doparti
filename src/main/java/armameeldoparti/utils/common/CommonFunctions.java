@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import org.jetbrains.annotations.NotNull;
+import lombok.NonNull;
 
 /**
  * Common-use functions class.
@@ -62,7 +62,7 @@ public final class CommonFunctions {
    * @param parentComponent Graphical component where the dialogs associated
  *                          with the event should be displayed.
    */
-  public static void showErrorMessage(@NotNull String errorMessage, Component parentComponent) {
+  public static void showErrorMessage(@NonNull String errorMessage, Component parentComponent) {
     JOptionPane.showMessageDialog(
         parentComponent, errorMessage,
         Constants.ERROR_MESSAGE_TITLE,
@@ -75,7 +75,7 @@ public final class CommonFunctions {
    *
    * @param view Reference view from which the active monitor will be retrieved.
    */
-  public static void updateActiveMonitorFromView(@NotNull View view) {
+  public static void updateActiveMonitorFromView(@NonNull View view) {
     CommonFields.setActiveMonitor(
         Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
                                          .getScreenDevices())
@@ -105,7 +105,7 @@ public final class CommonFunctions {
    * @return A list containing the anchored players
    *         grouped by their anchorage number.
   */
-  @NotNull
+  @NonNull
   public static List<List<Player>> getAnchoredPlayers() {
     return new ArrayList<>(CommonFields.getPlayersSets()
                                        .values()
@@ -124,9 +124,9 @@ public final class CommonFunctions {
    *
    * @return The value-to-search corresponding position.
    */
-  @NotNull
-  public static <T> Position getCorrespondingPosition(@NotNull Map<Position, T> map,
-                                                      @NotNull T search) {
+  @NonNull
+  public static <T> Position getCorrespondingPosition(@NonNull Map<Position, T> map,
+                                                      @NonNull T search) {
     return map.entrySet()
               .stream()
               .filter(e -> e.getValue()
@@ -143,8 +143,8 @@ public final class CommonFunctions {
    *
    * @return The requested view's controller.
   */
-  @NotNull
-  public static Controller getController(@NotNull ProgramView view) {
+  @NonNull
+  public static Controller getController(@NonNull ProgramView view) {
     return CommonFields.getControllersMap()
                        .get(view);
   }

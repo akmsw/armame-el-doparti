@@ -1,8 +1,8 @@
 package armameeldoparti.models;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Players class.
@@ -37,8 +37,8 @@ public class Player {
    * @param name     Player name.
    * @param position Player position.
    */
-  public Player(@NotNull String name,
-                @NotNull Position position) {
+  public Player(@NonNull String name,
+                @NonNull Position position) {
     setName(name);
     setPosition(position);
     setAnchored(false);

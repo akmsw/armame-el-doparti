@@ -6,8 +6,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Team class.
@@ -83,7 +83,7 @@ public class Team {
    *
    * @return Whether the position set in the team is full.
    */
-  public boolean isPositionFull(@NotNull Position position) {
+  public boolean isPositionFull(@NonNull Position position) {
     return teamPlayers.get(position)
                       .size() == CommonFields.getPlayersAmountMap()
                                              .get(position);
