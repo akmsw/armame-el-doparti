@@ -46,7 +46,7 @@ public abstract class Controller {
                                                 .getDefaultConfiguration()
                                                 .getBounds();
 
-    view.setLocation((activeMonitorBounds.width - view.getWidth()) / 2 + activeMonitorBounds.x, 
+    view.setLocation((activeMonitorBounds.width - view.getWidth()) / 2 + activeMonitorBounds.x,
                   (activeMonitorBounds.height - view.getHeight()) / 2 + activeMonitorBounds.y);
   }
 

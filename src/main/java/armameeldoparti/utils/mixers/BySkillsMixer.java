@@ -201,7 +201,6 @@ public class BySkillsMixer implements PlayersMixer {
 
     playersSubsets.add(outerSubset);
     playersSubsets.add(innerSubset);
-
     playersSubsets.sort(Comparator.comparingInt(ps -> ps.stream()
                                                         .mapToInt(Player::getSkillPoints)
                                                         .reduce(0, Math::addExact)));
