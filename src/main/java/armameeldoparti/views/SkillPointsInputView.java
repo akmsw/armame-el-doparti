@@ -73,7 +73,6 @@ public class SkillPointsInputView extends View {
     addButtons();
     add(masterPanel);
     pack();
-    
   }
 
   /**
@@ -115,9 +114,8 @@ public class SkillPointsInputView extends View {
         .backButtonEvent()
     );
 
-    for (JButton button : Arrays.asList(finishButton, resetSkillPointsButton, backButton)) {
-      masterPanel.add(button, "grow, span");
-    }
+    Arrays.asList(finishButton, resetSkillPointsButton, backButton)
+          .forEach(b -> masterPanel.add(b, "grow, span"));
   }
 
   // ---------------------------------------- Private methods -----------------------------------
