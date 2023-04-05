@@ -46,12 +46,12 @@ Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizand
 - #### Versión mínima
     🟡 [Java 11](https://www.oracle.com/ar/java/technologies/javase/jdk11-archive-downloads.html)
 - #### Versión recomendada
-    🟢 [Java 19](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) *(o más reciente)*
+    🟢 [Java 20](https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html) *(o más reciente)*
 
 ## ⚙️ Requisitos para compilación manual
 ### 🪶 Apache Maven
 - #### Versión recomendada
-    🟢 [Apache Maven 3.9.0](https://maven.apache.org/download.cgi) *(o más reciente)*
+    🟢 [Apache Maven 3.9.1](https://maven.apache.org/download.cgi) *(o más reciente)*
 
 ## 📥 Descarga
 La versión estable más reciente del programa se encuentra disponible para descargar en la sección [releases](https://github.com/akmsw/armame-el-doparti/releases) de este proyecto.
