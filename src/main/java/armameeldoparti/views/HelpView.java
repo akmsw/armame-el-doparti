@@ -87,7 +87,6 @@ public class HelpView extends View {
   protected void addButtons() {
     previousPageButton = new JButton("Anterior");
     nextPageButton = new JButton("Siguiente");
-
     backButton = new JButton("Volver al menú principal");
 
     previousPageButton.addActionListener(e ->

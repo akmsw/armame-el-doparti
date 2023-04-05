@@ -117,8 +117,8 @@ public final class Main {
          new InputStreamReader(
            Objects.requireNonNull(
              CommonFunctions.class
-                             .getClassLoader()
-                             .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
+                            .getClassLoader()
+                            .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
            )
          )
       )) {

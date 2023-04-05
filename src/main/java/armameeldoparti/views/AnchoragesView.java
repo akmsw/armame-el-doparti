@@ -74,7 +74,8 @@ public class AnchoragesView extends View {
 
     textArea = new JTextArea();
 
-    scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+    scrollPane = new JScrollPane(textArea,
+                                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                                  ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     anchorageButtons = new ArrayList<>();
@@ -126,13 +127,10 @@ public class AnchoragesView extends View {
 
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> {
-                  final Position currentPosition = value.get(0)
-                                                        .getPosition();
-
-                  fillCheckBoxesSet(value, checkBoxesMap.get(currentPosition));
-                  addCheckBoxesSet(checkBoxesMap.get(currentPosition),
+                  fillCheckBoxesSet(value, checkBoxesMap.get(key));
+                  addCheckBoxesSet(checkBoxesMap.get(key),
                                    CommonFields.getPositionsMap()
-                                               .get(currentPosition));
+                                               .get(key));
                 });
 
     textArea.setBorder(BorderFactory.createBevelBorder(1));
@@ -234,8 +232,8 @@ public class AnchoragesView extends View {
   /**
    * Adds the checkboxes to the view with a label that specifies the corresponding position.
    *
-   * @param cbSet      Check boxes to add.
-   * @param labelText  Label text.
+   * @param cbSet     Check boxes to add.
+   * @param labelText Label text.
    */
   private void addCheckBoxesSet(@NonNull List<JCheckBox> cbSet,
                                 @NonNull String labelText) {

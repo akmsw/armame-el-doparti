@@ -58,8 +58,8 @@ public final class Constants {
   public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
   public static final String MIX_OPTION_BY_SKILL = "Por puntuaciones";
   public static final String MSG_ERROR_NULL_RESOURCE = "ERROR EN OBTENCIÓN DE RECURSOS GRÁFICOS";
-  public static final String MSG_ERROR_INVALID_STRING = "El nombre del jugador debe estar formado "
-                                                        + "por letras de la A a la Z";
+  public static final String MSG_ERROR_INVALID_STRING = "El nombre del jugador debe estar formado"
+                                                        + " por letras de la A a la Z";
   public static final String MSG_ERROR_INVALID_NAME = "El nombre del jugador no puede estar vacío,"
                                                       + " tener más de " + Constants.MAX_NAME_LEN
                                                       + " caracteres, o estar repetido";
