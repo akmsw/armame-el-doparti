@@ -33,7 +33,7 @@ public abstract class View extends JFrame {
    * Basic view constructor.
    *
    * @param frameTitle                   The frame title.
-   * @param masterPanelLayoutConstraints The layout constraints of the view's master panel .
+   * @param masterPanelLayoutConstraints The layout constraints for the view's master panel .
    */
   protected View(@NonNull String frameTitle,
                  @NonNull String masterPanelLayoutConstraints) {
