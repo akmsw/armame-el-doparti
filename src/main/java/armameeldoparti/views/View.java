@@ -25,9 +25,7 @@ public abstract class View extends JFrame {
 
   private JPanel masterPanel;
 
-  // ---------------------------------------- Protected fields ----------------------------------
-
-  protected String frameTitle;
+  private String frameTitle;
 
   // ---------------------------------------- Protected constructor -----------------------------
 

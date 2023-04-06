@@ -19,11 +19,13 @@ import lombok.Setter;
  *
  * @since 28/07/2022
  */
+@Getter
+@Setter(AccessLevel.PROTECTED)
 public abstract class Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private @Getter @Setter(AccessLevel.PROTECTED) View view;
+  private View view;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -47,7 +49,7 @@ public abstract class Controller {
                                                 .getBounds();
 
     view.setLocation((activeMonitorBounds.width - view.getWidth()) / 2 + activeMonitorBounds.x,
-                  (activeMonitorBounds.height - view.getHeight()) / 2 + activeMonitorBounds.y);
+                     (activeMonitorBounds.height - view.getHeight()) / 2 + activeMonitorBounds.y);
   }
 
   /**
