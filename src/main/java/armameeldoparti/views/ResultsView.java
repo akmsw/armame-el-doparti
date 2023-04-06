@@ -8,13 +8,11 @@ import armameeldoparti.utils.common.Constants;
 import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import net.miginfocom.swing.MigLayout;
 
 /**
  * Results view class.
@@ -35,8 +33,6 @@ public class ResultsView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private final JPanel panel;
-
   private @Getter @Setter JTable table;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -45,9 +41,7 @@ public class ResultsView extends View {
    * Builds an empty results view.
    */
   public ResultsView() {
-    super(getUpdatedFrameTitle());
-
-    panel = new JPanel(new MigLayout("wrap"));
+    super(getUpdatedFrameTitle(), "wrap");
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -65,7 +59,7 @@ public class ResultsView extends View {
     setTitle(getFrameTitle());
     addTable();
     addButtons();
-    add(panel);
+    add(getMasterPanel());
   }
 
   /**
@@ -114,10 +108,10 @@ public class ResultsView extends View {
           .remixButtonEvent()
       );
 
-      panel.add(remixButton, "growx");
+      getMasterPanel().add(remixButton, "growx");
     }
 
-    panel.add(backButton, "growx");
+    getMasterPanel().add(backButton, "growx");
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -147,6 +141,6 @@ public class ResultsView extends View {
     table.setBorder(BorderFactory.createLineBorder(Constants.GREEN_DARK));
     table.setEnabled(false);
 
-    panel.add(table, "push, grow, span, center");
+    getMasterPanel().add(table, "push, grow, span, center");
   }
 }

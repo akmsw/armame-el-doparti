@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.SpinnerNumberModel;
@@ -21,7 +20,6 @@ import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import lombok.Getter;
-import net.miginfocom.swing.MigLayout;
 
 /**
  * Skill points input view class.
@@ -36,8 +34,6 @@ public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private final JPanel masterPanel;
-
   private final transient @Getter Map<Player, JSpinner> spinnersMap;
   private final transient Map<JSpinner, JLabel> labelsMap;
 
@@ -47,9 +43,7 @@ public class SkillPointsInputView extends View {
    * Builds the skill points input view.
    */
   public SkillPointsInputView() {
-    super("Ingreso de puntuaciones");
-
-    masterPanel = new JPanel(new MigLayout());
+    super("Ingreso de puntuaciones", "");
 
     spinnersMap = new HashMap<>();
     labelsMap = new HashMap<>();
@@ -71,7 +65,7 @@ public class SkillPointsInputView extends View {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     addSpinners();
     addButtons();
-    add(masterPanel);
+    add(getMasterPanel());
     pack();
   }
 
@@ -117,7 +111,7 @@ public class SkillPointsInputView extends View {
     );
 
     Arrays.asList(finishButton, resetSkillPointsButton, backButton)
-          .forEach(b -> masterPanel.add(b, "grow, span"));
+          .forEach(b -> getMasterPanel().add(b, "grow, span"));
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -132,7 +126,7 @@ public class SkillPointsInputView extends View {
 
       positionLabel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-      masterPanel.add(positionLabel, "grow, span");
+      getMasterPanel().add(positionLabel, "grow, span");
 
       List<Player> currentSet = CommonFields.getPlayersSets()
                                             .get(position);
@@ -150,8 +144,8 @@ public class SkillPointsInputView extends View {
 
         labelsMap.put(spinner, nameLabel);
 
-        masterPanel.add(nameLabel, "pushx");
-        masterPanel.add(spinnersMap.get(currentSet.get(j)), j % 2 != 0 ? "wrap" : null);
+        getMasterPanel().add(nameLabel, "pushx");
+        getMasterPanel().add(spinnersMap.get(currentSet.get(j)), j % 2 != 0 ? "wrap" : null);
       }
 
       spinnersMap.values()

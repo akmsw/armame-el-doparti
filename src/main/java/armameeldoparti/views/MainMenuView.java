@@ -9,11 +9,9 @@ import java.util.Objects;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import net.miginfocom.layout.CC;
-import net.miginfocom.swing.MigLayout;
 
 /**
  * Main menu view class.
@@ -26,19 +24,13 @@ import net.miginfocom.swing.MigLayout;
  */
 public class MainMenuView extends View {
 
-  // ---------------------------------------- Private fields ------------------------------------
-
-  private final JPanel masterPanel;
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
    * Builds the main menu view.
    */
   public MainMenuView() {
-    super(Constants.PROGRAM_TITLE + " " + Constants.PROGRAM_VERSION);
-
-    masterPanel = new JPanel(new MigLayout("wrap"));
+    super(Constants.PROGRAM_TITLE + " " + Constants.PROGRAM_VERSION, "wrap");
 
     initializeInterface();
   }
@@ -52,7 +44,7 @@ public class MainMenuView extends View {
   protected void initializeInterface() {
     addBackground();
     addButtons();
-    add(masterPanel);
+    add(getMasterPanel());
     setResizable(false);
     setTitle(getFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -95,12 +87,12 @@ public class MainMenuView extends View {
     );
 
     for (JButton button : Arrays.asList(startButton, helpButton)) {
-      masterPanel.add(button, "growx");
+      getMasterPanel().add(button, "growx");
     }
 
-    masterPanel.add(contactButton, new CC().width("50%")
-                                           .split());
-    masterPanel.add(issuesButton, new CC().width("50%"));
+    getMasterPanel().add(contactButton, new CC().width("50%")
+                                                .split());
+    getMasterPanel().add(issuesButton, new CC().width("50%"));
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -118,6 +110,6 @@ public class MainMenuView extends View {
 
     JLabel bgLabel = new JLabel("", bgImg, SwingConstants.CENTER);
 
-    masterPanel.add(bgLabel, "growx");
+    getMasterPanel().add(bgLabel, "growx");
   }
 }

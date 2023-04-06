@@ -67,7 +67,7 @@ public class AnchoragesView extends View {
    * Builds the anchorages view.
    */
   public AnchoragesView() {
-    super("Anclaje de jugadores");
+    super("Anclaje de jugadores", "wrap 2");
 
     leftPanel = new JPanel(new MigLayout("wrap 2"));
     rightPanel = new JPanel(new MigLayout("wrap"));
@@ -136,13 +136,11 @@ public class AnchoragesView extends View {
     textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setEditable(false);
 
-    JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
-
-    masterPanel.add(leftPanel, "west");
-    masterPanel.add(rightPanel, "east");
+    getMasterPanel().add(leftPanel, "west");
+    getMasterPanel().add(rightPanel, "east");
 
     addButtons();
-    add(masterPanel);
+    add(getMasterPanel());
     setTitle(getFrameTitle());
     setResizable(false);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

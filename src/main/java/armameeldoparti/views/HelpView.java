@@ -7,7 +7,6 @@ import armameeldoparti.utils.common.Constants;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
@@ -16,7 +15,6 @@ import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import lombok.Getter;
 import net.miginfocom.layout.CC;
-import net.miginfocom.swing.MigLayout;
 
 /**
  * Help view class.
@@ -42,8 +40,6 @@ public class HelpView extends View {
 
   private @Getter JLabel pagesCounter;
 
-  private final JPanel masterPanel;
-
   private @Getter JScrollPane scrollPane;
 
   private @Getter JTextArea textArea;
@@ -54,9 +50,7 @@ public class HelpView extends View {
    * Builds the help view.
    */
   public HelpView() {
-    super("Ayuda");
-
-    masterPanel = new JPanel(new MigLayout("wrap"));
+    super("Ayuda", "wrap");
 
     initializeInterface();
   }
@@ -71,7 +65,7 @@ public class HelpView extends View {
     addTextArea();
     addPagesLabel();
     addButtons();
-    add(masterPanel);
+    add(getMasterPanel());
     setTitle(getFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Constants.ICON
@@ -103,11 +97,11 @@ public class HelpView extends View {
 
     previousPageButton.setEnabled(false);
 
-    masterPanel.add(previousPageButton, new CC().width("50%")
-                                                .split());
-    masterPanel.add(nextPageButton, new CC().width("50%")
-                                            .wrap());
-    masterPanel.add(backButton, "growx, span");
+    getMasterPanel().add(previousPageButton, new CC().width("50%")
+                                                     .split());
+    getMasterPanel().add(nextPageButton, new CC().width("50%")
+                                                 .wrap());
+    getMasterPanel().add(backButton, "growx, span");
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -137,7 +131,7 @@ public class HelpView extends View {
                 }
               });
 
-    masterPanel.add(scrollPane);
+    getMasterPanel().add(scrollPane);
   }
 
   /**
@@ -149,6 +143,6 @@ public class HelpView extends View {
     pagesCounter.setBorder(BorderFactory.createLoweredSoftBevelBorder());
     pagesCounter.setHorizontalAlignment(SwingConstants.CENTER);
 
-    masterPanel.add(pagesCounter, "growx");
+    getMasterPanel().add(pagesCounter, "growx");
   }
 }

@@ -68,7 +68,7 @@ public class NamesInputView extends View {
    * Builds the names input view.
    */
   public NamesInputView() {
-    super("Ingreso de jugadores");
+    super("Ingreso de jugadores", "wrap 2");
 
     leftPanel = new JPanel(new MigLayout("wrap"));
     rightPanel = new JPanel(new MigLayout("wrap"));
@@ -84,10 +84,8 @@ public class NamesInputView extends View {
    */
   @Override
   protected void initializeInterface() {
-    JPanel masterPanel = new JPanel(new MigLayout("wrap 2"));
-
-    masterPanel.add(leftPanel, "west");
-    masterPanel.add(rightPanel, "east");
+    getMasterPanel().add(leftPanel, "west");
+    getMasterPanel().add(rightPanel, "east");
 
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setTitle(getFrameTitle());
@@ -99,7 +97,7 @@ public class NamesInputView extends View {
     addTextArea();
     addButtons();
     addAnchoragesCheckBox();
-    add(masterPanel);
+    add(getMasterPanel());
     pack();
   }
 
