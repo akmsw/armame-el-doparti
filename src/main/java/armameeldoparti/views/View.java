@@ -32,12 +32,12 @@ public abstract class View extends JFrame {
   /**
    * Basic view constructor.
    *
-   * @param frameTitle             The frame title.
-   * @param masterPanelConstraints The view's master panel layout constraints.
+   * @param frameTitle                   The frame title.
+   * @param masterPanelLayoutConstraints The layout constraints of the view's master panel .
    */
   protected View(@NonNull String frameTitle,
-                 @NonNull String masterPanelConstraints) {
-    setMasterPanel(new JPanel(new MigLayout(masterPanelConstraints)));
+                 @NonNull String masterPanelLayoutConstraints) {
+    setMasterPanel(new JPanel(new MigLayout(masterPanelLayoutConstraints)));
     setFrameTitle(frameTitle);
   }
 
