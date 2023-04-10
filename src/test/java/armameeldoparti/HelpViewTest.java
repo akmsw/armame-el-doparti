@@ -89,7 +89,7 @@ class HelpViewTest {
   @DisplayName("The page number should change when navigating")
   @ParameterizedTest
   @MethodSource("navigationProvider")
-  void currentPageNumberChangeOnNavigation(int timesNext, int timesPrevious) {
+  void currentPageNumberShouldChangeOnNavigation(int timesNext, int timesPrevious) {
     for (int i = 0; i < timesNext; i++) {
       helpController.nextPageButtonEvent();
     }
@@ -112,7 +112,7 @@ class HelpViewTest {
    */
   @DisplayName("Tests the limits for the navigation buttons")
   @Test
-  void navigationButtonsLimits() {
+  void navigationButtonsLimitsTest() {
     assertFalse(helpView.getPreviousPageButton()
                         .isEnabled());
     assertTrue(helpView.getNextPageButton()

@@ -44,11 +44,11 @@ class MainMenuTest {
   /**
    * The help view should start visible on the first page.
    *
-   * <p>Also tests the correct navigation between the main menu and the help view
+   * <p>Also tests the correct navigation between the main menu and the help view.
    */
   @DisplayName("Tests the initial state of the help view and the navigation")
   @Test
-  void helpViewInitialState() {
+  void helpViewInitialStateTest() {
     ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU)).helpButtonEvent();
 
     assertEquals(0, ((HelpController) CommonFunctions.getController(ProgramView.HELP))
@@ -82,7 +82,7 @@ class MainMenuTest {
    */
   @DisplayName("Tests the initial state of the names input view and the navigation")
   @Test
-  void namesInputViewInitialState() {
+  void namesInputViewInitialStateTest() {
     ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU)).startButtonEvent();
 
     assertTrue(CommonFunctions.getController(ProgramView.NAMES_INPUT)

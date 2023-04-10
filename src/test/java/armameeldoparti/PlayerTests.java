@@ -35,8 +35,8 @@ class PlayerTests implements ArgumentsProvider {
   @DisplayName("Tests the default values when creating a player")
   @ParameterizedTest
   @ArgumentsSource(PlayerTests.class)
-  void defaultValuesInPlayersCreation(@NonNull String name,
-                                      @NonNull Position position) {
+  void defaultValuesInPlayersCreationTest(@NonNull String name,
+                                          @NonNull Position position) {
     Player player = new Player(name, position);
 
     assertEquals(0, player.getAnchorageNumber());

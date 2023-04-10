@@ -31,7 +31,6 @@ public class MainMenuView extends View {
    */
   public MainMenuView() {
     super(Constants.PROGRAM_TITLE + " " + Constants.PROGRAM_VERSION, "wrap");
-
     initializeInterface();
   }
 
