@@ -58,28 +58,24 @@ public class MainMenuView extends View {
   @Override
   protected void addButtons() {
     JButton startButton = new JButton("Comenzar");
-
     startButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
         .startButtonEvent()
     );
 
     JButton helpButton = new JButton("Ayuda");
-
     helpButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
         .helpButtonEvent()
     );
 
     JButton contactButton = new JButton("Contacto");
-
     contactButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
         .contactButtonEvent()
     );
 
     JButton issuesButton = new JButton("Reportes y sugerencias");
-
     issuesButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
         .issuesButtonEvent()

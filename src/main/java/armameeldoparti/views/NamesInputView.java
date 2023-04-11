@@ -107,7 +107,6 @@ public class NamesInputView extends View {
   @Override
   protected void addButtons() {
     mixButton = new JButton("Distribuir");
-
     mixButton.setEnabled(false);
     mixButton.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
@@ -115,7 +114,6 @@ public class NamesInputView extends View {
     );
 
     JButton backButton = new JButton("Atrás");
-
     backButton.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
         .backButtonEvent()

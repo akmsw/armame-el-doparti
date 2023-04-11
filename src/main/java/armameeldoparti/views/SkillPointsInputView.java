@@ -90,21 +90,18 @@ public class SkillPointsInputView extends View {
   @Override
   protected void addButtons() {
     JButton finishButton = new JButton("Finalizar");
-
     finishButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .finishButtonEvent()
     );
 
     JButton resetSkillPointsButton = new JButton("Reiniciar puntuaciones");
-
     resetSkillPointsButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .resetSkillsButtonEvent()
     );
 
-    JButton backButton = new JButton("Atrás");    
-
+    JButton backButton = new JButton("Atrás");
     backButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .backButtonEvent()

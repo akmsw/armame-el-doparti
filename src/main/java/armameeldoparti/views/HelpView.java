@@ -80,19 +80,21 @@ public class HelpView extends View {
   @Override
   protected void addButtons() {
     previousPageButton = new JButton("Anterior");
-    nextPageButton = new JButton("Siguiente");
-    backButton = new JButton("Volver al menú principal");
-
     previousPageButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).previousPageButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP))
+        .previousPageButtonEvent()
     );
 
+    nextPageButton = new JButton("Siguiente");
     nextPageButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).nextPageButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP))
+        .nextPageButtonEvent()
     );
 
+    backButton = new JButton("Volver al menú principal");
     backButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).backButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP))
+        .backButtonEvent()
     );
 
     previousPageButton.setEnabled(false);

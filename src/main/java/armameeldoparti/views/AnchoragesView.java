@@ -155,7 +155,6 @@ public class AnchoragesView extends View {
   @Override
   protected void addButtons() {
     finishButton = new JButton("Finalizar");
-
     finishButton.setEnabled(false);
     finishButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
@@ -163,35 +162,30 @@ public class AnchoragesView extends View {
     );
 
     newAnchorageButton = new JButton("Anclar");
-
     newAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
     deleteAnchorageButton = new JButton("Borrar un anclaje");
-
     deleteAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
     deleteLastAnchorageButton = new JButton("Borrar último anclaje");
-
     deleteLastAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .deleteLastAnchorageButtonEvent()
     );
 
     clearAnchoragesButton = new JButton("Limpiar anclajes");
-
     clearAnchoragesButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .clearAnchoragesButtonEvent()
     );
 
     JButton backButton = new JButton("Atrás");
-
     backButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .backButtonEvent()
