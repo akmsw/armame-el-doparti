@@ -125,18 +125,15 @@ public class BySkillsMixer implements PlayersMixer {
       }
     }
 
-    List<List<Player>> remainingPlayers = new ArrayList<>(CommonFields.getPlayersSets()
-                                                                      .values()
-                                                                      .stream()
-                                                                      .flatMap(List::stream)
-                                                                      .filter(
-                                                                        p -> p.getTeamNumber() == 0
-                                                                      )
-                                                                      .collect(
-                                                                        Collectors.groupingBy(
-                                                                          Player::getPosition)
-                                                                      )
-                                                                      .values());
+    List<List<Player>> remainingPlayers = new ArrayList<>(
+        CommonFields.getPlayersSets()
+                    .values()
+                    .stream()
+                    .flatMap(List::stream)
+                    .filter(p -> p.getTeamNumber() == 0)
+                    .collect(Collectors.groupingBy(Player::getPosition))
+                    .values()
+    );
 
     remainingPlayers.sort(Comparator.comparingInt(List::size));
 

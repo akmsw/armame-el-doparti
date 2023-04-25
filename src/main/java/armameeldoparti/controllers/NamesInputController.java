@@ -265,18 +265,13 @@ public class NamesInputController extends Controller {
                                 .filter(tf -> tf.getParent() == leftPanel)
                                 .forEach(leftPanel::remove);
 
-    for (int i = 0; i < NamesInputView.getOPTIONS_COMBOBOX()
-                                      .length; i++) {
-      if (selectedOption.equals(NamesInputView.getOPTIONS_COMBOBOX()[i])) {
-        ((NamesInputView) getView()).getTextFieldsMap()
-                                    .get(CommonFunctions.getCorrespondingPosition(
-                                          CommonFields.getPositionsMap(),
-                                          selectedOption.toUpperCase()))
-                                    .forEach(tf -> leftPanel.add(tf, "growx"));
-
-        break;
-      }
-    }
+    ((NamesInputView) getView()).getTextFieldsMap()
+                                .get(CommonFunctions.getCorrespondingPosition(
+                                       CommonFields.getPositionsMap(),
+                                       selectedOption.toUpperCase()
+                                     )
+                                    )
+                                .forEach(tf -> leftPanel.add(tf, "growx"));
 
     leftPanel.revalidate();
     leftPanel.repaint();
