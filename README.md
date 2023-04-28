@@ -117,6 +117,13 @@ No se pueden anclar a un mismo equipo todos los jugadores de un mismo tipo (por 
   - En el campo de ingreso de comando personalizado, poné: `java -jar`
   - Seleccionalo como opción predeterminada para la ejecución de archivos .jar
 
+## 🔜 Próximamente
+Si querés estar al tanto de qué cambios están planeados para las próximas versiones, te dejo acá los links a los proyectos:
+- [v3.1](https://github.com/users/akmsw/projects/10/views/1)
+- [v4.0](https://github.com/users/akmsw/projects/7/views/1)
+- [v4.1](https://github.com/users/akmsw/projects/8/views/1)
+- [v5.0](https://github.com/users/akmsw/projects/9/views/1)
+
 ## ⚠️ Reportes y sugerencias
 Si el programa presenta algún error que debería ser reportado para arreglarlo, si se te ocurrió alguna nueva funcionalidad para agregar al programa, o si opinás que algo podría ser modificado, la sección de [issues](https://github.com/akmsw/armame-el-doparti/issues) está abierta para que hagas estos reportes y/o sugerencias. Es necesario tener una cuenta en GitHub para abrir un nuevo reporte en el repositorio. Para poder trabajar en eso lo más rápidamente posible, te proveo unas plantillas para cada caso donde te pido toda la información que necesito.
 
