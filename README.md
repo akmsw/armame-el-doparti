@@ -1,9 +1,6 @@
-# ⚽ Armame el doparti v3.0 **[WIP]**
+# ⚽ Armame el doparti v3.0 [![releaseDateBadge](https://img.shields.io/badge/status-prealpha-yellow)]()
 
 ![portada](./src/main/res/img/readme/cover.png)
-
-[![releaseDateBadge](https://img.shields.io/badge/status-prealpha-yellow)]()
-[![maintainedBadge](https://img.shields.io/badge/maintained-yes-brightgreen)]()
 
 [![buildBadge](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
 [![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
