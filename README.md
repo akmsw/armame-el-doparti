@@ -31,6 +31,7 @@
 - [Mejoras](https://github.com/akmsw/armame-el-doparti#-mejoras)
 - [Solución a problemas frecuentes](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-soluci%C3%B3n-de-problemas-comunes)
   - [En Linux](https://github.com/akmsw/armame-el-doparti#-en-Linux)
+- [Próximamente](https://github.com/akmsw/armame-el-doparti#-pr%C3%B3ximamente)
 - [Reportes y sugerencias](https://github.com/akmsw/armame-el-doparti#%EF%B8%8F-reportes-y-sugerencias)
 - [Capturas de pantalla](https://github.com/akmsw/armame-el-doparti#-capturas-de-pantalla)
 
