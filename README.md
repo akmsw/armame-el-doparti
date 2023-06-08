@@ -1,4 +1,4 @@
-# ⚽ Armame el doparti v3.0 [![releaseDateBadge](https://img.shields.io/badge/status-prealpha-yellow)]()
+# ⚽ Armame el doparti [![releaseDateBadge](https://img.shields.io/badge/v3.0%20status-prealpha-yellow)]()
 
 ![portada](./src/main/res/img/readme/cover.png)
 
