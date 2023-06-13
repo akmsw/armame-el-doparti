@@ -21,6 +21,7 @@ public interface PlayersMixer {
    * Distributes the players without considering anchorages.
    *
    * @param teams List that contains the two teams.
+   *
    * @return The updated teams with the players distributed
    *         without considering anchorages.
    */
@@ -31,6 +32,7 @@ public interface PlayersMixer {
    * Distributes the players considering anchorages.
    *
    * @param teams List that contains the two teams.
+   *
    * @return The updated teams with the players distributed
    *         considering anchorages.
    */

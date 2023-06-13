@@ -18,13 +18,14 @@ import lombok.Setter;
  *
  * @since 10/07/2022
  */
+@Getter
 public class Team {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private @Getter @Setter int teamNumber;
+  private @Setter int teamNumber;
 
-  private @Getter Map<Position, List<Player>> teamPlayers;
+  private Map<Position, List<Player>> teamPlayers;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

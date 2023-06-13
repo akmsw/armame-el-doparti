@@ -112,6 +112,7 @@ public class RandomMixer implements PlayersMixer {
    * per position or the players per team amounts are not exceeded.
    *
    * @param teams List that contains the two teams.
+   *
    * @return The updated teams with the players distributed randomly considering anchorages.
    */
   @Override
@@ -227,9 +228,9 @@ public class RandomMixer implements PlayersMixer {
    * @param team Team to check if the anchored players can be added.
    * @param anchoredPlayers Anchored players to check.
    *
-   *  @return If the amount of anchored players to be added to a
-   *          team would exceed the maximum allowed amount of players
-   *          per team in any position set.
+   * @return If the amount of anchored players to be added to a
+   *         team would exceed the maximum allowed amount of players
+   *         per team in any position set.
    */
   private boolean anchorageOverflowsAnyPositionSet(@NonNull Team team,
                                                    @NonNull List<Player> anchoredPlayers) {

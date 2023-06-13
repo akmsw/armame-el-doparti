@@ -95,8 +95,8 @@ class MainMenuTest {
                                                      .getView()).getComboBox()
                                                                 .getSelectedIndex());
     assertEquals("", ((NamesInputView) CommonFunctions.getController(ProgramView.NAMES_INPUT)
-                                                     .getView()).getTextArea()
-                                                                .getText());
+                                                      .getView()).getTextArea()
+                                                                 .getText());
     assertFalse(((NamesInputView) CommonFunctions.getController(ProgramView.NAMES_INPUT)
                                                  .getView()).getAnchoragesCheckBox()
                                                             .isSelected());

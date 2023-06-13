@@ -56,6 +56,7 @@ public class BySkillsMixer implements PlayersMixer {
    * The team with more skill points is assigned the set of players with the lowest skill points.
    *
    * @param teams List that contains the two teams.
+   *
    * @return The updated teams with the players distributed by their skill points, without
    *         considering anchorages.
    */
@@ -103,6 +104,7 @@ public class BySkillsMixer implements PlayersMixer {
    * per team amounts are not exceeded.
    *
    * @param teams List that contains the two teams.
+   *
    * @return The updated teams with the players distributed by their skill points,
    *         without considering anchorages.
    */
