@@ -76,7 +76,7 @@ public class AnchoragesController extends Controller {
    * distribution.
    *
    * @param parentComponent Graphical component where the dialogs associated with the event should
-  *                         be displayed.
+   *                        be displayed.
    */
   public void finishButtonEvent(Component parentComponent) {
     if (!validAnchoragesCombination()) {

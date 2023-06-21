@@ -130,6 +130,6 @@ public final class Constants {
    * Empty, private constructor. Not needed.
    */
   private Constants() {
-    // Body not needed.
+    // Body not needed
   }
 }

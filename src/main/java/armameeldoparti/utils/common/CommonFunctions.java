@@ -35,7 +35,7 @@ public final class CommonFunctions {
    * Empty, private constructor. Not needed.
    */
   private CommonFunctions() {
-    // Not needed.
+    // Not needed
   }
 
   // ---------------------------------------- Public methods ------------------------------------
