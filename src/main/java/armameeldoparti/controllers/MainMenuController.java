@@ -47,8 +47,7 @@ public class MainMenuController extends Controller {
   /**
    * 'Help' button event handler.
    *
-   * <p>Makes the controlled view invisible
-   * and shows the help view.
+   * <p>Makes the controlled view invisible and shows the help view.
    */
   public void helpButtonEvent() {
     hideView();
@@ -62,8 +61,7 @@ public class MainMenuController extends Controller {
   /**
    * 'Start' button event handler.
    *
-   * <p>Makes the controlled view invisible
-   * and shows the names input view.
+   * <p>Makes the controlled view invisible and shows the names input view.
    */
   public void startButtonEvent() {
     hideView();

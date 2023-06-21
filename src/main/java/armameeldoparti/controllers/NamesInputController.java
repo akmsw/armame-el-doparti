@@ -53,8 +53,7 @@ public class NamesInputController extends Controller {
   /**
    * Makes the controlled view visible.
    *
-   * <p>Updates the view state according to the combobox
-   * initial state, and makes it visible.
+   * <p>Updates the view state according to the combobox initial state, and makes it visible.
    */
   @Override
   public void showView() {
@@ -69,8 +68,7 @@ public class NamesInputController extends Controller {
   }
 
   /**
-   * Resets the controlled view to its default values and
-   * makes it invisible.
+   * Resets the controlled view to its default values and makes it invisible.
    */
   @Override
   public void resetView() {
@@ -93,9 +91,8 @@ public class NamesInputController extends Controller {
   /**
    * 'Back' button event handler.
    *
-   * <p>Resets the controlled view to its default values,
-   * turns the anchorages flags to false, makes the
-   * controlled view invisible and shows the main menu view.
+   * <p>Resets the controlled view to its default values, turns the anchorages flags to false, makes
+   * the controlled view invisible and shows the main menu view.
    */
   public void backButtonEvent() {
     resetView();
@@ -109,12 +106,11 @@ public class NamesInputController extends Controller {
   /**
    * 'Mix' button event handler.
    *
-   * <p>Asks the user for the players distribution method, makes
-   * the controlled view invisible and shows the corresponding
-   * following view.
+   * <p>Asks the user for the players distribution method, makes the controlled view invisible and
+   * shows the corresponding following view.
    *
-   * @param parentComponent Graphical component where the dialogs associated
-   *                        with the event should be displayed.
+   * @param parentComponent Graphical component where the dialogs associated with the event should
+   *                        be displayed.
    */
   public void mixButtonEvent(Component parentComponent) {
     int distribution = JOptionPane.showOptionDialog(
@@ -158,13 +154,13 @@ public class NamesInputController extends Controller {
   /**
    * Text fields input event handler.
    *
-   * <p>Validates the user input with a regular expression that checks if the string
-   * contains only latin characters from A to Z including Ñ, uppercase or lowercase,
-   * with or without accent mark, with or without spaces.
-   * If the input is not valid or already exists, the program asks for a new input.
+   * <p>Validates the user input with a regular expression that checks if the string contains only
+   * latin characters from A to Z including Ñ, uppercase or lowercase, with or without accent mark,
+   * with or without spaces. If the input is not valid or already exists, the program asks for a new
+   * input.
    *
-   * <p>If the input is valid, it will be applied as a player name in the players set
-   * corresponding to the combobox selected option.
+   * <p>If the input is valid, it will be applied as a player name in the players set corresponding
+   * to the combobox selected option.
    *
    * @param playerIndex The index of the player which name will be the text filed input.
    * @param playersSet  The set of players corresponding to the selected combobox option.
@@ -216,8 +212,8 @@ public class NamesInputController extends Controller {
   /**
    * Updates the text displayed in the read-only text area.
    *
-   * <p>The players names are shown in the order they are positioned in their respective list.
-   * The order is the same of the positions enum.
+   * <p>The players names are shown in the order they are positioned in their respective list. The
+   * order is the same of the positions enum.
    */
   private void updateTextArea() {
     var wrapperCounter = new Object() {
@@ -257,7 +253,7 @@ public class NamesInputController extends Controller {
   private void updateTextFields(@NonNull String selectedOption) {
     JPanel leftPanel = ((NamesInputView) getView()).getLeftPanel();
 
-    // Removes the text fields from the view's left panel.
+    // Removes the text fields from the view's left panel
     ((NamesInputView) getView()).getTextFieldsMap()
                                 .values()
                                 .stream()
@@ -322,14 +318,12 @@ public class NamesInputController extends Controller {
   }
 
   /**
-   * Checks if the given name has at most MAX_NAME_LEN characters,
-   * is not empty or blank and if there isn't already a player
-   * with that name.
+   * Checks if the given name has at most MAX_NAME_LEN characters, is not empty or blank and if
+   * there isn't already a player with that name.
    *
    * @param name The name to validate.
    *
-   * @return If the given name is valid according to
-   *         the specified conditions.
+   * @return If the given name is valid according to the specified conditions.
    */
   private boolean validName(@NonNull String name) {
     return name.length() <= Constants.MAX_NAME_LEN

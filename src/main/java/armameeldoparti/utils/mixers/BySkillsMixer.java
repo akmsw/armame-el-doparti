@@ -41,19 +41,18 @@ public class BySkillsMixer implements PlayersMixer {
    *
    * <p>Positions are traversed in reverse order to achieve the fairer distribution.
    *
-   * <p>The players of each position are ordered based on their score, from highest to lowest.
-   * The teams are then ordered based on the sum of their players scores so far, from lowest
-   * to highest.
+   * <p>The players of each position are ordered based on their score, from highest to lowest. The
+   * teams are then ordered based on the sum of their players scores so far, from lowest to highest.
    *
-   * <p>If the number of players to distribute is 2, the team with less skill points is
-   * assigned the player with the highest skill points, and the team with more skill points
-   * is assigned the lowest skill points player.
+   * <p>If the number of players to distribute is 2, the team with less skill points is assigned the
+   * player with the highest skill points, and the team with more skill points is assigned the
+   * lowest skill points player.
    *
-   * <p>If the number of players to distribute is 4, two subgroups are made with the players
-   * at the list ends, from the outside to the inside.
-   * These subsets are then ordered based on their skill points, from highest to lowest.
-   * The team with less skill points is assigned the set of players with more skill points.
-   * The team with more skill points is assigned the set of players with the lowest skill points.
+   * <p>If the number of players to distribute is 4, two subgroups are made with the players at the
+   * list ends, from the outside to the inside. These subsets are then ordered based on their skill
+   * points, from highest to lowest. The team with less skill points is assigned the set of players
+   * with more skill points. The team with more skill points is assigned the set of players with the
+   * lowest skill points.
    *
    * @param teams List that contains the two teams.
    *

@@ -58,8 +58,8 @@ public final class Main {
   // ---------------------------------------- Main entry point ----------------------------------
 
   /**
-   * Starts the program by initializing the fields needed along with
-   * the program's graphical properties, and making the main menu view visible.
+   * Starts the program by initializing the fields needed along with the program's graphical
+   * properties, and making the main menu view visible.
    *
    * @param args Program arguments (not used yet).
    */
@@ -98,19 +98,18 @@ public final class Main {
   /**
    * Gets the number of players for each position per team using regular expressions.
    *
-   * <p>{@code [CLMFG].+>.+}: Retrieves the lines that start with C, L, M, F, or W,
-   * followed by at least one '>' character (these are the lines that matters in the
-   * .pda file).
+   * <p>{@code [CLMFG].+>.+}: Retrieves the lines that start with C, L, M, F, or W, followed by at
+   * least one '>' character (these are the lines that matters in the .pda file).
    *
    * <p>{@code (?!(?<=X)\\d).}: Gets the part of the line that is not a number that we are
    * interested in (the number would take the place of the X).
    *
-   * <p>If the .pda file is modified in terms of the order of the important lines,
-   * it must be taken into account that Position.values()[index] trusts that what is found
-   * corresponds to the order in which the values in the Position enum are declared.
-   * Idem, if the order of the Position enum values are changed, it should be noted that
-   * Position.values()[index] trusts the order in which the data will be retrieved from the
-   * .pda file and, therefore, you should review the order of the important lines in the file.
+   * <p>If the .pda file is modified in terms of the order of the important lines, it must be taken
+   * into account that Position.values()[index] trusts that what is found corresponds to the order
+   * in which the values in the Position enum are declared. Idem, if the order of the Position enum
+   * values are changed, it should be noted that Position.values()[index] trusts the order in which
+   * the data will be retrieved from the .pda file and, therefore, you should review the order of
+   * the important lines in the file.
    */
   private static void setPlayersDistribution() {
     try (BufferedReader buff = new BufferedReader(

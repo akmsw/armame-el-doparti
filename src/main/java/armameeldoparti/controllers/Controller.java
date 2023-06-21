@@ -10,8 +10,8 @@ import lombok.NonNull;
 import lombok.Setter;
 
 /**
- * Abstract class that specifies the basic methods for
- * interaction between controllers and their assigned views.
+ * Abstract class that specifies the basic methods for interaction between controllers and their
+ * assigned views.
  *
  * @author Bonino, Francisco Ignacio.
  *

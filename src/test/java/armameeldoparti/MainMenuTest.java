@@ -74,9 +74,9 @@ class MainMenuTest {
   }
 
   /**
-   * The names input view should start visible, with the first combo box options selected,
-   * the text area empty, the anchorages checkbox not selected, the mix button disabled,
-   * and the text fields empty.
+   * The names input view should start visible, with the first combo box options selected, the text
+   * area empty, the anchorages checkbox not selected, the mix button disabled, and the text fields
+   * empty.
    *
    * <p>Also tests the correct navigation between the main menu and the names input view.
    */

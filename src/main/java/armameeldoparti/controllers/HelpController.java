@@ -78,8 +78,8 @@ public class HelpController extends Controller {
   /**
    * 'Back' button event handler.
    *
-   * <p>Resets the page to the beginning, makes the controlled view
-   * invisible and shows the main menu view.
+   * <p>Resets the page to the beginning, makes the controlled view invisible and shows the main
+   * menu view.
    */
   public void backButtonEvent() {
     hideView();
@@ -92,8 +92,8 @@ public class HelpController extends Controller {
   /**
    * 'Next page' button event handler.
    *
-   * <p>Increments the page number, updating the state of the buttons,
-   * the displayed page in the text area and the reading progress label.
+   * <p>Increments the page number, updating the state of the buttons, the displayed page in the
+   * text area and the reading progress label.
    */
   public void nextPageButtonEvent() {
     if (++currentPageNumber < TOTAL_PAGES - 1) {
@@ -110,8 +110,8 @@ public class HelpController extends Controller {
   /**
    * 'Previous page' button event handler.
    *
-   * <p>Decrements the page number, updating the state of the buttons,
-   * the displayed page in the text area and the reading progress label.
+   * <p>Decrements the page number, updating the state of the buttons, the displayed page in the
+   * text area and the reading progress label.
    */
   public void previousPageButtonEvent() {
     if (--currentPageNumber > 0) {

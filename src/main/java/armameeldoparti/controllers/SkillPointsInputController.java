@@ -32,8 +32,7 @@ public class SkillPointsInputController extends Controller {
   // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Resets the controlled view to its default values
-   * and makes it invisible.
+   * Resets the controlled view to its default values and makes it invisible.
    */
   @Override
   public void resetView() {
@@ -44,8 +43,8 @@ public class SkillPointsInputController extends Controller {
   /**
    * 'Finish' button event handler.
    *
-   * <p>Sets the entered skill points for each player, makes
-   * the controlled view invisible and shows the results view.
+   * <p>Sets the entered skill points for each player, makes the controlled view invisible and shows
+   * the results view.
    */
   public void finishButtonEvent() {
     hideView();
@@ -62,8 +61,8 @@ public class SkillPointsInputController extends Controller {
   /**
    * 'Reset skill points' button event handler.
    *
-   * <p>Sets 0 skill points to every player and resets every spinner
-   * value to the minimum skill point.
+   * <p>Sets 0 skill points to every player and resets every spinner value to the minimum skill
+   * point.
    */
   public void resetSkillsButtonEvent() {
     resetSkills();
@@ -72,8 +71,7 @@ public class SkillPointsInputController extends Controller {
   /**
    * 'Back' button event handler.
    *
-   * <p>Resets the controlled view to its default values
-   * and shows the corresponding next view.
+   * <p>Resets the controlled view to its default values and shows the corresponding next view.
    */
   public void backButtonEvent() {
     resetView();
@@ -95,8 +93,7 @@ public class SkillPointsInputController extends Controller {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Sets 0 skill points to every player and resets every spinner
-   * value to the minimum skill point.
+   * Sets 0 skill points to every player and resets every spinner value to the minimum skill point.
    */
   private void resetSkills() {
     ((SkillPointsInputView) getView()).getSpinnersMap()

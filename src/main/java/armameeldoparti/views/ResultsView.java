@@ -26,8 +26,8 @@ import lombok.Setter;
 public class ResultsView extends View {
 
   /**
-   * Fixed table cells width (in pixels).
-   * This value depends on the program's font and the maximum player name length.
+   * Fixed table cells width (in pixels). This value depends on the program's font and the maximum
+   * player name length.
    */
   private static final int FIXED_CELL_WIDTH = 250;
 
@@ -117,8 +117,7 @@ public class ResultsView extends View {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Updates and returns the frame title based on the
-   * chosen distribution and the anchorages option.
+   * Updates and returns the frame title based on the chosen distribution and the anchorages option.
    *
    * @return The updated frame title.
    */

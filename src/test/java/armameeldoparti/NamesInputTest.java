@@ -49,8 +49,8 @@ class NamesInputTest {
   // ---------------------------------------- Tests bodies --------------------------------------
 
   /**
-   * Tests whether empty names and names with numbers and/or symbols are correctly
-   * detected and if they all trigger their corresponding exception.
+   * Tests whether empty names and names with numbers and/or symbols are correctly detected and if
+   * they all trigger their corresponding exception.
    *
    * @param invalidString The string that shouldn't pass the name check.
    */
@@ -70,8 +70,8 @@ class NamesInputTest {
   }
 
   /**
-   * Tests whether empty names, blank names and long names (more than 10 characters),
-   * are correctly detected and if they all trigger their corresponding exception.
+   * Tests whether empty names, blank names and long names (more than 10 characters), are correctly
+   * detected and if they all trigger their corresponding exception.
    *
    * @param invalidName The string that shouldn't pass the name check.
    */
@@ -91,8 +91,8 @@ class NamesInputTest {
   }
 
   /**
-   * Tests whether repeated names are correctly detected and if they all trigger
-   * their corresponding exception.
+   * Tests whether repeated names are correctly detected and if they all trigger their corresponding
+   * exception.
    */
   @DisplayName("Tests if repeated names throw the expected exception")
   @Test
@@ -129,10 +129,10 @@ class NamesInputTest {
    * @param playerPosition The position of the player to test.
    * @param playerName     The name to apply to the player.
    *
-   * @throws InvalidNameException     This exception is never thrown since
-   *                                  every test string is a valid name.
-   * @throws IllegalArgumentException This exception is never thrown since
-   *                                  every test string is a valid name.
+   * @throws InvalidNameException     This exception is never thrown since every test string is a
+   *                                  valid name.
+   * @throws IllegalArgumentException This exception is never thrown since every test string is a
+   *                                  valid name.
    */
   @DisplayName("Tests whether valid names are correctly stored as players names")
   @ParameterizedTest

@@ -58,9 +58,9 @@ public final class CommonFunctions {
   /**
    * Builds an error window with a custom message.
    *
-   * @param errorMessage Custom error message to show.
-   * @param parentComponent Graphical component where the dialogs associated
- *                          with the event should be displayed.
+   * @param errorMessage    Custom error message to show.
+   * @param parentComponent Graphical component where the dialogs associated with the event should
+   *                        be displayed.
    */
   public static void showErrorMessage(@NonNull String errorMessage, Component parentComponent) {
     JOptionPane.showMessageDialog(
@@ -99,11 +99,9 @@ public final class CommonFunctions {
   }
 
   /**
-   * Gets a list containing the anchored players
-   * grouped by their anchorage number.
+   * Gets a list containing the anchored players grouped by their anchorage number.
    *
-   * @return A list containing the anchored players
-   *         grouped by their anchorage number.
+   * @return A list containing the anchored players grouped by their anchorage number.
   */
   @NonNull
   public static List<List<Player>> getAnchoredPlayers() {
@@ -142,7 +140,7 @@ public final class CommonFunctions {
    * @param view The view whose controller is needed.
    *
    * @return The requested view's controller.
-  */
+   */
   @NonNull
   public static Controller getController(@NonNull ProgramView view) {
     return CommonFields.getControllersMap()

@@ -143,8 +143,7 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Adds the read-only text area where the entered player names will be displayed
-   * in real time.
+   * Adds the read-only text area where the entered player names will be displayed in real time.
    */
   private void addTextArea() {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);

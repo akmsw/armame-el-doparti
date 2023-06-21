@@ -22,8 +22,7 @@ public interface PlayersMixer {
    *
    * @param teams List that contains the two teams.
    *
-   * @return The updated teams with the players distributed
-   *         without considering anchorages.
+   * @return The updated teams with the players distributed without considering anchorages.
    */
   @NonNull
   List<Team> withoutAnchorages(@NonNull List<Team> teams);
@@ -33,8 +32,7 @@ public interface PlayersMixer {
    *
    * @param teams List that contains the two teams.
    *
-   * @return The updated teams with the players distributed
-   *         considering anchorages.
+   * @return The updated teams with the players distributed considering anchorages.
    */
   @NonNull
   List<Team> withAnchorages(@NonNull List<Team> teams);

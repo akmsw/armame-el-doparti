@@ -84,8 +84,8 @@ public class ResultsController extends Controller {
   }
 
   /**
-   * Creates the teams and the results table, applies the needed table format, fills
-   * the non-variable table cells and displays the distribution results.
+   * Creates the teams and the results table, applies the needed table format, fills the
+   * non-variable table cells and displays the distribution results.
    */
   public void setUp() {
     Team team1 = new Team(1);
@@ -114,9 +114,8 @@ public class ResultsController extends Controller {
   /**
    * 'Back' button event handler.
    *
-   * <p>Resets the teams, resets the controlled view to its default
-   * values and makes it invisible, and shows the corresponding previous
-   * view.
+   * <p>Resets the teams, resets the controlled view to its default values and makes it invisible,
+   * and shows the corresponding previous view.
    */
   public void backButtonEvent() {
     resetTeams();
@@ -138,8 +137,8 @@ public class ResultsController extends Controller {
   /**
    * 'Remix' button event handler.
    *
-   * <p>Resets the teams, redistributes the players with the
-   * specified method and updates the results table.
+   * <p>Resets the teams, redistributes the players with the specified method and updates the
+   * results table.
    */
   public void remixButtonEvent() {
     resetTeams();
@@ -152,8 +151,8 @@ public class ResultsController extends Controller {
   /**
    * Fills the table with the distribution results.
    *
-   * <p>The table cells are filled trusting the positions order in the
-   * first column (same order as the positions enum).
+   * <p>The table cells are filled trusting the positions order in the first column (same order as
+   * the positions enum).
    */
   public void updateTable() {
     var wrapper = new Object() {
@@ -217,19 +216,17 @@ public class ResultsController extends Controller {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Sets the table cells format, including text alignment and background and
-   * foreground colors.
+   * Sets the table cells format, including text alignment and background and foreground colors.
    *
-   * <p>Row 0 & column 0 have dark green background and white foreground.
-   * The remaining cells will have black foreground.
+   * <p>Row 0 & column 0 have dark green background and white foreground. The remaining cells will
+   * have black foreground.
    *
-   * <p>The background color will be yellow-ish if the cell shows any skill points
-   * related information. If the cell contains an anchored player name, its background
-   * will be the corresponding from the ANCHORAGES_COLORS array. If not, its background
-   * will be white.
+   * <p>The background color will be yellow-ish if the cell shows any skill points related
+   * information. If the cell contains an anchored player name, its background will be the
+   * corresponding from the ANCHORAGES_COLORS array. If not, its background will be white.
    *
-   * <p>The cell text will be centered if it shows any skill points related information,
-   * or a team name. Otherwise, it will be left-aligned.
+   * <p>The cell text will be centered if it shows any skill points related information, or a team
+   * name. Otherwise, it will be left-aligned.
    */
   private void setTableFormat() {
     ((ResultsView) getView()).getTable().setDefaultRenderer(

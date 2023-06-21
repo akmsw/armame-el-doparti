@@ -47,8 +47,8 @@ class HelpViewTest {
    *
    * <p>Instantiates the help view and its controller.
    *
-   * @throws URISyntaxException If the specified URI for the help pages
-   *                            directory is not correctly formatted.
+   * @throws URISyntaxException If the specified URI for the help pages directory is not correctly
+   *                            formatted.
    */
   @BeforeAll
   void setUp() throws URISyntaxException {
@@ -80,8 +80,7 @@ class HelpViewTest {
   // ---------------------------------------- Tests bodies --------------------------------------
 
   /**
-   * Tests whether the page number shown on the label is correct
-   * after navigating between pages.
+   * Tests whether the page number shown on the label is correct after navigating between pages.
    *
    * @param timesNext     How many times the next page button is pressed.
    * @param timesPrevious How many times the previous page button is pressed.
@@ -131,11 +130,9 @@ class HelpViewTest {
   // ---------------------------------------- Arguments providers -------------------------------
 
   /**
-   * Provides how many times the test should navigate
-   * back and forth in the help view pages.
+   * Provides how many times the test should navigate back and forth in the help view pages.
    *
-   * @return How many times the test should navigate
-   *         back and forth in the help view pages.
+   * @return How many times the test should navigate back and forth in the help view pages.
    */
   static Stream<Arguments> navigationProvider() {
     return Stream.of(
