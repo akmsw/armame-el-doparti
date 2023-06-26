@@ -1,10 +1,15 @@
 package armameeldoparti.controllers;
 
+import armameeldoparti.models.Player;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.SkillPointsInputView;
+import java.util.Map;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import lombok.NonNull;
 
 /**
@@ -85,7 +90,16 @@ public class SkillPointsInputController extends Controller {
    * Updates the players name labels.
    */
   public void updateNameLabels() {
-    ((SkillPointsInputView) getView()).updateNameLabels();
+    Map<JSpinner, JLabel> labelsMap = ((SkillPointsInputView) getView()).getLabelsMap();
+    Map<Player, JSpinner> spinnersMap = ((SkillPointsInputView) getView()).getSpinnersMap();
+
+    for (Position position : Position.values()) {
+      for (Player player : CommonFields.getPlayersSets()
+                                       .get(position)) {
+        labelsMap.get(spinnersMap.get(player))
+                 .setText(player.getName());
+      }
+    }
 
     getView().pack();
   }

@@ -89,26 +89,6 @@ public class AnchoragesView extends View {
     initializeInterface();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
-
-  /**
-   * Updates the checkboxes text with the players names.
-   */
-  public void updateCheckBoxesText() {
-    for (Position position : Position.values()) {
-      for (int i = 0; i < CommonFields.getPlayersSets()
-                                      .get(position)
-                                      .size(); i++) {
-        checkBoxesMap.get(position)
-                     .get(i)
-                     .setText(CommonFields.getPlayersSets()
-                                          .get(position)
-                                          .get(i)
-                                          .getName());
-      }
-    }
-  }
-
   // ---------------------------------------- Protected methods ---------------------------------
 
   /**

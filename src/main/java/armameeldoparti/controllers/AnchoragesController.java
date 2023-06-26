@@ -1,6 +1,7 @@
 package armameeldoparti.controllers;
 
 import armameeldoparti.models.Player;
+import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
@@ -8,6 +9,7 @@ import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.AnchoragesView;
 import java.awt.Component;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -65,7 +67,21 @@ public class AnchoragesController extends Controller {
    * Updates the checkboxes text with the players names.
    */
   public void updateCheckBoxesText() {
-    ((AnchoragesView) getView()).updateCheckBoxesText();
+    Map<Position, List<JCheckBox>> checkBoxesMap = ((AnchoragesView) getView()).getCheckBoxesMap();
+
+    for (Position position : Position.values()) {
+      for (int i = 0; i < CommonFields.getPlayersSets()
+                                      .get(position)
+                                      .size(); i++) {
+        checkBoxesMap.get(position)
+                     .get(i)
+                     .setText(CommonFields.getPlayersSets()
+                                          .get(position)
+                                          .get(i)
+                                          .getName());
+      }
+    }
+
     getView().pack();
   }
 

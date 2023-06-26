@@ -5,7 +5,6 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -24,12 +23,6 @@ import lombok.Setter;
  * @since 06/03/2021
  */
 public class ResultsView extends View {
-
-  /**
-   * Fixed table cells width (in pixels). This value depends on the program's font and the maximum
-   * player name length.
-   */
-  private static final int FIXED_CELL_WIDTH = 250;
 
   // ---------------------------------------- Private fields ------------------------------------
 
@@ -60,30 +53,6 @@ public class ResultsView extends View {
     addTable();
     addButtons();
     add(getMasterPanel());
-  }
-
-  /**
-   * Sets the ideal table cells size.
-   */
-  public void setTableCellsSize() {
-    for (int column = 0; column < table.getColumnCount(); column++) {
-      table.getColumnModel()
-           .getColumn(column)
-           .setPreferredWidth(FIXED_CELL_WIDTH);
-    }
-
-    for (int i = 0; i < table.getRowCount(); i++) {
-      int rowHeight = table.getRowHeight();
-
-      for (int j = 0; j < table.getColumnCount(); j++) {
-        Component component = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
-
-        rowHeight = Math.max(rowHeight, component.getPreferredSize()
-                                                 .height);
-      }
-
-      table.setRowHeight(i, rowHeight);
-    }
   }
 
   // ---------------------------------------- Protected methods ---------------------------------

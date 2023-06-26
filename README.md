@@ -5,7 +5,7 @@
 [![buildBadge](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
 [![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
 
-[![checkStyleBadge](https://img.shields.io/badge/checkstyle%2010.12.0-passing-brightgreen)](https://checkstyle.sourceforge.io/)
+[![checkStyleBadge](https://img.shields.io/badge/checkstyle%2010.12.1-passing-brightgreen)](https://checkstyle.sourceforge.io/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-3-yellow?logo=sonarlint)](https://www.sonarlint.org/)
 [![jUnit5Badge](https://img.shields.io/badge/junit%205.9.2-passing-brightgreen?logo=junit5)](https://junit.org/junit5/)
 
@@ -116,11 +116,7 @@ No se pueden anclar a un mismo equipo todos los jugadores de un mismo tipo (por 
   - Seleccionalo como opción predeterminada para la ejecución de archivos .jar
 
 ## 🔜 Próximamente
-Si querés estar al tanto de qué cambios están planeados para las próximas versiones, te dejo acá los links a los proyectos:
-- [v3.1](https://github.com/users/akmsw/projects/10/views/1)
-- [v4.0](https://github.com/users/akmsw/projects/7/views/1)
-- [v4.1](https://github.com/users/akmsw/projects/8/views/1)
-- [v5.0](https://github.com/users/akmsw/projects/9/views/1)
+Si querés estar al tanto de qué cambios están planeados para las próximas versiones, [acá](https://github.com/akmsw?query=is%3Aopen+sort%3Atitle-asc&tab=projects) vas a poder ver los detalles y metas planificadas.
 
 ## ⚠️ Reportes y sugerencias
 Si el programa presenta algún error que debería ser reportado para arreglarlo, si se te ocurrió alguna nueva funcionalidad para agregar al programa, o si opinás que algo podría ser modificado, la sección de [issues](https://github.com/akmsw/armame-el-doparti/issues) está abierta para que hagas estos reportes y/o sugerencias. Es necesario tener una cuenta en GitHub para abrir un nuevo reporte en el repositorio. Para poder trabajar en eso lo más rápidamente posible, te proveo unas plantillas para cada caso donde te pido toda la información que necesito.

@@ -33,6 +33,11 @@ public class ResultsController extends Controller {
 
   // ---------------------------------------- Private constants ---------------------------------
 
+  /**
+   * Fixed table cells width (in pixels). This value depends on the program's font and the maximum
+   * player name length.
+   */
+  private static final int FIXED_CELL_WIDTH = 250;
   private static final int TABLE_COLUMNS = 3;
 
   /**
@@ -105,9 +110,7 @@ public class ResultsController extends Controller {
     setTableFormat();
     fillTableFields();
     updateTable();
-
-    ((ResultsView) getView()).setTableCellsSize();
-
+    setTableCellsSize();
     getView().pack();
   }
 
@@ -214,6 +217,32 @@ public class ResultsController extends Controller {
   }
 
   // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Sets the ideal table cells size.
+   */
+  public void setTableCellsSize() {
+    JTable table = ((ResultsView) getView()).getTable();
+
+    for (int column = 0; column < table.getColumnCount(); column++) {
+      table.getColumnModel()
+           .getColumn(column)
+           .setPreferredWidth(FIXED_CELL_WIDTH);
+    }
+
+    for (int i = 0; i < table.getRowCount(); i++) {
+      int rowHeight = table.getRowHeight();
+
+      for (int j = 0; j < table.getColumnCount(); j++) {
+        Component component = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
+
+        rowHeight = Math.max(rowHeight, component.getPreferredSize()
+                                                 .height);
+      }
+
+      table.setRowHeight(i, rowHeight);
+    }
+  }
 
   /**
    * Sets the table cells format, including text alignment and background and foreground colors.

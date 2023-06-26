@@ -30,11 +30,12 @@ import lombok.Getter;
  *
  * @since 06/03/2021
  */
+@Getter
 public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private final transient @Getter Map<Player, JSpinner> spinnersMap;
+  private final transient Map<Player, JSpinner> spinnersMap;
   private final transient Map<JSpinner, JLabel> labelsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -67,19 +68,6 @@ public class SkillPointsInputView extends View {
     addButtons();
     add(getMasterPanel());
     pack();
-  }
-
-  /**
-   * Updates the labels with the players names.
-   */
-  public void updateNameLabels() {
-    for (Position position : Position.values()) {
-      for (Player player : CommonFields.getPlayersSets()
-                                       .get(position)) {
-        labelsMap.get(spinnersMap.get(player))
-                 .setText(player.getName());
-      }
-    }
   }
 
   // ---------------------------------------- Protected methods ---------------------------------
