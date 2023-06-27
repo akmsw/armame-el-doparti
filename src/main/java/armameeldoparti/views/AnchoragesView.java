@@ -33,33 +33,34 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 3.0.0
+ * @version 0.0.1
  *
- * @since 15/03/2021
+ * @since v3.0
  */
+@Getter
 public class AnchoragesView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private @Getter JButton finishButton;
-  private @Getter JButton newAnchorageButton;
-  private @Getter JButton deleteAnchorageButton;
-  private @Getter JButton deleteLastAnchorageButton;
-  private @Getter JButton clearAnchoragesButton;
+  private JButton finishButton;
+  private JButton newAnchorageButton;
+  private JButton deleteAnchorageButton;
+  private JButton deleteLastAnchorageButton;
+  private JButton clearAnchoragesButton;
 
-  private final JPanel leftPanel;
-  private final JPanel rightPanel;
+  private JPanel leftPanel;
+  private JPanel rightPanel;
 
-  private final JScrollPane scrollPane;
+  private JScrollPane scrollPane;
 
-  private @Getter JTextArea textArea;
+  private JTextArea textArea;
 
-  private @Getter List<JButton> anchorageButtons;
+  private List<JButton> anchorageButtons;
 
   /**
    * Map that associates each checkboxes-list with its corresponding position.
    */
-  private @Getter Map<Position, List<JCheckBox>> checkBoxesMap;
+  private Map<Position, List<JCheckBox>> checkBoxesMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

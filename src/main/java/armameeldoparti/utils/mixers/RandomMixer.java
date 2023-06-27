@@ -19,7 +19,7 @@ import lombok.NonNull;
  *
  * @version 0.0.1
  *
- * @since 12/07/2022
+ * @since v3.0
  */
 public class RandomMixer implements PlayersMixer {
 
@@ -28,7 +28,7 @@ public class RandomMixer implements PlayersMixer {
   private int randomTeam1;
   private int randomTeam2;
 
-  private final Random randomGenerator;
+  private Random randomGenerator;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

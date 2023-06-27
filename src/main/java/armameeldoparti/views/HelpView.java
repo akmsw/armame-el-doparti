@@ -23,8 +23,9 @@ import net.miginfocom.layout.CC;
  *
  * @version 0.0.1
  *
- * @since 03/07/2022
+ * @since v3.0
  */
+@Getter
 public class HelpView extends View {
 
   // ---------------------------------------- Private constants ---------------------------------
@@ -34,15 +35,15 @@ public class HelpView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private @Getter JButton previousPageButton;
-  private @Getter JButton nextPageButton;
-  private @Getter JButton backButton;
+  private JButton previousPageButton;
+  private JButton nextPageButton;
+  private JButton backButton;
 
-  private @Getter JLabel pagesCounter;
+  private JLabel pagesCounter;
 
-  private @Getter JScrollPane scrollPane;
+  private JScrollPane scrollPane;
 
-  private @Getter JTextArea textArea;
+  private JTextArea textArea;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

@@ -15,7 +15,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @version 0.0.1
  *
- * @since 28/07/2022
+ * @since v3.0
  */
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)

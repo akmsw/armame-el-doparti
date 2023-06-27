@@ -27,7 +27,7 @@ import lombok.NonNull;
  *
  * @version 0.0.1
  *
- * @since 26/07/2022
+ * @since v3.0
  */
 public class ResultsController extends Controller {
 
@@ -54,9 +54,9 @@ public class ResultsController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private final BySkillsMixer bySkillsMixer;
+  private BySkillsMixer bySkillsMixer;
 
-  private final RandomMixer randomMixer;
+  private RandomMixer randomMixer;
 
   private List<Team> teams;
 

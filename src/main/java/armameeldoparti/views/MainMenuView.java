@@ -18,9 +18,9 @@ import net.miginfocom.layout.CC;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 3.0.0
+ * @version 0.0.1
  *
- * @since 27/02/2021
+ * @since v3.0
  */
 public class MainMenuView extends View {
 

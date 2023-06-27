@@ -7,7 +7,7 @@ package armameeldoparti.models;
  *
  * @version 0.0.1
  *
- * @since 10/11/2022
+ * @since v3.0
  */
 public enum Error {
   BROWSER_ERROR,

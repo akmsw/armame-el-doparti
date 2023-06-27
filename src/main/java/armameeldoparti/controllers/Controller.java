@@ -4,7 +4,6 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.views.View;
 import java.awt.Rectangle;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -17,10 +16,10 @@ import lombok.Setter;
  *
  * @version 0.0.1
  *
- * @since 28/07/2022
+ * @since v3.0
  */
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter
 public abstract class Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -43,7 +42,7 @@ public abstract class Controller {
   /**
    * Centers the controlled view on the current active monitor.
    */
-  protected void centerView() {
+  protected final void centerView() {
     Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
                                                 .getDefaultConfiguration()
                                                 .getBounds();
@@ -55,7 +54,7 @@ public abstract class Controller {
   /**
    * Makes the controlled view invisible.
    */
-  protected void hideView() {
+  protected final void hideView() {
     view.setVisible(false);
 
     CommonFunctions.updateActiveMonitorFromView(view);

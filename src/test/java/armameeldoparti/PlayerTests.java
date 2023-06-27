@@ -22,7 +22,7 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
  *
  * @version 0.0.1
  *
- * @since 23/07/2022
+ * @since v3.0
  */
 @TestInstance(Lifecycle.PER_CLASS)
 class PlayerTests implements ArgumentsProvider {

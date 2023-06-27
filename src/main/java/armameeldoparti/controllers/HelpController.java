@@ -24,8 +24,9 @@ import lombok.NonNull;
  *
  * @version 0.0.1
  *
- * @since 26/07/2022
+ * @since v3.0
  */
+@Getter
 public class HelpController extends Controller {
 
   // ---------------------------------------- Private constants ---------------------------------
@@ -47,7 +48,7 @@ public class HelpController extends Controller {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private @Getter int currentPageNumber;
+  private int currentPageNumber;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

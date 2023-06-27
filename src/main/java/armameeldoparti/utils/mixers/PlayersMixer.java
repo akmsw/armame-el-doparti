@@ -11,7 +11,7 @@ import lombok.NonNull;
  *
  * @version 0.0.1
  *
- * @since 13/07/2022
+ * @since v3.0
  */
 public interface PlayersMixer {
 

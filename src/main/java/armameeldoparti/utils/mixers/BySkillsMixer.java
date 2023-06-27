@@ -21,7 +21,7 @@ import lombok.NonNull;
  *
  * @version 0.0.1
  *
- * @since 12/07/2022
+ * @since v3.0
  */
 public class BySkillsMixer implements PlayersMixer {
 

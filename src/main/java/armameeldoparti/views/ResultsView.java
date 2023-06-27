@@ -18,15 +18,17 @@ import lombok.Setter;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 3.0.0
+ * @version 0.0.1
  *
- * @since 06/03/2021
+ * @since v3.0
  */
+@Getter
+@Setter
 public class ResultsView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private @Getter @Setter JTable table;
+  private JTable table;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

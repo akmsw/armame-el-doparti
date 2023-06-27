@@ -23,7 +23,7 @@ import lombok.NonNull;
  *
  * @version 0.0.1
  *
- * @since 26/07/2022
+ * @since v3.0
  */
 public class NamesInputController extends Controller {
 

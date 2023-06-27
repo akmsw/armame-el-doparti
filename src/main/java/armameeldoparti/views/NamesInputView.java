@@ -30,8 +30,9 @@ import net.miginfocom.swing.MigLayout;
  *
  * @version 3.0.0
  *
- * @since 28/02/2021
+ * @since v3.0
  */
+@Getter
 public class NamesInputView extends View {
 
   // ---------------------------------------- Private constants ---------------------------------
@@ -39,7 +40,7 @@ public class NamesInputView extends View {
   private static final int TEXT_AREA_ROWS = 14;
   private static final int TEXT_AREA_COLUMNS = 12;
 
-  private static final @Getter String[] OPTIONS_COMBOBOX = {
+  private static final String[] OPTIONS_COMBOBOX = {
     "Defensores centrales",
     "Defensores laterales",
     "Mediocampistas",
@@ -49,18 +50,18 @@ public class NamesInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private @Getter JButton mixButton;
+  private JButton mixButton;
 
-  private @Getter JCheckBox anchoragesCheckBox;
+  private JCheckBox anchoragesCheckBox;
 
-  private @Getter JComboBox<String> comboBox;
+  private JComboBox<String> comboBox;
 
-  private @Getter JPanel leftPanel;
-  private final JPanel rightPanel;
+  private JPanel leftPanel;
+  private JPanel rightPanel;
 
-  private @Getter JTextArea textArea;
+  private JTextArea textArea;
 
-  private @Getter Map<Position, List<JTextField>> textFieldsMap;
+  private Map<Position, List<JTextField>> textFieldsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

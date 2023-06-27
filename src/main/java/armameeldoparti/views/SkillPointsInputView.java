@@ -26,17 +26,17 @@ import lombok.Getter;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 3.0.0
+ * @version 0.0.1
  *
- * @since 06/03/2021
+ * @since v3.0
  */
 @Getter
 public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private final transient Map<Player, JSpinner> spinnersMap;
-  private final transient Map<JSpinner, JLabel> labelsMap;
+  private transient Map<Player, JSpinner> spinnersMap;
+  private transient Map<JSpinner, JLabel> labelsMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

@@ -20,22 +20,22 @@ import lombok.Setter;
  *
  * @version 0.0.1
  *
- * @since 30/10/2022
+ * @since v3.0
  */
 public final class CommonFields {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private static @Getter @Setter int distribution;
+  @Getter @Setter private static int distribution;
 
-  private static @Getter @Setter boolean anchoragesEnabled;
+  @Getter @Setter private static boolean anchoragesEnabled;
 
-  private static @Getter @Setter GraphicsDevice activeMonitor;
+  @Getter @Setter private static GraphicsDevice activeMonitor;
 
-  private static @Getter Map<Position, Integer> playersAmountMap;
-  private static @Getter Map<Position, List<Player>> playersSets;
-  private static @Getter Map<Position, String> positionsMap;
-  private static @Getter Map<ProgramView, Controller> controllersMap;
+  @Getter private static Map<Position, Integer> playersAmountMap;
+  @Getter private static Map<Position, List<Player>> playersSets;
+  @Getter private static Map<Position, String> positionsMap;
+  @Getter private static Map<ProgramView, Controller> controllersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

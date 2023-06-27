@@ -14,16 +14,17 @@ import lombok.Setter;
  *
  * @author Bonino, Francisco Ignacio.
  *
- * @version 3.0.0
+ * @version 0.0.1
  *
- * @since 10/07/2022
+ * @since v3.0
  */
 @Getter
+@Setter
 public class Team {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private @Setter int teamNumber;
+  private int teamNumber;
 
   private Map<Position, List<Player>> teamPlayers;
 
@@ -33,7 +34,7 @@ public class Team {
    * Builds a basic team with empty position sets.
    */
   public Team(int teamNumber) {
-    teamPlayers = new EnumMap<>(Position.class);
+    setTeamPlayers(new EnumMap<>(Position.class));
 
     for (Position position : Position.values()) {
       teamPlayers.put(position, new ArrayList<>());
