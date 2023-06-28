@@ -173,8 +173,10 @@ public class NamesInputView extends View {
    */
   private void addTextFields() {
     for (Position position : Position.values()) {
-      for (int i = 0; i < CommonFields.getPlayersAmountMap()
-                                      .get(position) * 2; i++) {
+      int totalPlayersInPosition = CommonFields.getPlayersAmountMap()
+                                               .get(position) * 2;
+
+      for (int i = 0; i < totalPlayersInPosition; i++) {
         JTextField tf = new JTextField();
 
         tf.addActionListener(e -> {

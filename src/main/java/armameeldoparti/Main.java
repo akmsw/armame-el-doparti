@@ -85,8 +85,10 @@ public final class Main {
     for (Position position : Position.values()) {
       List<Player> playersSet = new ArrayList<>();
 
-      for (int i = 0; i < CommonFields.getPlayersAmountMap()
-                                      .get(position) * 2; i++) {
+      int totalPlayersInPosition = CommonFields.getPlayersAmountMap()
+                                               .get(position) * 2;
+
+      for (int i = 0; i < totalPlayersInPosition; i++) {
         playersSet.add(new Player("", position));
       }
 
@@ -215,8 +217,8 @@ public final class Main {
    * @param font Font to use.
    */
   private static void setProgramFont(Font font) {
-    final Enumeration<Object> keys = UIManager.getDefaults()
-                                              .keys();
+    Enumeration<Object> keys = UIManager.getDefaults()
+                                        .keys();
 
     while (keys.hasMoreElements()) {
       Object key = keys.nextElement();

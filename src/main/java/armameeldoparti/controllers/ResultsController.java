@@ -178,9 +178,9 @@ public class ResultsController extends Controller {
     });
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
-      for (int i = 0; i < 2; i++) {
+      for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
         ((ResultsView) getView()).getTable()
-                                 .setValueAt(teams.get(i)
+                                 .setValueAt(teams.get(teamIndex)
                                                   .getTeamPlayers()
                                                   .values()
                                                   .stream()
@@ -189,7 +189,7 @@ public class ResultsController extends Controller {
                                                   .reduce(0, Math::addExact),
                                              ((ResultsView) getView()).getTable()
                                                                       .getRowCount() - 1,
-                                             i + 1);
+                                             teamIndex + 1);
       }
     }
   }
@@ -224,23 +224,28 @@ public class ResultsController extends Controller {
   public void setTableCellsSize() {
     JTable table = ((ResultsView) getView()).getTable();
 
-    for (int column = 0; column < table.getColumnCount(); column++) {
+    int columnCount = table.getColumnCount();
+    int rowCount = table.getRowCount();
+
+    for (int columnIndex = 0; columnIndex < columnCount; columnIndex++) {
       table.getColumnModel()
-           .getColumn(column)
+           .getColumn(columnIndex)
            .setPreferredWidth(FIXED_CELL_WIDTH);
     }
 
-    for (int i = 0; i < table.getRowCount(); i++) {
+    for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
       int rowHeight = table.getRowHeight();
 
-      for (int j = 0; j < table.getColumnCount(); j++) {
-        Component component = table.prepareRenderer(table.getCellRenderer(i, j), i, j);
+      for (int columnIndex = 0; columnIndex < columnCount; columnIndex++) {
+        Component component = table.prepareRenderer(table.getCellRenderer(rowIndex, columnIndex),
+                                                    rowIndex,
+                                                    columnIndex);
 
         rowHeight = Math.max(rowHeight, component.getPreferredSize()
                                                  .height);
       }
 
-      table.setRowHeight(i, rowHeight);
+      table.setRowHeight(rowIndex, rowHeight);
     }
   }
 
@@ -340,40 +345,51 @@ public class ResultsController extends Controller {
    * Fills the table cells whose texts do not change.
    */
   private void fillTableFields() {
-    for (int i = 0; i < 2; i++) {
+    for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
       ((ResultsView) getView()).getTable()
-                               .setValueAt("EQUIPO #" + (i + 1), 0, i + 1);
+                               .setValueAt("EQUIPO #" + (teamIndex + 1), 0, teamIndex + 1);
     }
 
-    for (int i = 1; i < ((ResultsView) getView()).getTable()
-                                                 .getRowCount() - 1; i++) {
-      if (i == 1) {
+    int rowCount = ((ResultsView) getView()).getTable()
+                                            .getRowCount() - 1;
+
+    for (int rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+      if (rowIndex == 1) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(CommonFields.getPositionsMap()
-                                                         .get(Position.CENTRAL_DEFENDER), i, 0);
-      } else if (i < 4) {
+                                                         .get(Position.CENTRAL_DEFENDER),
+                                             rowIndex,
+                                             0);
+      } else if (rowIndex < 4) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(CommonFields.getPositionsMap()
-                                                         .get(Position.LATERAL_DEFENDER), i, 0);
-      } else if (i < 6) {
+                                                         .get(Position.LATERAL_DEFENDER),
+                                             rowIndex,
+                                             0);
+      } else if (rowIndex < 6) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(CommonFields.getPositionsMap()
-                                                         .get(Position.MIDFIELDER), i, 0);
-      } else if (i < 7) {
+                                                         .get(Position.MIDFIELDER),
+                                             rowIndex,
+                                             0);
+      } else if (rowIndex < 7) {
         ((ResultsView) getView()).getTable()
                                  .setValueAt(CommonFields.getPositionsMap()
-                                                         .get(Position.FORWARD), i, 0);
+                                                         .get(Position.FORWARD),
+                                             rowIndex,
+                                             0);
       }
     }
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
-      for (int i = 0; i < 2; i++) {
+      for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
         ((ResultsView) getView()).getTable()
-                                 .setValueAt(i == 0 ? CommonFields.getPositionsMap()
-                                                                  .get(Position.GOALKEEPER)
-                                                    : "PUNTAJE DEL EQUIPO",
+                                 .setValueAt(teamIndex == 0 ? CommonFields.getPositionsMap()
+                                                                          .get(Position.GOALKEEPER)
+                                                            : "PUNTAJE DEL EQUIPO",
                                              ((ResultsView) getView()).getTable()
-                                                                      .getRowCount() + i - 2, 0);
+                                                                     .getRowCount() + teamIndex - 2,
+                                             0);
       }
     } else {
       ((ResultsView) getView()).getTable()

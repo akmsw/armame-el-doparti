@@ -70,14 +70,16 @@ public class AnchoragesController extends Controller {
     Map<Position, List<JCheckBox>> checkBoxesMap = ((AnchoragesView) getView()).getCheckBoxesMap();
 
     for (Position position : Position.values()) {
-      for (int i = 0; i < CommonFields.getPlayersSets()
-                                      .get(position)
-                                      .size(); i++) {
+      int positionSetSize = CommonFields.getPlayersSets()
+                                        .get(position)
+                                        .size();
+
+      for (int checkBoxIndex = 0; checkBoxIndex < positionSetSize; checkBoxIndex++) {
         checkBoxesMap.get(position)
-                     .get(i)
+                     .get(checkBoxIndex)
                      .setText(CommonFields.getPlayersSets()
                                           .get(position)
-                                          .get(i)
+                                          .get(checkBoxIndex)
                                           .getName());
       }
     }
@@ -174,8 +176,8 @@ public class AnchoragesController extends Controller {
   public void deleteAnchorageButtonEvent(Component parentComponent) {
     String[] optionsDelete = new String[anchoragesAmount];
 
-    for (int i = 0; i < anchoragesAmount; i++) {
-      optionsDelete[i] = Integer.toString(i + 1);
+    for (int anchorageNumber = 0; anchorageNumber < anchoragesAmount; anchorageNumber++) {
+      optionsDelete[anchorageNumber] = Integer.toString(anchorageNumber + 1);
     }
 
     int anchorageToDelete = JOptionPane.showOptionDialog(
@@ -251,31 +253,32 @@ public class AnchoragesController extends Controller {
                                 .setText("");
 
     var wrapper = new Object() {
-      private int anchorageNum;
+      private int anchorageNumber;
       private int counter = 1;
     };
 
-    for (wrapper.anchorageNum = 1;
-         wrapper.anchorageNum <= anchoragesAmount;
-         wrapper.anchorageNum++) {
+    for (wrapper.anchorageNumber = 1;
+         wrapper.anchorageNumber <= anchoragesAmount;
+         wrapper.anchorageNumber++) {
       ((AnchoragesView) getView()).getTextArea()
-                                  .append(" ----- ANCLAJE #" + wrapper.anchorageNum
-                                          + " -----" + System.lineSeparator());
+                                  .append(" ----- ANCLAJE #" + wrapper.anchorageNumber + " -----"
+                                          + System.lineSeparator());
 
       CommonFields.getPlayersSets()
                   .forEach((key, value) -> value.stream()
                                                 .filter(p -> p.getAnchorageNumber()
-                                                             == wrapper.anchorageNum)
+                                                             == wrapper.anchorageNumber)
                                                 .forEach(p -> {
-                                                  ((AnchoragesView) getView()).getTextArea()
-                                                      .append(" " + wrapper.counter
-                                                              + ". " + p.getName()
+                                                  ((AnchoragesView) getView())
+                                                      .getTextArea()
+                                                      .append(" " + wrapper.counter + ". "
+                                                              + p.getName()
                                                               + System.lineSeparator());
 
                                                   wrapper.counter++;
                                                 }));
 
-      if (wrapper.anchorageNum != anchoragesAmount) {
+      if (wrapper.anchorageNumber != anchoragesAmount) {
         ((AnchoragesView) getView()).getTextArea()
                                     .append(System.lineSeparator());
       }
@@ -347,8 +350,10 @@ public class AnchoragesController extends Controller {
     changeAnchorage(anchorageToDelete, 0);
 
     if (anchorageToDelete != anchoragesAmount) {
-      for (int i = anchorageToDelete + 1; i <= anchoragesAmount; i++) {
-        changeAnchorage(i, i - 1);
+      for (int anchorageNumber = anchorageToDelete + 1;
+               anchorageNumber <= anchoragesAmount;
+               anchorageNumber++) {
+        changeAnchorage(anchorageNumber, anchorageNumber - 1);
       }
     }
 

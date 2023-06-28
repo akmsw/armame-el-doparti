@@ -64,7 +64,9 @@ public class RandomMixer implements PlayersMixer {
       List<Player> playersSet = CommonFields.getPlayersSets()
                                             .get(position);
 
-      for (int i = 0; i < playersSet.size() / 2; i++) {
+      int halfPlayersInSet = playersSet.size() / 2;
+
+      for (int i = 0; i < halfPlayersInSet; i++) {
         chosenPlayer = playersSet.get(
           playersSet.indexOf(
             getRandomUnassignedPlayer(playersSet.stream()

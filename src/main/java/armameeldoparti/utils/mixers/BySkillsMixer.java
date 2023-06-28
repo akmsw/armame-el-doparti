@@ -76,11 +76,11 @@ public class BySkillsMixer implements PlayersMixer {
       teams.sort(Comparator.comparingInt(Team::getTeamSkill));
 
       if (currentSet.size() == 2) {
-        for (int i = 0; i < 2; i++) {
-          teams.get(i)
+        for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
+          teams.get(teamIndex)
                .getTeamPlayers()
                .get(position)
-               .add(currentSet.get(i));
+               .add(currentSet.get(teamIndex));
         }
       } else {
         distributeSubsets(teams, currentSet, position);
@@ -204,18 +204,18 @@ public class BySkillsMixer implements PlayersMixer {
                                                         .reduce(0, Math::addExact)));
 
     var wrapper = new Object() {
-      int index;
+      int teamIndex;
     };
 
-    for (wrapper.index = 0; wrapper.index < 2; wrapper.index++) {
-      playersSubsets.get(wrapper.index)
-                    .forEach(p -> p.setTeamNumber(teams.get(1 - wrapper.index)
+    for (wrapper.teamIndex = 0; wrapper.teamIndex < 2; wrapper.teamIndex++) {
+      playersSubsets.get(wrapper.teamIndex)
+                    .forEach(p -> p.setTeamNumber(teams.get(1 - wrapper.teamIndex)
                                                        .getTeamNumber()));
 
-      teams.get(wrapper.index)
+      teams.get(wrapper.teamIndex)
            .getTeamPlayers()
            .get(position)
-           .addAll(playersSubsets.get(1 - wrapper.index));
+           .addAll(playersSubsets.get(1 - wrapper.teamIndex));
     }
   }
 }

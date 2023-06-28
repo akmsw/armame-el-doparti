@@ -116,21 +116,24 @@ public class SkillPointsInputView extends View {
       List<Player> currentSet = CommonFields.getPlayersSets()
                                             .get(position);
 
-      for (int j = 0; j < currentSet.size(); j++) {
+      int currentSetSize = currentSet.size();
+
+      for (int playerIndex = 0; playerIndex < currentSetSize; playerIndex++) {
         JSpinner spinner = new JSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
                                                                Constants.SKILL_MIN,
                                                                Constants.SKILL_MAX,
                                                                Constants.SKILL_STEP));
 
-        JLabel nameLabel = new JLabel(currentSet.get(j)
+        JLabel nameLabel = new JLabel(currentSet.get(playerIndex)
                                                 .getName());
 
-        spinnersMap.put(currentSet.get(j), spinner);
+        spinnersMap.put(currentSet.get(playerIndex), spinner);
 
         labelsMap.put(spinner, nameLabel);
 
         getMasterPanel().add(nameLabel, "pushx");
-        getMasterPanel().add(spinnersMap.get(currentSet.get(j)), j % 2 != 0 ? "wrap" : null);
+        getMasterPanel().add(spinnersMap.get(currentSet.get(playerIndex)),
+                             playerIndex % 2 != 0 ? "wrap" : null);
       }
 
       spinnersMap.values()
