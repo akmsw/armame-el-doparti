@@ -67,19 +67,19 @@ public class AnchoragesController extends Controller {
    * Updates the checkboxes text with the players names.
    */
   public void updateCheckBoxesText() {
-    Map<Position, List<JCheckBox>> checkBoxesMap = ((AnchoragesView) getView()).getCheckBoxesMap();
+    Map<Position, List<JCheckBox>> checkboxesMap = ((AnchoragesView) getView()).getCheckboxesMap();
 
     for (Position position : Position.values()) {
       int positionSetSize = CommonFields.getPlayersSets()
                                         .get(position)
                                         .size();
 
-      for (int checkBoxIndex = 0; checkBoxIndex < positionSetSize; checkBoxIndex++) {
-        checkBoxesMap.get(position)
-                     .get(checkBoxIndex)
+      for (int checkboxIndex = 0; checkboxIndex < positionSetSize; checkboxIndex++) {
+        checkboxesMap.get(position)
+                     .get(checkboxIndex)
                      .setText(CommonFields.getPlayersSets()
                                           .get(position)
-                                          .get(checkBoxIndex)
+                                          .get(checkboxIndex)
                                           .getName());
       }
     }
@@ -115,7 +115,7 @@ public class AnchoragesController extends Controller {
    *                        be displayed.
    */
   public void newAnchorageButtonEvent(Component parentComponent) {
-    int playersToAnchorAmount = (int) ((AnchoragesView) getView()).getCheckBoxesMap()
+    int playersToAnchorAmount = (int) ((AnchoragesView) getView()).getCheckboxesMap()
                                                                   .values()
                                                                   .stream()
                                                                   .flatMap(List::stream)
@@ -230,7 +230,7 @@ public class AnchoragesController extends Controller {
   private void newAnchorage() {
     anchoragesAmount++;
 
-    ((AnchoragesView) getView()).getCheckBoxesMap()
+    ((AnchoragesView) getView()).getCheckboxesMap()
                                 .values()
                                 .stream()
                                 .filter(cbs -> cbs.stream()
@@ -309,7 +309,7 @@ public class AnchoragesController extends Controller {
     if (Constants.MAX_ANCHORED_PLAYERS - anchoredPlayersAmount < 2) {
       ((AnchoragesView) getView()).getNewAnchorageButton()
                                   .setEnabled(false);
-      ((AnchoragesView) getView()).getCheckBoxesMap()
+      ((AnchoragesView) getView()).getCheckboxesMap()
                                   .values()
                                   .stream()
                                   .flatMap(List::stream)
@@ -317,7 +317,7 @@ public class AnchoragesController extends Controller {
     } else {
       ((AnchoragesView) getView()).getNewAnchorageButton()
                                   .setEnabled(true);
-      ((AnchoragesView) getView()).getCheckBoxesMap()
+      ((AnchoragesView) getView()).getCheckboxesMap()
                                   .values()
                                   .stream()
                                   .flatMap(List::stream)
@@ -382,7 +382,7 @@ public class AnchoragesController extends Controller {
                   if (replacement == 0) {
                     p.setAnchored(false);
 
-                    ((AnchoragesView) getView()).getCheckBoxesMap()
+                    ((AnchoragesView) getView()).getCheckboxesMap()
                                                 .values()
                                                 .stream()
                                                 .flatMap(List::stream)
@@ -428,7 +428,7 @@ public class AnchoragesController extends Controller {
   private void setAnchorages(@NonNull List<JCheckBox> cbSet) {
     CommonFields.getPlayersSets()
                 .get(CommonFunctions.getCorrespondingPosition(
-                  ((AnchoragesView) getView()).getCheckBoxesMap(), cbSet))
+                  ((AnchoragesView) getView()).getCheckboxesMap(), cbSet))
                 .stream()
                 .filter(p -> cbSet.stream()
                                   .filter(JCheckBox::isSelected)
@@ -451,7 +451,7 @@ public class AnchoragesController extends Controller {
    * Unchecks the remaining checked checkboxes.
    */
   private void clearCheckBoxes() {
-    ((AnchoragesView) getView()).getCheckBoxesMap()
+    ((AnchoragesView) getView()).getCheckboxesMap()
                                 .values()
                                 .stream()
                                 .flatMap(List::stream)
@@ -478,7 +478,7 @@ public class AnchoragesController extends Controller {
    * @return Whether half (or more) of any players set is checked, or not.
    */
   private boolean validCheckedPlayersPerPosition() {
-    return ((AnchoragesView) getView()).getCheckBoxesMap()
+    return ((AnchoragesView) getView()).getCheckboxesMap()
                                        .values()
                                        .stream()
                                        .noneMatch(cbs -> cbs.stream()

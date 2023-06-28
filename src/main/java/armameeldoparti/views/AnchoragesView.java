@@ -60,7 +60,7 @@ public class AnchoragesView extends View {
   /**
    * Map that associates each checkboxes-list with its corresponding position.
    */
-  private Map<Position, List<JCheckBox>> checkBoxesMap;
+  private Map<Position, List<JCheckBox>> checkboxesMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -81,10 +81,10 @@ public class AnchoragesView extends View {
 
     anchorageButtons = new ArrayList<>();
 
-    checkBoxesMap = new EnumMap<>(Position.class);
+    checkboxesMap = new EnumMap<>(Position.class);
 
     for (Position position : Position.values()) {
-      checkBoxesMap.put(position, new ArrayList<>());
+      checkboxesMap.put(position, new ArrayList<>());
     }
 
     initializeInterface();
@@ -108,8 +108,8 @@ public class AnchoragesView extends View {
 
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> {
-                  fillCheckBoxesSet(value, checkBoxesMap.get(key));
-                  addCheckBoxesSet(checkBoxesMap.get(key),
+                  fillCheckBoxesSet(value, checkboxesMap.get(key));
+                  addCheckBoxesSet(checkboxesMap.get(key),
                                    CommonFields.getPositionsMap()
                                                .get(key));
                 });
