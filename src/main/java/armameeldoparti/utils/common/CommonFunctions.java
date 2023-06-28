@@ -47,11 +47,11 @@ public final class CommonFunctions {
    * @param e The error that caused the program to end.
    */
   public static void exitProgram(Error e) {
-    showErrorMessage(Constants.errorMessages
+    showErrorMessage(Constants.MAP_ERROR_MESSAGE
                               .get(e),
                      null);
 
-    System.exit(Constants.errorCodes
+    System.exit(Constants.MAP_ERROR_CODE
                          .get(e));
   }
 
