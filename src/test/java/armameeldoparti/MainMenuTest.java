@@ -98,7 +98,7 @@ class MainMenuTest {
                                                       .getView()).getTextArea()
                                                                  .getText());
     assertFalse(((NamesInputView) CommonFunctions.getController(ProgramView.NAMES_INPUT)
-                                                 .getView()).getAnchoragesCheckBox()
+                                                 .getView()).getAnchoragesCheckbox()
                                                             .isSelected());
     assertFalse(((NamesInputView) CommonFunctions.getController(ProgramView.NAMES_INPUT)
                                                  .getView()).getMixButton()

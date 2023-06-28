@@ -52,7 +52,7 @@ public class NamesInputView extends View {
 
   private JButton mixButton;
 
-  private JCheckBox anchoragesCheckBox;
+  private JCheckBox anchoragesCheckbox;
 
   private JComboBox<String> comboBox;
 
@@ -97,7 +97,7 @@ public class NamesInputView extends View {
     addTextFields();
     addTextArea();
     addButtons();
-    addAnchoragesCheckBox();
+    addAnchoragesCheckbox();
     add(getMasterPanel());
     pack();
   }
@@ -158,14 +158,14 @@ public class NamesInputView extends View {
   /**
    * Adds the anchorages enablement checkbox.
    */
-  private void addAnchoragesCheckBox() {
-    anchoragesCheckBox = new JCheckBox("Anclar jugadores", false);
+  private void addAnchoragesCheckbox() {
+    anchoragesCheckbox = new JCheckBox("Anclar jugadores", false);
 
-    anchoragesCheckBox.addActionListener(
+    anchoragesCheckbox.addActionListener(
         e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled())
     );
 
-    rightPanel.add(anchoragesCheckBox, "center");
+    rightPanel.add(anchoragesCheckbox, "center");
   }
 
   /**

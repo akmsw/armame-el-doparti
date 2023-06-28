@@ -75,7 +75,7 @@ public class NamesInputController extends Controller {
     hideView();
     clearPlayersNames();
 
-    ((NamesInputView) getView()).getAnchoragesCheckBox()
+    ((NamesInputView) getView()).getAnchoragesCheckbox()
                                 .setSelected(false);
     ((NamesInputView) getView()).getComboBox()
                                 .setSelectedIndex(0);
@@ -131,7 +131,7 @@ public class NamesInputController extends Controller {
 
     if (CommonFields.isAnchoragesEnabled()) {
       ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-      .updateCheckBoxesText();
+      .updateCheckboxesText();
 
       CommonFunctions.getController(ProgramView.ANCHORAGES)
                      .showView();

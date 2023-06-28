@@ -108,8 +108,8 @@ public class AnchoragesView extends View {
 
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> {
-                  fillCheckBoxesSet(value, checkboxesMap.get(key));
-                  addCheckBoxesSet(checkboxesMap.get(key),
+                  fillCheckboxesSet(value, checkboxesMap.get(key));
+                  addCheckboxesSet(checkboxesMap.get(key),
                                    CommonFields.getPositionsMap()
                                                .get(key));
                 });
@@ -197,7 +197,7 @@ public class AnchoragesView extends View {
    * @param playersSet Players sets from where to obtain the names.
    * @param cbSet      Check boxes set to fill.
    */
-  private void fillCheckBoxesSet(@NonNull List<Player> playersSet,
+  private void fillCheckboxesSet(@NonNull List<Player> playersSet,
                                  @NonNull List<JCheckBox> cbSet) {
     playersSet.forEach(p -> cbSet.add(new JCheckBox(p.getName())));
   }
@@ -208,7 +208,7 @@ public class AnchoragesView extends View {
    * @param cbSet     Check boxes to add.
    * @param labelText Label text.
    */
-  private void addCheckBoxesSet(@NonNull List<JCheckBox> cbSet,
+  private void addCheckboxesSet(@NonNull List<JCheckBox> cbSet,
                                 @NonNull String labelText) {
     JLabel label = new JLabel(labelText);
 
