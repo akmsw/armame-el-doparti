@@ -491,8 +491,8 @@ public class AnchoragesController extends Controller {
    *
    * @param playersToAnchorAmount Checked players amount.
    *
-   * @return Whether the selected players amount is at most the maximum allowed per anchorage
-   *         or not.
+   * @return Whether the selected players amount is at most the maximum allowed per anchorage or
+   *         not.
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
     return anchoredPlayersAmount + playersToAnchorAmount <= Constants.MAX_ANCHORED_PLAYERS;
