@@ -115,12 +115,12 @@ public final class CommonFunctions {
   }
 
   /**
-   * Gets the valueToSearch corresponding position in a generic map received.
+   * Gets the search-corresponding position in a generic map received.
    *
    * @param map    Generic map with positions as keys.
    * @param search Value to search in the map.
    *
-   * @return The value-to-search corresponding position.
+   * @return The search-corresponding position.
    */
   @NonNull
   public static <T> Position getCorrespondingPosition(@NonNull Map<Position, T> map,
