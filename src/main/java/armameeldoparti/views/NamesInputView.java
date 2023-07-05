@@ -19,7 +19,12 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
@@ -133,6 +138,23 @@ public class NamesInputView extends View {
     comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
 
     comboBox.setSelectedIndex(0);
+    comboBox.setBorder(
+      BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                      Constants.GREEN_MEDIUM,
+                                      Constants.GREEN_DARK)
+    );
+    comboBox.setUI(new BasicComboBoxUI() {
+      @Override
+      protected JButton createArrowButton() {
+        JButton arrowButton = new BasicArrowButton(SwingConstants.SOUTH,
+                                                   Constants.GREEN_DARK, Constants.GREEN_DARK,
+                                                   Constants.GREEN_LIGHT, Constants.GREEN_DARK);
+
+        arrowButton.setBorder(new LineBorder(Constants.GREEN_MEDIUM));
+
+        return arrowButton;
+      }
+    });
     comboBox.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
                                                .comboBoxEvent((String) Objects.requireNonNull(
@@ -149,8 +171,12 @@ public class NamesInputView extends View {
   private void addTextArea() {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
-    textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setEditable(false);
+    textArea.setBorder(
+      BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                      Constants.GREEN_MEDIUM,
+                                      Constants.GREEN_MEDIUM)
+    );
 
     rightPanel.add(textArea, "push, grow, span");
   }
@@ -179,6 +205,11 @@ public class NamesInputView extends View {
       for (int i = 0; i < totalPlayersInPosition; i++) {
         JTextField tf = new JTextField();
 
+        tf.setBorder(
+          BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                          Constants.GREEN_MEDIUM,
+                                          Constants.GREEN_MEDIUM)
+        );
         tf.addActionListener(e -> {
               try {
                 ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))

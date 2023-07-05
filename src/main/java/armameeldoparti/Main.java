@@ -176,17 +176,19 @@ public final class Main {
    * Sets up the program's GUI properties.
    */
   private static void setGraphicalProperties() {
-    UIManager.put("OptionPane.background", Constants.GREEN_LIGHT);
-    UIManager.put("Panel.background", Constants.GREEN_LIGHT);
-    UIManager.put("CheckBox.background", Constants.GREEN_LIGHT);
-    UIManager.put("Separator.background", Constants.GREEN_LIGHT);
-    UIManager.put("CheckBox.focus", Constants.GREEN_LIGHT);
     UIManager.put("Button.background", Constants.GREEN_DARK);
     UIManager.put("Button.focus", Constants.GREEN_DARK);
-    UIManager.put("ToggleButton.focus", Constants.GREEN_DARK);
-    UIManager.put("TitledBorder.border", new LineBorder(Constants.GREEN_DARK));
     UIManager.put("Button.foreground", Color.WHITE);
+    UIManager.put("CheckBox.background", Constants.GREEN_LIGHT);
+    UIManager.put("CheckBox.focus", Constants.GREEN_LIGHT);
     UIManager.put("ComboBox.focus", Color.WHITE);
+    UIManager.put("ComboBox.selectionBackground", Constants.GREEN_MEDIUM);
+    UIManager.put("ComboBox.selectionForeground", Color.WHITE);
+    UIManager.put("OptionPane.background", Constants.GREEN_LIGHT);
+    UIManager.put("Panel.background", Constants.GREEN_LIGHT);
+    UIManager.put("Separator.background", Constants.GREEN_LIGHT);
+    UIManager.put("TitledBorder.border", new LineBorder(Constants.GREEN_DARK));
+    UIManager.put("ToggleButton.focus", Constants.GREEN_DARK);
 
     try {
       // In order to use the font, it must be first created and registered
