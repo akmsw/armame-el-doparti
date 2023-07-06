@@ -138,11 +138,9 @@ public class NamesInputView extends View {
     comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
 
     comboBox.setSelectedIndex(0);
-    comboBox.setBorder(
-      BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                      Constants.GREEN_MEDIUM,
-                                      Constants.GREEN_DARK)
-    );
+    comboBox.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                                       Constants.GREEN_MEDIUM,
+                                                       Constants.GREEN_DARK));
     comboBox.setUI(new BasicComboBoxUI() {
       @Override
       protected JButton createArrowButton() {
@@ -172,11 +170,9 @@ public class NamesInputView extends View {
     textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
     textArea.setEditable(false);
-    textArea.setBorder(
-      BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                      Constants.GREEN_MEDIUM,
-                                      Constants.GREEN_MEDIUM)
-    );
+    textArea.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                                       Constants.GREEN_MEDIUM,
+                                                       Constants.GREEN_MEDIUM));
 
     rightPanel.add(textArea, "push, grow, span");
   }
@@ -205,11 +201,9 @@ public class NamesInputView extends View {
       for (int i = 0; i < totalPlayersInPosition; i++) {
         JTextField tf = new JTextField();
 
-        tf.setBorder(
-          BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                          Constants.GREEN_MEDIUM,
-                                          Constants.GREEN_MEDIUM)
-        );
+        tf.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                                     Constants.GREEN_MEDIUM,
+                                                     Constants.GREEN_MEDIUM));
         tf.addActionListener(e -> {
               try {
                 ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
