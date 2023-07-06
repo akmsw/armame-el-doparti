@@ -28,9 +28,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Objects;
+import java.util.TreeMap;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
@@ -64,8 +66,23 @@ public final class Main {
    * @param args Program arguments (not used yet).
    */
   public static void main(String[] args) {
-    CommonFields.initializeActiveMonitor();
-    CommonFields.initializeMaps();
+    // Establishes the main monitor as active monitor by default.
+    CommonFields.setActiveMonitor(GraphicsEnvironment.getLocalGraphicsEnvironment()
+                                                     .getDefaultScreenDevice());
+    CommonFields.setControllersMap(new EnumMap<>(ProgramView.class));
+    CommonFields.setPlayersAmountMap(new EnumMap<>(Position.class));
+    CommonFields.setPositionsMap(new EnumMap<>(Position.class));
+    CommonFields.setPlayersSets(new TreeMap<>());
+    CommonFields.getPositionsMap()
+                .put(Position.CENTRAL_DEFENDER, Constants.POSITION_CENTRAL_DEFENDERS);
+    CommonFields.getPositionsMap()
+                .put(Position.LATERAL_DEFENDER, Constants.POSITION_LATERAL_DEFENDERS);
+    CommonFields.getPositionsMap()
+                .put(Position.MIDFIELDER, Constants.POSITION_MIDFIELDERS);
+    CommonFields.getPositionsMap()
+                .put(Position.FORWARD, Constants.POSITION_FORWARDS);
+    CommonFields.getPositionsMap()
+                .put(Position.GOALKEEPER, Constants.POSITION_GOALKEEPERS);
     CommonFields.setAnchoragesEnabled(false);
 
     setGraphicalProperties();

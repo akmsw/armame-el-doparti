@@ -105,6 +105,9 @@ public class AnchoragesView extends View {
                   this.trackColor = Constants.GREEN_MEDIUM;
                 }
               });
+    scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                                         Constants.GREEN_MEDIUM,
+                                                         Constants.GREEN_MEDIUM));
 
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> {
@@ -114,12 +117,10 @@ public class AnchoragesView extends View {
                                                .get(key));
                 });
 
-    textArea.setBorder(BorderFactory.createBevelBorder(1));
     textArea.setEditable(false);
 
     getMasterPanel().add(leftPanel, "west");
     getMasterPanel().add(rightPanel, "east");
-
     addButtons();
     add(getMasterPanel());
     setTitle(getFrameTitle());
