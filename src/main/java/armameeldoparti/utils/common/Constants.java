@@ -3,7 +3,6 @@ package armameeldoparti.utils.common;
 import armameeldoparti.models.Error;
 import java.awt.Color;
 import java.awt.Image;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import javax.swing.ImageIcon;
@@ -108,25 +107,21 @@ public final class Constants {
   /**
    * Map of errors and their corresponding exit code.
    */
-  public static final Map<Error, Integer> MAP_ERROR_CODE = Collections.unmodifiableMap(
-      Map.of(
-        Error.BROWSER_ERROR, EXIT_CODE_ERROR_BROWSER,
-        Error.FATAL_INTERNAL_ERROR, EXIT_CODE_ERROR_FATAL_INTERNAL,
-        Error.GUI_ERROR, EXIT_CODE_ERROR_GUI,
-        Error.INTERNAL_FILES_ERROR, EXIT_CODE_ERROR_INTERNAL_FILES
-      )
+  public static final Map<Error, Integer> MAP_ERROR_CODE = Map.of(
+      Error.BROWSER_ERROR, EXIT_CODE_ERROR_BROWSER,
+      Error.FATAL_INTERNAL_ERROR, EXIT_CODE_ERROR_FATAL_INTERNAL,
+      Error.GUI_ERROR, EXIT_CODE_ERROR_GUI,
+      Error.INTERNAL_FILES_ERROR, EXIT_CODE_ERROR_INTERNAL_FILES
   );
 
   /**
    * Map of errors and their corresponding error message to display.
    */
-  public static final Map<Error, String> MAP_ERROR_MESSAGE = Collections.unmodifiableMap(
-      Map.of(
-        Error.BROWSER_ERROR, MSG_ERROR_BROWSER,
-        Error.FATAL_INTERNAL_ERROR, MSG_ERROR_FATAL_INTERNAL,
-        Error.GUI_ERROR, MSG_ERROR_GUI,
-        Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
-      )
+  public static final Map<Error, String> MAP_ERROR_MESSAGE = Map.of(
+      Error.BROWSER_ERROR, MSG_ERROR_BROWSER,
+      Error.FATAL_INTERNAL_ERROR, MSG_ERROR_FATAL_INTERNAL,
+      Error.GUI_ERROR, MSG_ERROR_GUI,
+      Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
   );
 
   // ---------------------------------------- Constructor ---------------------------------------
