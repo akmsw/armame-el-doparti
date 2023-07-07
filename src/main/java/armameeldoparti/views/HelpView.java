@@ -4,15 +4,13 @@ import armameeldoparti.controllers.HelpController;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.graphical.CustomScrollPane;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import lombok.Getter;
 import net.miginfocom.layout.CC;
 
@@ -41,7 +39,7 @@ public class HelpView extends View {
 
   private JLabel pagesCounter;
 
-  private JScrollPane scrollPane;
+  private CustomScrollPane scrollPane;
 
   private JTextArea textArea;
 
@@ -120,19 +118,7 @@ public class HelpView extends View {
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
 
-    scrollPane = new JScrollPane(textArea,
-                                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-    scrollPane.setBackground(Constants.GREEN_LIGHT);
-    scrollPane.getVerticalScrollBar()
-              .setUI(new BasicScrollBarUI() {
-                @Override
-                protected void configureScrollBarColors() {
-                  this.thumbColor = Constants.GREEN_DARK;
-                  this.trackColor = Constants.GREEN_MEDIUM;
-                }
-              });
+    scrollPane = new CustomScrollPane(textArea);
 
     getMasterPanel().add(scrollPane);
   }

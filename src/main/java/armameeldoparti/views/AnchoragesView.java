@@ -7,6 +7,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.graphical.CustomScrollPane;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -17,13 +18,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import lombok.Getter;
 import lombok.NonNull;
 import net.miginfocom.swing.MigLayout;
@@ -51,7 +49,7 @@ public class AnchoragesView extends View {
   private JPanel leftPanel;
   private JPanel rightPanel;
 
-  private JScrollPane scrollPane;
+  private CustomScrollPane scrollPane;
 
   private JTextArea textArea;
 
@@ -75,9 +73,7 @@ public class AnchoragesView extends View {
 
     textArea = new JTextArea();
 
-    scrollPane = new JScrollPane(textArea,
-                                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    scrollPane = new CustomScrollPane(textArea);
 
     anchorageButtons = new ArrayList<>();
 
@@ -97,18 +93,6 @@ public class AnchoragesView extends View {
    */
   @Override
   protected void initializeInterface() {
-    scrollPane.getVerticalScrollBar()
-              .setUI(new BasicScrollBarUI() {
-                @Override
-                protected void configureScrollBarColors() {
-                  this.thumbColor = Constants.GREEN_DARK;
-                  this.trackColor = Constants.GREEN_MEDIUM;
-                }
-              });
-    scrollPane.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                         Constants.GREEN_MEDIUM,
-                                                         Constants.GREEN_MEDIUM));
-
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> {
                   fillCheckboxesSet(value, checkboxesMap.get(key));
@@ -119,6 +103,9 @@ public class AnchoragesView extends View {
 
     textArea.setEditable(false);
 
+    getScrollPane().setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                                              Constants.GREEN_MEDIUM,
+                                                              Constants.GREEN_MEDIUM));
     getMasterPanel().add(leftPanel, "west");
     getMasterPanel().add(rightPanel, "east");
     addButtons();
