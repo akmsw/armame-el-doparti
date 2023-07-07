@@ -8,6 +8,7 @@ import armameeldoparti.utils.common.graphical.CustomScrollPane;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -39,7 +40,7 @@ public class HelpView extends View {
 
   private JLabel pagesCounter;
 
-  private CustomScrollPane scrollPane;
+  private JScrollPane scrollPane;
 
   private JTextArea textArea;
 

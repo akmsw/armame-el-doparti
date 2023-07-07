@@ -7,6 +7,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.graphical.CustomSpinner;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -119,10 +120,10 @@ public class SkillPointsInputView extends View {
       int currentSetSize = currentSet.size();
 
       for (int playerIndex = 0; playerIndex < currentSetSize; playerIndex++) {
-        JSpinner spinner = new JSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
-                                                               Constants.SKILL_MIN,
-                                                               Constants.SKILL_MAX,
-                                                               Constants.SKILL_STEP));
+        JSpinner spinner = new CustomSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
+                                                                    Constants.SKILL_MIN,
+                                                                    Constants.SKILL_MAX,
+                                                                    Constants.SKILL_STEP));
 
         JLabel nameLabel = new JLabel(currentSet.get(playerIndex)
                                                 .getName());

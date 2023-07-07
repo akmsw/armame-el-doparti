@@ -14,8 +14,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.border.BevelBorder;
+import javax.swing.plaf.basic.BasicArrowButton;
 import lombok.NonNull;
 
 /**
@@ -96,6 +100,29 @@ public final class CommonFunctions {
    */
   public static Component getComponentFromEvent(ActionEvent e) {
     return e == null ? null : SwingUtilities.windowForComponent((Component) e.getSource());
+  }
+
+  /**
+   * Builds a custom arrow button that fits the program aesthetics.
+   *
+   * <p>The button and the shadows will be medium green. The arrow will be light green.
+   *
+   * @param orientation The button arrow orientation.
+   *
+   * @return The custom arrow button.
+   */
+  public static JButton buildArrowButton(int orientation) {
+    JButton arrowButton = new BasicArrowButton(orientation,
+                                               Constants.GREEN_MEDIUM,
+                                               Constants.GREEN_MEDIUM,
+                                               Constants.GREEN_LIGHT,
+                                               Constants.GREEN_MEDIUM);
+
+    arrowButton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                                          Constants.GREEN_MEDIUM,
+                                                          Constants.GREEN_DARK));
+
+    return arrowButton;
   }
 
   /**

@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
@@ -49,7 +50,7 @@ public class AnchoragesView extends View {
   private JPanel leftPanel;
   private JPanel rightPanel;
 
-  private CustomScrollPane scrollPane;
+  private JScrollPane scrollPane;
 
   private JTextArea textArea;
 
@@ -73,7 +74,9 @@ public class AnchoragesView extends View {
 
     textArea = new JTextArea();
 
-    scrollPane = new CustomScrollPane(textArea);
+    textArea.setEditable(false);
+
+    scrollPane = new CustomScrollPane(new JTextArea());
 
     anchorageButtons = new ArrayList<>();
 

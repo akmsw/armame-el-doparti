@@ -1,13 +1,11 @@
 package armameeldoparti.utils.common.graphical;
 
+import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import lombok.Getter;
 
@@ -65,7 +63,7 @@ public class CustomScrollPane extends JScrollPane {
       /**
        * Configures the scrollbar decrease button to fit the program aesthetics.
        *
-       * <p>The button and the shadows will be medium green. The arrow will be light green.
+       * @see CommonFunctions#buildArrowButton(int)
        *
        * @param orientation The button arrow orientation.
        *
@@ -73,17 +71,7 @@ public class CustomScrollPane extends JScrollPane {
        */
       @Override
       protected JButton createDecreaseButton(int orientation) {
-        JButton decreaseButton = new BasicArrowButton(orientation,
-                                                      Constants.GREEN_MEDIUM,
-                                                      Constants.GREEN_MEDIUM,
-                                                      Constants.GREEN_LIGHT,
-                                                      Constants.GREEN_MEDIUM);
-
-        decreaseButton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                                 Constants.GREEN_MEDIUM,
-                                                                 Constants.GREEN_DARK));
-
-        return decreaseButton;
+        return CommonFunctions.buildArrowButton(orientation);
       }
 
       /**
