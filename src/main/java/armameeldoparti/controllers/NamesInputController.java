@@ -65,6 +65,7 @@ public class NamesInputController extends Controller {
       ).toString()
     );
     centerView();
+    resetComboBox();
     getView().setVisible(true);
   }
 

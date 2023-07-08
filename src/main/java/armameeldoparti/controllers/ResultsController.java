@@ -134,13 +134,8 @@ public class ResultsController extends Controller {
       previousView = ProgramView.SKILL_POINTS;
     }
 
-    Controller controller = CommonFunctions.getController(previousView);
-
-    if (previousView.equals(ProgramView.NAMES_INPUT)) {
-      ((NamesInputController) controller).resetComboBox();
-    }
-
-    controller.showView();
+    CommonFunctions.getController(previousView)
+                   .showView();
   }
 
   /**
