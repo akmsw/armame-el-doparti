@@ -216,8 +216,12 @@ public class AnchoragesController extends Controller {
     hideView();
     resetView();
 
-    CommonFunctions.getController(ProgramView.NAMES_INPUT)
-                   .showView();
+    NamesInputController controller = (
+        (NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT)
+    );
+
+    controller.resetComboBox();
+    controller.showView();
   }
 
   // ---------------------------------------- Private methods -----------------------------------

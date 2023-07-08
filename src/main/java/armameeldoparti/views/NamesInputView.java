@@ -133,7 +133,6 @@ public class NamesInputView extends View {
   private void addComboBox() {
     comboBox = new CustomComboBox<>(OPTIONS_COMBOBOX);
 
-    comboBox.setSelectedIndex(0);
     comboBox.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
                                                .comboBoxEvent((String) Objects.requireNonNull(

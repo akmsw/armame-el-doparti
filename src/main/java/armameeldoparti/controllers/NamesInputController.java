@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import javax.naming.InvalidNameException;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import lombok.NonNull;
@@ -88,6 +89,16 @@ public class NamesInputController extends Controller {
 
     updateTextFields(((NamesInputView) getView()).getComboBox()
                                                  .getItemAt(0));
+  }
+
+  /**
+   * Resets the combobox to the initial state and gives it the view focus.
+   */
+  public void resetComboBox() {
+    JComboBox<String> comboBox = ((NamesInputView) getView()).getComboBox();
+
+    comboBox.setSelectedIndex(0);
+    comboBox.requestFocusInWindow();
   }
 
   /**
