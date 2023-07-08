@@ -40,7 +40,7 @@ public class CustomTable extends JTable {
   /**
    * Configures the graphical properties for the table in order to fit the program aesthetics.
    */
-  public void setupGraphicalProperties() {
+  private void setupGraphicalProperties() {
     setBorder(BorderFactory.createLineBorder(Constants.GREEN_DARK));
     setDefaultRenderer(
         Object.class,

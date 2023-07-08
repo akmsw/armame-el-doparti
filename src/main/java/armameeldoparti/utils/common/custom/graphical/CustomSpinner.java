@@ -38,7 +38,7 @@ public class CustomSpinner extends JSpinner {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Configures the graphical properties of the scroll pane in order to fit the program aesthetics.
+   * Configures the graphical properties of the spinner in order to fit the program aesthetics.
    */
   private void setupGraphicalProperties() {
     setUI(new BasicSpinnerUI() {
@@ -66,7 +66,7 @@ public class CustomSpinner extends JSpinner {
       }
 
       /**
-       * Configures the spinner 'previous' button to fit the program aesthetics.
+       * Configures the spinner 'next' button to fit the program aesthetics.
        *
        * @see CommonFunctions#buildArrowButton(int)
        *

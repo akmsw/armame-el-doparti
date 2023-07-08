@@ -19,7 +19,7 @@ import javax.swing.border.BevelBorder;
  */
 public class CustomTextArea extends JTextArea {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // ---------------------------------------- Constructors --------------------------------------
 
   /**
    * Builds a basic text area using the established program aesthetics.
