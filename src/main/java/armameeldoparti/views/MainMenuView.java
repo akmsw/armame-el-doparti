@@ -4,13 +4,16 @@ import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import java.util.Arrays;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.util.Objects;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import lombok.NonNull;
 import net.miginfocom.layout.CC;
 
 /**
@@ -30,7 +33,7 @@ public class MainMenuView extends View {
    * Builds the main menu view.
    */
   public MainMenuView() {
-    super(Constants.PROGRAM_TITLE + " " + Constants.PROGRAM_VERSION, "wrap");
+    super(Constants.PROGRAM_TITLE, Constants.MIG_LAYOUT_WRAP);
     initializeInterface();
   }
 
@@ -81,10 +84,8 @@ public class MainMenuView extends View {
         .issuesButtonEvent()
     );
 
-    for (JButton button : Arrays.asList(startButton, helpButton)) {
-      getMasterPanel().add(button, "growx");
-    }
-
+    getMasterPanel().add(startButton, Constants.MIG_LAYOUT_GROWX);
+    getMasterPanel().add(helpButton, Constants.MIG_LAYOUT_GROWX);
     getMasterPanel().add(contactButton, new CC().width("50%")
                                                 .split());
     getMasterPanel().add(issuesButton, new CC().width("50%"));
@@ -93,18 +94,75 @@ public class MainMenuView extends View {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Adds the background image to the panel.
+   * Adds the background image and labels to the main menu view.
    */
   private void addBackground() {
-    ImageIcon bgImg = new ImageIcon(Objects.requireNonNull(
-        getClass().getClassLoader()
-                  .getResource(Constants.PATH_IMG + Constants.FILENAME_BG_IMG),
-        Constants.MSG_ERROR_NULL_RESOURCE
-      )
+    addBackgroundImage();
+    addBackgroundLabel(
+        Constants.PROGRAM_TITLE.toLowerCase(),
+        Constants.MIG_LAYOUT_GROWX,
+        Constants.GREEN_DARK,
+        Constants.SIZE_FONT_TITLE_LABEL
+    );
+    addBackgroundLabel(
+        Constants.PROGRAM_AUTHOR,
+        Constants.MIG_LAYOUT_GROWX,
+        Color.WHITE,
+        Constants.SIZE_FONT_AUTHOR_LABEL
+    );
+    addBackgroundLabel(
+        Constants.PROGRAM_VERSION,
+        Constants.MIG_LAYOUT_ALIGN_RIGHT,
+        Constants.GREEN_DARK,
+        Constants.SIZE_FONT_VERSION_LABEL
+    );
+  }
+
+  /**
+   * Adds the background image to the panel.
+   */
+  private void addBackgroundImage() {
+    ImageIcon backgroundImageIcon = new ImageIcon(
+        Objects.requireNonNull(
+          getClass().getClassLoader()
+                    .getResource(Constants.PATH_IMG + Constants.FILENAME_ICON),
+          Constants.MSG_ERROR_NULL_RESOURCE
+        )
     );
 
-    JLabel bgLabel = new JLabel("", bgImg, SwingConstants.CENTER);
+    /*
+     * TODO:
+     *  The background image should not be scaled. If needed, the scale should not be hardcoded.
+     */
+    ImageIcon scaledBackgroundImage = new ImageIcon(
+        backgroundImageIcon.getImage()
+                           .getScaledInstance(500, 500, Image.SCALE_DEFAULT)
+    );
 
-    getMasterPanel().add(bgLabel, "growx");
+    JLabel backgroundImageLabel = new JLabel("", scaledBackgroundImage, SwingConstants.CENTER);
+
+    getMasterPanel().add(backgroundImageLabel, Constants.MIG_LAYOUT_GROWX);
+  }
+
+  /**
+   * Creates a basic label for the main menu view that will be placed and centered in the
+   * background.
+   *
+   * @param text     The label text.
+   * @param color    The color used for the label foreground.
+   * @param fontSize The font size for the label text.
+   */
+  private void addBackgroundLabel(@NonNull String text,
+                                  @NonNull String constraints,
+                                  @NonNull Color color,
+                                  int fontSize) {
+    JLabel label = new JLabel(text.toLowerCase());
+
+    label.setHorizontalAlignment(SwingConstants.CENTER);
+    label.setForeground(color);
+    label.setFont(new Font(label.getFont()
+                                .getName(), Font.PLAIN, fontSize));
+
+    getMasterPanel().add(label, constraints);
   }
 }

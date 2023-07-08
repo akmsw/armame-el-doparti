@@ -4,7 +4,8 @@ import armameeldoparti.controllers.HelpController;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import armameeldoparti.utils.common.graphical.CustomScrollPane;
+import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
+import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -50,8 +51,7 @@ public class HelpView extends View {
    * Builds the help view.
    */
   public HelpView() {
-    super("Ayuda", "wrap");
-
+    super("Ayuda", Constants.MIG_LAYOUT_WRAP);
     initializeInterface();
   }
 
@@ -68,9 +68,9 @@ public class HelpView extends View {
     add(getMasterPanel());
     setTitle(getFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setResizable(false);
     setIconImage(Constants.ICON
                           .getImage());
-    setResizable(false);
     pack();
   }
 
@@ -103,7 +103,11 @@ public class HelpView extends View {
                                                      .split());
     getMasterPanel().add(nextPageButton, new CC().width("50%")
                                                  .wrap());
-    getMasterPanel().add(backButton, "growx, span");
+    getMasterPanel().add(
+        backButton,
+        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
+                                                  Constants.MIG_LAYOUT_SPAN)
+    );
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -112,10 +116,9 @@ public class HelpView extends View {
    * Adds the text area where to display the instructions of the program.
    */
   private void addTextArea() {
-    textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
+    textArea = new CustomTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS, true);
 
     textArea.setBackground(Constants.GREEN_LIGHT);
-    textArea.setEditable(false);
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
 
@@ -133,6 +136,6 @@ public class HelpView extends View {
     pagesCounter.setBorder(BorderFactory.createLoweredSoftBevelBorder());
     pagesCounter.setHorizontalAlignment(SwingConstants.CENTER);
 
-    getMasterPanel().add(pagesCounter, "growx");
+    getMasterPanel().add(pagesCounter, Constants.MIG_LAYOUT_GROWX);
   }
 }

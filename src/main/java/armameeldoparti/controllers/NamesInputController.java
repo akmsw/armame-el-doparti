@@ -269,7 +269,7 @@ public class NamesInputController extends Controller {
                                        selectedOption.toUpperCase()
                                      )
                                     )
-                                .forEach(tf -> leftPanel.add(tf, "growx"));
+                                .forEach(tf -> leftPanel.add(tf, Constants.MIG_LAYOUT_GROWX));
 
     leftPanel.revalidate();
     leftPanel.repaint();

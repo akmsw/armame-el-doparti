@@ -7,6 +7,7 @@ import armameeldoparti.models.Team;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.custom.graphical.CustomTable;
 import armameeldoparti.utils.mixers.BySkillsMixer;
 import armameeldoparti.utils.mixers.RandomMixer;
 import armameeldoparti.views.ResultsView;
@@ -102,9 +103,9 @@ public class ResultsController extends Controller {
 
     teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM ? randomMix() : bySkillsMix());
 
-    ((ResultsView) getView()).setTable(new JTable(Constants.PLAYERS_PER_TEAM + 1
-                                                  + CommonFields.getDistribution(),
-                                                  TABLE_COLUMNS));
+    ((ResultsView) getView()).setTable(new CustomTable(Constants.PLAYERS_PER_TEAM + 1
+                                                       + CommonFields.getDistribution(),
+                                                       TABLE_COLUMNS));
     ((ResultsView) getView()).initializeInterface();
 
     setTableFormat();

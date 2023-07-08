@@ -6,25 +6,22 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.custom.graphical.CustomComboBox;
+import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
+import armameeldoparti.utils.common.custom.graphical.CustomTextField;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import javax.naming.InvalidNameException;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
@@ -74,10 +71,10 @@ public class NamesInputView extends View {
    * Builds the names input view.
    */
   public NamesInputView() {
-    super("Ingreso de jugadores", "wrap 2");
+    super("Ingreso de jugadores", String.join(" ", Constants.MIG_LAYOUT_WRAP, "2"));
 
-    leftPanel = new JPanel(new MigLayout("wrap"));
-    rightPanel = new JPanel(new MigLayout("wrap"));
+    leftPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
+    rightPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
 
     initializeTextFieldsMap();
     initializeInterface();
@@ -90,13 +87,10 @@ public class NamesInputView extends View {
    */
   @Override
   protected void initializeInterface() {
-    getMasterPanel().add(leftPanel, "west");
-    getMasterPanel().add(rightPanel, "east");
-
+    getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    getMasterPanel().add(rightPanel, Constants.MIG_LAYOUT_EAST);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setTitle(getFrameTitle());
-    setIconImage(Constants.ICON
-                          .getImage());
     setResizable(false);
     addComboBox();
     addTextFields();
@@ -104,6 +98,8 @@ public class NamesInputView extends View {
     addButtons();
     addAnchoragesCheckbox();
     add(getMasterPanel());
+    setIconImage(Constants.ICON
+                          .getImage());
     pack();
   }
 
@@ -125,8 +121,8 @@ public class NamesInputView extends View {
         .backButtonEvent()
     );
 
-    rightPanel.add(mixButton, "grow");
-    rightPanel.add(backButton, "grow");
+    rightPanel.add(mixButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(backButton, Constants.MIG_LAYOUT_GROW);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -135,24 +131,9 @@ public class NamesInputView extends View {
    * Adds the combobox.
    */
   private void addComboBox() {
-    comboBox = new JComboBox<>(OPTIONS_COMBOBOX);
+    comboBox = new CustomComboBox<>(OPTIONS_COMBOBOX);
 
     comboBox.setSelectedIndex(0);
-    comboBox.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                       Constants.GREEN_MEDIUM,
-                                                       Constants.GREEN_DARK));
-    comboBox.setUI(new BasicComboBoxUI() {
-      @Override
-      protected JButton createArrowButton() {
-        JButton arrowButton = new BasicArrowButton(SwingConstants.SOUTH,
-                                                   Constants.GREEN_DARK, Constants.GREEN_DARK,
-                                                   Constants.GREEN_LIGHT, Constants.GREEN_DARK);
-
-        arrowButton.setBorder(new LineBorder(Constants.GREEN_MEDIUM));
-
-        return arrowButton;
-      }
-    });
     comboBox.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
                                                .comboBoxEvent((String) Objects.requireNonNull(
@@ -160,21 +141,18 @@ public class NamesInputView extends View {
                                                )
     );
 
-    leftPanel.add(comboBox, "growx");
+    leftPanel.add(comboBox, Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
    * Adds the read-only text area where the entered player names will be displayed in real time.
    */
   private void addTextArea() {
-    textArea = new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
+    textArea = new CustomTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS, false);
 
-    textArea.setEditable(false);
-    textArea.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                       Constants.GREEN_MEDIUM,
-                                                       Constants.GREEN_MEDIUM));
-
-    rightPanel.add(textArea, "push, grow, span");
+    rightPanel.add(textArea, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH,
+                                                                       Constants.MIG_LAYOUT_GROW,
+                                                                       Constants.MIG_LAYOUT_SPAN));
   }
 
   /**
@@ -187,7 +165,7 @@ public class NamesInputView extends View {
         e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled())
     );
 
-    rightPanel.add(anchoragesCheckbox, "center");
+    rightPanel.add(anchoragesCheckbox, Constants.MIG_LAYOUT_CENTER);
   }
 
   /**
@@ -199,12 +177,14 @@ public class NamesInputView extends View {
                                                .get(position) * 2;
 
       for (int i = 0; i < totalPlayersInPosition; i++) {
-        JTextField tf = new JTextField();
+        JTextField tf = new CustomTextField();
 
-        tf.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                     Constants.GREEN_MEDIUM,
-                                                     Constants.GREEN_MEDIUM));
         tf.addActionListener(e -> {
+              /*
+               * If the entered text is both a valid string and name, it will be applied to the
+               * corresponding player. If not, an error message will be shown and the text field
+               * will be reset to the player name.
+               */
               try {
                 ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
                                                        .textFieldEvent(textFieldsMap.get(position)
@@ -212,16 +192,20 @@ public class NamesInputView extends View {
                                                                        CommonFields.getPlayersSets()
                                                                                    .get(position),
                                                                        tf.getText());
-              } catch (IllegalArgumentException stringEx) {
-                CommonFunctions.showErrorMessage(Constants.MSG_ERROR_INVALID_STRING,
-                                                 CommonFunctions.getComponentFromEvent(e));
+              } catch (IllegalArgumentException | InvalidNameException ex) {
+                CommonFunctions.showErrorMessage(
+                    ex instanceof IllegalArgumentException ? Constants.MSG_ERROR_INVALID_STRING
+                                                           : Constants.MSG_ERROR_INVALID_NAME,
+                    CommonFunctions.getComponentFromEvent(e)
+                );
 
-                tf.setText("");
-              } catch (InvalidNameException nameEx) {
-                CommonFunctions.showErrorMessage(Constants.MSG_ERROR_INVALID_NAME,
-                                                 CommonFunctions.getComponentFromEvent(e));
-
-                tf.setText("");
+                tf.setText(
+                    CommonFields.getPlayersSets()
+                                .get(position)
+                                .get(textFieldsMap.get(position)
+                                                  .indexOf(tf))
+                                .getName()
+                );
               }
             }
         );

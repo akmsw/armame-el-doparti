@@ -126,6 +126,17 @@ public final class CommonFunctions {
   }
 
   /**
+   * Builds a string that represents the MiG layout constraints for the graphical component.
+   *
+   * @param constraints MiG Layout constraints for the component.
+   *
+   * @return The fully built component constraints.
+   */
+  public static String buildMigLayoutConstraints(String... constraints) {
+    return String.join(", ", constraints);
+  }
+
+  /**
    * Gets a list containing the anchored players grouped by their anchorage number.
    *
    * @return A list containing the anchored players grouped by their anchorage number.

@@ -1,13 +1,15 @@
-package armameeldoparti.utils.common.graphical;
+package armameeldoparti.utils.common.custom.graphical;
 
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
-import lombok.Getter;
+import lombok.NonNull;
 
 /**
  * Custom scroll pane class.
@@ -23,10 +25,6 @@ import lombok.Getter;
  */
 public class CustomScrollPane extends JScrollPane {
 
-  // ---------------------------------------- Private fields ------------------------------------
-
-  @Getter private JTextArea textArea;
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -34,7 +32,7 @@ public class CustomScrollPane extends JScrollPane {
    *
    * @param textArea Text area associated to the scroll pane that will be controlled.
    */
-  public CustomScrollPane(JTextArea textArea) {
+  public CustomScrollPane(@NonNull JTextArea textArea) {
     super(textArea,
           ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
           ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -48,6 +46,9 @@ public class CustomScrollPane extends JScrollPane {
    */
   private void setupGraphicalProperties() {
     setBackground(Constants.GREEN_LIGHT);
+    setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                              Constants.GREEN_MEDIUM,
+                                              Constants.GREEN_MEDIUM));
     getVerticalScrollBar().setUI(new BasicScrollBarUI() {
       /**
        * Configures the scrollbar colors to fit the program aesthetics.

@@ -7,8 +7,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import armameeldoparti.utils.common.graphical.CustomSpinner;
-import java.util.Arrays;
+import armameeldoparti.utils.common.custom.graphical.CustomSpinner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,8 +95,27 @@ public class SkillPointsInputView extends View {
         .backButtonEvent()
     );
 
-    Arrays.asList(finishButton, resetSkillPointsButton, backButton)
-          .forEach(b -> getMasterPanel().add(b, "grow, span"));
+    getMasterPanel().add(
+        finishButton,
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROW,
+          Constants.MIG_LAYOUT_SPAN
+        )
+    );
+    getMasterPanel().add(
+        resetSkillPointsButton,
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROW,
+          Constants.MIG_LAYOUT_SPAN
+        )
+    );
+    getMasterPanel().add(
+        backButton,
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROW,
+          Constants.MIG_LAYOUT_SPAN
+        )
+    );
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -112,7 +130,11 @@ public class SkillPointsInputView extends View {
 
       positionLabel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-      getMasterPanel().add(positionLabel, "grow, span");
+      getMasterPanel().add(
+          positionLabel,
+          CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
+                                                    Constants.MIG_LAYOUT_SPAN)
+      );
 
       List<Player> currentSet = CommonFields.getPlayersSets()
                                             .get(position);
@@ -132,9 +154,9 @@ public class SkillPointsInputView extends View {
 
         labelsMap.put(spinner, nameLabel);
 
-        getMasterPanel().add(nameLabel, "pushx");
+        getMasterPanel().add(nameLabel, Constants.MIG_LAYOUT_PUSHX);
         getMasterPanel().add(spinnersMap.get(currentSet.get(playerIndex)),
-                             playerIndex % 2 != 0 ? "wrap" : null);
+                             playerIndex % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
       }
 
       spinnersMap.values()

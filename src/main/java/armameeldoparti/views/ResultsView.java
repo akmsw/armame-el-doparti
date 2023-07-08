@@ -5,7 +5,6 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
@@ -36,7 +35,7 @@ public class ResultsView extends View {
    * Builds an empty results view.
    */
   public ResultsView() {
-    super(getUpdatedFrameTitle(), "wrap");
+    super(getUpdatedFrameTitle(), Constants.MIG_LAYOUT_WRAP);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -47,11 +46,11 @@ public class ResultsView extends View {
   @Override
   public void initializeInterface() {
     setFrameTitle(getUpdatedFrameTitle());
+    setTitle(getFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setIconImage(Constants.ICON
                           .getImage());
     setResizable(false);
-    setTitle(getFrameTitle());
     addTable();
     addButtons();
     add(getMasterPanel());
@@ -79,10 +78,10 @@ public class ResultsView extends View {
           .remixButtonEvent()
       );
 
-      getMasterPanel().add(remixButton, "growx");
+      getMasterPanel().add(remixButton, Constants.MIG_LAYOUT_GROWX);
     }
 
-    getMasterPanel().add(backButton, "growx");
+    getMasterPanel().add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -108,9 +107,16 @@ public class ResultsView extends View {
     table.setCellSelectionEnabled(false);
     table.setRowSelectionAllowed(false);
     table.setColumnSelectionAllowed(false);
-    table.setBorder(BorderFactory.createLineBorder(Constants.GREEN_DARK));
     table.setEnabled(false);
 
-    getMasterPanel().add(table, "push, grow, span, center");
+    getMasterPanel().add(
+        table,
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_PUSH,
+          Constants.MIG_LAYOUT_GROW,
+          Constants.MIG_LAYOUT_SPAN,
+          Constants.MIG_LAYOUT_CENTER
+        )
+    );
   }
 }

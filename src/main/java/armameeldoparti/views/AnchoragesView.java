@@ -7,13 +7,12 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import armameeldoparti.utils.common.graphical.CustomScrollPane;
+import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
+import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -67,16 +66,14 @@ public class AnchoragesView extends View {
    * Builds the anchorages view.
    */
   public AnchoragesView() {
-    super("Anclaje de jugadores", "wrap 2");
+    super("Anclaje de jugadores", Constants.MIG_LAYOUT_WRAP2);
 
-    leftPanel = new JPanel(new MigLayout("wrap 2"));
-    rightPanel = new JPanel(new MigLayout("wrap"));
+    leftPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP2));
+    rightPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
 
-    textArea = new JTextArea();
+    textArea = new CustomTextArea(true);
 
-    textArea.setEditable(false);
-
-    scrollPane = new CustomScrollPane(new JTextArea());
+    scrollPane = new CustomScrollPane(textArea);
 
     anchorageButtons = new ArrayList<>();
 
@@ -104,13 +101,8 @@ public class AnchoragesView extends View {
                                                .get(key));
                 });
 
-    textArea.setEditable(false);
-
-    getScrollPane().setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                              Constants.GREEN_MEDIUM,
-                                                              Constants.GREEN_MEDIUM));
-    getMasterPanel().add(leftPanel, "west");
-    getMasterPanel().add(rightPanel, "east");
+    getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    getMasterPanel().add(rightPanel, Constants.MIG_LAYOUT_EAST);
     addButtons();
     add(getMasterPanel());
     setTitle(getFrameTitle());
@@ -169,15 +161,29 @@ public class AnchoragesView extends View {
     anchorageButtons.add(deleteLastAnchorageButton);
     anchorageButtons.add(clearAnchoragesButton);
 
-    for (JButton button : Arrays.asList(finishButton, backButton)) {
-      leftPanel.add(button, "growx, span");
-    }
+    leftPanel.add(
+        finishButton,
+        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
+                                                  Constants.MIG_LAYOUT_SPAN)
+    );
+    leftPanel.add(
+        backButton,
+        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
+                                                  Constants.MIG_LAYOUT_SPAN)
+    );
 
-    rightPanel.add(scrollPane, "span2, push, grow");
-    rightPanel.add(newAnchorageButton, "grow");
-    rightPanel.add(deleteAnchorageButton, "grow");
-    rightPanel.add(deleteLastAnchorageButton, "grow");
-    rightPanel.add(clearAnchoragesButton, "grow");
+    rightPanel.add(
+        scrollPane,
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_SPAN2,
+          Constants.MIG_LAYOUT_PUSH,
+          Constants.MIG_LAYOUT_GROW
+        )
+    );
+    rightPanel.add(newAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(deleteAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(deleteLastAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(clearAnchoragesButton, Constants.MIG_LAYOUT_GROW);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -205,8 +211,16 @@ public class AnchoragesView extends View {
 
     label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 
-    leftPanel.add(label, "growx, span");
+    leftPanel.add(label, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
+                                                                   Constants.MIG_LAYOUT_SPAN));
 
-    cbSet.forEach(cb -> leftPanel.add(cb, "align left, pushx"));
+    cbSet.forEach(cb -> leftPanel.add(
+        cb,
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_ALIGN_LEFT,
+          Constants.MIG_LAYOUT_PUSHX
+        )
+      )
+    );
   }
 }

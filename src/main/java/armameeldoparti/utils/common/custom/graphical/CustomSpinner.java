@@ -1,4 +1,4 @@
-package armameeldoparti.utils.common.graphical;
+package armameeldoparti.utils.common.custom.graphical;
 
 import armameeldoparti.models.Error;
 import armameeldoparti.utils.common.CommonFunctions;
@@ -8,6 +8,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicSpinnerUI;
+import lombok.NonNull;
 
 /**
  * Custom spinner class.
@@ -29,7 +30,7 @@ public class CustomSpinner extends JSpinner {
    *
    * @param spinnerNumberModel The number model used for the spinner.
    */
-  public CustomSpinner(SpinnerNumberModel spinnerNumberModel) {
+  public CustomSpinner(@NonNull SpinnerNumberModel spinnerNumberModel) {
     super(spinnerNumberModel);
     setupGraphicalProperties();
   }

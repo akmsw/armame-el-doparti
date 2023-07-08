@@ -30,7 +30,7 @@ public final class Constants {
    */
   private static final int ICON_SCALE = 50;
 
-  private static final String FILENAME_ICON = "icon.png";
+  private static final String MIG_LAYOUT_ALIGN = "align";
   private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
   private static final String MSG_ERROR_FATAL_INTERNAL = "ERROR FATAL";
   private static final String MSG_ERROR_GUI = "ERROR DE INTERFAZ GRÁFICA";
@@ -44,6 +44,9 @@ public final class Constants {
   public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
   public static final int MIX_BY_SKILLS = 1;
   public static final int MIX_RANDOM = 0;
+  public static final int SIZE_FONT_TITLE_LABEL = 40;
+  public static final int SIZE_FONT_AUTHOR_LABEL = SIZE_FONT_TITLE_LABEL - 10;
+  public static final int SIZE_FONT_VERSION_LABEL = 16;
   public static final int SKILL_INI = 1;
   public static final int SKILL_MAX = 5;
   public static final int SKILL_MIN = 1;
@@ -53,6 +56,7 @@ public final class Constants {
 
   public static final String ERROR_MESSAGE_TITLE = "¡Error!";
   public static final String FILENAME_BG_IMG = "bg.png";
+  public static final String FILENAME_ICON = "icon.png";
   public static final String FILENAME_FONT = "comfortaa.ttf";
   public static final String FILENAME_PDA = "dist.pda";
   public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
@@ -74,11 +78,25 @@ public final class Constants {
   public static final String POSITION_MIDFIELDERS = "MEDIOCAMPISTAS";
   public static final String PROGRAM_TITLE = "Armame el doparti";
   public static final String PROGRAM_VERSION = "v3.0";
+  public static final String PROGRAM_AUTHOR = "@akmsw";
   public static final String REGEX_NAMES_VALIDATION = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
   public static final String REGEX_PDA_DATA_RETRIEVE = "[CLMFG].+>.+";
   public static final String REGEX_PLAYERS_AMOUNT = "(?!(?<=" + PLAYERS_PER_TEAM + ")\\d).";
   public static final String URL_CONTACT = "https://github.com/akmsw";
-  public static final String URL_ISSUES = "https://github.com/akmsw/armame-el-doparti/issues";
+  public static final String URL_ISSUES = URL_CONTACT + "/armame-el-doparti/issues";
+  public static final String MIG_LAYOUT_CENTER = "center";
+  public static final String MIG_LAYOUT_EAST = "east";
+  public static final String MIG_LAYOUT_GROW = "grow";
+  public static final String MIG_LAYOUT_GROWX = MIG_LAYOUT_GROW + "x";
+  public static final String MIG_LAYOUT_ALIGN_LEFT = MIG_LAYOUT_ALIGN + " left";
+  public static final String MIG_LAYOUT_ALIGN_RIGHT = MIG_LAYOUT_ALIGN + " right";
+  public static final String MIG_LAYOUT_PUSH = "push";
+  public static final String MIG_LAYOUT_PUSHX = MIG_LAYOUT_PUSH + "x";
+  public static final String MIG_LAYOUT_SPAN = "span";
+  public static final String MIG_LAYOUT_SPAN2 = MIG_LAYOUT_SPAN + "2";
+  public static final String MIG_LAYOUT_WEST = "west";
+  public static final String MIG_LAYOUT_WRAP = "wrap";
+  public static final String MIG_LAYOUT_WRAP2 = MIG_LAYOUT_WRAP + " 2";
 
   public static final Color GREEN_DARK = new Color(41, 71, 74);
   public static final Color GREEN_MEDIUM = new Color(109, 130, 118);
