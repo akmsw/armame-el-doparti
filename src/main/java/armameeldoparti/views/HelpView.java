@@ -4,9 +4,9 @@ import armameeldoparti.controllers.HelpController;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -131,10 +131,7 @@ public class HelpView extends View {
    * Adds the reading progress label.
    */
   private void addPagesLabel() {
-    pagesCounter = new JLabel();
-
-    pagesCounter.setBorder(BorderFactory.createLoweredSoftBevelBorder());
-    pagesCounter.setHorizontalAlignment(SwingConstants.CENTER);
+    pagesCounter = new CustomBorderedLabel(SwingConstants.CENTER);
 
     getMasterPanel().add(pagesCounter, Constants.MIG_LAYOUT_GROWX);
   }

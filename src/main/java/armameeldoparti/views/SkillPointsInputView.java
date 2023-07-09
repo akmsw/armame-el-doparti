@@ -7,6 +7,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomSpinner;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
 import lombok.Getter;
 
 /**
@@ -125,13 +125,10 @@ public class SkillPointsInputView extends View {
    */
   private void addSpinners() {
     for (Position position : Position.values()) {
-      JLabel positionLabel = new JLabel(CommonFields.getPositionsMap()
-                                                    .get(position));
-
-      positionLabel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
-
       getMasterPanel().add(
-          positionLabel,
+          new CustomBorderedLabel(CommonFields.getPositionsMap()
+                                              .get(position),
+                                  SwingConstants.LEFT),
           CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
                                                     Constants.MIG_LAYOUT_SPAN)
       );

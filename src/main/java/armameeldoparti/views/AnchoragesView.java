@@ -7,6 +7,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import java.util.ArrayList;
@@ -15,13 +16,11 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
 import lombok.Getter;
 import lombok.NonNull;
 import net.miginfocom.swing.MigLayout;
@@ -207,12 +206,9 @@ public class AnchoragesView extends View {
    */
   private void addCheckboxesSet(@NonNull List<JCheckBox> cbSet,
                                 @NonNull String labelText) {
-    JLabel label = new JLabel(labelText);
-
-    label.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
-
-    leftPanel.add(label, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
-                                                                   Constants.MIG_LAYOUT_SPAN));
+    leftPanel.add(new CustomBorderedLabel(labelText, SwingConstants.LEFT),
+                  CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
+                                                            Constants.MIG_LAYOUT_SPAN));
 
     cbSet.forEach(cb -> leftPanel.add(
         cb,
