@@ -55,7 +55,6 @@ public final class Constants {
   public static final float FONT_SIZE = 18f;
 
   public static final String ERROR_MESSAGE_TITLE = "¡Error!";
-  public static final String FILENAME_BG_IMG = "bg.png";
   public static final String FILENAME_ICON = "icon.png";
   public static final String FILENAME_FONT = "comfortaa.ttf";
   public static final String FILENAME_PDA = "dist.pda";
