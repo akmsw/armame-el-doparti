@@ -23,7 +23,7 @@ public class CustomBorderedLabel extends JLabel {
   /**
    * Builds a basic empty bordered label using the established program aesthetics.
    *
-   * @param alignment The text alignment.
+   * @param alignment The label text alignment.
    */
   public CustomBorderedLabel(int alignment) {
     super();
@@ -34,7 +34,7 @@ public class CustomBorderedLabel extends JLabel {
    * Builds a basic bordered label using the established program aesthetics.
    *
    * @param text      The label text.
-   * @param alignment The text alignment.
+   * @param alignment The label text alignment.
    */
   public CustomBorderedLabel(@NonNull String text, int alignment) {
     super(text);
@@ -47,7 +47,7 @@ public class CustomBorderedLabel extends JLabel {
    * Configures the graphical properties of the label in order to fit the program aesthetics. The
    * label will have a lowered bevel border.
    *
-   * @param alignment The text alignment.
+   * @param alignment The label text alignment.
    */
   private void setupGraphicalProperties(int alignment) {
     setBorder(BorderFactory.createLoweredSoftBevelBorder());
