@@ -26,7 +26,7 @@ import lombok.Getter;
  *
  * @version 0.0.1
  *
- * @since v3.0
+ * @since 3.0
  */
 @Getter
 public class SkillPointsInputView extends View {

@@ -11,7 +11,7 @@ import lombok.Setter;
  *
  * @version 3.0.0
  *
- * @since v1.0
+ * @since 1.0
  */
 @Getter
 @Setter

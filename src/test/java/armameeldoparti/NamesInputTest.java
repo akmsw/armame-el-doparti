@@ -31,7 +31,7 @@ import org.junit.jupiter.params.provider.ValueSource;
  *
  * @version 0.0.1
  *
- * @since v3.0
+ * @since 3.0
  */
 @TestInstance(Lifecycle.PER_CLASS)
 class NamesInputTest {

@@ -31,7 +31,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @version 3.0.0
  *
- * @since v3.0
+ * @since 3.0
  */
 @Getter
 public class NamesInputView extends View {

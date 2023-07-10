@@ -7,7 +7,7 @@ package armameeldoparti.models;
  *
  * @version 0.0.1
  *
- * @since v3.0
+ * @since 3.0
  */
 public enum ProgramView {
   MAIN_MENU,
