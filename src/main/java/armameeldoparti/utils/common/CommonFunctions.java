@@ -173,7 +173,7 @@ public final class CommonFunctions {
    * @param <T>      Generic optional type.
    * @param optional The optional to be checked.
    *
-   * @return The optional value if it's present.
+   * @return The optional value if present.
    */
   @NonNull
   public static <T> T retrieveOptional(@NonNull Optional<T> optional) {
@@ -187,6 +187,7 @@ public final class CommonFunctions {
   /**
    * Gets the search-corresponding position in a generic map received.
    *
+   * @param <T>    Generic value type.
    * @param map    Generic map with positions as keys.
    * @param search Value to search in the map.
    *
