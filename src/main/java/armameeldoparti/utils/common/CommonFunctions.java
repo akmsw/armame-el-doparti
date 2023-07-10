@@ -7,7 +7,6 @@ import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.views.View;
 import java.awt.Component;
-import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -82,18 +81,14 @@ public final class CommonFunctions {
    * @param view Reference view from which the active monitor will be retrieved.
    */
   public static void updateActiveMonitorFromView(@NonNull View view) {
-    Optional<GraphicsDevice> newActiveMonitor = Arrays.stream(
-                                                  GraphicsEnvironment.getLocalGraphicsEnvironment()
-                                                                     .getScreenDevices()
-                                                )
-                                                .filter(s -> s.getDefaultConfiguration()
-                                                              .getBounds()
-                                                              .contains(view.getLocation()))
-                                                .findFirst();
-
-    validateOptional(newActiveMonitor);
-
-    CommonFields.setActiveMonitor(newActiveMonitor.get());
+    CommonFields.setActiveMonitor(
+        retrieveOptional(Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
+                                                          .getScreenDevices())
+                               .filter(s -> s.getDefaultConfiguration()
+                                             .getBounds()
+                                             .contains(view.getLocation()))
+                               .findFirst())
+    );
   }
 
   /**
@@ -171,15 +166,22 @@ public final class CommonFunctions {
   }
 
   /**
-   * Checks if an optional that should not be null has a value present. If the optional has no
-   * value, then the program exits with a fatal internal error code.
+   * Checks if an optional that should not be null has a value present. If so, that value is
+   * retrieved. If the optional has no value, then the program exits with a fatal internal error
+   * code.
    *
+   * @param <T>      Generic optional type.
    * @param optional The optional to be checked.
+   *
+   * @return The optional value if it's present.
    */
-  public static <T> void validateOptional(Optional<T> optional) {
+  @NonNull
+  public static <T> T retrieveOptional(Optional<T> optional) {
     if (!optional.isPresent()) {
       exitProgram(Error.FATAL_INTERNAL_ERROR);
     }
+
+    return optional.get();
   }
 
   /**
@@ -193,15 +195,11 @@ public final class CommonFunctions {
   @NonNull
   public static <T> Position getCorrespondingPosition(@NonNull Map<Position, T> map,
                                                       @NonNull T search) {
-    Optional<Position> correspondingPosition = map.entrySet()
-                                                  .stream()
-                                                  .filter(e -> e.getValue()
-                                                                .equals(search))
-                                                  .map(Map.Entry::getKey)
-                                                  .findFirst();
-
-    validateOptional(correspondingPosition);
-
-    return correspondingPosition.get();
+    return retrieveOptional(map.entrySet()
+                               .stream()
+                               .filter(e -> e.getValue()
+                                             .equals(search))
+                               .map(Map.Entry::getKey)
+                               .findFirst());
   }
 }
