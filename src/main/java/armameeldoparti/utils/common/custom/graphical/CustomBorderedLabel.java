@@ -27,7 +27,7 @@ public class CustomBorderedLabel extends JLabel {
    */
   public CustomBorderedLabel(int alignment) {
     super();
-    setupGraphicalProperties(alignment);
+    setUpGraphicalProperties(alignment);
   }
 
   /**
@@ -38,7 +38,7 @@ public class CustomBorderedLabel extends JLabel {
    */
   public CustomBorderedLabel(@NonNull String text, int alignment) {
     super(text);
-    setupGraphicalProperties(alignment);
+    setUpGraphicalProperties(alignment);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -49,7 +49,7 @@ public class CustomBorderedLabel extends JLabel {
    *
    * @param alignment The label text alignment.
    */
-  private void setupGraphicalProperties(int alignment) {
+  private void setUpGraphicalProperties(int alignment) {
     setBorder(BorderFactory.createLoweredSoftBevelBorder());
     setHorizontalAlignment(alignment);
   }

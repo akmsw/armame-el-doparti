@@ -33,7 +33,7 @@ public class CustomArrowButton extends BasicArrowButton {
         Constants.GREEN_LIGHT,
         Constants.GREEN_DARK
     );
-    setupGraphicalProperties();
+    setUpGraphicalProperties();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -41,7 +41,7 @@ public class CustomArrowButton extends BasicArrowButton {
   /**
    * Configures the graphical properties of the arrow button in order to fit the program aesthetics.
    */
-  private void setupGraphicalProperties() {
+  private void setUpGraphicalProperties() {
     setBorder(new LineBorder(Constants.GREEN_MEDIUM));
   }
 }

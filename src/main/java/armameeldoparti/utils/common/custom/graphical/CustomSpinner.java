@@ -32,7 +32,7 @@ public class CustomSpinner extends JSpinner {
    */
   public CustomSpinner(@NonNull SpinnerNumberModel spinnerNumberModel) {
     super(spinnerNumberModel);
-    setupGraphicalProperties();
+    setUpGraphicalProperties();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -40,7 +40,7 @@ public class CustomSpinner extends JSpinner {
   /**
    * Configures the graphical properties of the spinner in order to fit the program aesthetics.
    */
-  private void setupGraphicalProperties() {
+  private void setUpGraphicalProperties() {
     ((DefaultEditor) getEditor()).getTextField()
                                  .setEditable(false);
     setUI(new BasicSpinnerUI() {

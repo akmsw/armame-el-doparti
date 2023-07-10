@@ -30,15 +30,17 @@ public class CustomTextArea extends JTextArea {
    */
   public CustomTextArea(int rows, int columns, boolean scrollable) {
     super(rows, columns);
-    setupGraphicalProperties(scrollable);
+    setUpGraphicalProperties(scrollable);
   }
 
   /**
    * Builds a basic text area using the established program aesthetics.
+   *
+   * @param scrollable If the text area could handle a text long enough to have a scrollbar.
    */
   public CustomTextArea(boolean scrollable) {
     super();
-    setupGraphicalProperties(scrollable);
+    setUpGraphicalProperties(scrollable);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -49,7 +51,7 @@ public class CustomTextArea extends JTextArea {
    * @param scrollable If the text area could handle a text long enough to have a scrollbar. If so,
    *                   no border is set for the text area. If not, a bevel border is set.
    */
-  private void setupGraphicalProperties(boolean scrollable) {
+  private void setUpGraphicalProperties(boolean scrollable) {
     setEditable(false);
 
     if (!scrollable) {

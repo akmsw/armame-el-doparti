@@ -36,7 +36,7 @@ public class CustomScrollPane extends JScrollPane {
     super(textArea,
           ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
           ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    setupGraphicalProperties();
+    setUpGraphicalProperties();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -44,7 +44,7 @@ public class CustomScrollPane extends JScrollPane {
   /**
    * Configures the graphical properties of the scroll pane in order to fit the program aesthetics.
    */
-  private void setupGraphicalProperties() {
+  private void setUpGraphicalProperties() {
     setBackground(Constants.GREEN_LIGHT);
     setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
                                               Constants.GREEN_MEDIUM,

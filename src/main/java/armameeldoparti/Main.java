@@ -85,7 +85,7 @@ public final class Main {
         )
     );
 
-    setupGeneralGraphicalProperties();
+    setUpGeneralGraphicalProperties();
     setPlayersDistribution();
     populatePlayersSets();
     setUpControllers();
@@ -192,7 +192,7 @@ public final class Main {
   /**
    * Sets up the program's GUI properties.
    */
-  private static void setupGeneralGraphicalProperties() {
+  private static void setUpGeneralGraphicalProperties() {
     UIManager.put("Button.background", Constants.GREEN_DARK);
     UIManager.put("Button.focus", Constants.GREEN_DARK);
     UIManager.put("Button.foreground", Color.WHITE);

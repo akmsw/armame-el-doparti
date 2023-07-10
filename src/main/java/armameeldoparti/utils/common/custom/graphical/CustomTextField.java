@@ -25,7 +25,7 @@ public class CustomTextField extends JTextField {
    * Builds a basic text field using the established program aesthetics.
    */
   public CustomTextField() {
-    setupGraphicalProperties();
+    setUpGraphicalProperties();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -33,7 +33,7 @@ public class CustomTextField extends JTextField {
   /**
    * Configures the graphical properties for the text field in order to fit the program aesthetics.
    */
-  private void setupGraphicalProperties() {
+  private void setUpGraphicalProperties() {
     setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
                                               Constants.GREEN_MEDIUM,
                                               Constants.GREEN_MEDIUM));

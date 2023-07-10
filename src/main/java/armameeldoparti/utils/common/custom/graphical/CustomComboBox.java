@@ -26,10 +26,12 @@ public class CustomComboBox<E> extends JComboBox<E> {
 
   /**
    * Builds a basic combobox using the established program aesthetics.
+   *
+   * @param items Items array used in the combobox.
    */
   public CustomComboBox(@NonNull E[] items) {
     super(items);
-    setupGraphicalProperties();
+    setUpGraphicalProperties();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -37,7 +39,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
   /**
    * Configures the graphical properties for the combobox in order to fit the program aesthetics.
    */
-  private void setupGraphicalProperties() {
+  private void setUpGraphicalProperties() {
     setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
                                               Constants.GREEN_MEDIUM,
                                               Constants.GREEN_DARK));
