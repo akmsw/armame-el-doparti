@@ -21,8 +21,8 @@ public final class Constants {
   // ---------------------------------------- Private constants ---------------------------------
 
   private static final int EXIT_CODE_ERROR_BROWSER = -1;
-  private static final int EXIT_CODE_ERROR_FATAL_INTERNAL = -2;
-  private static final int EXIT_CODE_ERROR_GUI = -3;
+  private static final int EXIT_CODE_ERROR_GUI = -2;
+  private static final int EXIT_CODE_ERROR_INTERNAL_FATAL = -3;
   private static final int EXIT_CODE_ERROR_INTERNAL_FILES = -4;
 
   /**
@@ -32,7 +32,7 @@ public final class Constants {
 
   private static final String MIG_LAYOUT_ALIGN = "align";
   private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
-  private static final String MSG_ERROR_FATAL_INTERNAL = "ERROR FATAL";
+  private static final String MSG_ERROR_FATAL_INTERNAL = "ERROR FATAL INTERNO";
   private static final String MSG_ERROR_GUI = "ERROR DE INTERFAZ GRÁFICA";
   private static final String MSG_ERROR_INTERNAL_FILES = "ERROR DE LECTURA DE ARCHIVOS INTERNOS";
 
@@ -127,8 +127,8 @@ public final class Constants {
    */
   public static final Map<Error, Integer> MAP_ERROR_CODE = Map.of(
       Error.BROWSER_ERROR, EXIT_CODE_ERROR_BROWSER,
-      Error.FATAL_INTERNAL_ERROR, EXIT_CODE_ERROR_FATAL_INTERNAL,
       Error.GUI_ERROR, EXIT_CODE_ERROR_GUI,
+      Error.FATAL_INTERNAL_ERROR, EXIT_CODE_ERROR_INTERNAL_FATAL,
       Error.INTERNAL_FILES_ERROR, EXIT_CODE_ERROR_INTERNAL_FILES
   );
 

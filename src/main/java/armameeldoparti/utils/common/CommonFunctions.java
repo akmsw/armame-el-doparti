@@ -49,15 +49,15 @@ public final class CommonFunctions {
    * Exits the program with the corresponding error message
    * and error code according to the occurred exception.
    *
-   * @param e The error that caused the program to end.
+   * @param error The error that caused the program to end.
    */
-  public static void exitProgram(Error e) {
+  public static void exitProgram(@NonNull Error error) {
     showErrorMessage(Constants.MAP_ERROR_MESSAGE
-                              .get(e),
+                              .get(error),
                      null);
 
     System.exit(Constants.MAP_ERROR_CODE
-                         .get(e));
+                         .get(error));
   }
 
   /**
@@ -132,7 +132,7 @@ public final class CommonFunctions {
    *
    * @return The fully built component constraints.
    */
-  public static String buildMigLayoutConstraints(String... constraints) {
+  public static String buildMigLayoutConstraints(@NonNull String... constraints) {
     return String.join(", ", constraints);
   }
 
@@ -176,7 +176,7 @@ public final class CommonFunctions {
    * @return The optional value if it's present.
    */
   @NonNull
-  public static <T> T retrieveOptional(Optional<T> optional) {
+  public static <T> T retrieveOptional(@NonNull Optional<T> optional) {
     if (!optional.isPresent()) {
       exitProgram(Error.FATAL_INTERNAL_ERROR);
     }
