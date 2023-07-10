@@ -87,6 +87,7 @@ public final class Constants {
   public static final String MIG_LAYOUT_EAST = "east";
   public static final String MIG_LAYOUT_GROW = "grow";
   public static final String MIG_LAYOUT_GROWX = MIG_LAYOUT_GROW + "x";
+  public static final String MIG_LAYOUT_ALIGN_CENTER = MIG_LAYOUT_ALIGN + " center";
   public static final String MIG_LAYOUT_ALIGN_LEFT = MIG_LAYOUT_ALIGN + " left";
   public static final String MIG_LAYOUT_ALIGN_RIGHT = MIG_LAYOUT_ALIGN + " right";
   public static final String MIG_LAYOUT_PUSH = "push";

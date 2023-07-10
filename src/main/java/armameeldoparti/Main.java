@@ -85,7 +85,7 @@ public final class Main {
         )
     );
 
-    setGraphicalProperties();
+    setupGeneralGraphicalProperties();
     setPlayersDistribution();
     populatePlayersSets();
     setUpControllers();
@@ -192,7 +192,7 @@ public final class Main {
   /**
    * Sets up the program's GUI properties.
    */
-  private static void setGraphicalProperties() {
+  private static void setupGeneralGraphicalProperties() {
     UIManager.put("Button.background", Constants.GREEN_DARK);
     UIManager.put("Button.focus", Constants.GREEN_DARK);
     UIManager.put("Button.foreground", Color.WHITE);
@@ -206,6 +206,9 @@ public final class Main {
     UIManager.put("Separator.background", Constants.GREEN_LIGHT);
     UIManager.put("TitledBorder.border", new LineBorder(Constants.GREEN_DARK));
     UIManager.put("ToggleButton.focus", Constants.GREEN_DARK);
+    UIManager.put("ToolTip.background", Constants.GREEN_MEDIUM);
+    UIManager.put("ToolTip.border", new LineBorder(Constants.GREEN_DARK));
+    UIManager.put("ToolTip.foreground", Color.WHITE);
 
     try {
       // In order to use the font, it must be first created and registered

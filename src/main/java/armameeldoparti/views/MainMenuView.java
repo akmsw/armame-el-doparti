@@ -99,22 +99,25 @@ public class MainMenuView extends View {
   private void addBackground() {
     addBackgroundImage();
     addBackgroundLabel(
+        Constants.SIZE_FONT_TITLE_LABEL,
         Constants.PROGRAM_TITLE.toLowerCase(),
-        Constants.MIG_LAYOUT_GROWX,
+        Constants.MIG_LAYOUT_ALIGN_CENTER,
         Constants.GREEN_DARK,
-        Constants.SIZE_FONT_TITLE_LABEL
+        null
     );
     addBackgroundLabel(
+        Constants.SIZE_FONT_AUTHOR_LABEL,
         Constants.PROGRAM_AUTHOR,
-        Constants.MIG_LAYOUT_GROWX,
+        Constants.MIG_LAYOUT_ALIGN_CENTER,
         Color.WHITE,
-        Constants.SIZE_FONT_AUTHOR_LABEL
+        null
     );
     addBackgroundLabel(
+        Constants.SIZE_FONT_VERSION_LABEL,
         Constants.PROGRAM_VERSION,
         Constants.MIG_LAYOUT_ALIGN_RIGHT,
         Constants.GREEN_DARK,
-        Constants.SIZE_FONT_VERSION_LABEL
+        "Versión del programa"
     );
   }
 
@@ -148,18 +151,22 @@ public class MainMenuView extends View {
    * Creates a basic label for the main menu view that will be placed and centered in the
    * background.
    *
-   * @param text     The label text.
-   * @param color    The color used for the label foreground.
-   * @param fontSize The font size for the label text.
+   * @param fontSize    The font size for the label text.
+   * @param text        The label text.
+   * @param constraints The label MiG Layout constraints.
+   * @param color       The color used for the label foreground.
+   * @param tooltip     Optional label tooltip.
    */
-  private void addBackgroundLabel(@NonNull String text,
+  private void addBackgroundLabel(int fontSize,
+                                  @NonNull String text,
                                   @NonNull String constraints,
                                   @NonNull Color color,
-                                  int fontSize) {
+                                  String tooltip) {
     JLabel label = new JLabel(text.toLowerCase());
 
     label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setForeground(color);
+    label.setToolTipText(tooltip);
     label.setFont(new Font(label.getFont()
                                 .getName(), Font.PLAIN, fontSize));
 

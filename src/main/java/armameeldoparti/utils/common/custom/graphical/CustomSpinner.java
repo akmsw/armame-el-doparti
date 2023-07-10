@@ -41,6 +41,8 @@ public class CustomSpinner extends JSpinner {
    * Configures the graphical properties of the spinner in order to fit the program aesthetics.
    */
   private void setupGraphicalProperties() {
+    ((DefaultEditor) getEditor()).getTextField()
+                                 .setEditable(false);
     setUI(new BasicSpinnerUI() {
       /**
        * Configures the spinner 'previous' button to fit the program aesthetics.

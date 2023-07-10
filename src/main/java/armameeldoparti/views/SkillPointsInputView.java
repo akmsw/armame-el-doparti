@@ -15,7 +15,6 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
-import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -152,13 +151,8 @@ public class SkillPointsInputView extends View {
         labelsMap.put(spinner, nameLabel);
 
         getMasterPanel().add(nameLabel, Constants.MIG_LAYOUT_PUSHX);
-        getMasterPanel().add(spinnersMap.get(currentSet.get(playerIndex)),
-                             playerIndex % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
+        getMasterPanel().add(spinner, playerIndex % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
       }
-
-      spinnersMap.values()
-                 .forEach(s -> ((DefaultEditor) s.getEditor()).getTextField()
-                                                              .setEditable(false));
     }
   }
 }
