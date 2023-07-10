@@ -10,7 +10,7 @@ import armameeldoparti.views.AnchoragesView;
 import java.awt.Component;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import lombok.NonNull;
@@ -382,15 +382,22 @@ public class AnchoragesController extends Controller {
                   if (replacement == 0) {
                     p.setAnchored(false);
 
-                    ((AnchoragesView) getView()).getCheckboxesMap()
-                                                .values()
-                                                .stream()
-                                                .flatMap(List::stream)
-                                                .filter(cb -> cb.getText()
-                                                                .equals(p.getName()))
-                                                .collect(Collectors.toList())
-                                                .get(0)
-                                                .setVisible(true);
+                    Optional<JCheckBox> pcb = ((AnchoragesView) getView()).getCheckboxesMap()
+                                                                          .values()
+                                                                          .stream()
+                                                                          .flatMap(List::stream)
+                                                                          .filter(
+                                                                            cb -> cb.getText()
+                                                                                    .equals(
+                                                                                      p.getName()
+                                                                                    )
+                                                                          )
+                                                                          .findFirst();
+
+                    CommonFunctions.validateOptional(pcb);
+
+                    pcb.get()
+                       .setVisible(true);
 
                     anchoredPlayersAmount--;
                   }

@@ -7,12 +7,14 @@ import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.views.View;
 import java.awt.Component;
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -80,15 +82,18 @@ public final class CommonFunctions {
    * @param view Reference view from which the active monitor will be retrieved.
    */
   public static void updateActiveMonitorFromView(@NonNull View view) {
-    CommonFields.setActiveMonitor(
-        Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
-                                         .getScreenDevices())
-              .filter(s -> s.getDefaultConfiguration()
-                            .getBounds()
-                            .contains(view.getLocation()))
-              .collect(Collectors.toList())
-              .get(0)
-    );
+    Optional<GraphicsDevice> newActiveMonitor = Arrays.stream(
+                                                  GraphicsEnvironment.getLocalGraphicsEnvironment()
+                                                                     .getScreenDevices()
+                                                )
+                                                .filter(s -> s.getDefaultConfiguration()
+                                                              .getBounds()
+                                                              .contains(view.getLocation()))
+                                                .findFirst();
+
+    validateOptional(newActiveMonitor);
+
+    CommonFields.setActiveMonitor(newActiveMonitor.get());
   }
 
   /**
@@ -137,6 +142,19 @@ public final class CommonFunctions {
   }
 
   /**
+   * Gets the corresponding controller to the requested view.
+   *
+   * @param view The view whose controller is needed.
+   *
+   * @return The requested view's controller.
+   */
+  @NonNull
+  public static Controller getController(@NonNull ProgramView view) {
+    return CommonFields.getControllersMap()
+                       .get(view);
+  }
+
+  /**
    * Gets a list containing the anchored players grouped by their anchorage number.
    *
    * @return A list containing the anchored players grouped by their anchorage number.
@@ -153,6 +171,18 @@ public final class CommonFunctions {
   }
 
   /**
+   * Checks if an optional that should not be null has a value present. If the optional has no
+   * value, then the program exits with a fatal internal error code.
+   *
+   * @param optional The optional to be checked.
+   */
+  public static <T> void validateOptional(Optional<T> optional) {
+    if (!optional.isPresent()) {
+      exitProgram(Error.FATAL_INTERNAL_ERROR);
+    }
+  }
+
+  /**
    * Gets the search-corresponding position in a generic map received.
    *
    * @param map    Generic map with positions as keys.
@@ -163,25 +193,15 @@ public final class CommonFunctions {
   @NonNull
   public static <T> Position getCorrespondingPosition(@NonNull Map<Position, T> map,
                                                       @NonNull T search) {
-    return map.entrySet()
-              .stream()
-              .filter(e -> e.getValue()
-                            .equals(search))
-              .map(Map.Entry::getKey)
-              .collect(Collectors.toList())
-              .get(0);
-  }
+    Optional<Position> correspondingPosition = map.entrySet()
+                                                  .stream()
+                                                  .filter(e -> e.getValue()
+                                                                .equals(search))
+                                                  .map(Map.Entry::getKey)
+                                                  .findFirst();
 
-  /**
-   * Gets the corresponding controller to the requested view.
-   *
-   * @param view The view whose controller is needed.
-   *
-   * @return The requested view's controller.
-   */
-  @NonNull
-  public static Controller getController(@NonNull ProgramView view) {
-    return CommonFields.getControllersMap()
-                       .get(view);
+    validateOptional(correspondingPosition);
+
+    return correspondingPosition.get();
   }
 }
