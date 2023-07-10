@@ -1,7 +1,9 @@
 package armameeldoparti.views;
 
+import armameeldoparti.utils.common.Constants;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -38,7 +40,12 @@ public abstract class View extends JFrame {
   protected View(@NonNull String frameTitle,
                  @NonNull String masterPanelLayoutConstraints) {
     setMasterPanel(new JPanel(new MigLayout(masterPanelLayoutConstraints)));
+    setResizable(false);
     setFrameTitle(frameTitle);
+    setTitle(getFrameTitle());
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setIconImage(Constants.ICON
+                          .getImage());
   }
 
   // ---------------------------------------- Abstract protected methods ------------------------

@@ -21,7 +21,6 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
@@ -89,17 +88,12 @@ public class NamesInputView extends View {
   protected void initializeInterface() {
     getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
     getMasterPanel().add(rightPanel, Constants.MIG_LAYOUT_EAST);
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setTitle(getFrameTitle());
-    setResizable(false);
     addComboBox();
     addTextFields();
     addTextArea();
     addButtons();
     addAnchoragesCheckbox();
     add(getMasterPanel());
-    setIconImage(Constants.ICON
-                          .getImage());
     pack();
   }
 

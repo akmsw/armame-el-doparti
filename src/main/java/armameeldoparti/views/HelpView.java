@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import lombok.Getter;
 import net.miginfocom.layout.CC;
 
@@ -66,11 +65,6 @@ public class HelpView extends View {
     addPagesLabel();
     addButtons();
     add(getMasterPanel());
-    setTitle(getFrameTitle());
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setResizable(false);
-    setIconImage(Constants.ICON
-                          .getImage());
     pack();
   }
 

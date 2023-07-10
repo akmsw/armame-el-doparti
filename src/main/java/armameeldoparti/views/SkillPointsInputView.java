@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import lombok.Getter;
 
 /**
@@ -58,11 +57,6 @@ public class SkillPointsInputView extends View {
    */
   @Override
   public void initializeInterface() {
-    setTitle(getFrameTitle());
-    setResizable(false);
-    setIconImage(Constants.ICON
-                          .getImage());
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     addSpinners();
     addButtons();
     add(getMasterPanel());

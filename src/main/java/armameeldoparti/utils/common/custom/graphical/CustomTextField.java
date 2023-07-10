@@ -6,7 +6,7 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
 /**
- * Custom text area class.
+ * Custom text field class.
  *
  * <p>This class is used to instantiate a custom text field that fits the overall program
  * aesthetics.

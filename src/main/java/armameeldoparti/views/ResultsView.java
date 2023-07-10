@@ -7,7 +7,6 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.WindowConstants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -47,10 +46,6 @@ public class ResultsView extends View {
   public void initializeInterface() {
     setFrameTitle(getUpdatedFrameTitle());
     setTitle(getFrameTitle());
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Constants.ICON
-                          .getImage());
-    setResizable(false);
     addTable();
     addButtons();
     add(getMasterPanel());

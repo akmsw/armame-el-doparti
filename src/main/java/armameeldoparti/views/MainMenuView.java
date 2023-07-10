@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import lombok.NonNull;
 import net.miginfocom.layout.CC;
 
@@ -47,11 +46,6 @@ public class MainMenuView extends View {
     addBackground();
     addButtons();
     add(getMasterPanel());
-    setResizable(false);
-    setTitle(getFrameTitle());
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Constants.ICON
-                          .getImage());
     pack();
   }
 

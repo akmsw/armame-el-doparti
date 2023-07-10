@@ -93,19 +93,18 @@ public class BySkillsMixer implements PlayersMixer {
   /**
    * Distributes the players by their skills considering anchorages.
    *
-   * <p>First, the anchored players are grouped in different lists by their
-   * anchorage number, and they are distributed as fair as possible starting
-   * with the sets with most anchored players in order to avoid inconsistencies.
+   * <p>First, the anchored players are grouped in different lists by their anchorage number, and
+   * they are distributed as fair as possible starting with the sets with most anchored players in
+   * order to avoid inconsistencies.
    *
-   * <p>Then, the players that are not anchored are distributed between the teams
-   * as fair as possible based on their skill points.
-   * They will be added to a team only if the players per position or the players
-   * per team amounts are not exceeded.
+   * <p>Then, the players that are not anchored are distributed between the teams as fair as
+   * possible based on their skill points. They will be added to a team only if the players per
+   * position or the players per team amounts are not exceeded.
    *
    * @param teams List that contains the two teams.
    *
-   * @return The updated teams with the players distributed by their skill points,
-   *         without considering anchorages.
+   * @return The updated teams with the players distributed by their skill points, without
+   *         considering anchorages.
    */
   @Override
   @NonNull
@@ -176,8 +175,8 @@ public class BySkillsMixer implements PlayersMixer {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Performs the subsets distribution in sets with 4 players as explained
-   * in {@link #withAnchorages(List)}.
+   * Performs the subsets distribution in sets with 4 players as explained in
+   * {@link #withAnchorages(List)}.
    *
    * @param teams      List that contains the two teams.
    * @param playersSet Current working players set.

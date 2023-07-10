@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import lombok.Getter;
 import lombok.NonNull;
 import net.miginfocom.swing.MigLayout;
@@ -104,11 +103,6 @@ public class AnchoragesView extends View {
     getMasterPanel().add(rightPanel, Constants.MIG_LAYOUT_EAST);
     addButtons();
     add(getMasterPanel());
-    setTitle(getFrameTitle());
-    setResizable(false);
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Constants.ICON
-                          .getImage());
     pack();
   }
 

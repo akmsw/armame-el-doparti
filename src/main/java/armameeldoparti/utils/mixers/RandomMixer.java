@@ -44,10 +44,8 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Distributes the players randomly without considering anchorages.
    *
-   * <p>Half of the players of each players-set are randomly assigned a team number.
-   *
-   * <p>The rest of the players in the group without team (team == 0) are assigned the opposing team
-   * number.
+   * <p>Half of the players of each players-set are randomly assigned a team number. The rest of the
+   * players in the group without team (team == 0) are assigned the opposing team number.
    *
    * @param teams List that contains the two teams.
    *
