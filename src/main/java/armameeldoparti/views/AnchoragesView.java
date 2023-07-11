@@ -8,6 +8,7 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
+import armameeldoparti.utils.common.custom.graphical.CustomCheckBox;
 import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import java.util.ArrayList;
@@ -189,7 +190,7 @@ public class AnchoragesView extends View {
    */
   private void fillCheckboxesSet(@NonNull List<Player> playersSet,
                                  @NonNull List<JCheckBox> cbSet) {
-    playersSet.forEach(p -> cbSet.add(new JCheckBox(p.getName())));
+    playersSet.forEach(p -> cbSet.add(new CustomCheckBox(p.getName())));
   }
 
   /**

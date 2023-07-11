@@ -122,7 +122,9 @@ public class MainMenuView extends View {
     ImageIcon backgroundImageIcon = new ImageIcon(
         Objects.requireNonNull(
           getClass().getClassLoader()
-                    .getResource(Constants.PATH_IMG + Constants.FILENAME_ICON),
+                    .getResource(Constants.PATH_IMG
+                                 + Constants.PATH_ICO
+                                 + Constants.FILENAME_ICON_MAIN),
           Constants.MSG_ERROR_NULL_RESOURCE
         )
     );

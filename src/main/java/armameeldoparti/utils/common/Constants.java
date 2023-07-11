@@ -55,7 +55,15 @@ public final class Constants {
   public static final float FONT_SIZE = 18f;
 
   public static final String ERROR_MESSAGE_TITLE = "¡Error!";
-  public static final String FILENAME_ICON = "icon.png";
+  public static final String FILENAME_ICON_MAIN = "main_icon.png";
+  public static final String FILENAME_ICON_CB_DISABLED_SELECTED = "cb_d_s.png";
+  public static final String FILENAME_ICON_CB_DISABLED_UNSELECTED = "cb_d_us.png";
+  public static final String FILENAME_ICON_CB_ENABLED_SELECTED_FOCUSED = "cb_e_s_f.png";
+  public static final String FILENAME_ICON_CB_ENABLED_SELECTED_PRESSED = "cb_e_s_p.png";
+  public static final String FILENAME_ICON_CB_ENABLED_SELECTED_UNFOCUSED = "cb_e_s_uf.png";
+  public static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_FOCUSED = "cb_e_us_f.png";
+  public static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_PRESSED = "cb_e_us_p.png";
+  public static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED = "cb_e_us_uf.png";
   public static final String FILENAME_FONT = "comfortaa.ttf";
   public static final String FILENAME_PDA = "dist.pda";
   public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
@@ -68,6 +76,7 @@ public final class Constants {
                                                       + " caracteres, o estar repetido";
   public static final String PATH_DOCS = "docs/";
   public static final String PATH_HELP_DOCS = PATH_DOCS + "help/";
+  public static final String PATH_ICO = "icons/";
   public static final String PATH_IMG = "img/";
   public static final String PATH_TTF = "fonts/";
   public static final String POSITION_CENTRAL_DEFENDERS = "DEFENSORES CENTRALES";
@@ -103,15 +112,30 @@ public final class Constants {
   public static final Color GREEN_LIGHT = new Color(176, 189, 162);
   public static final Color YELLOW_LIGHT = new Color(255, 238, 153);
 
-  /**
-   * Standard-size program icon.
-   */
-  public static final ImageIcon ICON = new ImageIcon(
-      Objects.requireNonNull(Constants.class
-                                      .getClassLoader()
-                                      .getResource(PATH_IMG + FILENAME_ICON),
-                             Constants.MSG_ERROR_NULL_RESOURCE
-      )
+  public static final ImageIcon ICON = createImageIcon(FILENAME_ICON_MAIN);
+  public static final ImageIcon ICON_CB_DISABLED_SELECTED = createImageIcon(
+      FILENAME_ICON_CB_DISABLED_SELECTED
+  );
+  public static final ImageIcon ICON_CB_DISABLED_UNSELECTED = createImageIcon(
+      FILENAME_ICON_CB_DISABLED_UNSELECTED
+  );
+  public static final ImageIcon ICON_CB_ENABLED_SELECTED_FOCUSED = createImageIcon(
+      FILENAME_ICON_CB_ENABLED_SELECTED_FOCUSED
+  );
+  public static final ImageIcon ICON_CB_ENABLED_SELECTED_PRESSED = createImageIcon(
+      FILENAME_ICON_CB_ENABLED_SELECTED_PRESSED
+  );
+  public static final ImageIcon ICON_CB_ENABLED_SELECTED_UNFOCUSED = createImageIcon(
+      FILENAME_ICON_CB_ENABLED_SELECTED_UNFOCUSED
+  );
+  public static final ImageIcon ICON_CB_ENABLED_UNSELECTED_FOCUSED = createImageIcon(
+      FILENAME_ICON_CB_ENABLED_UNSELECTED_FOCUSED
+  );
+  public static final ImageIcon ICON_CB_ENABLED_UNSELECTED_PRESSED = createImageIcon(
+      FILENAME_ICON_CB_ENABLED_UNSELECTED_PRESSED
+  );
+  public static final ImageIcon ICON_CB_ENABLED_UNSELECTED_UNFOCUSED = createImageIcon(
+      FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED
   );
 
   /**
@@ -149,5 +173,24 @@ public final class Constants {
    */
   private Constants() {
     // Body not needed
+  }
+
+  // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Given an icon filename, creates an ImageIcon with it.
+   *
+   * @param iconFileName Name of the icon file to use.
+   *
+   * @return The ImageIcon of the specified file.
+   */
+  private static ImageIcon createImageIcon(String iconFileName) {
+    return new ImageIcon(
+      Objects.requireNonNull(Constants.class
+                                      .getClassLoader()
+                                      .getResource(PATH_IMG + PATH_ICO + iconFileName),
+                             Constants.MSG_ERROR_NULL_RESOURCE
+      )
+    );
   }
 }

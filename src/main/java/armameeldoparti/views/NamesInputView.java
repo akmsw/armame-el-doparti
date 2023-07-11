@@ -6,6 +6,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.custom.graphical.CustomCheckBox;
 import armameeldoparti.utils.common.custom.graphical.CustomComboBox;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import armameeldoparti.utils.common.custom.graphical.CustomTextField;
@@ -152,7 +153,7 @@ public class NamesInputView extends View {
    * Adds the anchorages enablement checkbox.
    */
   private void addAnchoragesCheckbox() {
-    anchoragesCheckbox = new JCheckBox("Anclar jugadores", false);
+    anchoragesCheckbox = new CustomCheckBox("Anclar jugadores");
 
     anchoragesCheckbox.addActionListener(
         e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled())

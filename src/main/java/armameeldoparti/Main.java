@@ -198,6 +198,7 @@ public final class Main {
     UIManager.put("Button.foreground", Color.WHITE);
     UIManager.put("CheckBox.background", Constants.GREEN_LIGHT);
     UIManager.put("CheckBox.focus", Constants.GREEN_LIGHT);
+    UIManager.put("CheckBox.foreground", Constants.GREEN_DARK);
     UIManager.put("ComboBox.focus", Color.WHITE);
     UIManager.put("ComboBox.selectionBackground", Constants.GREEN_MEDIUM);
     UIManager.put("ComboBox.selectionForeground", Color.WHITE);
