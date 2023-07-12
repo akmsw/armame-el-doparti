@@ -205,8 +205,10 @@ public final class CommonFunctions {
   /**
    * Builds a custom arrow button that fits the program aesthetics based on the parent UI component.
    *
-   * <p>The arrow will be light green. The button and the shadows will be dark green if its parent
-   * UI component is a BasicComboBoxUI, otherwise they will be medium green.
+   * <p>The arrow will be light green, the shadows will be medium green and the button will have a
+   * raised bevel border. If its parent UI component is a BasicComboBoxUI, the button background
+   * will be dark green. Otherwise, it will be medium green.
+   *
    *
    * @param <T>             Generic parent UI component type.
    * @param orientation     The button arrow orientation.
@@ -215,24 +217,19 @@ public final class CommonFunctions {
    * @return The custom arrow button.
    */
   @NonNull
-  public static <T> JButton buildArrowButton(int orientation, @NonNull T parentComponent) {
+  public static <T> JButton buildCustomArrowButton(int orientation, @NonNull T parentComponent) {
     Color backgroundColor = parentComponent instanceof BasicComboBoxUI ? Constants.GREEN_DARK
                                                                        : Constants.GREEN_MEDIUM;
 
     JButton arrowButton = new BasicArrowButton(orientation,
                                                backgroundColor,
-                                               backgroundColor,
+                                               Constants.GREEN_MEDIUM,
                                                Constants.GREEN_LIGHT,
-                                               backgroundColor);
+                                               Constants.GREEN_MEDIUM);
 
-    arrowButton.setBorder(
-        parentComponent instanceof BasicComboBoxUI ? new LineBorder(Constants.GREEN_MEDIUM)
-                                                   : BorderFactory.createBevelBorder(
-                                                       BevelBorder.RAISED,
-                                                       Constants.GREEN_MEDIUM,
-                                                       Constants.GREEN_DARK
-                                                     )
-    );
+    arrowButton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                                          Constants.GREEN_MEDIUM,
+                                                          Constants.GREEN_DARK));
 
     return arrowButton;
   }

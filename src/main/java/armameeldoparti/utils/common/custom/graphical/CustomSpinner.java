@@ -47,13 +47,13 @@ public class CustomSpinner extends JSpinner {
       /**
        * Configures the spinner 'previous' button to fit the program aesthetics.
        *
-       * @see CommonFunctions#buildArrowButton(int)
+       * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
        * @return The spiner 'previous' button.
        */
       @Override
       protected Component createPreviousButton() {
-        JButton previousButton = CommonFunctions.buildArrowButton(SwingConstants.SOUTH, this);
+        JButton previousButton = CommonFunctions.buildCustomArrowButton(SwingConstants.SOUTH, this);
 
         previousButton.addActionListener(e -> {
           try {
@@ -70,13 +70,13 @@ public class CustomSpinner extends JSpinner {
       /**
        * Configures the spinner 'next' button to fit the program aesthetics.
        *
-       * @see CommonFunctions#buildArrowButton(int)
+       * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
        * @return The spiner 'next' button.
        */
       @Override
       protected Component createNextButton() {
-        JButton nextButton = CommonFunctions.buildArrowButton(SwingConstants.NORTH, this);
+        JButton nextButton = CommonFunctions.buildCustomArrowButton(SwingConstants.NORTH, this);
 
         nextButton.addActionListener(e -> {
           try {

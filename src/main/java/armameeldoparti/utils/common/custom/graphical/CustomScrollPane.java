@@ -64,7 +64,7 @@ public class CustomScrollPane extends JScrollPane {
       /**
        * Configures the scrollbar decrease button to fit the program aesthetics.
        *
-       * @see CommonFunctions#buildArrowButton(int)
+       * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
        * @param orientation The button arrow orientation.
        *
@@ -72,7 +72,7 @@ public class CustomScrollPane extends JScrollPane {
        */
       @Override
       protected JButton createDecreaseButton(int orientation) {
-        return CommonFunctions.buildArrowButton(orientation, this);
+        return CommonFunctions.buildCustomArrowButton(orientation, this);
       }
 
       /**

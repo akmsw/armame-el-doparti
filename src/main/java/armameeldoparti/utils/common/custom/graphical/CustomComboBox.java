@@ -39,6 +39,8 @@ public class CustomComboBox<E> extends JComboBox<E> {
 
   /**
    * Configures the graphical properties for the combobox in order to fit the program aesthetics.
+   *
+   * @see CommonFunctions#buildCustomArrowButton(int, Object)
    */
   private void setUpGraphicalProperties() {
     setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
@@ -47,7 +49,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
     setUI(new BasicComboBoxUI() {
       @Override
       protected JButton createArrowButton() {
-        return CommonFunctions.buildArrowButton(SwingConstants.SOUTH, this);
+        return CommonFunctions.buildCustomArrowButton(SwingConstants.SOUTH, this);
       }
     });
   }
