@@ -111,9 +111,6 @@ public final class Constants {
   public static final Color GREEN_LIGHT = new Color(176, 189, 162);
   public static final Color YELLOW_LIGHT = new Color(255, 238, 153);
 
-  public static final ImageIcon ICON = CommonFunctions.createImageIcon(
-      FILENAME_ICON_MAIN
-  );
   public static final ImageIcon ICON_CB_D_S = CommonFunctions.createImageIcon(
       FILENAME_ICON_CB_DISABLED_SELECTED
   );
@@ -138,13 +135,11 @@ public final class Constants {
   public static final ImageIcon ICON_CB_E_US_UF = CommonFunctions.createImageIcon(
       FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED
   );
-
-  /**
-   * Scaled program icon.
-   */
-  public static final ImageIcon ICON_SCALED = new ImageIcon(
-      ICON.getImage()
-          .getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH)
+  public static final ImageIcon ICON_MAIN = CommonFunctions.createImageIcon(
+      FILENAME_ICON_MAIN
+  );
+  public static final ImageIcon ICON_DIALOG = CommonFunctions.scaleImageIcon(
+      ICON_MAIN, ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH
   );
 
   /**

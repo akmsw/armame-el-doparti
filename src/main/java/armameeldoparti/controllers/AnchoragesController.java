@@ -185,7 +185,7 @@ public class AnchoragesController extends Controller {
         "Antes de continuar...",
         JOptionPane.OK_CANCEL_OPTION,
         JOptionPane.QUESTION_MESSAGE,
-        Constants.ICON_SCALED, optionsDelete,
+        Constants.ICON_DIALOG, optionsDelete,
         optionsDelete[0]
     );
 

@@ -6,6 +6,7 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -122,7 +123,7 @@ public class MainMenuView extends View {
     getMasterPanel().add(
         new JLabel(
             "",
-            CommonFunctions.scaleImageIcon(Constants.ICON, 500, 500),
+            CommonFunctions.scaleImageIcon(Constants.ICON_MAIN, 500, 500, Image.SCALE_DEFAULT),
             SwingConstants.CENTER
         ),
         Constants.MIG_LAYOUT_GROWX

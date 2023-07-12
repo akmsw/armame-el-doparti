@@ -131,7 +131,7 @@ public class NamesInputController extends Controller {
         parentComponent,
         "Seleccione el criterio de distribución de jugadores",
         "Antes de continuar...", JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.QUESTION_MESSAGE, Constants.ICON_SCALED,
+        JOptionPane.QUESTION_MESSAGE, Constants.ICON_DIALOG,
         OPTIONS_MIX, OPTIONS_MIX[0]
     );
 

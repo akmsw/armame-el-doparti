@@ -163,13 +163,17 @@ public final class CommonFunctions {
    * @param icon   Icon to scale.
    * @param width  New width.
    * @param height New height.
+   * @param hints  Scaling method.
    *
    * @return The scaled icon.
    */
   @NonNull
-  public static ImageIcon scaleImageIcon(@NonNull ImageIcon icon, int width, int height) {
+  public static ImageIcon scaleImageIcon(@NonNull ImageIcon icon,
+                                         int width,
+                                         int height,
+                                         int hints) {
     return new ImageIcon(icon.getImage()
-                             .getScaledInstance(width, height, Image.SCALE_DEFAULT));
+                             .getScaledInstance(width, height, hints));
   }
 
   /**
