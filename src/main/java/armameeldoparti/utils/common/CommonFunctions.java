@@ -108,40 +108,6 @@ public final class CommonFunctions {
   }
 
   /**
-   * Builds a custom arrow button that fits the program aesthetics based on the parent UI component.
-   *
-   * <p>The arrow will be light green. The button and the shadows will be dark green if its parent
-   * UI component is a BasicComboBoxUI, otherwise they will be medium green.
-   *
-   * @param <T>             Generic parent UI component type.
-   * @param orientation     The button arrow orientation.
-   * @param parentComponent Parent UI component.
-   *
-   * @return The custom arrow button.
-   */
-  @NonNull
-  public static <T> JButton buildArrowButton(int orientation, @NonNull T parentComponent) {
-    Color backgroundColor = parentComponent instanceof BasicComboBoxUI ? Constants.GREEN_DARK
-                                                                       : Constants.GREEN_MEDIUM;
-
-    JButton arrowButton = new BasicArrowButton(orientation,
-                                               backgroundColor,
-                                               backgroundColor,
-                                               Constants.GREEN_LIGHT,
-                                               backgroundColor);
-
-    arrowButton.setBorder(
-        parentComponent instanceof BasicComboBoxUI
-        ? new LineBorder(Constants.GREEN_MEDIUM)
-        : BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                          Constants.GREEN_MEDIUM,
-                                          Constants.GREEN_DARK)
-    );
-
-    return arrowButton;
-  }
-
-  /**
    * Builds a string that represents the MiG layout constraints for the graphical component.
    *
    * @param constraints MiG Layout constraints for the component.
@@ -234,6 +200,41 @@ public final class CommonFunctions {
     }
 
     return optional.get();
+  }
+
+  /**
+   * Builds a custom arrow button that fits the program aesthetics based on the parent UI component.
+   *
+   * <p>The arrow will be light green. The button and the shadows will be dark green if its parent
+   * UI component is a BasicComboBoxUI, otherwise they will be medium green.
+   *
+   * @param <T>             Generic parent UI component type.
+   * @param orientation     The button arrow orientation.
+   * @param parentComponent Parent UI component.
+   *
+   * @return The custom arrow button.
+   */
+  @NonNull
+  public static <T> JButton buildArrowButton(int orientation, @NonNull T parentComponent) {
+    Color backgroundColor = parentComponent instanceof BasicComboBoxUI ? Constants.GREEN_DARK
+                                                                       : Constants.GREEN_MEDIUM;
+
+    JButton arrowButton = new BasicArrowButton(orientation,
+                                               backgroundColor,
+                                               backgroundColor,
+                                               Constants.GREEN_LIGHT,
+                                               backgroundColor);
+
+    arrowButton.setBorder(
+        parentComponent instanceof BasicComboBoxUI ? new LineBorder(Constants.GREEN_MEDIUM)
+                                                   : BorderFactory.createBevelBorder(
+                                                       BevelBorder.RAISED,
+                                                       Constants.GREEN_MEDIUM,
+                                                       Constants.GREEN_DARK
+                                                     )
+    );
+
+    return arrowButton;
   }
 
   /**
