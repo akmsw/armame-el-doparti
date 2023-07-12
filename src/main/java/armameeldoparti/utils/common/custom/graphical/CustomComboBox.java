@@ -1,5 +1,6 @@
 package armameeldoparti.utils.common.custom.graphical;
 
+import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -46,7 +47,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
     setUI(new BasicComboBoxUI() {
       @Override
       protected JButton createArrowButton() {
-        return new CustomArrowButton(SwingConstants.SOUTH);
+        return CommonFunctions.buildArrowButton(SwingConstants.SOUTH, this);
       }
     });
   }

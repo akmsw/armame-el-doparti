@@ -6,6 +6,7 @@ import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.views.View;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import lombok.NonNull;
 
 /**
@@ -105,25 +108,35 @@ public final class CommonFunctions {
   }
 
   /**
-   * Builds a custom arrow button that fits the program aesthetics.
+   * Builds a custom arrow button that fits the program aesthetics based on the parent UI component.
    *
-   * <p>The button and the shadows will be medium green. The arrow will be light green.
+   * <p>The arrow will be light green. The button and the shadows will be dark green if its parent
+   * UI component is a BasicComboBoxUI, otherwise they will be medium green.
    *
-   * @param orientation The button arrow orientation.
+   * @param <T>             Generic parent UI component type.
+   * @param orientation     The button arrow orientation.
+   * @param parentComponent Parent UI component.
    *
    * @return The custom arrow button.
    */
   @NonNull
-  public static JButton buildArrowButton(int orientation) {
-    JButton arrowButton = new BasicArrowButton(orientation,
-                                               Constants.GREEN_MEDIUM,
-                                               Constants.GREEN_MEDIUM,
-                                               Constants.GREEN_LIGHT,
-                                               Constants.GREEN_MEDIUM);
+  public static <T> JButton buildArrowButton(int orientation, @NonNull T parentComponent) {
+    Color backgroundColor = parentComponent instanceof BasicComboBoxUI ? Constants.GREEN_DARK
+                                                                       : Constants.GREEN_MEDIUM;
 
-    arrowButton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                          Constants.GREEN_MEDIUM,
-                                                          Constants.GREEN_DARK));
+    JButton arrowButton = new BasicArrowButton(orientation,
+                                               backgroundColor,
+                                               backgroundColor,
+                                               Constants.GREEN_LIGHT,
+                                               backgroundColor);
+
+    arrowButton.setBorder(
+        parentComponent instanceof BasicComboBoxUI
+        ? new LineBorder(Constants.GREEN_MEDIUM)
+        : BorderFactory.createBevelBorder(BevelBorder.RAISED,
+                                          Constants.GREEN_MEDIUM,
+                                          Constants.GREEN_DARK)
+    );
 
     return arrowButton;
   }

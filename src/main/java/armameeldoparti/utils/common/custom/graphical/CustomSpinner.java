@@ -53,7 +53,7 @@ public class CustomSpinner extends JSpinner {
        */
       @Override
       protected Component createPreviousButton() {
-        JButton previousButton = CommonFunctions.buildArrowButton(SwingConstants.SOUTH);
+        JButton previousButton = CommonFunctions.buildArrowButton(SwingConstants.SOUTH, this);
 
         previousButton.addActionListener(e -> {
           try {
@@ -76,7 +76,7 @@ public class CustomSpinner extends JSpinner {
        */
       @Override
       protected Component createNextButton() {
-        JButton nextButton = CommonFunctions.buildArrowButton(SwingConstants.NORTH);
+        JButton nextButton = CommonFunctions.buildArrowButton(SwingConstants.NORTH, this);
 
         nextButton.addActionListener(e -> {
           try {

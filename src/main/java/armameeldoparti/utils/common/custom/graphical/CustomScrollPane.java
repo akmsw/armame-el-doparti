@@ -72,7 +72,7 @@ public class CustomScrollPane extends JScrollPane {
        */
       @Override
       protected JButton createDecreaseButton(int orientation) {
-        return CommonFunctions.buildArrowButton(orientation);
+        return CommonFunctions.buildArrowButton(orientation, this);
       }
 
       /**
