@@ -8,7 +8,6 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.views.View;
 import java.awt.Component;
 import java.awt.GraphicsEnvironment;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
