@@ -8,14 +8,17 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.views.View;
 import java.awt.Component;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -111,6 +114,7 @@ public final class CommonFunctions {
    *
    * @return The custom arrow button.
    */
+  @NonNull
   public static JButton buildArrowButton(int orientation) {
     JButton arrowButton = new BasicArrowButton(orientation,
                                                Constants.GREEN_MEDIUM,
@@ -132,8 +136,40 @@ public final class CommonFunctions {
    *
    * @return The fully built component constraints.
    */
+  @NonNull
   public static String buildMigLayoutConstraints(@NonNull String... constraints) {
     return String.join(", ", constraints);
+  }
+
+  /**
+   * Given an icon filename, creates an ImageIcon with it.
+   *
+   * @param iconFileName Name of the icon file to use.
+   *
+   * @return The ImageIcon of the specified file.
+   */
+  @NonNull
+  public static ImageIcon createImageIcon(@NonNull String iconFileName) {
+    return Objects.requireNonNull(
+      new ImageIcon(Constants.class
+                             .getClassLoader()
+                             .getResource(Constants.PATH_IMG + Constants.PATH_ICO + iconFileName))
+    );
+  }
+
+  /**
+   * Scales an icon to the specified width and height.
+   *
+   * @param icon   Icon to scale.
+   * @param width  New width.
+   * @param height New height.
+   *
+   * @return The scaled icon.
+   */
+  @NonNull
+  public static ImageIcon scaleImageIcon(@NonNull ImageIcon icon, int width, int height) {
+    return new ImageIcon(icon.getImage()
+                             .getScaledInstance(width, height, Image.SCALE_DEFAULT));
   }
 
   /**

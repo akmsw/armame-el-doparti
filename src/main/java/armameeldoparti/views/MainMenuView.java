@@ -6,9 +6,6 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
-import java.util.Objects;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -117,30 +114,19 @@ public class MainMenuView extends View {
 
   /**
    * Adds the background image to the panel.
+   *
+   * <p>TODO: The background image should not be scaled. If needed, the scale should not be
+   * hardcoded.
    */
   private void addBackgroundImage() {
-    ImageIcon backgroundImageIcon = new ImageIcon(
-        Objects.requireNonNull(
-          getClass().getClassLoader()
-                    .getResource(Constants.PATH_IMG
-                                 + Constants.PATH_ICO
-                                 + Constants.FILENAME_ICON_MAIN),
-          Constants.MSG_ERROR_NULL_RESOURCE
-        )
+    getMasterPanel().add(
+        new JLabel(
+            "",
+            CommonFunctions.scaleImageIcon(Constants.ICON, 500, 500),
+            SwingConstants.CENTER
+        ),
+        Constants.MIG_LAYOUT_GROWX
     );
-
-    /*
-     * TODO:
-     *  The background image should not be scaled. If needed, the scale should not be hardcoded.
-     */
-    ImageIcon scaledBackgroundImage = new ImageIcon(
-        backgroundImageIcon.getImage()
-                           .getScaledInstance(500, 500, Image.SCALE_DEFAULT)
-    );
-
-    JLabel backgroundImageLabel = new JLabel("", scaledBackgroundImage, SwingConstants.CENTER);
-
-    getMasterPanel().add(backgroundImageLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
   /**

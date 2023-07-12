@@ -33,12 +33,12 @@ public class CustomCheckBox extends JCheckBox {
    * Configures the graphical properties of the checkbox in order to fit the program aesthetics.
    */
   private void setUpGraphicalProperties() {
-    setIcon(Constants.ICON_CB_ENABLED_UNSELECTED_UNFOCUSED);
-    setSelectedIcon(Constants.ICON_CB_ENABLED_SELECTED_UNFOCUSED);
-    setDisabledIcon(Constants.ICON_CB_DISABLED_UNSELECTED);
-    setDisabledSelectedIcon(Constants.ICON_CB_DISABLED_SELECTED);
-    setRolloverIcon(Constants.ICON_CB_ENABLED_UNSELECTED_FOCUSED);
-    setRolloverSelectedIcon(Constants.ICON_CB_ENABLED_SELECTED_FOCUSED);
-    setPressedIcon(Constants.ICON_CB_ENABLED_UNSELECTED_PRESSED);
+    setIcon(Constants.ICON_CB_E_US_UF);
+    setSelectedIcon(Constants.ICON_CB_E_S_UF);
+    setDisabledIcon(Constants.ICON_CB_D_US);
+    setDisabledSelectedIcon(Constants.ICON_CB_D_S);
+    setRolloverIcon(Constants.ICON_CB_E_US_F);
+    setRolloverSelectedIcon(Constants.ICON_CB_E_S_F);
+    setPressedIcon(Constants.ICON_CB_E_US_P);
   }
 }
