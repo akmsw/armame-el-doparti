@@ -53,7 +53,7 @@ public class CustomSpinner extends JSpinner {
        *
        * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
-       * @return The spiner 'previous' button.
+       * @return The spinner 'previous' button.
        */
       @Override
       @SuppressWarnings("unchecked")
@@ -87,7 +87,7 @@ public class CustomSpinner extends JSpinner {
        *
        * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
-       * @return The spiner 'next' button.
+       * @return The spinner 'next' button.
        */
       @Override
       @SuppressWarnings("unchecked")
