@@ -42,7 +42,7 @@ public class CustomSpinner extends JSpinner {
    */
   private void setUpGraphicalProperties() {
     ((DefaultEditor) getEditor()).getTextField()
-                                 .setEditable(false);
+        .setEditable(false);
     setUI(new BasicSpinnerUI() {
       /**
        * Configures the spinner 'previous' button to fit the program aesthetics.
@@ -52,15 +52,22 @@ public class CustomSpinner extends JSpinner {
        * @return The spiner 'previous' button.
        */
       @Override
+      @SuppressWarnings("unchecked")
       protected Component createPreviousButton() {
         JButton previousButton = CommonFunctions.buildCustomArrowButton(SwingConstants.SOUTH, this);
 
         previousButton.addActionListener(e -> {
-          try {
-            spinner.commitEdit();
-            spinner.setValue(getPreviousValue());
-          } catch (Exception ex) {
-            CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
+          SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
+          Comparable<Object> minimum = (Comparable<Object>) model.getMinimum();
+          Comparable<Object> currentValue = (Comparable<Object>) model.getValue();
+
+          if (currentValue.compareTo(minimum) > 0) {
+            try {
+              spinner.commitEdit();
+              spinner.setValue(model.getPreviousValue());
+            } catch (Exception ex) {
+              CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
+            }
           }
         });
 
@@ -75,15 +82,22 @@ public class CustomSpinner extends JSpinner {
        * @return The spiner 'next' button.
        */
       @Override
+      @SuppressWarnings("unchecked")
       protected Component createNextButton() {
         JButton nextButton = CommonFunctions.buildCustomArrowButton(SwingConstants.NORTH, this);
 
         nextButton.addActionListener(e -> {
-          try {
-            spinner.commitEdit();
-            spinner.setValue(getNextValue());
-          } catch (Exception ex) {
-            CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
+          SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
+          Comparable<Object> maximum = (Comparable<Object>) model.getMaximum();
+          Comparable<Object> currentValue = (Comparable<Object>) model.getValue();
+
+          if (currentValue.compareTo(maximum) < 0) {
+            try {
+              spinner.commitEdit();
+              spinner.setValue(model.getNextValue());
+            } catch (Exception ex) {
+              CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
+            }
           }
         });
 
