@@ -48,6 +48,9 @@ public class CustomSpinner extends JSpinner {
       /**
        * Configures the spinner 'previous' button to fit the program aesthetics.
        *
+       * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
+       * time the type of the model minimum (a Comparable<?>) and the current value (an Object).
+       *
        * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
        * @return The spiner 'previous' button.
@@ -58,6 +61,7 @@ public class CustomSpinner extends JSpinner {
         JButton previousButton = CommonFunctions.buildCustomArrowButton(SwingConstants.SOUTH, this);
 
         previousButton.addActionListener(e -> {
+          // We know for sure that this custom spinner has a SpinnerNumberModel
           SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
           Comparable<Object> minimum = (Comparable<Object>) model.getMinimum();
           Comparable<Object> currentValue = (Comparable<Object>) model.getValue();
@@ -78,6 +82,9 @@ public class CustomSpinner extends JSpinner {
       /**
        * Configures the spinner 'next' button to fit the program aesthetics.
        *
+       * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
+       * time the type of the model maximum (a Comparable<?>) and the current value (an Object).
+       *
        * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
        * @return The spiner 'next' button.
@@ -88,6 +95,7 @@ public class CustomSpinner extends JSpinner {
         JButton nextButton = CommonFunctions.buildCustomArrowButton(SwingConstants.NORTH, this);
 
         nextButton.addActionListener(e -> {
+          // We know for sure that this custom spinner has a SpinnerNumberModel
           SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
           Comparable<Object> maximum = (Comparable<Object>) model.getMaximum();
           Comparable<Object> currentValue = (Comparable<Object>) model.getValue();
