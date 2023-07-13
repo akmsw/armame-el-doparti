@@ -3,6 +3,7 @@ package armameeldoparti.utils.common.custom.graphical;
 import armameeldoparti.models.Error;
 import armameeldoparti.utils.common.CommonFunctions;
 import java.awt.Component;
+import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -65,7 +66,7 @@ public class CustomSpinner extends JSpinner {
             try {
               spinner.commitEdit();
               spinner.setValue(model.getPreviousValue());
-            } catch (Exception ex) {
+            } catch (ParseException ex) {
               CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
             }
           }
@@ -95,7 +96,7 @@ public class CustomSpinner extends JSpinner {
             try {
               spinner.commitEdit();
               spinner.setValue(model.getNextValue());
-            } catch (Exception ex) {
+            } catch (ParseException ex) {
               CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
             }
           }
