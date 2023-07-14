@@ -43,13 +43,13 @@ public class CustomSpinner extends JSpinner {
    */
   private void setUpGraphicalProperties() {
     ((DefaultEditor) getEditor()).getTextField()
-        .setEditable(false);
+                                 .setEditable(false);
     setUI(new BasicSpinnerUI() {
       /**
        * Configures the spinner 'previous' button to fit the program aesthetics.
        *
        * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
-       * time the type of the model minimum (a Comparable<?>) and the current value (an Object).
+       * time the type of the model minimum (a Comparable) and the current value (an Object).
        *
        * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
@@ -83,7 +83,7 @@ public class CustomSpinner extends JSpinner {
        * Configures the spinner 'next' button to fit the program aesthetics.
        *
        * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
-       * time the type of the model maximum (a Comparable<?>) and the current value (an Object).
+       * time the type of the model maximum (a Comparable) and the current value (an Object).
        *
        * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
