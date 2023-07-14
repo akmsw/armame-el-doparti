@@ -115,19 +115,10 @@ public class MainMenuView extends View {
 
   /**
    * Adds the background image to the panel.
-   *
-   * <p>TODO: The background image scale, if needed, should not be hardcoded.
    */
   private void addBackgroundImage() {
     getMasterPanel().add(
-        new JLabel(
-            "",
-            CommonFunctions.scaleImageIcon(Constants.ICON_BACKGROUND,
-                                           500,
-                                           435,
-                                           Image.SCALE_SMOOTH),
-            SwingConstants.CENTER
-        ),
+        new JLabel("", Constants.ICON_BACKGROUND, SwingConstants.CENTER),
         Constants.MIG_LAYOUT_GROWX
     );
   }

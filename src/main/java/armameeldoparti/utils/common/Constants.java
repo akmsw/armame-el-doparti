@@ -61,7 +61,7 @@ public final class Constants {
   public static final int SKILL_MIN = 1;
   public static final int SKILL_STEP = 1;
 
-  public static final float FONT_SIZE = 16f;
+  public static final float FONT_SIZE = 18f;
 
   public static final String ERROR_MESSAGE_TITLE = "¡Error!";
   public static final String FILENAME_FONT = "comfortaa.ttf";
@@ -105,7 +105,7 @@ public final class Constants {
   public static final String MIG_LAYOUT_SPAN2 = MIG_LAYOUT_SPAN + "2";
   public static final String MIG_LAYOUT_WEST = "west";
   public static final String MIG_LAYOUT_WRAP = "wrap";
-  public static final String MIG_LAYOUT_WRAP2 = MIG_LAYOUT_WRAP + " 2";
+  public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
 
   public static final Color GREEN_DARK = new Color(41, 71, 74);
   public static final Color GREEN_MEDIUM = new Color(109, 130, 118);
