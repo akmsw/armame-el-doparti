@@ -116,7 +116,7 @@ public class MainMenuView extends View {
   /**
    * Adds the background image to the panel.
    *
-   * <p>TODO: The background image scale, if needed, should not be scaled hardcoded.
+   * <p>TODO: The background image scale, if needed, should not be hardcoded.
    */
   private void addBackgroundImage() {
     getMasterPanel().add(

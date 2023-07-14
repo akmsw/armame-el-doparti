@@ -37,6 +37,8 @@ public final class Constants {
   private static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_FOCUSED = "cb_e_us_f.png";
   private static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_PRESSED = "cb_e_us_p.png";
   private static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED = "cb_e_us_uf.png";
+  private static final String FILENAME_ICON_MAIN = "main_icon.png";
+  private static final String FILENAME_IMAGE_BACKGROUND = "bg.png";
   private static final String MIG_LAYOUT_ALIGN = "align";
   private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
   private static final String MSG_ERROR_FATAL_INTERNAL = "ERROR FATAL INTERNO";
@@ -62,8 +64,6 @@ public final class Constants {
   public static final float FONT_SIZE = 16f;
 
   public static final String ERROR_MESSAGE_TITLE = "¡Error!";
-  public static final String FILENAME_BACKGROUND = "bg.png";
-  public static final String FILENAME_ICON_MAIN = "main_icon.png";
   public static final String FILENAME_FONT = "comfortaa.ttf";
   public static final String FILENAME_PDA = "dist.pda";
   public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
@@ -72,7 +72,7 @@ public final class Constants {
   public static final String MSG_ERROR_INVALID_STRING = "El nombre del jugador debe estar formado"
                                                         + " por letras de la A a la Z";
   public static final String MSG_ERROR_INVALID_NAME = "El nombre del jugador no puede estar vacío,"
-                                                      + " tener más de " + Constants.MAX_NAME_LEN
+                                                      + " tener más de " + MAX_NAME_LEN
                                                       + " caracteres, o estar repetido";
   public static final String PATH_DOCS = "docs/";
   public static final String PATH_HELP_DOCS = PATH_DOCS + "help/";
@@ -113,7 +113,7 @@ public final class Constants {
   public static final Color YELLOW_LIGHT = new Color(255, 238, 153);
 
   public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(
-      FILENAME_BACKGROUND
+      FILENAME_IMAGE_BACKGROUND
   );
   public static final ImageIcon ICON_CB_D_S = CommonFunctions.createImageIcon(
       FILENAME_ICON_CB_DISABLED_SELECTED
