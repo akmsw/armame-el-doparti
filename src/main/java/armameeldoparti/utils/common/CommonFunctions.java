@@ -119,7 +119,25 @@ public final class CommonFunctions {
   }
 
   /**
-   * Given an icon filename, creates an ImageIcon with it.
+   * Given an image filename, creates an ImageIcon with it.
+   *
+   * @param imageFileName Name of the image file.
+   *
+   * @return The ImageIcon of the specified file.
+   */
+  @NonNull
+  public static ImageIcon createImage(@NonNull String imageFileName) {
+    return Objects.requireNonNull(
+      new ImageIcon(Constants.class
+                             .getClassLoader()
+                             .getResource(Constants.PATH_IMG + imageFileName))
+    );
+  }
+
+  /**
+   * Given an icon filename, appends the icons folder path to it and creates an ImageIcon.
+   *
+   * @see #createImage(String)
    *
    * @param iconFileName Name of the icon file to use.
    *
@@ -127,11 +145,7 @@ public final class CommonFunctions {
    */
   @NonNull
   public static ImageIcon createImageIcon(@NonNull String iconFileName) {
-    return Objects.requireNonNull(
-      new ImageIcon(Constants.class
-                             .getClassLoader()
-                             .getResource(Constants.PATH_IMG + Constants.PATH_ICO + iconFileName))
-    );
+    return createImage(Constants.PATH_ICO + iconFileName);
   }
 
   /**

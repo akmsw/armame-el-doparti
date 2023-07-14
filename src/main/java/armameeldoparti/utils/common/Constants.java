@@ -62,6 +62,7 @@ public final class Constants {
   public static final float FONT_SIZE = 16f;
 
   public static final String ERROR_MESSAGE_TITLE = "¡Error!";
+  public static final String FILENAME_BACKGROUND = "bg.png";
   public static final String FILENAME_ICON_MAIN = "main_icon.png";
   public static final String FILENAME_FONT = "comfortaa.ttf";
   public static final String FILENAME_PDA = "dist.pda";
@@ -111,6 +112,9 @@ public final class Constants {
   public static final Color GREEN_LIGHT = new Color(176, 189, 162);
   public static final Color YELLOW_LIGHT = new Color(255, 238, 153);
 
+  public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(
+      FILENAME_BACKGROUND
+  );
   public static final ImageIcon ICON_CB_D_S = CommonFunctions.createImageIcon(
       FILENAME_ICON_CB_DISABLED_SELECTED
   );
