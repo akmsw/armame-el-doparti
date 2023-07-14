@@ -6,7 +6,6 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
