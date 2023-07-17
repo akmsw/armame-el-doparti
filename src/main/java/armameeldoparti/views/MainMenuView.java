@@ -29,7 +29,7 @@ public class MainMenuView extends View {
    * Builds the main menu view.
    */
   public MainMenuView() {
-    super(Constants.PROGRAM_TITLE, Constants.MIG_LAYOUT_WRAP);
+    super(CommonFunctions.capitalize(Constants.PROGRAM_TITLE), Constants.MIG_LAYOUT_WRAP);
     initializeInterface();
   }
 
@@ -91,7 +91,7 @@ public class MainMenuView extends View {
     addBackgroundImage();
     addBackgroundLabel(
         Constants.SIZE_FONT_TITLE_LABEL,
-        Constants.PROGRAM_TITLE.toLowerCase(),
+        Constants.PROGRAM_TITLE,
         Constants.MIG_LAYOUT_ALIGN_CENTER,
         Constants.GREEN_DARK,
         null

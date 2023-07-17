@@ -29,6 +29,7 @@ public final class Constants {
    */
   private static final int ICON_SCALE = 50;
 
+  private static final String PROGRAM_AUTHOR_GITHUB_USERNAME = "akmsw";
   private static final String FILENAME_ICON_CB_DISABLED_SELECTED = "cb_d_s.png";
   private static final String FILENAME_ICON_CB_DISABLED_UNSELECTED = "cb_d_us.png";
   private static final String FILENAME_ICON_CB_ENABLED_SELECTED_FOCUSED = "cb_e_s_f.png";
@@ -84,14 +85,15 @@ public final class Constants {
   public static final String POSITION_GOALKEEPERS = "ARQUEROS";
   public static final String POSITION_LATERAL_DEFENDERS = "DEFENSORES LATERALES";
   public static final String POSITION_MIDFIELDERS = "MEDIOCAMPISTAS";
-  public static final String PROGRAM_TITLE = "Armame el doparti";
+  public static final String PROGRAM_TITLE = "armame el doparti"; // Must be on lowercase
   public static final String PROGRAM_VERSION = "v3.0";
-  public static final String PROGRAM_AUTHOR = "@akmsw";
+  public static final String PROGRAM_AUTHOR = "@" + PROGRAM_AUTHOR_GITHUB_USERNAME;
   public static final String REGEX_NAMES_VALIDATION = "[a-z A-ZÁÉÍÓÚáéíóúñÑ]+";
   public static final String REGEX_PDA_DATA_RETRIEVE = "[CLMFG].+>.+";
   public static final String REGEX_PLAYERS_AMOUNT = "(?!(?<=" + PLAYERS_PER_TEAM + ")\\d).";
-  public static final String URL_CONTACT = "https://github.com/akmsw";
-  public static final String URL_ISSUES = URL_CONTACT + "/armame-el-doparti/issues";
+  public static final String URL_CONTACT = "https://github.com/" + PROGRAM_AUTHOR_GITHUB_USERNAME;
+  public static final String URL_ISSUES = URL_CONTACT + "/" + PROGRAM_TITLE.replace(" ", "-")
+                                          + "/issues";
   public static final String MIG_LAYOUT_CENTER = "center";
   public static final String MIG_LAYOUT_EAST = "east";
   public static final String MIG_LAYOUT_GROW = "grow";

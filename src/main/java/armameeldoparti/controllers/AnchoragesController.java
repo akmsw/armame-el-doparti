@@ -472,9 +472,9 @@ public class AnchoragesController extends Controller {
   }
 
   /**
-   * Checks if half (or more) of any players set is selected or not.
+   * Checks if more than half of any players set is selected or not.
    *
-   * @return Whether half (or more) of any players set is checked, or not.
+   * @return Whether more than half of any players set is checked, or not.
    */
   private boolean validCheckedPlayersPerPosition() {
     return ((AnchoragesView) getView()).getCheckboxesMap()

@@ -119,6 +119,22 @@ public final class CommonFunctions {
   }
 
   /**
+   * Capitalizes the first letter of the given string if it's not empty.
+   *
+   * @param input The string to capitalize.
+   *
+   * @return The given string with the first letter uppercase and the rest lowercase.
+   */
+  @NonNull
+  public static String capitalize(@NonNull String input) {
+    return input.isEmpty() ? input
+                           : input.substring(0, 1)
+                                  .toUpperCase()
+                             + input.substring(1)
+                                    .toLowerCase();
+  }
+
+  /**
    * Given an image filename, creates an ImageIcon with it.
    *
    * @param imageFileName Name of the image file.
