@@ -1,7 +1,6 @@
 package armameeldoparti.models;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 /**
@@ -37,8 +36,7 @@ public class Player {
    * @param name     Player name.
    * @param position Player position.
    */
-  public Player(@NonNull String name,
-                @NonNull Position position) {
+  public Player(String name, Position position) {
     setName(name);
     setPosition(position);
     setAnchored(false);

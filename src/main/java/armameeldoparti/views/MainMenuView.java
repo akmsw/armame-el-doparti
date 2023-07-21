@@ -10,7 +10,6 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import lombok.NonNull;
 import net.miginfocom.layout.CC;
 
 /**
@@ -134,9 +133,9 @@ public class MainMenuView extends View {
    * @param tooltip     Optional label tooltip.
    */
   private void addBackgroundLabel(int fontSize,
-                                  @NonNull String text,
-                                  @NonNull String constraints,
-                                  @NonNull Color color,
+                                  String text,
+                                  String constraints,
+                                  Color color,
                                   String tooltip) {
     JLabel label = new JLabel(text.toLowerCase());
 

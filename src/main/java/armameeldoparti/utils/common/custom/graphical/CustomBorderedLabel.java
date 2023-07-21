@@ -2,7 +2,6 @@ package armameeldoparti.utils.common.custom.graphical;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import lombok.NonNull;
 
 /**
  * Custom bordered label class.
@@ -36,7 +35,7 @@ public class CustomBorderedLabel extends JLabel {
    * @param text      The label text.
    * @param alignment The label text alignment.
    */
-  public CustomBorderedLabel(@NonNull String text, int alignment) {
+  public CustomBorderedLabel(String text, int alignment) {
     super(text);
     setUpGraphicalProperties(alignment);
   }

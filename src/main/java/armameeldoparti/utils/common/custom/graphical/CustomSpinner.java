@@ -9,7 +9,6 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicSpinnerUI;
-import lombok.NonNull;
 
 /**
  * Custom spinner class.
@@ -31,7 +30,7 @@ public class CustomSpinner extends JSpinner {
    *
    * @param spinnerNumberModel The number model used for the spinner.
    */
-  public CustomSpinner(@NonNull SpinnerNumberModel spinnerNumberModel) {
+  public CustomSpinner(SpinnerNumberModel spinnerNumberModel) {
     super(spinnerNumberModel);
     setUpGraphicalProperties();
   }

@@ -9,7 +9,6 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
-import lombok.NonNull;
 
 /**
  * Custom scroll pane class.
@@ -32,7 +31,7 @@ public class CustomScrollPane extends JScrollPane {
    *
    * @param textArea Text area associated to the scroll pane that will be controlled.
    */
-  public CustomScrollPane(@NonNull JTextArea textArea) {
+  public CustomScrollPane(JTextArea textArea) {
     super(textArea,
           ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
           ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

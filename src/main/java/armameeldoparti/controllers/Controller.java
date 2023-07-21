@@ -5,7 +5,6 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.views.View;
 import java.awt.Rectangle;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 /**
@@ -33,7 +32,7 @@ public abstract class Controller {
    *
    * @param view View to control.
    */
-  protected Controller(@NonNull View view) {
+  protected Controller(View view) {
     setView(view);
   }
 

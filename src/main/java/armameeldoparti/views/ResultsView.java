@@ -9,7 +9,6 @@ import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 /**
@@ -87,7 +86,6 @@ public class ResultsView extends View {
    *
    * @return The updated frame title.
    */
-  @NonNull
   private static String getUpdatedFrameTitle() {
     return (CommonFields.getDistribution() == Constants.MIX_RANDOM
             ? "Aleatorio - "

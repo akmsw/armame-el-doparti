@@ -10,7 +10,6 @@ import armameeldoparti.utils.common.Constants;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
-import lombok.NonNull;
 
 /**
  * Random distribution class.
@@ -52,8 +51,7 @@ public class RandomMixer implements PlayersMixer {
    * @return The updated teams with the players distributed randomly without considering anchorages.
    */
   @Override
-  @NonNull
-  public List<Team> withoutAnchorages(@NonNull List<Team> teams) {
+  public List<Team> withoutAnchorages(List<Team> teams) {
     Player chosenPlayer;
 
     shuffleTeamNumbers(teams.size());
@@ -113,8 +111,7 @@ public class RandomMixer implements PlayersMixer {
    * @return The updated teams with the players distributed randomly considering anchorages.
    */
   @Override
-  @NonNull
-  public List<Team> withAnchorages(@NonNull List<Team> teams) {
+  public List<Team> withAnchorages(List<Team> teams) {
     List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
 
     for (List<Player> aps : anchoredPlayers) {
@@ -193,8 +190,7 @@ public class RandomMixer implements PlayersMixer {
    *
    * @return If a set of anchored players can be added to a team.
    */
-  private boolean anchorageCanBeAdded(@NonNull Team team,
-                                      @NonNull List<Player> anchoredPlayers) {
+  private boolean anchorageCanBeAdded(Team team, List<Player> anchoredPlayers) {
     return !(anchorageOverflowsTeamSize(team, anchoredPlayers)
              || anchorageOverflowsAnyPositionSet(team, anchoredPlayers));
   }
@@ -209,8 +205,7 @@ public class RandomMixer implements PlayersMixer {
    *  @return If the amount of anchored players to be added to a team would exceed the maximum
    *          allowed amount of players per team.
    */
-  private boolean anchorageOverflowsTeamSize(@NonNull Team team,
-                                             @NonNull List<Player> anchoredPlayers) {
+  private boolean anchorageOverflowsTeamSize(Team team, List<Player> anchoredPlayers) {
     return team.getPlayersCount() + anchoredPlayers.size() > Constants.PLAYERS_PER_TEAM;
   }
 
@@ -224,8 +219,7 @@ public class RandomMixer implements PlayersMixer {
    * @return If the amount of anchored players to be added to a team would exceed the maximum
    *         allowed amount of players per team in any position set.
    */
-  private boolean anchorageOverflowsAnyPositionSet(@NonNull Team team,
-                                                   @NonNull List<Player> anchoredPlayers) {
+  private boolean anchorageOverflowsAnyPositionSet(Team team, List<Player> anchoredPlayers) {
     return anchoredPlayers.stream()
                           .anyMatch(p -> team.isPositionFull(p.getPosition())
                                          || anchorageOverflowsPositionSet(team, anchoredPlayers,
@@ -243,9 +237,9 @@ public class RandomMixer implements PlayersMixer {
    * @return If the amount of anchored players to be added to a position set in a team would exceed
    *         the maximum allowed amount of players per team for that particular position.
    */
-  private boolean anchorageOverflowsPositionSet(@NonNull Team team,
-                                                @NonNull List<Player> anchoredPlayers,
-                                                @NonNull Position position) {
+  private boolean anchorageOverflowsPositionSet(Team team,
+                                                List<Player> anchoredPlayers,
+                                                Position position) {
     return team.getTeamPlayers()
                .get(position)
                .size()
@@ -263,8 +257,7 @@ public class RandomMixer implements PlayersMixer {
    *
    * @return A random player that has not been assigned a team yet.
    */
-  @NonNull
-  private Player getRandomUnassignedPlayer(@NonNull List<Player> unassignedPlayersList) {
+  private Player getRandomUnassignedPlayer(List<Player> unassignedPlayersList) {
     return unassignedPlayersList.get(randomGenerator.nextInt(unassignedPlayersList.size()));
   }
 }

@@ -23,7 +23,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import lombok.Getter;
-import lombok.NonNull;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -189,8 +188,7 @@ public class AnchoragesView extends View {
    * @param playersSet Players sets from where to obtain the names.
    * @param cbSet      Check boxes set to fill.
    */
-  private void fillCheckboxesSet(@NonNull List<Player> playersSet,
-                                 @NonNull List<JCheckBox> cbSet) {
+  private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
     playersSet.forEach(p -> cbSet.add(new CustomCheckBox(p.getName())));
   }
 
@@ -200,8 +198,7 @@ public class AnchoragesView extends View {
    * @param cbSet     Check boxes to add.
    * @param labelText Label text.
    */
-  private void addCheckboxesSet(@NonNull List<JCheckBox> cbSet,
-                                @NonNull String labelText) {
+  private void addCheckboxesSet(List<JCheckBox> cbSet, String labelText) {
     leftPanel.add(new CustomBorderedLabel(labelText, SwingConstants.LEFT),
                   CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
                                                             Constants.MIG_LAYOUT_SPAN));

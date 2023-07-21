@@ -8,7 +8,6 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.plaf.basic.BasicComboBoxUI;
-import lombok.NonNull;
 
 /**
  * Custom text area class.
@@ -30,7 +29,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
    *
    * @param items Items array used in the combobox.
    */
-  public CustomComboBox(@NonNull E[] items) {
+  public CustomComboBox(E[] items) {
     super(items);
     setUpGraphicalProperties();
   }

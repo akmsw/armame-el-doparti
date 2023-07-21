@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
-import lombok.NonNull;
 
 /**
  * Custom text area class.
@@ -28,7 +27,7 @@ public class CustomButton extends JButton {
    *
    * @param text The text to display on the button.
    */
-  public CustomButton(@NonNull String text) {
+  public CustomButton(String text) {
     super(text);
     setOpaque(false);
     setFocusPainted(false);

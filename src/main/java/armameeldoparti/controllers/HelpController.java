@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Objects;
 import javax.swing.BorderFactory;
 import lombok.Getter;
-import lombok.NonNull;
 
 /**
  * Help view controller class.
@@ -57,7 +56,7 @@ public class HelpController extends Controller {
    *
    * @param helpView View to control.
    */
-  public HelpController(@NonNull HelpView helpView) {
+  public HelpController(HelpView helpView) {
     super(helpView);
 
     currentPageNumber = 0;

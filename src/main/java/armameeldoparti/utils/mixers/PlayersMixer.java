@@ -2,7 +2,6 @@ package armameeldoparti.utils.mixers;
 
 import armameeldoparti.models.Team;
 import java.util.List;
-import lombok.NonNull;
 
 /**
  * Interface that specifies the players distribution methods.
@@ -24,8 +23,7 @@ public interface PlayersMixer {
    *
    * @return The updated teams with the players distributed without considering anchorages.
    */
-  @NonNull
-  List<Team> withoutAnchorages(@NonNull List<Team> teams);
+  List<Team> withoutAnchorages(List<Team> teams);
 
   /**
    * Distributes the players considering anchorages.
@@ -34,6 +32,5 @@ public interface PlayersMixer {
    *
    * @return The updated teams with the players distributed considering anchorages.
    */
-  @NonNull
-  List<Team> withAnchorages(@NonNull List<Team> teams);
+  List<Team> withAnchorages(List<Team> teams);
 }

@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import net.miginfocom.swing.MigLayout;
 
@@ -37,8 +36,7 @@ public abstract class View extends JFrame {
    * @param frameTitle                   The frame title.
    * @param masterPanelLayoutConstraints The layout constraints for the view's master panel.
    */
-  protected View(@NonNull String frameTitle,
-                 @NonNull String masterPanelLayoutConstraints) {
+  protected View(String frameTitle, String masterPanelLayoutConstraints) {
     setMasterPanel(new JPanel(new MigLayout(masterPanelLayoutConstraints)));
     setResizable(false);
     setFrameTitle(frameTitle);

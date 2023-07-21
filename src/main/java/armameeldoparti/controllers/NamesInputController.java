@@ -15,7 +15,6 @@ import javax.naming.InvalidNameException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import lombok.NonNull;
 
 /**
  * Names input view controller class.
@@ -45,7 +44,7 @@ public class NamesInputController extends Controller {
    *
    * @param namesInputView View to control.
    */
-  public NamesInputController(@NonNull NamesInputView namesInputView) {
+  public NamesInputController(NamesInputView namesInputView) {
     super(namesInputView);
   }
 
@@ -183,9 +182,7 @@ public class NamesInputController extends Controller {
    * @throws IllegalArgumentException When the input is an invalid string.
    * @throws InvalidNameException     When the input is an invalid name.
    */
-  public void textFieldEvent(int playerIndex,
-                             @NonNull List<Player> playersSet,
-                             @NonNull String text)
+  public void textFieldEvent(int playerIndex, List<Player> playersSet, String text)
                              throws IllegalArgumentException,
                                     InvalidNameException {
     if (!validString(text)) {
@@ -217,7 +214,7 @@ public class NamesInputController extends Controller {
    *
    * @param selectedOption Combobox selected option.
    */
-  public void comboBoxEvent(@NonNull String selectedOption) {
+  public void comboBoxEvent(String selectedOption) {
     updateTextFields(selectedOption);
   }
 
@@ -264,7 +261,7 @@ public class NamesInputController extends Controller {
    *
    * @param selectedOption Combobox selected option.
    */
-  private void updateTextFields(@NonNull String selectedOption) {
+  private void updateTextFields(String selectedOption) {
     JPanel leftPanel = ((NamesInputView) getView()).getLeftPanel();
 
     // Removes the text fields from the view's left panel
@@ -311,7 +308,7 @@ public class NamesInputController extends Controller {
    *
    * @return Whether there is already a player with the specified name or not.
    */
-  private boolean alreadyExists(@NonNull String name) {
+  private boolean alreadyExists(String name) {
     return CommonFields.getPlayersSets()
                        .values()
                        .stream()
@@ -327,7 +324,7 @@ public class NamesInputController extends Controller {
    *
    * @return Whether the string matches the string validation regex or not.
    */
-  private boolean validString(@NonNull String string) {
+  private boolean validString(String string) {
     return Pattern.matches(Constants.REGEX_NAMES_VALIDATION, string);
   }
 
@@ -339,7 +336,7 @@ public class NamesInputController extends Controller {
    *
    * @return If the given name is valid according to the specified conditions.
    */
-  private boolean validName(@NonNull String name) {
+  private boolean validName(String name) {
     return name.length() <= Constants.MAX_NAME_LEN
            && !(name.isBlank() || name.isEmpty() || alreadyExists(name));
   }

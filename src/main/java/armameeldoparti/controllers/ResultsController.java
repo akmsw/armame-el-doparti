@@ -19,7 +19,6 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import lombok.NonNull;
 
 /**
  * Results view controller.
@@ -68,7 +67,7 @@ public class ResultsController extends Controller {
    *
    * @param resultsView View to control.
    */
-  public ResultsController(@NonNull ResultsView resultsView) {
+  public ResultsController(ResultsView resultsView) {
     super(resultsView);
 
     bySkillsMixer = new BySkillsMixer();
@@ -200,7 +199,6 @@ public class ResultsController extends Controller {
    *
    * @return The updated teams with the players distributed.
    */
-  @NonNull
   public List<Team> randomMix() {
     return CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams)
                                               : randomMixer.withoutAnchorages(teams);
@@ -211,7 +209,6 @@ public class ResultsController extends Controller {
    *
    * @return The updated teams with the players distributed.
    */
-  @NonNull
   public List<Team> bySkillsMix() {
     return CommonFields.isAnchoragesEnabled() ? bySkillsMixer.withAnchorages(teams)
                                               : bySkillsMixer.withoutAnchorages(teams);

@@ -9,7 +9,6 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import lombok.NonNull;
 
 /**
  * Main menu view controller class.
@@ -29,7 +28,7 @@ public class MainMenuController extends Controller {
    *
    * @param mainMenuView View to control.
    */
-  public MainMenuController(@NonNull MainMenuView mainMenuView) {
+  public MainMenuController(MainMenuView mainMenuView) {
     super(mainMenuView);
   }
 
@@ -105,7 +104,7 @@ public class MainMenuController extends Controller {
    *
    * @param link Destination URL.
    */
-  private void browserRedirect(@NonNull String link) {
+  private void browserRedirect(String link) {
     try {
       Desktop.getDesktop()
              .browse(new URI(link));

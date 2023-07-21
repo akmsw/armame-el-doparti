@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.NonNull;
 
 /**
  * By-skill distribution class.
@@ -60,8 +59,7 @@ public class BySkillsMixer implements PlayersMixer {
    *         considering anchorages.
    */
   @Override
-  @NonNull
-  public List<Team> withoutAnchorages(@NonNull List<Team> teams) {
+  public List<Team> withoutAnchorages(List<Team> teams) {
     List<Position> reversedEnum = Arrays.asList(Position.values());
 
     Collections.reverse(reversedEnum);
@@ -107,8 +105,7 @@ public class BySkillsMixer implements PlayersMixer {
    *         considering anchorages.
    */
   @Override
-  @NonNull
-  public List<Team> withAnchorages(@NonNull List<Team> teams) {
+  public List<Team> withAnchorages(List<Team> teams) {
     List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
 
     for (List<Player> aps : anchoredPlayers) {
@@ -182,9 +179,7 @@ public class BySkillsMixer implements PlayersMixer {
    * @param playersSet Current working players set.
    * @param position   Current working players position.
    */
-  private void distributeSubsets(@NonNull List<Team> teams,
-                                 @NonNull List<Player> playersSet,
-                                 @NonNull Position position) {
+  private void distributeSubsets(List<Team> teams, List<Player> playersSet, Position position) {
     List<Player> outerSubset = new ArrayList<>();
     List<Player> innerSubset = new ArrayList<>();
 

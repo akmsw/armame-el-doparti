@@ -25,7 +25,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
-import lombok.NonNull;
 
 /**
  * Common-use functions class.
@@ -55,7 +54,7 @@ public final class CommonFunctions {
    *
    * @param error The error that caused the program to end.
    */
-  public static void exitProgram(@NonNull Error error) {
+  public static void exitProgram(Error error) {
     showErrorMessage(Constants.MAP_ERROR_MESSAGE
                               .get(error),
                      null);
@@ -71,7 +70,7 @@ public final class CommonFunctions {
    * @param parentComponent Graphical component where the dialogs associated with the event should
    *                        be displayed.
    */
-  public static void showErrorMessage(@NonNull String errorMessage, Component parentComponent) {
+  public static void showErrorMessage(String errorMessage, Component parentComponent) {
     JOptionPane.showMessageDialog(
         parentComponent, errorMessage,
         Constants.ERROR_MESSAGE_TITLE,
@@ -84,7 +83,7 @@ public final class CommonFunctions {
    *
    * @param view Reference view from which the active monitor will be retrieved.
    */
-  public static void updateActiveMonitorFromView(@NonNull View view) {
+  public static void updateActiveMonitorFromView(View view) {
     CommonFields.setActiveMonitor(
         retrieveOptional(Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
                                                           .getScreenDevices())
@@ -113,8 +112,7 @@ public final class CommonFunctions {
    *
    * @return The fully built component constraints.
    */
-  @NonNull
-  public static String buildMigLayoutConstraints(@NonNull String... constraints) {
+  public static String buildMigLayoutConstraints(String... constraints) {
     return String.join(", ", constraints);
   }
 
@@ -125,8 +123,7 @@ public final class CommonFunctions {
    *
    * @return The given string with the first letter uppercase and the rest lowercase.
    */
-  @NonNull
-  public static String capitalize(@NonNull String input) {
+  public static String capitalize(String input) {
     return input.isEmpty() ? input
                            : input.substring(0, 1)
                                   .toUpperCase()
@@ -141,8 +138,7 @@ public final class CommonFunctions {
    *
    * @return The ImageIcon of the specified file.
    */
-  @NonNull
-  public static ImageIcon createImage(@NonNull String imageFileName) {
+  public static ImageIcon createImage(String imageFileName) {
     return Objects.requireNonNull(
       new ImageIcon(Constants.class
                              .getClassLoader()
@@ -159,8 +155,7 @@ public final class CommonFunctions {
    *
    * @return The ImageIcon of the specified file.
    */
-  @NonNull
-  public static ImageIcon createImageIcon(@NonNull String iconFileName) {
+  public static ImageIcon createImageIcon(String iconFileName) {
     return createImage(Constants.PATH_ICO + iconFileName);
   }
 
@@ -174,11 +169,7 @@ public final class CommonFunctions {
    *
    * @return The scaled icon.
    */
-  @NonNull
-  public static ImageIcon scaleImageIcon(@NonNull ImageIcon icon,
-                                         int width,
-                                         int height,
-                                         int hints) {
+  public static ImageIcon scaleImageIcon(ImageIcon icon, int width, int height, int hints) {
     return new ImageIcon(icon.getImage()
                              .getScaledInstance(width, height, hints));
   }
@@ -190,8 +181,7 @@ public final class CommonFunctions {
    *
    * @return The requested view's controller.
    */
-  @NonNull
-  public static Controller getController(@NonNull ProgramView view) {
+  public static Controller getController(ProgramView view) {
     return CommonFields.getControllersMap()
                        .get(view);
   }
@@ -201,7 +191,6 @@ public final class CommonFunctions {
    *
    * @return A list containing the anchored players grouped by their anchorage number.
   */
-  @NonNull
   public static List<List<Player>> getAnchoredPlayers() {
     return new ArrayList<>(CommonFields.getPlayersSets()
                                        .values()
@@ -222,8 +211,7 @@ public final class CommonFunctions {
    *
    * @return The optional value if present.
    */
-  @NonNull
-  public static <T> T retrieveOptional(@NonNull Optional<T> optional) {
+  public static <T> T retrieveOptional(Optional<T> optional) {
     if (!optional.isPresent()) {
       exitProgram(Error.FATAL_INTERNAL_ERROR);
     }
@@ -245,8 +233,7 @@ public final class CommonFunctions {
    *
    * @return The custom arrow button.
    */
-  @NonNull
-  public static <T> JButton buildCustomArrowButton(int orientation, @NonNull T parentComponent) {
+  public static <T> JButton buildCustomArrowButton(int orientation, T parentComponent) {
     Color backgroundColor = parentComponent instanceof BasicComboBoxUI ? Constants.GREEN_DARK
                                                                        : Constants.GREEN_MEDIUM;
 
@@ -272,9 +259,7 @@ public final class CommonFunctions {
    *
    * @return The search-corresponding position.
    */
-  @NonNull
-  public static <T> Position getCorrespondingPosition(@NonNull Map<Position, T> map,
-                                                      @NonNull T search) {
+  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T search) {
     return retrieveOptional(map.entrySet()
                                .stream()
                                .filter(e -> e.getValue()

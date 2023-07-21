@@ -10,7 +10,6 @@ import armameeldoparti.views.SkillPointsInputView;
 import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
-import lombok.NonNull;
 
 /**
  * Skill points input view controller class.
@@ -30,7 +29,7 @@ public class SkillPointsInputController extends Controller {
    *
    * @param skillPointsInputView View to control.
    */
-  public SkillPointsInputController(@NonNull SkillPointsInputView skillPointsInputView) {
+  public SkillPointsInputController(SkillPointsInputView skillPointsInputView) {
     super(skillPointsInputView);
   }
 
