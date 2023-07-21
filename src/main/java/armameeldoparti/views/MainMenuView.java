@@ -4,6 +4,7 @@ import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -51,25 +52,25 @@ public class MainMenuView extends View {
    */
   @Override
   protected void addButtons() {
-    JButton startButton = new JButton("Comenzar");
+    JButton startButton = new CustomButton("Comenzar");
     startButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
         .startButtonEvent()
     );
 
-    JButton helpButton = new JButton("Ayuda");
+    JButton helpButton = new CustomButton("Ayuda");
     helpButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
         .helpButtonEvent()
     );
 
-    JButton contactButton = new JButton("Contacto");
+    JButton contactButton = new CustomButton("Contacto");
     contactButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
         .contactButtonEvent()
     );
 
-    JButton issuesButton = new JButton("Reportes y sugerencias");
+    JButton issuesButton = new CustomButton("Reportes y sugerencias");
     issuesButton.addActionListener(e ->
         ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
         .issuesButtonEvent()

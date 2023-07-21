@@ -8,6 +8,7 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
+import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import armameeldoparti.utils.common.custom.graphical.CustomSpinner;
 import java.util.HashMap;
 import java.util.List;
@@ -70,19 +71,19 @@ public class SkillPointsInputView extends View {
    */
   @Override
   protected void addButtons() {
-    JButton finishButton = new JButton("Finalizar");
+    JButton finishButton = new CustomButton("Finalizar");
     finishButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .finishButtonEvent()
     );
 
-    JButton resetSkillPointsButton = new JButton("Reiniciar puntuaciones");
+    JButton resetSkillPointsButton = new CustomButton("Reiniciar puntuaciones");
     resetSkillPointsButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .resetSkillsButtonEvent()
     );
 
-    JButton backButton = new JButton("Atrás");
+    JButton backButton = new CustomButton("Atrás");
     backButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .backButtonEvent()

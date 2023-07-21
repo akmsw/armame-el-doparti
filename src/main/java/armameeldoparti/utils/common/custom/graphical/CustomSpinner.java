@@ -63,6 +63,7 @@ public class CustomSpinner extends JSpinner {
         previousButton.addActionListener(e -> {
           // We know for sure that this custom spinner has a SpinnerNumberModel
           SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
+
           Comparable<Object> minimum = (Comparable<Object>) model.getMinimum();
           Comparable<Object> currentValue = (Comparable<Object>) model.getValue();
 
@@ -97,6 +98,7 @@ public class CustomSpinner extends JSpinner {
         nextButton.addActionListener(e -> {
           // We know for sure that this custom spinner has a SpinnerNumberModel
           SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
+
           Comparable<Object> maximum = (Comparable<Object>) model.getMaximum();
           Comparable<Object> currentValue = (Comparable<Object>) model.getValue();
 

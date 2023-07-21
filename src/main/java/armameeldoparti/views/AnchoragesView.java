@@ -8,6 +8,7 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
+import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import armameeldoparti.utils.common.custom.graphical.CustomCheckBox;
 import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
@@ -112,38 +113,38 @@ public class AnchoragesView extends View {
    */
   @Override
   protected void addButtons() {
-    finishButton = new JButton("Finalizar");
+    finishButton = new CustomButton("Finalizar");
     finishButton.setEnabled(false);
     finishButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .finishButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
-    newAnchorageButton = new JButton("Anclar");
+    newAnchorageButton = new CustomButton("Anclar");
     newAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
-    deleteAnchorageButton = new JButton("Borrar un anclaje");
+    deleteAnchorageButton = new CustomButton("Borrar un anclaje");
     deleteAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
-    deleteLastAnchorageButton = new JButton("Borrar último anclaje");
+    deleteLastAnchorageButton = new CustomButton("Borrar último anclaje");
     deleteLastAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .deleteLastAnchorageButtonEvent()
     );
 
-    clearAnchoragesButton = new JButton("Limpiar anclajes");
+    clearAnchoragesButton = new CustomButton("Limpiar anclajes");
     clearAnchoragesButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .clearAnchoragesButtonEvent()
     );
 
-    JButton backButton = new JButton("Atrás");
+    JButton backButton = new CustomButton("Atrás");
     backButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .backButtonEvent()

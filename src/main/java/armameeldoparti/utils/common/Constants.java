@@ -48,6 +48,7 @@ public final class Constants {
 
   // ---------------------------------------- Public constants ----------------------------------
 
+  public static final int BUTTON_BORDER_ARC = 25;
   public static final int PLAYERS_PER_TEAM = 7;
   public static final int MAX_NAME_LEN = 10;
   public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
@@ -110,6 +111,7 @@ public final class Constants {
   public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
 
   public static final Color GREEN_DARK = new Color(41, 71, 74);
+  public static final Color GREEN_DARK_MEDIUM = new Color(75, 101, 96);
   public static final Color GREEN_MEDIUM = new Color(109, 130, 118);
   public static final Color GREEN_LIGHT = new Color(176, 189, 162);
   public static final Color YELLOW_LIGHT = new Color(255, 238, 153);

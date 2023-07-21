@@ -5,6 +5,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import lombok.Getter;
@@ -58,7 +59,7 @@ public class ResultsView extends View {
    */
   @Override
   protected void addButtons() {
-    JButton backButton = new JButton("Atrás");
+    JButton backButton = new CustomButton("Atrás");
 
     backButton.addActionListener(e ->
         ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))
@@ -66,7 +67,7 @@ public class ResultsView extends View {
     );
 
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
-      JButton remixButton = new JButton("Redistribuir");
+      JButton remixButton = new CustomButton("Redistribuir");
 
       remixButton.addActionListener(e ->
           ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))

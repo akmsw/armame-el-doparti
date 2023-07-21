@@ -5,6 +5,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
+import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import javax.swing.JButton;
@@ -73,19 +74,19 @@ public class HelpView extends View {
    */
   @Override
   protected void addButtons() {
-    previousPageButton = new JButton("Anterior");
+    previousPageButton = new CustomButton("Anterior");
     previousPageButton.addActionListener(e ->
         ((HelpController) CommonFunctions.getController(ProgramView.HELP))
         .previousPageButtonEvent()
     );
 
-    nextPageButton = new JButton("Siguiente");
+    nextPageButton = new CustomButton("Siguiente");
     nextPageButton.addActionListener(e ->
         ((HelpController) CommonFunctions.getController(ProgramView.HELP))
         .nextPageButtonEvent()
     );
 
-    backButton = new JButton("Volver al menú principal");
+    backButton = new CustomButton("Volver al menú principal");
     backButton.addActionListener(e ->
         ((HelpController) CommonFunctions.getController(ProgramView.HELP))
         .backButtonEvent()
