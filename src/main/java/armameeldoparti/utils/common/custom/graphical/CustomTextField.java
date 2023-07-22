@@ -1,9 +1,11 @@
 package armameeldoparti.utils.common.custom.graphical;
 
 import armameeldoparti.utils.common.Constants;
-import javax.swing.BorderFactory;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
 import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
 
 /**
  * Custom text field class.
@@ -34,8 +36,50 @@ public class CustomTextField extends JTextField {
    * Configures the graphical properties for the text field in order to fit the program aesthetics.
    */
   private void setUpGraphicalProperties() {
-    setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                              Constants.GREEN_MEDIUM,
-                                              Constants.GREEN_MEDIUM));
+    setOpaque(false);
+  }
+
+  @Override
+  protected void paintComponent(Graphics g) {
+    Graphics2D g2 = (Graphics2D) g.create();
+    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g2.setColor(getBackground());
+    g2.fillRoundRect(
+        0,
+        0,
+        (getWidth() - 1),
+        (getHeight() - 1),
+        Constants.ROUNDED_BORDER_ARC,
+        Constants.ROUNDED_BORDER_ARC
+    );
+    super.paintComponent(g);
+    g2.dispose();
+  }
+
+  @Override
+  protected void paintBorder(Graphics g) {
+    g.setColor(Constants.GREEN_LIGHT);
+
+    Graphics2D g2 = (Graphics2D) g.create();
+    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g2.drawRoundRect(
+        0,
+        0,
+        (getWidth() - 1),
+        (getHeight() - 1),
+        Constants.ROUNDED_BORDER_ARC,
+        Constants.ROUNDED_BORDER_ARC
+    );
+    g2.dispose();
+  }
+
+  @Override
+  public Insets getInsets() {
+    return new Insets(
+      Constants.ROUNDED_BORDER_INSETS,
+      Constants.ROUNDED_BORDER_INSETS,
+      Constants.ROUNDED_BORDER_INSETS,
+      Constants.ROUNDED_BORDER_INSETS
+    );
   }
 }

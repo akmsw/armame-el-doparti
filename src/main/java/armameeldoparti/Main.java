@@ -198,12 +198,14 @@ public final class Main {
     UIManager.put("Button.foreground", Color.WHITE);
     UIManager.put("CheckBox.background", Constants.GREEN_LIGHT);
     UIManager.put("CheckBox.focus", Constants.GREEN_LIGHT);
-    UIManager.put("ComboBox.focus", Color.WHITE);
+    UIManager.put("ComboBox.background", Constants.GREEN_MEDIUM);
+    UIManager.put("ComboBox.foreground", Color.WHITE);
     UIManager.put("ComboBox.selectionBackground", Constants.GREEN_MEDIUM);
     UIManager.put("ComboBox.selectionForeground", Color.WHITE);
     UIManager.put("OptionPane.background", Constants.GREEN_LIGHT);
     UIManager.put("Panel.background", Constants.GREEN_LIGHT);
     UIManager.put("Separator.background", Constants.GREEN_LIGHT);
+    UIManager.put("TextArea.background", Constants.GREEN_LIGHT_WHITE);
     UIManager.put("TitledBorder.border", new LineBorder(Constants.GREEN_DARK));
     UIManager.put("ToggleButton.focus", Constants.GREEN_DARK);
     UIManager.put("ToolTip.background", Constants.GREEN_MEDIUM);

@@ -3,6 +3,7 @@ package armameeldoparti.utils.common.custom.graphical;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
@@ -72,26 +73,15 @@ public class CustomButton extends JButton {
   }
 
   /**
-   * Paints the custom button rounded border.
-   *
-   * @param g The custom button graphics to edit and paint.
+   * Hmm.
    */
   @Override
-  protected void paintBorder(Graphics g) {
-    g.setColor(Constants.GREEN_MEDIUM);
-
-    Graphics2D g2 = (Graphics2D) g;
-
-    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    g2.draw(
-      new RoundRectangle2D.Double(
-        0,
-        0,
-        (getWidth() - 1),
-        (getHeight() - 1),
-        Constants.ROUNDED_BORDER_ARC,
-        Constants.ROUNDED_BORDER_ARC
-      )
+  public Insets getInsets() {
+    return new Insets(
+      Constants.ROUNDED_BORDER_INSETS,
+      Constants.ROUNDED_BORDER_INSETS,
+      Constants.ROUNDED_BORDER_INSETS,
+      Constants.ROUNDED_BORDER_INSETS
     );
   }
 }

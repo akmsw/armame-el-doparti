@@ -54,7 +54,8 @@ public final class Constants {
   public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
   public static final int MIX_BY_SKILLS = 1;
   public static final int MIX_RANDOM = 0;
-  public static final int ROUNDED_BORDER_ARC = 25;
+  public static final int ROUNDED_BORDER_ARC = 30;
+  public static final int ROUNDED_BORDER_INSETS = 8;
   public static final int SIZE_FONT_TITLE_LABEL = 40;
   public static final int SIZE_FONT_AUTHOR_LABEL = 30;
   public static final int SIZE_FONT_VERSION_LABEL = 16;
@@ -115,6 +116,7 @@ public final class Constants {
   public static final Color GREEN_MEDIUM = new Color(109, 130, 118);
   public static final Color GREEN_MEDIUM_LIGHT = new Color(143, 160, 140);
   public static final Color GREEN_LIGHT = new Color(176, 189, 162);
+  public static final Color GREEN_LIGHT_WHITE = new Color(216, 222, 209);
   public static final Color YELLOW_LIGHT = new Color(255, 238, 153);
 
   public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(
