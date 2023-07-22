@@ -65,6 +65,8 @@ public class CustomComboBox<E> extends JComboBox<E> {
     Graphics2D g2 = (Graphics2D) g.create();
 
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+    g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
     g2.setColor(Constants.GREEN_MEDIUM);
     g2.fillRoundRect(
         0,
@@ -87,6 +89,8 @@ public class CustomComboBox<E> extends JComboBox<E> {
     Graphics2D g2 = (Graphics2D) g.create();
 
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+    g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
     g2.drawRoundRect(
         0,
         0,
