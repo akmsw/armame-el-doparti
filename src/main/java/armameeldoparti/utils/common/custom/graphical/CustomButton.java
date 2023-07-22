@@ -61,10 +61,10 @@ public class CustomButton extends JButton {
       new RoundRectangle2D.Double(
         0,
         0,
-        ((double) getWidth()) - 1,
-        ((double) getHeight()) - 1,
-        Constants.BUTTON_BORDER_ARC,
-        Constants.BUTTON_BORDER_ARC
+        (getWidth() - 1),
+        (getHeight() - 1),
+        Constants.ROUNDED_BORDER_ARC,
+        Constants.ROUNDED_BORDER_ARC
       )
     );
 
@@ -87,10 +87,10 @@ public class CustomButton extends JButton {
       new RoundRectangle2D.Double(
         0,
         0,
-        ((double) getWidth()) - 1,
-        ((double) getHeight()) - 1,
-        Constants.BUTTON_BORDER_ARC,
-        Constants.BUTTON_BORDER_ARC
+        (getWidth() - 1),
+        (getHeight() - 1),
+        Constants.ROUNDED_BORDER_ARC,
+        Constants.ROUNDED_BORDER_ARC
       )
     );
   }

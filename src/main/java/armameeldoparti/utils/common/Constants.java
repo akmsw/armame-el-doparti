@@ -48,13 +48,13 @@ public final class Constants {
 
   // ---------------------------------------- Public constants ----------------------------------
 
-  public static final int BUTTON_BORDER_ARC = 25;
   public static final int PLAYERS_PER_TEAM = 7;
   public static final int MAX_NAME_LEN = 10;
   public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
   public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
   public static final int MIX_BY_SKILLS = 1;
   public static final int MIX_RANDOM = 0;
+  public static final int ROUNDED_BORDER_ARC = 25;
   public static final int SIZE_FONT_TITLE_LABEL = 40;
   public static final int SIZE_FONT_AUTHOR_LABEL = 30;
   public static final int SIZE_FONT_VERSION_LABEL = 16;
@@ -113,6 +113,7 @@ public final class Constants {
   public static final Color GREEN_DARK = new Color(41, 71, 74);
   public static final Color GREEN_DARK_MEDIUM = new Color(75, 101, 96);
   public static final Color GREEN_MEDIUM = new Color(109, 130, 118);
+  public static final Color GREEN_MEDIUM_LIGHT = new Color(143, 160, 140);
   public static final Color GREEN_LIGHT = new Color(176, 189, 162);
   public static final Color YELLOW_LIGHT = new Color(255, 238, 153);
 
