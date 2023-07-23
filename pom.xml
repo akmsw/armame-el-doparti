@@ -8,8 +8,8 @@
   <version>3.0</version>
 
   <properties>
-    <junit-platform.version>5.9.2</junit-platform.version>
-    <junit-jupiter-params.version>5.9.2</junit-jupiter-params.version>
+    <junit-platform.version>5.10.0</junit-platform.version>
+    <junit-jupiter-params.version>5.10.0</junit-jupiter-params.version>
     <lombok.version>1.18.24</lombok.version>
     <require-maven.version>3.9.0</require-maven.version>
     <maven.compiler.source>11</maven.compiler.source>
