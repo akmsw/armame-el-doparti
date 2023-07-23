@@ -54,9 +54,10 @@ public final class Constants {
   public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
   public static final int MIX_BY_SKILLS = 1;
   public static final int MIX_RANDOM = 0;
-  public static final int ROUNDED_BORDER_ARC = 30;
+  public static final int ROUNDED_BORDER_ARC_GENERAL = 30;
   public static final int ROUNDED_BORDER_ARC_SCROLLBAR = 20;
-  public static final int ROUNDED_BORDER_INSETS = 8;
+  public static final int ROUNDED_BORDER_INSETS_GENERAL = 8;
+  public static final int ROUNDED_BORDER_INSETS_SCROLLPANE = 18;
   public static final int SIZE_FONT_TITLE_LABEL = 40;
   public static final int SIZE_FONT_AUTHOR_LABEL = 30;
   public static final int SIZE_FONT_VERSION_LABEL = 16;

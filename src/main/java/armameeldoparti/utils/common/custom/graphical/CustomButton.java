@@ -64,8 +64,8 @@ public class CustomButton extends JButton {
         0,
         (getWidth() - 1),
         (getHeight() - 1),
-        Constants.ROUNDED_BORDER_ARC,
-        Constants.ROUNDED_BORDER_ARC
+        Constants.ROUNDED_BORDER_ARC_GENERAL,
+        Constants.ROUNDED_BORDER_ARC_GENERAL
       )
     );
 
@@ -78,10 +78,10 @@ public class CustomButton extends JButton {
   @Override
   public Insets getInsets() {
     return new Insets(
-      Constants.ROUNDED_BORDER_INSETS,
-      Constants.ROUNDED_BORDER_INSETS,
-      Constants.ROUNDED_BORDER_INSETS,
-      Constants.ROUNDED_BORDER_INSETS
+      Constants.ROUNDED_BORDER_INSETS_GENERAL,
+      Constants.ROUNDED_BORDER_INSETS_GENERAL,
+      Constants.ROUNDED_BORDER_INSETS_GENERAL,
+      Constants.ROUNDED_BORDER_INSETS_GENERAL
     );
   }
 }

@@ -3,14 +3,14 @@ package armameeldoparti.utils.common.custom.graphical;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Insets;
 import java.awt.RenderingHints;
-import javax.swing.JTextField;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 
 /**
- * Custom text field class.
+ * Custom label class.
  *
- * <p>This class is used to instantiate a custom text field that fits the overall program
+ * <p>This class is used to instantiate a custom label that fits the overall program
  * aesthetics.
  *
  * @author Bonino, Francisco Ignacio.
@@ -19,24 +19,50 @@ import javax.swing.JTextField;
  *
  * @since 3.0
  */
-public class CustomTextField extends JTextField {
+public class CustomLabel extends JLabel {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // ---------------------------------------- Constructors --------------------------------------
 
   /**
-   * Builds a basic text field using the established program aesthetics.
+   * Builds a basic empty label using the established program aesthetics.
+   *
+   * @param alignment The label text alignment.
    */
-  public CustomTextField() {
-    setUpGraphicalProperties();
+  public CustomLabel(int alignment) {
+    super();
+    setUpGraphicalProperties(alignment);
+  }
+
+  /**
+   * Builds a basic label using the established program aesthetics.
+   *
+   * @param text      The label text.
+   * @param alignment The label text alignment.
+   */
+  public CustomLabel(String text, int alignment) {
+    super(text);
+    setUpGraphicalProperties(alignment);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Configures the graphical properties for the text field in order to fit the program aesthetics.
+   * Configures the graphical properties of the label in order to fit the program aesthetics. The
+   * label will have a lowered bevel border.
+   *
+   * @param alignment The label text alignment.
    */
-  private void setUpGraphicalProperties() {
+  private void setUpGraphicalProperties(int alignment) {
+    setHorizontalAlignment(alignment);
     setOpaque(false);
+    setBorder(
+      BorderFactory.createEmptyBorder(
+        Constants.ROUNDED_BORDER_INSETS_GENERAL,
+        Constants.ROUNDED_BORDER_INSETS_GENERAL,
+        Constants.ROUNDED_BORDER_INSETS_GENERAL,
+        Constants.ROUNDED_BORDER_INSETS_GENERAL
+      )
+    );
   }
 
   @Override
@@ -80,15 +106,5 @@ public class CustomTextField extends JTextField {
         Constants.ROUNDED_BORDER_ARC_GENERAL
     );
     g2.dispose();
-  }
-
-  @Override
-  public Insets getInsets() {
-    return new Insets(
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL
-    );
   }
 }

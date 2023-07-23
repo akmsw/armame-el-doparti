@@ -7,8 +7,8 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomButton;
+import armameeldoparti.utils.common.custom.graphical.CustomLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomSpinner;
 import java.util.HashMap;
 import java.util.List;
@@ -120,9 +120,9 @@ public class SkillPointsInputView extends View {
   private void addSpinners() {
     for (Position position : Position.values()) {
       getMasterPanel().add(
-          new CustomBorderedLabel(CommonFields.getPositionsMap()
-                                              .get(position),
-                                  SwingConstants.LEFT),
+          new CustomLabel(CommonFields.getPositionsMap()
+                                      .get(position),
+                          SwingConstants.LEFT),
           CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
                                                     Constants.MIG_LAYOUT_SPAN)
       );

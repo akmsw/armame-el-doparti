@@ -269,7 +269,7 @@ public class AnchoragesController extends Controller {
                                                 .forEach(p -> {
                                                   ((AnchoragesView) getView())
                                                       .getTextArea()
-                                                      .append(" " + wrapper.counter + ". "
+                                                      .append(wrapper.counter + ". "
                                                               + p.getName()
                                                               + System.lineSeparator());
 

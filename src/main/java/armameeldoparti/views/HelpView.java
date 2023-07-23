@@ -4,8 +4,8 @@ import armameeldoparti.controllers.HelpController;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomButton;
+import armameeldoparti.utils.common.custom.graphical.CustomLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import javax.swing.JButton;
@@ -39,6 +39,7 @@ public class HelpView extends View {
   private JButton nextPageButton;
   private JButton backButton;
 
+  private JLabel pageTitleTextField;
   private JLabel pagesCounter;
 
   private JScrollPane scrollPane;
@@ -62,6 +63,7 @@ public class HelpView extends View {
    */
   @Override
   protected void initializeInterface() {
+    addPageTitleTextField();
     addTextArea();
     addPagesLabel();
     addButtons();
@@ -76,20 +78,17 @@ public class HelpView extends View {
   protected void addButtons() {
     previousPageButton = new CustomButton("Anterior");
     previousPageButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP))
-        .previousPageButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).previousPageButtonEvent()
     );
 
     nextPageButton = new CustomButton("Siguiente");
     nextPageButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP))
-        .nextPageButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).nextPageButtonEvent()
     );
 
     backButton = new CustomButton("Volver al menú principal");
     backButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP))
-        .backButtonEvent()
+        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).backButtonEvent()
     );
 
     previousPageButton.setEnabled(false);
@@ -108,6 +107,15 @@ public class HelpView extends View {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
+   * Adds the text field where to display the current page title.
+   */
+  private void addPageTitleTextField() {
+    pageTitleTextField = new CustomLabel(SwingConstants.CENTER);
+
+    getMasterPanel().add(pageTitleTextField, Constants.MIG_LAYOUT_GROW);
+  }
+
+  /**
    * Adds the text area where to display the instructions of the program.
    */
   private void addTextArea() {
@@ -120,7 +128,7 @@ public class HelpView extends View {
    * Adds the reading progress label.
    */
   private void addPagesLabel() {
-    pagesCounter = new CustomBorderedLabel(SwingConstants.CENTER);
+    pagesCounter = new CustomLabel(SwingConstants.CENTER);
 
     getMasterPanel().add(pagesCounter, Constants.MIG_LAYOUT_GROWX);
   }

@@ -57,10 +57,10 @@ public class CustomScrollPane extends JScrollPane {
     g2.fillRoundRect(
         0,
         0,
-        getWidth() - 1,
-        getHeight() - 1,
-        Constants.ROUNDED_BORDER_ARC,
-        Constants.ROUNDED_BORDER_ARC
+        (getWidth() - 1),
+        (getHeight() - 1),
+        Constants.ROUNDED_BORDER_ARC_GENERAL,
+        Constants.ROUNDED_BORDER_ARC_GENERAL
     );
     g2.dispose();
   }
@@ -71,15 +71,13 @@ public class CustomScrollPane extends JScrollPane {
    * Configures the graphical properties of the scroll pane in order to fit the program aesthetics.
    */
   private void setUpGraphicalProperties() {
-    int scrollpaneRoundedBorderInsets = Constants.ROUNDED_BORDER_ARC - 12;
-
     setOpaque(false);
     setBorder(
         BorderFactory.createEmptyBorder(
-          scrollpaneRoundedBorderInsets,
-          scrollpaneRoundedBorderInsets,
-          scrollpaneRoundedBorderInsets,
-          scrollpaneRoundedBorderInsets
+          Constants.ROUNDED_BORDER_INSETS_SCROLLPANE,
+          Constants.ROUNDED_BORDER_INSETS_SCROLLPANE,
+          Constants.ROUNDED_BORDER_INSETS_SCROLLPANE,
+          Constants.ROUNDED_BORDER_INSETS_SCROLLPANE
         )
     );
     getViewport().setBackground(Constants.GREEN_LIGHT_WHITE);

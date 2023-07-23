@@ -7,9 +7,9 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import armameeldoparti.utils.common.custom.graphical.CustomBorderedLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import armameeldoparti.utils.common.custom.graphical.CustomCheckBox;
+import armameeldoparti.utils.common.custom.graphical.CustomLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import java.util.ArrayList;
@@ -95,9 +95,11 @@ public class AnchoragesView extends View {
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> {
                   fillCheckboxesSet(value, checkboxesMap.get(key));
-                  addCheckboxesSet(checkboxesMap.get(key),
-                                   CommonFields.getPositionsMap()
-                                               .get(key));
+                  addCheckboxesSet(
+                      checkboxesMap.get(key),
+                      CommonFields.getPositionsMap()
+                                  .get(key)
+                  );
                 });
 
     getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
@@ -206,9 +208,11 @@ public class AnchoragesView extends View {
    * @param labelText Label text.
    */
   private void addCheckboxesSet(List<JCheckBox> cbSet, String labelText) {
-    leftPanel.add(new CustomBorderedLabel(labelText, SwingConstants.LEFT),
-                  CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
-                                                            Constants.MIG_LAYOUT_SPAN));
+    leftPanel.add(
+        new CustomLabel(labelText, SwingConstants.LEFT),
+        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
+                                                  Constants.MIG_LAYOUT_SPAN)
+    );
 
     cbSet.forEach(cb -> leftPanel.add(
         cb,

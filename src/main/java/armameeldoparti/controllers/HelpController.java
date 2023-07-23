@@ -130,11 +130,9 @@ public class HelpController extends Controller {
    * <p>Finds the text file corresponding to the page number and displays its content.
    */
   public void updatePage() {
-    // ((HelpView) getView()).getScrollPane()
-    //                       .setBorder(BorderFactory.createTitledBorder(
-    //                         pagesMap.get(currentPageNumber)
-    //                                 .get(PAGE_TITLE_INDEX)
-    //                       ));
+    ((HelpView) getView()).getPageTitleTextField()
+                          .setText(pagesMap.get(currentPageNumber)
+                                           .get(PAGE_TITLE_INDEX));
     ((HelpView) getView()).getTextArea()
                           .setText("");
 
