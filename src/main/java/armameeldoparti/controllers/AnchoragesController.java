@@ -259,7 +259,7 @@ public class AnchoragesController extends Controller {
          wrapper.anchorageNumber <= anchoragesAmount;
          wrapper.anchorageNumber++) {
       ((AnchoragesView) getView()).getTextArea()
-                                  .append(" ----- ANCLAJE #" + wrapper.anchorageNumber + " -----"
+                                  .append("ANCLAJE #" + wrapper.anchorageNumber
                                           + System.lineSeparator());
 
       CommonFields.getPlayersSets()

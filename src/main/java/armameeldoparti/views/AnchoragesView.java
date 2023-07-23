@@ -70,7 +70,7 @@ public class AnchoragesView extends View {
     leftPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP_2));
     rightPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
 
-    textArea = new CustomTextArea(true);
+    textArea = new CustomTextArea();
 
     scrollPane = new CustomScrollPane(textArea);
 
@@ -102,6 +102,7 @@ public class AnchoragesView extends View {
 
     getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
     getMasterPanel().add(rightPanel, Constants.MIG_LAYOUT_EAST);
+    addTextArea();
     addButtons();
     add(getMasterPanel());
     pack();
@@ -166,6 +167,18 @@ public class AnchoragesView extends View {
                                                   Constants.MIG_LAYOUT_SPAN)
     );
 
+    rightPanel.add(newAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(deleteAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(deleteLastAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(clearAnchoragesButton, Constants.MIG_LAYOUT_GROW);
+  }
+
+  // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Adds the text area where to display the anchorages.
+   */
+  private void addTextArea() {
     rightPanel.add(
         scrollPane,
         CommonFunctions.buildMigLayoutConstraints(
@@ -174,13 +187,7 @@ public class AnchoragesView extends View {
           Constants.MIG_LAYOUT_GROW
         )
     );
-    rightPanel.add(newAnchorageButton, Constants.MIG_LAYOUT_GROW);
-    rightPanel.add(deleteAnchorageButton, Constants.MIG_LAYOUT_GROW);
-    rightPanel.add(deleteLastAnchorageButton, Constants.MIG_LAYOUT_GROW);
-    rightPanel.add(clearAnchoragesButton, Constants.MIG_LAYOUT_GROW);
   }
-
-  // ---------------------------------------- Private methods -----------------------------------
 
   /**
    * Fills the checkboxes sets.

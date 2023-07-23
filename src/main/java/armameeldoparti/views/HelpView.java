@@ -111,15 +111,9 @@ public class HelpView extends View {
    * Adds the text area where to display the instructions of the program.
    */
   private void addTextArea() {
-    textArea = new CustomTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS, true);
+    textArea = new CustomTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
-    textArea.setBackground(Constants.GREEN_LIGHT);
-    textArea.setLineWrap(true);
-    textArea.setWrapStyleWord(true);
-
-    scrollPane = new CustomScrollPane(textArea);
-
-    getMasterPanel().add(scrollPane);
+    getMasterPanel().add(new CustomScrollPane(textArea));
   }
 
   /**
