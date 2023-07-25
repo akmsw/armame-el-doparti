@@ -72,6 +72,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
           RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
         )
     );
+    g2.setColor(getBackground());
     g2.fillRoundRect(
         0,
         0,
