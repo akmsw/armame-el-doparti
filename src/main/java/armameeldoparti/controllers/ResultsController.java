@@ -11,14 +11,9 @@ import armameeldoparti.utils.common.custom.graphical.CustomTable;
 import armameeldoparti.utils.mixers.BySkillsMixer;
 import armameeldoparti.utils.mixers.RandomMixer;
 import armameeldoparti.views.ResultsView;
-import java.awt.Color;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * Results view controller.
@@ -33,30 +28,17 @@ public class ResultsController extends Controller {
 
   // ---------------------------------------- Private constants ---------------------------------
 
-  /**
-   * Fixed table cells width (in pixels). This value depends on the program's font and the maximum
-   * player name length.
-   */
-  private static final int FIXED_CELL_WIDTH = 250;
   private static final int TABLE_COLUMNS = 3;
-
-  /**
-   * Anchorages colors array used as the background color for the results table.
-   */
-  private static final Color[] ANCHORAGES_COLORS = {
-    new Color(255, 204, 153),
-    new Color(184, 224, 227),
-    new Color(220, 206, 235),
-    new Color(195, 235, 198),
-    new Color(151, 197, 216),
-    new Color(219, 220, 218)
-  };
 
   // ---------------------------------------- Private fields ------------------------------------
 
   private BySkillsMixer bySkillsMixer;
 
   private RandomMixer randomMixer;
+
+  private ResultsView view;
+
+  private CustomTable table;
 
   private List<Team> teams;
 
@@ -73,6 +55,8 @@ public class ResultsController extends Controller {
     bySkillsMixer = new BySkillsMixer();
 
     randomMixer = new RandomMixer();
+
+    view = (ResultsView) getView();
 
     teams = new ArrayList<>();
   }
@@ -102,15 +86,21 @@ public class ResultsController extends Controller {
 
     teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM ? randomMix() : bySkillsMix());
 
-    ((ResultsView) getView()).setTable(new CustomTable(Constants.PLAYERS_PER_TEAM + 1
-                                                       + CommonFields.getDistribution(),
-                                                       TABLE_COLUMNS));
-    ((ResultsView) getView()).initializeInterface();
+    view.setTable(
+      new CustomTable(
+        Constants.PLAYERS_PER_TEAM + CommonFields.getDistribution() + 1,
+        TABLE_COLUMNS
+      )
+    );
+    view.initializeInterface();
 
-    setTableFormat();
+    table = (CustomTable) view.getTable();
+
     fillTableFields();
     updateTable();
-    setTableCellsSize();
+
+    table.adjustCells();
+
     getView().pack();
   }
 
@@ -168,10 +158,9 @@ public class ResultsController extends Controller {
             .forEach(position ->
               team.getTeamPlayers()
                   .get(position)
-                  .forEach(player -> ((ResultsView) getView()).getTable()
-                                                              .setValueAt(player.getName(),
-                                                                          wrapper.row++,
-                                                                          wrapper.column)));
+                  .forEach(player -> table.setValueAt(player.getName(),
+                                                      wrapper.row++,
+                                                      wrapper.column)));
 
       wrapper.column++;
       wrapper.row = 1;
@@ -179,17 +168,16 @@ public class ResultsController extends Controller {
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
       for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
-        ((ResultsView) getView()).getTable()
-                                 .setValueAt(teams.get(teamIndex)
-                                                  .getTeamPlayers()
-                                                  .values()
-                                                  .stream()
-                                                  .flatMap(List::stream)
-                                                  .mapToInt(Player::getSkillPoints)
-                                                  .reduce(0, Math::addExact),
-                                             ((ResultsView) getView()).getTable()
-                                                                      .getRowCount() - 1,
-                                             teamIndex + 1);
+        table.setValueAt(teams.get(teamIndex)
+                              .getTeamPlayers()
+                              .values()
+                              .stream()
+                              .flatMap(List::stream)
+                              .mapToInt(Player::getSkillPoints)
+                              .reduce(0, Math::addExact),
+                         table.getRowCount() - 1,
+                         teamIndex + 1
+        );
       }
     }
   }
@@ -217,184 +205,64 @@ public class ResultsController extends Controller {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Sets the ideal table cells size.
-   */
-  public void setTableCellsSize() {
-    JTable table = ((ResultsView) getView()).getTable();
-
-    int columnCount = table.getColumnCount();
-    int rowCount = table.getRowCount();
-
-    for (int columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-      table.getColumnModel()
-           .getColumn(columnIndex)
-           .setPreferredWidth(FIXED_CELL_WIDTH);
-    }
-
-    for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-      int rowHeight = table.getRowHeight();
-
-      for (int columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-        Component component = table.prepareRenderer(table.getCellRenderer(rowIndex, columnIndex),
-                                                    rowIndex,
-                                                    columnIndex);
-
-        rowHeight = Math.max(rowHeight, component.getPreferredSize()
-                                                 .height);
-      }
-
-      table.setRowHeight(rowIndex, rowHeight);
-    }
-  }
-
-  /**
-   * Sets the table cells format, including text alignment and background and foreground colors.
-   *
-   * <p>Row 0 & column 0 have dark green background and white foreground. The remaining cells will
-   * have black foreground.
-   *
-   * <p>The background color will be yellow-ish if the cell shows any skill points related
-   * information. If the cell contains an anchored player name, its background will be the
-   * corresponding from the ANCHORAGES_COLORS array. If not, its background will be white.
-   *
-   * <p>The cell text will be centered if it shows any skill points related information, or a team
-   * name. Otherwise, it will be left-aligned.
-   */
-  private void setTableFormat() {
-    ((ResultsView) getView()).getTable().setDefaultRenderer(
-        Object.class,
-        new DefaultTableCellRenderer() {
-          /**
-           * Configures the table cells background and foreground colors.
-           *
-           * @param myTable    Source table.
-           * @param value      Table cell value.
-           * @param isSelected If the cell is selected.
-           * @param hasFocus   If the cell is focused.
-           * @param row        Cell row number.
-           * @param column     Cell column number.
-           */
-          @Override
-          public Component getTableCellRendererComponent(JTable myTable, Object value,
-                                                         boolean isSelected, boolean hasFocus,
-                                                         int row, int column) {
-            final Component c = super.getTableCellRendererComponent(myTable, value, isSelected,
-                                                                    hasFocus, row, column);
-
-            boolean byScoresMixFlag = CommonFields.getDistribution() == Constants.MIX_BY_SKILLS
-                                      && row == ((ResultsView) getView()).getTable()
-                                                                         .getRowCount() - 1;
-
-            if (row == 0) {
-              c.setBackground(Constants.GREEN_DARK);
-              c.setForeground(Color.WHITE);
-
-              ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
-
-              return c;
-            }
-
-            if (column == 0) {
-              if (byScoresMixFlag) {
-                c.setBackground(Constants.YELLOW_LIGHT);
-                c.setForeground(Color.BLACK);
-
-                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
-
-                return c;
-              }
-
-              c.setBackground(Constants.GREEN_DARK);
-              c.setForeground(Color.WHITE);
-
-              ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
-
-              return c;
-            }
-
-            if (byScoresMixFlag) {
-              c.setBackground(Constants.YELLOW_LIGHT);
-              c.setForeground(Color.BLACK);
-
-              ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
-
-              return c;
-            }
-
-            Player playerOnCell = (Player) CommonFields.getPlayersSets()
-                                                       .values()
-                                                       .stream()
-                                                       .flatMap(List::stream)
-                                                       .filter(p -> p.getName() == value)
-                                                       .toArray()[0];
-
-            c.setBackground(playerOnCell.getAnchorageNumber() != 0
-                            ? ANCHORAGES_COLORS[playerOnCell.getAnchorageNumber() - 1]
-                            : Color.WHITE);
-            c.setForeground(Color.BLACK);
-            ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
-
-            return c;
-          }
-        });
-  }
-
-  /**
    * Fills the table cells whose texts do not change.
    */
   private void fillTableFields() {
     for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
-      ((ResultsView) getView()).getTable()
-                               .setValueAt("EQUIPO #" + (teamIndex + 1), 0, teamIndex + 1);
+      table.setValueAt("EQUIPO #" + (teamIndex + 1), 0, teamIndex + 1);
     }
 
-    int rowCount = ((ResultsView) getView()).getTable()
-                                            .getRowCount() - 1;
+    int rowCount = table.getRowCount() - 1;
 
     for (int rowIndex = 1; rowIndex < rowCount; rowIndex++) {
       if (rowIndex == 1) {
-        ((ResultsView) getView()).getTable()
-                                 .setValueAt(CommonFields.getPositionsMap()
-                                                         .get(Position.CENTRAL_DEFENDER),
-                                             rowIndex,
-                                             0);
+        table.setValueAt(
+            CommonFields.getPositionsMap()
+                        .get(Position.CENTRAL_DEFENDER),
+            rowIndex,
+            0
+        );
       } else if (rowIndex < 4) {
-        ((ResultsView) getView()).getTable()
-                                 .setValueAt(CommonFields.getPositionsMap()
-                                                         .get(Position.LATERAL_DEFENDER),
-                                             rowIndex,
-                                             0);
+        table.setValueAt(
+            CommonFields.getPositionsMap()
+                        .get(Position.LATERAL_DEFENDER),
+            rowIndex,
+            0
+        );
       } else if (rowIndex < 6) {
-        ((ResultsView) getView()).getTable()
-                                 .setValueAt(CommonFields.getPositionsMap()
-                                                         .get(Position.MIDFIELDER),
-                                             rowIndex,
-                                             0);
+        table.setValueAt(
+            CommonFields.getPositionsMap()
+                        .get(Position.MIDFIELDER),
+            rowIndex,
+            0
+        );
       } else if (rowIndex < 7) {
-        ((ResultsView) getView()).getTable()
-                                 .setValueAt(CommonFields.getPositionsMap()
-                                                         .get(Position.FORWARD),
-                                             rowIndex,
-                                             0);
+        table.setValueAt(
+            CommonFields.getPositionsMap()
+                        .get(Position.FORWARD),
+            rowIndex,
+            0
+        );
       }
     }
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
       for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
-        ((ResultsView) getView()).getTable()
-                                 .setValueAt(teamIndex == 0 ? CommonFields.getPositionsMap()
-                                                                          .get(Position.GOALKEEPER)
-                                                            : "PUNTAJE DEL EQUIPO",
-                                             ((ResultsView) getView()).getTable()
-                                                                     .getRowCount() + teamIndex - 2,
-                                             0);
+        table.setValueAt(
+            teamIndex == 0 ? CommonFields.getPositionsMap()
+                                         .get(Position.GOALKEEPER)
+                           : "PUNTAJE DEL EQUIPO",
+            table.getRowCount() + teamIndex - 2,
+            0
+        );
       }
     } else {
-      ((ResultsView) getView()).getTable()
-                               .setValueAt(CommonFields.getPositionsMap()
-                                                       .get(Position.GOALKEEPER),
-                                           ((ResultsView) getView()).getTable()
-                                                                    .getRowCount() - 1, 0);
+      table.setValueAt(
+          CommonFields.getPositionsMap()
+                      .get(Position.GOALKEEPER),
+          table.getRowCount() - 1,
+          0
+      );
     }
   }
 

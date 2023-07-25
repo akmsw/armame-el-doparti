@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -50,9 +51,13 @@ public class CustomScrollPane extends JScrollPane {
   protected void paintBorder(Graphics g) {
     Graphics2D g2 = (Graphics2D) g.create();
 
-    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-    g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+    g2.setRenderingHints(
+        Map.of(
+          RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON,
+          RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY,
+          RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
+        )
+    );
     g2.setColor(Constants.GREEN_LIGHT_WHITE);
     g2.fillRoundRect(
         0,
@@ -126,9 +131,13 @@ public class CustomScrollPane extends JScrollPane {
       protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         Graphics2D g2 = (Graphics2D) g.create();
 
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+        g2.setRenderingHints(
+            Map.of(
+              RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON,
+              RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY,
+              RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
+            )
+        );
         g2.setColor(Constants.GREEN_DARK);
         g2.fillRoundRect(
             thumbBounds.x,
@@ -145,9 +154,13 @@ public class CustomScrollPane extends JScrollPane {
       protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
         Graphics2D g2 = (Graphics2D) g.create();
 
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+        g2.setRenderingHints(
+            Map.of(
+              RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON,
+              RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY,
+              RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
+            )
+        );
         g2.setColor(Constants.GREEN_MEDIUM);
         g2.fillRoundRect(
             trackBounds.x,
