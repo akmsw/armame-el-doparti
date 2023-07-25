@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
-import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 
 /**
@@ -58,15 +57,13 @@ public class CustomButton extends JButton {
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
     g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-    g2.fill(
-      new RoundRectangle2D.Double(
+    g2.fillRoundRect(
         0,
         0,
         (getWidth() - 1),
         (getHeight() - 1),
         Constants.ROUNDED_BORDER_ARC_GENERAL,
         Constants.ROUNDED_BORDER_ARC_GENERAL
-      )
     );
 
     super.paintComponent(g);
