@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
  *
  * @since 3.0
  */
-public class MainMenuController extends Controller {
+public class MainMenuController extends Controller<MainMenuView> {
 
   // ---------------------------------------- Constructor ---------------------------------------
 

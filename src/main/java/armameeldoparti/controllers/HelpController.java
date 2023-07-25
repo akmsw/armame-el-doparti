@@ -25,7 +25,7 @@ import lombok.Getter;
  * @since 3.0
  */
 @Getter
-public class HelpController extends Controller {
+public class HelpController extends Controller<HelpView> {
 
   // ---------------------------------------- Private constants ---------------------------------
 
@@ -96,11 +96,11 @@ public class HelpController extends Controller {
    */
   public void nextPageButtonEvent() {
     if (++currentPageNumber < TOTAL_PAGES - 1) {
-      ((HelpView) getView()).getPreviousPageButton()
-                            .setEnabled(true);
+      getView().getPreviousPageButton()
+               .setEnabled(true);
     } else {
-      ((HelpView) getView()).getNextPageButton()
-                            .setEnabled(false);
+      getView().getNextPageButton()
+               .setEnabled(false);
     }
 
     updatePage();
@@ -114,11 +114,11 @@ public class HelpController extends Controller {
    */
   public void previousPageButtonEvent() {
     if (--currentPageNumber > 0) {
-      ((HelpView) getView()).getNextPageButton()
-                            .setEnabled(true);
+      getView().getNextPageButton()
+               .setEnabled(true);
     } else {
-      ((HelpView) getView()).getPreviousPageButton()
-                            .setEnabled(false);
+      getView().getPreviousPageButton()
+               .setEnabled(false);
     }
 
     updatePage();
@@ -130,11 +130,11 @@ public class HelpController extends Controller {
    * <p>Finds the text file corresponding to the page number and displays its content.
    */
   public void updatePage() {
-    ((HelpView) getView()).getPageTitleTextField()
-                          .setText(pagesMap.get(currentPageNumber)
-                                           .get(PAGE_TITLE_INDEX));
-    ((HelpView) getView()).getTextArea()
-                          .setText("");
+    getView().getPageTitleTextField()
+             .setText(pagesMap.get(currentPageNumber)
+                              .get(PAGE_TITLE_INDEX));
+    getView().getTextArea()
+             .setText("");
 
     updateLabel();
 
@@ -150,8 +150,8 @@ public class HelpController extends Controller {
           ),
           StandardCharsets.UTF_8)
     )) {
-      ((HelpView) getView()).getTextArea()
-                            .read(reader, null);
+      getView().getTextArea()
+               .read(reader, null);
     } catch (IOException e) {
       e.printStackTrace();
 
@@ -165,17 +165,17 @@ public class HelpController extends Controller {
    * Updates the reading progress label text.
    */
   private void updateLabel() {
-    ((HelpView) getView()).getPagesCounter()
-                          .setText(currentPageNumber + 1 + "/" + TOTAL_PAGES);
+    getView().getPagesCounter()
+             .setText(currentPageNumber + 1 + "/" + TOTAL_PAGES);
   }
 
   /**
    * Resets the navigation buttons to their initial state.
    */
   private void resetButtons() {
-    ((HelpView) getView()).getPreviousPageButton()
-                          .setEnabled(false);
-    ((HelpView) getView()).getNextPageButton()
-                          .setEnabled(true);
+    getView().getPreviousPageButton()
+             .setEnabled(false);
+    getView().getNextPageButton()
+             .setEnabled(true);
   }
 }

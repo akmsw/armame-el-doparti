@@ -25,7 +25,7 @@ import javax.swing.JPanel;
  *
  * @since 3.0
  */
-public class NamesInputController extends Controller {
+public class NamesInputController extends Controller<NamesInputView> {
 
   // ---------------------------------------- Private constants ---------------------------------
 
@@ -58,8 +58,8 @@ public class NamesInputController extends Controller {
   @Override
   public void showView() {
     updateTextFields(Objects.requireNonNull(
-        ((NamesInputView) getView()).getComboBox()
-                                    .getSelectedItem(),
+        getView().getComboBox()
+                 .getSelectedItem(),
         Constants.MSG_ERROR_NULL_RESOURCE
       ).toString()
     );
@@ -76,26 +76,26 @@ public class NamesInputController extends Controller {
     hideView();
     clearPlayersNames();
 
-    ((NamesInputView) getView()).getAnchoragesCheckbox()
-                                .setSelected(false);
-    ((NamesInputView) getView()).getComboBox()
-                                .setSelectedIndex(0);
-    ((NamesInputView) getView()).getComboBox()
-                                .requestFocusInWindow();
-    ((NamesInputView) getView()).getTextArea()
-                                .setText("");
-    ((NamesInputView) getView()).getMixButton()
-                                .setEnabled(false);
+    getView().getAnchoragesCheckbox()
+             .setSelected(false);
+    getView().getComboBox()
+             .setSelectedIndex(0);
+    getView().getComboBox()
+             .requestFocusInWindow();
+    getView().getTextArea()
+             .setText("");
+    getView().getMixButton()
+             .setEnabled(false);
 
-    updateTextFields(((NamesInputView) getView()).getComboBox()
-                                                 .getItemAt(0));
+    updateTextFields(getView().getComboBox()
+                              .getItemAt(0));
   }
 
   /**
    * Resets the combobox to the initial state and gives it the view focus.
    */
   public void resetComboBox() {
-    JComboBox<String> comboBox = ((NamesInputView) getView()).getComboBox();
+    JComboBox<String> comboBox = getView().getComboBox();
 
     comboBox.setSelectedIndex(0);
     comboBox.requestFocusInWindow();
@@ -203,8 +203,8 @@ public class NamesInputController extends Controller {
     updateTextArea();
 
     // The mix button is enabled only when every player has a name
-    ((NamesInputView) getView()).getMixButton()
-                                .setEnabled(!alreadyExists(""));
+    getView().getMixButton()
+             .setEnabled(!alreadyExists(""));
   }
 
   /**
@@ -231,8 +231,8 @@ public class NamesInputController extends Controller {
       private int counter;
     };
 
-    ((NamesInputView) getView()).getTextArea()
-                                .setText("");
+    getView().getTextArea()
+             .setText("");
 
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> value.stream()
@@ -242,17 +242,15 @@ public class NamesInputController extends Controller {
                                                 if (wrapperCounter.counter != 0
                                                     && Constants.PLAYERS_PER_TEAM * 2
                                                        - wrapperCounter.counter != 0) {
-                                                  ((NamesInputView) getView())
-                                                      .getTextArea()
-                                                      .append(System.lineSeparator());
+                                                  getView().getTextArea()
+                                                           .append(System.lineSeparator());
                                                 }
 
                                                 wrapperCounter.counter++;
 
-                                                ((NamesInputView) getView())
-                                                    .getTextArea()
-                                                    .append(wrapperCounter.counter
-                                                            + " - " + p.getName());
+                                                getView().getTextArea()
+                                                         .append(wrapperCounter.counter
+                                                                 + " - " + p.getName());
                                               }));
   }
 
@@ -262,23 +260,24 @@ public class NamesInputController extends Controller {
    * @param selectedOption Combobox selected option.
    */
   private void updateTextFields(String selectedOption) {
-    JPanel leftPanel = ((NamesInputView) getView()).getLeftPanel();
+    JPanel leftPanel = getView().getLeftPanel();
 
     // Removes the text fields from the view's left panel
-    ((NamesInputView) getView()).getTextFieldsMap()
-                                .values()
-                                .stream()
-                                .flatMap(Collection::stream)
-                                .filter(tf -> tf.getParent() == leftPanel)
-                                .forEach(leftPanel::remove);
+    getView().getTextFieldsMap()
+             .values()
+             .stream()
+             .flatMap(Collection::stream)
+             .filter(tf -> tf.getParent() == leftPanel)
+             .forEach(leftPanel::remove);
 
-    ((NamesInputView) getView()).getTextFieldsMap()
-                                .get(CommonFunctions.getCorrespondingPosition(
-                                       CommonFields.getPositionsMap(),
-                                       selectedOption.toUpperCase()
-                                     )
-                                    )
-                                .forEach(tf -> leftPanel.add(tf, Constants.MIG_LAYOUT_GROWX));
+    getView().getTextFieldsMap()
+             .get(
+               CommonFunctions.getCorrespondingPosition(
+                 CommonFields.getPositionsMap(),
+                 selectedOption.toUpperCase()
+               )
+             )
+             .forEach(tf -> leftPanel.add(tf, Constants.MIG_LAYOUT_GROWX));
 
     leftPanel.revalidate();
     leftPanel.repaint();
@@ -288,11 +287,11 @@ public class NamesInputController extends Controller {
    * Clears the players names and text fields.
    */
   private void clearPlayersNames() {
-    ((NamesInputView) getView()).getTextFieldsMap()
-                                .values()
-                                .stream()
-                                .flatMap(List::stream)
-                                .forEach(tf -> tf.setText(null));
+    getView().getTextFieldsMap()
+             .values()
+             .stream()
+             .flatMap(List::stream)
+             .forEach(tf -> tf.setText(null));
 
     CommonFields.getPlayersSets()
                 .values()

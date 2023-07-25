@@ -4,6 +4,7 @@ import armameeldoparti.controllers.Controller;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
+import armameeldoparti.views.View;
 import java.awt.GraphicsDevice;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public final class CommonFields {
   @Getter @Setter private static Map<Position, Integer> playersAmountMap;
   @Getter @Setter private static Map<Position, List<Player>> playersSets;
   @Getter @Setter private static Map<Position, String> positionsMap;
-  @Getter @Setter private static Map<ProgramView, Controller> controllersMap;
+  @Getter @Setter private static Map<ProgramView, Controller<? extends View>> controllersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @since 3.0
  */
-public class ResultsController extends Controller {
+public class ResultsController extends Controller<ResultsView> {
 
   // ---------------------------------------- Private constants ---------------------------------
 
@@ -35,8 +35,6 @@ public class ResultsController extends Controller {
   private BySkillsMixer bySkillsMixer;
 
   private RandomMixer randomMixer;
-
-  private ResultsView view;
 
   private CustomTable table;
 
@@ -55,8 +53,6 @@ public class ResultsController extends Controller {
     bySkillsMixer = new BySkillsMixer();
 
     randomMixer = new RandomMixer();
-
-    view = (ResultsView) getView();
 
     teams = new ArrayList<>();
   }
@@ -86,15 +82,15 @@ public class ResultsController extends Controller {
 
     teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM ? randomMix() : bySkillsMix());
 
-    view.setTable(
+    getView().setTable(
       new CustomTable(
         Constants.PLAYERS_PER_TEAM + CommonFields.getDistribution() + 1,
         TABLE_COLUMNS
       )
     );
-    view.initializeInterface();
+    getView().initializeInterface();
 
-    table = (CustomTable) view.getTable();
+    table = (CustomTable) getView().getTable();
 
     fillTableFields();
     updateTable();

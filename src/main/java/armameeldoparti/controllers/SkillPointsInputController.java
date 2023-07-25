@@ -6,6 +6,7 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import armameeldoparti.views.ResultsView;
 import armameeldoparti.views.SkillPointsInputView;
 import java.util.Map;
 import javax.swing.JLabel;
@@ -20,7 +21,7 @@ import javax.swing.JSpinner;
  *
  * @since 3.0
  */
-public class SkillPointsInputController extends Controller {
+public class SkillPointsInputController extends Controller<SkillPointsInputView> {
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -53,8 +54,8 @@ public class SkillPointsInputController extends Controller {
   public void finishButtonEvent() {
     hideView();
 
-    ((SkillPointsInputView) getView()).getSpinnersMap()
-                                      .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
+    getView().getSpinnersMap()
+             .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
 
     ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).setUp();
 
@@ -89,8 +90,8 @@ public class SkillPointsInputController extends Controller {
    * Updates the players name labels.
    */
   public void updateNameLabels() {
-    Map<JSpinner, JLabel> labelsMap = ((SkillPointsInputView) getView()).getLabelsMap();
-    Map<Player, JSpinner> spinnersMap = ((SkillPointsInputView) getView()).getSpinnersMap();
+    Map<JSpinner, JLabel> labelsMap = getView().getLabelsMap();
+    Map<Player, JSpinner> spinnersMap = getView().getSpinnersMap();
 
     for (Position position : Position.values()) {
       for (Player player : CommonFields.getPlayersSets()
@@ -109,10 +110,10 @@ public class SkillPointsInputController extends Controller {
    * Sets 0 skill points to every player and resets every spinner value to the minimum skill point.
    */
   private void resetSkills() {
-    ((SkillPointsInputView) getView()).getSpinnersMap()
-                                      .forEach((k, v) -> {
-                                        k.setSkillPoints(0);
-                                        v.setValue(Constants.SKILL_MIN);
-                                      });
+    getView().getSpinnersMap()
+             .forEach((k, v) -> {
+               k.setSkillPoints(0);
+               v.setValue(Constants.SKILL_MIN);
+             });
   }
 }

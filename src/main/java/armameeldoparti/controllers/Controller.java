@@ -19,11 +19,11 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public abstract class Controller {
+public abstract class Controller<T extends View> {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private View view;
+  private T view;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -32,7 +32,7 @@ public abstract class Controller {
    *
    * @param view View to control.
    */
-  protected Controller(View view) {
+  protected Controller(T view) {
     setView(view);
   }
 

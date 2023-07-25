@@ -177,11 +177,17 @@ public final class CommonFunctions {
   /**
    * Gets the corresponding controller to the requested view.
    *
+   * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime
+   * the type of the view controlled.
+   *
+   * TODO: Avoid warning suppression.
+   *
    * @param view The view whose controller is needed.
    *
    * @return The requested view's controller.
    */
-  public static Controller getController(ProgramView view) {
+  @SuppressWarnings("java:S1452")
+  public static Controller<? extends View> getController(ProgramView view) {
     return CommonFields.getControllersMap()
                        .get(view);
   }
