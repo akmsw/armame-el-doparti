@@ -209,7 +209,7 @@ public class ResultsController extends Controller {
    */
   private void fillTableFields() {
     for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
-      table.setValueAt("EQUIPO #" + (teamIndex + 1), 0, teamIndex + 1);
+      table.setValueAt("EQUIPO " + (teamIndex + 1), 0, teamIndex + 1);
     }
 
     int rowCount = table.getRowCount() - 1;
