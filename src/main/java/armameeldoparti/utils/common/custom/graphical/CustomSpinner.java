@@ -50,8 +50,6 @@ public class CustomSpinner extends JSpinner {
        * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
        * time the type of the model minimum (a Comparable) and the current value (an Object).
        *
-       * <p>TODO: Avoid warning suppression.
-       *
        * @see CommonFunctions#buildCustomArrowButton(int, Object)
        *
        * @return The spinner 'previous' button.

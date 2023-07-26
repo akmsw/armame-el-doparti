@@ -4,6 +4,9 @@ import armameeldoparti.models.Error;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
 
@@ -155,6 +158,20 @@ public final class Constants {
   );
   public static final ImageIcon ICON_DIALOG = CommonFunctions.scaleImageIcon(
       ICON_MAIN, ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH
+  );
+
+  /**
+   * Anchorages colors array used as the background color for the results table.
+   */
+  public static final List<Color> ANCHORAGES_COLORS = Collections.unmodifiableList(
+      Arrays.asList(
+        new Color(255, 204, 153),
+        new Color(184, 224, 227),
+        new Color(220, 206, 235),
+        new Color(195, 235, 198),
+        new Color(151, 197, 216),
+        new Color(219, 220, 218)
+      )
   );
 
   /**

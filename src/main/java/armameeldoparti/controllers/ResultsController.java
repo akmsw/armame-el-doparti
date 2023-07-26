@@ -11,9 +11,18 @@ import armameeldoparti.utils.common.custom.graphical.CustomTable;
 import armameeldoparti.utils.mixers.BySkillsMixer;
 import armameeldoparti.utils.mixers.RandomMixer;
 import armameeldoparti.views.ResultsView;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JComponent;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * Results view controller.
@@ -92,6 +101,7 @@ public class ResultsController extends Controller<ResultsView> {
 
     table = (CustomTable) getView().getTable();
 
+    overrideTableFormat();
     fillTableFields();
     updateTable();
 
@@ -273,5 +283,131 @@ public class ResultsController extends Controller<ResultsView> {
                 .stream()
                 .flatMap(List::stream)
                 .forEach(p -> p.setTeamNumber(0));
+  }
+
+  /**
+   * Overrides the table cells format in order to match the overall program aesthetics, including
+   * text alignment and background and foreground colors.
+   *
+   * <p>Row 0 and column 0 have dark green background and white foreground. The remaining cells will
+   * have black foreground.
+   *
+   * <p>The background color will be yellow-ish if the cell shows any skill points related
+   * information. If the cell contains an anchored player name, its background will be the
+   * corresponding from the ANCHORAGES_COLORS array. If not, its background will be white.
+   *
+   * <p>The cell text will be centered if it shows any skill points related information, or a team
+   * name. Otherwise, it will be left-aligned.
+   */
+  private void overrideTableFormat() {
+    getView().getTable().setDefaultRenderer(
+        Object.class,
+        new DefaultTableCellRenderer() {
+          /**
+           * Configures the table cells format.
+           *
+           * @param myTable    Source table.
+           * @param value      Table cell value.
+           * @param isSelected If the cell is selected.
+           * @param hasFocus   If the cell is focused.
+           * @param row        Cell row number.
+           * @param column     Cell column number.
+           */
+          @Override
+          public Component getTableCellRendererComponent(JTable myTable, Object value,
+                                                         boolean isSelected, boolean hasFocus,
+                                                         int row, int column) {
+            JComponent c = (JComponent) super.getTableCellRendererComponent(
+                myTable, value, isSelected, hasFocus, row, column
+            );
+
+            boolean byScoresMixFlag = CommonFields.getDistribution() == Constants.MIX_BY_SKILLS
+                                      && row == getView().getTable()
+                                                         .getRowCount() - 1;
+
+              c.setOpaque(false);
+              c.setBorder(
+                new EmptyBorder(
+                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
+                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
+                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
+                  Constants.ROUNDED_BORDER_INSETS_GENERAL
+                )
+              );
+
+              if (row == 0) {
+                c.setBackground(Constants.GREEN_DARK);
+                c.setForeground(Color.WHITE);
+
+                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+
+                return c;
+              }
+
+              if (column == 0) {
+                if (byScoresMixFlag) {
+                  c.setBackground(Constants.YELLOW_LIGHT);
+                  c.setForeground(Color.BLACK);
+
+                  ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+
+                  return c;
+                }
+
+                c.setBackground(Constants.GREEN_DARK);
+                c.setForeground(Color.WHITE);
+
+                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
+
+                return c;
+              }
+
+              if (byScoresMixFlag) {
+                c.setBackground(Constants.YELLOW_LIGHT);
+                c.setForeground(Color.BLACK);
+
+                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+
+                return c;
+              }
+
+              Player playerOnCell = (Player) CommonFields.getPlayersSets()
+                                                        .values()
+                                                        .stream()
+                                                        .flatMap(List::stream)
+                                                        .filter(p -> p.getName() == value)
+                                                        .toArray()[0];
+
+              c.setBackground(playerOnCell.getAnchorageNumber() != 0
+                              ? Constants.ANCHORAGES_COLORS
+                                         .get(playerOnCell.getAnchorageNumber() - 1)
+                              : Constants.GREEN_LIGHT_WHITE);
+              c.setForeground(Color.BLACK);
+              ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
+
+              return c;
+          }
+
+          @Override
+          protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+
+            g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+            g2.setColor(getBackground());
+            g2.fillRoundRect(
+                0,
+                0,
+                (getWidth() - 1),
+                (getHeight() - 1),
+                Constants.ROUNDED_BORDER_ARC_TABLE_CELLS,
+                Constants.ROUNDED_BORDER_ARC_TABLE_CELLS
+            );
+
+            super.paintComponent(g2);
+
+            g2.dispose();
+          }
+        }
+    );
   }
 }
