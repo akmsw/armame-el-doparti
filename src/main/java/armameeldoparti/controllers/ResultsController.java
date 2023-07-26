@@ -379,7 +379,7 @@ public class ResultsController extends Controller<ResultsView> {
                                                         .toArray()[0];
 
               c.setBackground(playerOnCell.getAnchorageNumber() != 0
-                              ? Constants.ANCHORAGES_COLORS
+                              ? Constants.COLORS_ANCHORAGES
                                          .get(playerOnCell.getAnchorageNumber() - 1)
                               : Constants.GREEN_LIGHT_WHITE);
               c.setForeground(Color.BLACK);

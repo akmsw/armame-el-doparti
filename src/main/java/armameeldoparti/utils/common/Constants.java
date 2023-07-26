@@ -52,6 +52,8 @@ public final class Constants {
 
   // ---------------------------------------- Public constants ----------------------------------
 
+  public static final int INDEX_HELP_PAGE_FILENAME = 1;
+  public static final int INDEX_HELP_PAGE_TITLE = 0;
   public static final int PLAYERS_PER_TEAM = 7;
   public static final int MAX_NAME_LEN = 10;
   public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
@@ -161,9 +163,32 @@ public final class Constants {
   );
 
   /**
-   * Anchorages colors array used as the background color for the results table.
+   * Possible players distribution methods.
    */
-  public static final List<Color> ANCHORAGES_COLORS = Collections.unmodifiableList(
+  public static final List<String> OPTIONS_MIX = Collections.unmodifiableList(
+      Arrays.asList(
+        MIX_OPTION_RANDOM,
+        MIX_OPTION_BY_SKILL
+      )
+  );
+
+  /**
+   * Positions to show in the names input view combobox.
+   */
+  public static final List<String> OPTIONS_POSITIONS_COMBOBOX = Collections.unmodifiableList(
+      Arrays.asList(
+        "Defensores centrales",
+        "Defensores laterales",
+        "Mediocampistas",
+        "Delanteros",
+        "Arqueros"
+      )
+  );
+
+  /**
+   * Anchorages colors list used as background color for the results table cells.
+   */
+  public static final List<Color> COLORS_ANCHORAGES = Collections.unmodifiableList(
       Arrays.asList(
         new Color(255, 204, 153),
         new Color(184, 224, 227),
@@ -192,6 +217,20 @@ public final class Constants {
       Error.FATAL_INTERNAL_ERROR, MSG_ERROR_FATAL_INTERNAL,
       Error.GUI_ERROR, MSG_ERROR_GUI,
       Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
+  );
+
+  /**
+   * Map of help pages titles and filenames.
+   */
+  public static final Map<Integer, List<String>> MAP_HELP_PAGES_FILES = Map.of(
+      0, Arrays.asList("INTRODUCCIÓN", "helpIntro.hlp"),
+      1, Arrays.asList("CRITERIOS ESTABLECIDOS", "helpCriteria.hlp"),
+      2, Arrays.asList("INGRESO DE JUGADORES", "helpNames.hlp"),
+      3, Arrays.asList("ANCLAJES", "helpAnchorages.hlp"),
+      4, Arrays.asList("PUNTUACIONES", "helpScores.hlp"),
+      5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.hlp"),
+      6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpBySkillsMix.hlp"),
+      7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.hlp")
   );
 
   /**

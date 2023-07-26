@@ -44,14 +44,6 @@ public class NamesInputView extends View {
   private static final int TEXT_AREA_ROWS = 14;
   private static final int TEXT_AREA_COLUMNS = 12;
 
-  private static final String[] OPTIONS_COMBOBOX = {
-    "Defensores centrales",
-    "Defensores laterales",
-    "Mediocampistas",
-    "Delanteros",
-    "Arqueros"
-  };
-
   // ---------------------------------------- Private fields ------------------------------------
 
   private JButton mixButton;
@@ -128,12 +120,14 @@ public class NamesInputView extends View {
    * Adds the combobox.
    */
   private void addComboBox() {
-    comboBox = new CustomComboBox<>(OPTIONS_COMBOBOX);
+    comboBox = new CustomComboBox<>(Constants.OPTIONS_POSITIONS_COMBOBOX.toArray(new String[0]));
 
     comboBox.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
-                                               .comboBoxEvent((String) Objects.requireNonNull(
-                                                 ((JComboBox<?>) e.getSource()).getSelectedItem())
+                                               .comboBoxEvent(
+                                                 (String) Objects.requireNonNull(
+                                                   ((JComboBox<?>) e.getSource()).getSelectedItem()
+                                                 )
                                                )
     );
 

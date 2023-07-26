@@ -9,9 +9,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import lombok.Getter;
 
@@ -29,20 +26,8 @@ public class HelpController extends Controller<HelpView> {
 
   // ---------------------------------------- Private constants ---------------------------------
 
-  private static final Map<Integer, List<String>> pagesMap = Map.of(
-      0, Arrays.asList("INTRODUCCIÓN", "helpIntro.hlp"),
-      1, Arrays.asList("CRITERIOS ESTABLECIDOS", "helpCriteria.hlp"),
-      2, Arrays.asList("INGRESO DE JUGADORES", "helpNames.hlp"),
-      3, Arrays.asList("ANCLAJES", "helpAnchorages.hlp"),
-      4, Arrays.asList("PUNTUACIONES", "helpScores.hlp"),
-      5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.hlp"),
-      6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpBySkillsMix.hlp"),
-      7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.hlp")
-  );
-
-  private static final int PAGE_FILENAME_INDEX = 1;
-  private static final int PAGE_TITLE_INDEX = 0;
-  private static final int TOTAL_PAGES = pagesMap.size();
+  private static final int TOTAL_HELP_PAGES = Constants.MAP_HELP_PAGES_FILES
+                                                       .size();
 
   // ---------------------------------------- Private fields ------------------------------------
 
@@ -95,7 +80,7 @@ public class HelpController extends Controller<HelpView> {
    * text area and the reading progress label.
    */
   public void nextPageButtonEvent() {
-    if (++currentPageNumber < TOTAL_PAGES - 1) {
+    if (++currentPageNumber < TOTAL_HELP_PAGES - 1) {
       getView().getPreviousPageButton()
                .setEnabled(true);
     } else {
@@ -131,8 +116,9 @@ public class HelpController extends Controller<HelpView> {
    */
   public void updatePage() {
     getView().getPageTitleTextField()
-             .setText(pagesMap.get(currentPageNumber)
-                              .get(PAGE_TITLE_INDEX));
+             .setText(Constants.MAP_HELP_PAGES_FILES
+                               .get(currentPageNumber)
+                               .get(Constants.INDEX_HELP_PAGE_TITLE));
     getView().getTextArea()
              .setText("");
 
@@ -144,8 +130,9 @@ public class HelpController extends Controller<HelpView> {
             HelpController.class
                           .getClassLoader()
                           .getResourceAsStream(Constants.PATH_HELP_DOCS
-                                               + pagesMap.get(currentPageNumber)
-                                                         .get(PAGE_FILENAME_INDEX)),
+                                               + Constants.MAP_HELP_PAGES_FILES
+                                                          .get(currentPageNumber)
+                                                          .get(Constants.INDEX_HELP_PAGE_FILENAME)),
             Constants.MSG_ERROR_NULL_RESOURCE
           ),
           StandardCharsets.UTF_8)
@@ -166,7 +153,7 @@ public class HelpController extends Controller<HelpView> {
    */
   private void updateLabel() {
     getView().getPagesCounter()
-             .setText(currentPageNumber + 1 + "/" + TOTAL_PAGES);
+             .setText(currentPageNumber + 1 + "/" + TOTAL_HELP_PAGES);
   }
 
   /**

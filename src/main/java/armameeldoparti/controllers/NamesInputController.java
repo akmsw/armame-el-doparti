@@ -27,16 +27,6 @@ import javax.swing.JPanel;
  */
 public class NamesInputController extends Controller<NamesInputView> {
 
-  // ---------------------------------------- Private constants ---------------------------------
-
-  /**
-   * Possible players distribution methods.
-   */
-  private static final String[] OPTIONS_MIX = {
-    Constants.MIX_OPTION_RANDOM,
-    Constants.MIX_OPTION_BY_SKILL
-  };
-
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -129,9 +119,12 @@ public class NamesInputController extends Controller<NamesInputView> {
     int distribution = JOptionPane.showOptionDialog(
         parentComponent,
         "Seleccione el criterio de distribución de jugadores",
-        "Antes de continuar...", JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.QUESTION_MESSAGE, Constants.ICON_DIALOG,
-        OPTIONS_MIX, OPTIONS_MIX[0]
+        "Antes de continuar...",
+        JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        Constants.ICON_DIALOG,
+        Constants.OPTIONS_MIX.toArray(),
+        Constants.OPTIONS_MIX.get(0)
     );
 
     if (distribution == JOptionPane.CLOSED_OPTION) {
