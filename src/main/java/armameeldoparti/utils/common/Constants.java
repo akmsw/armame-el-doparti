@@ -3,6 +3,8 @@ package armameeldoparti.utils.common;
 import armameeldoparti.models.Error;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.RenderingHints.Key;
 import java.util.Map;
 import javax.swing.ImageIcon;
 
@@ -174,6 +176,15 @@ public final class Constants {
       Error.FATAL_INTERNAL_ERROR, MSG_ERROR_FATAL_INTERNAL,
       Error.GUI_ERROR, MSG_ERROR_GUI,
       Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
+  );
+
+  /**
+   * Map of rendering hints used to paint custom components.
+   */
+  public static final Map<RenderingHints.Key, Object> MAP_RENDERING_HINTS = Map.of(
+      RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON,
+      RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY,
+      RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
   );
 
   // ---------------------------------------- Constructor ---------------------------------------
