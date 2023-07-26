@@ -6,7 +6,6 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import armameeldoparti.views.ResultsView;
 import armameeldoparti.views.SkillPointsInputView;
 import java.util.Map;
 import javax.swing.JLabel;

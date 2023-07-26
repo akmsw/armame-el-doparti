@@ -180,7 +180,7 @@ public final class CommonFunctions {
    * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime
    * the type of the view controlled.
    *
-   * TODO: Avoid warning suppression.
+   * <p>TODO: Avoid warning suppression.
    *
    * @param view The view whose controller is needed.
    *

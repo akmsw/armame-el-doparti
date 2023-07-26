@@ -43,6 +43,9 @@ public class CustomTable extends JTable {
 
   // ---------------------------------------- Public methods ------------------------------------
 
+  /**
+   * A.
+   */
   public void adjustCells() {
     int totalColumns = getColumnCount();
     int totalRows = getRowCount();

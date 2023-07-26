@@ -162,29 +162,39 @@ public final class Main {
    * Creates the controllers and assigns their corresponding view to control.
    */
   private static void setUpControllers() {
-    Controller mainMenuController = new MainMenuController(new MainMenuView());
+    Controller<MainMenuView> mainMenuController = new MainMenuController(
+        new MainMenuView()
+    );
     CommonFields.getControllersMap()
                 .put(ProgramView.MAIN_MENU, mainMenuController);
 
-    Controller helpController = new HelpController(new HelpView());
+    Controller<HelpView> helpController = new HelpController(
+        new HelpView()
+    );
     CommonFields.getControllersMap()
                 .put(ProgramView.HELP, helpController);
 
-    Controller namesInputController = new NamesInputController(new NamesInputView());
+    Controller<NamesInputView> namesInputController = new NamesInputController(
+        new NamesInputView()
+    );
     CommonFields.getControllersMap()
                 .put(ProgramView.NAMES_INPUT, namesInputController);
 
-    Controller anchoragesController = new AnchoragesController(new AnchoragesView());
+    Controller<AnchoragesView> anchoragesController = new AnchoragesController(
+        new AnchoragesView()
+    );
     CommonFields.getControllersMap()
                 .put(ProgramView.ANCHORAGES, anchoragesController);
 
-    Controller skillPointsInputController = new SkillPointsInputController(
+    Controller<SkillPointsInputView> skillPointsInputController = new SkillPointsInputController(
         new SkillPointsInputView()
     );
     CommonFields.getControllersMap()
                 .put(ProgramView.SKILL_POINTS, skillPointsInputController);
 
-    Controller resultsController = new ResultsController(new ResultsView());
+    Controller<ResultsView> resultsController = new ResultsController(
+        new ResultsView()
+    );
     CommonFields.getControllersMap()
                 .put(ProgramView.RESULTS, resultsController);
   }
@@ -194,7 +204,6 @@ public final class Main {
    */
   private static void setUpGeneralGraphicalProperties() {
     UIManager.put("Button.background", Constants.GREEN_DARK);
-    UIManager.put("Button.focus", Constants.GREEN_DARK);
     UIManager.put("Button.foreground", Color.WHITE);
     UIManager.put("CheckBox.background", Constants.GREEN_LIGHT);
     UIManager.put("CheckBox.focus", Constants.GREEN_LIGHT);
