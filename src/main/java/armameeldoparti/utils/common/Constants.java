@@ -4,7 +4,6 @@ import armameeldoparti.models.Error;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.RenderingHints.Key;
 import java.util.Map;
 import javax.swing.ImageIcon;
 
