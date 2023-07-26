@@ -56,7 +56,28 @@ public class CustomComboBox<E> extends JComboBox<E> {
 
       @Override
       protected ListCellRenderer<Object> createRenderer() {
-        return new CustomComboBoxCellRenderer();
+        return new DefaultListCellRenderer() {
+          @Override
+          public Component getListCellRendererComponent(JList<?> list,
+                                                        Object value,
+                                                        int index,
+                                                        boolean isSelected,
+                                                        boolean cellHasFocus) {
+            JLabel renderer = (JLabel) super.getListCellRendererComponent(
+                list, value, index, isSelected, cellHasFocus
+            );
+
+            if (isSelected) {
+              renderer.setBackground(Constants.GREEN_DARK_MEDIUM);
+              renderer.setForeground(Color.WHITE);
+            } else {
+              renderer.setBackground(list.getBackground());
+              renderer.setForeground(list.getForeground());
+            }
+
+            return renderer;
+          }
+        };
       }
     });
   }
@@ -118,28 +139,5 @@ public class CustomComboBox<E> extends JComboBox<E> {
       Constants.ROUNDED_BORDER_INSETS_GENERAL,
       Constants.ROUNDED_BORDER_INSETS_GENERAL
     );
-  }
-
-  private static class CustomComboBoxCellRenderer extends DefaultListCellRenderer {
-    @Override
-    public Component getListCellRendererComponent(JList<?> list,
-                                                  Object value,
-                                                  int index,
-                                                  boolean isSelected,
-                                                  boolean cellHasFocus) {
-      JLabel renderer = (JLabel) super.getListCellRendererComponent(
-          list, value, index, isSelected, cellHasFocus
-      );
-
-      if (isSelected) {
-        renderer.setBackground(Constants.GREEN_DARK_MEDIUM);
-        renderer.setForeground(Color.WHITE);
-      } else {
-        renderer.setBackground(list.getBackground());
-        renderer.setForeground(list.getForeground());
-      }
-
-      return renderer;
-    }
   }
 }
