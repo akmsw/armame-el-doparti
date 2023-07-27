@@ -66,7 +66,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
             );
 
             if (isSelected) {
-              renderer.setBackground(Constants.GREEN_DARK_MEDIUM);
+              renderer.setBackground(Constants.COLOR_GREEN_DARK_MEDIUM);
               renderer.setForeground(Color.WHITE);
             } else {
               renderer.setBackground(list.getBackground());

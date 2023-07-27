@@ -44,9 +44,9 @@ public class CustomButton extends JButton {
   @Override
   protected void paintComponent(Graphics g) {
     if (getModel().isPressed()) {
-      g.setColor(Constants.GREEN_MEDIUM);
+      g.setColor(Constants.COLOR_GREEN_MEDIUM);
     } else if (getModel().isRollover()) {
-      g.setColor(Constants.GREEN_DARK_MEDIUM);
+      g.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
     } else {
       g.setColor(getBackground());
     }

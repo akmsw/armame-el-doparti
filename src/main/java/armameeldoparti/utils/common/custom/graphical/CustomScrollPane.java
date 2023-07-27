@@ -50,7 +50,7 @@ public class CustomScrollPane extends JScrollPane {
     Graphics2D g2 = (Graphics2D) g.create();
 
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-    g2.setColor(Constants.GREEN_LIGHT_WHITE);
+    g2.setColor(Constants.COLOR_GREEN_LIGHT_WHITE);
     g2.fillRoundRect(
         0,
         0,
@@ -77,7 +77,7 @@ public class CustomScrollPane extends JScrollPane {
           Constants.ROUNDED_BORDER_INSETS_SCROLLPANE
         )
     );
-    getViewport().setBackground(Constants.GREEN_LIGHT_WHITE);
+    getViewport().setBackground(Constants.COLOR_GREEN_LIGHT_WHITE);
     getVerticalScrollBar().setUI(new BasicScrollBarUI() {
       /**
        * Configures the scrollbar colors to fit the program aesthetics.
@@ -86,8 +86,8 @@ public class CustomScrollPane extends JScrollPane {
        */
       @Override
       protected void configureScrollBarColors() {
-        this.thumbColor = Constants.GREEN_DARK;
-        this.trackColor = Constants.GREEN_MEDIUM;
+        this.thumbColor = Constants.COLOR_GREEN_DARK;
+        this.trackColor = Constants.COLOR_GREEN_MEDIUM;
       }
 
       /**
@@ -124,7 +124,7 @@ public class CustomScrollPane extends JScrollPane {
         Graphics2D g2 = (Graphics2D) g.create();
 
         g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-        g2.setColor(Constants.GREEN_DARK);
+        g2.setColor(Constants.COLOR_GREEN_DARK);
         g2.fillRoundRect(
             thumbBounds.x,
             thumbBounds.y,
@@ -141,7 +141,7 @@ public class CustomScrollPane extends JScrollPane {
         Graphics2D g2 = (Graphics2D) g.create();
 
         g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-        g2.setColor(Constants.GREEN_MEDIUM);
+        g2.setColor(Constants.COLOR_GREEN_MEDIUM);
         g2.fillRoundRect(
             trackBounds.x,
             trackBounds.y,

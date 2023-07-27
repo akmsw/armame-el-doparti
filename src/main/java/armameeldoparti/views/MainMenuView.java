@@ -93,7 +93,7 @@ public class MainMenuView extends View {
         Constants.SIZE_FONT_TITLE_LABEL,
         Constants.PROGRAM_TITLE,
         Constants.MIG_LAYOUT_ALIGN_CENTER,
-        Constants.GREEN_DARK,
+        Constants.COLOR_GREEN_DARK,
         null
     );
     addBackgroundLabel(
@@ -107,7 +107,7 @@ public class MainMenuView extends View {
         Constants.SIZE_FONT_VERSION_LABEL,
         Constants.PROGRAM_VERSION,
         Constants.MIG_LAYOUT_ALIGN_RIGHT,
-        Constants.GREEN_DARK,
+        Constants.COLOR_GREEN_DARK,
         "Versión del programa"
     );
   }

@@ -120,13 +120,13 @@ public final class Constants {
   public static final String MIG_LAYOUT_WRAP = "wrap";
   public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
 
-  public static final Color GREEN_DARK = Color.decode("#29474a");
-  public static final Color GREEN_DARK_MEDIUM = Color.decode("#4b6560");
-  public static final Color GREEN_MEDIUM = Color.decode("#6d8276");
-  public static final Color GREEN_MEDIUM_LIGHT = Color.decode("#8fa08c");
-  public static final Color GREEN_LIGHT = Color.decode("#b0bda2");
-  public static final Color GREEN_LIGHT_WHITE = Color.decode("#d8ded1");
-  public static final Color YELLOW_LIGHT = Color.decode("#ffee99");
+  public static final Color COLOR_GREEN_DARK = Color.decode("#29474a");
+  public static final Color COLOR_GREEN_DARK_MEDIUM = Color.decode("#4b6560");
+  public static final Color COLOR_GREEN_MEDIUM = Color.decode("#6d8276");
+  public static final Color COLOR_GREEN_MEDIUM_LIGHT = Color.decode("#8fa08c");
+  public static final Color COLOR_GREEN_LIGHT = Color.decode("#b0bda2");
+  public static final Color COLOR_GREEN_LIGHT_WHITE = Color.decode("#d8ded1");
+  public static final Color COLOR_YELLOW_LIGHT = Color.decode("#ffee99");
 
   public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(
       FILENAME_IMAGE_BACKGROUND

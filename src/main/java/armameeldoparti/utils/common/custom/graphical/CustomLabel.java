@@ -86,7 +86,7 @@ public class CustomLabel extends JLabel {
 
   @Override
   protected void paintBorder(Graphics g) {
-    g.setColor(Constants.GREEN_LIGHT);
+    g.setColor(Constants.COLOR_GREEN_LIGHT);
 
     Graphics2D g2 = (Graphics2D) g.create();
 

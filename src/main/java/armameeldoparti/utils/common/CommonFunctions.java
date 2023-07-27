@@ -233,25 +233,25 @@ public final class CommonFunctions {
    * will be dark green. Otherwise, it will be medium green.
    *
    *
-   * @param <T>             Generic parent UI component type.
-   * @param orientation     The button arrow orientation.
-   * @param parentComponent Parent UI component.
+   * @param <T>         Generic parent UI component type.
+   * @param orientation The button arrow orientation.
+   * @param parentComp  Parent UI component.
    *
    * @return The custom arrow button.
    */
-  public static <T> JButton buildCustomArrowButton(int orientation, T parentComponent) {
-    Color backgroundColor = parentComponent instanceof BasicComboBoxUI ? Constants.GREEN_DARK
-                                                                       : Constants.GREEN_MEDIUM;
+  public static <T> JButton buildCustomArrowButton(int orientation, T parentComp) {
+    Color backgroundColor = parentComp instanceof BasicComboBoxUI ? Constants.COLOR_GREEN_DARK
+                                                                  : Constants.COLOR_GREEN_MEDIUM;
 
     JButton arrowButton = new BasicArrowButton(orientation,
                                                backgroundColor,
-                                               Constants.GREEN_MEDIUM,
-                                               Constants.GREEN_LIGHT,
-                                               Constants.GREEN_MEDIUM);
+                                               Constants.COLOR_GREEN_MEDIUM,
+                                               Constants.COLOR_GREEN_LIGHT,
+                                               Constants.COLOR_GREEN_MEDIUM);
 
     arrowButton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                          Constants.GREEN_MEDIUM,
-                                                          Constants.GREEN_DARK));
+                                                          Constants.COLOR_GREEN_MEDIUM,
+                                                          Constants.COLOR_GREEN_DARK));
 
     return arrowButton;
   }

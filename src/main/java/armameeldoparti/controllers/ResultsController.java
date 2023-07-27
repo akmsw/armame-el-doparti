@@ -336,7 +336,7 @@ public class ResultsController extends Controller<ResultsView> {
               );
 
               if (row == 0) {
-                c.setBackground(Constants.GREEN_DARK);
+                c.setBackground(Constants.COLOR_GREEN_DARK);
                 c.setForeground(Color.WHITE);
 
                 ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -346,7 +346,7 @@ public class ResultsController extends Controller<ResultsView> {
 
               if (column == 0) {
                 if (byScoresMixFlag) {
-                  c.setBackground(Constants.YELLOW_LIGHT);
+                  c.setBackground(Constants.COLOR_YELLOW_LIGHT);
                   c.setForeground(Color.BLACK);
 
                   ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -354,7 +354,7 @@ public class ResultsController extends Controller<ResultsView> {
                   return c;
                 }
 
-                c.setBackground(Constants.GREEN_DARK);
+                c.setBackground(Constants.COLOR_GREEN_DARK);
                 c.setForeground(Color.WHITE);
 
                 ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
@@ -363,7 +363,7 @@ public class ResultsController extends Controller<ResultsView> {
               }
 
               if (byScoresMixFlag) {
-                c.setBackground(Constants.YELLOW_LIGHT);
+                c.setBackground(Constants.COLOR_YELLOW_LIGHT);
                 c.setForeground(Color.BLACK);
 
                 ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
@@ -381,7 +381,7 @@ public class ResultsController extends Controller<ResultsView> {
               c.setBackground(playerOnCell.getAnchorageNumber() != 0
                               ? Constants.COLORS_ANCHORAGES
                                          .get(playerOnCell.getAnchorageNumber() - 1)
-                              : Constants.GREEN_LIGHT_WHITE);
+                              : Constants.COLOR_GREEN_LIGHT_WHITE);
               c.setForeground(Color.BLACK);
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
 

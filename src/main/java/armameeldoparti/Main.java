@@ -203,23 +203,23 @@ public final class Main {
    * Sets up the program's GUI properties.
    */
   private static void setUpGeneralGraphicalProperties() {
-    UIManager.put("Button.background", Constants.GREEN_DARK);
+    UIManager.put("Button.background", Constants.COLOR_GREEN_DARK);
     UIManager.put("Button.foreground", Color.WHITE);
-    UIManager.put("CheckBox.background", Constants.GREEN_LIGHT);
-    UIManager.put("CheckBox.focus", Constants.GREEN_LIGHT);
-    UIManager.put("ComboBox.background", Constants.GREEN_MEDIUM);
+    UIManager.put("CheckBox.background", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("CheckBox.focus", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("ComboBox.background", Constants.COLOR_GREEN_MEDIUM);
     UIManager.put("ComboBox.foreground", Color.WHITE);
-    UIManager.put("ComboBox.selectionBackground", Constants.GREEN_MEDIUM);
+    UIManager.put("ComboBox.selectionBackground", Constants.COLOR_GREEN_MEDIUM);
     UIManager.put("ComboBox.selectionForeground", Color.WHITE);
-    UIManager.put("Label.background", Constants.GREEN_MEDIUM_LIGHT);
-    UIManager.put("OptionPane.background", Constants.GREEN_LIGHT);
-    UIManager.put("Panel.background", Constants.GREEN_LIGHT);
-    UIManager.put("Separator.background", Constants.GREEN_LIGHT);
-    UIManager.put("TextArea.background", Constants.GREEN_LIGHT_WHITE);
-    UIManager.put("TitledBorder.border", new LineBorder(Constants.GREEN_DARK));
-    UIManager.put("ToggleButton.focus", Constants.GREEN_DARK);
-    UIManager.put("ToolTip.background", Constants.GREEN_MEDIUM);
-    UIManager.put("ToolTip.border", new LineBorder(Constants.GREEN_DARK));
+    UIManager.put("Label.background", Constants.COLOR_GREEN_MEDIUM_LIGHT);
+    UIManager.put("OptionPane.background", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("Panel.background", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("Separator.background", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("TextArea.background", Constants.COLOR_GREEN_LIGHT_WHITE);
+    UIManager.put("TitledBorder.border", new LineBorder(Constants.COLOR_GREEN_DARK));
+    UIManager.put("ToggleButton.focus", Constants.COLOR_GREEN_DARK);
+    UIManager.put("ToolTip.background", Constants.COLOR_GREEN_MEDIUM);
+    UIManager.put("ToolTip.border", new LineBorder(Constants.COLOR_GREEN_DARK));
     UIManager.put("ToolTip.foreground", Color.WHITE);
 
     try {

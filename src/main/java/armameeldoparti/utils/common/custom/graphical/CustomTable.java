@@ -78,7 +78,7 @@ public class CustomTable extends JTable {
 
   private void setUpGraphicalProperties() {
     setOpaque(false);
-    setGridColor(Constants.GREEN_LIGHT);
+    setGridColor(Constants.COLOR_GREEN_LIGHT);
     setDefaultRenderer(
         Object.class,
         new DefaultTableCellRenderer() {
@@ -107,7 +107,7 @@ public class CustomTable extends JTable {
               );
 
               if (row == 0) {
-                auxComp.setBackground(Constants.GREEN_DARK);
+                auxComp.setBackground(Constants.COLOR_GREEN_DARK);
                 auxComp.setForeground(Color.WHITE);
 
                 ((DefaultTableCellRenderer) auxComp).setHorizontalAlignment(SwingConstants.CENTER);
@@ -116,7 +116,7 @@ public class CustomTable extends JTable {
               }
 
               if (column == 0) {
-                auxComp.setBackground(Constants.GREEN_DARK);
+                auxComp.setBackground(Constants.COLOR_GREEN_DARK);
                 auxComp.setForeground(Color.WHITE);
 
                 ((DefaultTableCellRenderer) auxComp).setHorizontalAlignment(SwingConstants.LEFT);
@@ -124,7 +124,7 @@ public class CustomTable extends JTable {
                 return auxComp;
               }
 
-              auxComp.setBackground(Constants.GREEN_LIGHT_WHITE);
+              auxComp.setBackground(Constants.COLOR_GREEN_LIGHT_WHITE);
               auxComp.setForeground(Color.BLACK);
             }
 
