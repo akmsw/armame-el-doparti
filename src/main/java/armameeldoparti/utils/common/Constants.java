@@ -120,13 +120,13 @@ public final class Constants {
   public static final String MIG_LAYOUT_WRAP = "wrap";
   public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
 
-  public static final Color GREEN_DARK = new Color(41, 71, 74);
-  public static final Color GREEN_DARK_MEDIUM = new Color(75, 101, 96);
-  public static final Color GREEN_MEDIUM = new Color(109, 130, 118);
-  public static final Color GREEN_MEDIUM_LIGHT = new Color(143, 160, 140);
-  public static final Color GREEN_LIGHT = new Color(176, 189, 162);
-  public static final Color GREEN_LIGHT_WHITE = new Color(216, 222, 209);
-  public static final Color YELLOW_LIGHT = new Color(255, 238, 153);
+  public static final Color GREEN_DARK = Color.decode("#29474a");
+  public static final Color GREEN_DARK_MEDIUM = Color.decode("#4b6560");
+  public static final Color GREEN_MEDIUM = Color.decode("#6d8276");
+  public static final Color GREEN_MEDIUM_LIGHT = Color.decode("#8fa08c");
+  public static final Color GREEN_LIGHT = Color.decode("#b0bda2");
+  public static final Color GREEN_LIGHT_WHITE = Color.decode("#d8ded1");
+  public static final Color YELLOW_LIGHT = Color.decode("#ffee99");
 
   public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(
       FILENAME_IMAGE_BACKGROUND
@@ -190,12 +190,12 @@ public final class Constants {
    */
   public static final List<Color> COLORS_ANCHORAGES = Collections.unmodifiableList(
       Arrays.asList(
-        new Color(255, 204, 153),
-        new Color(184, 224, 227),
-        new Color(220, 206, 235),
-        new Color(195, 235, 198),
-        new Color(151, 197, 216),
-        new Color(219, 220, 218)
+          Color.decode("#ffcc99"),
+          Color.decode("#bbe0e3"),
+          Color.decode("#dcceeb"),
+          Color.decode("#c3ebc6"),
+          Color.decode("#97c5d8"),
+          Color.decode("#dbdcda")
       )
   );
 
