@@ -41,6 +41,6 @@ public final class CommonFields {
    * Empty, private constructor. Not needed.
    */
   private CommonFields() {
-    // Not needed
+    // Body not needed
   }
 }

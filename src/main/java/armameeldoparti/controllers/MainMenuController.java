@@ -94,7 +94,7 @@ public class MainMenuController extends Controller<MainMenuView> {
    */
   @Override
   protected void resetView() {
-    // Not needed in this controller
+    // Body not needed in this controller
   }
 
   // ---------------------------------------- Private methods -----------------------------------

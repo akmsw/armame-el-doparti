@@ -33,7 +33,14 @@ public final class Constants {
    */
   private static final int ICON_SCALE = 50;
 
-  private static final String PROGRAM_AUTHOR_GITHUB_USERNAME = "akmsw";
+  private static final String FILENAME_HELP_PAGE_1 = "helpIntro.hlp";
+  private static final String FILENAME_HELP_PAGE_2 = "helpCriteria.hlp";
+  private static final String FILENAME_HELP_PAGE_3 = "helpNames.hlp";
+  private static final String FILENAME_HELP_PAGE_4 = "helpAnchorages.hlp";
+  private static final String FILENAME_HELP_PAGE_5 = "helpScores.hlp";
+  private static final String FILENAME_HELP_PAGE_6 = "helpRandomMix.hlp";
+  private static final String FILENAME_HELP_PAGE_7 = "helpBySkillsMix.hlp";
+  private static final String FILENAME_HELP_PAGE_8 = "helpContact.hlp";
   private static final String FILENAME_ICON_CB_DISABLED_SELECTED = "cb_d_s.png";
   private static final String FILENAME_ICON_CB_DISABLED_UNSELECTED = "cb_d_us.png";
   private static final String FILENAME_ICON_CB_ENABLED_SELECTED_FOCUSED = "cb_e_s_f.png";
@@ -44,11 +51,38 @@ public final class Constants {
   private static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED = "cb_e_us_uf.png";
   private static final String FILENAME_ICON_MAIN = "main_icon.png";
   private static final String FILENAME_IMAGE_BACKGROUND = "bg.png";
+  private static final String HEX_CODE_GREEN_DARK = "#29474a";
+  private static final String HEX_CODE_GREEN_DARK_MEDIUM = "#4b6560";
+  private static final String HEX_CODE_GREEN_MEDIUM = "#6d8276";
+  private static final String HEX_CODE_GREEN_MEDIUM_LIGHT = "#8fa08c";
+  private static final String HEX_CODE_GREEN_LIGHT = "#b0bda2";
+  private static final String HEX_CODE_GREEN_LIGHT_WHITE = "#d8ded1";
+  private static final String HEX_CODE_YELLOW_LIGHT = "#ffee99";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_1 = "#29474a";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_2 = "#4b6560";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_3 = "#6d8276";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_4 = "#8fa08c";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_5 = "#b0bda2";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_6 = "#d8ded1";
   private static final String MIG_LAYOUT_ALIGN = "align";
   private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
   private static final String MSG_ERROR_FATAL_INTERNAL = "ERROR FATAL INTERNO";
   private static final String MSG_ERROR_GUI = "ERROR DE INTERFAZ GRÁFICA";
   private static final String MSG_ERROR_INTERNAL_FILES = "ERROR DE LECTURA DE ARCHIVOS INTERNOS";
+  private static final String POSITION_COMBOBOX_1 = "Defensores centrales";
+  private static final String POSITION_COMBOBOX_2 = "Defensores laterales";
+  private static final String POSITION_COMBOBOX_3 = "Mediocampistas";
+  private static final String POSITION_COMBOBOX_4 = "Delanteros";
+  private static final String POSITION_COMBOBOX_5 = "Arqueros";
+  private static final String PROGRAM_AUTHOR_GITHUB_USERNAME = "akmsw";
+  private static final String TITLE_HELP_PAGE_1 = "Introducción";
+  private static final String TITLE_HELP_PAGE_2 = "Criterios establecidos";
+  private static final String TITLE_HELP_PAGE_3 = "Ingreso de jugadores";
+  private static final String TITLE_HELP_PAGE_4 = "Anclajes";
+  private static final String TITLE_HELP_PAGE_5 = "Puntuaciones";
+  private static final String TITLE_HELP_PAGE_6 = "Distribución aleatoria";
+  private static final String TITLE_HELP_PAGE_7 = "Distribución por puntuaciones";
+  private static final String TITLE_HELP_PAGE_8 = "Sugerencias, reportes y contacto";
 
   // ---------------------------------------- Public constants ----------------------------------
 
@@ -78,6 +112,20 @@ public final class Constants {
   public static final String ERROR_MESSAGE_TITLE = "¡Error!";
   public static final String FILENAME_FONT = "comfortaa.ttf";
   public static final String FILENAME_PDA = "dist.pda";
+  public static final String MIG_LAYOUT_CENTER = "center";
+  public static final String MIG_LAYOUT_EAST = "east";
+  public static final String MIG_LAYOUT_GROW = "grow";
+  public static final String MIG_LAYOUT_GROWX = MIG_LAYOUT_GROW + "x";
+  public static final String MIG_LAYOUT_ALIGN_CENTER = MIG_LAYOUT_ALIGN + " center";
+  public static final String MIG_LAYOUT_ALIGN_LEFT = MIG_LAYOUT_ALIGN + " left";
+  public static final String MIG_LAYOUT_ALIGN_RIGHT = MIG_LAYOUT_ALIGN + " right";
+  public static final String MIG_LAYOUT_PUSH = "push";
+  public static final String MIG_LAYOUT_PUSHX = MIG_LAYOUT_PUSH + "x";
+  public static final String MIG_LAYOUT_SPAN = "span";
+  public static final String MIG_LAYOUT_SPAN2 = MIG_LAYOUT_SPAN + "2";
+  public static final String MIG_LAYOUT_WEST = "west";
+  public static final String MIG_LAYOUT_WRAP = "wrap";
+  public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
   public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
   public static final String MIX_OPTION_BY_SKILL = "Por puntuaciones";
   public static final String MSG_ERROR_NULL_RESOURCE = "ERROR EN OBTENCIÓN DE RECURSOS GRÁFICOS";
@@ -105,28 +153,14 @@ public final class Constants {
   public static final String URL_CONTACT = "https://github.com/" + PROGRAM_AUTHOR_GITHUB_USERNAME;
   public static final String URL_ISSUES = URL_CONTACT + "/" + PROGRAM_TITLE.replace(" ", "-")
                                           + "/issues";
-  public static final String MIG_LAYOUT_CENTER = "center";
-  public static final String MIG_LAYOUT_EAST = "east";
-  public static final String MIG_LAYOUT_GROW = "grow";
-  public static final String MIG_LAYOUT_GROWX = MIG_LAYOUT_GROW + "x";
-  public static final String MIG_LAYOUT_ALIGN_CENTER = MIG_LAYOUT_ALIGN + " center";
-  public static final String MIG_LAYOUT_ALIGN_LEFT = MIG_LAYOUT_ALIGN + " left";
-  public static final String MIG_LAYOUT_ALIGN_RIGHT = MIG_LAYOUT_ALIGN + " right";
-  public static final String MIG_LAYOUT_PUSH = "push";
-  public static final String MIG_LAYOUT_PUSHX = MIG_LAYOUT_PUSH + "x";
-  public static final String MIG_LAYOUT_SPAN = "span";
-  public static final String MIG_LAYOUT_SPAN2 = MIG_LAYOUT_SPAN + "2";
-  public static final String MIG_LAYOUT_WEST = "west";
-  public static final String MIG_LAYOUT_WRAP = "wrap";
-  public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
 
-  public static final Color COLOR_GREEN_DARK = Color.decode("#29474a");
-  public static final Color COLOR_GREEN_DARK_MEDIUM = Color.decode("#4b6560");
-  public static final Color COLOR_GREEN_MEDIUM = Color.decode("#6d8276");
-  public static final Color COLOR_GREEN_MEDIUM_LIGHT = Color.decode("#8fa08c");
-  public static final Color COLOR_GREEN_LIGHT = Color.decode("#b0bda2");
-  public static final Color COLOR_GREEN_LIGHT_WHITE = Color.decode("#d8ded1");
-  public static final Color COLOR_YELLOW_LIGHT = Color.decode("#ffee99");
+  public static final Color COLOR_GREEN_DARK = Color.decode(HEX_CODE_GREEN_DARK);
+  public static final Color COLOR_GREEN_DARK_MEDIUM = Color.decode(HEX_CODE_GREEN_DARK_MEDIUM);
+  public static final Color COLOR_GREEN_MEDIUM = Color.decode(HEX_CODE_GREEN_MEDIUM);
+  public static final Color COLOR_GREEN_MEDIUM_LIGHT = Color.decode(HEX_CODE_GREEN_MEDIUM_LIGHT);
+  public static final Color COLOR_GREEN_LIGHT = Color.decode(HEX_CODE_GREEN_LIGHT);
+  public static final Color COLOR_GREEN_LIGHT_WHITE = Color.decode(HEX_CODE_GREEN_LIGHT_WHITE);
+  public static final Color COLOR_YELLOW_LIGHT = Color.decode(HEX_CODE_YELLOW_LIGHT);
 
   public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(
       FILENAME_IMAGE_BACKGROUND
@@ -177,11 +211,11 @@ public final class Constants {
    */
   public static final List<String> OPTIONS_POSITIONS_COMBOBOX = Collections.unmodifiableList(
       Arrays.asList(
-        "Defensores centrales",
-        "Defensores laterales",
-        "Mediocampistas",
-        "Delanteros",
-        "Arqueros"
+        POSITION_COMBOBOX_1,
+        POSITION_COMBOBOX_2,
+        POSITION_COMBOBOX_3,
+        POSITION_COMBOBOX_4,
+        POSITION_COMBOBOX_5
       )
   );
 
@@ -190,12 +224,12 @@ public final class Constants {
    */
   public static final List<Color> COLORS_ANCHORAGES = Collections.unmodifiableList(
       Arrays.asList(
-          Color.decode("#ffcc99"),
-          Color.decode("#bbe0e3"),
-          Color.decode("#dcceeb"),
-          Color.decode("#c3ebc6"),
-          Color.decode("#97c5d8"),
-          Color.decode("#dbdcda")
+          Color.decode(HEX_CODE_ANCHORAGE_COLOR_1),
+          Color.decode(HEX_CODE_ANCHORAGE_COLOR_2),
+          Color.decode(HEX_CODE_ANCHORAGE_COLOR_3),
+          Color.decode(HEX_CODE_ANCHORAGE_COLOR_4),
+          Color.decode(HEX_CODE_ANCHORAGE_COLOR_5),
+          Color.decode(HEX_CODE_ANCHORAGE_COLOR_6)
       )
   );
 
@@ -223,14 +257,14 @@ public final class Constants {
    * Map of help pages titles and filenames.
    */
   public static final Map<Integer, List<String>> MAP_HELP_PAGES_FILES = Map.of(
-      0, Arrays.asList("INTRODUCCIÓN", "helpIntro.hlp"),
-      1, Arrays.asList("CRITERIOS ESTABLECIDOS", "helpCriteria.hlp"),
-      2, Arrays.asList("INGRESO DE JUGADORES", "helpNames.hlp"),
-      3, Arrays.asList("ANCLAJES", "helpAnchorages.hlp"),
-      4, Arrays.asList("PUNTUACIONES", "helpScores.hlp"),
-      5, Arrays.asList("DISTRIBUCIÓN ALEATORIA", "helpRandomMix.hlp"),
-      6, Arrays.asList("DISTRIBUCIÓN POR PUNTUACIONES", "helpBySkillsMix.hlp"),
-      7, Arrays.asList("SUGERENCIAS, REPORTES Y CONTACTO", "helpContact.hlp")
+      0, Arrays.asList(TITLE_HELP_PAGE_1, FILENAME_HELP_PAGE_1),
+      1, Arrays.asList(TITLE_HELP_PAGE_2, FILENAME_HELP_PAGE_2),
+      2, Arrays.asList(TITLE_HELP_PAGE_3, FILENAME_HELP_PAGE_3),
+      3, Arrays.asList(TITLE_HELP_PAGE_4, FILENAME_HELP_PAGE_4),
+      4, Arrays.asList(TITLE_HELP_PAGE_5, FILENAME_HELP_PAGE_5),
+      5, Arrays.asList(TITLE_HELP_PAGE_6, FILENAME_HELP_PAGE_6),
+      6, Arrays.asList(TITLE_HELP_PAGE_7, FILENAME_HELP_PAGE_7),
+      7, Arrays.asList(TITLE_HELP_PAGE_8, FILENAME_HELP_PAGE_8)
   );
 
   /**
