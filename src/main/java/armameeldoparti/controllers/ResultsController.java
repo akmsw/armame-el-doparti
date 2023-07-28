@@ -346,8 +346,8 @@ public class ResultsController extends Controller<ResultsView> {
 
               if (column == 0) {
                 if (byScoresMixFlag) {
-                  c.setBackground(Constants.COLOR_YELLOW_LIGHT);
-                  c.setForeground(Color.BLACK);
+                  c.setBackground(Constants.COLOR_GREEN_MEDIUM);
+                  c.setForeground(Color.WHITE);
 
                   ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -363,8 +363,8 @@ public class ResultsController extends Controller<ResultsView> {
               }
 
               if (byScoresMixFlag) {
-                c.setBackground(Constants.COLOR_YELLOW_LIGHT);
-                c.setForeground(Color.BLACK);
+                c.setBackground(Constants.COLOR_GREEN_MEDIUM);
+                c.setForeground(Color.WHITE);
 
                 ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
 
