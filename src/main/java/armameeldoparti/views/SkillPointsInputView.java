@@ -71,19 +71,21 @@ public class SkillPointsInputView extends View {
    */
   @Override
   protected void addButtons() {
-    JButton finishButton = new CustomButton("Finalizar");
+    JButton finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);
     finishButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .finishButtonEvent()
     );
 
-    JButton resetSkillPointsButton = new CustomButton("Reiniciar puntuaciones");
+    JButton resetSkillPointsButton = new CustomButton(
+        "Reiniciar puntuaciones", Constants.ROUNDED_BORDER_ARC_GENERAL
+    );
     resetSkillPointsButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .resetSkillsButtonEvent()
     );
 
-    JButton backButton = new CustomButton("Atrás");
+    JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
     backButton.addActionListener(e ->
         ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
         .backButtonEvent()

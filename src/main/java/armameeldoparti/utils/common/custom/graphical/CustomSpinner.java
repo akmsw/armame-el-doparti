@@ -2,12 +2,17 @@ package armameeldoparti.utils.common.custom.graphical;
 
 import armameeldoparti.models.Error;
 import armameeldoparti.utils.common.CommonFunctions;
+import armameeldoparti.utils.common.Constants;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.AbstractBorder;
 import javax.swing.plaf.basic.BasicSpinnerUI;
 
 /**
@@ -43,6 +48,39 @@ public class CustomSpinner extends JSpinner {
   private void setUpGraphicalProperties() {
     ((DefaultEditor) getEditor()).getTextField()
                                  .setEditable(false);
+    ((DefaultEditor) getEditor()).getTextField()
+                                 .setBackground(Constants.COLOR_GREEN_LIGHT_WHITE);
+
+    setOpaque(false);
+    setBorder(
+      new AbstractBorder() {
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+          Graphics2D g2 = (Graphics2D) g;
+
+          g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+          g2.setColor(Constants.COLOR_GREEN_LIGHT_WHITE);
+          g2.fillRoundRect(
+              x,
+              y,
+              (width - 1),
+              (height - 1),
+              Constants.ROUNDED_BORDER_ARC_SPINNER,
+              Constants.ROUNDED_BORDER_ARC_SPINNER
+          );
+        }
+
+        @Override
+        public Insets getBorderInsets(Component c) {
+          return new Insets(
+            Constants.ROUNDED_BORDER_INSETS_GENERAL,
+            Constants.ROUNDED_BORDER_INSETS_GENERAL,
+            Constants.ROUNDED_BORDER_INSETS_GENERAL,
+            Constants.ROUNDED_BORDER_INSETS_GENERAL
+          );
+        }
+      }
+    );
     setUI(new BasicSpinnerUI() {
       /**
        * Configures the spinner 'previous' button to fit the program aesthetics.
@@ -50,14 +88,12 @@ public class CustomSpinner extends JSpinner {
        * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
        * time the type of the model minimum (a Comparable) and the current value (an Object).
        *
-       * @see CommonFunctions#buildCustomArrowButton(int, Object)
-       *
        * @return The spinner 'previous' button.
        */
       @Override
       @SuppressWarnings("unchecked")
       protected Component createPreviousButton() {
-        JButton previousButton = CommonFunctions.buildCustomArrowButton(SwingConstants.SOUTH, this);
+        JButton previousButton = new CustomButton(SwingConstants.SOUTH);
 
         previousButton.addActionListener(e -> {
           // We know for sure that this custom spinner has a SpinnerNumberModel
@@ -85,14 +121,12 @@ public class CustomSpinner extends JSpinner {
        * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
        * time the type of the model maximum (a Comparable) and the current value (an Object).
        *
-       * @see CommonFunctions#buildCustomArrowButton(int, Object)
-       *
        * @return The spinner 'next' button.
        */
       @Override
       @SuppressWarnings("unchecked")
       protected Component createNextButton() {
-        JButton nextButton = CommonFunctions.buildCustomArrowButton(SwingConstants.NORTH, this);
+        JButton nextButton = new CustomButton(SwingConstants.NORTH);
 
         nextButton.addActionListener(e -> {
           // We know for sure that this custom spinner has a SpinnerNumberModel

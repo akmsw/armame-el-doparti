@@ -215,6 +215,7 @@ public final class Main {
     UIManager.put("OptionPane.background", Constants.COLOR_GREEN_LIGHT);
     UIManager.put("Panel.background", Constants.COLOR_GREEN_LIGHT);
     UIManager.put("Separator.background", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("Spinner.background", Constants.COLOR_GREEN_LIGHT_WHITE);
     UIManager.put("TextArea.background", Constants.COLOR_GREEN_LIGHT_WHITE);
     UIManager.put("TitledBorder.border", new LineBorder(Constants.COLOR_GREEN_DARK));
     UIManager.put("ToggleButton.focus", Constants.COLOR_GREEN_DARK);

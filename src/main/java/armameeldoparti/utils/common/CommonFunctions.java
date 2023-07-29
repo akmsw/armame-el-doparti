@@ -226,37 +226,6 @@ public final class CommonFunctions {
   }
 
   /**
-   * Builds a custom arrow button that fits the program aesthetics based on the parent UI component.
-   *
-   * <p>The arrow will be light green, the shadows will be medium green and the button will have a
-   * raised bevel border. If its parent UI component is a BasicComboBoxUI, the button background
-   * will be dark green. Otherwise, it will be medium green.
-   *
-   *
-   * @param <T>         Generic parent UI component type.
-   * @param orientation The button arrow orientation.
-   * @param parentComp  Parent UI component.
-   *
-   * @return The custom arrow button.
-   */
-  public static <T> JButton buildCustomArrowButton(int orientation, T parentComp) {
-    Color backgroundColor = parentComp instanceof BasicComboBoxUI ? Constants.COLOR_GREEN_DARK
-                                                                  : Constants.COLOR_GREEN_MEDIUM;
-
-    JButton arrowButton = new BasicArrowButton(orientation,
-                                               backgroundColor,
-                                               Constants.COLOR_GREEN_MEDIUM,
-                                               Constants.COLOR_GREEN_LIGHT,
-                                               Constants.COLOR_GREEN_MEDIUM);
-
-    arrowButton.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-                                                          Constants.COLOR_GREEN_MEDIUM,
-                                                          Constants.COLOR_GREEN_DARK));
-
-    return arrowButton;
-  }
-
-  /**
    * Gets the search-corresponding position in a generic map received.
    *
    * @param <T>    Generic value type.

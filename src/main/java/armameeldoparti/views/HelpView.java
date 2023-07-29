@@ -76,17 +76,17 @@ public class HelpView extends View {
    */
   @Override
   protected void addButtons() {
-    previousPageButton = new CustomButton("Anterior");
+    previousPageButton = new CustomButton("Anterior", Constants.ROUNDED_BORDER_ARC_GENERAL);
     previousPageButton.addActionListener(e ->
         ((HelpController) CommonFunctions.getController(ProgramView.HELP)).previousPageButtonEvent()
     );
 
-    nextPageButton = new CustomButton("Siguiente");
+    nextPageButton = new CustomButton("Siguiente", Constants.ROUNDED_BORDER_ARC_GENERAL);
     nextPageButton.addActionListener(e ->
         ((HelpController) CommonFunctions.getController(ProgramView.HELP)).nextPageButtonEvent()
     );
 
-    backButton = new CustomButton("Volver al menú principal");
+    backButton = new CustomButton("Volver al menú principal", Constants.ROUNDED_BORDER_ARC_GENERAL);
     backButton.addActionListener(e ->
         ((HelpController) CommonFunctions.getController(ProgramView.HELP)).backButtonEvent()
     );

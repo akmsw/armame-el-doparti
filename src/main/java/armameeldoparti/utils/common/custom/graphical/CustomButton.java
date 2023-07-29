@@ -1,10 +1,16 @@
 package armameeldoparti.utils.common.custom.graphical;
 
+import armameeldoparti.models.Error;
+import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Custom text area class.
@@ -17,7 +23,14 @@ import javax.swing.JButton;
  *
  * @since 3.0
  */
+@Getter(AccessLevel.PRIVATE)
+@Setter(AccessLevel.PRIVATE)
 public class CustomButton extends JButton {
+
+  private boolean isArrowButton;
+
+  private int arc;
+  private int orientation;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -25,9 +38,30 @@ public class CustomButton extends JButton {
    * Builds a basic button using the established program aesthetics.
    *
    * @param text The text to display on the button.
+   * @param arc  The round borders arc.
    */
-  public CustomButton(String text) {
+  public CustomButton(String text, int arc) {
     super(text);
+    setArc(arc);
+    setArrowButton(false);
+    setOpaque(false);
+    setFocusPainted(false);
+    setContentAreaFilled(false);
+    setBorderPainted(false);
+  }
+
+  /**
+   * A.
+   *
+   * @param orientation B.
+   */
+  public CustomButton(int orientation) {
+    if (orientation != SwingConstants.NORTH && orientation != SwingConstants.SOUTH) {
+      CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
+    }
+
+    setArrowButton(true);
+    setOrientation(orientation);
     setOpaque(false);
     setFocusPainted(false);
     setContentAreaFilled(false);
@@ -54,14 +88,18 @@ public class CustomButton extends JButton {
     Graphics2D g2 = (Graphics2D) g.create();
 
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-    g2.fillRoundRect(
-        0,
-        0,
-        (getWidth() - 1),
-        (getHeight() - 1),
-        Constants.ROUNDED_BORDER_ARC_GENERAL,
-        Constants.ROUNDED_BORDER_ARC_GENERAL
-    );
+
+    if (isArrowButton()) {
+      int arcAngle = -180;
+
+      if (getOrientation() == SwingConstants.SOUTH) {
+        arcAngle *= -1;
+      }
+
+      g2.fillArc(0, 0, (getWidth() - 1), (getHeight() - 1), (-arcAngle), arcAngle);
+    } else {
+      g2.fillRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), arc, arc);
+    }
 
     super.paintComponent(g);
   }

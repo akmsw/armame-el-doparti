@@ -115,38 +115,44 @@ public class AnchoragesView extends View {
    */
   @Override
   protected void addButtons() {
-    finishButton = new CustomButton("Finalizar");
+    finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);
     finishButton.setEnabled(false);
     finishButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .finishButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
-    newAnchorageButton = new CustomButton("Anclar");
+    newAnchorageButton = new CustomButton("Anclar", Constants.ROUNDED_BORDER_ARC_GENERAL);
     newAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
-    deleteAnchorageButton = new CustomButton("Borrar un anclaje");
+    deleteAnchorageButton = new CustomButton(
+      "Borrar un anclaje", Constants.ROUNDED_BORDER_ARC_GENERAL
+    );
     deleteAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
-    deleteLastAnchorageButton = new CustomButton("Borrar último anclaje");
+    deleteLastAnchorageButton = new CustomButton(
+      "Borrar último anclaje", Constants.ROUNDED_BORDER_ARC_GENERAL
+    );
     deleteLastAnchorageButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .deleteLastAnchorageButtonEvent()
     );
 
-    clearAnchoragesButton = new CustomButton("Limpiar anclajes");
+    clearAnchoragesButton = new CustomButton(
+      "Limpiar anclajes", Constants.ROUNDED_BORDER_ARC_GENERAL
+    );
     clearAnchoragesButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .clearAnchoragesButtonEvent()
     );
 
-    JButton backButton = new CustomButton("Atrás");
+    JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
     backButton.addActionListener(e ->
         ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
         .backButtonEvent()

@@ -97,14 +97,14 @@ public class NamesInputView extends View {
    */
   @Override
   protected void addButtons() {
-    mixButton = new CustomButton("Distribuir");
+    mixButton = new CustomButton("Distribuir", Constants.ROUNDED_BORDER_ARC_GENERAL);
     mixButton.setEnabled(false);
     mixButton.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
         .mixButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
-    JButton backButton = new CustomButton("Atrás");
+    JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
     backButton.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
         .backButtonEvent()

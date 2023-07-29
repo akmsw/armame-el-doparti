@@ -58,15 +58,14 @@ public class ResultsView extends View {
    */
   @Override
   protected void addButtons() {
-    JButton backButton = new CustomButton("Atrás");
-
+    JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
     backButton.addActionListener(e ->
         ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))
         .backButtonEvent()
     );
 
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
-      JButton remixButton = new CustomButton("Redistribuir");
+      JButton remixButton = new CustomButton("Redistribuir", Constants.ROUNDED_BORDER_ARC_GENERAL);
 
       remixButton.addActionListener(e ->
           ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))

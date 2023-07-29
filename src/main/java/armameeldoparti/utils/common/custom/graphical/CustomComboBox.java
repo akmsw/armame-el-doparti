@@ -49,7 +49,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
     setUI(new BasicComboBoxUI() {
       @Override
       protected JButton createArrowButton() {
-        return new CustomButton("");
+        return new CustomButton(null, Constants.ROUNDED_BORDER_ARC_GENERAL);
       }
 
       @Override
