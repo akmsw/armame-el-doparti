@@ -6,7 +6,6 @@ import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.views.View;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
@@ -17,14 +16,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.border.BevelBorder;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 
 /**
  * Common-use functions class.

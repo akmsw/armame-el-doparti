@@ -1,6 +1,5 @@
 package armameeldoparti.utils.common.custom.graphical;
 
-import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
