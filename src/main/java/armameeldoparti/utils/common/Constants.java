@@ -107,6 +107,7 @@ public final class Constants {
   public static final int SKILL_MAX = 5;
   public static final int SKILL_MIN = 1;
   public static final int SKILL_STEP = 1;
+  public static final int STROKE_BUTTON_ARROW = 5;
 
   public static final float FONT_SIZE = 18f;
 

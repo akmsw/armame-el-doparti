@@ -3,9 +3,11 @@ package armameeldoparti.utils.common.custom.graphical;
 import armameeldoparti.models.Error;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.Polygon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import lombok.AccessLevel;
@@ -90,16 +92,41 @@ public class CustomButton extends JButton {
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
 
     if (isArrowButton()) {
-      int arcAngle = -180;
+      int[] pointsX = {
+        getWidth() / 2,
+        (int) (getWidth() * 0.75),
+        (int) (getWidth() * 0.25)
+      };
 
-      if (getOrientation() == SwingConstants.SOUTH) {
-        arcAngle *= -1;
-      }
+      int[] pointsY = (
+        (orientation == SwingConstants.NORTH) ? new int[] {
+          (int) (getHeight() * 0.25),
+          (int) (getHeight() * 0.75),
+          (int) (getHeight() * 0.75)
+        }
+        : new int[] {
+          (int) (getHeight() * 0.75),
+          (int) (getHeight() * 0.25),
+          (int) (getHeight() * 0.25)
+        }
+      );
 
-      g2.fillArc(0, 0, (getWidth() - 1), (getHeight() - 1), (-arcAngle), arcAngle);
+      Polygon triangle = new Polygon(pointsX, pointsY, 3);
+
+      g2.setStroke(
+        new BasicStroke(
+          Constants.STROKE_BUTTON_ARROW,
+          BasicStroke.CAP_ROUND,
+          BasicStroke.JOIN_ROUND
+        )
+      );
+      g2.drawPolygon(triangle);
+      g2.fillPolygon(triangle);
     } else {
       g2.fillRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), arc, arc);
     }
+
+    g2.dispose();
 
     super.paintComponent(g);
   }

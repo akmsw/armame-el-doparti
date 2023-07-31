@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 /**
@@ -49,7 +50,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
     setUI(new BasicComboBoxUI() {
       @Override
       protected JButton createArrowButton() {
-        return new CustomButton(null, Constants.ROUNDED_BORDER_ARC_GENERAL);
+        return new CustomButton(SwingConstants.SOUTH);
       }
 
       @Override

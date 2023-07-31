@@ -98,7 +98,7 @@ public class CustomScrollPane extends JScrollPane {
        */
       @Override
       protected JButton createDecreaseButton(int orientation) {
-        return new CustomButton(null, Constants.ROUNDED_BORDER_ARC_GENERAL);
+        return new CustomButton(orientation);
       }
 
       /**
@@ -113,7 +113,7 @@ public class CustomScrollPane extends JScrollPane {
        */
       @Override
       protected JButton createIncreaseButton(int orientation) {
-        return new CustomButton(null, Constants.ROUNDED_BORDER_ARC_GENERAL);
+        return new CustomButton(orientation);
       }
 
       @Override
