@@ -46,10 +46,7 @@ public class CustomButton extends JButton {
     super(text);
     setArc(arc);
     setArrowButton(false);
-    setOpaque(false);
-    setFocusPainted(false);
-    setContentAreaFilled(false);
-    setBorderPainted(false);
+    setUpGraphicalProperties();
   }
 
   /**
@@ -64,13 +61,17 @@ public class CustomButton extends JButton {
 
     setArrowButton(true);
     setOrientation(orientation);
+    setUpGraphicalProperties();
+  }
+
+  // ---------------------------------------- Private methods -----------------------------------
+
+  private void setUpGraphicalProperties() {
     setOpaque(false);
     setFocusPainted(false);
     setContentAreaFilled(false);
     setBorderPainted(false);
   }
-
-  // ---------------------------------------- Private methods -----------------------------------
 
   /**
    * Paints the custom button graphics.
@@ -84,30 +85,34 @@ public class CustomButton extends JButton {
     } else if (getModel().isRollover()) {
       g.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
     } else {
-      g.setColor(getBackground());
+      g.setColor(isEnabled() ? getBackground() : Constants.COLOR_GREEN_MEDIUM);
     }
 
     Graphics2D g2 = (Graphics2D) g.create();
+
+    int buttonHeight = getHeight();
+    int buttonWidth = getWidth();
 
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
 
     if (isArrowButton()) {
       int[] pointsX = {
-        getWidth() / 2,
-        (int) (getWidth() * 0.75),
-        (int) (getWidth() * 0.25)
+        buttonWidth / 2,
+        (int) (buttonWidth * 0.75),
+        (int) (buttonWidth * 0.25)
       };
 
       int[] pointsY = (
-        (orientation == SwingConstants.NORTH) ? new int[] {
-          (int) (getHeight() * 0.25),
-          (int) (getHeight() * 0.75),
-          (int) (getHeight() * 0.75)
+        (orientation == SwingConstants.NORTH)
+        ? new int[] {
+          (int) (buttonHeight * 0.25),
+          (int) (buttonHeight * 0.75),
+          (int) (buttonHeight * 0.75)
         }
         : new int[] {
-          (int) (getHeight() * 0.75),
-          (int) (getHeight() * 0.25),
-          (int) (getHeight() * 0.25)
+          (int) (buttonHeight * 0.75),
+          (int) (buttonHeight * 0.25),
+          (int) (buttonHeight * 0.25)
         }
       );
 
@@ -123,7 +128,7 @@ public class CustomButton extends JButton {
       g2.drawPolygon(triangle);
       g2.fillPolygon(triangle);
     } else {
-      g2.fillRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), arc, arc);
+      g2.fillRoundRect(0, 0, (buttonWidth - 1), (buttonHeight - 1), arc, arc);
     }
 
     g2.dispose();

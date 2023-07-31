@@ -383,6 +383,7 @@ public class ResultsController extends Controller<ResultsView> {
                                          .get(playerOnCell.getAnchorageNumber() - 1)
                               : Constants.COLOR_GREEN_LIGHT_WHITE);
               c.setForeground(Color.BLACK);
+
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
 
               return c;
