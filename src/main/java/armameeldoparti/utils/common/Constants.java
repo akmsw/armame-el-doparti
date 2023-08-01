@@ -58,10 +58,10 @@ public final class Constants {
   private static final String HEX_CODE_GREEN_LIGHT = "#b0bda2";
   private static final String HEX_CODE_GREEN_LIGHT_WHITE = "#d8ded1";
   private static final String HEX_CODE_ANCHORAGE_COLOR_1 = "#e5af8d";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_2 = "#74b1d1";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_3 = "#a995c9";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_4 = "#85d689";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_5 = "#ffee99";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_2 = "#ffee99";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_3 = "#85d689";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_4 = "#74b1d1";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_5 = "#a995c9";
   private static final String HEX_CODE_ANCHORAGE_COLOR_6 = "#f27c7c";
   private static final String MIG_LAYOUT_ALIGN = "align";
   private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
