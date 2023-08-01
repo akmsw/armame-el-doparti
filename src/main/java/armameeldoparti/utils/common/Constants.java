@@ -57,13 +57,12 @@ public final class Constants {
   private static final String HEX_CODE_GREEN_MEDIUM_LIGHT = "#8fa08c";
   private static final String HEX_CODE_GREEN_LIGHT = "#b0bda2";
   private static final String HEX_CODE_GREEN_LIGHT_WHITE = "#d8ded1";
-  private static final String HEX_CODE_YELLOW_LIGHT = "#ffee99";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_1 = "#29474a";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_2 = "#4b6560";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_3 = "#6d8276";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_4 = "#8fa08c";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_5 = "#b0bda2";
-  private static final String HEX_CODE_ANCHORAGE_COLOR_6 = "#d8ded1";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_1 = "#e5af8d";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_2 = "#74b1d1";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_3 = "#a995c9";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_4 = "#85d689";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_5 = "#ffee99";
+  private static final String HEX_CODE_ANCHORAGE_COLOR_6 = "#f27c7c";
   private static final String MIG_LAYOUT_ALIGN = "align";
   private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
   private static final String MSG_ERROR_FATAL_INTERNAL = "ERROR FATAL INTERNO";
@@ -162,7 +161,6 @@ public final class Constants {
   public static final Color COLOR_GREEN_MEDIUM_LIGHT = Color.decode(HEX_CODE_GREEN_MEDIUM_LIGHT);
   public static final Color COLOR_GREEN_LIGHT = Color.decode(HEX_CODE_GREEN_LIGHT);
   public static final Color COLOR_GREEN_LIGHT_WHITE = Color.decode(HEX_CODE_GREEN_LIGHT_WHITE);
-  public static final Color COLOR_YELLOW_LIGHT = Color.decode(HEX_CODE_YELLOW_LIGHT);
 
   public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(
       FILENAME_IMAGE_BACKGROUND
