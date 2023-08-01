@@ -95,6 +95,7 @@
               <artifact>*:*</artifact>
               <excludes>
                 <exclude>META-INF/MANIFEST.MF</exclude>
+                <exclude>**/readme/*</exclude>
               </excludes>
             </filter>
           </filters>
