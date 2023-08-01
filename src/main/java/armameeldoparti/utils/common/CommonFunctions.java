@@ -192,13 +192,15 @@ public final class CommonFunctions {
    * @return A list containing the anchored players grouped by their anchorage number.
   */
   public static List<List<Player>> getAnchoredPlayers() {
-    return new ArrayList<>(CommonFields.getPlayersSets()
-                                       .values()
-                                       .stream()
-                                       .flatMap(List::stream)
-                                       .filter(Player::isAnchored)
-                                       .collect(Collectors.groupingBy(Player::getAnchorageNumber))
-                                       .values());
+    return new ArrayList<>(
+      CommonFields.getPlayersSets()
+                  .values()
+                  .stream()
+                  .flatMap(List::stream)
+                  .filter(Player::isAnchored)
+                  .collect(Collectors.groupingBy(Player::getAnchorageNumber))
+                  .values()
+    );
   }
 
   /**
@@ -229,11 +231,14 @@ public final class CommonFunctions {
    * @return The search-corresponding position.
    */
   public static <T> Position getCorrespondingPosition(Map<Position, T> map, T search) {
-    return retrieveOptional(map.entrySet()
-                               .stream()
-                               .filter(e -> e.getValue()
-                                             .equals(search))
-                               .map(Map.Entry::getKey)
-                               .findFirst());
+    return retrieveOptional(
+      map.entrySet()
+         .stream()
+         .filter(
+           e -> e.getValue()
+                 .equals(search)
+         )
+         .map(Map.Entry::getKey)
+         .findFirst());
   }
 }

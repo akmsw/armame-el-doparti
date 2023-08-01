@@ -65,9 +65,11 @@ public class RandomMixer implements PlayersMixer {
       for (int i = 0; i < halfPlayersInSet; i++) {
         chosenPlayer = playersSet.get(
           playersSet.indexOf(
-            getRandomUnassignedPlayer(playersSet.stream()
-                                                .filter(p -> p.getTeamNumber() == 0)
-                                                .collect(Collectors.toList()))
+            getRandomUnassignedPlayer(
+              playersSet.stream()
+                        .filter(p -> p.getTeamNumber() == 0)
+                        .collect(Collectors.toList())
+            )
           )
         );
 
@@ -221,9 +223,14 @@ public class RandomMixer implements PlayersMixer {
    */
   private boolean anchorageOverflowsAnyPositionSet(Team team, List<Player> anchoredPlayers) {
     return anchoredPlayers.stream()
-                          .anyMatch(p -> team.isPositionFull(p.getPosition())
-                                         || anchorageOverflowsPositionSet(team, anchoredPlayers,
-                                                                          p.getPosition()));
+                          .anyMatch(
+                            p -> team.isPositionFull(p.getPosition())
+                                 || anchorageOverflowsPositionSet(
+                                      team,
+                                      anchoredPlayers,
+                                      p.getPosition()
+                                    )
+                          );
   }
 
   /**

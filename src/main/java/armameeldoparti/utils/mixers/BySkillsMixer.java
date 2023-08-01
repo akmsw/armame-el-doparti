@@ -68,8 +68,10 @@ public class BySkillsMixer implements PlayersMixer {
       List<Player> currentSet = CommonFields.getPlayersSets()
                                             .get(position);
 
-      currentSet.sort(Comparator.comparingInt(Player::getSkillPoints)
-                                .reversed());
+      currentSet.sort(
+          Comparator.comparingInt(Player::getSkillPoints)
+                    .reversed()
+      );
 
       teams.sort(Comparator.comparingInt(Team::getTeamSkill));
 
@@ -135,14 +137,20 @@ public class BySkillsMixer implements PlayersMixer {
     remainingPlayers.sort(Comparator.comparingInt(List::size));
 
     for (List<Player> ps : remainingPlayers) {
-      ps.sort(Comparator.comparingInt(Player::getSkillPoints)
-                        .reversed());
+      ps.sort(
+          Comparator.comparingInt(Player::getSkillPoints)
+                    .reversed()
+      );
 
       if (ps.size() == 4) {
         teams.sort(Comparator.comparingInt(Team::getTeamSkill));
 
-        distributeSubsets(teams, ps, ps.get(0)
-                                       .getPosition());
+        distributeSubsets(
+            teams,
+            ps,
+            ps.get(0)
+              .getPosition()
+        );
       } else {
         for (Player p : ps) {
           teams.sort(Comparator.comparingInt(Team::getTeamSkill));
@@ -193,9 +201,11 @@ public class BySkillsMixer implements PlayersMixer {
 
     playersSubsets.add(outerSubset);
     playersSubsets.add(innerSubset);
-    playersSubsets.sort(Comparator.comparingInt(ps -> ps.stream()
-                                                        .mapToInt(Player::getSkillPoints)
-                                                        .reduce(0, Math::addExact)));
+    playersSubsets.sort(
+        Comparator.comparingInt(ps -> ps.stream()
+                  .mapToInt(Player::getSkillPoints)
+                  .reduce(0, Math::addExact))
+    );
 
     var wrapper = new Object() {
       int teamIndex;

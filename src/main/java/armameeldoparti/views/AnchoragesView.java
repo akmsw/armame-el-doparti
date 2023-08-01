@@ -166,13 +166,17 @@ public class AnchoragesView extends View {
 
     leftPanel.add(
         finishButton,
-        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
-                                                  Constants.MIG_LAYOUT_SPAN)
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROWX,
+          Constants.MIG_LAYOUT_SPAN
+        )
     );
     leftPanel.add(
         backButton,
-        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
-                                                  Constants.MIG_LAYOUT_SPAN)
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROWX,
+          Constants.MIG_LAYOUT_SPAN
+        )
     );
 
     rightPanel.add(newAnchorageButton, Constants.MIG_LAYOUT_GROW);
@@ -216,8 +220,10 @@ public class AnchoragesView extends View {
   private void addCheckboxesSet(List<JCheckBox> cbSet, String labelText) {
     leftPanel.add(
         new CustomLabel(labelText, SwingConstants.LEFT),
-        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
-                                                  Constants.MIG_LAYOUT_SPAN)
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROWX,
+          Constants.MIG_LAYOUT_SPAN
+        )
     );
 
     cbSet.forEach(cb -> leftPanel.add(

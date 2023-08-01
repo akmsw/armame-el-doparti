@@ -67,9 +67,9 @@ public class ResultsView extends View {
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
       JButton remixButton = new CustomButton("Redistribuir", Constants.ROUNDED_BORDER_ARC_GENERAL);
 
-      remixButton.addActionListener(e ->
-          ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))
-          .remixButtonEvent()
+      remixButton.addActionListener(
+          e -> ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))
+               .remixButtonEvent()
       );
 
       getMasterPanel().add(remixButton, Constants.MIG_LAYOUT_GROWX);
@@ -86,10 +86,11 @@ public class ResultsView extends View {
    * @return The updated frame title.
    */
   private static String getUpdatedFrameTitle() {
-    return (CommonFields.getDistribution() == Constants.MIX_RANDOM
-            ? "Aleatorio - "
-            : "Por puntuaciones - ").concat(CommonFields.isAnchoragesEnabled() ? "Con anclajes"
-                                                                               : "Sin anclajes");
+    return String.join(
+      " - ",
+      CommonFields.getDistribution() == Constants.MIX_RANDOM ? "Aleatorio" : "Por puntuaciones",
+      CommonFields.isAnchoragesEnabled() ? "Con anclajes" : "Sin anclajes"
+    );
   }
 
   /**

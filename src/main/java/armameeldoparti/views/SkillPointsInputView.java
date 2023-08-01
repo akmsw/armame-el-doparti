@@ -34,8 +34,8 @@ public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private transient Map<Player, JSpinner> spinnersMap;
   private transient Map<JSpinner, JLabel> labelsMap;
+  private transient Map<Player, JSpinner> spinnersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -122,11 +122,15 @@ public class SkillPointsInputView extends View {
   private void addSpinners() {
     for (Position position : Position.values()) {
       getMasterPanel().add(
-          new CustomLabel(CommonFields.getPositionsMap()
-                                      .get(position),
-                          SwingConstants.LEFT),
-          CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
-                                                    Constants.MIG_LAYOUT_SPAN)
+          new CustomLabel(
+            CommonFields.getPositionsMap()
+                        .get(position),
+            SwingConstants.LEFT
+          ),
+          CommonFunctions.buildMigLayoutConstraints(
+            Constants.MIG_LAYOUT_GROW,
+            Constants.MIG_LAYOUT_SPAN
+          )
       );
 
       List<Player> currentSet = CommonFields.getPlayersSets()
@@ -135,13 +139,19 @@ public class SkillPointsInputView extends View {
       int currentSetSize = currentSet.size();
 
       for (int playerIndex = 0; playerIndex < currentSetSize; playerIndex++) {
-        JSpinner spinner = new CustomSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
-                                                                    Constants.SKILL_MIN,
-                                                                    Constants.SKILL_MAX,
-                                                                    Constants.SKILL_STEP));
+        JSpinner spinner = new CustomSpinner(
+            new SpinnerNumberModel(
+              Constants.SKILL_INI,
+              Constants.SKILL_MIN,
+              Constants.SKILL_MAX,
+              Constants.SKILL_STEP
+            )
+        );
 
-        JLabel nameLabel = new JLabel(currentSet.get(playerIndex)
-                                                .getName());
+        JLabel nameLabel = new JLabel(
+            currentSet.get(playerIndex)
+                      .getName()
+        );
 
         spinnersMap.put(currentSet.get(playerIndex), spinner);
 

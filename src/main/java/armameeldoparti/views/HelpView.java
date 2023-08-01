@@ -93,14 +93,22 @@ public class HelpView extends View {
 
     previousPageButton.setEnabled(false);
 
-    getMasterPanel().add(previousPageButton, new CC().width("50%")
-                                                     .split());
-    getMasterPanel().add(nextPageButton, new CC().width("50%")
-                                                 .wrap());
+    getMasterPanel().add(
+        previousPageButton,
+        new CC().width("50%")
+                .split()
+    );
+    getMasterPanel().add(
+        nextPageButton,
+        new CC().width("50%")
+                .wrap()
+    );
     getMasterPanel().add(
         backButton,
-        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
-                                                  Constants.MIG_LAYOUT_SPAN)
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROWX,
+          Constants.MIG_LAYOUT_SPAN
+        )
     );
   }
 

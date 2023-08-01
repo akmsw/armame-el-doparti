@@ -91,6 +91,7 @@ public final class Constants {
   public static final int MAX_NAME_LEN = 10;
   public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
   public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
+  public static final int MIN_PLAYERS_PER_ANCHORAGE = 2;
   public static final int MIX_BY_SKILLS = 1;
   public static final int MIX_RANDOM = 0;
   public static final int ROUNDED_BORDER_ARC_GENERAL = 30;

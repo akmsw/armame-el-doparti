@@ -47,11 +47,12 @@ public class NamesInputController extends Controller<NamesInputView> {
    */
   @Override
   public void showView() {
-    updateTextFields(Objects.requireNonNull(
-        getView().getComboBox()
-                 .getSelectedItem(),
-        Constants.MSG_ERROR_NULL_RESOURCE
-      ).toString()
+    updateTextFields(
+        Objects.requireNonNull(
+          getView().getComboBox()
+                   .getSelectedItem(),
+          Constants.MSG_ERROR_NULL_RESOURCE
+        ).toString()
     );
     centerView();
     resetComboBox();

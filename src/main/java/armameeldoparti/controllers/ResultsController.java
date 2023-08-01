@@ -174,15 +174,16 @@ public class ResultsController extends Controller<ResultsView> {
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
       for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
-        table.setValueAt(teams.get(teamIndex)
-                              .getTeamPlayers()
-                              .values()
-                              .stream()
-                              .flatMap(List::stream)
-                              .mapToInt(Player::getSkillPoints)
-                              .reduce(0, Math::addExact),
-                         table.getRowCount() - 1,
-                         teamIndex + 1
+        table.setValueAt(
+            teams.get(teamIndex)
+                 .getTeamPlayers()
+                 .values()
+                 .stream()
+                 .flatMap(List::stream)
+                 .mapToInt(Player::getSkillPoints)
+                 .reduce(0, Math::addExact),
+            table.getRowCount() - 1,
+            teamIndex + 1
         );
       }
     }
@@ -378,10 +379,12 @@ public class ResultsController extends Controller<ResultsView> {
                                                         .filter(p -> p.getName() == value)
                                                         .toArray()[0];
 
-              c.setBackground(playerOnCell.getAnchorageNumber() != 0
-                              ? Constants.COLORS_ANCHORAGES
-                                         .get(playerOnCell.getAnchorageNumber() - 1)
-                              : Constants.COLOR_GREEN_LIGHT_WHITE);
+              c.setBackground(
+                  playerOnCell.getAnchorageNumber() != 0
+                  ? Constants.COLORS_ANCHORAGES
+                             .get(playerOnCell.getAnchorageNumber() - 1)
+                  : Constants.COLOR_GREEN_LIGHT_WHITE
+              );
               c.setForeground(Color.BLACK);
 
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);

@@ -129,10 +129,12 @@ public class HelpController extends Controller<HelpView> {
           Objects.requireNonNull(
             HelpController.class
                           .getClassLoader()
-                          .getResourceAsStream(Constants.PATH_HELP_DOCS
-                                               + Constants.MAP_HELP_PAGES_FILES
-                                                          .get(currentPageNumber)
-                                                          .get(Constants.INDEX_HELP_PAGE_FILENAME)),
+                          .getResourceAsStream(
+                            Constants.PATH_HELP_DOCS
+                            + Constants.MAP_HELP_PAGES_FILES
+                                       .get(currentPageNumber)
+                                       .get(Constants.INDEX_HELP_PAGE_FILENAME)
+                          ),
             Constants.MSG_ERROR_NULL_RESOURCE
           ),
           StandardCharsets.UTF_8)
