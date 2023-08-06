@@ -31,12 +31,12 @@ public final class CommonFields {
   private static Map<Position, Integer> playersAmountMap;
   private static Map<Position, List<Player>> playersSets;
   private static Map<Position, String> positionsMap;
-  private static Map<ProgramView, Controller<? extends View>> controllersMap;
+  private static Map<ProgramView, Controller<? extends View>> controllerMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Empty, private constructor. Not needed.
+   * Empty, private constructor.
    */
   private CommonFields() {
     // Body not needed
@@ -69,8 +69,8 @@ public final class CommonFields {
   }
 
   @SuppressWarnings("java:S1452")
-  public static Map<ProgramView, Controller<?>> getControllersMap() {
-    return controllersMap;
+  public static Map<ProgramView, Controller<? extends View>> getControllerMap() {
+    return controllerMap;
   }
 
   // ---------------------------------------- Setters -------------------------------------------
@@ -99,7 +99,7 @@ public final class CommonFields {
     CommonFields.positionsMap = positionsMap;
   }
 
-  public static void setControllersMap(Map<ProgramView, Controller<?>> controllersMap) {
-    CommonFields.controllersMap = controllersMap;
+  public static void setControllerMap(Map<ProgramView, Controller<? extends View>> controllerMap) {
+    CommonFields.controllerMap = controllerMap;
   }
 }

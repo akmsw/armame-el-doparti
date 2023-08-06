@@ -15,8 +15,7 @@ import javax.swing.table.TableCellRenderer;
 /**
  * Custom text area class.
  *
- * <p>This class is used to instantiate a custom table that fits the overall program
- * aesthetics.
+ * <p>This class is used to instantiate a custom table that fits the overall program aesthetics.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -42,7 +41,7 @@ public class CustomTable extends JTable {
   // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * A.
+   * Adjusts the cells size to fit the biggest content shown in the table.
    */
   public void adjustCells() {
     int totalColumns = getColumnCount();
@@ -74,8 +73,11 @@ public class CustomTable extends JTable {
     }
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------- Private methods ------------------------------------
 
+  /**
+   * Configures the graphical properties for the table in order to fit the program aesthetics.
+   */
   private void setUpGraphicalProperties() {
     setOpaque(false);
     setGridColor(Constants.COLOR_GREEN_LIGHT);
@@ -97,14 +99,7 @@ public class CustomTable extends JTable {
               JComponent auxComp = (JComponent) comp;
 
               auxComp.setOpaque(false);
-              auxComp.setBorder(
-                new EmptyBorder(
-                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
-                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
-                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
-                  Constants.ROUNDED_BORDER_INSETS_GENERAL
-                )
-              );
+              auxComp.setBorder(new EmptyBorder(Constants.INSETS_GENERAL));
 
               if (row == 0) {
                 auxComp.setBackground(Constants.COLOR_GREEN_DARK);

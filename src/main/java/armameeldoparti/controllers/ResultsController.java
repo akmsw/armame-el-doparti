@@ -304,16 +304,6 @@ public class ResultsController extends Controller<ResultsView> {
     getView().getTable().setDefaultRenderer(
         Object.class,
         new DefaultTableCellRenderer() {
-          /**
-           * Configures the table cells format.
-           *
-           * @param myTable    Source table.
-           * @param value      Table cell value.
-           * @param isSelected If the cell is selected.
-           * @param hasFocus   If the cell is focused.
-           * @param row        Cell row number.
-           * @param column     Cell column number.
-           */
           @Override
           public Component getTableCellRendererComponent(JTable myTable, Object value,
                                                          boolean isSelected, boolean hasFocus,
@@ -328,12 +318,7 @@ public class ResultsController extends Controller<ResultsView> {
 
               c.setOpaque(false);
               c.setBorder(
-                new EmptyBorder(
-                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
-                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
-                  Constants.ROUNDED_BORDER_INSETS_GENERAL,
-                  Constants.ROUNDED_BORDER_INSETS_GENERAL
-                )
+                new EmptyBorder(Constants.INSETS_GENERAL)
               );
 
               if (row == 0) {

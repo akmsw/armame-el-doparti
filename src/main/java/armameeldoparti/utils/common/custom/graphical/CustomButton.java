@@ -1,15 +1,10 @@
 package armameeldoparti.utils.common.custom.graphical;
 
-import armameeldoparti.models.Error;
-import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
-import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
-import java.awt.Polygon;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
 /**
  * Custom text area class.
@@ -24,15 +19,14 @@ import javax.swing.SwingConstants;
  */
 public class CustomButton extends JButton {
 
-  private boolean isArrowButton;
+  // ---------------------------------------- Private fields ------------------------------------
 
   private int arc;
-  private int orientation;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Builds a basic button using the established program aesthetics.
+   * Builds a basic rounded button using the established program aesthetics.
    *
    * @param text The text to display on the button.
    * @param arc  The round borders arc.
@@ -40,39 +34,18 @@ public class CustomButton extends JButton {
   public CustomButton(String text, int arc) {
     super(text);
     setArc(arc);
-    setArrowButton(false);
     setUpGraphicalProperties();
   }
 
-  /**
-   * A.
-   *
-   * @param orientation B.
-   */
-  public CustomButton(int orientation) {
-    if (orientation != SwingConstants.NORTH && orientation != SwingConstants.SOUTH) {
-      CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
-    }
+  // ---------------------------------------- Public methods ------------------------------------
 
-    setArrowButton(true);
-    setOrientation(orientation);
-    setUpGraphicalProperties();
+  @Override
+  public Insets getInsets() {
+    return Constants.INSETS_GENERAL;
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------- Protected methods ---------------------------------
 
-  private void setUpGraphicalProperties() {
-    setOpaque(false);
-    setFocusPainted(false);
-    setContentAreaFilled(false);
-    setBorderPainted(false);
-  }
-
-  /**
-   * Paints the custom button graphics.
-   *
-   * @param g The custom button graphics to edit and paint.
-   */
   @Override
   protected void paintComponent(Graphics g) {
     if (getModel().isPressed()) {
@@ -89,86 +62,33 @@ public class CustomButton extends JButton {
     int buttonWidth = getWidth();
 
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-
-    if (isArrowButton()) {
-      int[] pointsX = {
-        buttonWidth / 2,
-        (int) (buttonWidth * 0.75),
-        (int) (buttonWidth * 0.25)
-      };
-
-      int[] pointsY = (
-        (orientation == SwingConstants.NORTH)
-        ? new int[] {
-          (int) (buttonHeight * 0.25),
-          (int) (buttonHeight * 0.75),
-          (int) (buttonHeight * 0.75)
-        }
-        : new int[] {
-          (int) (buttonHeight * 0.75),
-          (int) (buttonHeight * 0.25),
-          (int) (buttonHeight * 0.25)
-        }
-      );
-
-      Polygon triangle = new Polygon(pointsX, pointsY, 3);
-
-      g2.setStroke(
-        new BasicStroke(
-          Constants.STROKE_BUTTON_ARROW,
-          BasicStroke.CAP_ROUND,
-          BasicStroke.JOIN_ROUND
-        )
-      );
-      g2.drawPolygon(triangle);
-      g2.fillPolygon(triangle);
-    } else {
-      g2.fillRoundRect(0, 0, (buttonWidth - 1), (buttonHeight - 1), arc, arc);
-    }
-
+    g2.fillRoundRect(0, 0, (buttonWidth - 1), (buttonHeight - 1), arc, arc);
     g2.dispose();
 
     super.paintComponent(g);
   }
 
+  // ---------------------------------------- Private methods -----------------------------------
+
   /**
-   * Hmm.
+   * Configures the graphical properties of the button in order to fit the program aesthetics.
    */
-  @Override
-  public Insets getInsets() {
-    return new Insets(
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL
-    );
+  private void setUpGraphicalProperties() {
+    setOpaque(false);
+    setFocusPainted(false);
+    setContentAreaFilled(false);
+    setBorderPainted(false);
   }
 
   // ---------------------------------------- Getters -------------------------------------------
-
-  private boolean isArrowButton() {
-    return isArrowButton;
-  }
 
   public int getArc() {
     return arc;
   }
 
-  public int getOrientation() {
-    return orientation;
-  }
-
   // ---------------------------------------- Setters -------------------------------------------
-
-  private void setArrowButton(boolean isArrowButton) {
-    this.isArrowButton = isArrowButton;
-  }
 
   private void setArc(int arc) {
     this.arc = arc;
-  }
-
-  private void setOrientation(int orientation) {
-    this.orientation = orientation;
   }
 }

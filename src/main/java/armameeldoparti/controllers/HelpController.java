@@ -46,9 +46,6 @@ public class HelpController extends Controller<HelpView> {
 
   // ---------------------------------------- Public methods ------------------------------------
 
-  /**
-   * Resets the controlled view to its default values.
-   */
   @Override
   public void resetView() {
     currentPageNumber = 0;

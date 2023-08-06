@@ -40,46 +40,14 @@ public class CustomComboBox<E> extends JComboBox<E> {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
-  /**
-   * Configures the graphical properties for the combobox in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setOpaque(false);
-    setUI(new BasicComboBoxUI() {
-      @Override
-      protected JButton createArrowButton() {
-        return new CustomButton(SwingConstants.SOUTH);
-      }
-
-      @Override
-      protected ListCellRenderer<Object> createRenderer() {
-        return new DefaultListCellRenderer() {
-          @Override
-          public Component getListCellRendererComponent(JList<?> list,
-                                                        Object value,
-                                                        int index,
-                                                        boolean isSelected,
-                                                        boolean cellHasFocus) {
-            JLabel renderer = (JLabel) super.getListCellRendererComponent(
-                list, value, index, isSelected, cellHasFocus
-            );
-
-            if (isSelected) {
-              renderer.setBackground(Constants.COLOR_GREEN_DARK_MEDIUM);
-              renderer.setForeground(Color.WHITE);
-            } else {
-              renderer.setBackground(list.getBackground());
-              renderer.setForeground(list.getForeground());
-            }
-
-            return renderer;
-          }
-        };
-      }
-    });
+  @Override
+  public Insets getInsets() {
+    return Constants.INSETS_GENERAL;
   }
+
+  // ---------------------------------------- Protected methods ---------------------------------
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -118,13 +86,44 @@ public class CustomComboBox<E> extends JComboBox<E> {
     g2.dispose();
   }
 
-  @Override
-  public Insets getInsets() {
-    return new Insets(
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL
-    );
+  // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Configures the graphical properties for the combobox in order to fit the program aesthetics.
+   */
+  private void setUpGraphicalProperties() {
+    setOpaque(false);
+    setUI(new BasicComboBoxUI() {
+      @Override
+      protected JButton createArrowButton() {
+        return new CustomArrowButton(SwingConstants.SOUTH);
+      }
+
+      @Override
+      protected ListCellRenderer<Object> createRenderer() {
+        return new DefaultListCellRenderer() {
+          @Override
+          public Component getListCellRendererComponent(JList<?> list,
+                                                        Object value,
+                                                        int index,
+                                                        boolean isSelected,
+                                                        boolean cellHasFocus) {
+            JLabel renderer = (JLabel) super.getListCellRendererComponent(
+                list, value, index, isSelected, cellHasFocus
+            );
+
+            if (isSelected) {
+              renderer.setBackground(Constants.COLOR_GREEN_DARK_MEDIUM);
+              renderer.setForeground(Color.WHITE);
+            } else {
+              renderer.setBackground(list.getBackground());
+              renderer.setForeground(list.getForeground());
+            }
+
+            return renderer;
+          }
+        };
+      }
+    });
   }
 }

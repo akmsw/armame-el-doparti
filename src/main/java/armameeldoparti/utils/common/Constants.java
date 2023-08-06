@@ -3,6 +3,7 @@ package armameeldoparti.utils.common;
 import armameeldoparti.models.Error;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.util.Arrays;
 import java.util.Collections;
@@ -197,6 +198,13 @@ public final class Constants {
       ICON_MAIN, ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH
   );
 
+  public static final Insets INSETS_GENERAL = new Insets(
+      Constants.ROUNDED_BORDER_INSETS_GENERAL,
+      Constants.ROUNDED_BORDER_INSETS_GENERAL,
+      Constants.ROUNDED_BORDER_INSETS_GENERAL,
+      Constants.ROUNDED_BORDER_INSETS_GENERAL
+  );
+
   /**
    * Possible players distribution methods.
    */
@@ -280,7 +288,7 @@ public final class Constants {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Empty, private constructor. Not needed.
+   * Empty, private constructor.
    */
   private Constants() {
     // Body not needed

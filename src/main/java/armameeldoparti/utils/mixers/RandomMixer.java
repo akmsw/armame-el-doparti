@@ -204,8 +204,8 @@ public class RandomMixer implements PlayersMixer {
    * @param team            Team to check if the anchored players can be added.
    * @param anchoredPlayers Anchored players to check.
    *
-   *  @return If the amount of anchored players to be added to a team would exceed the maximum
-   *          allowed amount of players per team.
+   * @return If the amount of anchored players to be added to a team would exceed the maximum
+   *         allowed amount of players per team.
    */
   private boolean anchorageOverflowsTeamSize(Team team, List<Player> anchoredPlayers) {
     return team.getPlayersCount() + anchoredPlayers.size() > Constants.PLAYERS_PER_TEAM;

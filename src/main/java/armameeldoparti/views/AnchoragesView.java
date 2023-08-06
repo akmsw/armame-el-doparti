@@ -53,7 +53,7 @@ public class AnchoragesView extends View {
   private List<JButton> anchorageButtons;
 
   /**
-   * Map that associates each checkboxes-list with its corresponding position.
+   * Map that associates each checkboxes list with its corresponding position.
    */
   private Map<Position, List<JCheckBox>> checkboxesMap;
 

@@ -29,14 +29,14 @@ public class CustomTextField extends JTextField {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------- Public methods ------------------------------------
 
-  /**
-   * Configures the graphical properties for the text field in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setOpaque(false);
+  @Override
+  public Insets getInsets() {
+    return Constants.INSETS_GENERAL;
   }
+
+  // ---------------------------------------- Protected methods ---------------------------------
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -77,13 +77,12 @@ public class CustomTextField extends JTextField {
     g2.dispose();
   }
 
-  @Override
-  public Insets getInsets() {
-    return new Insets(
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL
-    );
+  // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Configures the graphical properties for the text field in order to fit the program aesthetics.
+   */
+  private void setUpGraphicalProperties() {
+    setOpaque(false);
   }
 }

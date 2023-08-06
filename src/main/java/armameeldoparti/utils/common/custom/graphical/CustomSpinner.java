@@ -1,14 +1,10 @@
 package armameeldoparti.utils.common.custom.graphical;
 
-import armameeldoparti.models.Error;
-import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
-import java.text.ParseException;
-import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
@@ -72,78 +68,29 @@ public class CustomSpinner extends JSpinner {
 
         @Override
         public Insets getBorderInsets(Component c) {
-          return new Insets(
-            Constants.ROUNDED_BORDER_INSETS_GENERAL,
-            Constants.ROUNDED_BORDER_INSETS_GENERAL,
-            Constants.ROUNDED_BORDER_INSETS_GENERAL,
-            Constants.ROUNDED_BORDER_INSETS_GENERAL
-          );
+            return Constants.INSETS_GENERAL;
         }
       }
     );
     setUI(new BasicSpinnerUI() {
-      /**
-       * Configures the spinner 'previous' button to fit the program aesthetics.
-       *
-       * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
-       * time the type of the model minimum (a Comparable) and the current value (an Object).
-       *
-       * @return The spinner 'previous' button.
-       */
       @Override
-      @SuppressWarnings("unchecked")
       protected Component createPreviousButton() {
-        JButton previousButton = new CustomButton(SwingConstants.SOUTH);
+        Component previousButton = new CustomArrowButton(SwingConstants.SOUTH);
 
-        previousButton.addActionListener(e -> {
-          // We know for sure that this custom spinner has a SpinnerNumberModel
-          SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
+        previousButton.setName("Spinner.previousButton");
 
-          Comparable<Object> minimum = (Comparable<Object>) model.getMinimum();
-          Comparable<Object> currentValue = (Comparable<Object>) model.getValue();
-
-          if (currentValue.compareTo(minimum) > 0) {
-            try {
-              spinner.commitEdit();
-              spinner.setValue(model.getPreviousValue());
-            } catch (ParseException ex) {
-              CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
-            }
-          }
-        });
+        this.installPreviousButtonListeners(previousButton);
 
         return previousButton;
       }
 
-      /**
-       * Configures the spinner 'next' button to fit the program aesthetics.
-       *
-       * <p>The "unchecked type" warning is suppressed since the Java compiler can't know at compile
-       * time the type of the model maximum (a Comparable) and the current value (an Object).
-       *
-       * @return The spinner 'next' button.
-       */
       @Override
-      @SuppressWarnings("unchecked")
       protected Component createNextButton() {
-        JButton nextButton = new CustomButton(SwingConstants.NORTH);
+        Component nextButton = new CustomArrowButton(SwingConstants.NORTH);
 
-        nextButton.addActionListener(e -> {
-          // We know for sure that this custom spinner has a SpinnerNumberModel
-          SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
+        nextButton.setName("Spinner.nextButton");
 
-          Comparable<Object> maximum = (Comparable<Object>) model.getMaximum();
-          Comparable<Object> currentValue = (Comparable<Object>) model.getValue();
-
-          if (currentValue.compareTo(maximum) < 0) {
-            try {
-              spinner.commitEdit();
-              spinner.setValue(model.getNextValue());
-            } catch (ParseException ex) {
-              CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
-            }
-          }
-        });
+        this.installNextButtonListeners(nextButton);
 
         return nextButton;
       }

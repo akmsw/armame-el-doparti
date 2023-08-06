@@ -34,9 +34,6 @@ public class MainMenuController extends Controller<MainMenuView> {
 
   // ---------------------------------------- Public methods ------------------------------------
 
-  /**
-   * Makes the controlled view visible.
-   */
   @Override
   public void showView() {
     centerView();
@@ -89,12 +86,9 @@ public class MainMenuController extends Controller<MainMenuView> {
 
   // ---------------------------------------- Protected methods ---------------------------------
 
-  /**
-   * Resets the controlled view to its default values.
-   */
   @Override
   protected void resetView() {
-    // Body not needed in this controller
+    // Body not needed in this particular controller
   }
 
   // ---------------------------------------- Private methods -----------------------------------

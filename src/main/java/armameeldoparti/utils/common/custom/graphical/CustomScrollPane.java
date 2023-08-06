@@ -4,12 +4,12 @@ import armameeldoparti.utils.common.Constants;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 /**
@@ -68,52 +68,23 @@ public class CustomScrollPane extends JScrollPane {
    */
   private void setUpGraphicalProperties() {
     setOpaque(false);
-    setBorder(
-        BorderFactory.createEmptyBorder(
-          Constants.ROUNDED_BORDER_INSETS_SCROLLPANE,
-          Constants.ROUNDED_BORDER_INSETS_SCROLLPANE,
-          Constants.ROUNDED_BORDER_INSETS_SCROLLPANE,
-          Constants.ROUNDED_BORDER_INSETS_SCROLLPANE
-        )
-    );
+    setBorder(new EmptyBorder(Constants.INSETS_GENERAL));
     getViewport().setBackground(Constants.COLOR_GREEN_LIGHT_WHITE);
     getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-      /**
-       * Configures the scrollbar colors to fit the program aesthetics.
-       *
-       * <p>The thumb will be dark green and the track will be medium green.
-       */
       @Override
       protected void configureScrollBarColors() {
         this.thumbColor = Constants.COLOR_GREEN_DARK;
         this.trackColor = Constants.COLOR_GREEN_MEDIUM;
       }
 
-      /**
-       * Configures the scrollbar decrease button to fit the program aesthetics.
-       *
-       * @param orientation The button arrow orientation.
-       *
-       * @return The scrollbar decrease button.
-       */
       @Override
       protected JButton createDecreaseButton(int orientation) {
-        return new CustomButton(orientation);
+        return new CustomArrowButton(orientation);
       }
 
-      /**
-       * Configures the scrollbar increase button to fit the program aesthetics. It'll have the same
-       * graphical properties as the scrollbar decrease button.
-       *
-       * @see #createDecreaseButton(int)
-       *
-       * @param orientation The button arrow orientation.
-       *
-       * @return The scrollbar increase button.
-       */
       @Override
       protected JButton createIncreaseButton(int orientation) {
-        return new CustomButton(orientation);
+        return new CustomArrowButton(orientation);
       }
 
       @Override

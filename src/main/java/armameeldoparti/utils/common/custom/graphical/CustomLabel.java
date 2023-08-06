@@ -3,8 +3,8 @@ package armameeldoparti.utils.common.custom.graphical;
 import armameeldoparti.utils.common.Constants;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Custom label class.
@@ -43,26 +43,7 @@ public class CustomLabel extends JLabel {
     setUpGraphicalProperties(alignment);
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
-
-  /**
-   * Configures the graphical properties of the label in order to fit the program aesthetics. The
-   * label will have a lowered bevel border.
-   *
-   * @param alignment The label text alignment.
-   */
-  private void setUpGraphicalProperties(int alignment) {
-    setHorizontalAlignment(alignment);
-    setOpaque(false);
-    setBorder(
-        BorderFactory.createEmptyBorder(
-          Constants.ROUNDED_BORDER_INSETS_GENERAL,
-          Constants.ROUNDED_BORDER_INSETS_GENERAL,
-          Constants.ROUNDED_BORDER_INSETS_GENERAL,
-          Constants.ROUNDED_BORDER_INSETS_GENERAL
-        )
-    );
-  }
+  // ---------------------------------------- Protected methods ---------------------------------
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -101,5 +82,18 @@ public class CustomLabel extends JLabel {
         Constants.ROUNDED_BORDER_ARC_GENERAL
     );
     g2.dispose();
+  }
+
+  // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Configures the graphical properties of the label in order to fit the program aesthetics.
+   *
+   * @param alignment The label text alignment.
+   */
+  private void setUpGraphicalProperties(int alignment) {
+    setHorizontalAlignment(alignment);
+    setOpaque(false);
+    setBorder(new EmptyBorder(Constants.INSETS_GENERAL));
   }
 }

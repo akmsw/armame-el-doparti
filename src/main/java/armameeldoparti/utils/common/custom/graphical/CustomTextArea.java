@@ -21,8 +21,8 @@ public class CustomTextArea extends JTextArea {
   /**
    * Builds a basic text area using the established program aesthetics.
    *
-   * @param rows       Row count for the text area.
-   * @param columns    Column count for the text area.
+   * @param rows    Row count for the text area.
+   * @param columns Column count for the text area.
    */
   public CustomTextArea(int rows, int columns) {
     super(rows, columns);
@@ -30,7 +30,7 @@ public class CustomTextArea extends JTextArea {
   }
 
   /**
-   * Builds a basic text area using the established program aesthetics.
+   * Builds a basic empty text area using the established program aesthetics.
    */
   public CustomTextArea() {
     super();

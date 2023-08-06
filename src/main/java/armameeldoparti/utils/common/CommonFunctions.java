@@ -34,7 +34,7 @@ public final class CommonFunctions {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Empty, private constructor. Not needed.
+   * Empty, private constructor.
    */
   private CommonFunctions() {
     // Body not needed
@@ -143,11 +143,11 @@ public final class CommonFunctions {
   /**
    * Given an icon filename, appends the icons folder path to it and creates an ImageIcon.
    *
-   * @see #createImage(String)
-   *
    * @param iconFileName Name of the icon file to use.
    *
    * @return The ImageIcon of the specified file.
+   *
+   * @see #createImage(String)
    */
   public static ImageIcon createImageIcon(String iconFileName) {
     return createImage(Constants.PATH_ICO + iconFileName);
@@ -172,9 +172,7 @@ public final class CommonFunctions {
    * Gets the corresponding controller to the requested view.
    *
    * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime
-   * the type of the view controlled.
-   *
-   * <p>TODO: Avoid warning suppression.
+   * the type of the controlled view.
    *
    * @param view The view whose controller is needed.
    *
@@ -182,7 +180,7 @@ public final class CommonFunctions {
    */
   @SuppressWarnings("java:S1452")
   public static Controller<? extends View> getController(ProgramView view) {
-    return CommonFields.getControllersMap()
+    return CommonFields.getControllerMap()
                        .get(view);
   }
 

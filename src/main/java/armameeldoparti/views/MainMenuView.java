@@ -144,8 +144,14 @@ public class MainMenuView extends View {
     label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setForeground(color);
     label.setToolTipText(tooltip);
-    label.setFont(new Font(label.getFont()
-                                .getName(), Font.PLAIN, fontSize));
+    label.setFont(
+      new Font(
+        label.getFont()
+             .getName(),
+        Font.PLAIN,
+        fontSize
+      )
+    );
 
     getMasterPanel().add(label, constraints);
   }

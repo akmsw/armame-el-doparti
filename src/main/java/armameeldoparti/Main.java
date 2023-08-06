@@ -52,7 +52,7 @@ public final class Main {
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Empty, private constructor. Not needed.
+   * Empty, private constructor.
    */
   private Main() {
     // Body not needed
@@ -64,14 +64,14 @@ public final class Main {
    * Starts the program by initializing the fields needed along with the program's graphical
    * properties, and making the main menu view visible.
    *
-   * @param args Program arguments (not used yet).
+   * @param args Program arguments (unused).
    */
   public static void main(String[] args) {
-    // Establishes the main monitor as active monitor by default
+    // Establishes the main monitor as the active monitor by default
     CommonFields.setActiveMonitor(GraphicsEnvironment.getLocalGraphicsEnvironment()
                                                      .getDefaultScreenDevice());
     CommonFields.setAnchoragesEnabled(false);
-    CommonFields.setControllersMap(new EnumMap<>(ProgramView.class));
+    CommonFields.setControllerMap(new EnumMap<>(ProgramView.class));
     CommonFields.setPlayersAmountMap(new EnumMap<>(Position.class));
     CommonFields.setPositionsMap(new EnumMap<>(Position.class));
     CommonFields.setPlayersSets(new TreeMap<>());
@@ -165,37 +165,37 @@ public final class Main {
     Controller<MainMenuView> mainMenuController = new MainMenuController(
         new MainMenuView()
     );
-    CommonFields.getControllersMap()
+    CommonFields.getControllerMap()
                 .put(ProgramView.MAIN_MENU, mainMenuController);
 
     Controller<HelpView> helpController = new HelpController(
         new HelpView()
     );
-    CommonFields.getControllersMap()
+    CommonFields.getControllerMap()
                 .put(ProgramView.HELP, helpController);
 
     Controller<NamesInputView> namesInputController = new NamesInputController(
         new NamesInputView()
     );
-    CommonFields.getControllersMap()
+    CommonFields.getControllerMap()
                 .put(ProgramView.NAMES_INPUT, namesInputController);
 
     Controller<AnchoragesView> anchoragesController = new AnchoragesController(
         new AnchoragesView()
     );
-    CommonFields.getControllersMap()
+    CommonFields.getControllerMap()
                 .put(ProgramView.ANCHORAGES, anchoragesController);
 
     Controller<SkillPointsInputView> skillPointsInputController = new SkillPointsInputController(
         new SkillPointsInputView()
     );
-    CommonFields.getControllersMap()
+    CommonFields.getControllerMap()
                 .put(ProgramView.SKILL_POINTS, skillPointsInputController);
 
     Controller<ResultsView> resultsController = new ResultsController(
         new ResultsView()
     );
-    CommonFields.getControllersMap()
+    CommonFields.getControllerMap()
                 .put(ProgramView.RESULTS, resultsController);
   }
 

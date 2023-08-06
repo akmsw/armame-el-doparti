@@ -196,7 +196,7 @@ public class NamesInputController extends Controller<NamesInputView> {
 
     updateTextArea();
 
-    // The mix button is enabled only when every player has a name
+    // The mix button is enabled only when every player has a valid non-empty name assigned
     getView().getMixButton()
              .setEnabled(!alreadyExists(""));
   }

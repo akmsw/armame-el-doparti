@@ -110,9 +110,9 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   private void resetSkills() {
     getView().getSpinnersMap()
-             .forEach((k, v) -> {
-               k.setSkillPoints(0);
-               v.setValue(Constants.SKILL_MIN);
+             .forEach((player, spinner) -> {
+               player.setSkillPoints(0);
+               spinner.setValue(Constants.SKILL_MIN);
              });
   }
 }

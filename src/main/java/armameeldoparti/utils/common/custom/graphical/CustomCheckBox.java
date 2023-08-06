@@ -21,6 +21,8 @@ public class CustomCheckBox extends JCheckBox {
 
   /**
    * Builds a basic checkbox using the established program aesthetics.
+   *
+   * @param text The text shown in the checkbox.
    */
   public CustomCheckBox(String text) {
     super(text);
