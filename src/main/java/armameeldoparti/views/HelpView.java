@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import lombok.Getter;
 import net.miginfocom.layout.CC;
 
 /**
@@ -25,7 +24,6 @@ import net.miginfocom.layout.CC;
  *
  * @since 3.0
  */
-@Getter
 public class HelpView extends View {
 
   // ---------------------------------------- Private constants ---------------------------------
@@ -139,5 +137,65 @@ public class HelpView extends View {
     pagesCounter = new CustomLabel(SwingConstants.CENTER);
 
     getMasterPanel().add(pagesCounter, Constants.MIG_LAYOUT_GROWX);
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public JButton getPreviousPageButton() {
+    return previousPageButton;
+  }
+
+  public JButton getNextPageButton() {
+    return nextPageButton;
+  }
+
+  public JButton getBackButton() {
+    return backButton;
+  }
+
+  public JLabel getPageTitleTextField() {
+    return pageTitleTextField;
+  }
+
+  public JLabel getPagesCounter() {
+    return pagesCounter;
+  }
+
+  public JScrollPane getScrollPane() {
+    return scrollPane;
+  }
+
+  public JTextArea getTextArea() {
+    return textArea;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setPreviousPageButton(JButton previousPageButton) {
+    this.previousPageButton = previousPageButton;
+  }
+
+  public void setNextPageButton(JButton nextPageButton) {
+    this.nextPageButton = nextPageButton;
+  }
+
+  public void setBackButton(JButton backButton) {
+    this.backButton = backButton;
+  }
+
+  public void setPageTitleTextField(JLabel pageTitleTextField) {
+    this.pageTitleTextField = pageTitleTextField;
+  }
+
+  public void setPagesCounter(JLabel pagesCounter) {
+    this.pagesCounter = pagesCounter;
+  }
+
+  public void setScrollPane(JScrollPane scrollPane) {
+    this.scrollPane = scrollPane;
+  }
+
+  public void setTextArea(JTextArea textArea) {
+    this.textArea = textArea;
   }
 }

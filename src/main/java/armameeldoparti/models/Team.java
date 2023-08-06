@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Team class.
@@ -17,8 +15,6 @@ import lombok.Setter;
  *
  * @since 3.0
  */
-@Getter
-@Setter
 public class Team {
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -88,5 +84,25 @@ public class Team {
     return teamPlayers.get(position)
                       .size() == CommonFields.getPlayersAmountMap()
                                              .get(position);
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public int getTeamNumber() {
+    return teamNumber;
+  }
+
+  public Map<Position, List<Player>> getTeamPlayers() {
+    return teamPlayers;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setTeamNumber(int teamNumber) {
+    this.teamNumber = teamNumber;
+  }
+
+  public void setTeamPlayers(Map<Position, List<Player>> teamPlayers) {
+    this.teamPlayers = teamPlayers;
   }
 }

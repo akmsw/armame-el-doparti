@@ -1,8 +1,5 @@
 package armameeldoparti.models;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Players class.
  *
@@ -12,8 +9,6 @@ import lombok.Setter;
  *
  * @since 1.0
  */
-@Getter
-@Setter
 public class Player {
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -43,5 +38,57 @@ public class Player {
     setTeamNumber(0);
     setAnchorageNumber(0);
     setSkillPoints(0);
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public boolean isAnchored() {
+    return isAnchored;
+  }
+
+  public int getAnchorageNumber() {
+    return anchorageNumber;
+  }
+
+  public int getSkillPoints() {
+    return skillPoints;
+  }
+
+  public int getTeamNumber() {
+    return teamNumber;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public Position getPosition() {
+    return position;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setAnchored(boolean isAnchored) {
+    this.isAnchored = isAnchored;
+  }
+
+  public void setAnchorageNumber(int anchorageNumber) {
+    this.anchorageNumber = anchorageNumber;
+  }
+
+  public void setSkillPoints(int skillPoints) {
+    this.skillPoints = skillPoints;
+  }
+
+  public void setTeamNumber(int teamNumber) {
+    this.teamNumber = teamNumber;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setPosition(Position position) {
+    this.position = position;
   }
 }

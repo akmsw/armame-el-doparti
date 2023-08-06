@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -34,7 +33,6 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 3.0
  */
-@Getter
 public class AnchoragesView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -234,5 +232,97 @@ public class AnchoragesView extends View {
         )
       )
     );
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public JButton getFinishButton() {
+    return finishButton;
+  }
+
+  public JButton getNewAnchorageButton() {
+    return newAnchorageButton;
+  }
+
+  public JButton getDeleteAnchorageButton() {
+    return deleteAnchorageButton;
+  }
+
+  public JButton getDeleteLastAnchorageButton() {
+    return deleteLastAnchorageButton;
+  }
+
+  public JButton getClearAnchoragesButton() {
+    return clearAnchoragesButton;
+  }
+
+  public JPanel getLeftPanel() {
+    return leftPanel;
+  }
+
+  public JPanel getRightPanel() {
+    return rightPanel;
+  }
+
+  public JScrollPane getScrollPane() {
+    return scrollPane;
+  }
+
+  public JTextArea getTextArea() {
+    return textArea;
+  }
+
+  public List<JButton> getAnchorageButtons() {
+    return anchorageButtons;
+  }
+
+  public Map<Position, List<JCheckBox>> getCheckboxesMap() {
+    return checkboxesMap;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setFinishButton(JButton finishButton) {
+    this.finishButton = finishButton;
+  }
+
+  public void setNewAnchorageButton(JButton newAnchorageButton) {
+    this.newAnchorageButton = newAnchorageButton;
+  }
+
+  public void setDeleteAnchorageButton(JButton deleteAnchorageButton) {
+    this.deleteAnchorageButton = deleteAnchorageButton;
+  }
+
+  public void setDeleteLastAnchorageButton(JButton deleteLastAnchorageButton) {
+    this.deleteLastAnchorageButton = deleteLastAnchorageButton;
+  }
+
+  public void setClearAnchoragesButton(JButton clearAnchoragesButton) {
+    this.clearAnchoragesButton = clearAnchoragesButton;
+  }
+
+  public void setLeftPanel(JPanel leftPanel) {
+    this.leftPanel = leftPanel;
+  }
+
+  public void setRightPanel(JPanel rightPanel) {
+    this.rightPanel = rightPanel;
+  }
+
+  public void setScrollPane(JScrollPane scrollPane) {
+    this.scrollPane = scrollPane;
+  }
+
+  public void setTextArea(JTextArea textArea) {
+    this.textArea = textArea;
+  }
+
+  public void setAnchorageButtons(List<JButton> anchorageButtons) {
+    this.anchorageButtons = anchorageButtons;
+  }
+
+  public void setCheckboxesMap(Map<Position, List<JCheckBox>> checkboxesMap) {
+    this.checkboxesMap = checkboxesMap;
   }
 }

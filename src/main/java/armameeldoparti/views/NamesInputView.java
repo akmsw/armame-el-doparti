@@ -24,7 +24,6 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -36,7 +35,6 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 3.0
  */
-@Getter
 public class NamesInputView extends View {
 
   // ---------------------------------------- Private constants ---------------------------------
@@ -220,5 +218,65 @@ public class NamesInputView extends View {
     for (Position position : Position.values()) {
       textFieldsMap.put(position, new ArrayList<>());
     }
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public JButton getMixButton() {
+    return mixButton;
+  }
+
+  public JCheckBox getAnchoragesCheckbox() {
+    return anchoragesCheckbox;
+  }
+
+  public JComboBox<String> getComboBox() {
+    return comboBox;
+  }
+
+  public JPanel getLeftPanel() {
+    return leftPanel;
+  }
+
+  public JPanel getRightPanel() {
+    return rightPanel;
+  }
+
+  public JTextArea getTextArea() {
+    return textArea;
+  }
+
+  public Map<Position, List<JTextField>> getTextFieldsMap() {
+    return textFieldsMap;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setMixButton(JButton mixButton) {
+    this.mixButton = mixButton;
+  }
+
+  public void setAnchoragesCheckbox(JCheckBox anchoragesCheckbox) {
+    this.anchoragesCheckbox = anchoragesCheckbox;
+  }
+
+  public void setComboBox(JComboBox<String> comboBox) {
+    this.comboBox = comboBox;
+  }
+
+  public void setLeftPanel(JPanel leftPanel) {
+    this.leftPanel = leftPanel;
+  }
+
+  public void setRightPanel(JPanel rightPanel) {
+    this.rightPanel = rightPanel;
+  }
+
+  public void setTextArea(JTextArea textArea) {
+    this.textArea = textArea;
+  }
+
+  public void setTextFieldsMap(Map<Position, List<JTextField>> textFieldsMap) {
+    this.textFieldsMap = textFieldsMap;
   }
 }

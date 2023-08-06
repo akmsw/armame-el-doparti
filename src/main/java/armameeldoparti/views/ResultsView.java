@@ -8,8 +8,6 @@ import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Results view class.
@@ -20,8 +18,6 @@ import lombok.Setter;
  *
  * @since 3.0
  */
-@Getter
-@Setter
 public class ResultsView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -112,5 +108,17 @@ public class ResultsView extends View {
           Constants.MIG_LAYOUT_CENTER
         )
     );
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public JTable getTable() {
+    return table;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setTable(JTable table) {
+    this.table = table;
   }
 }

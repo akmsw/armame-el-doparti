@@ -8,8 +8,6 @@ import armameeldoparti.views.View;
 import java.awt.GraphicsDevice;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Common-use fields class.
@@ -24,16 +22,16 @@ public final class CommonFields {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  @Getter @Setter private static int distribution;
+  private static int distribution;
 
-  @Getter @Setter private static boolean anchoragesEnabled;
+  private static boolean anchoragesEnabled;
 
-  @Getter @Setter private static GraphicsDevice activeMonitor;
+  private static GraphicsDevice activeMonitor;
 
-  @Getter @Setter private static Map<Position, Integer> playersAmountMap;
-  @Getter @Setter private static Map<Position, List<Player>> playersSets;
-  @Getter @Setter private static Map<Position, String> positionsMap;
-  @Getter @Setter private static Map<ProgramView, Controller<? extends View>> controllersMap;
+  private static Map<Position, Integer> playersAmountMap;
+  private static Map<Position, List<Player>> playersSets;
+  private static Map<Position, String> positionsMap;
+  private static Map<ProgramView, Controller<? extends View>> controllersMap;
 
   // ---------------------------------------- Constructor ---------------------------------------
 
@@ -42,5 +40,66 @@ public final class CommonFields {
    */
   private CommonFields() {
     // Body not needed
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public static int getDistribution() {
+    return distribution;
+  }
+
+  public static boolean isAnchoragesEnabled() {
+    return anchoragesEnabled;
+  }
+
+  public static GraphicsDevice getActiveMonitor() {
+    return activeMonitor;
+  }
+
+  public static Map<Position, Integer> getPlayersAmountMap() {
+    return playersAmountMap;
+  }
+
+  public static Map<Position, List<Player>> getPlayersSets() {
+    return playersSets;
+  }
+
+  public static Map<Position, String> getPositionsMap() {
+    return positionsMap;
+  }
+
+  @SuppressWarnings("java:S1452")
+  public static Map<ProgramView, Controller<?>> getControllersMap() {
+    return controllersMap;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public static void setDistribution(int distribution) {
+    CommonFields.distribution = distribution;
+  }
+
+  public static void setAnchoragesEnabled(boolean anchoragesEnabled) {
+    CommonFields.anchoragesEnabled = anchoragesEnabled;
+  }
+
+  public static void setActiveMonitor(GraphicsDevice activeMonitor) {
+    CommonFields.activeMonitor = activeMonitor;
+  }
+
+  public static void setPlayersAmountMap(Map<Position, Integer> playersAmountMap) {
+    CommonFields.playersAmountMap = playersAmountMap;
+  }
+
+  public static void setPlayersSets(Map<Position, List<Player>> playersSets) {
+    CommonFields.playersSets = playersSets;
+  }
+
+  public static void setPositionsMap(Map<Position, String> positionsMap) {
+    CommonFields.positionsMap = positionsMap;
+  }
+
+  public static void setControllersMap(Map<ProgramView, Controller<?>> controllersMap) {
+    CommonFields.controllersMap = controllersMap;
   }
 }

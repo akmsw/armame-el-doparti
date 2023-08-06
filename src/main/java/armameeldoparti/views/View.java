@@ -4,9 +4,6 @@ import armameeldoparti.utils.common.Constants;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -18,15 +15,13 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 3.0
  */
-@Getter(AccessLevel.PROTECTED)
-@Setter(AccessLevel.PROTECTED)
 public abstract class View extends JFrame {
 
   // ------------------------------------------ Private fields ----------------------------------
 
-  private JPanel masterPanel;
-
   private String frameTitle;
+
+  private JPanel masterPanel;
 
   // ---------------------------------------- Protected constructor -----------------------------
 
@@ -59,4 +54,24 @@ public abstract class View extends JFrame {
    * Adds the buttons to their corresponding panel.
    */
   protected abstract void addButtons();
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public String getFrameTitle() {
+    return frameTitle;
+  }
+
+  public JPanel getMasterPanel() {
+    return masterPanel;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setFrameTitle(String frameTitle) {
+    this.frameTitle = frameTitle;
+  }
+
+  public void setMasterPanel(JPanel masterPanel) {
+    this.masterPanel = masterPanel;
+  }
 }

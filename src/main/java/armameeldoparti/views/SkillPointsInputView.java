@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
-import lombok.Getter;
 
 /**
  * Skill points input view class.
@@ -29,7 +28,6 @@ import lombok.Getter;
  *
  * @since 3.0
  */
-@Getter
 public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -161,5 +159,25 @@ public class SkillPointsInputView extends View {
         getMasterPanel().add(spinner, playerIndex % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
       }
     }
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public Map<JSpinner, JLabel> getLabelsMap() {
+    return labelsMap;
+  }
+
+  public Map<Player, JSpinner> getSpinnersMap() {
+    return spinnersMap;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setLabelsMap(Map<JSpinner, JLabel> labelsMap) {
+    this.labelsMap = labelsMap;
+  }
+
+  public void setSpinnersMap(Map<Player, JSpinner> spinnersMap) {
+    this.spinnersMap = spinnersMap;
   }
 }

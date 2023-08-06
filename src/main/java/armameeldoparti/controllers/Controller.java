@@ -4,8 +4,6 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.views.View;
 import java.awt.Rectangle;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Abstract class that specifies the basic methods for interaction between controllers and their
@@ -17,8 +15,6 @@ import lombok.Setter;
  *
  * @since 3.0
  */
-@Getter
-@Setter
 public abstract class Controller<T extends View> {
 
   // ---------------------------------------- Private fields ------------------------------------
@@ -76,4 +72,16 @@ public abstract class Controller<T extends View> {
    * Resets the controlled view to its default values.
    */
   protected abstract void resetView();
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public T getView() {
+    return view;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setView(T view) {
+    this.view = view;
+  }
 }

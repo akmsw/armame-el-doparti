@@ -7,7 +7,6 @@
 
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle%2010.12.2-passing-brightgreen)](https://checkstyle.sourceforge.io/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-3-yellow?logo=sonarlint)](https://www.sonarlint.org/)
-[![jUnit5Badge](https://img.shields.io/badge/junit%205.10.0-passing-brightgreen?logo=junit5)](https://junit.org/junit5/)
 
 [![openJDKTargetBadge](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/11/)
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross--platform-blueviolet?logo=windows-terminal)](https://en.wikipedia.org/wiki/Cross-platform_software)

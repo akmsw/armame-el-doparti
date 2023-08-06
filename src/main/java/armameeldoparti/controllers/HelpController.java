@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-import lombok.Getter;
 
 /**
  * Help view controller class.
@@ -21,7 +20,6 @@ import lombok.Getter;
  *
  * @since 3.0
  */
-@Getter
 public class HelpController extends Controller<HelpView> {
 
   // ---------------------------------------- Private constants ---------------------------------
@@ -166,5 +164,17 @@ public class HelpController extends Controller<HelpView> {
              .setEnabled(false);
     getView().getNextPageButton()
              .setEnabled(true);
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public int getCurrentPageNumber() {
+    return currentPageNumber;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setCurrentPageNumber(int currentPageNumber) {
+    this.currentPageNumber = currentPageNumber;
   }
 }

@@ -9,9 +9,6 @@
 
   <properties>
     <java.version>11</java.version>
-    <junit-jupiter-params.version>5.10.0</junit-jupiter-params.version>
-    <junit-platform.version>5.10.0</junit-platform.version>
-    <lombok.version>1.18.28</lombok.version>
     <maven.version>3.9.3</maven.version>
     <maven-compiler.version>3.11.0</maven-compiler.version>
     <maven-enforcer.version>3.2.1</maven-enforcer.version>
@@ -23,27 +20,6 @@
   </properties>
 
   <dependencies>
-
-    <!-- Unit testing dependencies -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit-platform.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit-platform.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
-      <version>${junit-jupiter-params.version}</version>
-      <scope>test</scope>
-    </dependency>
-
     <!-- MiG Layout dependencies -->
     <dependency>
       <groupId>com.miglayout</groupId>
@@ -54,14 +30,6 @@
       <groupId>com.miglayout</groupId>
       <artifactId>miglayout-swing</artifactId>
       <version>${miglayout.version}</version>
-    </dependency>
-
-    <!-- Lombok dependencies -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -103,20 +71,6 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
-
-      <!-- To run unit tests -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire.version}</version>
-      </plugin>
-
-      <!-- To run unit tests in the build process -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${maven-failsafe.version}</version>
       </plugin>
 
       <!-- To build the final .jar with built-in dependencies -->

@@ -10,9 +10,6 @@ import java.awt.Insets;
 import java.awt.Polygon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Custom text area class.
@@ -25,8 +22,6 @@ import lombok.Setter;
  *
  * @since 3.0
  */
-@Getter(AccessLevel.PRIVATE)
-@Setter(AccessLevel.PRIVATE)
 public class CustomButton extends JButton {
 
   private boolean isArrowButton;
@@ -147,5 +142,33 @@ public class CustomButton extends JButton {
       Constants.ROUNDED_BORDER_INSETS_GENERAL,
       Constants.ROUNDED_BORDER_INSETS_GENERAL
     );
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  private boolean isArrowButton() {
+    return isArrowButton;
+  }
+
+  public int getArc() {
+    return arc;
+  }
+
+  public int getOrientation() {
+    return orientation;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  private void setArrowButton(boolean isArrowButton) {
+    this.isArrowButton = isArrowButton;
+  }
+
+  private void setArc(int arc) {
+    this.arc = arc;
+  }
+
+  private void setOrientation(int orientation) {
+    this.orientation = orientation;
   }
 }
