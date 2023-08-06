@@ -51,9 +51,6 @@ public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Public methods ------------------------------------
 
-  /**
-   * Initializes the view and makes it visible.
-   */
   @Override
   public void initializeInterface() {
     addSpinners();
@@ -64,9 +61,6 @@ public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Protected methods ---------------------------------
 
-  /**
-   * Adds the buttons to their corresponding panel.
-   */
   @Override
   protected void addButtons() {
     JButton finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);

@@ -8,7 +8,7 @@
 [![checkStyleBadge](https://img.shields.io/badge/checkstyle%2010.12.2-passing-brightgreen)](https://checkstyle.sourceforge.io/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-3-yellow?logo=sonarlint)](https://www.sonarlint.org/)
 
-[![openJDKTargetBadge](https://img.shields.io/badge/jdk-11%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/11/)
+[![openJDKTargetBadge](https://img.shields.io/badge/jdk-14%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/14/)
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross--platform-blueviolet?logo=windows-terminal)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/gpl-3.0-blue?logo=gnu)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
@@ -41,7 +41,7 @@ Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizand
 ## 📦 Requisitos generales
 ### ☕ Java
 - #### Versión mínima
-    🟡 [Java 11](https://www.oracle.com/ar/java/technologies/javase/jdk11-archive-downloads.html)
+    🟡 [Java 14](https://www.oracle.com/ar/java/technologies/javase/jdk14-archive-downloads.html)
 - #### Versión recomendada
     🟢 [Java 20](https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html) *(o más reciente)*
 

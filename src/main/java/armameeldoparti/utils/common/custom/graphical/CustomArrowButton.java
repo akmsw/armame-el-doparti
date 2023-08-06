@@ -1,5 +1,7 @@
 package armameeldoparti.utils.common.custom.graphical;
 
+import armameeldoparti.models.Error;
+import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
@@ -44,49 +46,106 @@ public class CustomArrowButton extends BasicArrowButton {
 
   @Override
   public void paint(Graphics g) {
-    if (getModel().isPressed()) {
-      g.setColor(Constants.COLOR_GREEN_MEDIUM);
-    } else if (getModel().isRollover()) {
-      g.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
-    } else {
-      g.setColor(isEnabled() ? getBackground() : Constants.COLOR_GREEN_MEDIUM);
+    try {
+      int buttonHeight = getHeight();
+      int buttonWidth = getWidth();
+
+      double buttonHeight25 = buttonHeight * 0.25;
+      double buttonHeight75 = buttonHeight * 0.75;
+      double buttonWidth25 = buttonWidth * 0.25;
+      double buttonWidth75 = buttonWidth * 0.75;
+
+      int[] pointsX;
+      int[] pointsY;
+
+      switch (getDirection()) {
+        case SwingConstants.NORTH -> {
+          pointsX = new int[] {
+            buttonWidth / 2,
+            (int) buttonWidth75,
+            (int) buttonWidth25
+          };
+
+          pointsY = new int[] {
+            (int) buttonHeight25,
+            (int) buttonHeight75,
+            (int) buttonHeight75
+          };
+        }
+
+        case SwingConstants.SOUTH -> {
+          pointsX = new int[] {
+            buttonWidth / 2,
+            (int) buttonWidth75,
+            (int) buttonWidth25
+          };
+
+          pointsY = new int[] {
+            (int) buttonHeight75,
+            (int) buttonHeight25,
+            (int) buttonHeight25
+          };
+        }
+
+        case SwingConstants.EAST -> {
+          pointsX = new int[] {
+            (int) buttonWidth75,
+            (int) buttonWidth25,
+            (int) buttonWidth25
+          };
+
+          pointsY = new int[] {
+            buttonHeight / 2,
+            (int) buttonHeight75,
+            (int) buttonHeight25
+          };
+        }
+
+        case SwingConstants.WEST -> {
+          pointsX = new int[] {
+            (int) buttonWidth25,
+            (int) buttonWidth75,
+            (int) buttonWidth75
+          };
+
+          pointsY = new int[] {
+            buttonHeight / 2,
+            (int) buttonHeight25,
+            (int) buttonHeight75
+          };
+        }
+
+        default -> throw new IllegalArgumentException();
+      }
+
+      if (getModel().isPressed()) {
+        g.setColor(Constants.COLOR_GREEN_MEDIUM);
+      } else if (getModel().isRollover()) {
+        g.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
+      } else {
+        g.setColor(isEnabled() ? getBackground() : Constants.COLOR_GREEN_MEDIUM);
+      }
+
+      Polygon triangle = new Polygon(pointsX, pointsY, 3);
+
+      Graphics2D g2 = (Graphics2D) g.create();
+
+      g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+      g2.setStroke(
+        new BasicStroke(
+          Constants.STROKE_BUTTON_ARROW,
+          BasicStroke.CAP_ROUND,
+          BasicStroke.JOIN_ROUND
+        )
+      );
+      g2.drawPolygon(triangle);
+      g2.fillPolygon(triangle);
+      g2.dispose();
+
+      super.paintComponent(g);
+    } catch (IllegalArgumentException e) {
+      CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
     }
-
-    Graphics2D g2 = (Graphics2D) g.create();
-
-    double heightScaleFactor = (getDirection() == SwingConstants.NORTH) ? 0.75 : 0.25;
-    double complementaryHeightScaleFactor = 1.0 - heightScaleFactor;
-
-    int buttonHeight = getHeight();
-    int buttonWidth = getWidth();
-
-    int[] pointsX = {
-      buttonWidth / 2,
-      (int) (buttonWidth * 0.75),
-      (int) (buttonWidth * 0.25)
-    };
-
-    int[] pointsY = {
-      (int) (buttonHeight * complementaryHeightScaleFactor),
-      (int) (buttonHeight * heightScaleFactor),
-      (int) (buttonHeight * heightScaleFactor)
-    };
-
-    Polygon triangle = new Polygon(pointsX, pointsY, 3);
-
-    g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-    g2.setStroke(
-      new BasicStroke(
-        Constants.STROKE_BUTTON_ARROW,
-        BasicStroke.CAP_ROUND,
-        BasicStroke.JOIN_ROUND
-      )
-    );
-    g2.drawPolygon(triangle);
-    g2.fillPolygon(triangle);
-    g2.dispose();
-
-    super.paintComponent(g);
   }
 
   // ---------------------------------------- Private methods -----------------------------------

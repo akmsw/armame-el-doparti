@@ -35,9 +35,6 @@ public class ResultsView extends View {
 
   // ---------------------------------------- Public methods ------------------------------------
 
-  /**
-   * Initializes the view and makes it visible.
-   */
   @Override
   public void initializeInterface() {
     setFrameTitle(getUpdatedFrameTitle());
@@ -49,9 +46,6 @@ public class ResultsView extends View {
 
   // ---------------------------------------- Protected methods ---------------------------------
 
-  /**
-   * Adds the buttons to their corresponding panel.
-   */
   @Override
   protected void addButtons() {
     JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);

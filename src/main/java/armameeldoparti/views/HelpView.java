@@ -56,9 +56,6 @@ public class HelpView extends View {
 
   // ---------------------------------------- Protected methods ---------------------------------
 
-  /**
-   * Initializes the view and makes it visible.
-   */
   @Override
   protected void initializeInterface() {
     addPageTitleTextField();
@@ -69,9 +66,6 @@ public class HelpView extends View {
     pack();
   }
 
-  /**
-   * Adds the buttons to their corresponding panel.
-   */
   @Override
   protected void addButtons() {
     previousPageButton = new CustomButton("Anterior", Constants.ROUNDED_BORDER_ARC_GENERAL);

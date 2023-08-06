@@ -85,9 +85,6 @@ public class AnchoragesView extends View {
 
   // ---------------------------------------- Protected methods ---------------------------------
 
-  /**
-   * Initializes the view and makes it visible.
-   */
   @Override
   protected void initializeInterface() {
     CommonFields.getPlayersSets()
@@ -108,9 +105,6 @@ public class AnchoragesView extends View {
     pack();
   }
 
-  /**
-   * Adds the buttons to their corresponding panel.
-   */
   @Override
   protected void addButtons() {
     finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);

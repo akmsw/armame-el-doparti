@@ -66,9 +66,11 @@ public final class CommonFunctions {
    */
   public static void showErrorMessage(String errorMessage, Component parentComponent) {
     JOptionPane.showMessageDialog(
-        parentComponent, errorMessage,
+        parentComponent,
+        errorMessage,
         Constants.ERROR_MESSAGE_TITLE,
-        JOptionPane.ERROR_MESSAGE, null
+        JOptionPane.ERROR_MESSAGE,
+        null
     );
   }
 

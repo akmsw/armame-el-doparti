@@ -131,12 +131,12 @@ public final class Constants {
   public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
   public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
   public static final String MIX_OPTION_BY_SKILL = "Por puntuaciones";
-  public static final String MSG_ERROR_NULL_RESOURCE = "ERROR EN OBTENCIÓN DE RECURSOS GRÁFICOS";
   public static final String MSG_ERROR_INVALID_STRING = "El nombre del jugador debe estar formado"
                                                         + " por letras de la A a la Z";
   public static final String MSG_ERROR_INVALID_NAME = "El nombre del jugador no puede estar vacío,"
-                                                      + " tener más de " + MAX_NAME_LEN
+                                                      + "\ntener más de " + MAX_NAME_LEN
                                                       + " caracteres, o estar repetido";
+  public static final String MSG_ERROR_NULL_RESOURCE = "Error en obtención de recursos gráficos";
   public static final String PATH_DOCS = "docs/";
   public static final String PATH_HELP_DOCS = PATH_DOCS + "help/";
   public static final String PATH_ICO = "icons/";

@@ -74,9 +74,6 @@ public class NamesInputView extends View {
 
   // ---------------------------------------- Protected methods ---------------------------------
 
-  /**
-   * Initializes the view and makes it visible.
-   */
   @Override
   protected void initializeInterface() {
     getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
@@ -90,9 +87,6 @@ public class NamesInputView extends View {
     pack();
   }
 
-  /**
-   * Adds the buttons to their corresponding panel.
-   */
   @Override
   protected void addButtons() {
     mixButton = new CustomButton("Distribuir", Constants.ROUNDED_BORDER_ARC_GENERAL);

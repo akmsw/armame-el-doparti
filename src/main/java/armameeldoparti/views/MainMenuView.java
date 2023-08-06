@@ -35,9 +35,6 @@ public class MainMenuView extends View {
 
   // ---------------------------------------- Protected methods ---------------------------------
 
-  /**
-   * Initializes the view and makes it visible.
-   */
   @Override
   protected void initializeInterface() {
     addBackground();
@@ -46,9 +43,6 @@ public class MainMenuView extends View {
     pack();
   }
 
-  /**
-   * Adds the buttons to their corresponding panel.
-   */
   @Override
   protected void addButtons() {
     JButton startButton = new CustomButton("Comenzar", Constants.ROUNDED_BORDER_ARC_GENERAL);
