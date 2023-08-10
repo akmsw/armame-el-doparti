@@ -1,7 +1,6 @@
 package armameeldoparti;
 
 import armameeldoparti.controllers.AnchoragesController;
-import armameeldoparti.controllers.Controller;
 import armameeldoparti.controllers.HelpController;
 import armameeldoparti.controllers.MainMenuController;
 import armameeldoparti.controllers.NamesInputController;
@@ -162,41 +161,16 @@ public final class Main {
    * Creates the controllers and assigns their corresponding view to control.
    */
   private static void setUpControllers() {
-    Controller<MainMenuView> mainMenuController = new MainMenuController(
-        new MainMenuView()
+    CommonFields.getControllerMap().putAll(
+        Map.of(
+          ProgramView.MAIN_MENU, new MainMenuController(new MainMenuView()),
+          ProgramView.HELP, new HelpController(new HelpView()),
+          ProgramView.NAMES_INPUT, new NamesInputController(new NamesInputView()),
+          ProgramView.ANCHORAGES, new AnchoragesController(new AnchoragesView()),
+          ProgramView.SKILL_POINTS, new SkillPointsInputController(new SkillPointsInputView()),
+          ProgramView.RESULTS, new ResultsController(new ResultsView())
+        )
     );
-    CommonFields.getControllerMap()
-                .put(ProgramView.MAIN_MENU, mainMenuController);
-
-    Controller<HelpView> helpController = new HelpController(
-        new HelpView()
-    );
-    CommonFields.getControllerMap()
-                .put(ProgramView.HELP, helpController);
-
-    Controller<NamesInputView> namesInputController = new NamesInputController(
-        new NamesInputView()
-    );
-    CommonFields.getControllerMap()
-                .put(ProgramView.NAMES_INPUT, namesInputController);
-
-    Controller<AnchoragesView> anchoragesController = new AnchoragesController(
-        new AnchoragesView()
-    );
-    CommonFields.getControllerMap()
-                .put(ProgramView.ANCHORAGES, anchoragesController);
-
-    Controller<SkillPointsInputView> skillPointsInputController = new SkillPointsInputController(
-        new SkillPointsInputView()
-    );
-    CommonFields.getControllerMap()
-                .put(ProgramView.SKILL_POINTS, skillPointsInputController);
-
-    Controller<ResultsView> resultsController = new ResultsController(
-        new ResultsView()
-    );
-    CommonFields.getControllerMap()
-                .put(ProgramView.RESULTS, resultsController);
   }
 
   /**
