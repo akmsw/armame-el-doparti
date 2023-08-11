@@ -7,7 +7,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 
 /**
- * Custom text area class.
+ * Custom button class.
  *
  * <p>This class is used to instantiate a custom button that fits the overall program aesthetics.
  *

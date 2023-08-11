@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 /**
- * Custom text area class.
+ * Custom combobox class.
  *
  * <p>This class is used to instantiate a custom combobox that fits the overall program aesthetics.
  *

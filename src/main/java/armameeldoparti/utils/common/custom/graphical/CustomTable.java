@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 /**
- * Custom text area class.
+ * Custom table class.
  *
  * <p>This class is used to instantiate a custom table that fits the overall program aesthetics.
  *
