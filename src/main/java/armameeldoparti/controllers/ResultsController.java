@@ -73,7 +73,8 @@ public class ResultsController extends Controller<ResultsView> {
    */
   @Override
   public void resetView() {
-    getView().dispose();
+    view.dispose();
+
     setView(new ResultsView());
   }
 
@@ -91,15 +92,15 @@ public class ResultsController extends Controller<ResultsView> {
 
     teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM ? randomMix() : bySkillsMix());
 
-    getView().setTable(
+    view.setTable(
       new CustomTable(
         Constants.PLAYERS_PER_TEAM + CommonFields.getDistribution() + 1,
         TABLE_COLUMNS
       )
     );
-    getView().initializeInterface();
+    view.initializeInterface();
 
-    table = (CustomTable) getView().getTable();
+    table = (CustomTable) view.getTable();
 
     overrideTableFormat();
     fillTableFields();
@@ -107,7 +108,7 @@ public class ResultsController extends Controller<ResultsView> {
 
     table.adjustCells();
 
-    getView().pack();
+    view.pack();
   }
 
   /**
@@ -301,7 +302,7 @@ public class ResultsController extends Controller<ResultsView> {
    * name. Otherwise, it will be left-aligned.
    */
   private void overrideTableFormat() {
-    getView().getTable().setDefaultRenderer(
+    view.getTable().setDefaultRenderer(
         Object.class,
         new DefaultTableCellRenderer() {
           @Override
@@ -313,8 +314,8 @@ public class ResultsController extends Controller<ResultsView> {
             );
 
             boolean byScoresMixFlag = CommonFields.getDistribution() == Constants.MIX_BY_SKILLS
-                                      && row == getView().getTable()
-                                                         .getRowCount() - 1;
+                                      && row == view.getTable()
+                                                    .getRowCount() - 1;
 
               c.setOpaque(false);
               c.setBorder(

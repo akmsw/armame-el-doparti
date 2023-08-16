@@ -17,9 +17,9 @@ import java.awt.Rectangle;
  */
 public abstract class Controller<T extends View> {
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------- Protected fields ----------------------------------
 
-  private T view;
+  protected T view;
 
   // ---------------------------------------- Constructor ---------------------------------------
 

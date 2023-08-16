@@ -37,7 +37,8 @@ public class MainMenuController extends Controller<MainMenuView> {
   @Override
   public void showView() {
     centerView();
-    getView().setVisible(true);
+
+    view.setVisible(true);
   }
 
   /**
@@ -46,12 +47,12 @@ public class MainMenuController extends Controller<MainMenuView> {
    * <p>Makes the controlled view invisible and shows the help view.
    */
   public void helpButtonEvent() {
+    HelpController controller = (HelpController) CommonFunctions.getController(ProgramView.HELP);
+
     hideView();
 
-    ((HelpController) CommonFunctions.getController(ProgramView.HELP)).updatePage();
-
-    CommonFunctions.getController(ProgramView.HELP)
-                   .showView();
+    controller.updatePage();
+    controller.showView();
   }
 
   /**

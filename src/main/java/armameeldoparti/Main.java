@@ -34,7 +34,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 import javax.swing.UIManager;
-import javax.swing.border.LineBorder;
 import javax.swing.plaf.FontUIResource;
 
 /**
@@ -72,7 +71,6 @@ public final class Main {
     CommonFields.setAnchoragesEnabled(false);
     CommonFields.setControllerMap(new EnumMap<>(ProgramView.class));
     CommonFields.setPlayersAmountMap(new EnumMap<>(Position.class));
-    CommonFields.setPositionsMap(new EnumMap<>(Position.class));
     CommonFields.setPlayersSets(new TreeMap<>());
     CommonFields.setPositionsMap(
         Map.of(
@@ -131,14 +129,14 @@ public final class Main {
    */
   private static void setPlayersDistribution() {
     try (BufferedReader buff = new BufferedReader(
-         new InputStreamReader(
-           Objects.requireNonNull(
-             CommonFunctions.class
-                            .getClassLoader()
-                            .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
-           )
-         )
-      )) {
+        new InputStreamReader(
+          Objects.requireNonNull(
+            CommonFunctions.class
+                          .getClassLoader()
+                          .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
+          )
+        )
+    )) {
       var wrapperIndex = new Object() {
         private int index = 0;
       };
@@ -188,14 +186,15 @@ public final class Main {
     UIManager.put("Label.background", Constants.COLOR_GREEN_MEDIUM_LIGHT);
     UIManager.put("OptionPane.background", Constants.COLOR_GREEN_LIGHT);
     UIManager.put("Panel.background", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("RadioButton.background", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("RadioButton.focus", Constants.COLOR_GREEN_LIGHT);
     UIManager.put("Separator.background", Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("Separator.foreground", Constants.COLOR_GREEN_MEDIUM);
     UIManager.put("Spinner.background", Constants.COLOR_GREEN_LIGHT_WHITE);
+    UIManager.put("FormattedTextField.background", Constants.COLOR_GREEN_LIGHT_WHITE);
     UIManager.put("TextArea.background", Constants.COLOR_GREEN_LIGHT_WHITE);
-    UIManager.put("TitledBorder.border", new LineBorder(Constants.COLOR_GREEN_DARK));
-    UIManager.put("ToggleButton.focus", Constants.COLOR_GREEN_DARK);
-    UIManager.put("ToolTip.background", Constants.COLOR_GREEN_MEDIUM);
-    UIManager.put("ToolTip.border", new LineBorder(Constants.COLOR_GREEN_DARK));
-    UIManager.put("ToolTip.foreground", Color.WHITE);
+    UIManager.put("TextField.selectionBackground", Constants.COLOR_GREEN_DARK_MEDIUM);
+    UIManager.put("TextField.selectionForeground", Constants.COLOR_GREEN_LIGHT_WHITE);
 
     try {
       // In order to use the font, it must be first created and registered
@@ -214,8 +213,6 @@ public final class Main {
 
       setProgramFont(programFont);
     } catch (IOException | FontFormatException e) {
-      e.printStackTrace();
-
       CommonFunctions.exitProgram(Error.GUI_ERROR);
     }
   }

@@ -9,7 +9,10 @@ import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import armameeldoparti.utils.common.custom.graphical.CustomCheckBox;
 import armameeldoparti.utils.common.custom.graphical.CustomComboBox;
+import armameeldoparti.utils.common.custom.graphical.CustomLabel;
+import armameeldoparti.utils.common.custom.graphical.CustomRadioButton;
 import armameeldoparti.utils.common.custom.graphical.CustomScrollPane;
+import armameeldoparti.utils.common.custom.graphical.CustomSeparator;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import armameeldoparti.utils.common.custom.graphical.CustomTextField;
 import java.util.ArrayList;
@@ -22,8 +25,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -40,18 +45,24 @@ public class NamesInputView extends View {
   // ---------------------------------------- Private constants ---------------------------------
 
   private static final int TEXT_AREA_ROWS = 14;
-  private static final int TEXT_AREA_COLUMNS = 12;
+  private static final int TEXT_AREA_COLUMNS = 9;
 
   // ---------------------------------------- Private fields ------------------------------------
 
   private JButton mixButton;
+  private JButton backButton;
 
   private JCheckBox anchoragesCheckbox;
 
   private JComboBox<String> comboBox;
 
   private JPanel leftPanel;
+  private JPanel leftTopPanel;
+  private JPanel leftBottomPanel;
   private JPanel rightPanel;
+
+  private JRadioButton radioButtonByRatings;
+  private JRadioButton radioButtonRandom;
 
   private JTextArea textArea;
 
@@ -65,7 +76,9 @@ public class NamesInputView extends View {
   public NamesInputView() {
     super("Ingreso de jugadores", String.join(" ", Constants.MIG_LAYOUT_WRAP, "2"));
 
-    leftPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
+    leftPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP, Constants.MIG_LAYOUT_GROW));
+    leftTopPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
+    leftBottomPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
     rightPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
 
     initializeTextFieldsMap();
@@ -76,13 +89,22 @@ public class NamesInputView extends View {
 
   @Override
   protected void initializeInterface() {
+    leftPanel.add(
+        leftTopPanel,
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROWY,
+          Constants.MIG_LAYOUT_PUSHY
+        )
+    );
+    leftPanel.add(leftBottomPanel, Constants.MIG_LAYOUT_SOUTH);
     getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
     getMasterPanel().add(rightPanel, Constants.MIG_LAYOUT_EAST);
     addComboBox();
     addTextFields();
+    addRadioButtons();
+    addAnchoragesCheckbox();
     addTextArea();
     addButtons();
-    addAnchoragesCheckbox();
     add(getMasterPanel());
     pack();
   }
@@ -96,7 +118,7 @@ public class NamesInputView extends View {
         .mixButtonEvent(CommonFunctions.getComponentFromEvent(e))
     );
 
-    JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
+    backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
     backButton.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
         .backButtonEvent()
@@ -112,7 +134,8 @@ public class NamesInputView extends View {
    * Adds the combobox.
    */
   private void addComboBox() {
-    comboBox = new CustomComboBox<>(Constants.OPTIONS_POSITIONS_COMBOBOX.toArray(new String[0]));
+    comboBox = new CustomComboBox<>(Constants.OPTIONS_POSITIONS_COMBOBOX
+                                             .toArray(new String[0]));
 
     comboBox.addActionListener(e ->
         ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
@@ -123,7 +146,7 @@ public class NamesInputView extends View {
                                                )
     );
 
-    leftPanel.add(comboBox, Constants.MIG_LAYOUT_GROWX);
+    leftTopPanel.add(comboBox, Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -152,7 +175,7 @@ public class NamesInputView extends View {
         e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled())
     );
 
-    rightPanel.add(anchoragesCheckbox, Constants.MIG_LAYOUT_CENTER);
+    leftBottomPanel.add(anchoragesCheckbox, Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -214,7 +237,63 @@ public class NamesInputView extends View {
     }
   }
 
+  /**
+   * Adds the radio buttons to choose the players distribution method.
+   *
+   * <p>The "java:S1612" warning is suppressed because of how the suggested method reference deals
+   * with the triggered event.
+   *
+   * <p>When using lambda expressions, the event handler is called whenever the event is triggered.
+   * This means that the controller is retrieved only when the radio buttons are clicked, avoiding
+   * null-reference problems.
+   *
+   * <p>When using a method reference (::radioButtonEvent), a radioButtonEvent method reference is
+   * created when the view is being builded. This means that the controller should be retrieved when
+   * the method reference is created, and it could be before any radio button click event is
+   * triggered, meaning it could potentially cause null-reference problems since the view must be
+   * fully created before the controller can be created. This is method reference causes a cyclic
+   * dependence between the view and the controller.
+   *
+   * <p>The event handler could be written in this class, but for the sake of the MVC design pattern
+   * the controller should be the responsible for events handling.
+   */
+  @SuppressWarnings("java:S1612")
+  private void addRadioButtons() {
+    radioButtonRandom = new CustomRadioButton("Aleatoria");
+    radioButtonRandom.addItemListener(e ->
+        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
+        .radioButtonEvent(e)
+    );
+
+    radioButtonByRatings = new CustomRadioButton("Por puntajes");
+    radioButtonByRatings.addItemListener(e ->
+        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
+        .radioButtonEvent(e)
+    );
+
+    leftBottomPanel.add(
+        new CustomLabel("DISTRIBUCIÓN", SwingConstants.LEFT),
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROWX,
+          Constants.MIG_LAYOUT_PUSHX
+        )
+    );
+    leftBottomPanel.add(radioButtonRandom);
+    leftBottomPanel.add(radioButtonByRatings);
+    leftBottomPanel.add(
+        new CustomSeparator(),
+        CommonFunctions.buildMigLayoutConstraints(
+          Constants.MIG_LAYOUT_GROWX,
+          Constants.MIG_LAYOUT_PUSHX
+        )
+    );
+  }
+
   // ---------------------------------------- Getters -------------------------------------------
+
+  public JButton getBackButton() {
+    return backButton;
+  }
 
   public JButton getMixButton() {
     return mixButton;
@@ -232,8 +311,24 @@ public class NamesInputView extends View {
     return leftPanel;
   }
 
+  public JPanel getLeftTopPanel() {
+    return leftTopPanel;
+  }
+
+  public JPanel getLeftBottomPanel() {
+    return leftBottomPanel;
+  }
+
   public JPanel getRightPanel() {
     return rightPanel;
+  }
+
+  public JRadioButton getRadioButtonByRatings() {
+    return radioButtonByRatings;
+  }
+
+  public JRadioButton getRadioButtonRandom() {
+    return radioButtonRandom;
   }
 
   public JTextArea getTextArea() {
@@ -245,6 +340,10 @@ public class NamesInputView extends View {
   }
 
   // ---------------------------------------- Setters -------------------------------------------
+
+  public void setBackButton(JButton backButton) {
+    this.backButton = backButton;
+  }
 
   public void setMixButton(JButton mixButton) {
     this.mixButton = mixButton;
@@ -262,6 +361,14 @@ public class NamesInputView extends View {
     this.leftPanel = leftPanel;
   }
 
+  public void setLeftTopPanel(JPanel leftTopPanel) {
+    this.leftTopPanel = leftTopPanel;
+  }
+
+  public void setLeftBottomPanel(JPanel leftBottomPanel) {
+    this.leftBottomPanel = leftBottomPanel;
+  }
+
   public void setRightPanel(JPanel rightPanel) {
     this.rightPanel = rightPanel;
   }
@@ -272,5 +379,13 @@ public class NamesInputView extends View {
 
   public void setTextFieldsMap(Map<Position, List<JTextField>> textFieldsMap) {
     this.textFieldsMap = textFieldsMap;
+  }
+
+  public void setRadioButtonByRatings(JRadioButton radioButtonByRatings) {
+    this.radioButtonByRatings = radioButtonByRatings;
+  }
+
+  public void setRadioButtonRandom(JRadioButton radioButtonRandom) {
+    this.radioButtonRandom = radioButtonRandom;
   }
 }

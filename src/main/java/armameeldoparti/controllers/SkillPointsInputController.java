@@ -53,8 +53,8 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
   public void finishButtonEvent() {
     hideView();
 
-    getView().getSpinnersMap()
-             .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
+    view.getSpinnersMap()
+        .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
 
     ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).setUp();
 
@@ -89,8 +89,8 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    * Updates the players name labels.
    */
   public void updateNameLabels() {
-    Map<JSpinner, JLabel> labelsMap = getView().getLabelsMap();
-    Map<Player, JSpinner> spinnersMap = getView().getSpinnersMap();
+    Map<JSpinner, JLabel> labelsMap = view.getLabelsMap();
+    Map<Player, JSpinner> spinnersMap = view.getSpinnersMap();
 
     for (Position position : Position.values()) {
       for (Player player : CommonFields.getPlayersSets()
@@ -100,7 +100,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
       }
     }
 
-    getView().pack();
+    view.pack();
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -109,10 +109,10 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    * Sets 0 skill points to every player and resets every spinner value to the minimum skill point.
    */
   private void resetSkills() {
-    getView().getSpinnersMap()
-             .forEach((player, spinner) -> {
-               player.setSkillPoints(0);
-               spinner.setValue(Constants.SKILL_MIN);
-             });
+    view.getSpinnersMap()
+        .forEach((player, spinner) -> {
+          player.setSkillPoints(0);
+          spinner.setValue(Constants.SKILL_MIN);
+        });
   }
 }

@@ -1,12 +1,14 @@
 package armameeldoparti.utils.common.custom.graphical;
 
+import armameeldoparti.utils.common.Constants;
+import java.awt.Insets;
 import javax.swing.JTextArea;
 
 /**
  * Custom text area class.
  *
- * <p>This class is used to instantiate a custom text area that fits the overall program
- * aesthetics. It is supposed to be used along with a CustomScrollPane if a scrollbar is needed.
+ * <p>This class is used to instantiate a custom text area that fits the overall program aesthetics.
+ * It is supposed to be used along with a CustomScrollPane to ensure its correct display.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -37,6 +39,13 @@ public class CustomTextArea extends JTextArea {
     setUpGraphicalProperties();
   }
 
+  // ---------------------------------------- Public methods ------------------------------------
+
+  @Override
+  public Insets getInsets() {
+    return Constants.INSETS_GENERAL;
+  }
+
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
@@ -47,5 +56,6 @@ public class CustomTextArea extends JTextArea {
     setWrapStyleWord(true);
     setEditable(false);
     setOpaque(false);
+    setFocusable(false);
   }
 }

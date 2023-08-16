@@ -7,13 +7,13 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.NamesInputView;
 import java.awt.Component;
+import java.awt.event.ItemEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import javax.naming.InvalidNameException;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -49,14 +49,15 @@ public class NamesInputController extends Controller<NamesInputView> {
   public void showView() {
     updateTextFields(
         Objects.requireNonNull(
-          getView().getComboBox()
-                   .getSelectedItem(),
+          view.getComboBox()
+              .getSelectedItem(),
           Constants.MSG_ERROR_NULL_RESOURCE
         ).toString()
     );
     centerView();
     resetComboBox();
-    getView().setVisible(true);
+
+    view.setVisible(true);
   }
 
   /**
@@ -67,26 +68,30 @@ public class NamesInputController extends Controller<NamesInputView> {
     hideView();
     clearPlayersNames();
 
-    getView().getAnchoragesCheckbox()
-             .setSelected(false);
-    getView().getComboBox()
-             .setSelectedIndex(0);
-    getView().getComboBox()
-             .requestFocusInWindow();
-    getView().getTextArea()
-             .setText("");
-    getView().getMixButton()
-             .setEnabled(false);
+    view.getAnchoragesCheckbox()
+        .setSelected(false);
+    view.getComboBox()
+        .setSelectedIndex(0);
+    view.getComboBox()
+        .requestFocusInWindow();
+    view.getTextArea()
+        .setText("");
+    view.getMixButton()
+        .setEnabled(false);
+    view.getRadioButtonRandom()
+        .setSelected(false);
+    view.getRadioButtonByRatings()
+        .setSelected(false);
 
-    updateTextFields(getView().getComboBox()
-                              .getItemAt(0));
+    updateTextFields(view.getComboBox()
+                         .getItemAt(0));
   }
 
   /**
    * Resets the combobox to the initial state and gives it the view focus.
    */
   public void resetComboBox() {
-    JComboBox<String> comboBox = getView().getComboBox();
+    JComboBox<String> comboBox = view.getComboBox();
 
     comboBox.setSelectedIndex(0);
     comboBox.requestFocusInWindow();
@@ -117,24 +122,11 @@ public class NamesInputController extends Controller<NamesInputView> {
    *                        be displayed.
    */
   public void mixButtonEvent(Component parentComponent) {
-    int distribution = JOptionPane.showOptionDialog(
-        parentComponent,
-        "Seleccione el criterio de distribución de jugadores",
-        "Antes de continuar...",
-        JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.QUESTION_MESSAGE,
-        Constants.ICON_DIALOG,
-        Constants.OPTIONS_MIX.toArray(),
-        Constants.OPTIONS_MIX.get(0)
-    );
-
-    if (distribution == JOptionPane.CLOSED_OPTION) {
-      return;
-    }
-
     hideView();
 
-    CommonFields.setDistribution(distribution);
+    CommonFields.setDistribution(view.getRadioButtonRandom()
+                                     .isSelected() ? Constants.MIX_RANDOM
+                                                   : Constants.MIX_BY_SKILLS);
 
     if (CommonFields.isAnchoragesEnabled()) {
       ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
@@ -195,10 +187,7 @@ public class NamesInputController extends Controller<NamesInputView> {
               .setName(name);
 
     updateTextArea();
-
-    // The mix button is enabled only when every player has a valid non-empty name assigned
-    getView().getMixButton()
-             .setEnabled(!alreadyExists(""));
+    validateMixButtonEnable();
   }
 
   /**
@@ -212,7 +201,37 @@ public class NamesInputController extends Controller<NamesInputView> {
     updateTextFields(selectedOption);
   }
 
+  /**
+   * Radio buttons click event handler.
+   *
+   * <p>Since there can be only one distribution method at a time, if one radio button is selected,
+   * the other is unselected automatically. Then, if the conditions are met, the mix button is
+   * enabled.
+   *
+   * @param e Radio button click event.
+   */
+  public void radioButtonEvent(ItemEvent e) {
+    if (e.getStateChange() == ItemEvent.SELECTED) {
+      (e.getSource() == view.getRadioButtonRandom()
+                        ? view.getRadioButtonByRatings()
+                        : view.getRadioButtonRandom())
+                              .setSelected(false);
+    }
+
+    validateMixButtonEnable();
+  }
+
   // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * The mix button is enabled only when every condition needed to distribute the players is met.
+   *
+   * @see #readyToDistribute()
+   */
+  private void validateMixButtonEnable() {
+    view.getMixButton()
+        .setEnabled(readyToDistribute());
+  }
 
   /**
    * Updates the text displayed in the read-only text area.
@@ -225,8 +244,8 @@ public class NamesInputController extends Controller<NamesInputView> {
       private int counter;
     };
 
-    getView().getTextArea()
-             .setText("");
+    view.getTextArea()
+        .setText("");
 
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> value.stream()
@@ -236,15 +255,15 @@ public class NamesInputController extends Controller<NamesInputView> {
                                                 if (wrapperCounter.counter != 0
                                                     && Constants.PLAYERS_PER_TEAM * 2
                                                        - wrapperCounter.counter != 0) {
-                                                  getView().getTextArea()
-                                                           .append(System.lineSeparator());
+                                                  view.getTextArea()
+                                                      .append(System.lineSeparator());
                                                 }
 
                                                 wrapperCounter.counter++;
 
-                                                getView().getTextArea()
-                                                         .append(wrapperCounter.counter
-                                                                 + " - " + p.getName());
+                                                view.getTextArea()
+                                                    .append(wrapperCounter.counter + " - "
+                                                            + p.getName());
                                               }));
   }
 
@@ -254,38 +273,38 @@ public class NamesInputController extends Controller<NamesInputView> {
    * @param selectedOption Combobox selected option.
    */
   private void updateTextFields(String selectedOption) {
-    JPanel leftPanel = getView().getLeftPanel();
+    JPanel leftTopPanel = view.getLeftTopPanel();
 
-    // Removes the text fields from the view's left panel
-    getView().getTextFieldsMap()
-             .values()
-             .stream()
-             .flatMap(Collection::stream)
-             .filter(tf -> tf.getParent() == leftPanel)
-             .forEach(leftPanel::remove);
+    // Removes the text fields from the view's top left panel
+    view.getTextFieldsMap()
+        .values()
+        .stream()
+        .flatMap(Collection::stream)
+        .filter(tf -> tf.getParent() == leftTopPanel)
+        .forEach(leftTopPanel::remove);
 
-    getView().getTextFieldsMap()
-             .get(
-               CommonFunctions.getCorrespondingPosition(
-                 CommonFields.getPositionsMap(),
-                 selectedOption.toUpperCase()
-               )
-             )
-             .forEach(tf -> leftPanel.add(tf, Constants.MIG_LAYOUT_GROWX));
+    view.getTextFieldsMap()
+        .get(
+          CommonFunctions.getCorrespondingPosition(
+            CommonFields.getPositionsMap(),
+            selectedOption.toUpperCase()
+          )
+        )
+        .forEach(tf -> leftTopPanel.add(tf, Constants.MIG_LAYOUT_GROWX));
 
-    leftPanel.revalidate();
-    leftPanel.repaint();
+    leftTopPanel.revalidate();
+    leftTopPanel.repaint();
   }
 
   /**
    * Clears the players names and text fields.
    */
   private void clearPlayersNames() {
-    getView().getTextFieldsMap()
-             .values()
-             .stream()
-             .flatMap(List::stream)
-             .forEach(tf -> tf.setText(null));
+    view.getTextFieldsMap()
+        .values()
+        .stream()
+        .flatMap(List::stream)
+        .forEach(tf -> tf.setText(null));
 
     CommonFields.getPlayersSets()
                 .values()
@@ -308,6 +327,29 @@ public class NamesInputController extends Controller<NamesInputView> {
                        .flatMap(Collection::stream)
                        .anyMatch(p -> p.getName()
                                        .equals(name));
+  }
+
+
+  /**
+   * Checks if every player has a valid non-empty name assigned and the players distribution method
+   * has been chosen.
+   *
+   * @return Whether every condition needed to distribute the players is met or not.
+   */
+  private boolean readyToDistribute() {
+    return !alreadyExists("") && distributionMethodHasBeenChosen();
+  }
+
+  /**
+   * Checks if any players distribution method has been chosen.
+   *
+   * @return Whether the user has chosen a players distribution method or not.
+   */
+  private boolean distributionMethodHasBeenChosen() {
+    return view.getRadioButtonRandom()
+               .isSelected()
+           || view.getRadioButtonByRatings()
+                  .isSelected();
   }
 
   /**

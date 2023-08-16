@@ -5,11 +5,13 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
+import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.plaf.basic.BasicSpinnerUI;
+import javax.swing.text.DefaultCaret;
 
 /**
  * Custom spinner class.
@@ -42,10 +44,27 @@ public class CustomSpinner extends JSpinner {
    * Configures the graphical properties of the spinner in order to fit the program aesthetics.
    */
   private void setUpGraphicalProperties() {
-    ((DefaultEditor) getEditor()).getTextField()
-                                 .setEditable(false);
-    ((DefaultEditor) getEditor()).getTextField()
-                                 .setBackground(Constants.COLOR_GREEN_LIGHT_WHITE);
+    JFormattedTextField spinnerTextField = ((DefaultEditor) getEditor()).getTextField();
+
+    spinnerTextField.setEditable(false);
+    spinnerTextField.setCaret(
+      new DefaultCaret() {
+        @Override
+        public boolean isVisible() {
+          return false;
+        }
+
+        @Override
+        public void setSelectionVisible(boolean vis) {
+          // Selection should not be visible
+        }
+
+        @Override
+        public boolean isSelectionVisible() {
+          return false;
+        }
+      }
+    );
 
     setOpaque(false);
     setBorder(
@@ -68,7 +87,7 @@ public class CustomSpinner extends JSpinner {
 
         @Override
         public Insets getBorderInsets(Component c) {
-            return Constants.INSETS_GENERAL;
+          return Constants.INSETS_GENERAL;
         }
       }
     );

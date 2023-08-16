@@ -50,6 +50,14 @@ public final class Constants {
   private static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_FOCUSED = "cb_e_us_f.png";
   private static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_PRESSED = "cb_e_us_p.png";
   private static final String FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED = "cb_e_us_uf.png";
+  private static final String FILENAME_ICON_RB_DISABLED_SELECTED = "rb_d_s.png";
+  private static final String FILENAME_ICON_RB_DISABLED_UNSELECTED = "rb_d_us.png";
+  private static final String FILENAME_ICON_RB_ENABLED_SELECTED_FOCUSED = "rb_e_s_f.png";
+  private static final String FILENAME_ICON_RB_ENABLED_SELECTED_PRESSED = "rb_e_s_p.png";
+  private static final String FILENAME_ICON_RB_ENABLED_SELECTED_UNFOCUSED = "rb_e_s_uf.png";
+  private static final String FILENAME_ICON_RB_ENABLED_UNSELECTED_FOCUSED = "rb_e_us_f.png";
+  private static final String FILENAME_ICON_RB_ENABLED_UNSELECTED_PRESSED = "rb_e_us_p.png";
+  private static final String FILENAME_ICON_RB_ENABLED_UNSELECTED_UNFOCUSED = "rb_e_us_uf.png";
   private static final String FILENAME_ICON_MAIN = "main_icon.png";
   private static final String FILENAME_IMAGE_BACKGROUND = "bg.png";
   private static final String HEX_CODE_GREEN_DARK = "#29474a";
@@ -95,10 +103,13 @@ public final class Constants {
   public static final int MIN_PLAYERS_PER_ANCHORAGE = 2;
   public static final int MIX_BY_SKILLS = 1;
   public static final int MIX_RANDOM = 0;
+  public static final int ROUNDED_BORDER_ARC_COMBOBOX = 10;
   public static final int ROUNDED_BORDER_ARC_GENERAL = 30;
   public static final int ROUNDED_BORDER_ARC_SCROLLBAR = 20;
+  public static final int ROUNDED_BORDER_ARC_SEPARATOR = 4;
   public static final int ROUNDED_BORDER_ARC_SPINNER = 10;
   public static final int ROUNDED_BORDER_ARC_TABLE_CELLS = 15;
+  public static final int ROUNDED_BORDER_INSETS_COMBOBOX = 6;
   public static final int ROUNDED_BORDER_INSETS_GENERAL = 8;
   public static final int ROUNDED_BORDER_INSETS_SCROLLPANE = 18;
   public static final int SIZE_FONT_TITLE_LABEL = 40;
@@ -119,11 +130,15 @@ public final class Constants {
   public static final String MIG_LAYOUT_EAST = "east";
   public static final String MIG_LAYOUT_GROW = "grow";
   public static final String MIG_LAYOUT_GROWX = MIG_LAYOUT_GROW + "x";
+  public static final String MIG_LAYOUT_GROWY = MIG_LAYOUT_GROW + "y";
   public static final String MIG_LAYOUT_ALIGN_CENTER = MIG_LAYOUT_ALIGN + " center";
   public static final String MIG_LAYOUT_ALIGN_LEFT = MIG_LAYOUT_ALIGN + " left";
   public static final String MIG_LAYOUT_ALIGN_RIGHT = MIG_LAYOUT_ALIGN + " right";
+  public static final String MIG_LAYOUT_NORTH = "north";
   public static final String MIG_LAYOUT_PUSH = "push";
   public static final String MIG_LAYOUT_PUSHX = MIG_LAYOUT_PUSH + "x";
+  public static final String MIG_LAYOUT_PUSHY = MIG_LAYOUT_PUSH + "y";
+  public static final String MIG_LAYOUT_SOUTH = "south";
   public static final String MIG_LAYOUT_SPAN = "span";
   public static final String MIG_LAYOUT_SPAN2 = MIG_LAYOUT_SPAN + "2";
   public static final String MIG_LAYOUT_WEST = "west";
@@ -191,11 +206,42 @@ public final class Constants {
   public static final ImageIcon ICON_CB_E_US_UF = CommonFunctions.createImageIcon(
       FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED
   );
+  public static final ImageIcon ICON_RB_D_S = CommonFunctions.createImageIcon(
+      FILENAME_ICON_RB_DISABLED_SELECTED
+  );
+  public static final ImageIcon ICON_RB_D_US = CommonFunctions.createImageIcon(
+      FILENAME_ICON_RB_DISABLED_UNSELECTED
+  );
+  public static final ImageIcon ICON_RB_E_S_F = CommonFunctions.createImageIcon(
+      FILENAME_ICON_RB_ENABLED_SELECTED_FOCUSED
+  );
+  public static final ImageIcon ICON_RB_E_S_P = CommonFunctions.createImageIcon(
+      FILENAME_ICON_RB_ENABLED_SELECTED_PRESSED
+  );
+  public static final ImageIcon ICON_RB_E_S_UF = CommonFunctions.createImageIcon(
+      FILENAME_ICON_RB_ENABLED_SELECTED_UNFOCUSED
+  );
+  public static final ImageIcon ICON_RB_E_US_F = CommonFunctions.createImageIcon(
+      FILENAME_ICON_RB_ENABLED_UNSELECTED_FOCUSED
+  );
+  public static final ImageIcon ICON_RB_E_US_P = CommonFunctions.createImageIcon(
+      FILENAME_ICON_RB_ENABLED_UNSELECTED_PRESSED
+  );
+  public static final ImageIcon ICON_RB_E_US_UF = CommonFunctions.createImageIcon(
+      FILENAME_ICON_RB_ENABLED_UNSELECTED_UNFOCUSED
+  );
   public static final ImageIcon ICON_MAIN = CommonFunctions.createImageIcon(
       FILENAME_ICON_MAIN
   );
   public static final ImageIcon ICON_DIALOG = CommonFunctions.scaleImageIcon(
       ICON_MAIN, ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH
+  );
+
+  public static final Insets INSETS_COMBOBOX = new Insets(
+      Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
+      Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
+      Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
+      Constants.ROUNDED_BORDER_INSETS_COMBOBOX
   );
 
   public static final Insets INSETS_GENERAL = new Insets(

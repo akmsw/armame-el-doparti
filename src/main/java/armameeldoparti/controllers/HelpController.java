@@ -5,11 +5,13 @@ import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.HelpView;
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+import javax.swing.JTextArea;
 
 /**
  * Help view controller class.
@@ -76,11 +78,11 @@ public class HelpController extends Controller<HelpView> {
    */
   public void nextPageButtonEvent() {
     if (++currentPageNumber < TOTAL_HELP_PAGES - 1) {
-      getView().getPreviousPageButton()
-               .setEnabled(true);
+      view.getPreviousPageButton()
+          .setEnabled(true);
     } else {
-      getView().getNextPageButton()
-               .setEnabled(false);
+      view.getNextPageButton()
+          .setEnabled(false);
     }
 
     updatePage();
@@ -94,11 +96,11 @@ public class HelpController extends Controller<HelpView> {
    */
   public void previousPageButtonEvent() {
     if (--currentPageNumber > 0) {
-      getView().getNextPageButton()
-               .setEnabled(true);
+      view.getNextPageButton()
+          .setEnabled(true);
     } else {
-      getView().getPreviousPageButton()
-               .setEnabled(false);
+      view.getPreviousPageButton()
+          .setEnabled(false);
     }
 
     updatePage();
@@ -110,12 +112,13 @@ public class HelpController extends Controller<HelpView> {
    * <p>Finds the text file corresponding to the page number and displays its content.
    */
   public void updatePage() {
-    getView().getPageTitleTextField()
-             .setText(Constants.MAP_HELP_PAGES_FILES
-                               .get(currentPageNumber)
-                               .get(Constants.INDEX_HELP_PAGE_TITLE));
-    getView().getTextArea()
-             .setText("");
+    JTextArea textArea = view.getTextArea();
+
+    view.getPageTitleTextField()
+        .setText(Constants.MAP_HELP_PAGES_FILES
+                          .get(currentPageNumber)
+                          .get(Constants.INDEX_HELP_PAGE_TITLE));
+    textArea.setText("");
 
     updateLabel();
 
@@ -134,11 +137,10 @@ public class HelpController extends Controller<HelpView> {
           ),
           StandardCharsets.UTF_8)
     )) {
-      getView().getTextArea()
-               .read(reader, null);
+      textArea.read(reader, null);
+      textArea.setCaretPosition(0);
+      textArea.scrollRectToVisible(new Rectangle(0, 0, 1, 1));
     } catch (IOException e) {
-      e.printStackTrace();
-
       CommonFunctions.exitProgram(Error.INTERNAL_FILES_ERROR);
     }
   }
@@ -149,18 +151,18 @@ public class HelpController extends Controller<HelpView> {
    * Updates the reading progress label text.
    */
   private void updateLabel() {
-    getView().getPagesCounter()
-             .setText(currentPageNumber + 1 + "/" + TOTAL_HELP_PAGES);
+    view.getPagesCounter()
+        .setText(currentPageNumber + 1 + "/" + TOTAL_HELP_PAGES);
   }
 
   /**
    * Resets the navigation buttons to their initial state.
    */
   private void resetButtons() {
-    getView().getPreviousPageButton()
-             .setEnabled(false);
-    getView().getNextPageButton()
-             .setEnabled(true);
+    view.getPreviousPageButton()
+        .setEnabled(false);
+    view.getNextPageButton()
+        .setEnabled(true);
   }
 
   // ---------------------------------------- Getters -------------------------------------------

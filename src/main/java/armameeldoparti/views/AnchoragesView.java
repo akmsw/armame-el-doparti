@@ -35,6 +35,11 @@ import net.miginfocom.swing.MigLayout;
  */
 public class AnchoragesView extends View {
 
+  // ---------------------------------------- Private constants ---------------------------------
+
+  private static final int TEXT_AREA_ROWS = 10;
+  private static final int TEXT_AREA_COLUMNS = 9;
+
   // ---------------------------------------- Private fields ------------------------------------
 
   private JButton finishButton;
@@ -68,7 +73,7 @@ public class AnchoragesView extends View {
     leftPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP_2));
     rightPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
 
-    textArea = new CustomTextArea();
+    textArea = new CustomTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
     scrollPane = new CustomScrollPane(textArea);
 

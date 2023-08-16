@@ -68,6 +68,10 @@ public final class CommonFields {
     return positionsMap;
   }
 
+  /*
+   * The "java:S1452" warning is suppressed since the Java compiler can't know at runtime the type
+   * of the controlled view.
+   */
   @SuppressWarnings("java:S1452")
   public static Map<ProgramView, Controller<? extends View>> getControllerMap() {
     return controllerMap;

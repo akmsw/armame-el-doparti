@@ -52,10 +52,9 @@ public class CustomTextField extends JTextField {
         Constants.ROUNDED_BORDER_ARC_GENERAL,
         Constants.ROUNDED_BORDER_ARC_GENERAL
     );
+    g2.dispose();
 
     super.paintComponent(g);
-
-    g2.dispose();
   }
 
   @Override

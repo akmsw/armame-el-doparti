@@ -89,22 +89,19 @@ public class MainMenuView extends View {
         Constants.SIZE_FONT_TITLE_LABEL,
         Constants.PROGRAM_TITLE,
         Constants.MIG_LAYOUT_ALIGN_CENTER,
-        Constants.COLOR_GREEN_DARK,
-        null
+        Constants.COLOR_GREEN_DARK
     );
     addBackgroundLabel(
         Constants.SIZE_FONT_AUTHOR_LABEL,
         Constants.PROGRAM_AUTHOR,
         Constants.MIG_LAYOUT_ALIGN_CENTER,
-        Color.WHITE,
-        null
+        Color.WHITE
     );
     addBackgroundLabel(
         Constants.SIZE_FONT_VERSION_LABEL,
         Constants.PROGRAM_VERSION,
         Constants.MIG_LAYOUT_ALIGN_RIGHT,
-        Constants.COLOR_GREEN_DARK,
-        "Versión del programa"
+        Constants.COLOR_GREEN_DARK
     );
   }
 
@@ -119,25 +116,18 @@ public class MainMenuView extends View {
   }
 
   /**
-   * Creates a basic label for the main menu view that will be placed and centered in the
-   * background.
+   * Creates a basic label for the main menu view that will be placed in the background.
    *
    * @param fontSize    The font size for the label text.
    * @param text        The label text.
    * @param constraints The label MiG Layout constraints.
    * @param color       The color used for the label foreground.
-   * @param tooltip     Optional label tooltip.
    */
-  private void addBackgroundLabel(int fontSize,
-                                  String text,
-                                  String constraints,
-                                  Color color,
-                                  String tooltip) {
+  private void addBackgroundLabel(int fontSize, String text, String constraints, Color color) {
     JLabel label = new JLabel(text.toLowerCase());
 
     label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setForeground(color);
-    label.setToolTipText(tooltip);
     label.setFont(
       new Font(
         label.getFont()
