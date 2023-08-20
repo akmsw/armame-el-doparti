@@ -17,11 +17,11 @@ import net.miginfocom.swing.MigLayout;
  */
 public abstract class View extends JFrame {
 
-  // ------------------------------------------ Private fields ----------------------------------
+  // ---------------------------------------- Protected fields ----------------------------------
 
-  private String frameTitle;
+  protected String frameTitle;
 
-  private JPanel masterPanel;
+  protected JPanel masterPanel;
 
   // ---------------------------------------- Protected constructor -----------------------------
 
@@ -37,10 +37,8 @@ public abstract class View extends JFrame {
     setFrameTitle(frameTitle);
     setTitle(getFrameTitle());
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(
-        Constants.ICON_MAIN
-                 .getImage()
-    );
+    setIconImage(Constants.ICON_MAIN
+                          .getImage());
   }
 
   // ---------------------------------------- Abstract protected methods ------------------------

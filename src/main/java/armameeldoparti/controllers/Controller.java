@@ -73,15 +73,25 @@ public abstract class Controller<T extends View> {
    */
   protected abstract void resetView();
 
+  /**
+   * Sets up the view's GUI components initial state if needed.
+   */
+  protected abstract void setUpInitialState();
+
+  /**
+   * Sets up the view's GUI components event listeners.
+   */
+  protected abstract void setUpListeners();
+
   // ---------------------------------------- Getters -------------------------------------------
 
-  public T getView() {
+  protected T getView() {
     return view;
   }
 
   // ---------------------------------------- Setters -------------------------------------------
 
-  public void setView(T view) {
+  protected void setView(T view) {
     this.view = view;
   }
 }

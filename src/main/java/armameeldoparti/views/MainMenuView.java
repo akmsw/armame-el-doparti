@@ -1,7 +1,5 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.MainMenuController;
-import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomButton;
@@ -23,6 +21,13 @@ import net.miginfocom.layout.CC;
  */
 public class MainMenuView extends View {
 
+  // ---------------------------------------- Private fields ------------------------------------
+
+  JButton startButton;
+  JButton helpButton;
+  JButton contactButton;
+  JButton issuesButton;
+
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
@@ -39,43 +44,22 @@ public class MainMenuView extends View {
   protected void initializeInterface() {
     addBackground();
     addButtons();
-    add(getMasterPanel());
+    add(masterPanel);
     pack();
   }
 
   @Override
   protected void addButtons() {
-    JButton startButton = new CustomButton("Comenzar", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    startButton.addActionListener(e ->
-        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
-        .startButtonEvent()
-    );
+    startButton = new CustomButton("Comenzar", Constants.ROUNDED_BORDER_ARC_GENERAL);
+    helpButton = new CustomButton("Ayuda", Constants.ROUNDED_BORDER_ARC_GENERAL);
+    contactButton = new CustomButton("Contacto", Constants.ROUNDED_BORDER_ARC_GENERAL);
+    issuesButton = new CustomButton("Reportes y sugerencias", Constants.ROUNDED_BORDER_ARC_GENERAL);
 
-    JButton helpButton = new CustomButton("Ayuda", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    helpButton.addActionListener(e ->
-        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
-        .helpButtonEvent()
-    );
-
-    JButton contactButton = new CustomButton("Contacto", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    contactButton.addActionListener(e ->
-        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
-        .contactButtonEvent()
-    );
-
-    JButton issuesButton = new CustomButton(
-        "Reportes y sugerencias", Constants.ROUNDED_BORDER_ARC_GENERAL
-    );
-    issuesButton.addActionListener(e ->
-        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))
-        .issuesButtonEvent()
-    );
-
-    getMasterPanel().add(startButton, Constants.MIG_LAYOUT_GROWX);
-    getMasterPanel().add(helpButton, Constants.MIG_LAYOUT_GROWX);
-    getMasterPanel().add(contactButton, new CC().width("50%")
-                                                .split());
-    getMasterPanel().add(issuesButton, new CC().width("50%"));
+    masterPanel.add(startButton, Constants.MIG_LAYOUT_GROWX);
+    masterPanel.add(helpButton, Constants.MIG_LAYOUT_GROWX);
+    masterPanel.add(contactButton, new CC().width("50%")
+                                           .split());
+    masterPanel.add(issuesButton, new CC().width("50%"));
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -109,7 +93,7 @@ public class MainMenuView extends View {
    * Adds the background image to the panel.
    */
   private void addBackgroundImage() {
-    getMasterPanel().add(
+    masterPanel.add(
         new JLabel("", Constants.ICON_BACKGROUND, SwingConstants.CENTER),
         Constants.MIG_LAYOUT_GROWX
     );
@@ -137,6 +121,42 @@ public class MainMenuView extends View {
       )
     );
 
-    getMasterPanel().add(label, constraints);
+    masterPanel.add(label, constraints);
+  }
+
+  // ---------------------------------------- Getters -------------------------------------------
+
+  public JButton getStartButton() {
+    return startButton;
+  }
+
+  public JButton getHelpButton() {
+    return helpButton;
+  }
+
+  public JButton getContactButton() {
+    return contactButton;
+  }
+
+  public JButton getIssuesButton() {
+    return issuesButton;
+  }
+
+  // ---------------------------------------- Setters -------------------------------------------
+
+  public void setStartButton(JButton startButton) {
+    this.startButton = startButton;
+  }
+
+  public void setHelpButton(JButton helpButton) {
+    this.helpButton = helpButton;
+  }
+
+  public void setContactButton(JButton contactButton) {
+    this.contactButton = contactButton;
+  }
+
+  public void setIssuesButton(JButton issuesButton) {
+    this.issuesButton = issuesButton;
   }
 }

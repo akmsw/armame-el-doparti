@@ -1,7 +1,5 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.HelpController;
-import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomButton;
@@ -62,40 +60,27 @@ public class HelpView extends View {
     addTextArea();
     addPagesLabel();
     addButtons();
-    add(getMasterPanel());
+    add(masterPanel);
     pack();
   }
 
   @Override
   protected void addButtons() {
     previousPageButton = new CustomButton("Anterior", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    previousPageButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).previousPageButtonEvent()
-    );
-
     nextPageButton = new CustomButton("Siguiente", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    nextPageButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).nextPageButtonEvent()
-    );
-
     backButton = new CustomButton("Volver al menú principal", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    backButton.addActionListener(e ->
-        ((HelpController) CommonFunctions.getController(ProgramView.HELP)).backButtonEvent()
-    );
 
-    previousPageButton.setEnabled(false);
-
-    getMasterPanel().add(
+    masterPanel.add(
         previousPageButton,
         new CC().width("50%")
                 .split()
     );
-    getMasterPanel().add(
+    masterPanel.add(
         nextPageButton,
         new CC().width("50%")
                 .wrap()
     );
-    getMasterPanel().add(
+    masterPanel.add(
         backButton,
         CommonFunctions.buildMigLayoutConstraints(
           Constants.MIG_LAYOUT_GROWX,
@@ -112,7 +97,7 @@ public class HelpView extends View {
   private void addPageTitleTextField() {
     pageTitleTextField = new CustomLabel(SwingConstants.CENTER);
 
-    getMasterPanel().add(pageTitleTextField, Constants.MIG_LAYOUT_GROW);
+    masterPanel.add(pageTitleTextField, Constants.MIG_LAYOUT_GROW);
   }
 
   /**
@@ -121,7 +106,7 @@ public class HelpView extends View {
   private void addTextArea() {
     textArea = new CustomTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS);
 
-    getMasterPanel().add(new CustomScrollPane(textArea));
+    masterPanel.add(new CustomScrollPane(textArea));
   }
 
   /**
@@ -130,7 +115,7 @@ public class HelpView extends View {
   private void addPagesLabel() {
     pagesCounter = new CustomLabel(SwingConstants.CENTER);
 
-    getMasterPanel().add(pagesCounter, Constants.MIG_LAYOUT_GROWX);
+    masterPanel.add(pagesCounter, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------------------------------------- Getters -------------------------------------------

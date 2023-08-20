@@ -9,7 +9,6 @@ import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.AnchoragesView;
 import java.awt.Component;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
@@ -38,47 +37,30 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    */
   public AnchoragesController(AnchoragesView anchoragesView) {
     super(anchoragesView);
-
-    anchoragesAmount = 0;
-    anchoredPlayersAmount = 0;
-
+    setUpListeners();
+    setUpInitialState();
     toggleButtons();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Resets the controlled view to its default values.
-   *
-   * <p>Clears every anchorage made, updating the text area and the state of the buttons, and the
-   * checkboxes that were selected whose players were not anchored, are deselected.
-   */
-  @Override
-  public void resetView() {
-    clearCheckboxes();
-    clearAnchorages();
-    updateTextArea();
-    toggleButtons();
-  }
-
-  /**
    * Updates the checkboxes text with the players names.
    */
   public void updateCheckboxesText() {
-    Map<Position, List<JCheckBox>> checkboxesMap = view.getCheckboxesMap();
-
     for (Position position : Position.values()) {
       int positionSetSize = CommonFields.getPlayersSets()
                                         .get(position)
                                         .size();
 
       for (int checkboxIndex = 0; checkboxIndex < positionSetSize; checkboxIndex++) {
-        checkboxesMap.get(position)
-                     .get(checkboxIndex)
-                     .setText(CommonFields.getPlayersSets()
-                                          .get(position)
-                                          .get(checkboxIndex)
-                                          .getName());
+        view.getCheckboxesMap()
+            .get(position)
+            .get(checkboxIndex)
+            .setText(CommonFields.getPlayersSets()
+                                 .get(position)
+                                 .get(checkboxIndex)
+                                 .getName());
       }
     }
 
@@ -220,6 +202,54 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
     CommonFunctions.getController(ProgramView.NAMES_INPUT)
                    .showView();
+  }
+
+  // ---------------------------------------- Protected methods ---------------------------------
+
+  /**
+   * Resets the controlled view to its default values.
+   *
+   * <p>Clears every anchorage made, updating the text area and the state of the buttons, and the
+   * checkboxes that were selected whose players were not anchored, are deselected.
+   */
+  @Override
+  protected void resetView() {
+    clearCheckboxes();
+    clearAnchorages();
+    updateTextArea();
+    toggleButtons();
+  }
+
+  @Override
+  protected void setUpInitialState() {
+    anchoragesAmount = 0;
+    anchoredPlayersAmount = 0;
+
+    view.getFinishButton()
+        .setEnabled(false);
+  }
+
+  @Override
+  protected void setUpListeners() {
+    view.getFinishButton()
+        .addActionListener(e -> finishButtonEvent(CommonFunctions.getComponentFromEvent(e)));
+
+    view.getNewAnchorageButton()
+        .addActionListener(e -> newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e)));
+
+    view.getDeleteAnchorageButton()
+        .addActionListener(
+          e -> deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
+        );
+
+    view.getDeleteLastAnchorageButton()
+        .addActionListener(e -> deleteLastAnchorageButtonEvent());
+
+    view.getClearAnchoragesButton()
+        .addActionListener(e -> clearAnchoragesButtonEvent());
+
+    view.getBackButton()
+        .addActionListener(e -> backButtonEvent());
   }
 
   // ---------------------------------------- Private methods -----------------------------------

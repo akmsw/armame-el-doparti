@@ -31,18 +31,10 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   public SkillPointsInputController(SkillPointsInputView skillPointsInputView) {
     super(skillPointsInputView);
+    setUpListeners();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
-
-  /**
-   * Resets the controlled view to its default values and makes it invisible.
-   */
-  @Override
-  public void resetView() {
-    resetSkills();
-    hideView();
-  }
 
   /**
    * 'Finish' button event handler.
@@ -101,6 +93,34 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
     }
 
     view.pack();
+  }
+
+  // ---------------------------------------- Protected methods ---------------------------------
+
+  /**
+   * Resets the controlled view to its default values and makes it invisible.
+   */
+  @Override
+  protected void resetView() {
+    resetSkills();
+    hideView();
+  }
+
+  @Override
+  protected void setUpInitialState() {
+    // Body not needed in this particular controller
+  }
+
+  @Override
+  protected void setUpListeners() {
+    view.getBackButton()
+        .addActionListener(e -> backButtonEvent());
+
+    view.getFinishButton()
+        .addActionListener(e -> finishButtonEvent());
+
+    view.getResetSkillPointsButton()
+        .addActionListener(e -> resetSkillsButtonEvent());
   }
 
   // ---------------------------------------- Private methods -----------------------------------

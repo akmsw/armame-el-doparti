@@ -7,8 +7,12 @@ import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.views.View;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -88,6 +92,20 @@ public final class CommonFunctions {
                                              .contains(view.getLocation()))
                                .findFirst())
     );
+  }
+
+  /**
+   * Opens a new tab in the default web browser with the specified URL.
+   *
+   * @param link Destination URL.
+   */
+  public static void browserRedirect(String link) {
+    try {
+      Desktop.getDesktop()
+             .browse(new URI(link));
+    } catch (IOException | URISyntaxException e) {
+      CommonFunctions.exitProgram(Error.BROWSER_ERROR);
+    }
   }
 
   /**

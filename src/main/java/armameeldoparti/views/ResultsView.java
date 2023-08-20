@@ -1,7 +1,5 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.ResultsController;
-import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -22,6 +20,9 @@ public class ResultsView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
+  private JButton backButton;
+  private JButton remixButton;
+
   private JTable table;
 
   // ---------------------------------------- Constructor ---------------------------------------
@@ -31,6 +32,9 @@ public class ResultsView extends View {
    */
   public ResultsView() {
     super(getUpdatedFrameTitle(), Constants.MIG_LAYOUT_WRAP);
+
+    backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
+    remixButton = new CustomButton("Redistribuir", Constants.ROUNDED_BORDER_ARC_GENERAL);
   }
 
   // ---------------------------------------- Public methods ------------------------------------
@@ -38,34 +42,21 @@ public class ResultsView extends View {
   @Override
   public void initializeInterface() {
     setFrameTitle(getUpdatedFrameTitle());
-    setTitle(getFrameTitle());
+    setTitle(frameTitle);
     addTable();
     addButtons();
-    add(getMasterPanel());
+    add(masterPanel);
   }
 
   // ---------------------------------------- Protected methods ---------------------------------
 
   @Override
   protected void addButtons() {
-    JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    backButton.addActionListener(e ->
-        ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))
-        .backButtonEvent()
-    );
-
     if (CommonFields.getDistribution() == Constants.MIX_RANDOM) {
-      JButton remixButton = new CustomButton("Redistribuir", Constants.ROUNDED_BORDER_ARC_GENERAL);
-
-      remixButton.addActionListener(
-          e -> ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS))
-               .remixButtonEvent()
-      );
-
-      getMasterPanel().add(remixButton, Constants.MIG_LAYOUT_GROWX);
+      masterPanel.add(remixButton, Constants.MIG_LAYOUT_GROWX);
     }
 
-    getMasterPanel().add(backButton, Constants.MIG_LAYOUT_GROWX);
+    masterPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -93,7 +84,7 @@ public class ResultsView extends View {
     table.setColumnSelectionAllowed(false);
     table.setEnabled(false);
 
-    getMasterPanel().add(
+    masterPanel.add(
         table,
         CommonFunctions.buildMigLayoutConstraints(
           Constants.MIG_LAYOUT_PUSH,
@@ -106,11 +97,27 @@ public class ResultsView extends View {
 
   // ---------------------------------------- Getters -------------------------------------------
 
+  public JButton getBackButton() {
+    return backButton;
+  }
+
+  public JButton getRemixButton() {
+    return remixButton;
+  }
+
   public JTable getTable() {
     return table;
   }
 
   // ---------------------------------------- Setters -------------------------------------------
+
+  public void setBackButton(JButton backButton) {
+    this.backButton = backButton;
+  }
+
+  public void setRemixButton(JButton remixButton) {
+    this.remixButton = remixButton;
+  }
 
   public void setTable(JTable table) {
     this.table = table;

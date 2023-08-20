@@ -1,8 +1,6 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.NamesInputController;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -19,8 +17,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import javax.naming.InvalidNameException;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -97,32 +93,24 @@ public class NamesInputView extends View {
         )
     );
     leftPanel.add(leftBottomPanel, Constants.MIG_LAYOUT_SOUTH);
-    getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    getMasterPanel().add(rightPanel, Constants.MIG_LAYOUT_EAST);
+
+    masterPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    masterPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
+
     addComboBox();
     addTextFields();
     addRadioButtons();
     addAnchoragesCheckbox();
     addTextArea();
     addButtons();
-    add(getMasterPanel());
+    add(masterPanel);
     pack();
   }
 
   @Override
   protected void addButtons() {
     mixButton = new CustomButton("Distribuir", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    mixButton.setEnabled(false);
-    mixButton.addActionListener(e ->
-        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
-        .mixButtonEvent(CommonFunctions.getComponentFromEvent(e))
-    );
-
     backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    backButton.addActionListener(e ->
-        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
-        .backButtonEvent()
-    );
 
     rightPanel.add(mixButton, Constants.MIG_LAYOUT_GROW);
     rightPanel.add(backButton, Constants.MIG_LAYOUT_GROW);
@@ -136,15 +124,6 @@ public class NamesInputView extends View {
   private void addComboBox() {
     comboBox = new CustomComboBox<>(Constants.OPTIONS_POSITIONS_COMBOBOX
                                              .toArray(new String[0]));
-
-    comboBox.addActionListener(e ->
-        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
-                                               .comboBoxEvent(
-                                                 (String) Objects.requireNonNull(
-                                                   ((JComboBox<?>) e.getSource()).getSelectedItem()
-                                                 )
-                                               )
-    );
 
     leftTopPanel.add(comboBox, Constants.MIG_LAYOUT_GROWX);
   }
@@ -171,10 +150,6 @@ public class NamesInputView extends View {
   private void addAnchoragesCheckbox() {
     anchoragesCheckbox = new CustomCheckBox("Anclar jugadores");
 
-    anchoragesCheckbox.addActionListener(
-        e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled())
-    );
-
     leftBottomPanel.add(anchoragesCheckbox, Constants.MIG_LAYOUT_GROWX);
   }
 
@@ -187,41 +162,8 @@ public class NamesInputView extends View {
                                                .get(position) * 2;
 
       for (int i = 0; i < totalPlayersInPosition; i++) {
-        JTextField tf = new CustomTextField();
-
-        tf.addActionListener(e -> {
-              /*
-               * If the entered text is both a valid string and name, it will be applied to the
-               * corresponding player. If not, an error message will be shown and the text field
-               * will be reset to the player name.
-               */
-              try {
-                ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
-                                                       .textFieldEvent(textFieldsMap.get(position)
-                                                                                    .indexOf(tf),
-                                                                       CommonFields.getPlayersSets()
-                                                                                   .get(position),
-                                                                       tf.getText());
-              } catch (IllegalArgumentException | InvalidNameException ex) {
-                CommonFunctions.showErrorMessage(
-                    ex instanceof IllegalArgumentException ? Constants.MSG_ERROR_INVALID_STRING
-                                                           : Constants.MSG_ERROR_INVALID_NAME,
-                    CommonFunctions.getComponentFromEvent(e)
-                );
-
-                tf.setText(
-                    CommonFields.getPlayersSets()
-                                .get(position)
-                                .get(textFieldsMap.get(position)
-                                                  .indexOf(tf))
-                                .getName()
-                );
-              }
-            }
-        );
-
         textFieldsMap.get(position)
-                     .add(tf);
+                     .add(new CustomTextField());
       }
     }
   }
@@ -240,9 +182,6 @@ public class NamesInputView extends View {
   /**
    * Adds the radio buttons to choose the players distribution method.
    *
-   * <p>The "java:S1612" warning is suppressed because of how the suggested method reference deals
-   * with the triggered event.
-   *
    * <p>When using lambda expressions, the event handler is called whenever the event is triggered.
    * This means that the controller is retrieved only when the radio buttons are clicked, avoiding
    * null-reference problems.
@@ -257,19 +196,9 @@ public class NamesInputView extends View {
    * <p>The event handler could be written in this class, but for the sake of the MVC design pattern
    * the controller should be the responsible for events handling.
    */
-  @SuppressWarnings("java:S1612")
   private void addRadioButtons() {
     radioButtonRandom = new CustomRadioButton("Aleatoria");
-    radioButtonRandom.addItemListener(e ->
-        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
-        .radioButtonEvent(e)
-    );
-
     radioButtonByRatings = new CustomRadioButton("Por puntajes");
-    radioButtonByRatings.addItemListener(e ->
-        ((NamesInputController) CommonFunctions.getController(ProgramView.NAMES_INPUT))
-        .radioButtonEvent(e)
-    );
 
     leftBottomPanel.add(
         new CustomLabel("DISTRIBUCIÓN", SwingConstants.LEFT),

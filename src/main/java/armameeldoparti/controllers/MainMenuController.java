@@ -1,14 +1,9 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.models.Error;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.MainMenuView;
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * Main menu view controller class.
@@ -30,15 +25,14 @@ public class MainMenuController extends Controller<MainMenuView> {
    */
   public MainMenuController(MainMenuView mainMenuView) {
     super(mainMenuView);
+    setUpListeners();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
 
   @Override
   public void showView() {
-    centerView();
-
-    view.setVisible(true);
+    super.showView();
   }
 
   /**
@@ -73,7 +67,7 @@ public class MainMenuController extends Controller<MainMenuView> {
    * <p>Opens the browser on the contact URL.
    */
   public void contactButtonEvent() {
-    browserRedirect(Constants.URL_CONTACT);
+    CommonFunctions.browserRedirect(Constants.URL_CONTACT);
   }
 
   /**
@@ -82,7 +76,7 @@ public class MainMenuController extends Controller<MainMenuView> {
    * <p>Opens the browser on the issues URL.
    */
   public void issuesButtonEvent() {
-    browserRedirect(Constants.URL_ISSUES);
+    CommonFunctions.browserRedirect(Constants.URL_ISSUES);
   }
 
   // ---------------------------------------- Protected methods ---------------------------------
@@ -92,19 +86,23 @@ public class MainMenuController extends Controller<MainMenuView> {
     // Body not needed in this particular controller
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  @Override
+  protected void setUpInitialState() {
+    // Body not needed in this particular controller
+  }
 
-  /**
-   * Opens a new tab in the default web browser with the specified URL.
-   *
-   * @param link Destination URL.
-   */
-  private void browserRedirect(String link) {
-    try {
-      Desktop.getDesktop()
-             .browse(new URI(link));
-    } catch (IOException | URISyntaxException e) {
-      CommonFunctions.exitProgram(Error.BROWSER_ERROR);
-    }
+  @Override
+  protected void setUpListeners() {
+    view.getStartButton()
+        .addActionListener(e -> startButtonEvent());
+
+    view.getHelpButton()
+        .addActionListener(e -> helpButtonEvent());
+
+    view.getContactButton()
+        .addActionListener(e -> contactButtonEvent());
+
+    view.getIssuesButton()
+        .addActionListener(e -> issuesButtonEvent());
   }
 }

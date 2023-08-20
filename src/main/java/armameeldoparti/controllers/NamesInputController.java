@@ -36,56 +36,11 @@ public class NamesInputController extends Controller<NamesInputView> {
    */
   public NamesInputController(NamesInputView namesInputView) {
     super(namesInputView);
+    setUpListeners();
+    setUpInitialState();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
-
-  /**
-   * Makes the controlled view visible.
-   *
-   * <p>Updates the view state according to the combobox initial state, and makes it visible.
-   */
-  @Override
-  public void showView() {
-    updateTextFields(
-        Objects.requireNonNull(
-          view.getComboBox()
-              .getSelectedItem(),
-          Constants.MSG_ERROR_NULL_RESOURCE
-        ).toString()
-    );
-    centerView();
-    resetComboBox();
-
-    view.setVisible(true);
-  }
-
-  /**
-   * Resets the controlled view to its default values and makes it invisible.
-   */
-  @Override
-  public void resetView() {
-    hideView();
-    clearPlayersNames();
-
-    view.getAnchoragesCheckbox()
-        .setSelected(false);
-    view.getComboBox()
-        .setSelectedIndex(0);
-    view.getComboBox()
-        .requestFocusInWindow();
-    view.getTextArea()
-        .setText("");
-    view.getMixButton()
-        .setEnabled(false);
-    view.getRadioButtonRandom()
-        .setSelected(false);
-    view.getRadioButtonByRatings()
-        .setSelected(false);
-
-    updateTextFields(view.getComboBox()
-                         .getItemAt(0));
-  }
 
   /**
    * Resets the combobox to the initial state and gives it the view focus.
@@ -219,6 +174,117 @@ public class NamesInputController extends Controller<NamesInputView> {
     }
 
     validateMixButtonEnable();
+  }
+
+  // ---------------------------------------- Protected methods ---------------------------------
+
+  @Override
+  protected void resetView() {
+    hideView();
+    clearPlayersNames();
+
+    view.getAnchoragesCheckbox()
+        .setSelected(false);
+    view.getComboBox()
+        .setSelectedIndex(0);
+    view.getComboBox()
+        .requestFocusInWindow();
+    view.getTextArea()
+        .setText("");
+    view.getMixButton()
+        .setEnabled(false);
+    view.getRadioButtonRandom()
+        .setSelected(false);
+    view.getRadioButtonByRatings()
+        .setSelected(false);
+
+    updateTextFields(view.getComboBox()
+                         .getItemAt(0));
+  }
+
+  @Override
+  protected void setUpInitialState() {
+    view.getMixButton()
+        .setEnabled(false);
+  }
+
+  @Override
+  protected void setUpListeners() {
+    view.getMixButton()
+        .addActionListener(e -> mixButtonEvent(view));
+
+    view.getBackButton()
+        .addActionListener(e -> backButtonEvent());
+
+    view.getRadioButtonRandom()
+        .addItemListener(this::radioButtonEvent);
+
+    view.getRadioButtonByRatings()
+        .addItemListener(this::radioButtonEvent);
+
+    view.getComboBox()
+        .addActionListener(
+          e -> comboBoxEvent(
+            (String) Objects.requireNonNull(((JComboBox<?>) e.getSource()).getSelectedItem())
+          )
+        );
+
+    view.getAnchoragesCheckbox()
+        .addActionListener(
+          e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled())
+        );
+
+
+    view.getTextFieldsMap()
+        .forEach((p, tfs) ->
+          tfs.forEach(tf ->
+            tf.addActionListener(e -> {
+                /*
+                 * If the entered text is both a valid string and name, it will be applied to the
+                 * corresponding player. If not, an error message will be shown and the text field
+                 * will be reset to the player name.
+                 */
+                try {
+                  textFieldEvent(tfs.indexOf(tf),
+                                 CommonFields.getPlayersSets()
+                                             .get(p),
+                                 tf.getText());
+                } catch (IllegalArgumentException | InvalidNameException ex) {
+                  CommonFunctions.showErrorMessage(
+                      ex instanceof IllegalArgumentException ? Constants.MSG_ERROR_INVALID_STRING
+                                                             : Constants.MSG_ERROR_INVALID_NAME,
+                      CommonFunctions.getComponentFromEvent(e)
+                  );
+
+                  tf.setText(CommonFields.getPlayersSets()
+                                         .get(p)
+                                         .get(tfs.indexOf(tf))
+                                         .getName());
+                }
+              }
+            )
+          )
+        );
+  }
+
+  /**
+   * Makes the controlled view visible.
+   *
+   * <p>Updates the view state according to the combobox initial state, and makes it visible.
+   */
+  @Override
+  protected void showView() {
+    updateTextFields(
+        Objects.requireNonNull(
+          view.getComboBox()
+              .getSelectedItem(),
+          Constants.MSG_ERROR_NULL_RESOURCE
+        ).toString()
+    );
+    centerView();
+    resetComboBox();
+
+    view.setVisible(true);
   }
 
   // ---------------------------------------- Private methods -----------------------------------

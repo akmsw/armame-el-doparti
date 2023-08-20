@@ -1,9 +1,7 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.AnchoragesController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -42,11 +40,12 @@ public class AnchoragesView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private JButton finishButton;
-  private JButton newAnchorageButton;
+  private JButton backButton;
+  private JButton clearAnchoragesButton;
   private JButton deleteAnchorageButton;
   private JButton deleteLastAnchorageButton;
-  private JButton clearAnchoragesButton;
+  private JButton finishButton;
+  private JButton newAnchorageButton;
 
   private JPanel leftPanel;
   private JPanel rightPanel;
@@ -102,58 +101,29 @@ public class AnchoragesView extends View {
                   );
                 });
 
-    getMasterPanel().add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    getMasterPanel().add(rightPanel, Constants.MIG_LAYOUT_EAST);
+    masterPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    masterPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
+
     addTextArea();
     addButtons();
-    add(getMasterPanel());
+    add(masterPanel);
     pack();
   }
 
   @Override
   protected void addButtons() {
-    finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    finishButton.setEnabled(false);
-    finishButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .finishButtonEvent(CommonFunctions.getComponentFromEvent(e))
-    );
-
-    newAnchorageButton = new CustomButton("Anclar", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    newAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
-    );
-
-    deleteAnchorageButton = new CustomButton(
-      "Borrar un anclaje", Constants.ROUNDED_BORDER_ARC_GENERAL
-    );
-    deleteAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
-    );
-
-    deleteLastAnchorageButton = new CustomButton(
-      "Borrar último anclaje", Constants.ROUNDED_BORDER_ARC_GENERAL
-    );
-    deleteLastAnchorageButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .deleteLastAnchorageButtonEvent()
-    );
-
+    backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
     clearAnchoragesButton = new CustomButton(
       "Limpiar anclajes", Constants.ROUNDED_BORDER_ARC_GENERAL
     );
-    clearAnchoragesButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .clearAnchoragesButtonEvent()
+    deleteAnchorageButton = new CustomButton(
+      "Borrar un anclaje", Constants.ROUNDED_BORDER_ARC_GENERAL
     );
-
-    JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    backButton.addActionListener(e ->
-        ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-        .backButtonEvent()
+    deleteLastAnchorageButton = new CustomButton(
+      "Borrar último anclaje", Constants.ROUNDED_BORDER_ARC_GENERAL
     );
+    finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);
+    newAnchorageButton = new CustomButton("Anclar", Constants.ROUNDED_BORDER_ARC_GENERAL);
 
     anchorageButtons.add(finishButton);
     anchorageButtons.add(newAnchorageButton);
@@ -235,12 +205,12 @@ public class AnchoragesView extends View {
 
   // ---------------------------------------- Getters -------------------------------------------
 
-  public JButton getFinishButton() {
-    return finishButton;
+  public JButton getBackButton() {
+    return backButton;
   }
 
-  public JButton getNewAnchorageButton() {
-    return newAnchorageButton;
+  public JButton getClearAnchoragesButton() {
+    return clearAnchoragesButton;
   }
 
   public JButton getDeleteAnchorageButton() {
@@ -251,8 +221,12 @@ public class AnchoragesView extends View {
     return deleteLastAnchorageButton;
   }
 
-  public JButton getClearAnchoragesButton() {
-    return clearAnchoragesButton;
+  public JButton getFinishButton() {
+    return finishButton;
+  }
+
+  public JButton getNewAnchorageButton() {
+    return newAnchorageButton;
   }
 
   public JPanel getLeftPanel() {
@@ -281,12 +255,12 @@ public class AnchoragesView extends View {
 
   // ---------------------------------------- Setters -------------------------------------------
 
-  public void setFinishButton(JButton finishButton) {
-    this.finishButton = finishButton;
+  public void setBackButton(JButton backButton) {
+    this.backButton = backButton;
   }
 
-  public void setNewAnchorageButton(JButton newAnchorageButton) {
-    this.newAnchorageButton = newAnchorageButton;
+  public void setClearAnchoragesButton(JButton clearAnchoragesButton) {
+    this.clearAnchoragesButton = clearAnchoragesButton;
   }
 
   public void setDeleteAnchorageButton(JButton deleteAnchorageButton) {
@@ -297,8 +271,12 @@ public class AnchoragesView extends View {
     this.deleteLastAnchorageButton = deleteLastAnchorageButton;
   }
 
-  public void setClearAnchoragesButton(JButton clearAnchoragesButton) {
-    this.clearAnchoragesButton = clearAnchoragesButton;
+  public void setFinishButton(JButton finishButton) {
+    this.finishButton = finishButton;
+  }
+
+  public void setNewAnchorageButton(JButton newAnchorageButton) {
+    this.newAnchorageButton = newAnchorageButton;
   }
 
   public void setLeftPanel(JPanel leftPanel) {

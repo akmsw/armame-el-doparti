@@ -42,19 +42,11 @@ public class HelpController extends Controller<HelpView> {
    */
   public HelpController(HelpView helpView) {
     super(helpView);
-
-    currentPageNumber = 0;
+    setUpListeners();
+    setUpInitialState();
   }
 
   // ---------------------------------------- Public methods ------------------------------------
-
-  @Override
-  public void resetView() {
-    currentPageNumber = 0;
-
-    updatePage();
-    resetButtons();
-  }
 
   /**
    * 'Back' button event handler.
@@ -143,6 +135,36 @@ public class HelpController extends Controller<HelpView> {
     } catch (IOException e) {
       CommonFunctions.exitProgram(Error.INTERNAL_FILES_ERROR);
     }
+  }
+
+  // ---------------------------------------- Protected methods ---------------------------------
+
+  @Override
+  protected void resetView() {
+    currentPageNumber = 0;
+
+    updatePage();
+    resetButtons();
+  }
+
+  @Override
+  protected void setUpInitialState() {
+    currentPageNumber = 0;
+
+    view.getPreviousPageButton()
+        .setEnabled(false);
+  }
+
+  @Override
+  protected void setUpListeners() {
+    view.getPreviousPageButton()
+        .addActionListener(e -> previousPageButtonEvent());
+
+    view.getNextPageButton()
+        .addActionListener(e -> nextPageButtonEvent());
+
+    view.getBackButton()
+        .addActionListener(e -> backButtonEvent());
   }
 
   // ---------------------------------------- Private methods -----------------------------------

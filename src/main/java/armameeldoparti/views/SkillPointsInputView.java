@@ -1,9 +1,7 @@
 package armameeldoparti.views;
 
-import armameeldoparti.controllers.SkillPointsInputController;
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
-import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
@@ -32,6 +30,10 @@ public class SkillPointsInputView extends View {
 
   // ---------------------------------------- Private fields ------------------------------------
 
+  private JButton backButton;
+  private JButton finishButton;
+  private JButton resetSkillPointsButton;
+
   private transient Map<JSpinner, JLabel> labelsMap;
   private transient Map<Player, JSpinner> spinnersMap;
 
@@ -55,7 +57,7 @@ public class SkillPointsInputView extends View {
   public void initializeInterface() {
     addSpinners();
     addButtons();
-    add(getMasterPanel());
+    add(masterPanel);
     pack();
   }
 
@@ -63,41 +65,27 @@ public class SkillPointsInputView extends View {
 
   @Override
   protected void addButtons() {
-    JButton finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    finishButton.addActionListener(e ->
-        ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
-        .finishButtonEvent()
-    );
-
-    JButton resetSkillPointsButton = new CustomButton(
+    backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
+    finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);
+    resetSkillPointsButton = new CustomButton(
         "Reiniciar puntuaciones", Constants.ROUNDED_BORDER_ARC_GENERAL
     );
-    resetSkillPointsButton.addActionListener(e ->
-        ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
-        .resetSkillsButtonEvent()
-    );
 
-    JButton backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    backButton.addActionListener(e ->
-        ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
-        .backButtonEvent()
-    );
-
-    getMasterPanel().add(
+    masterPanel.add(
         finishButton,
         CommonFunctions.buildMigLayoutConstraints(
           Constants.MIG_LAYOUT_GROW,
           Constants.MIG_LAYOUT_SPAN
         )
     );
-    getMasterPanel().add(
+    masterPanel.add(
         resetSkillPointsButton,
         CommonFunctions.buildMigLayoutConstraints(
           Constants.MIG_LAYOUT_GROW,
           Constants.MIG_LAYOUT_SPAN
         )
     );
-    getMasterPanel().add(
+    masterPanel.add(
         backButton,
         CommonFunctions.buildMigLayoutConstraints(
           Constants.MIG_LAYOUT_GROW,
@@ -113,7 +101,7 @@ public class SkillPointsInputView extends View {
    */
   private void addSpinners() {
     for (Position position : Position.values()) {
-      getMasterPanel().add(
+      masterPanel.add(
           new CustomLabel(
             CommonFields.getPositionsMap()
                         .get(position),
@@ -140,22 +128,32 @@ public class SkillPointsInputView extends View {
             )
         );
 
-        JLabel nameLabel = new JLabel(
-            currentSet.get(playerIndex)
-                      .getName()
-        );
+        JLabel nameLabel = new JLabel(currentSet.get(playerIndex)
+                                                .getName());
 
         spinnersMap.put(currentSet.get(playerIndex), spinner);
 
         labelsMap.put(spinner, nameLabel);
 
-        getMasterPanel().add(nameLabel, Constants.MIG_LAYOUT_PUSHX);
-        getMasterPanel().add(spinner, playerIndex % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
+        masterPanel.add(nameLabel, Constants.MIG_LAYOUT_PUSHX);
+        masterPanel.add(spinner, playerIndex % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
       }
     }
   }
 
   // ---------------------------------------- Getters -------------------------------------------
+
+  public JButton getBackButton() {
+    return backButton;
+  }
+
+  public JButton getFinishButton() {
+    return finishButton;
+  }
+
+  public JButton getResetSkillPointsButton() {
+    return resetSkillPointsButton;
+  }
 
   public Map<JSpinner, JLabel> getLabelsMap() {
     return labelsMap;
@@ -166,6 +164,18 @@ public class SkillPointsInputView extends View {
   }
 
   // ---------------------------------------- Setters -------------------------------------------
+
+  public void setBackButton(JButton backButton) {
+    this.backButton = backButton;
+  }
+
+  public void setFinishButton(JButton finishButton) {
+    this.finishButton = finishButton;
+  }
+
+  public void setResetSkillPointsButton(JButton resetSkillPointsButton) {
+    this.resetSkillPointsButton = resetSkillPointsButton;
+  }
 
   public void setLabelsMap(Map<JSpinner, JLabel> labelsMap) {
     this.labelsMap = labelsMap;

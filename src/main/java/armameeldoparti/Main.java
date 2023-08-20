@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
@@ -62,7 +63,7 @@ public final class Main {
    * Starts the program by initializing the fields needed along with the program's graphical
    * properties, and making the main menu view visible.
    *
-   * @param args Program arguments (unused).
+   * @param args Program arguments (not used).
    */
   public static void main(String[] args) {
     // Establishes the main monitor as the active monitor by default
@@ -87,7 +88,9 @@ public final class Main {
     populatePlayersSets();
     setUpControllers();
 
-    ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU)).showView();
+    SwingUtilities.invokeLater(
+        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))::showView
+    );
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -114,7 +117,7 @@ public final class Main {
   /**
    * Gets the number of players for each position per team using regular expressions.
    *
-   * <p>{@code [CLMFG].+>.+}: Retrieves the lines that start with C, L, M, F, or W, followed by at
+   * <p>{@code [CLMFG].+>.+}: Retrieves the lines that start with C, L, M, F, or G, followed by at
    * least one '>' character (these are the lines that matters in the .pda file).
    *
    * <p>{@code (?!(?<=X)\\d).}: Gets the part of the line that is not a number that we are
