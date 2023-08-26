@@ -7,9 +7,10 @@ import armameeldoparti.models.Team;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * Random distribution class.
@@ -52,47 +53,38 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    Player chosenPlayer;
-
     shuffleTeamNumbers(teams.size());
 
+    Map<Position, List<Player>> playersSets = CommonFields.getPlayersSets();
+    Map<Position, List<Player>> randomTeam1PlayersMap = teams.get(randomTeam1)
+                                                             .getTeamPlayers();
+    Map<Position, List<Player>> randomTeam2PlayersMap = teams.get(randomTeam2)
+                                                             .getTeamPlayers();
+
     for (Position position : Position.values()) {
-      List<Player> playersSet = CommonFields.getPlayersSets()
-                                            .get(position);
+      List<Player> playersAtPosition = playersSets.get(position);
 
-      int halfPlayersInSet = playersSet.size() / 2;
+      Collections.shuffle(playersAtPosition);
 
-      for (int i = 0; i < halfPlayersInSet; i++) {
-        chosenPlayer = playersSet.get(
-          playersSet.indexOf(
-            getRandomUnassignedPlayer(
-              playersSet.stream()
-                        .filter(p -> p.getTeamNumber() == 0)
-                        .collect(Collectors.toList())
-            )
-          )
-        );
-
-        chosenPlayer.setTeamNumber(randomTeam1 + 1);
-
-        teams.get(randomTeam1)
-             .getTeamPlayers()
-             .get(chosenPlayer.getPosition())
-             .add(chosenPlayer);
-      }
-
-      // Remaining unassigned players
-      playersSet.stream()
-                .filter(p -> p.getTeamNumber() == 0)
-                .forEach(p -> {
-                  p.setTeamNumber(randomTeam2 + 1);
-
-                  teams.get(randomTeam2)
-                       .getTeamPlayers()
-                       .get(p.getPosition())
-                       .add(p);
-                });
+      randomTeam1PlayersMap.get(position)
+                           .addAll(playersAtPosition.subList(0, playersAtPosition.size() / 2));
     }
+
+    randomTeam1PlayersMap.values()
+                         .stream()
+                         .flatMap(List::stream)
+                         .forEach(p -> p.setTeamNumber(randomTeam1 + 1));
+
+    playersSets.values()
+               .stream()
+               .flatMap(List::stream)
+               .filter(player -> player.getTeamNumber() == 0)
+               .forEach(player -> {
+                 randomTeam2PlayersMap.get(player.getPosition())
+                                      .add(player);
+
+                 player.setTeamNumber(randomTeam2 + 1);
+               });
 
     return teams;
   }
@@ -255,16 +247,5 @@ public class RandomMixer implements PlayersMixer {
                             .count()
            > CommonFields.getPlayersAmountMap()
                          .get(position);
-  }
-
-  /**
-   * Gets a random player from a list containing players that have not been assigned a team yet.
-   *
-   * @param unassignedPlayersList List containing players without any team assigned yet.
-   *
-   * @return A random player that has not been assigned a team yet.
-   */
-  private Player getRandomUnassignedPlayer(List<Player> unassignedPlayersList) {
-    return unassignedPlayersList.get(randomGenerator.nextInt(unassignedPlayersList.size()));
   }
 }
