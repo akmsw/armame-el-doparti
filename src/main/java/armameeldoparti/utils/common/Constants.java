@@ -40,7 +40,7 @@ public final class Constants {
   private static final String FILENAME_HELP_PAGE_4 = "helpAnchorages.hlp";
   private static final String FILENAME_HELP_PAGE_5 = "helpScores.hlp";
   private static final String FILENAME_HELP_PAGE_6 = "helpRandomMix.hlp";
-  private static final String FILENAME_HELP_PAGE_7 = "helpBySkillsMix.hlp";
+  private static final String FILENAME_HELP_PAGE_7 = "helpBySkillPointsMix.hlp";
   private static final String FILENAME_HELP_PAGE_8 = "helpContact.hlp";
   private static final String FILENAME_ICON_CB_DISABLED_SELECTED = "cb_d_s.png";
   private static final String FILENAME_ICON_CB_DISABLED_UNSELECTED = "cb_d_us.png";
@@ -101,7 +101,7 @@ public final class Constants {
   public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
   public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;
   public static final int MIN_PLAYERS_PER_ANCHORAGE = 2;
-  public static final int MIX_BY_SKILLS = 1;
+  public static final int MIX_BY_SKILL_POINTS = 1;
   public static final int MIX_RANDOM = 0;
   public static final int ROUNDED_BORDER_ARC_COMBOBOX = 10;
   public static final int ROUNDED_BORDER_ARC_GENERAL = 30;

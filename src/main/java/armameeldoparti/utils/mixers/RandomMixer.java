@@ -46,9 +46,9 @@ public class RandomMixer implements PlayersMixer {
    * Distributes the players randomly without considering anchorages.
    *
    * <p>Half of the players of each players-set are randomly assigned a team number. The rest of the
-   * players in the group without team (team == 0) are assigned the opposing team number.
+   * players are assigned to the opposing team number.
    *
-   * @param teams List that contains the two teams.
+   * @param teams Teams where to distribute the players.
    *
    * @return The updated teams with the players distributed randomly without considering anchorages.
    */
@@ -170,15 +170,15 @@ public class RandomMixer implements PlayersMixer {
     boolean isRandomTeam2Available = validationPredicate.test(teams.get(randomTeam2));
 
     if (isRandomTeam1Available && isRandomTeam2Available) {
-        return randomGenerator.nextInt(teams.size());
+      return randomGenerator.nextInt(teams.size());
     }
 
     if (isRandomTeam1Available) {
-        return randomTeam1;
+      return randomTeam1;
     }
 
     if (isRandomTeam2Available) {
-        return randomTeam2;
+      return randomTeam2;
     }
 
     return -1;

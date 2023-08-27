@@ -81,7 +81,7 @@ public class NamesInputController extends Controller<NamesInputView> {
 
     CommonFields.setDistribution(view.getRadioButtonRandom()
                                      .isSelected() ? Constants.MIX_RANDOM
-                                                   : Constants.MIX_BY_SKILLS);
+                                                   : Constants.MIX_BY_SKILL_POINTS);
 
     if (CommonFields.isAnchoragesEnabled()) {
       ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
@@ -168,7 +168,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   public void radioButtonEvent(ItemEvent e) {
     if (e.getStateChange() == ItemEvent.SELECTED) {
       (e.getSource() == view.getRadioButtonRandom()
-                        ? view.getRadioButtonByRatings()
+                        ? view.getRadioButtonBySkillPoints()
                         : view.getRadioButtonRandom())
                               .setSelected(false);
     }
@@ -195,7 +195,7 @@ public class NamesInputController extends Controller<NamesInputView> {
         .setEnabled(false);
     view.getRadioButtonRandom()
         .setSelected(false);
-    view.getRadioButtonByRatings()
+    view.getRadioButtonBySkillPoints()
         .setSelected(false);
 
     updateTextFields(view.getComboBox()
@@ -219,7 +219,7 @@ public class NamesInputController extends Controller<NamesInputView> {
     view.getRadioButtonRandom()
         .addItemListener(this::radioButtonEvent);
 
-    view.getRadioButtonByRatings()
+    view.getRadioButtonBySkillPoints()
         .addItemListener(this::radioButtonEvent);
 
     view.getComboBox()
@@ -414,7 +414,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   private boolean distributionMethodHasBeenChosen() {
     return view.getRadioButtonRandom()
                .isSelected()
-           || view.getRadioButtonByRatings()
+           || view.getRadioButtonBySkillPoints()
                   .isSelected();
   }
 

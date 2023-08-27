@@ -8,7 +8,7 @@ import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomTable;
-import armameeldoparti.utils.mixers.BySkillsMixer;
+import armameeldoparti.utils.mixers.BySkillPointsMixer;
 import armameeldoparti.utils.mixers.RandomMixer;
 import armameeldoparti.views.ResultsView;
 import java.awt.Color;
@@ -41,7 +41,7 @@ public class ResultsController extends Controller<ResultsView> {
 
   // ---------------------------------------- Private fields ------------------------------------
 
-  private BySkillsMixer bySkillsMixer;
+  private BySkillPointsMixer bySkillPointsMixer;
 
   private RandomMixer randomMixer;
 
@@ -62,7 +62,7 @@ public class ResultsController extends Controller<ResultsView> {
   public ResultsController(ResultsView resultsView) {
     super(resultsView);
 
-    bySkillsMixer = new BySkillsMixer();
+    bySkillPointsMixer = new BySkillPointsMixer();
 
     randomMixer = new RandomMixer();
 
@@ -83,7 +83,7 @@ public class ResultsController extends Controller<ResultsView> {
   public void setUp() {
     teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM
                                                ? randomMix(Arrays.asList(team1, team2))
-                                               : bySkillsMix(Arrays.asList(team1, team2)));
+                                               : bySkillPointsMix(Arrays.asList(team1, team2)));
 
     view.setTable(
       new CustomTable(
@@ -168,7 +168,7 @@ public class ResultsController extends Controller<ResultsView> {
         }
     );
 
-    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
+    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
       for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
         table.setValueAt(
             teams.get(teamIndex)
@@ -204,9 +204,9 @@ public class ResultsController extends Controller<ResultsView> {
    *
    * @return The updated teams with the players distributed.
    */
-  public List<Team> bySkillsMix(List<Team> teams) {
-    return CommonFields.isAnchoragesEnabled() ? bySkillsMixer.withAnchorages(teams)
-                                              : bySkillsMixer.withoutAnchorages(teams);
+  public List<Team> bySkillPointsMix(List<Team> teams) {
+    return CommonFields.isAnchoragesEnabled() ? bySkillPointsMixer.withAnchorages(teams)
+                                              : bySkillPointsMixer.withoutAnchorages(teams);
   }
 
   // ---------------------------------------- Protected methods ---------------------------------
@@ -280,7 +280,7 @@ public class ResultsController extends Controller<ResultsView> {
       }
     }
 
-    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
+    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
       for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
         table.setValueAt(
             teamIndex == 0 ? CommonFields.getPositionsMap()
@@ -339,9 +339,9 @@ public class ResultsController extends Controller<ResultsView> {
                 myTable, value, isSelected, hasFocus, row, column
             );
 
-            boolean byScoresMixFlag = CommonFields.getDistribution() == Constants.MIX_BY_SKILLS
-                                      && row == view.getTable()
-                                                    .getRowCount() - 1;
+            boolean mixBySkill = CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS
+                                 && row == view.getTable()
+                                               .getRowCount() - 1;
 
             c.setOpaque(false);
             c.setBorder(
@@ -358,7 +358,7 @@ public class ResultsController extends Controller<ResultsView> {
             }
 
             if (column == 0) {
-              if (byScoresMixFlag) {
+              if (mixBySkill) {
                 c.setBackground(Constants.COLOR_GREEN_MEDIUM);
                 c.setForeground(Color.WHITE);
 
@@ -375,7 +375,7 @@ public class ResultsController extends Controller<ResultsView> {
               return c;
             }
 
-            if (byScoresMixFlag) {
+            if (mixBySkill) {
               c.setBackground(Constants.COLOR_GREEN_MEDIUM);
               c.setForeground(Color.WHITE);
 

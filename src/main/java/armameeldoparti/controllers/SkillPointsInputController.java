@@ -25,7 +25,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Builds the skills input view controller.
+   * Builds the skill points input view controller.
    *
    * @param skillPointsInputView View to control.
    */
@@ -60,8 +60,8 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    * <p>Sets 0 skill points to every player and resets every spinner value to the minimum skill
    * point.
    */
-  public void resetSkillsButtonEvent() {
-    resetSkills();
+  public void resetSkillPointsButtonEvent() {
+    resetSkillPoints();
   }
 
   /**
@@ -102,7 +102,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   @Override
   protected void resetView() {
-    resetSkills();
+    resetSkillPoints();
     hideView();
   }
 
@@ -120,7 +120,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
         .addActionListener(e -> finishButtonEvent());
 
     view.getResetSkillPointsButton()
-        .addActionListener(e -> resetSkillsButtonEvent());
+        .addActionListener(e -> resetSkillPointsButtonEvent());
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -128,7 +128,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
   /**
    * Sets 0 skill points to every player and resets every spinner value to the minimum skill point.
    */
-  private void resetSkills() {
+  private void resetSkillPoints() {
     view.getSpinnersMap()
         .forEach((player, spinner) -> {
           player.setSkillPoints(0);

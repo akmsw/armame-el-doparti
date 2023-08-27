@@ -57,7 +57,7 @@ public class NamesInputView extends View {
   private JPanel leftBottomPanel;
   private JPanel rightPanel;
 
-  private JRadioButton radioButtonByRatings;
+  private JRadioButton radioButtonBySkillPoints;
   private JRadioButton radioButtonRandom;
 
   private JTextArea textArea;
@@ -198,7 +198,7 @@ public class NamesInputView extends View {
    */
   private void addRadioButtons() {
     radioButtonRandom = new CustomRadioButton("Aleatoria");
-    radioButtonByRatings = new CustomRadioButton("Por puntajes");
+    radioButtonBySkillPoints = new CustomRadioButton("Por puntajes");
 
     leftBottomPanel.add(
         new CustomLabel("DISTRIBUCIÓN", SwingConstants.LEFT),
@@ -208,7 +208,7 @@ public class NamesInputView extends View {
         )
     );
     leftBottomPanel.add(radioButtonRandom);
-    leftBottomPanel.add(radioButtonByRatings);
+    leftBottomPanel.add(radioButtonBySkillPoints);
     leftBottomPanel.add(
         new CustomSeparator(),
         CommonFunctions.buildMigLayoutConstraints(
@@ -252,8 +252,8 @@ public class NamesInputView extends View {
     return rightPanel;
   }
 
-  public JRadioButton getRadioButtonByRatings() {
-    return radioButtonByRatings;
+  public JRadioButton getRadioButtonBySkillPoints() {
+    return radioButtonBySkillPoints;
   }
 
   public JRadioButton getRadioButtonRandom() {
@@ -310,8 +310,8 @@ public class NamesInputView extends View {
     this.textFieldsMap = textFieldsMap;
   }
 
-  public void setRadioButtonByRatings(JRadioButton radioButtonByRatings) {
-    this.radioButtonByRatings = radioButtonByRatings;
+  public void setRadioButtonBySkillPoints(JRadioButton radioButtonBySkillPoints) {
+    this.radioButtonBySkillPoints = radioButtonBySkillPoints;
   }
 
   public void setRadioButtonRandom(JRadioButton radioButtonRandom) {

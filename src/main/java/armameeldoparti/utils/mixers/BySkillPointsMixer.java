@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * By-skill distribution class.
+ * By-skill-points distribution class.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -22,21 +22,21 @@ import java.util.stream.Collectors;
  *
  * @since 3.0
  */
-public class BySkillsMixer implements PlayersMixer {
+public class BySkillPointsMixer implements PlayersMixer {
 
   // ---------------------------------------- Constructor ---------------------------------------
 
   /**
-   * Builds the by-skill players distributor.
+   * Builds the by-skill-points players distributor.
    */
-  public BySkillsMixer() {
+  public BySkillPointsMixer() {
     // Body not needed
   }
 
   // ---------------------------------------- Public methods ----------------------------------
 
   /**
-   * Distributes the players by their skills without considering anchorages.
+   * Distributes the players by their skill points without considering anchorages.
    *
    * <p>Positions are traversed in reverse order to achieve the fairer distribution.
    *
@@ -91,7 +91,7 @@ public class BySkillsMixer implements PlayersMixer {
   }
 
   /**
-   * Distributes the players by their skills considering anchorages.
+   * Distributes the players by their skill points considering anchorages.
    *
    * <p>First, the anchored players are grouped in different lists by their anchorage number, and
    * they are distributed as fair as possible starting with the sets with most anchored players in

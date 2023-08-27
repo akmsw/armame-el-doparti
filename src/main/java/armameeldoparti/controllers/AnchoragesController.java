@@ -442,7 +442,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     hideView();
     clearCheckboxes();
 
-    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILLS) {
+    if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
       ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
       .updateNameLabels();
 
