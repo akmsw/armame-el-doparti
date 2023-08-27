@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * Random distribution class.
@@ -106,60 +107,82 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
+    List<List<Player>> anchorages = CommonFunctions.getAnchoredPlayers();
 
-    for (List<Player> aps : anchoredPlayers) {
-      shuffleTeamNumbers(teams.size());
+    for (List<Player> anchorage : anchorages) {
+      int teamNumber = getAvailableTeam(teams, team -> anchorageCanBeAdded(team, anchorage));
 
-      int teamNumber = -1;
-
-      if (anchorageCanBeAdded(teams.get(randomTeam1), aps)) {
-        teamNumber = randomTeam1;
-      } else if (anchorageCanBeAdded(teams.get(randomTeam2), aps)) {
-        teamNumber = randomTeam2;
-      } else {
+      if (teamNumber == -1) {
         CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
       }
 
-      for (Player p : aps) {
-        p.setTeamNumber(teamNumber + 1);
+      Map<Position, List<Player>> randomTeamPlayersMap = teams.get(teamNumber)
+                                                              .getTeamPlayers();
 
-        teams.get(teamNumber)
-             .getTeamPlayers()
-             .get(p.getPosition())
-             .add(p);
+      for (Player player : anchorage) {
+        player.setTeamNumber(teamNumber + 1);
+
+        randomTeamPlayersMap.get(player.getPosition())
+                            .add(player);
       }
     }
 
+    // Remaining (not anchored) players without an assigned team
     CommonFields.getPlayersSets()
                 .values()
                 .stream()
                 .flatMap(List::stream)
-                .filter(p -> p.getTeamNumber() == 0)
-                .forEach(p -> {
-                  shuffleTeamNumbers(teams.size());
+                .filter(player -> player.getTeamNumber() == 0)
+                .forEach(player -> {
+                  int teamNumber = getAvailableTeam(teams, team -> playerCanBeAdded(team, player));
 
-                  int teamNumber = randomTeam1;
-
-                  if (teams.get(teamNumber)
-                           .isPositionFull(p.getPosition())
-                      || teams.get(teamNumber)
-                              .getPlayersCount() + 1 > Constants.PLAYERS_PER_TEAM) {
-                    teamNumber = randomTeam2;
+                  if (teamNumber == -1) {
+                    CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
                   }
 
-                  p.setTeamNumber(teamNumber + 1);
+                  player.setTeamNumber(teamNumber + 1);
 
                   teams.get(teamNumber)
                        .getTeamPlayers()
-                       .get(p.getPosition())
-                       .add(p);
+                       .get(player.getPosition())
+                       .add(player);
                 });
 
     return teams;
   }
 
   // ---------------------------------------- Private methods -----------------------------------
+
+  /**
+   * Checks which team a given entity can be added to.
+   *
+   * @param teams               The possible teams where to add the entity.
+   * @param validationPredicate The predicate that will validate if the entity can be added to a
+   *                            team, or not.
+   *
+   * @return The only available team index, or a random team index if the entity can be added in
+   *         every team.
+   */
+  private int getAvailableTeam(List<Team> teams, Predicate<Team> validationPredicate) {
+    shuffleTeamNumbers(teams.size());
+
+    boolean isRandomTeam1Available = validationPredicate.test(teams.get(randomTeam1));
+    boolean isRandomTeam2Available = validationPredicate.test(teams.get(randomTeam2));
+
+    if (isRandomTeam1Available && isRandomTeam2Available) {
+        return randomGenerator.nextInt(teams.size());
+    }
+
+    if (isRandomTeam1Available) {
+        return randomTeam1;
+    }
+
+    if (isRandomTeam2Available) {
+        return randomTeam2;
+    }
+
+    return -1;
+  }
 
   /**
    * Randomly shuffles the team numbers.
@@ -172,12 +195,25 @@ public class RandomMixer implements PlayersMixer {
   }
 
   /**
+   * Checks if the given player position in the given team is already complete and, therefore, if
+   * the player can be added to it.
+   *
+   * @param team   Team where the player should be added.
+   * @param player The players to add.
+   *
+   * @return If a player can be added to a team.
+   */
+  private boolean playerCanBeAdded(Team team, Player player) {
+    return !team.isPositionFull(player.getPosition());
+  }
+
+  /**
    * Checks if a set of anchored players can be added to a team.
    *
-   * <p>It checks if any of the positions of the anchored players in the destination team is already
-   * complete, and it checks if adding them does not exceed the number of players allowed per
-   * position per team. This is done in order to avoid more than half of the registered players of
-   * the same position remaining on the same team.
+   * <p>First, checks if any of the positions of the anchored players in the destination team is
+   * already complete. If not, checks if adding them does not exceed the number of players allowed
+   * per position per team. This is done in order to avoid more than half of the registered players
+   * of the same position remaining on the same team.
    *
    * @param team            Team where the anchored players should be added.
    * @param anchoredPlayers List containing the players with the same anchorage number.
