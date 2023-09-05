@@ -92,12 +92,12 @@ public class AnchoragesView extends View {
   @Override
   protected void initializeInterface() {
     CommonFields.getPlayersSets()
-                .forEach((key, value) -> {
-                  fillCheckboxesSet(value, checkboxesMap.get(key));
+                .forEach((position, playersSet) -> {
+                  fillCheckboxesSet(playersSet, checkboxesMap.get(position));
                   addCheckboxesSet(
-                      checkboxesMap.get(key),
+                      checkboxesMap.get(position),
                       CommonFields.getPositionsMap()
-                                  .get(key)
+                                  .get(position)
                   );
                 });
 
@@ -175,7 +175,7 @@ public class AnchoragesView extends View {
    * @param cbSet      Check boxes set to fill.
    */
   private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
-    playersSet.forEach(p -> cbSet.add(new CustomCheckBox(p.getName())));
+    playersSet.forEach(player -> cbSet.add(new CustomCheckBox(player.getName())));
   }
 
   /**
@@ -193,8 +193,8 @@ public class AnchoragesView extends View {
         )
     );
 
-    cbSet.forEach(cb -> leftPanel.add(
-        cb,
+    cbSet.forEach(checkbox -> leftPanel.add(
+        checkbox,
         CommonFunctions.buildMigLayoutConstraints(
           Constants.MIG_LAYOUT_ALIGN_LEFT,
           Constants.MIG_LAYOUT_PUSHX

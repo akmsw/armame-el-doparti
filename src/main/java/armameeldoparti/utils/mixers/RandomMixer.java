@@ -74,7 +74,7 @@ public class RandomMixer implements PlayersMixer {
     randomTeam1PlayersMap.values()
                          .stream()
                          .flatMap(List::stream)
-                         .forEach(p -> p.setTeamNumber(randomTeam1 + 1));
+                         .forEach(player -> player.setTeamNumber(randomTeam1 + 1));
 
     playersSets.values()
                .stream()
@@ -101,7 +101,7 @@ public class RandomMixer implements PlayersMixer {
    * <p>Then, the players that are not anchored are distributed randomly. They will be added to a
    * team only if the players per position or the players per team amounts are not exceeded.
    *
-   * @param teams List that contains the two teams.
+   * @param teams Teams where to distribute the players.
    *
    * @return The updated teams with the players distributed randomly considering anchorages.
    */
@@ -252,12 +252,12 @@ public class RandomMixer implements PlayersMixer {
   private boolean anchorageOverflowsAnyPositionSet(Team team, List<Player> anchoredPlayers) {
     return anchoredPlayers.stream()
                           .anyMatch(
-                            p -> team.isPositionFull(p.getPosition())
-                                 || anchorageOverflowsPositionSet(
-                                      team,
-                                      anchoredPlayers,
-                                      p.getPosition()
-                                    )
+                            player -> team.isPositionFull(player.getPosition())
+                                      || anchorageOverflowsPositionSet(
+                                           team,
+                                           anchoredPlayers,
+                                           player.getPosition()
+                                         )
                           );
   }
 
@@ -279,7 +279,7 @@ public class RandomMixer implements PlayersMixer {
                .get(position)
                .size()
            + anchoredPlayers.stream()
-                            .filter(ap -> ap.getPosition() == position)
+                            .filter(player -> player.getPosition() == position)
                             .count()
            > CommonFields.getPlayersAmountMap()
                          .get(position);

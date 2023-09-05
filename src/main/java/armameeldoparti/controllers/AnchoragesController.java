@@ -265,10 +265,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     view.getCheckboxesMap()
         .values()
         .stream()
-        .filter(
-          cbs -> cbs.stream()
-                    .anyMatch(JCheckBox::isSelected)
-        )
+        .filter(checkboxesSet -> checkboxesSet.stream()
+                                              .anyMatch(JCheckBox::isSelected))
         .forEach(this::setAnchorages);
 
     anchoredPlayersAmount = (int) CommonFields.getPlayersSets()
@@ -299,15 +297,13 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
       CommonFields.getPlayersSets()
                   .forEach((key, value) -> value.stream()
-                                                .filter(
-                                                  p -> p.getAnchorageNumber()
-                                                       == wrapper.anchorageNumber
-                                                )
+                                                .filter(player -> player.getAnchorageNumber()
+                                                                  == wrapper.anchorageNumber)
                                                 .forEach(
-                                                  p -> {
+                                                  player -> {
                                                     view.getTextArea()
                                                         .append(
-                                                          wrapper.counter + ". " + p.getName()
+                                                          wrapper.counter + ". " + player.getName()
                                                           + System.lineSeparator()
                                                         );
 
@@ -329,7 +325,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    */
   private void toggleButtons() {
     view.getAnchorageButtons()
-        .forEach(b -> b.setEnabled(false));
+        .forEach(button -> button.setEnabled(false));
 
     if (anchoragesAmount == 1) {
       view.getFinishButton()
@@ -340,7 +336,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
           .setEnabled(true);
     } else if (anchoragesAmount > 1) {
       view.getAnchorageButtons()
-          .forEach(b -> b.setEnabled(true));
+          .forEach(button -> button.setEnabled(true));
     }
 
     if (Constants.MAX_ANCHORED_PLAYERS - anchoredPlayersAmount < 2) {
@@ -350,7 +346,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
           .values()
           .stream()
           .flatMap(List::stream)
-          .forEach(cb -> cb.setEnabled(!cb.isEnabled()));
+          .forEach(checkbox -> checkbox.setEnabled(!checkbox.isEnabled()));
     } else {
       view.getNewAnchorageButton()
           .setEnabled(true);
@@ -358,8 +354,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
           .values()
           .stream()
           .flatMap(List::stream)
-          .filter(cb -> !cb.isEnabled() && !cb.isSelected())
-          .forEach(cb -> cb.setEnabled(true));
+          .filter(checkbox -> !checkbox.isEnabled() && !checkbox.isSelected())
+          .forEach(checkbox -> checkbox.setEnabled(true));
     }
   }
 
@@ -379,7 +375,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    *
    * <p>The players that have the specified anchorage, now will have anchorage number 0. If the
    * anchorage number to delete is not the last one, then the remaining players (from the chosen
-   * anchor + 1 to anchoragesAmount) will have their anchorage number decreased by 1.
+   * anchorage + 1 to anchoragesAmount) will have their anchorage number decreased by 1.
    *
    * @param anchorageToDelete Anchorage number to delete.
    */
@@ -412,20 +408,20 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                 .values()
                 .stream()
                 .flatMap(List::stream)
-                .filter(p -> p.getAnchorageNumber() == target)
-                .forEach(p -> {
-                  p.setAnchorageNumber(replacement);
+                .filter(player -> player.getAnchorageNumber() == target)
+                .forEach(player -> {
+                  player.setAnchorageNumber(replacement);
 
                   if (replacement == 0) {
-                    p.setAnchored(false);
+                    player.setAnchored(false);
 
                     CommonFunctions.retrieveOptional(
                       view.getCheckboxesMap()
                           .values()
                           .stream()
                           .flatMap(List::stream)
-                          .filter(cb -> cb.getText()
-                                          .equals(p.getName()))
+                          .filter(checkbox -> checkbox.getText()
+                                                      .equals(player.getName()))
                           .findFirst()
                     ).setVisible(true);
 
@@ -467,23 +463,23 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                 .get(CommonFunctions.getCorrespondingPosition(view.getCheckboxesMap(), cbSet))
                 .stream()
                 .filter(
-                  p -> cbSet.stream()
-                            .filter(JCheckBox::isSelected)
-                            .anyMatch(
-                              cb -> cb.getText()
-                                      .equals(p.getName())
-                            )
+                  player -> cbSet.stream()
+                                 .filter(JCheckBox::isSelected)
+                                 .anyMatch(
+                                   checkbox -> checkbox.getText()
+                                                       .equals(player.getName())
+                                 )
                 )
-                .forEach(p -> {
-                  p.setAnchorageNumber(anchoragesAmount);
-                  p.setAnchored(true);
+                .forEach(player -> {
+                  player.setAnchorageNumber(anchoragesAmount);
+                  player.setAnchored(true);
                 });
 
     cbSet.stream()
          .filter(JCheckBox::isSelected)
-         .forEach(cb -> {
-           cb.setVisible(false);
-           cb.setSelected(false);
+         .forEach(checkbox -> {
+           checkbox.setVisible(false);
+           checkbox.setSelected(false);
          });
   }
 
@@ -495,8 +491,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
         .values()
         .stream()
         .flatMap(List::stream)
-        .filter(cb -> cb.isSelected() && cb.isVisible())
-        .forEach(cb -> cb.setSelected(false));
+        .filter(checkbox -> checkbox.isSelected() && checkbox.isVisible())
+        .forEach(checkbox -> checkbox.setSelected(false));
   }
 
   /**
@@ -521,11 +517,9 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     return view.getCheckboxesMap()
                .values()
                .stream()
-               .noneMatch(
-                 cbs -> cbs.stream()
-                           .filter(JCheckBox::isSelected)
-                           .count() > cbs.size() / 2
-               );
+               .noneMatch(checkboxesSet -> checkboxesSet.stream()
+                                                        .filter(JCheckBox::isSelected)
+                                                        .count() > checkboxesSet.size() / 2);
   }
 
   /**

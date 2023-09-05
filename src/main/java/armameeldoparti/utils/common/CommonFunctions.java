@@ -87,9 +87,9 @@ public final class CommonFunctions {
     CommonFields.setActiveMonitor(
         retrieveOptional(Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
                                                           .getScreenDevices())
-                               .filter(s -> s.getDefaultConfiguration()
-                                             .getBounds()
-                                             .contains(view.getLocation()))
+                               .filter(screen -> screen.getDefaultConfiguration()
+                                                       .getBounds()
+                                                       .contains(view.getLocation()))
                                .findFirst())
     );
   }

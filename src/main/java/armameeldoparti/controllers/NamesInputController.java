@@ -236,19 +236,19 @@ public class NamesInputController extends Controller<NamesInputView> {
 
 
     view.getTextFieldsMap()
-        .forEach((p, tfs) ->
-          tfs.forEach(tf ->
-            tf.addActionListener(e -> {
+        .forEach((player, textFieldsSet) ->
+          textFieldsSet.forEach(textField ->
+            textField.addActionListener(e -> {
                 /*
                  * If the entered text is both a valid string and name, it will be applied to the
                  * corresponding player. If not, an error message will be shown and the text field
                  * will be reset to the player name.
                  */
                 try {
-                  textFieldEvent(tfs.indexOf(tf),
+                  textFieldEvent(textFieldsSet.indexOf(textField),
                                  CommonFields.getPlayersSets()
-                                             .get(p),
-                                 tf.getText());
+                                             .get(player),
+                                 textField.getText());
                 } catch (IllegalArgumentException | InvalidNameException ex) {
                   CommonFunctions.showErrorMessage(
                       ex instanceof IllegalArgumentException ? Constants.MSG_ERROR_INVALID_STRING
@@ -256,9 +256,9 @@ public class NamesInputController extends Controller<NamesInputView> {
                       CommonFunctions.getComponentFromEvent(e)
                   );
 
-                  tf.setText(CommonFields.getPlayersSets()
-                                         .get(p)
-                                         .get(tfs.indexOf(tf))
+                  textField.setText(CommonFields.getPlayersSets()
+                                         .get(player)
+                                         .get(textFieldsSet.indexOf(textField))
                                          .getName());
                 }
               }
@@ -315,9 +315,9 @@ public class NamesInputController extends Controller<NamesInputView> {
 
     CommonFields.getPlayersSets()
                 .forEach((key, value) -> value.stream()
-                                              .filter(p -> !p.getName()
-                                                             .equals(""))
-                                              .forEach(p -> {
+                                              .filter(player -> !player.getName()
+                                                                       .equals(""))
+                                              .forEach(player -> {
                                                 if (wrapperCounter.counter != 0
                                                     && Constants.PLAYERS_PER_TEAM * 2
                                                        - wrapperCounter.counter != 0) {
@@ -329,7 +329,7 @@ public class NamesInputController extends Controller<NamesInputView> {
 
                                                 view.getTextArea()
                                                     .append(wrapperCounter.counter + " - "
-                                                            + p.getName());
+                                                            + player.getName());
                                               }));
   }
 
@@ -346,7 +346,7 @@ public class NamesInputController extends Controller<NamesInputView> {
         .values()
         .stream()
         .flatMap(Collection::stream)
-        .filter(tf -> tf.getParent() == leftTopPanel)
+        .filter(textField -> textField.getParent() == leftTopPanel)
         .forEach(leftTopPanel::remove);
 
     view.getTextFieldsMap()
@@ -356,7 +356,7 @@ public class NamesInputController extends Controller<NamesInputView> {
             selectedOption.toUpperCase()
           )
         )
-        .forEach(tf -> leftTopPanel.add(tf, Constants.MIG_LAYOUT_GROWX));
+        .forEach(textField -> leftTopPanel.add(textField, Constants.MIG_LAYOUT_GROWX));
 
     leftTopPanel.revalidate();
     leftTopPanel.repaint();
@@ -370,13 +370,13 @@ public class NamesInputController extends Controller<NamesInputView> {
         .values()
         .stream()
         .flatMap(List::stream)
-        .forEach(tf -> tf.setText(null));
+        .forEach(textField -> textField.setText(null));
 
     CommonFields.getPlayersSets()
                 .values()
                 .stream()
                 .flatMap(List::stream)
-                .forEach(p -> p.setName(""));
+                .forEach(player -> player.setName(""));
   }
 
   /**
@@ -391,8 +391,8 @@ public class NamesInputController extends Controller<NamesInputView> {
                        .values()
                        .stream()
                        .flatMap(Collection::stream)
-                       .anyMatch(p -> p.getName()
-                                       .equals(name));
+                       .anyMatch(player -> player.getName()
+                                                 .equals(name));
   }
 
 

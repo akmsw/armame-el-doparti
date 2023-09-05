@@ -310,7 +310,7 @@ public class ResultsController extends Controller<ResultsView> {
                 .values()
                 .stream()
                 .flatMap(List::stream)
-                .forEach(p -> p.setTeamNumber(0));
+                .forEach(player -> player.setTeamNumber(0));
   }
 
   /**
@@ -388,7 +388,7 @@ public class ResultsController extends Controller<ResultsView> {
                                                        .values()
                                                        .stream()
                                                        .flatMap(List::stream)
-                                                       .filter(p -> p.getName() == value)
+                                                       .filter(player -> player.getName() == value)
                                                        .toArray()[0];
 
             c.setBackground(

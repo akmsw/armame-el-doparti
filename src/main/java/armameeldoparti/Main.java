@@ -145,11 +145,11 @@ public final class Main {
       };
 
       buff.lines()
-          .filter(l -> l.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
-          .forEach(l -> {
+          .filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
+          .forEach(line -> {
             CommonFields.getPlayersAmountMap()
                         .put(Position.values()[wrapperIndex.index],
-                             Integer.parseInt(l.replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")));
+                             Integer.parseInt(line.replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")));
 
             wrapperIndex.index++;
           });

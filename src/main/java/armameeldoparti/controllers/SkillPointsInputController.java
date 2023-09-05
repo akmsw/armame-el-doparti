@@ -46,7 +46,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
     hideView();
 
     view.getSpinnersMap()
-        .forEach((k, v) -> k.setSkillPoints((int) v.getValue()));
+        .forEach((player, spinner) -> player.setSkillPoints((int) spinner.getValue()));
 
     ((ResultsController) CommonFunctions.getController(ProgramView.RESULTS)).setUp();
 
