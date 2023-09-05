@@ -5,7 +5,7 @@
 [![buildBadge](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
 [![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
 
-[![checkStyleBadge](https://img.shields.io/badge/checkstyle%2010.12.2-passing-brightgreen)](https://checkstyle.sourceforge.io/)
+[![checkStyleBadge](https://img.shields.io/badge/checkstyle%2010.12.3-passing-brightgreen)](https://checkstyle.sourceforge.io/)
 [![sonarLintBadge](https://img.shields.io/badge/sonarlint-3-yellow?logo=sonarlint)](https://www.sonarlint.org/)
 
 [![openJDKTargetBadge](https://img.shields.io/badge/jdk-14%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/14/)
