@@ -70,7 +70,7 @@ public class NamesInputView extends View {
    * Builds the names input view.
    */
   public NamesInputView() {
-    super("Ingreso de jugadores", String.join(" ", Constants.MIG_LAYOUT_WRAP, "2"));
+    super("Ingreso de jugadores", Constants.MIG_LAYOUT_WRAP_2);
 
     leftPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP, Constants.MIG_LAYOUT_GROW));
     leftTopPanel = new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP));
@@ -201,7 +201,7 @@ public class NamesInputView extends View {
     radioButtonBySkillPoints = new CustomRadioButton("Por puntajes");
 
     leftBottomPanel.add(
-        new CustomLabel("DISTRIBUCIÓN", SwingConstants.LEFT),
+        new CustomLabel("Distribución", SwingConstants.CENTER),
         CommonFunctions.buildMigLayoutConstraints(
           Constants.MIG_LAYOUT_GROWX,
           Constants.MIG_LAYOUT_PUSHX

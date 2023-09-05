@@ -23,16 +23,6 @@ public class CustomLabel extends JLabel {
   // ---------------------------------------- Constructors --------------------------------------
 
   /**
-   * Builds a basic empty label using the established program aesthetics.
-   *
-   * @param alignment The label text alignment.
-   */
-  public CustomLabel(int alignment) {
-    super();
-    setUpGraphicalProperties(alignment);
-  }
-
-  /**
    * Builds a basic label using the established program aesthetics.
    *
    * @param text      The label text.

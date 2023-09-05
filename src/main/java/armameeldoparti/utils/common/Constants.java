@@ -144,8 +144,6 @@ public final class Constants {
   public static final String MIG_LAYOUT_WEST = "west";
   public static final String MIG_LAYOUT_WRAP = "wrap";
   public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
-  public static final String MIX_OPTION_RANDOM = "Aleatoriamente";
-  public static final String MIX_OPTION_BY_SKILL = "Por puntuaciones";
   public static final String MSG_ERROR_INVALID_STRING = "El nombre del jugador debe estar formado"
                                                         + " por letras de la A a la Z";
   public static final String MSG_ERROR_INVALID_NAME = "El nombre del jugador no puede estar vacío,"
@@ -249,16 +247,6 @@ public final class Constants {
       Constants.ROUNDED_BORDER_INSETS_GENERAL,
       Constants.ROUNDED_BORDER_INSETS_GENERAL,
       Constants.ROUNDED_BORDER_INSETS_GENERAL
-  );
-
-  /**
-   * Possible players distribution methods.
-   */
-  public static final List<String> OPTIONS_MIX = Collections.unmodifiableList(
-      Arrays.asList(
-        MIX_OPTION_RANDOM,
-        MIX_OPTION_BY_SKILL
-      )
   );
 
   /**

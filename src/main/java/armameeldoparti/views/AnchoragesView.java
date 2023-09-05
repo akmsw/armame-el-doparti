@@ -91,19 +91,10 @@ public class AnchoragesView extends View {
 
   @Override
   protected void initializeInterface() {
-    CommonFields.getPlayersSets()
-                .forEach((position, playersSet) -> {
-                  fillCheckboxesSet(playersSet, checkboxesMap.get(position));
-                  addCheckboxesSet(
-                      checkboxesMap.get(position),
-                      CommonFields.getPositionsMap()
-                                  .get(position)
-                  );
-                });
-
     masterPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
     masterPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
 
+    addCheckBoxes();
     addTextArea();
     addButtons();
     add(masterPanel);
@@ -155,6 +146,22 @@ public class AnchoragesView extends View {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
+   * Adds the players checkboxes and their position labels.
+   */
+  private void addCheckBoxes() {
+    Map<Position, String> positionsMap = CommonFields.getPositionsMap();
+
+    CommonFields.getPlayersSets()
+                .forEach((position, playersSet) -> {
+                  fillCheckboxesSet(playersSet, checkboxesMap.get(position));
+                  addCheckboxesSet(
+                      checkboxesMap.get(position),
+                      CommonFunctions.capitalize(positionsMap.get(position))
+                  );
+                });
+  }
+
+  /**
    * Adds the text area where to display the anchorages.
    */
   private void addTextArea() {
@@ -186,7 +193,7 @@ public class AnchoragesView extends View {
    */
   private void addCheckboxesSet(List<JCheckBox> cbSet, String labelText) {
     leftPanel.add(
-        new CustomLabel(labelText, SwingConstants.LEFT),
+        new CustomLabel(labelText, SwingConstants.CENTER),
         CommonFunctions.buildMigLayoutConstraints(
           Constants.MIG_LAYOUT_GROWX,
           Constants.MIG_LAYOUT_SPAN

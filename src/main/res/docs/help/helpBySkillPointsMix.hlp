@@ -1,6 +1,6 @@
 Si elegiste distribuir los jugadores en base a puntuaciones, la tabla va a tener 3 columnas también, pero 9 filas.
 
-La disposición es la misma que la tabla para distribución aleatoria, pero la fila que se agrega es de otro color y tiene como título "PUNTAJE DEL EQUIPO".
+La disposición es la misma que la tabla para distribución aleatoria, pero la fila que se agrega es de otro color y tiene como título "Puntuación del equipo".
 
 Esta fila va a tener dos números, uno por columna, que son el resultado de sumar las puntuaciones de todos los jugadores de cada equipo.
 

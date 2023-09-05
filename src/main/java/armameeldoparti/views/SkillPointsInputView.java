@@ -100,12 +100,13 @@ public class SkillPointsInputView extends View {
    * Adds the spinners to their corresponding panel.
    */
   private void addSpinners() {
+    Map<Position, String> positionsMap = CommonFields.getPositionsMap();
+
     for (Position position : Position.values()) {
       masterPanel.add(
           new CustomLabel(
-            CommonFields.getPositionsMap()
-                        .get(position),
-            SwingConstants.LEFT
+            CommonFunctions.capitalize(positionsMap.get(position)),
+            SwingConstants.CENTER
           ),
           CommonFunctions.buildMigLayoutConstraints(
             Constants.MIG_LAYOUT_GROW,

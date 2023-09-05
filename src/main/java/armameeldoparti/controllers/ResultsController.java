@@ -18,6 +18,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -169,7 +170,7 @@ public class ResultsController extends Controller<ResultsView> {
     );
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
-      for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
+      for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
         table.setValueAt(
             teams.get(teamIndex)
                  .getTeamPlayers()
@@ -242,38 +243,36 @@ public class ResultsController extends Controller<ResultsView> {
    * Fills the table cells whose texts do not change.
    */
   private void fillTableFields() {
-    for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
+    int rowCount = table.getRowCount() - 1;
+
+    Map<Position, String> positionsMap = CommonFields.getPositionsMap();
+
+    for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
       table.setValueAt("EQUIPO " + (teamIndex + 1), 0, teamIndex + 1);
     }
-
-    int rowCount = table.getRowCount() - 1;
 
     for (int rowIndex = 1; rowIndex < rowCount; rowIndex++) {
       if (rowIndex == 1) {
         table.setValueAt(
-            CommonFields.getPositionsMap()
-                        .get(Position.CENTRAL_DEFENDER),
+            positionsMap.get(Position.CENTRAL_DEFENDER),
             rowIndex,
             0
         );
       } else if (rowIndex < 4) {
         table.setValueAt(
-            CommonFields.getPositionsMap()
-                        .get(Position.LATERAL_DEFENDER),
+            positionsMap.get(Position.LATERAL_DEFENDER),
             rowIndex,
             0
         );
       } else if (rowIndex < 6) {
         table.setValueAt(
-            CommonFields.getPositionsMap()
-                        .get(Position.MIDFIELDER),
+            positionsMap.get(Position.MIDFIELDER),
             rowIndex,
             0
         );
       } else if (rowIndex < 7) {
         table.setValueAt(
-            CommonFields.getPositionsMap()
-                        .get(Position.FORWARD),
+            positionsMap.get(Position.FORWARD),
             rowIndex,
             0
         );
@@ -281,19 +280,17 @@ public class ResultsController extends Controller<ResultsView> {
     }
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
-      for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
+      for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
         table.setValueAt(
-            teamIndex == 0 ? CommonFields.getPositionsMap()
-                                         .get(Position.GOALKEEPER)
-                           : "PUNTAJE DEL EQUIPO",
+            teamIndex == 0 ? positionsMap.get(Position.GOALKEEPER)
+                           : "Puntuación del equipo",
             table.getRowCount() + teamIndex - 2,
             0
         );
       }
     } else {
       table.setValueAt(
-          CommonFields.getPositionsMap()
-                      .get(Position.GOALKEEPER),
+          positionsMap.get(Position.GOALKEEPER),
           table.getRowCount() - 1,
           0
       );
@@ -384,12 +381,14 @@ public class ResultsController extends Controller<ResultsView> {
               return c;
             }
 
-            Player playerOnCell = (Player) CommonFields.getPlayersSets()
-                                                       .values()
-                                                       .stream()
-                                                       .flatMap(List::stream)
-                                                       .filter(player -> player.getName() == value)
-                                                       .toArray()[0];
+            Player playerOnCell = CommonFunctions.retrieveOptional(
+                CommonFields.getPlayersSets()
+                            .values()
+                            .stream()
+                            .flatMap(List::stream)
+                            .filter(player -> player.getName() == value)
+                            .findFirst()
+            );
 
             c.setBackground(
                 playerOnCell.getAnchorageNumber() != 0
