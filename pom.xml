@@ -15,7 +15,7 @@
     <maven-failsafe.version>3.1.2</maven-failsafe.version>
     <maven-shade.version>3.3.0</maven-shade.version>
     <maven-surefire.version>3.0.0</maven-surefire.version>
-    <miglayout.version>11.1</miglayout.version>
+    <miglayout.version>11.2</miglayout.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
