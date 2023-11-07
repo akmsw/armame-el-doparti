@@ -190,11 +190,11 @@ public class NamesInputView extends View {
    * created when the view is being builded. This means that the controller should be retrieved when
    * the method reference is created, and it could be before any radio button click event is
    * triggered, meaning it could potentially cause null-reference problems since the view must be
-   * fully created before the controller can be created. This is method reference causes a cyclic
+   * fully created before the controller can be created. This method reference causes a cyclic
    * dependence between the view and the controller.
    *
    * <p>The event handler could be written in this class, but for the sake of the MVC design pattern
-   * the controller should be the responsible for events handling.
+   * good practices, the controller should be the responsible for events handling.
    */
   private void addRadioButtons() {
     radioButtonRandom = new CustomRadioButton("Aleatoria");

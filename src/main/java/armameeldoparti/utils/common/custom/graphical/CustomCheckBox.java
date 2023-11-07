@@ -6,8 +6,7 @@ import javax.swing.JCheckBox;
 /**
  * Custom checkbox class.
  *
- * <p>This class is used to instantiate a custom checkbox that fits the overall program
- * aesthetics.
+ * <p>This class is used to instantiate a custom checkbox that fits the overall program aesthetics.
  *
  * @author Bonino, Francisco Ignacio.
  *

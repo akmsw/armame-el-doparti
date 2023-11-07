@@ -47,8 +47,8 @@ public final class CommonFunctions {
   // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Exits the program with the corresponding error message
-   * and error code according to the occurred exception.
+   * Exits the program with the corresponding error message and error code according to the occurred
+   * exception.
    *
    * @param error The error that caused the program to end.
    */
@@ -191,8 +191,8 @@ public final class CommonFunctions {
   /**
    * Gets the corresponding controller to the requested view.
    *
-   * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime
-   * the type of the controlled view.
+   * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime the
+   * type of the controlled view.
    *
    * @param view The view whose controller is needed.
    *

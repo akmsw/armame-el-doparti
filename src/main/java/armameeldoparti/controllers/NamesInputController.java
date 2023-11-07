@@ -169,8 +169,7 @@ public class NamesInputController extends Controller<NamesInputView> {
     if (e.getStateChange() == ItemEvent.SELECTED) {
       (e.getSource() == view.getRadioButtonRandom()
                         ? view.getRadioButtonBySkillPoints()
-                        : view.getRadioButtonRandom())
-                              .setSelected(false);
+                        : view.getRadioButtonRandom()).setSelected(false);
     }
 
     validateMixButtonEnable();

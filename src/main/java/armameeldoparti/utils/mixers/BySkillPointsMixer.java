@@ -1,5 +1,7 @@
 package armameeldoparti.utils.mixers;
 
+import static java.util.Comparator.comparingInt;
+
 import armameeldoparti.models.Player;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.Team;
@@ -8,10 +10,10 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * By-skill-points distribution class.
@@ -38,14 +40,12 @@ public class BySkillPointsMixer implements PlayersMixer {
   /**
    * Distributes the players by their skill points without considering anchorages.
    *
-   * <p>Positions are traversed in reverse order to achieve the fairer distribution.
-   *
    * <p>The players of each position are ordered based on their score, from highest to lowest. The
    * teams are then ordered based on the sum of their players scores so far, from lowest to highest.
    *
    * <p>If the number of players to distribute is 2, the team with less skill points is assigned the
    * player with the highest skill points, and the team with more skill points is assigned the
-   * lowest skill points player.
+   * player with the lowest skill points.
    *
    * <p>If the number of players to distribute is 4, two subgroups are made with the players at the
    * list ends, from the outside to the inside. These subsets are then ordered based on their skill
@@ -53,37 +53,33 @@ public class BySkillPointsMixer implements PlayersMixer {
    * with more skill points. The team with more skill points is assigned the set of players with the
    * lowest skill points.
    *
-   * @param teams List that contains the two teams.
+   * @param teams Teams where to distribute the players.
    *
    * @return The updated teams with the players distributed by their skill points, without
    *         considering anchorages.
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    List<Position> reversedEnum = Arrays.asList(Position.values());
+    Map<Position, List<Player>> playersMap = CommonFields.getPlayersSets();
 
-    Collections.reverse(reversedEnum);
+    for (Position position : Position.values()) {
+      List<Player> currentPlayersSet = playersMap.get(position);
 
-    for (Position position : reversedEnum) {
-      List<Player> currentSet = CommonFields.getPlayersSets()
-                                            .get(position);
+      // Players sorted highest to lowest
+      currentPlayersSet.sort(comparingInt(Player::getSkillPoints).reversed());
 
-      currentSet.sort(
-          Comparator.comparingInt(Player::getSkillPoints)
-                    .reversed()
-      );
+      // Teams sorted lowest to highest
+      teams.sort(comparingInt(Team::getTeamSkill));
 
-      teams.sort(Comparator.comparingInt(Team::getTeamSkill));
-
-      if (currentSet.size() == 2) {
-        for (int teamIndex = 0; teamIndex < 2; teamIndex++) {
+      if (currentPlayersSet.size() == 2) {
+        for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
           teams.get(teamIndex)
                .getTeamPlayers()
                .get(position)
-               .add(currentSet.get(teamIndex));
+               .add(currentPlayersSet.get(teamIndex));
         }
       } else {
-        distributeSubsets(teams, currentSet, position);
+        distributeSubsets(teams, currentPlayersSet, position);
       }
     }
 
@@ -101,7 +97,7 @@ public class BySkillPointsMixer implements PlayersMixer {
    * possible based on their skill points. They will be added to a team only if the players per
    * position or the players per team amounts are not exceeded.
    *
-   * @param teams List that contains the two teams.
+   * @param teams Teams where to distribute the players.
    *
    * @return The updated teams with the players distributed by their skill points, without
    *         considering anchorages.
@@ -110,17 +106,17 @@ public class BySkillPointsMixer implements PlayersMixer {
   public List<Team> withAnchorages(List<Team> teams) {
     List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
 
-    for (List<Player> aps : anchoredPlayers) {
-      teams.sort(Comparator.comparingInt(Team::getTeamSkill));
+    for (List<Player> anchoredPlayersSet : anchoredPlayers) {
+      teams.sort(comparingInt(Team::getTeamSkill));
 
-      for (Player p : aps) {
-        p.setTeamNumber(teams.get(0)
-                             .getTeamNumber());
+      for (Player player : anchoredPlayersSet) {
+        player.setTeamNumber(teams.get(0)
+                                  .getTeamNumber());
 
         teams.get(0)
              .getTeamPlayers()
-             .get(p.getPosition())
-             .add(p);
+             .get(player.getPosition())
+             .add(player);
       }
     }
 
@@ -129,47 +125,40 @@ public class BySkillPointsMixer implements PlayersMixer {
                     .values()
                     .stream()
                     .flatMap(List::stream)
-                    .filter(p -> p.getTeamNumber() == 0)
+                    .filter(player -> player.getTeamNumber() == 0)
                     .collect(Collectors.groupingBy(Player::getPosition))
                     .values()
     );
 
-    remainingPlayers.sort(Comparator.comparingInt(List::size));
+    remainingPlayers.sort(comparingInt(List::size));
 
-    for (List<Player> ps : remainingPlayers) {
-      ps.sort(
-          Comparator.comparingInt(Player::getSkillPoints)
-                    .reversed()
-      );
+    for (List<Player> playersSet : remainingPlayers) {
+      playersSet.sort(comparingInt(Player::getSkillPoints).reversed());
 
-      if (ps.size() == 4) {
-        teams.sort(Comparator.comparingInt(Team::getTeamSkill));
+      if (playersSet.size() == 4) {
+        teams.sort(comparingInt(Team::getTeamSkill));
 
-        distributeSubsets(
-            teams,
-            ps,
-            ps.get(0)
-              .getPosition()
-        );
+        distributeSubsets(teams, playersSet, playersSet.get(0)
+                                                       .getPosition());
       } else {
-        for (Player p : ps) {
-          teams.sort(Comparator.comparingInt(Team::getTeamSkill));
+        for (Player player : playersSet) {
+          teams.sort(comparingInt(Team::getTeamSkill));
 
           int teamNumber = 0;
 
           if (teams.get(teamNumber)
-                   .isPositionFull(p.getPosition())
+                   .isPositionFull(player.getPosition())
               || teams.get(teamNumber)
                       .getPlayersCount() + 1 > Constants.PLAYERS_PER_TEAM) {
             teamNumber = 1;
           }
 
-          p.setTeamNumber(teamNumber + 1);
+          player.setTeamNumber(teamNumber + 1);
 
           teams.get(teamNumber)
                .getTeamPlayers()
-               .get(p.getPosition())
-               .add(p);
+               .get(player.getPosition())
+               .add(player);
         }
       }
     }
@@ -180,46 +169,44 @@ public class BySkillPointsMixer implements PlayersMixer {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Performs the subsets distribution in sets with 4 players as explained in
-   * {@link #withAnchorages(List)}.
+   * Performs the subsets distribution in sets with 4+ players as explained in
+   * {@link #withoutAnchorages(List)}.
    *
-   * @param teams      List that contains the two teams.
+   * @param teams      Teams where to distribute the players.
    * @param playersSet Current working players set.
    * @param position   Current working players position.
    */
   private void distributeSubsets(List<Team> teams, List<Player> playersSet, Position position) {
-    List<Player> outerSubset = new ArrayList<>();
-    List<Player> innerSubset = new ArrayList<>();
-
-    outerSubset.add(playersSet.get(0));
-    outerSubset.add(playersSet.get(playersSet.size() - 1));
-
-    innerSubset.add(playersSet.get(1));
-    innerSubset.add(playersSet.get(playersSet.size() - 2));
-
     List<List<Player>> playersSubsets = new ArrayList<>();
 
-    playersSubsets.add(outerSubset);
-    playersSubsets.add(innerSubset);
+    for (int i = 0; i < playersSet.size() / 2; i++) {
+      playersSubsets.add(
+          Arrays.asList(
+              playersSet.get(i),
+              playersSet.get(playersSet.size() - 1 - i)
+          )
+      );
+    }
+
+    // Subsets sorted lowest to highest
     playersSubsets.sort(
-        Comparator.comparingInt(ps -> ps.stream()
-                  .mapToInt(Player::getSkillPoints)
-                  .reduce(0, Math::addExact))
+        comparingInt(
+          playersSubset -> playersSubset.stream()
+                                        .mapToInt(Player::getSkillPoints)
+                                        .reduce(0, Math::addExact)
+        )
     );
 
-    var wrapper = new Object() {
-      int teamIndex;
-    };
+    IntStream.range(0, teams.size())
+             .forEach(
+               teamIndex -> {
+                 playersSubsets.get(teamIndex)
+                               .forEach(player -> player.setTeamNumber(teamIndex + 1));
 
-    for (wrapper.teamIndex = 0; wrapper.teamIndex < 2; wrapper.teamIndex++) {
-      playersSubsets.get(wrapper.teamIndex)
-                    .forEach(p -> p.setTeamNumber(teams.get(1 - wrapper.teamIndex)
-                                                       .getTeamNumber()));
-
-      teams.get(wrapper.teamIndex)
-           .getTeamPlayers()
-           .get(position)
-           .addAll(playersSubsets.get(1 - wrapper.teamIndex));
-    }
+                 teams.get(teamIndex)
+                      .getTeamPlayers()
+                      .get(position)
+                      .addAll(playersSubsets.get(1 - teamIndex));
+               });
   }
 }

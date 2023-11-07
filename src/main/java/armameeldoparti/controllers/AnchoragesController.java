@@ -115,7 +115,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
     if (!validCheckedPlayersPerPosition()) {
       CommonFunctions.showErrorMessage(
-          "No puede haber más de la mitad de jugadores  de una misma posición en un mismo anclaje",
+          "No puede haber más de la mitad de jugadores\nde una misma posición en un mismo anclaje",
           parentComponent
       );
 

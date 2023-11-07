@@ -154,14 +154,14 @@ public class RandomMixer implements PlayersMixer {
   // ---------------------------------------- Private methods -----------------------------------
 
   /**
-   * Checks which team a given entity can be added to.
+   * Checks which team a given player can be added to.
    *
-   * @param teams               The possible teams where to add the entity.
-   * @param validationPredicate The predicate that will validate if the entity can be added to a
+   * @param teams               The possible teams where to add the player.
+   * @param validationPredicate The predicate that will validate if the player can be added to a
    *                            team, or not.
    *
-   * @return The only available team index, or a random team index if the entity can be added in
-   *         every team.
+   * @return The only available team index, a random team index if the player can be added in
+   *         every team, or -1 if there's no available team for the player.
    */
   private int getAvailableTeam(List<Team> teams, Predicate<Team> validationPredicate) {
     shuffleTeamNumbers(teams.size());
