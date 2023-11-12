@@ -189,7 +189,6 @@ public class BySkillPointsMixer implements PlayersMixer {
                       .getTeamPlayers()
                       .get(position)
                       .addAll(playersSubsets.get(1 - teamIndex));
-               }
-             );
+             });
   }
 }
