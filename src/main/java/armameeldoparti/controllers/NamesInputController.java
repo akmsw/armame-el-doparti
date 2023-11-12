@@ -55,8 +55,8 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * 'Back' button event handler.
    *
-   * <p>Resets the controlled view to its default values, turns the anchorages flags to false, makes
-   * the controlled view invisible and shows the main menu view.
+   * <p>Resets the controlled view to its default values, turns the anchorages flags to false, makes the controlled view invisible
+   * and shows the main menu view.
    */
   public void backButtonEvent() {
     resetView();
@@ -70,11 +70,10 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * 'Mix' button event handler.
    *
-   * <p>Asks the user for the players distribution method, makes the controlled view invisible and
-   * shows the corresponding following view.
+   * <p>Asks the user for the players distribution method, makes the controlled view invisible and shows the corresponding
+   * following view.
    *
-   * @param parentComponent Graphical component where the dialogs associated with the event should
-   *                        be displayed.
+   * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
   public void mixButtonEvent(Component parentComponent) {
     hideView();
@@ -84,8 +83,7 @@ public class NamesInputController extends Controller<NamesInputView> {
                                                    : Constants.MIX_BY_SKILL_POINTS);
 
     if (CommonFields.isAnchoragesEnabled()) {
-      ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES))
-      .updateCheckboxesText();
+      ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES)).updateCheckboxesText();
 
       CommonFunctions.getController(ProgramView.ANCHORAGES)
                      .showView();
@@ -97,8 +95,7 @@ public class NamesInputController extends Controller<NamesInputView> {
                      .showView();
     } else {
       // By skill points distribution
-      ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
-      .updateNameLabels();
+      ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS)).updateNameLabels();
 
       CommonFunctions.getController(ProgramView.SKILL_POINTS)
                      .showView();
@@ -108,13 +105,12 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * Text fields input event handler.
    *
-   * <p>Validates the user input with a regular expression that checks if the string contains only
-   * latin characters from A to Z including Ñ, uppercase or lowercase, with or without accent mark,
-   * with or without spaces. If the input is not valid or already exists, the program asks for a new
-   * input.
+   * <p>Validates the user input with a regular expression that checks if the string contains only latin characters from A to Z
+   * including Ñ, uppercase or lowercase, with or without accent mark, with or without spaces. If the input is not valid or
+   * already exists, the program asks for a new input.
    *
-   * <p>If the input is valid, it will be applied as a player name in the players set corresponding
-   * to the combobox selected option.
+   * <p>If the input is valid, it will be applied as a player name in the players set corresponding to the combobox selected
+   * option.
    *
    * @param playerIndex The index of the player which name will be the text filed input.
    * @param playersSet  The set of players corresponding to the selected combobox option.
@@ -159,9 +155,8 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * Radio buttons click event handler.
    *
-   * <p>Since there can be only one distribution method at a time, if one radio button is selected,
-   * the other is unselected automatically. Then, if the conditions are met, the mix button is
-   * enabled.
+   * <p>Since there can be only one distribution method at a time, if one radio button is selected, the other is unselected
+   * automatically. Then, if the conditions are met, the mix button is enabled.
    *
    * @param e Radio button click event.
    */
@@ -222,16 +217,10 @@ public class NamesInputController extends Controller<NamesInputView> {
         .addItemListener(this::radioButtonEvent);
 
     view.getComboBox()
-        .addActionListener(
-          e -> comboBoxEvent(
-            (String) Objects.requireNonNull(((JComboBox<?>) e.getSource()).getSelectedItem())
-          )
-        );
+        .addActionListener(e -> comboBoxEvent((String) Objects.requireNonNull(((JComboBox<?>) e.getSource()).getSelectedItem())));
 
     view.getAnchoragesCheckbox()
-        .addActionListener(
-          e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled())
-        );
+        .addActionListener(e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled()));
 
 
     view.getTextFieldsMap()
@@ -239,9 +228,8 @@ public class NamesInputController extends Controller<NamesInputView> {
           textFieldsSet.forEach(textField ->
             textField.addActionListener(e -> {
                 /*
-                 * If the entered text is both a valid string and name, it will be applied to the
-                 * corresponding player. If not, an error message will be shown and the text field
-                 * will be reset to the player name.
+                 * If the entered text is both a valid string and name, it will be applied to the corresponding player.
+                 * If not, an error message will be shown and the text field will be reset to the player name.
                  */
                 try {
                   textFieldEvent(textFieldsSet.indexOf(textField),
@@ -256,9 +244,9 @@ public class NamesInputController extends Controller<NamesInputView> {
                   );
 
                   textField.setText(CommonFields.getPlayersSets()
-                                         .get(player)
-                                         .get(textFieldsSet.indexOf(textField))
-                                         .getName());
+                                                .get(player)
+                                                .get(textFieldsSet.indexOf(textField))
+                                                .getName());
                 }
               }
             )
@@ -274,11 +262,11 @@ public class NamesInputController extends Controller<NamesInputView> {
   @Override
   protected void showView() {
     updateTextFields(
-        Objects.requireNonNull(
-          view.getComboBox()
-              .getSelectedItem(),
-          Constants.MSG_ERROR_NULL_RESOURCE
-        ).toString()
+      Objects.requireNonNull(
+        view.getComboBox()
+            .getSelectedItem(),
+        Constants.MSG_ERROR_NULL_RESOURCE
+      ).toString()
     );
     centerView();
     resetComboBox();
@@ -301,8 +289,8 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * Updates the text displayed in the read-only text area.
    *
-   * <p>The players names are shown in the order they are positioned in their respective list. The
-   * order is the same of the positions enum.
+   * <p>The players names are shown in the order they are positioned in their respective list. The order is the same of the
+   * positions enum.
    */
   private void updateTextArea() {
     var wrapperCounter = new Object() {
@@ -313,23 +301,25 @@ public class NamesInputController extends Controller<NamesInputView> {
         .setText("");
 
     CommonFields.getPlayersSets()
-                .forEach((key, value) -> value.stream()
-                                              .filter(player -> !player.getName()
-                                                                       .equals(""))
-                                              .forEach(player -> {
-                                                if (wrapperCounter.counter != 0
-                                                    && Constants.PLAYERS_PER_TEAM * 2
-                                                       - wrapperCounter.counter != 0) {
-                                                  view.getTextArea()
-                                                      .append(System.lineSeparator());
-                                                }
+                .forEach(
+                  (key, value) -> value.stream()
+                                       .filter(player -> !player.getName()
+                                                                .equals(""))
+                                       .forEach(
+                                         player -> {
+                                           if (wrapperCounter.counter != 0
+                                               && Constants.PLAYERS_PER_TEAM * 2 - wrapperCounter.counter != 0) {
+                                             view.getTextArea()
+                                                 .append(System.lineSeparator());
+                                           }
 
-                                                wrapperCounter.counter++;
+                                           wrapperCounter.counter++;
 
-                                                view.getTextArea()
-                                                    .append(wrapperCounter.counter + " - "
-                                                            + player.getName());
-                                              }));
+                                           view.getTextArea()
+                                               .append(wrapperCounter.counter + " - " + player.getName());
+                                         }
+                                       )
+                );
   }
 
   /**
@@ -349,12 +339,7 @@ public class NamesInputController extends Controller<NamesInputView> {
         .forEach(leftTopPanel::remove);
 
     view.getTextFieldsMap()
-        .get(
-          CommonFunctions.getCorrespondingPosition(
-            CommonFields.getPositionsMap(),
-            selectedOption.toUpperCase()
-          )
-        )
+        .get(CommonFunctions.getCorrespondingPosition(CommonFields.getPositionsMap(), selectedOption.toUpperCase()))
         .forEach(textField -> leftTopPanel.add(textField, Constants.MIG_LAYOUT_GROWX));
 
     leftTopPanel.revalidate();
@@ -396,8 +381,7 @@ public class NamesInputController extends Controller<NamesInputView> {
 
 
   /**
-   * Checks if every player has a valid non-empty name assigned and the players distribution method
-   * has been chosen.
+   * Checks if every player has a valid non-empty name assigned and the players distribution method has been chosen.
    *
    * @return Whether every condition needed to distribute the players is met or not.
    */
@@ -429,8 +413,8 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Checks if the given name has at most MAX_NAME_LEN characters, is not empty or blank and if
-   * there isn't already a player with that name.
+   * Checks if the given name has at most MAX_NAME_LEN characters, is not empty or blank and if there isn't already a player with
+   * that name.
    *
    * @param name The name to validate.
    *

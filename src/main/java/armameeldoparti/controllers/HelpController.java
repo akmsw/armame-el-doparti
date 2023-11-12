@@ -51,8 +51,7 @@ public class HelpController extends Controller<HelpView> {
   /**
    * 'Back' button event handler.
    *
-   * <p>Resets the page to the beginning, makes the controlled view invisible and shows the main
-   * menu view.
+   * <p>Resets the page to the beginning, makes the controlled view invisible and shows the main menu view.
    */
   public void backButtonEvent() {
     hideView();
@@ -65,8 +64,8 @@ public class HelpController extends Controller<HelpView> {
   /**
    * 'Next page' button event handler.
    *
-   * <p>Increments the page number, updating the state of the buttons, the displayed page in the
-   * text area and the reading progress label.
+   * <p>Increments the page number, updating the state of the buttons, the displayed page in the text area and the reading
+   * progress label.
    */
   public void nextPageButtonEvent() {
     if (++currentPageNumber < TOTAL_HELP_PAGES - 1) {
@@ -83,8 +82,8 @@ public class HelpController extends Controller<HelpView> {
   /**
    * 'Previous page' button event handler.
    *
-   * <p>Decrements the page number, updating the state of the buttons, the displayed page in the
-   * text area and the reading progress label.
+   * <p>Decrements the page number, updating the state of the buttons, the displayed page in the text area and the reading
+   * progress label.
    */
   public void previousPageButtonEvent() {
     if (--currentPageNumber > 0) {
@@ -110,6 +109,7 @@ public class HelpController extends Controller<HelpView> {
         .setText(Constants.MAP_HELP_PAGES_FILES
                           .get(currentPageNumber)
                           .get(Constants.INDEX_HELP_PAGE_TITLE));
+
     textArea.setText("");
 
     updateLabel();
@@ -119,15 +119,14 @@ public class HelpController extends Controller<HelpView> {
           Objects.requireNonNull(
             HelpController.class
                           .getClassLoader()
-                          .getResourceAsStream(
-                            Constants.PATH_HELP_DOCS
-                            + Constants.MAP_HELP_PAGES_FILES
-                                       .get(currentPageNumber)
-                                       .get(Constants.INDEX_HELP_PAGE_FILENAME)
-                          ),
+                          .getResourceAsStream(Constants.PATH_HELP_DOCS
+                                               + Constants.MAP_HELP_PAGES_FILES
+                                                          .get(currentPageNumber)
+                                                          .get(Constants.INDEX_HELP_PAGE_FILENAME)),
             Constants.MSG_ERROR_NULL_RESOURCE
           ),
-          StandardCharsets.UTF_8)
+          StandardCharsets.UTF_8
+        )
     )) {
       textArea.read(reader, null);
       textArea.setCaretPosition(0);

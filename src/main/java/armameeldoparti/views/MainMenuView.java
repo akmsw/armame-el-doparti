@@ -69,34 +69,25 @@ public class MainMenuView extends View {
    */
   private void addBackground() {
     addBackgroundImage();
-    addBackgroundLabel(
-        Constants.SIZE_FONT_TITLE_LABEL,
-        Constants.PROGRAM_TITLE,
-        Constants.MIG_LAYOUT_ALIGN_CENTER,
-        Constants.COLOR_GREEN_DARK
-    );
-    addBackgroundLabel(
-        Constants.SIZE_FONT_AUTHOR_LABEL,
-        Constants.PROGRAM_AUTHOR,
-        Constants.MIG_LAYOUT_ALIGN_CENTER,
-        Color.WHITE
-    );
-    addBackgroundLabel(
-        Constants.SIZE_FONT_VERSION_LABEL,
-        Constants.PROGRAM_VERSION,
-        Constants.MIG_LAYOUT_ALIGN_RIGHT,
-        Constants.COLOR_GREEN_DARK
-    );
+    addBackgroundLabel(Constants.SIZE_FONT_TITLE_LABEL,
+                       Constants.PROGRAM_TITLE,
+                       Constants.MIG_LAYOUT_ALIGN_CENTER,
+                       Constants.COLOR_GREEN_DARK);
+    addBackgroundLabel(Constants.SIZE_FONT_AUTHOR_LABEL,
+                       Constants.PROGRAM_AUTHOR,
+                       Constants.MIG_LAYOUT_ALIGN_CENTER,
+                       Color.WHITE);
+    addBackgroundLabel(Constants.SIZE_FONT_VERSION_LABEL,
+                       Constants.PROGRAM_VERSION,
+                       Constants.MIG_LAYOUT_ALIGN_RIGHT,
+                       Constants.COLOR_GREEN_DARK);
   }
 
   /**
    * Adds the background image to the panel.
    */
   private void addBackgroundImage() {
-    masterPanel.add(
-        new JLabel("", Constants.ICON_BACKGROUND, SwingConstants.CENTER),
-        Constants.MIG_LAYOUT_GROWX
-    );
+    masterPanel.add(new JLabel("", Constants.ICON_BACKGROUND, SwingConstants.CENTER), Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -112,14 +103,10 @@ public class MainMenuView extends View {
 
     label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setForeground(color);
-    label.setFont(
-      new Font(
-        label.getFont()
-             .getName(),
-        Font.PLAIN,
-        fontSize
-      )
-    );
+    label.setFont(new Font(label.getFont()
+                                .getName(),
+                           Font.PLAIN,
+                           fontSize));
 
     masterPanel.add(label, constraints);
   }

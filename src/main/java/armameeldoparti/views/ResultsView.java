@@ -84,15 +84,10 @@ public class ResultsView extends View {
     table.setColumnSelectionAllowed(false);
     table.setEnabled(false);
 
-    masterPanel.add(
-        table,
-        CommonFunctions.buildMigLayoutConstraints(
-          Constants.MIG_LAYOUT_PUSH,
-          Constants.MIG_LAYOUT_GROW,
-          Constants.MIG_LAYOUT_SPAN,
-          Constants.MIG_LAYOUT_CENTER
-        )
-    );
+    masterPanel.add(table, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH,
+                                                                     Constants.MIG_LAYOUT_GROW,
+                                                                     Constants.MIG_LAYOUT_SPAN,
+                                                                     Constants.MIG_LAYOUT_CENTER));
   }
 
   // ---------------------------------------- Getters -------------------------------------------

@@ -144,8 +144,7 @@ public final class Constants {
   public static final String MIG_LAYOUT_WEST = "west";
   public static final String MIG_LAYOUT_WRAP = "wrap";
   public static final String MIG_LAYOUT_WRAP_2 = MIG_LAYOUT_WRAP + " 2";
-  public static final String MSG_ERROR_INVALID_STRING = "El nombre del jugador debe estar formado"
-                                                        + " por letras de la A a la Z";
+  public static final String MSG_ERROR_INVALID_STRING = "El nombre del jugador debe estar formado por letras de la A a la Z";
   public static final String MSG_ERROR_INVALID_NAME = "El nombre del jugador no puede estar vacío,"
                                                       + "\ntener más de " + MAX_NAME_LEN
                                                       + " caracteres, o estar repetido";
@@ -167,8 +166,7 @@ public final class Constants {
   public static final String REGEX_PDA_DATA_RETRIEVE = "[CLMFG].+>.+";
   public static final String REGEX_PLAYERS_AMOUNT = "(?!(?<=" + PLAYERS_PER_TEAM + ")\\d).";
   public static final String URL_CONTACT = "https://github.com/" + PROGRAM_AUTHOR_GITHUB_USERNAME;
-  public static final String URL_ISSUES = URL_CONTACT + "/" + PROGRAM_TITLE.replace(" ", "-")
-                                          + "/issues";
+  public static final String URL_ISSUES = URL_CONTACT + "/" + PROGRAM_TITLE.replace(" ", "-") + "/issues";
 
   public static final Color COLOR_GREEN_DARK = Color.decode(HEX_CODE_GREEN_DARK);
   public static final Color COLOR_GREEN_DARK_MEDIUM = Color.decode(HEX_CODE_GREEN_DARK_MEDIUM);
@@ -177,146 +175,106 @@ public final class Constants {
   public static final Color COLOR_GREEN_LIGHT = Color.decode(HEX_CODE_GREEN_LIGHT);
   public static final Color COLOR_GREEN_LIGHT_WHITE = Color.decode(HEX_CODE_GREEN_LIGHT_WHITE);
 
-  public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(
-      FILENAME_IMAGE_BACKGROUND
-  );
-  public static final ImageIcon ICON_CB_D_S = CommonFunctions.createImageIcon(
-      FILENAME_ICON_CB_DISABLED_SELECTED
-  );
-  public static final ImageIcon ICON_CB_D_US = CommonFunctions.createImageIcon(
-      FILENAME_ICON_CB_DISABLED_UNSELECTED
-  );
-  public static final ImageIcon ICON_CB_E_S_F = CommonFunctions.createImageIcon(
-      FILENAME_ICON_CB_ENABLED_SELECTED_FOCUSED
-  );
-  public static final ImageIcon ICON_CB_E_S_P = CommonFunctions.createImageIcon(
-      FILENAME_ICON_CB_ENABLED_SELECTED_PRESSED
-  );
-  public static final ImageIcon ICON_CB_E_S_UF = CommonFunctions.createImageIcon(
-      FILENAME_ICON_CB_ENABLED_SELECTED_UNFOCUSED
-  );
-  public static final ImageIcon ICON_CB_E_US_F = CommonFunctions.createImageIcon(
-      FILENAME_ICON_CB_ENABLED_UNSELECTED_FOCUSED
-  );
-  public static final ImageIcon ICON_CB_E_US_P = CommonFunctions.createImageIcon(
-      FILENAME_ICON_CB_ENABLED_UNSELECTED_PRESSED
-  );
-  public static final ImageIcon ICON_CB_E_US_UF = CommonFunctions.createImageIcon(
-      FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED
-  );
-  public static final ImageIcon ICON_RB_D_S = CommonFunctions.createImageIcon(
-      FILENAME_ICON_RB_DISABLED_SELECTED
-  );
-  public static final ImageIcon ICON_RB_D_US = CommonFunctions.createImageIcon(
-      FILENAME_ICON_RB_DISABLED_UNSELECTED
-  );
-  public static final ImageIcon ICON_RB_E_S_F = CommonFunctions.createImageIcon(
-      FILENAME_ICON_RB_ENABLED_SELECTED_FOCUSED
-  );
-  public static final ImageIcon ICON_RB_E_S_P = CommonFunctions.createImageIcon(
-      FILENAME_ICON_RB_ENABLED_SELECTED_PRESSED
-  );
-  public static final ImageIcon ICON_RB_E_S_UF = CommonFunctions.createImageIcon(
-      FILENAME_ICON_RB_ENABLED_SELECTED_UNFOCUSED
-  );
-  public static final ImageIcon ICON_RB_E_US_F = CommonFunctions.createImageIcon(
-      FILENAME_ICON_RB_ENABLED_UNSELECTED_FOCUSED
-  );
-  public static final ImageIcon ICON_RB_E_US_P = CommonFunctions.createImageIcon(
-      FILENAME_ICON_RB_ENABLED_UNSELECTED_PRESSED
-  );
-  public static final ImageIcon ICON_RB_E_US_UF = CommonFunctions.createImageIcon(
-      FILENAME_ICON_RB_ENABLED_UNSELECTED_UNFOCUSED
-  );
-  public static final ImageIcon ICON_MAIN = CommonFunctions.createImageIcon(
-      FILENAME_ICON_MAIN
-  );
-  public static final ImageIcon ICON_DIALOG = CommonFunctions.scaleImageIcon(
-      ICON_MAIN, ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH
-  );
+  public static final ImageIcon ICON_BACKGROUND = CommonFunctions.createImage(FILENAME_IMAGE_BACKGROUND);
+  public static final ImageIcon ICON_CB_D_S = CommonFunctions.createImageIcon(FILENAME_ICON_CB_DISABLED_SELECTED);
+  public static final ImageIcon ICON_CB_D_US = CommonFunctions.createImageIcon(FILENAME_ICON_CB_DISABLED_UNSELECTED);
+  public static final ImageIcon ICON_CB_E_S_F = CommonFunctions.createImageIcon(FILENAME_ICON_CB_ENABLED_SELECTED_FOCUSED);
+  public static final ImageIcon ICON_CB_E_S_P = CommonFunctions.createImageIcon(FILENAME_ICON_CB_ENABLED_SELECTED_PRESSED);
+  public static final ImageIcon ICON_CB_E_S_UF = CommonFunctions.createImageIcon(FILENAME_ICON_CB_ENABLED_SELECTED_UNFOCUSED);
+  public static final ImageIcon ICON_CB_E_US_F = CommonFunctions.createImageIcon(FILENAME_ICON_CB_ENABLED_UNSELECTED_FOCUSED);
+  public static final ImageIcon ICON_CB_E_US_P = CommonFunctions.createImageIcon(FILENAME_ICON_CB_ENABLED_UNSELECTED_PRESSED);
+  public static final ImageIcon ICON_CB_E_US_UF = CommonFunctions.createImageIcon(FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED);
+  public static final ImageIcon ICON_RB_D_S = CommonFunctions.createImageIcon(FILENAME_ICON_RB_DISABLED_SELECTED);
+  public static final ImageIcon ICON_RB_D_US = CommonFunctions.createImageIcon(FILENAME_ICON_RB_DISABLED_UNSELECTED);
+  public static final ImageIcon ICON_RB_E_S_F = CommonFunctions.createImageIcon(FILENAME_ICON_RB_ENABLED_SELECTED_FOCUSED);
+  public static final ImageIcon ICON_RB_E_S_P = CommonFunctions.createImageIcon(FILENAME_ICON_RB_ENABLED_SELECTED_PRESSED);
+  public static final ImageIcon ICON_RB_E_S_UF = CommonFunctions.createImageIcon(FILENAME_ICON_RB_ENABLED_SELECTED_UNFOCUSED);
+  public static final ImageIcon ICON_RB_E_US_F = CommonFunctions.createImageIcon(FILENAME_ICON_RB_ENABLED_UNSELECTED_FOCUSED);
+  public static final ImageIcon ICON_RB_E_US_P = CommonFunctions.createImageIcon(FILENAME_ICON_RB_ENABLED_UNSELECTED_PRESSED);
+  public static final ImageIcon ICON_RB_E_US_UF = CommonFunctions.createImageIcon(FILENAME_ICON_RB_ENABLED_UNSELECTED_UNFOCUSED);
+  public static final ImageIcon ICON_MAIN = CommonFunctions.createImageIcon(FILENAME_ICON_MAIN);
+  public static final ImageIcon ICON_DIALOG = CommonFunctions.scaleImageIcon(ICON_MAIN,
+                                                                             ICON_SCALE,
+                                                                             ICON_SCALE,
+                                                                             Image.SCALE_SMOOTH);
 
-  public static final Insets INSETS_COMBOBOX = new Insets(
-      Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
-      Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
-      Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
-      Constants.ROUNDED_BORDER_INSETS_COMBOBOX
-  );
-
-  public static final Insets INSETS_GENERAL = new Insets(
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL,
-      Constants.ROUNDED_BORDER_INSETS_GENERAL
-  );
+  public static final Insets INSETS_COMBOBOX = new Insets(Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
+                                                          Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
+                                                          Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
+                                                          Constants.ROUNDED_BORDER_INSETS_COMBOBOX);
+  public static final Insets INSETS_GENERAL = new Insets(Constants.ROUNDED_BORDER_INSETS_GENERAL,
+                                                         Constants.ROUNDED_BORDER_INSETS_GENERAL,
+                                                         Constants.ROUNDED_BORDER_INSETS_GENERAL,
+                                                         Constants.ROUNDED_BORDER_INSETS_GENERAL);
 
   /**
    * Positions to show in the names input view combobox.
    */
   public static final List<String> OPTIONS_POSITIONS_COMBOBOX = Collections.unmodifiableList(
-      Arrays.asList(
-        POSITION_COMBOBOX_1,
-        POSITION_COMBOBOX_2,
-        POSITION_COMBOBOX_3,
-        POSITION_COMBOBOX_4,
-        POSITION_COMBOBOX_5
-      )
+    Arrays.asList(
+      POSITION_COMBOBOX_1,
+      POSITION_COMBOBOX_2,
+      POSITION_COMBOBOX_3,
+      POSITION_COMBOBOX_4,
+      POSITION_COMBOBOX_5
+    )
   );
 
   /**
    * Anchorages colors list used as background color for the results table cells.
    */
   public static final List<Color> COLORS_ANCHORAGES = Collections.unmodifiableList(
-      Arrays.asList(
-          Color.decode(HEX_CODE_ANCHORAGE_COLOR_1),
-          Color.decode(HEX_CODE_ANCHORAGE_COLOR_2),
-          Color.decode(HEX_CODE_ANCHORAGE_COLOR_3),
-          Color.decode(HEX_CODE_ANCHORAGE_COLOR_4),
-          Color.decode(HEX_CODE_ANCHORAGE_COLOR_5),
-          Color.decode(HEX_CODE_ANCHORAGE_COLOR_6)
-      )
+    Arrays.asList(
+      Color.decode(HEX_CODE_ANCHORAGE_COLOR_1),
+      Color.decode(HEX_CODE_ANCHORAGE_COLOR_2),
+      Color.decode(HEX_CODE_ANCHORAGE_COLOR_3),
+      Color.decode(HEX_CODE_ANCHORAGE_COLOR_4),
+      Color.decode(HEX_CODE_ANCHORAGE_COLOR_5),
+      Color.decode(HEX_CODE_ANCHORAGE_COLOR_6)
+    )
   );
 
   /**
    * Map of errors and their corresponding exit code.
    */
   public static final Map<Error, Integer> MAP_ERROR_CODE = Map.of(
-      Error.BROWSER_ERROR, EXIT_CODE_ERROR_BROWSER,
-      Error.GUI_ERROR, EXIT_CODE_ERROR_GUI,
-      Error.FATAL_INTERNAL_ERROR, EXIT_CODE_ERROR_INTERNAL_FATAL,
-      Error.INTERNAL_FILES_ERROR, EXIT_CODE_ERROR_INTERNAL_FILES
+    Error.BROWSER_ERROR, EXIT_CODE_ERROR_BROWSER,
+    Error.GUI_ERROR, EXIT_CODE_ERROR_GUI,
+    Error.FATAL_INTERNAL_ERROR, EXIT_CODE_ERROR_INTERNAL_FATAL,
+    Error.INTERNAL_FILES_ERROR, EXIT_CODE_ERROR_INTERNAL_FILES
   );
 
   /**
    * Map of errors and their corresponding error message to display.
    */
   public static final Map<Error, String> MAP_ERROR_MESSAGE = Map.of(
-      Error.BROWSER_ERROR, MSG_ERROR_BROWSER,
-      Error.FATAL_INTERNAL_ERROR, MSG_ERROR_FATAL_INTERNAL,
-      Error.GUI_ERROR, MSG_ERROR_GUI,
-      Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
+    Error.BROWSER_ERROR, MSG_ERROR_BROWSER,
+    Error.FATAL_INTERNAL_ERROR, MSG_ERROR_FATAL_INTERNAL,
+    Error.GUI_ERROR, MSG_ERROR_GUI,
+    Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
   );
 
   /**
    * Map of help pages titles and filenames.
    */
   public static final Map<Integer, List<String>> MAP_HELP_PAGES_FILES = Map.of(
-      0, Arrays.asList(TITLE_HELP_PAGE_1, FILENAME_HELP_PAGE_1),
-      1, Arrays.asList(TITLE_HELP_PAGE_2, FILENAME_HELP_PAGE_2),
-      2, Arrays.asList(TITLE_HELP_PAGE_3, FILENAME_HELP_PAGE_3),
-      3, Arrays.asList(TITLE_HELP_PAGE_4, FILENAME_HELP_PAGE_4),
-      4, Arrays.asList(TITLE_HELP_PAGE_5, FILENAME_HELP_PAGE_5),
-      5, Arrays.asList(TITLE_HELP_PAGE_6, FILENAME_HELP_PAGE_6),
-      6, Arrays.asList(TITLE_HELP_PAGE_7, FILENAME_HELP_PAGE_7),
-      7, Arrays.asList(TITLE_HELP_PAGE_8, FILENAME_HELP_PAGE_8)
+    0, Arrays.asList(TITLE_HELP_PAGE_1, FILENAME_HELP_PAGE_1),
+    1, Arrays.asList(TITLE_HELP_PAGE_2, FILENAME_HELP_PAGE_2),
+    2, Arrays.asList(TITLE_HELP_PAGE_3, FILENAME_HELP_PAGE_3),
+    3, Arrays.asList(TITLE_HELP_PAGE_4, FILENAME_HELP_PAGE_4),
+    4, Arrays.asList(TITLE_HELP_PAGE_5, FILENAME_HELP_PAGE_5),
+    5, Arrays.asList(TITLE_HELP_PAGE_6, FILENAME_HELP_PAGE_6),
+    6, Arrays.asList(TITLE_HELP_PAGE_7, FILENAME_HELP_PAGE_7),
+    7, Arrays.asList(TITLE_HELP_PAGE_8, FILENAME_HELP_PAGE_8)
   );
 
   /**
    * Map of rendering hints used to paint custom components.
    */
   public static final Map<RenderingHints.Key, Object> MAP_RENDERING_HINTS = Map.of(
-      RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON,
-      RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY,
-      RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
+    RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON,
+    RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY,
+    RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
   );
 
   // ---------------------------------------- Constructor ---------------------------------------

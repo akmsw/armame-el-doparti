@@ -76,12 +76,12 @@ public class CustomSpinner extends JSpinner {
           g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
           g2.setColor(Constants.COLOR_GREEN_LIGHT_WHITE);
           g2.fillRoundRect(
-              x,
-              y,
-              (width - 1),
-              (height - 1),
-              Constants.ROUNDED_BORDER_ARC_SPINNER,
-              Constants.ROUNDED_BORDER_ARC_SPINNER
+            x,
+            y,
+            (width - 1),
+            (height - 1),
+            Constants.ROUNDED_BORDER_ARC_SPINNER,
+            Constants.ROUNDED_BORDER_ARC_SPINNER
           );
         }
 

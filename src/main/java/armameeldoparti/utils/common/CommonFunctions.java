@@ -47,8 +47,7 @@ public final class CommonFunctions {
   // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * Exits the program with the corresponding error message and error code according to the occurred
-   * exception.
+   * Exits the program with the corresponding error message and error code according to the occurred exception.
    *
    * @param error The error that caused the program to end.
    */
@@ -65,16 +64,15 @@ public final class CommonFunctions {
    * Builds an error window with a custom message.
    *
    * @param errorMessage    Custom error message to show.
-   * @param parentComponent Graphical component where the dialogs associated with the event should
-   *                        be displayed.
+   * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
   public static void showErrorMessage(String errorMessage, Component parentComponent) {
     JOptionPane.showMessageDialog(
-        parentComponent,
-        errorMessage,
-        Constants.ERROR_MESSAGE_TITLE,
-        JOptionPane.ERROR_MESSAGE,
-        null
+      parentComponent,
+      errorMessage,
+      Constants.ERROR_MESSAGE_TITLE,
+      JOptionPane.ERROR_MESSAGE,
+      null
     );
   }
 
@@ -85,12 +83,12 @@ public final class CommonFunctions {
    */
   public static void updateActiveMonitorFromView(View view) {
     CommonFields.setActiveMonitor(
-        retrieveOptional(Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
-                                                          .getScreenDevices())
-                               .filter(screen -> screen.getDefaultConfiguration()
-                                                       .getBounds()
-                                                       .contains(view.getLocation()))
-                               .findFirst())
+      retrieveOptional(Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment()
+                                                        .getScreenDevices())
+                             .filter(screen -> screen.getDefaultConfiguration()
+                                                     .getBounds()
+                                                     .contains(view.getLocation()))
+                             .findFirst())
     );
   }
 
@@ -153,11 +151,9 @@ public final class CommonFunctions {
    * @return The ImageIcon of the specified file.
    */
   public static ImageIcon createImage(String imageFileName) {
-    return Objects.requireNonNull(
-      new ImageIcon(Constants.class
-                             .getClassLoader()
-                             .getResource(Constants.PATH_IMG + imageFileName))
-    );
+    return Objects.requireNonNull(new ImageIcon(Constants.class
+                                                         .getClassLoader()
+                                                         .getResource(Constants.PATH_IMG + imageFileName)));
   }
 
   /**
@@ -191,8 +187,7 @@ public final class CommonFunctions {
   /**
    * Gets the corresponding controller to the requested view.
    *
-   * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime the
-   * type of the controlled view.
+   * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime the type of the controlled view.
    *
    * @param view The view whose controller is needed.
    *
@@ -210,21 +205,18 @@ public final class CommonFunctions {
    * @return A list containing the anchored players grouped by their anchorage number.
   */
   public static List<List<Player>> getAnchoredPlayers() {
-    return new ArrayList<>(
-      CommonFields.getPlayersSets()
-                  .values()
-                  .stream()
-                  .flatMap(List::stream)
-                  .filter(Player::isAnchored)
-                  .collect(Collectors.groupingBy(Player::getAnchorageNumber))
-                  .values()
-    );
+    return new ArrayList<>(CommonFields.getPlayersSets()
+                                       .values()
+                                       .stream()
+                                       .flatMap(List::stream)
+                                       .filter(Player::isAnchored)
+                                       .collect(Collectors.groupingBy(Player::getAnchorageNumber))
+                                       .values());
   }
 
   /**
-   * Checks if an optional that should not be null has a value present. If so, that value is
-   * retrieved. If the optional has no value, then the program exits with a fatal internal error
-   * code.
+   * Checks if an optional that should not be null has a value present. If so, that value is retrieved. If the optional has no
+   * value, then the program exits with a fatal internal error code.
    *
    * @param <T>      Generic optional type.
    * @param optional The optional to be checked.
@@ -249,14 +241,11 @@ public final class CommonFunctions {
    * @return The search-corresponding position.
    */
   public static <T> Position getCorrespondingPosition(Map<Position, T> map, T search) {
-    return retrieveOptional(
-      map.entrySet()
-         .stream()
-         .filter(
-           e -> e.getValue()
-                 .equals(search)
-         )
-         .map(Map.Entry::getKey)
-         .findFirst());
+    return retrieveOptional(map.entrySet()
+                               .stream()
+                               .filter(e -> e.getValue()
+                                             .equals(search))
+                               .map(Map.Entry::getKey)
+                               .findFirst());
   }
 }

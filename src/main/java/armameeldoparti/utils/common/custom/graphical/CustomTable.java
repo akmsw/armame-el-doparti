@@ -85,15 +85,10 @@ public class CustomTable extends JTable {
         Object.class,
         new DefaultTableCellRenderer() {
           @Override
-          public Component getTableCellRendererComponent(JTable table,
-                                                         Object value,
-                                                         boolean isSelected,
-                                                         boolean hasFocus,
-                                                         int row,
-                                                         int column) {
-            Component comp = super.getTableCellRendererComponent(
-                table, value, isSelected, hasFocus, row, column
-            );
+          public Component getTableCellRendererComponent(JTable table, Object value,
+                                                         boolean isSelected, boolean hasFocus,
+                                                         int row, int column) {
+            Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
             if (comp instanceof JComponent) {
               JComponent auxComp = (JComponent) comp;
@@ -133,12 +128,12 @@ public class CustomTable extends JTable {
             g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
             g2.setColor(getBackground());
             g2.fillRoundRect(
-                0,
-                0,
-                (getWidth() - 1),
-                (getHeight() - 1),
-                Constants.ROUNDED_BORDER_ARC_TABLE_CELLS,
-                Constants.ROUNDED_BORDER_ARC_TABLE_CELLS
+              0,
+              0,
+              (getWidth() - 1),
+              (getHeight() - 1),
+              Constants.ROUNDED_BORDER_ARC_TABLE_CELLS,
+              Constants.ROUNDED_BORDER_ARC_TABLE_CELLS
             );
 
             super.paintComponent(g2);

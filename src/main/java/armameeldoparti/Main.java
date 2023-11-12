@@ -60,8 +60,8 @@ public final class Main {
   // ---------------------------------------- Main entry point ----------------------------------
 
   /**
-   * Starts the program by initializing the fields needed along with the program's graphical
-   * properties, and making the main menu view visible.
+   * Starts the program by initializing the fields needed along with the program's graphical properties, and making the main menu
+   * view visible.
    *
    * @param args Program arguments (not used).
    */
@@ -73,24 +73,18 @@ public final class Main {
     CommonFields.setControllerMap(new EnumMap<>(ProgramView.class));
     CommonFields.setPlayersAmountMap(new EnumMap<>(Position.class));
     CommonFields.setPlayersSets(new TreeMap<>());
-    CommonFields.setPositionsMap(
-        Map.of(
-          Position.CENTRAL_DEFENDER, Constants.POSITION_CENTRAL_DEFENDERS,
-          Position.LATERAL_DEFENDER, Constants.POSITION_LATERAL_DEFENDERS,
-          Position.MIDFIELDER, Constants.POSITION_MIDFIELDERS,
-          Position.FORWARD, Constants.POSITION_FORWARDS,
-          Position.GOALKEEPER, Constants.POSITION_GOALKEEPERS
-        )
-    );
+    CommonFields.setPositionsMap(Map.of(Position.CENTRAL_DEFENDER, Constants.POSITION_CENTRAL_DEFENDERS,
+                                        Position.LATERAL_DEFENDER, Constants.POSITION_LATERAL_DEFENDERS,
+                                        Position.MIDFIELDER, Constants.POSITION_MIDFIELDERS,
+                                        Position.FORWARD, Constants.POSITION_FORWARDS,
+                                        Position.GOALKEEPER, Constants.POSITION_GOALKEEPERS));
 
     setUpGeneralGraphicalProperties();
     setPlayersDistribution();
     populatePlayersSets();
     setUpControllers();
 
-    SwingUtilities.invokeLater(
-        ((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))::showView
-    );
+    SwingUtilities.invokeLater(((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))::showView);
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -117,26 +111,24 @@ public final class Main {
   /**
    * Gets the number of players for each position per team using regular expressions.
    *
-   * <p>{@code [CLMFG].+>.+}: Retrieves the lines that start with C, L, M, F, or G, followed by at
-   * least one '>' character (these are the lines that matters in the .pda file).
+   * <p>{@code [CLMFG].+>.+}: Retrieves the lines that start with C, L, M, F, or G, followed by at least one '>' character (these
+   * are the lines that matters in the .pda file).
    *
-   * <p>{@code (?!(?<=X)\\d).}: Gets the part of the line that is not a number that we are
-   * interested in (the number would take the place of the X).
+   * <p>{@code (?!(?<=X)\\d).}: Gets the part of the line that is not a number that we are interested in (the number would take
+   * the place of the X).
    *
-   * <p>If the .pda file is modified in terms of the order of the important lines, it must be taken
-   * into account that Position.values()[index] trusts that what is found corresponds to the order
-   * in which the values in the Position enum are declared. Idem, if the order of the Position enum
-   * values are changed, it should be noted that Position.values()[index] trusts the order in which
-   * the data will be retrieved from the .pda file and, therefore, you should review the order of
-   * the important lines in the file.
+   * <p>If the .pda file is modified in terms of the order of the important lines, it must be taken into account that
+   * Position.values()[index] trusts that what is found corresponds to the order in which the values in the Position enum are
+   * declared. Idem, if the order of the Position enum values are changed, it should be noted that Position.values()[index] trusts
+   * the order in which the data will be retrieved from the .pda file and, therefore, you should review the order of the important
+   * lines in the file.
    */
   private static void setPlayersDistribution() {
     try (BufferedReader buff = new BufferedReader(
         new InputStreamReader(
-          Objects.requireNonNull(
-            CommonFunctions.class
-                          .getClassLoader()
-                          .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
+          Objects.requireNonNull(CommonFunctions.class
+                                                .getClassLoader()
+                                                .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
           )
         )
     )) {
@@ -146,13 +138,15 @@ public final class Main {
 
       buff.lines()
           .filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
-          .forEach(line -> {
-            CommonFields.getPlayersAmountMap()
-                        .put(Position.values()[wrapperIndex.index],
-                             Integer.parseInt(line.replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")));
+          .forEach(
+            line -> {
+              CommonFields.getPlayersAmountMap()
+                          .put(Position.values()[wrapperIndex.index],
+                               Integer.parseInt(line.replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")));
 
-            wrapperIndex.index++;
-          });
+              wrapperIndex.index++;
+            }
+          );
     } catch (IOException e) {
       CommonFunctions.exitProgram(Error.INTERNAL_FILES_ERROR);
     }
@@ -162,16 +156,13 @@ public final class Main {
    * Creates the controllers and assigns their corresponding view to control.
    */
   private static void setUpControllers() {
-    CommonFields.getControllerMap().putAll(
-        Map.of(
-          ProgramView.MAIN_MENU, new MainMenuController(new MainMenuView()),
-          ProgramView.HELP, new HelpController(new HelpView()),
-          ProgramView.NAMES_INPUT, new NamesInputController(new NamesInputView()),
-          ProgramView.ANCHORAGES, new AnchoragesController(new AnchoragesView()),
-          ProgramView.SKILL_POINTS, new SkillPointsInputController(new SkillPointsInputView()),
-          ProgramView.RESULTS, new ResultsController(new ResultsView())
-        )
-    );
+    CommonFields.getControllerMap()
+                .putAll(Map.of(ProgramView.MAIN_MENU, new MainMenuController(new MainMenuView()),
+                               ProgramView.HELP, new HelpController(new HelpView()),
+                               ProgramView.NAMES_INPUT, new NamesInputController(new NamesInputView()),
+                               ProgramView.ANCHORAGES, new AnchoragesController(new AnchoragesView()),
+                               ProgramView.SKILL_POINTS, new SkillPointsInputController(new SkillPointsInputView()),
+                               ProgramView.RESULTS, new ResultsController(new ResultsView())));
   }
 
   /**
@@ -202,13 +193,11 @@ public final class Main {
     try {
       // In order to use the font, it must be first created and registered
       Font programFont = Font.createFont(
-          Font.TRUETYPE_FONT,
-          Objects.requireNonNull(
-            CommonFunctions.class
-                           .getClassLoader()
-                           .getResourceAsStream(Constants.PATH_TTF + Constants.FILENAME_FONT),
-            Constants.MSG_ERROR_NULL_RESOURCE
-          )
+        Font.TRUETYPE_FONT,
+        Objects.requireNonNull(CommonFunctions.class
+                                              .getClassLoader()
+                                              .getResourceAsStream(Constants.PATH_TTF + Constants.FILENAME_FONT),
+                               Constants.MSG_ERROR_NULL_RESOURCE)
       ).deriveFont(Constants.FONT_SIZE);
 
       GraphicsEnvironment.getLocalGraphicsEnvironment()

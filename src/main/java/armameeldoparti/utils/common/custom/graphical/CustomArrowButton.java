@@ -14,8 +14,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
 /**
  * Custom arrow button class.
  *
- * <p>This class is used to instantiate a custom arrow button that fits the overall program
- * aesthetics.
+ * <p>This class is used to instantiate a custom arrow button that fits the overall program aesthetics.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -131,13 +130,7 @@ public class CustomArrowButton extends BasicArrowButton {
       Graphics2D g2 = (Graphics2D) g.create();
 
       g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-      g2.setStroke(
-        new BasicStroke(
-          Constants.STROKE_BUTTON_ARROW,
-          BasicStroke.CAP_ROUND,
-          BasicStroke.JOIN_ROUND
-        )
-      );
+      g2.setStroke(new BasicStroke(Constants.STROKE_BUTTON_ARROW, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
       g2.drawPolygon(triangle);
       g2.fillPolygon(triangle);
       g2.dispose();

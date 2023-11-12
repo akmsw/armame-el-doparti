@@ -15,8 +15,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 /**
  * Custom scroll pane class.
  *
- * <p>This class is used to instantiate a custom scroll pane that fits the overall program
- * aesthetics.
+ * <p>This class is used to instantiate a custom scroll pane that fits the overall program aesthetics.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -34,11 +33,7 @@ public class CustomScrollPane extends JScrollPane {
    * @param textArea Text area associated to the scroll pane that will be controlled.
    */
   public CustomScrollPane(JTextArea textArea) {
-    super(
-        textArea,
-        ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
-    );
+    super(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     setUpGraphicalProperties();
   }
 
@@ -51,12 +46,12 @@ public class CustomScrollPane extends JScrollPane {
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
     g2.setColor(Constants.COLOR_GREEN_LIGHT_WHITE);
     g2.fillRoundRect(
-        0,
-        0,
-        (getWidth() - 1),
-        (getHeight() - 1),
-        Constants.ROUNDED_BORDER_ARC_GENERAL,
-        Constants.ROUNDED_BORDER_ARC_GENERAL
+      0,
+      0,
+      (getWidth() - 1),
+      (getHeight() - 1),
+      Constants.ROUNDED_BORDER_ARC_GENERAL,
+      Constants.ROUNDED_BORDER_ARC_GENERAL
     );
     g2.dispose();
   }
@@ -94,12 +89,12 @@ public class CustomScrollPane extends JScrollPane {
         g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
         g2.setColor(Constants.COLOR_GREEN_DARK);
         g2.fillRoundRect(
-            thumbBounds.x,
-            thumbBounds.y,
-            thumbBounds.width,
-            thumbBounds.height,
-            Constants.ROUNDED_BORDER_ARC_SCROLLBAR,
-            Constants.ROUNDED_BORDER_ARC_SCROLLBAR
+          thumbBounds.x,
+          thumbBounds.y,
+          thumbBounds.width,
+          thumbBounds.height,
+          Constants.ROUNDED_BORDER_ARC_SCROLLBAR,
+          Constants.ROUNDED_BORDER_ARC_SCROLLBAR
         );
         g2.dispose();
       }
@@ -111,12 +106,12 @@ public class CustomScrollPane extends JScrollPane {
         g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
         g2.setColor(Constants.COLOR_GREEN_MEDIUM);
         g2.fillRoundRect(
-            trackBounds.x,
-            trackBounds.y,
-            trackBounds.width,
-            trackBounds.height,
-            Constants.ROUNDED_BORDER_ARC_SCROLLBAR,
-            Constants.ROUNDED_BORDER_ARC_SCROLLBAR
+          trackBounds.x,
+          trackBounds.y,
+          trackBounds.width,
+          trackBounds.height,
+          Constants.ROUNDED_BORDER_ARC_SCROLLBAR,
+          Constants.ROUNDED_BORDER_ARC_SCROLLBAR
         );
         g2.dispose();
       }

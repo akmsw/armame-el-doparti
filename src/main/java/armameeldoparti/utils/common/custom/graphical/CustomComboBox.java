@@ -59,12 +59,12 @@ public class CustomComboBox<E> extends JComboBox<E> {
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
     g2.setColor(getBackground());
     g2.fillRoundRect(
-        0,
-        0,
-        (getWidth() - 1),
-        (getHeight() - 1),
-        Constants.ROUNDED_BORDER_ARC_GENERAL,
-        Constants.ROUNDED_BORDER_ARC_GENERAL
+      0,
+      0,
+      (getWidth() - 1),
+      (getHeight() - 1),
+      Constants.ROUNDED_BORDER_ARC_GENERAL,
+      Constants.ROUNDED_BORDER_ARC_GENERAL
     );
     g2.dispose();
 
@@ -78,12 +78,12 @@ public class CustomComboBox<E> extends JComboBox<E> {
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
     g2.setColor(getBackground());
     g2.drawRoundRect(
-        0,
-        0,
-        (getWidth() - 1),
-        (getHeight() - 1),
-        Constants.ROUNDED_BORDER_ARC_GENERAL,
-        Constants.ROUNDED_BORDER_ARC_GENERAL
+      0,
+      0,
+      (getWidth() - 1),
+      (getHeight() - 1),
+      Constants.ROUNDED_BORDER_ARC_GENERAL,
+      Constants.ROUNDED_BORDER_ARC_GENERAL
     );
     g2.dispose();
   }
@@ -111,9 +111,9 @@ public class CustomComboBox<E> extends JComboBox<E> {
         protected ComboPopup createPopup() {
           return new BasicComboPopup(comboBox) {
             @Override
-              protected void configureList() {
-                super.configureList();
-                list.setCellRenderer(new CustomListCellRenderer());
+            protected void configureList() {
+              super.configureList();
+              list.setCellRenderer(new CustomListCellRenderer());
             }
 
             @Override
@@ -128,12 +128,12 @@ public class CustomComboBox<E> extends JComboBox<E> {
               g2.setColor(Constants.COLOR_GREEN_MEDIUM);
               g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
               g2.drawRoundRect(
-                  0,
-                  0,
-                  (getWidth() - 1),
-                  (getHeight() - 1),
-                  Constants.ROUNDED_BORDER_ARC_GENERAL,
-                  Constants.ROUNDED_BORDER_ARC_GENERAL
+                0,
+                0,
+                (getWidth() - 1),
+                (getHeight() - 1),
+                Constants.ROUNDED_BORDER_ARC_GENERAL,
+                Constants.ROUNDED_BORDER_ARC_GENERAL
               );
               g2.dispose();
             }
@@ -145,12 +145,12 @@ public class CustomComboBox<E> extends JComboBox<E> {
               g2.setColor(Constants.COLOR_GREEN_MEDIUM);
               g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
               g2.fillRoundRect(
-                  0,
-                  0,
-                  (getWidth() - 1),
-                  (getHeight() - 1),
-                  Constants.ROUNDED_BORDER_ARC_GENERAL,
-                  Constants.ROUNDED_BORDER_ARC_GENERAL
+                0,
+                0,
+                (getWidth() - 1),
+                (getHeight() - 1),
+                Constants.ROUNDED_BORDER_ARC_GENERAL,
+                Constants.ROUNDED_BORDER_ARC_GENERAL
               );
               g2.dispose();
 
@@ -166,9 +166,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
     @Override
     public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                                                   boolean isSelected, boolean cellHasFocus) {
-      JLabel renderer = (JLabel) super.getListCellRendererComponent(
-          list, value, index, isSelected, cellHasFocus
-      );
+      JLabel renderer = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
       Color fillColor = isSelected ? Constants.COLOR_GREEN_DARK_MEDIUM : list.getBackground();
 
@@ -187,12 +185,12 @@ public class CustomComboBox<E> extends JComboBox<E> {
       g2.setColor(getBackground());
       g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
       g2.fillRoundRect(
-          0,
-          0,
-          (getWidth() - 1),
-          (getHeight() - 1),
-          Constants.ROUNDED_BORDER_ARC_COMBOBOX,
-          Constants.ROUNDED_BORDER_ARC_COMBOBOX
+        0,
+        0,
+        (getWidth() - 1),
+        (getHeight() - 1),
+        Constants.ROUNDED_BORDER_ARC_COMBOBOX,
+        Constants.ROUNDED_BORDER_ARC_COMBOBOX
       );
       g2.dispose();
 

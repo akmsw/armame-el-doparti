@@ -70,11 +70,9 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * 'Finish' button event handler.
    *
-   * <p>Checks if the necessary anchorages conditions are met. If so, it proceeds with the
-   * distribution.
+   * <p>Checks if the necessary anchorages conditions are met. If so, it proceeds with the distribution.
    *
-   * @param parentComponent Graphical component where the dialogs associated with the event should
-   *                        be displayed.
+   * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
   public void finishButtonEvent(Component parentComponent) {
     if (!validAnchoragesCombination()) {
@@ -91,8 +89,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    *
    * <p>Checks if the necessary conditions to make a new anchorage are met. If so, it does it.
    *
-   * @param parentComponent Graphical component where the dialogs associated with the event should
-   *                        be displayed.
+   * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
   public void newAnchorageButtonEvent(Component parentComponent) {
     int playersToAnchorAmount = (int) view.getCheckboxesMap()
@@ -104,10 +101,10 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
     if (!validChecksAmount(playersToAnchorAmount)) {
       CommonFunctions.showErrorMessage(
-          "No puede haber más de " + Constants.MAX_PLAYERS_PER_ANCHORAGE
-          + " ni menos de " + Constants.MIN_PLAYERS_PER_ANCHORAGE
-          + " jugadores en un mismo anclaje",
-          parentComponent
+        "No puede haber más de " + Constants.MAX_PLAYERS_PER_ANCHORAGE
+        + " ni menos de " + Constants.MIN_PLAYERS_PER_ANCHORAGE
+        + " jugadores en un mismo anclaje",
+        parentComponent
       );
 
       return;
@@ -115,8 +112,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
     if (!validCheckedPlayersPerPosition()) {
       CommonFunctions.showErrorMessage(
-          "No puede haber más de la mitad de jugadores\nde una misma posición en un mismo anclaje",
-          parentComponent
+        "No puede haber más de la mitad de jugadores\nde una misma posición en un mismo anclaje",
+        parentComponent
       );
 
       return;
@@ -124,9 +121,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
     if (!validAnchoredPlayersAmount(playersToAnchorAmount)) {
       CommonFunctions.showErrorMessage(
-          "No puede haber más de " + Constants.MAX_ANCHORED_PLAYERS
-          + " jugadores anclados en total",
-          parentComponent
+        "No puede haber más de " + Constants.MAX_ANCHORED_PLAYERS + " jugadores anclados en total",
+        parentComponent
       );
 
       return;
@@ -151,11 +147,10 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * 'Delete anchorage' button event handler.
    *
-   * <p>Prompts the user for the number of the anchorage to delete, and removes it, updating the
-   * text area and the state of the buttons.
+   * <p>Prompts the user for the number of the anchorage to delete, and removes it, updating the text area and the state of the
+   * buttons.
    *
-   * @param parentComponent Graphical component where the dialogs associated with the event should
-   *                        be displayed.
+   * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
   public void deleteAnchorageButtonEvent(Component parentComponent) {
     String[] optionsDelete = new String[anchoragesAmount];
@@ -165,13 +160,13 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     }
 
     int anchorageToDelete = JOptionPane.showOptionDialog(
-        parentComponent,
-        "Seleccione qué anclaje desea borrar",
-        "Antes de continuar...",
-        JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.QUESTION_MESSAGE,
-        Constants.ICON_DIALOG, optionsDelete,
-        optionsDelete[0]
+      parentComponent,
+      "Seleccione qué anclaje desea borrar",
+      "Antes de continuar...",
+      JOptionPane.OK_CANCEL_OPTION,
+      JOptionPane.QUESTION_MESSAGE,
+      Constants.ICON_DIALOG, optionsDelete,
+      optionsDelete[0]
     );
 
     if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
@@ -193,8 +188,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * 'Back' button event handler.
    *
-   * <p>Makes the controlled view invisible, deletes every anchorage made, resets the controlled
-   * view to its default state and shows the names input view.
+   * <p>Makes the controlled view invisible, deletes every anchorage made, resets the controlled view to its default state and
+   * shows the names input view.
    */
   public void backButtonEvent() {
     hideView();
@@ -209,8 +204,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * Resets the controlled view to its default values.
    *
-   * <p>Clears every anchorage made, updating the text area and the state of the buttons, and the
-   * checkboxes that were selected whose players were not anchored, are deselected.
+   * <p>Clears every anchorage made, updating the text area and the state of the buttons, and the checkboxes that were selected
+   * whose players were not anchored, are deselected.
    */
   @Override
   protected void resetView() {
@@ -238,9 +233,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
         .addActionListener(e -> newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e)));
 
     view.getDeleteAnchorageButton()
-        .addActionListener(
-          e -> deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e))
-        );
+        .addActionListener(e -> deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e)));
 
     view.getDeleteLastAnchorageButton()
         .addActionListener(e -> deleteLastAnchorageButtonEvent());
@@ -296,20 +289,18 @@ public class AnchoragesController extends Controller<AnchoragesView> {
           .append("ANCLAJE " + wrapper.anchorageNumber + System.lineSeparator());
 
       CommonFields.getPlayersSets()
-                  .forEach((key, value) -> value.stream()
-                                                .filter(player -> player.getAnchorageNumber()
-                                                                  == wrapper.anchorageNumber)
-                                                .forEach(
-                                                  player -> {
-                                                    view.getTextArea()
-                                                        .append(
-                                                          wrapper.counter + ". " + player.getName()
-                                                          + System.lineSeparator()
-                                                        );
+                  .forEach(
+                    (key, value) -> value.stream()
+                                         .filter(player -> player.getAnchorageNumber() == wrapper.anchorageNumber)
+                                         .forEach(
+                                           player -> {
+                                             view.getTextArea()
+                                                 .append(wrapper.counter + ". " + player.getName() + System.lineSeparator());
 
-                                                    wrapper.counter++;
-                                                  }
-                                                ));
+                                             wrapper.counter++;
+                                           }
+                                         )
+                  );
 
       if (wrapper.anchorageNumber != anchoragesAmount) {
         view.getTextArea()
@@ -373,9 +364,9 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * Deletes a specific anchorage.
    *
-   * <p>The players that have the specified anchorage, now will have anchorage number 0. If the
-   * anchorage number to delete is not the last one, then the remaining players (from the chosen
-   * anchorage + 1 to anchoragesAmount) will have their anchorage number decreased by 1.
+   * <p>The players that have the specified anchorage, now will have anchorage number 0. If the anchorage number to delete is not
+   * the last one, then the remaining players (from the chosen anchorage + 1 to anchoragesAmount) will have their anchorage number
+   * decreased by 1.
    *
    * @param anchorageToDelete Anchorage number to delete.
    */
@@ -383,9 +374,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     changeAnchorage(anchorageToDelete, 0);
 
     if (anchorageToDelete != anchoragesAmount) {
-      for (int anchorageNumber = anchorageToDelete + 1;
-               anchorageNumber <= anchoragesAmount;
-               anchorageNumber++) {
+      for (int anchorageNumber = anchorageToDelete + 1; anchorageNumber <= anchoragesAmount; anchorageNumber++) {
         changeAnchorage(anchorageNumber, anchorageNumber - 1);
       }
     }
@@ -396,9 +385,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * Changes the anchorage number of certain players.
    *
-   * <p>If the replacement is 0 (an anchorage must be removed), then those players will be set as
-   * not-anchored, the players corresponding checkboxes will be visible and enabled again, and the
-   * anchored players amount will be decreased as needed.
+   * <p>If the replacement is 0 (an anchorage must be removed), then those players will be set as not-anchored, the players
+   * corresponding checkboxes will be visible and enabled again, and the anchored players amount will be decreased as needed.
    *
    * @param target      Anchorage number to replace.
    * @param replacement New anchorage number to set.
@@ -409,38 +397,39 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                 .stream()
                 .flatMap(List::stream)
                 .filter(player -> player.getAnchorageNumber() == target)
-                .forEach(player -> {
-                  player.setAnchorageNumber(replacement);
+                .forEach(
+                  player -> {
+                    player.setAnchorageNumber(replacement);
 
-                  if (replacement == 0) {
-                    player.setAnchored(false);
+                    if (replacement == 0) {
+                      player.setAnchored(false);
 
-                    CommonFunctions.retrieveOptional(
-                      view.getCheckboxesMap()
-                          .values()
-                          .stream()
-                          .flatMap(List::stream)
-                          .filter(checkbox -> checkbox.getText()
-                                                      .equals(player.getName()))
-                          .findFirst()
-                    ).setVisible(true);
+                      CommonFunctions.retrieveOptional(
+                          view.getCheckboxesMap()
+                              .values()
+                              .stream()
+                              .flatMap(List::stream)
+                              .filter(checkbox -> checkbox.getText()
+                                                          .equals(player.getName()))
+                              .findFirst()
+                      ).setVisible(true);
 
-                    anchoredPlayersAmount--;
+                      anchoredPlayersAmount--;
+                    }
                   }
-                });
+                );
   }
 
   /**
-   * The checkboxes that were selected whose players were not anchored, are deselected. Then, shows
-   * the corresponding following view.
+   * The checkboxes that were selected whose players were not anchored, are deselected. Then, shows the corresponding following
+   * view.
    */
   private void finish() {
     hideView();
     clearCheckboxes();
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
-      ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS))
-      .updateNameLabels();
+      ((SkillPointsInputController) CommonFunctions.getController(ProgramView.SKILL_POINTS)).updateNameLabels();
 
       CommonFunctions.getController(ProgramView.SKILL_POINTS)
                      .showView();
@@ -453,8 +442,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * Sets the corresponding anchorage number to the selected players. Then, unchecks their
-   * checkboxes and makes them invisible.
+   * Sets the corresponding anchorage number to the selected players. Then, unchecks their checkboxes and makes them invisible.
    *
    * @param cbSet Check boxes set with players checked.
    */
@@ -462,14 +450,10 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     CommonFields.getPlayersSets()
                 .get(CommonFunctions.getCorrespondingPosition(view.getCheckboxesMap(), cbSet))
                 .stream()
-                .filter(
-                  player -> cbSet.stream()
-                                 .filter(JCheckBox::isSelected)
-                                 .anyMatch(
-                                   checkbox -> checkbox.getText()
-                                                       .equals(player.getName())
-                                 )
-                )
+                .filter(player -> cbSet.stream()
+                                       .filter(JCheckBox::isSelected)
+                                       .anyMatch(checkbox -> checkbox.getText()
+                                                                     .equals(player.getName())))
                 .forEach(player -> {
                   player.setAnchorageNumber(anchoragesAmount);
                   player.setAnchored(true);
@@ -500,12 +484,10 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    *
    * @param playersToAnchorAmount Checked players to anchor.
    *
-   * @return Whether the checked players amount is at least 2 and at most MAX_PLAYERS_PER_ANCHORAGE,
-   *         or not.
+   * @return Whether the checked players amount is at least 2 and at most MAX_PLAYERS_PER_ANCHORAGE, or not.
    */
   private boolean validChecksAmount(int playersToAnchorAmount) {
-    return playersToAnchorAmount <= Constants.MAX_PLAYERS_PER_ANCHORAGE
-           && playersToAnchorAmount >= 2;
+    return playersToAnchorAmount <= Constants.MAX_PLAYERS_PER_ANCHORAGE && playersToAnchorAmount >= 2;
   }
 
   /**
@@ -527,8 +509,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    *
    * @param playersToAnchorAmount Checked players amount.
    *
-   * @return Whether the selected players amount is at most the maximum allowed per anchorage or
-   *         not.
+   * @return Whether the selected players amount is at most the maximum allowed per anchorage or not.
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
     return anchoredPlayersAmount + playersToAnchorAmount <= Constants.MAX_ANCHORED_PLAYERS;

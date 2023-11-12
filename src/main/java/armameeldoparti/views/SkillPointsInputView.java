@@ -67,31 +67,14 @@ public class SkillPointsInputView extends View {
   protected void addButtons() {
     backButton = new CustomButton("Atrás", Constants.ROUNDED_BORDER_ARC_GENERAL);
     finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);
-    resetSkillPointsButton = new CustomButton(
-        "Reiniciar puntuaciones", Constants.ROUNDED_BORDER_ARC_GENERAL
-    );
+    resetSkillPointsButton = new CustomButton("Reiniciar puntuaciones", Constants.ROUNDED_BORDER_ARC_GENERAL);
 
-    masterPanel.add(
-        finishButton,
-        CommonFunctions.buildMigLayoutConstraints(
-          Constants.MIG_LAYOUT_GROW,
-          Constants.MIG_LAYOUT_SPAN
-        )
-    );
-    masterPanel.add(
-        resetSkillPointsButton,
-        CommonFunctions.buildMigLayoutConstraints(
-          Constants.MIG_LAYOUT_GROW,
-          Constants.MIG_LAYOUT_SPAN
-        )
-    );
-    masterPanel.add(
-        backButton,
-        CommonFunctions.buildMigLayoutConstraints(
-          Constants.MIG_LAYOUT_GROW,
-          Constants.MIG_LAYOUT_SPAN
-        )
-    );
+    masterPanel.add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
+                                                                            Constants.MIG_LAYOUT_SPAN));
+    masterPanel.add(resetSkillPointsButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
+                                                                                      Constants.MIG_LAYOUT_SPAN));
+    masterPanel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
+                                                                          Constants.MIG_LAYOUT_SPAN));
   }
 
   // ---------------------------------------- Private methods -----------------------------------
@@ -103,16 +86,8 @@ public class SkillPointsInputView extends View {
     Map<Position, String> positionsMap = CommonFields.getPositionsMap();
 
     for (Position position : Position.values()) {
-      masterPanel.add(
-          new CustomLabel(
-            CommonFunctions.capitalize(positionsMap.get(position)),
-            SwingConstants.CENTER
-          ),
-          CommonFunctions.buildMigLayoutConstraints(
-            Constants.MIG_LAYOUT_GROW,
-            Constants.MIG_LAYOUT_SPAN
-          )
-      );
+      masterPanel.add(new CustomLabel(CommonFunctions.capitalize(positionsMap.get(position)), SwingConstants.CENTER),
+                      CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
 
       List<Player> currentSet = CommonFields.getPlayersSets()
                                             .get(position);
@@ -120,14 +95,10 @@ public class SkillPointsInputView extends View {
       int currentSetSize = currentSet.size();
 
       for (int playerIndex = 0; playerIndex < currentSetSize; playerIndex++) {
-        JSpinner spinner = new CustomSpinner(
-            new SpinnerNumberModel(
-              Constants.SKILL_INI,
-              Constants.SKILL_MIN,
-              Constants.SKILL_MAX,
-              Constants.SKILL_STEP
-            )
-        );
+        JSpinner spinner = new CustomSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
+                                                                    Constants.SKILL_MIN,
+                                                                    Constants.SKILL_MAX,
+                                                                    Constants.SKILL_STEP));
 
         JLabel nameLabel = new JLabel(currentSet.get(playerIndex)
                                                 .getName());
