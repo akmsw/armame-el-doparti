@@ -37,9 +37,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
   // ---------------------------------------- Public methods ------------------------------------
 
   /**
-   * 'Finish' button event handler.
-   *
-   * <p>Sets the entered skill points for each player, makes the controlled view invisible and shows the results view.
+   * Sets the entered skill points for each player, makes the controlled view invisible and shows the results view.
    */
   public void finishButtonEvent() {
     hideView();
@@ -54,21 +52,18 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
   }
 
   /**
-   * 'Reset skill points' button event handler.
-   *
-   * <p>Sets 0 skill points to every player and resets every spinner value to the minimum skill point.
+   * Sets 0 skill points to every player and resets every spinner value to the minimum skill point.
    */
   public void resetSkillPointsButtonEvent() {
     resetSkillPoints();
   }
 
   /**
-   * 'Back' button event handler.
-   *
-   * <p>Resets the controlled view to its default values and shows the corresponding next view.
+   * Resets the controlled view to its default values, makes it invisible and shows the corresponding next view.
    */
   public void backButtonEvent() {
     resetView();
+    hideView();
 
     CommonFunctions.getController(CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT)
                    .showView();
@@ -94,13 +89,9 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
 
   // ---------------------------------------- Protected methods ---------------------------------
 
-  /**
-   * Resets the controlled view to its default values and makes it invisible.
-   */
   @Override
   protected void resetView() {
     resetSkillPoints();
-    hideView();
   }
 
   @Override

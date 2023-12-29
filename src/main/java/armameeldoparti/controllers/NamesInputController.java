@@ -53,9 +53,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * 'Back' button event handler.
-   *
-   * <p>Resets the controlled view to its default values, turns the anchorages flags to false, makes the controlled view invisible
+   * Resets the controlled view to its default values, turns the anchorages flags to false, makes the controlled view invisible
    * and shows the main menu view.
    */
   public void backButtonEvent() {
@@ -68,10 +66,8 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * 'Mix' button event handler.
-   *
-   * <p>Asks the user for the players distribution method, makes the controlled view invisible and shows the corresponding
-   * following view.
+   * Asks the user for the players distribution method, makes the controlled view invisible and shows the corresponding following
+   * view.
    *
    * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
@@ -103,9 +99,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Text fields input event handler.
-   *
-   * <p>Validates the user input with a regular expression that checks if the string contains only latin characters from A to Z
+   * Validates the user input with a regular expression that checks if the string contains only latin characters from A to Z
    * including Ñ, uppercase or lowercase, with or without accent mark, with or without spaces. If the input is not valid or
    * already exists, the program asks for a new input.
    *
@@ -142,9 +136,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Combobox option change event handler.
-   *
-   * <p>Updates the shown text field according to the selected combobox option.
+   * Updates the shown text field according to the selected combobox option.
    *
    * @param selectedOption Combobox selected option.
    */
@@ -153,9 +145,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Radio buttons click event handler.
-   *
-   * <p>Since there can be only one distribution method at a time, if one radio button is selected, the other is unselected
+   * Since there can be only one distribution method at a time: if one radio button is selected, the other is unselected
    * automatically. Then, if the conditions are met, the mix button is enabled.
    *
    * @param e Radio button click event.
@@ -229,7 +219,7 @@ public class NamesInputController extends Controller<NamesInputView> {
             textField.addActionListener(e -> {
                 /*
                  * If the entered text is both a valid string and name, it will be applied to the corresponding player.
-                 * If not, an error message will be shown and the text field will be reset to the player name.
+                 * If not, an error message will be shown and the text field will be reset to the player's name.
                  */
                 try {
                   textFieldEvent(textFieldsSet.indexOf(textField),
@@ -368,7 +358,7 @@ public class NamesInputController extends Controller<NamesInputView> {
    *
    * @param name Name to validate.
    *
-   * @return Whether there is already a player with the specified name or not.
+   * @return Whether there is already a player with the specified name.
    */
   private boolean alreadyExists(String name) {
     return CommonFields.getPlayersSets()
@@ -383,7 +373,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * Checks if every player has a valid non-empty name assigned and the players distribution method has been chosen.
    *
-   * @return Whether every condition needed to distribute the players is met or not.
+   * @return Whether every condition needed to distribute the players is met.
    */
   private boolean readyToDistribute() {
     return !alreadyExists("") && distributionMethodHasBeenChosen();
@@ -392,7 +382,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * Checks if any players distribution method has been chosen.
    *
-   * @return Whether the user has chosen a players distribution method or not.
+   * @return Whether the user has chosen a players distribution method.
    */
   private boolean distributionMethodHasBeenChosen() {
     return view.getRadioButtonRandom()
@@ -406,7 +396,7 @@ public class NamesInputController extends Controller<NamesInputView> {
    *
    * @param string The string to validate.
    *
-   * @return Whether the string matches the string validation regex or not.
+   * @return Whether the string matches the string validation regex.
    */
   private boolean validString(String string) {
     return Pattern.matches(Constants.REGEX_NAMES_VALIDATION, string);
@@ -418,7 +408,7 @@ public class NamesInputController extends Controller<NamesInputView> {
    *
    * @param name The name to validate.
    *
-   * @return If the given name is valid according to the specified conditions.
+   * @return Whether the given name is valid.
    */
   private boolean validName(String name) {
     return name.length() <= Constants.MAX_NAME_LEN

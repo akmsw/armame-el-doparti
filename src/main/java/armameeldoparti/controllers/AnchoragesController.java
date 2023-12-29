@@ -68,9 +68,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * 'Finish' button event handler.
-   *
-   * <p>Checks if the necessary anchorages conditions are met. If so, it proceeds with the distribution.
+   * Checks if the necessary anchorages conditions are met. If so, it proceeds with the distribution.
    *
    * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
@@ -85,9 +83,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * 'New anchorage' button event handler.
-   *
-   * <p>Checks if the necessary conditions to make a new anchorage are met. If so, it does it.
+   * Checks if the necessary conditions to make a new anchorage are met. If so, it does it.
    *
    * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
@@ -134,9 +130,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * 'Delete last anchorage' button event handler.
-   *
-   * <p>Deletes the last anchorage made, updating the text area and the state of the buttons.
+   * Deletes the last anchorage made, updating the text area and the state of the buttons.
    */
   public void deleteLastAnchorageButtonEvent() {
     deleteAnchorage(anchoragesAmount);
@@ -145,9 +139,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * 'Delete anchorage' button event handler.
-   *
-   * <p>Prompts the user for the number of the anchorage to delete, and removes it, updating the text area and the state of the
+   * Prompts the user for the number of the anchorage to delete, and removes it, updating the text area and the state of the
    * buttons.
    *
    * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
@@ -177,19 +169,15 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * 'Clear anchorages' button event handler.
-   *
-   * <p>Resets the controlled view to its default values.
+   * Resets the controlled view to its default values.
    */
   public void clearAnchoragesButtonEvent() {
     resetView();
   }
 
   /**
-   * 'Back' button event handler.
-   *
-   * <p>Makes the controlled view invisible, deletes every anchorage made, resets the controlled view to its default state and
-   * shows the names input view.
+   * Makes the controlled view invisible, deletes every anchorage made, resets the controlled view to its default state and shows
+   * the names input view.
    */
   public void backButtonEvent() {
     hideView();
@@ -351,7 +339,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * Clears the anchorages made (if there are any).
+   * Clears the anchorages made, if any.
    *
    * @see #deleteAnchorage(int)
    */
@@ -365,8 +353,8 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    * Deletes a specific anchorage.
    *
    * <p>The players that have the specified anchorage, now will have anchorage number 0. If the anchorage number to delete is not
-   * the last one, then the remaining players (from the chosen anchorage + 1 to anchoragesAmount) will have their anchorage number
-   * decreased by 1.
+   * the last one, then the remaining players (from {@code anchorageToDelete + 1} to {@code anchoragesAmount}) will have their
+   * anchorage number decreased by 1.
    *
    * @param anchorageToDelete Anchorage number to delete.
    */
@@ -484,16 +472,16 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    *
    * @param playersToAnchorAmount Checked players to anchor.
    *
-   * @return Whether the checked players amount is at least 2 and at most MAX_PLAYERS_PER_ANCHORAGE, or not.
+   * @return Whether the checked players amount is at least 2 and at most MAX_PLAYERS_PER_ANCHORAGE.
    */
   private boolean validChecksAmount(int playersToAnchorAmount) {
     return playersToAnchorAmount <= Constants.MAX_PLAYERS_PER_ANCHORAGE && playersToAnchorAmount >= 2;
   }
 
   /**
-   * Checks if more than half of any players set is selected or not.
+   * Checks if more than half of any players set is selected.
    *
-   * @return Whether more than half of any players set is checked, or not.
+   * @return Whether more than half of any players set is checked.
    */
   private boolean validCheckedPlayersPerPosition() {
     return view.getCheckboxesMap()
@@ -509,7 +497,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    *
    * @param playersToAnchorAmount Checked players amount.
    *
-   * @return Whether the selected players amount is at most the maximum allowed per anchorage or not.
+   * @return Whether the selected players amount is at most the maximum allowed per anchorage.
    */
   private boolean validAnchoredPlayersAmount(int playersToAnchorAmount) {
     return anchoredPlayersAmount + playersToAnchorAmount <= Constants.MAX_ANCHORED_PLAYERS;

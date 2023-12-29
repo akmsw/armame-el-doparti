@@ -82,9 +82,8 @@ public class ResultsController extends Controller<ResultsView> {
    * distribution results.
    */
   public void setUp() {
-    teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM
-                                               ? randomMix(Arrays.asList(team1, team2))
-                                               : bySkillPointsMix(Arrays.asList(team1, team2)));
+    teams = (CommonFields.getDistribution() == Constants.MIX_RANDOM ? randomMix(Arrays.asList(team1, team2))
+                                                                    : bySkillPointsMix(Arrays.asList(team1, team2)));
 
     view.setTable(new CustomTable(Constants.PLAYERS_PER_TEAM + CommonFields.getDistribution() + 1, TABLE_COLUMNS));
     view.initializeInterface();
@@ -101,10 +100,8 @@ public class ResultsController extends Controller<ResultsView> {
   }
 
   /**
-   * 'Back' button event handler.
-   *
-   * <p>Resets the teams, resets the controlled view to its default values and makes it invisible, and shows the
-   * corresponding previous view.
+   * Resets the teams, resets the controlled view to its default values and makes it invisible, and shows the corresponding
+   * previous view.
    */
   public void backButtonEvent() {
     resetTeams();
@@ -123,9 +120,7 @@ public class ResultsController extends Controller<ResultsView> {
   }
 
   /**
-   * 'Remix' button event handler.
-   *
-   * <p>Resets the teams, redistributes the players with the specified method and updates the results table.
+   * Resets the teams, redistributes the players with the specified method and updates the results table.
    */
   public void remixButtonEvent() {
     resetTeams();

@@ -36,9 +36,7 @@ public class MainMenuController extends Controller<MainMenuView> {
   }
 
   /**
-   * 'Help' button event handler.
-   *
-   * <p>Makes the controlled view invisible and shows the help view.
+   * Makes the controlled view invisible and shows the help view.
    */
   public void helpButtonEvent() {
     HelpController controller = (HelpController) CommonFunctions.getController(ProgramView.HELP);
@@ -50,9 +48,7 @@ public class MainMenuController extends Controller<MainMenuView> {
   }
 
   /**
-   * 'Start' button event handler.
-   *
-   * <p>Makes the controlled view invisible and shows the names input view.
+   * Makes the controlled view invisible and shows the names input view.
    */
   public void startButtonEvent() {
     hideView();
@@ -62,18 +58,14 @@ public class MainMenuController extends Controller<MainMenuView> {
   }
 
   /**
-   * 'Contact' button event handler.
-   *
-   * <p>Opens the browser on the contact URL.
+   * Opens the browser on the contact URL.
    */
   public void contactButtonEvent() {
     CommonFunctions.browserRedirect(Constants.URL_CONTACT);
   }
 
   /**
-   * 'Reports & suggestions' button event handler.
-   *
-   * <p>Opens the browser on the issues URL.
+   * Opens the browser on the issues URL.
    */
   public void issuesButtonEvent() {
     CommonFunctions.browserRedirect(Constants.URL_ISSUES);
