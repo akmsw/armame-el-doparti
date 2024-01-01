@@ -112,7 +112,7 @@ public class RandomMixer implements PlayersMixer {
       int teamNumber = getAvailableTeam(teams, team -> anchorageCanBeAdded(team, anchorage));
 
       if (teamNumber == -1) {
-        CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
+        CommonFunctions.exitProgram(Error.ERROR_INTERNAL);
       }
 
       Map<Position, List<Player>> randomTeamPlayersMap = teams.get(teamNumber)
@@ -136,7 +136,7 @@ public class RandomMixer implements PlayersMixer {
                   int teamNumber = getAvailableTeam(teams, team -> playerCanBeAdded(team, player));
 
                   if (teamNumber == -1) {
-                    CommonFunctions.exitProgram(Error.FATAL_INTERNAL_ERROR);
+                    CommonFunctions.exitProgram(Error.ERROR_INTERNAL);
                   }
 
                   player.setTeamNumber(teamNumber + 1);
@@ -217,8 +217,7 @@ public class RandomMixer implements PlayersMixer {
    * @return If a set of anchored players can be added to a team.
    */
   private boolean anchorageCanBeAdded(Team team, List<Player> anchoredPlayers) {
-    return !(anchorageOverflowsTeamSize(team, anchoredPlayers)
-             || anchorageOverflowsAnyPositionSet(team, anchoredPlayers));
+    return !(anchorageOverflowsTeamSize(team, anchoredPlayers) || anchorageOverflowsAnyPositionSet(team, anchoredPlayers));
   }
 
   /**

@@ -148,7 +148,7 @@ public final class Main {
             }
           );
     } catch (IOException e) {
-      CommonFunctions.exitProgram(Error.INTERNAL_FILES_ERROR);
+      CommonFunctions.exitProgram(Error.ERROR_FILES);
     }
   }
 
@@ -205,7 +205,7 @@ public final class Main {
 
       setProgramFont(programFont);
     } catch (IOException | FontFormatException e) {
-      CommonFunctions.exitProgram(Error.GUI_ERROR);
+      CommonFunctions.exitProgram(Error.ERROR_GUI);
     }
   }
 

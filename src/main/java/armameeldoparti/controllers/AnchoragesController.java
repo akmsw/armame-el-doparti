@@ -270,9 +270,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
       private int counter = 1;
     };
 
-    for (wrapper.anchorageNumber = 1;
-         wrapper.anchorageNumber <= anchoragesAmount;
-         wrapper.anchorageNumber++) {
+    for (wrapper.anchorageNumber = 1; wrapper.anchorageNumber <= anchoragesAmount; wrapper.anchorageNumber++) {
       view.getTextArea()
           .append("ANCLAJE " + wrapper.anchorageNumber + System.lineSeparator());
 

@@ -26,8 +26,8 @@ public final class Constants {
 
   private static final int EXIT_CODE_ERROR_BROWSER = -1;
   private static final int EXIT_CODE_ERROR_GUI = -2;
-  private static final int EXIT_CODE_ERROR_INTERNAL_FATAL = -3;
-  private static final int EXIT_CODE_ERROR_INTERNAL_FILES = -4;
+  private static final int EXIT_CODE_ERROR_INTERNAL = -3;
+  private static final int EXIT_CODE_ERROR_FILES = -4;
 
   /**
    * Size, in pixels, of the scaled program icon (height and width).
@@ -74,9 +74,9 @@ public final class Constants {
   private static final String HEX_CODE_ANCHORAGE_COLOR_6 = "#f27c7c";
   private static final String MIG_LAYOUT_ALIGN = "align";
   private static final String MSG_ERROR_BROWSER = "ERROR DE CONEXIÓN CON NAVEGADOR WEB";
-  private static final String MSG_ERROR_FATAL_INTERNAL = "ERROR FATAL INTERNO";
+  private static final String MSG_ERROR_INTERNAL = "ERROR FATAL INTERNO";
   private static final String MSG_ERROR_GUI = "ERROR DE INTERFAZ GRÁFICA";
-  private static final String MSG_ERROR_INTERNAL_FILES = "ERROR DE LECTURA DE ARCHIVOS INTERNOS";
+  private static final String MSG_ERROR_FILES = "ERROR DE LECTURA DE ARCHIVOS INTERNOS";
   private static final String POSITION_COMBOBOX_1 = "Defensores centrales";
   private static final String POSITION_COMBOBOX_2 = "Defensores laterales";
   private static final String POSITION_COMBOBOX_3 = "Mediocampistas";
@@ -238,20 +238,20 @@ public final class Constants {
    * Map of errors and their corresponding exit code.
    */
   public static final Map<Error, Integer> MAP_ERROR_CODE = Map.of(
-    Error.BROWSER_ERROR, EXIT_CODE_ERROR_BROWSER,
-    Error.GUI_ERROR, EXIT_CODE_ERROR_GUI,
-    Error.FATAL_INTERNAL_ERROR, EXIT_CODE_ERROR_INTERNAL_FATAL,
-    Error.INTERNAL_FILES_ERROR, EXIT_CODE_ERROR_INTERNAL_FILES
+    Error.ERROR_BROWSER, EXIT_CODE_ERROR_BROWSER,
+    Error.ERROR_GUI, EXIT_CODE_ERROR_GUI,
+    Error.ERROR_INTERNAL, EXIT_CODE_ERROR_INTERNAL,
+    Error.ERROR_FILES, EXIT_CODE_ERROR_FILES
   );
 
   /**
    * Map of errors and their corresponding error message to display.
    */
   public static final Map<Error, String> MAP_ERROR_MESSAGE = Map.of(
-    Error.BROWSER_ERROR, MSG_ERROR_BROWSER,
-    Error.FATAL_INTERNAL_ERROR, MSG_ERROR_FATAL_INTERNAL,
-    Error.GUI_ERROR, MSG_ERROR_GUI,
-    Error.INTERNAL_FILES_ERROR, MSG_ERROR_INTERNAL_FILES
+    Error.ERROR_BROWSER, MSG_ERROR_BROWSER,
+    Error.ERROR_GUI, MSG_ERROR_GUI,
+    Error.ERROR_INTERNAL, MSG_ERROR_INTERNAL,
+    Error.ERROR_FILES, MSG_ERROR_FILES
   );
 
   /**

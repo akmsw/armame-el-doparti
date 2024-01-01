@@ -12,6 +12,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+
 import javax.naming.InvalidNameException;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -75,8 +77,7 @@ public class NamesInputController extends Controller<NamesInputView> {
     hideView();
 
     CommonFields.setDistribution(view.getRadioButtonRandom()
-                                     .isSelected() ? Constants.MIX_RANDOM
-                                                   : Constants.MIX_BY_SKILL_POINTS);
+                                     .isSelected() ? Constants.MIX_RANDOM : Constants.MIX_BY_SKILL_POINTS);
 
     if (CommonFields.isAnchoragesEnabled()) {
       ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES)).updateCheckboxesText();
@@ -152,9 +153,8 @@ public class NamesInputController extends Controller<NamesInputView> {
    */
   public void radioButtonEvent(ItemEvent e) {
     if (e.getStateChange() == ItemEvent.SELECTED) {
-      (e.getSource() == view.getRadioButtonRandom()
-                        ? view.getRadioButtonBySkillPoints()
-                        : view.getRadioButtonRandom()).setSelected(false);
+      (e.getSource() == view.getRadioButtonRandom() ? view.getRadioButtonBySkillPoints()
+                                                    : view.getRadioButtonRandom()).setSelected(false);
     }
 
     validateMixButtonEnable();
@@ -196,23 +196,16 @@ public class NamesInputController extends Controller<NamesInputView> {
   protected void setUpListeners() {
     view.getMixButton()
         .addActionListener(e -> mixButtonEvent(view));
-
     view.getBackButton()
         .addActionListener(e -> backButtonEvent());
-
     view.getRadioButtonRandom()
         .addItemListener(this::radioButtonEvent);
-
     view.getRadioButtonBySkillPoints()
         .addItemListener(this::radioButtonEvent);
-
     view.getComboBox()
         .addActionListener(e -> comboBoxEvent((String) Objects.requireNonNull(((JComboBox<?>) e.getSource()).getSelectedItem())));
-
     view.getAnchoragesCheckbox()
         .addActionListener(e -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled()));
-
-
     view.getTextFieldsMap()
         .forEach((player, textFieldsSet) ->
           textFieldsSet.forEach(textField ->

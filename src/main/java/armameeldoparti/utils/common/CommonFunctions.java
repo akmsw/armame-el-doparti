@@ -102,7 +102,7 @@ public final class CommonFunctions {
       Desktop.getDesktop()
              .browse(new URI(link));
     } catch (IOException | URISyntaxException e) {
-      CommonFunctions.exitProgram(Error.BROWSER_ERROR);
+      CommonFunctions.exitProgram(Error.ERROR_BROWSER);
     }
   }
 
@@ -225,7 +225,7 @@ public final class CommonFunctions {
    */
   public static <T> T retrieveOptional(Optional<T> optional) {
     if (!optional.isPresent()) {
-      exitProgram(Error.FATAL_INTERNAL_ERROR);
+      exitProgram(Error.ERROR_INTERNAL);
     }
 
     return optional.get();

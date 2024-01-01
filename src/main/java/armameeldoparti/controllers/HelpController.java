@@ -125,7 +125,7 @@ public class HelpController extends Controller<HelpView> {
       textArea.setCaretPosition(0);
       textArea.scrollRectToVisible(new Rectangle(0, 0, 1, 1));
     } catch (IOException e) {
-      CommonFunctions.exitProgram(Error.INTERNAL_FILES_ERROR);
+      CommonFunctions.exitProgram(Error.ERROR_FILES);
     }
   }
 

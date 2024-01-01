@@ -10,8 +10,8 @@ package armameeldoparti.models;
  * @since 3.0
  */
 public enum Error {
-  BROWSER_ERROR,
-  FATAL_INTERNAL_ERROR,
-  GUI_ERROR,
-  INTERNAL_FILES_ERROR,
+  ERROR_BROWSER,
+  ERROR_INTERNAL,
+  ERROR_GUI,
+  ERROR_FILES,
 }
