@@ -26,7 +26,7 @@ import java.awt.GraphicsEnvironment;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -94,19 +94,12 @@ public final class Main {
    * Populates the players sets with empty players.
    */
   private static void populatePlayersSets() {
-    for (Position position : Position.values()) {
-      List<Player> playersSet = new ArrayList<>();
-
-      int totalPlayersInPosition = CommonFields.getPlayersAmountMap()
-                                               .get(position) * 2;
-
-      for (int i = 0; i < totalPlayersInPosition; i++) {
-        playersSet.add(new Player("", position));
-      }
-
-      CommonFields.getPlayersSets()
-                  .put(position, playersSet);
-    }
+    Arrays.stream(Position.values())
+          .forEach(position -> CommonFields.getPlayersSets()
+                                           .put(position, IntStream.range(0, CommonFields.getPlayersAmountMap()
+                                                                                         .get(position) * 2)
+                                                                   .mapToObj(i -> new Player("", position))
+                                                                   .collect(Collectors.toList())));
   }
 
   /**
