@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -213,16 +212,10 @@ public final class Main {
    * @param font Font to use.
    */
   private static void setProgramFont(Font font) {
-    Enumeration<Object> keys = UIManager.getDefaults()
-                                        .keys();
-
-    while (keys.hasMoreElements()) {
-      Object key = keys.nextElement();
-      Object value = UIManager.get(key);
-
-      if (value instanceof FontUIResource) {
-        UIManager.put(key, font);
-      }
-    }
+    UIManager.getDefaults()
+             .keySet()
+             .stream()
+             .filter(k -> UIManager.get(k) instanceof FontUIResource)
+             .forEach(k -> UIManager.put(k, font));
   }
 }
