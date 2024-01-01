@@ -12,8 +12,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 import javax.naming.InvalidNameException;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -114,9 +114,8 @@ public class NamesInputController extends Controller<NamesInputView> {
    * @throws IllegalArgumentException When the input is an invalid string.
    * @throws InvalidNameException     When the input is an invalid name.
    */
-  public void textFieldEvent(int playerIndex, List<Player> playersSet, String text)
-                             throws IllegalArgumentException,
-                                    InvalidNameException {
+  public void textFieldEvent(int playerIndex, List<Player> playersSet, String text) throws IllegalArgumentException,
+                                                                                           InvalidNameException {
     if (!validString(text)) {
       throw new IllegalArgumentException();
     }
@@ -276,33 +275,23 @@ public class NamesInputController extends Controller<NamesInputView> {
    * positions enum.
    */
   private void updateTextArea() {
-    var wrapperCounter = new Object() {
-      private int counter;
-    };
-
     view.getTextArea()
         .setText("");
 
-    CommonFields.getPlayersSets()
-                .forEach(
-                  (key, value) -> value.stream()
-                                       .filter(player -> !player.getName()
-                                                                .equals(""))
-                                       .forEach(
-                                         player -> {
-                                           if (wrapperCounter.counter != 0
-                                               && Constants.PLAYERS_PER_TEAM * 2 - wrapperCounter.counter != 0) {
-                                             view.getTextArea()
-                                                 .append(System.lineSeparator());
-                                           }
+    List<Player> players = CommonFields.getPlayersSets()
+                                       .entrySet()
+                                       .stream()
+                                       .flatMap(playersSet -> playersSet.getValue()
+                                                                        .stream()
+                                                                        .filter(player -> !player.getName()
+                                                                                                 .equals("")))
+                                       .collect(Collectors.toList());
 
-                                           wrapperCounter.counter++;
-
-                                           view.getTextArea()
-                                               .append(wrapperCounter.counter + " - " + player.getName());
-                                         }
-                                       )
-                );
+    IntStream.range(0, players.size())
+             .forEachOrdered(index -> view.getTextArea()
+                                          .append((index + 1) + " - " + players.get(index)
+                                                                               .getName()
+                                                  + (index < Constants.PLAYERS_PER_TEAM * 2 - 1 ? System.lineSeparator() : "")));
   }
 
   /**
@@ -320,7 +309,6 @@ public class NamesInputController extends Controller<NamesInputView> {
         .flatMap(Collection::stream)
         .filter(textField -> textField.getParent() == leftTopPanel)
         .forEach(leftTopPanel::remove);
-
     view.getTextFieldsMap()
         .get(CommonFunctions.getCorrespondingPosition(CommonFields.getPositionsMap(), selectedOption.toUpperCase()))
         .forEach(textField -> leftTopPanel.add(textField, Constants.MIG_LAYOUT_GROWX));

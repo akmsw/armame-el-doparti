@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
@@ -125,28 +127,24 @@ public final class Main {
    */
   private static void setPlayersDistribution() {
     try (BufferedReader buff = new BufferedReader(
-        new InputStreamReader(
-          Objects.requireNonNull(CommonFunctions.class
-                                                .getClassLoader()
-                                                .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA)
-          )
-        )
-    )) {
-      var wrapperIndex = new Object() {
-        private int index = 0;
-      };
+           new InputStreamReader(
+             Objects.requireNonNull(CommonFunctions.class
+                                                   .getClassLoader()
+                                                   .getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA))
+           )
+         )
+    ) {
+      List<String> filteredLines = buff.lines()
+                                       .filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
+                                       .collect(Collectors.toList());
 
-      buff.lines()
-          .filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
-          .forEach(
-            line -> {
-              CommonFields.getPlayersAmountMap()
-                          .put(Position.values()[wrapperIndex.index],
-                               Integer.parseInt(line.replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")));
-
-              wrapperIndex.index++;
-            }
-          );
+      IntStream.range(0, filteredLines.size())
+               .forEach(
+                 index -> CommonFields.getPlayersAmountMap()
+                                      .put(Position.values()[index],
+                                           Integer.parseInt(filteredLines.get(index)
+                                                                         .replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")))
+               );
     } catch (IOException e) {
       CommonFunctions.exitProgram(Error.ERROR_FILES);
     }
