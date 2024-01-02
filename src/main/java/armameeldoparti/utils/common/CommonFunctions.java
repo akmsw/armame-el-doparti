@@ -95,12 +95,12 @@ public final class CommonFunctions {
   /**
    * Opens a new tab in the default web browser with the specified URL.
    *
-   * @param link Destination URL.
+   * @param url Destination URL.
    */
-  public static void browserRedirect(String link) {
+  public static void browserRedirect(String url) {
     try {
       Desktop.getDesktop()
-             .browse(new URI(link));
+             .browse(new URI(url));
     } catch (IOException | URISyntaxException e) {
       CommonFunctions.exitProgram(Error.ERROR_BROWSER);
     }
@@ -129,14 +129,14 @@ public final class CommonFunctions {
   }
 
   /**
-   * Capitalizes the first letter of the given string if it's not empty.
+   * Capitalizes the first letter of the given string.
    *
    * @param input The string to capitalize.
    *
    * @return The given string with the first letter uppercase and the rest lowercase.
    */
   public static String capitalize(String input) {
-    return input.isEmpty() ? input
+    return input.isBlank() ? input
                            : input.substring(0, 1)
                                   .toUpperCase()
                              + input.substring(1)

@@ -112,10 +112,10 @@ public final class Main {
    * the place of the X).
    *
    * <p>If the .pda file is modified in terms of the order of the important lines, it must be taken into account that
-   * Position.values()[index] trusts that what is found corresponds to the order in which the values in the Position enum are
-   * declared. Idem, if the order of the Position enum values are changed, it should be noted that Position.values()[index] trusts
-   * the order in which the data will be retrieved from the .pda file and, therefore, you should review the order of the important
-   * lines in the file.
+   * {@code Position.values()[index]} trusts that what is found corresponds to the order in which the values in the Position enum
+   * are declared. Idem, if the order of the Position enum values are changed, it should be noted that
+   * {@code Position.values()[index]} trusts the order in which the data will be retrieved from the .pda file and, therefore, you
+   * should review the order of the important lines in the file.
    */
   private static void setPlayersDistribution() {
     try (BufferedReader buff = new BufferedReader(
@@ -181,7 +181,6 @@ public final class Main {
     UIManager.put("TextField.selectionForeground", Constants.COLOR_GREEN_LIGHT_WHITE);
 
     try {
-      // In order to use the font, it must be first created and registered
       Font programFont = Font.createFont(
         Font.TRUETYPE_FONT,
         Objects.requireNonNull(CommonFunctions.class

@@ -88,6 +88,15 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
   public void newAnchorageButtonEvent(Component parentComponent) {
+    if (!validCheckedPlayersPerPosition()) {
+      CommonFunctions.showErrorMessage(
+        "No puede haber más de la mitad de jugadores\nde una misma posición en un mismo anclaje",
+        parentComponent
+      );
+
+      return;
+    }
+
     int playersToAnchorAmount = (int) view.getCheckboxesMap()
                                           .values()
                                           .stream()
@@ -100,15 +109,6 @@ public class AnchoragesController extends Controller<AnchoragesView> {
         "No puede haber más de " + Constants.MAX_PLAYERS_PER_ANCHORAGE
         + " ni menos de " + Constants.MIN_PLAYERS_PER_ANCHORAGE
         + " jugadores en un mismo anclaje",
-        parentComponent
-      );
-
-      return;
-    }
-
-    if (!validCheckedPlayersPerPosition()) {
-      CommonFunctions.showErrorMessage(
-        "No puede haber más de la mitad de jugadores\nde una misma posición en un mismo anclaje",
         parentComponent
       );
 
@@ -216,19 +216,14 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   protected void setUpListeners() {
     view.getFinishButton()
         .addActionListener(e -> finishButtonEvent(CommonFunctions.getComponentFromEvent(e)));
-
     view.getNewAnchorageButton()
         .addActionListener(e -> newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e)));
-
     view.getDeleteAnchorageButton()
         .addActionListener(e -> deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(e)));
-
     view.getDeleteLastAnchorageButton()
         .addActionListener(e -> deleteLastAnchorageButtonEvent());
-
     view.getClearAnchoragesButton()
         .addActionListener(e -> clearAnchoragesButtonEvent());
-
     view.getBackButton()
         .addActionListener(e -> backButtonEvent());
   }
@@ -454,7 +449,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * Unchecks the remaining checked checkboxes.
+   * Unchecks the checked checkboxes.
    */
   private void clearCheckboxes() {
     view.getCheckboxesMap()

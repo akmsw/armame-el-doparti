@@ -87,13 +87,10 @@ public class MainMenuController extends Controller<MainMenuView> {
   protected void setUpListeners() {
     view.getStartButton()
         .addActionListener(e -> startButtonEvent());
-
     view.getHelpButton()
         .addActionListener(e -> helpButtonEvent());
-
     view.getContactButton()
         .addActionListener(e -> contactButtonEvent());
-
     view.getIssuesButton()
         .addActionListener(e -> issuesButtonEvent());
   }

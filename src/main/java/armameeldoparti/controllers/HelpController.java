@@ -151,10 +151,8 @@ public class HelpController extends Controller<HelpView> {
   protected void setUpListeners() {
     view.getPreviousPageButton()
         .addActionListener(e -> previousPageButtonEvent());
-
     view.getNextPageButton()
         .addActionListener(e -> nextPageButtonEvent());
-
     view.getBackButton()
         .addActionListener(e -> backButtonEvent());
   }

@@ -7,7 +7,7 @@ import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Abstract class that specifies the basic views methods and fields.
+ * Abstract class that specifies the basic view methods and fields.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -44,7 +44,7 @@ public abstract class View extends JFrame {
   // ---------------------------------------- Abstract protected methods ------------------------
 
   /**
-   * Initializes the view and makes it visible.
+   * Initializes the view interface.
    */
   protected abstract void initializeInterface();
 

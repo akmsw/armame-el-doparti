@@ -52,7 +52,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
   }
 
   /**
-   * Sets 0 skill points to every player and resets every spinner value to the minimum skill point.
+   * Sets 0 skill points to every player and resets every spinner value to the minimum assignable skill point.
    */
   public void resetSkillPointsButtonEvent() {
     resetSkillPoints();

@@ -170,7 +170,9 @@ public class BySkillPointsMixer implements PlayersMixer {
   private void distributeSubsets(List<Team> teams, List<Player> playersSet, Position position) {
     List<List<Player>> playersSubsets = new ArrayList<>();
 
-    for (int i = 0; i < playersSet.size() / 2; i++) {
+    int currentPositionPlayersPerTeam = playersSet.size() / 2;
+
+    for (int i = 0; i < currentPositionPlayersPerTeam; i++) {
       playersSubsets.add(Arrays.asList(playersSet.get(i), playersSet.get(playersSet.size() - 1 - i)));
     }
 

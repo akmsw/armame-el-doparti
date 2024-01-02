@@ -178,7 +178,8 @@ public class ResultsController extends Controller<ResultsView> {
    * @return The updated teams with the players distributed.
    */
   public List<Team> randomMix(List<Team> teams) {
-    return CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams) : randomMixer.withoutAnchorages(teams);
+    return CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams)
+                                              : randomMixer.withoutAnchorages(teams);
   }
 
   /**
@@ -273,16 +274,16 @@ public class ResultsController extends Controller<ResultsView> {
   }
 
   /**
-   * Overrides the table cells format in order to match the overall program aesthetics, including text alignment and background
-   * and foreground colors.
+   * Overrides the table cells format in order to fit the program aesthetics, including text alignment and background and
+   * foreground colors.
    *
    * <p>Row 0 and column 0 have dark green background and white foreground. The remaining cells will have black foreground.
    *
    * <p>The background color will be medium green if the cell shows any skill points related information. If the cell contains an
-   * anchored player name, its background will be the corresponding from the ANCHORAGES_COLORS array. If not, its background will
+   * anchored player name, its background will be the corresponding from the anchorages colors array. If not, its background will
    * be light green.
    *
-   * <p>The cell text will be centered if it shows any skill points related information, or a team name. Otherwise, it will be
+   * <p>The cell text will be centered if it shows any skill points related information or a team name. Otherwise, it will be
    * left-aligned.
    */
   private void overrideTableFormat() {

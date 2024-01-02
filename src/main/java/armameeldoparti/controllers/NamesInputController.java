@@ -350,7 +350,6 @@ public class NamesInputController extends Controller<NamesInputView> {
                                                  .equals(name));
   }
 
-
   /**
    * Checks if every player has a valid non-empty name assigned and the players distribution method has been chosen.
    *
@@ -377,7 +376,7 @@ public class NamesInputController extends Controller<NamesInputView> {
    *
    * @param string The string to validate.
    *
-   * @return Whether the string matches the string validation regex.
+   * @return Whether the given string matches the string validation regex.
    */
   private boolean validString(String string) {
     return Pattern.matches(Constants.REGEX_NAMES_VALIDATION, string);
