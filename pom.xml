@@ -8,8 +8,8 @@
   <version>3.0</version>
 
   <properties>
-    <java.version>14</java.version>
-    <maven.version>3.9.3</maven.version>
+    <java.version>16</java.version>
+    <maven.version>3.9.6</maven.version>
     <maven-compiler.version>3.11.0</maven-compiler.version>
     <maven-enforcer.version>3.2.1</maven-enforcer.version>
     <maven-failsafe.version>3.1.2</maven-failsafe.version>

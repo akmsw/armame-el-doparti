@@ -14,9 +14,11 @@ import armameeldoparti.utils.common.custom.graphical.CustomSeparator;
 import armameeldoparti.utils.common.custom.graphical.CustomTextArea;
 import armameeldoparti.utils.common.custom.graphical.CustomTextField;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -147,15 +149,12 @@ public class NamesInputView extends View {
    * Builds, stores and configures each position text fields.
    */
   private void addTextFields() {
-    for (Position position : Position.values()) {
-      int totalPlayersInPosition = CommonFields.getPlayersAmountMap()
-                                               .get(position) * 2;
-
-      for (int i = 0; i < totalPlayersInPosition; i++) {
-        textFieldsMap.get(position)
-                     .add(new CustomTextField());
-      }
-    }
+    Arrays.asList(Position.values())
+          .forEach(position -> textFieldsMap.get(position)
+                                            .addAll(IntStream.range(0, CommonFields.getPlayersAmountMap()
+                                                                                   .get(position) * 2)
+                                                             .mapToObj(i -> new CustomTextField())
+                                                             .toList()));
   }
 
   /**

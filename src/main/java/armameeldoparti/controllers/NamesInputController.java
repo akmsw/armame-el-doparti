@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.naming.InvalidNameException;
 import javax.swing.JComboBox;
@@ -285,7 +284,7 @@ public class NamesInputController extends Controller<NamesInputView> {
                                                                         .stream()
                                                                         .filter(player -> !player.getName()
                                                                                                  .equals("")))
-                                       .collect(Collectors.toList());
+                                       .toList();
 
     IntStream.range(0, players.size())
              .forEachOrdered(index -> view.getTextArea()

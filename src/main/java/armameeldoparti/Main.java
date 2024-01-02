@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -99,7 +98,7 @@ public final class Main {
                                            .put(position, IntStream.range(0, CommonFields.getPlayersAmountMap()
                                                                                          .get(position) * 2)
                                                                    .mapToObj(i -> new Player("", position))
-                                                                   .collect(Collectors.toList())));
+                                                                   .toList()));
   }
 
   /**
@@ -128,7 +127,7 @@ public final class Main {
     ) {
       List<String> filteredLines = buff.lines()
                                        .filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
-                                       .collect(Collectors.toList());
+                                       .toList();
 
       IntStream.range(0, filteredLines.size())
                .forEach(

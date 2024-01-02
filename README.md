@@ -5,7 +5,7 @@
 [![buildBadge](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop-v3.0)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
 [![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
 
-[![openJDKTargetBadge](https://img.shields.io/badge/jdk-14%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/14/)
+[![openJDKTargetBadge](https://img.shields.io/badge/jdk-16%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/16/)
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross--platform-blueviolet?logo=windows-terminal)](https://en.wikipedia.org/wiki/Cross-platform_software)
 [![licenseBadge](https://img.shields.io/badge/gpl-3.0-blue?logo=gnu)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
@@ -38,14 +38,14 @@ Se ofrece la posibilidad de "anclar" dos o más jugadores entre sí, garantizand
 ## 📦 Requisitos generales
 ### ☕ Java
 - #### Versión mínima
-    🟡 [Java 14](https://www.oracle.com/ar/java/technologies/javase/jdk14-archive-downloads.html)
+    🟡 [Java 16](https://www.oracle.com/ar/java/technologies/javase/jdk16-archive-downloads.html)
 - #### Versión recomendada
     🟢 [Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html) *(o más reciente)*
 
 ## ⚙️ Requisitos para compilación manual
 ### 🪶 Apache Maven
 - #### Versión recomendada
-    🟢 [Apache Maven 3.9.5](https://maven.apache.org/download.cgi) *(o más reciente)*
+    🟢 [Apache Maven 3.9.6](https://maven.apache.org/download.cgi) *(o más reciente)*
 
 ## 📥 Descarga
 La versión estable más reciente del programa se encuentra disponible para descargar en la sección [releases](https://github.com/akmsw/armame-el-doparti/releases) de este proyecto.
@@ -103,13 +103,19 @@ No se pueden anclar a un mismo equipo todos los jugadores de un mismo tipo (por 
 - Importantes cambios generales de refactorización.
 
 ## 🛠️ Solución a problemas frecuentes
+### 🎛️ Generales
+- En caso de no poder construir el archivo `.jar` por tener instalada una versión distinta a la recomendada de Apache Maven, se puede modificar la línea del archivo `pom.xml` que especifica la versión a utilizar para la compilación manual:
+```xml
+<maven.version>3.9.6</maven.version> <!-- Reemplazá el 3.9.6 por la versión que tengas -->
+```
 ### 🐧 En Linux
-- Si el archivo ***.jar*** no se ejecuta al hacerle doble click, hacé esto:
+- Si instalaste correctamente una versión válida del JDK de Java y el archivo `.jar` no se ejecuta automáticamente al hacerle doble click, probá esto:
   - Click derecho sobre el archivo descargado
   - Propiedades
   - Abrir con...
   - En el campo de ingreso de comando personalizado, poné: `java -jar`
-  - Seleccionalo como opción predeterminada para la ejecución de archivos .jar
+  - Seleccionalo como opción predeterminada para la ejecución de archivos `.jar`
+  - Probá abrirlo con doble click nuevamente
 
 ## 🔜 Próximamente
 Si querés estar al tanto de qué cambios están planeados para las próximas versiones, [acá](https://github.com/akmsw/armame-el-doparti/projects?query=is%3Aopen?type=new&query=is:open%20sort:title-asc) vas a poder ver los detalles y metas planificadas.
