@@ -8,7 +8,9 @@ import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.AnchoragesView;
 import java.awt.Component;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.IntStream;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
@@ -254,42 +256,41 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * Updates the text area showing the anchorages details.
+   * Updates the text displayed in the read-only text area.
+   *
+   * <p>The order in which the players are displayed in this text area corresponds to the order of the Position enum.
+   *
+   * @see armameeldoparti.models.Position
    */
   private void updateTextArea() {
     view.getTextArea()
         .setText("");
 
-    var wrapper = new Object() {
-      private int anchorageNumber;
-      private int counter = 1;
-    };
+    IntStream.range(0, anchoragesAmount)
+             .forEach(i -> {
+               view.getTextArea()
+                   .append("ANCLAJE " + (i + 1) + System.lineSeparator());
 
-    for (wrapper.anchorageNumber = 1; wrapper.anchorageNumber <= anchoragesAmount; wrapper.anchorageNumber++) {
-      view.getTextArea()
-          .append("ANCLAJE " + wrapper.anchorageNumber + System.lineSeparator());
+               List<Player> anchoredPlayers = CommonFields.getPlayersSets()
+                                                          .entrySet()
+                                                          .stream()
+                                                          .flatMap(playersSet -> playersSet.getValue()
+                                                                                           .stream()
+                                                                                           .filter(player -> player.getAnchorageNumber() == (i + 1)))
+                                                          .sorted(Comparator.comparing(player -> player.getPosition()
+                                                                                                       .ordinal()))
+                                                          .toList();
 
-      CommonFields.getPlayersSets()
-                  .forEach(
-                    (key, value) -> value.stream()
-                                         .filter(player -> player.getAnchorageNumber() == wrapper.anchorageNumber)
-                                         .forEach(
-                                           player -> {
-                                             view.getTextArea()
-                                                 .append(wrapper.counter + ". " + player.getName() + System.lineSeparator());
+               for (Player player : anchoredPlayers) {
+                 view.getTextArea()
+                     .append((anchoredPlayers.indexOf(player) + 1) + ". " + player.getName() + System.lineSeparator());
+               }
 
-                                             wrapper.counter++;
-                                           }
-                                         )
-                  );
-
-      if (wrapper.anchorageNumber != anchoragesAmount) {
-        view.getTextArea()
-            .append(System.lineSeparator());
-      }
-
-      wrapper.counter = 1;
-    }
+               if ((i + 1) != anchoragesAmount) {
+                 view.getTextArea()
+                     .append(System.lineSeparator());
+               }
+             });
   }
 
   /**

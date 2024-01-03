@@ -271,8 +271,9 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * Updates the text displayed in the read-only text area.
    *
-   * <p>The players names are shown in the order they are positioned in their respective list. The order is the same of the
-   * positions enum.
+   * <p>The order in which the players are displayed in this text area corresponds to the order of the Position enum.
+   *
+   * @see armameeldoparti.models.Position
    */
   private void updateTextArea() {
     view.getTextArea()
