@@ -97,6 +97,7 @@ public final class Constants {
   public static final int INDEX_HELP_PAGE_FILENAME = 1;
   public static final int INDEX_HELP_PAGE_TITLE = 0;
   public static final int PLAYERS_PER_TEAM = 7;
+  public static final int PLAYERS_TOTAL = PLAYERS_PER_TEAM * 2;
   public static final int MAX_NAME_LEN = 10;
   public static final int MAX_PLAYERS_PER_ANCHORAGE = PLAYERS_PER_TEAM - 1;
   public static final int MAX_ANCHORED_PLAYERS = 2 * MAX_PLAYERS_PER_ANCHORAGE;

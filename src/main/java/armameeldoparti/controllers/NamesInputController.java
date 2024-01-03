@@ -9,6 +9,7 @@ import armameeldoparti.views.NamesInputView;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -284,13 +285,15 @@ public class NamesInputController extends Controller<NamesInputView> {
                                                                         .stream()
                                                                         .filter(player -> !player.getName()
                                                                                                  .equals("")))
+                                       .sorted(Comparator.comparing(player -> player.getPosition()
+                                                                                    .ordinal()))
                                        .toList();
 
     IntStream.range(0, players.size())
              .forEachOrdered(index -> view.getTextArea()
                                           .append((index + 1) + " - " + players.get(index)
                                                                                .getName()
-                                                  + (index < Constants.PLAYERS_PER_TEAM * 2 - 1 ? System.lineSeparator() : "")));
+                                                  + (index < Constants.PLAYERS_TOTAL - 1 ? System.lineSeparator() : "")));
   }
 
   /**
