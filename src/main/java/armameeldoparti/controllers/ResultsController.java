@@ -338,20 +338,16 @@ public class ResultsController extends Controller<ResultsView> {
               return c;
             }
 
-            Player playerOnCell = CommonFunctions.retrieveOptional(
-                CommonFields.getPlayersSets()
-                            .values()
-                            .stream()
-                            .flatMap(List::stream)
-                            .filter(player -> player.getName() == value)
-                            .findFirst()
-            );
+            Player playerOnCell = CommonFunctions.retrieveOptional(CommonFields.getPlayersSets()
+                                                                               .values()
+                                                                               .stream()
+                                                                               .flatMap(List::stream)
+                                                                               .filter(player -> player.getName() == value)
+                                                                               .findFirst());
 
-            c.setBackground(
-                playerOnCell.getAnchorageNumber() != 0 ? Constants.COLORS_ANCHORAGES
-                                                                  .get(playerOnCell.getAnchorageNumber() - 1)
-                                                       : Constants.COLOR_GREEN_LIGHT_WHITE
-            );
+            c.setBackground(playerOnCell.getAnchorageNumber() != 0 ? Constants.COLORS_ANCHORAGES
+                                                                              .get(playerOnCell.getAnchorageNumber() - 1)
+                                                                   : Constants.COLOR_GREEN_LIGHT_WHITE);
             c.setForeground(Color.BLACK);
 
             ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);

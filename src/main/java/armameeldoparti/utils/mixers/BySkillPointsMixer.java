@@ -60,7 +60,7 @@ public class BySkillPointsMixer implements PlayersMixer {
     Map<Position, List<Player>> playersMap = CommonFields.getPlayersSets();
 
     for (Position position : Position.values()) {
-      List<Player> currentPlayersSet = playersMap.get(position);
+      List<Player> currentPlayersSet = new ArrayList<>(playersMap.get(position));
 
       // Players sorted highest to lowest
       currentPlayersSet.sort(comparingInt(Player::getSkillPoints).reversed());

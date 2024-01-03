@@ -7,6 +7,7 @@ import armameeldoparti.models.Team;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class RandomMixer implements PlayersMixer {
                                                              .getTeamPlayers();
 
     for (Position position : Position.values()) {
-      List<Player> playersAtPosition = playersSets.get(position);
+      List<Player> playersAtPosition = new ArrayList<>(playersSets.get(position));
 
       Collections.shuffle(playersAtPosition);
 
