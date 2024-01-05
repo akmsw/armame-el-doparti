@@ -8,6 +8,8 @@ import armameeldoparti.utils.common.Constants;
 import armameeldoparti.utils.common.custom.graphical.CustomButton;
 import armameeldoparti.utils.common.custom.graphical.CustomLabel;
 import armameeldoparti.utils.common.custom.graphical.CustomSpinner;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,32 +85,27 @@ public class SkillPointsInputView extends View {
    * Adds the spinners to their corresponding panel.
    */
   private void addSpinners() {
-    Map<Position, String> positionsMap = CommonFields.getPositionsMap();
-
     for (Position position : Position.values()) {
-      masterPanel.add(new CustomLabel(CommonFunctions.capitalize(positionsMap.get(position)), SwingConstants.CENTER),
+      masterPanel.add(new CustomLabel(CommonFunctions.capitalize(CommonFields.getPositionsMap()
+                                                                             .get(position)), SwingConstants.CENTER),
                       CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
 
-      List<Player> currentSet = CommonFields.getPlayersSets()
-                                            .get(position);
+      List<Player> currentSet = new ArrayList<>(CommonFields.getPlayersSets()
+                                                            .get(position));
 
-      int currentSetSize = currentSet.size();
+      currentSet.sort(Comparator.comparing(player -> player.getPosition()
+                                                           .ordinal()));
 
-      for (int playerIndex = 0; playerIndex < currentSetSize; playerIndex++) {
-        JSpinner spinner = new CustomSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
-                                                                    Constants.SKILL_MIN,
-                                                                    Constants.SKILL_MAX,
-                                                                    Constants.SKILL_STEP));
+      for (Player player : currentSet) {
+        spinnersMap.put(player, new CustomSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
+                                                                         Constants.SKILL_MIN,
+                                                                         Constants.SKILL_MAX,
+                                                                         Constants.SKILL_STEP)));
 
-        JLabel nameLabel = new JLabel(currentSet.get(playerIndex)
-                                                .getName());
+        labelsMap.put(spinnersMap.get(player), new JLabel(player.getName()));
 
-        spinnersMap.put(currentSet.get(playerIndex), spinner);
-
-        labelsMap.put(spinner, nameLabel);
-
-        masterPanel.add(nameLabel, Constants.MIG_LAYOUT_PUSHX);
-        masterPanel.add(spinner, playerIndex % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
+        masterPanel.add(labelsMap.get(spinnersMap.get(player)), Constants.MIG_LAYOUT_PUSHX);
+        masterPanel.add(spinnersMap.get(player), currentSet.indexOf(player) % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
       }
     }
   }

@@ -130,12 +130,10 @@ public final class Main {
                                        .toList();
 
       IntStream.range(0, filteredLines.size())
-               .forEach(
-                 index -> CommonFields.getPlayersAmountMap()
-                                      .put(Position.values()[index],
-                                           Integer.parseInt(filteredLines.get(index)
-                                                                         .replaceAll(Constants.REGEX_PLAYERS_AMOUNT, "")))
-               );
+               .forEach(index -> CommonFields.getPlayersAmountMap()
+                                             .put(Position.values()[index],
+                                                  Integer.parseInt(filteredLines.get(index)
+                                                                                .replaceAll(Constants.REGEX_PLAYERS_AMOUNT, ""))));
     } catch (IOException e) {
       CommonFunctions.exitProgram(Error.ERROR_FILES);
     }
