@@ -386,15 +386,15 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Checks if the given name has at most MAX_NAME_LEN characters, is not empty or blank and if there isn't already a player with
-   * that name.
+   * Checks if the given name is not null/empty/blank, has at most MAX_NAME_LEN characters, and if there isn't already a player with that name.
    *
    * @param name The name to validate.
    *
    * @return Whether the given name is valid.
    */
   private boolean validName(String name) {
-    return name.length() <= Constants.MAX_NAME_LEN
-           && !(name.isBlank() || name.isEmpty() || alreadyExists(name));
+    return !name.isBlank()
+           && name.length() <= Constants.MAX_NAME_LEN
+           && !alreadyExists(name);
   }
 }
