@@ -60,8 +60,7 @@ public class HelpController extends Controller<HelpView> {
   }
 
   /**
-   * Increments the page number, updating the state of the buttons, the displayed page in the text area and the reading progress
-   * label.
+   * Increments the page number updating the state of the buttons, the displayed page in the text area and the reading progress label.
    */
   public void nextPageButtonEvent() {
     if (++currentPageNumber < TOTAL_HELP_PAGES - 1) {
@@ -76,8 +75,7 @@ public class HelpController extends Controller<HelpView> {
   }
 
   /**
-   * Decrements the page number, updating the state of the buttons, the displayed page in the text area and the reading progress
-   * label.
+   * Decrements the page number updating the state of the buttons, the displayed page in the text area and the reading progress label.
    */
   public void previousPageButtonEvent() {
     if (--currentPageNumber > 0) {
