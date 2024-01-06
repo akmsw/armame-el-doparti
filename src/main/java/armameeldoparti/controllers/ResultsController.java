@@ -178,8 +178,7 @@ public class ResultsController extends Controller<ResultsView> {
    * @return The updated teams with the players distributed.
    */
   public List<Team> randomMix(List<Team> teams) {
-    return CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams)
-                                              : randomMixer.withoutAnchorages(teams);
+    return CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams) : randomMixer.withoutAnchorages(teams);
   }
 
   /**
@@ -190,8 +189,7 @@ public class ResultsController extends Controller<ResultsView> {
    * @return The updated teams with the players distributed.
    */
   public List<Team> bySkillPointsMix(List<Team> teams) {
-    return CommonFields.isAnchoragesEnabled() ? bySkillPointsMixer.withAnchorages(teams)
-                                              : bySkillPointsMixer.withoutAnchorages(teams);
+    return CommonFields.isAnchoragesEnabled() ? bySkillPointsMixer.withAnchorages(teams) : bySkillPointsMixer.withoutAnchorages(teams);
   }
 
   // ---------------------------------------- Protected methods ---------------------------------
@@ -216,7 +214,6 @@ public class ResultsController extends Controller<ResultsView> {
   protected void setUpListeners() {
     view.getBackButton()
         .addActionListener(e -> backButtonEvent());
-
     view.getRemixButton()
         .addActionListener(e -> remixButtonEvent());
   }
@@ -236,22 +233,25 @@ public class ResultsController extends Controller<ResultsView> {
     }
 
     for (int rowIndex = 1; rowIndex < rowCount; rowIndex++) {
-      if (rowIndex == 1) {
-        table.setValueAt(positionsMap.get(Position.CENTRAL_DEFENDER), rowIndex, 0);
-      } else if (rowIndex < 4) {
-        table.setValueAt(positionsMap.get(Position.LATERAL_DEFENDER), rowIndex, 0);
-      } else if (rowIndex < 6) {
-        table.setValueAt(positionsMap.get(Position.MIDFIELDER), rowIndex, 0);
-      } else if (rowIndex < 7) {
-        table.setValueAt(positionsMap.get(Position.FORWARD), rowIndex, 0);
-      }
+      table.setValueAt(
+        positionsMap.get(
+          switch (rowIndex) {
+            case 1 -> Position.CENTRAL_DEFENDER;
+            case 2, 3 -> Position.LATERAL_DEFENDER;
+            case 4, 5 -> Position.MIDFIELDER;
+            default -> Position.FORWARD;
+          }
+        ),
+        rowIndex,
+        0
+      );
     }
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
-      for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
+      for (int colIndex = 0; colIndex < teams.size(); colIndex++) {
         table.setValueAt(
-          teamIndex == 0 ? positionsMap.get(Position.GOALKEEPER) : "Puntuación del equipo",
-          table.getRowCount() + teamIndex - 2,
+          colIndex == 0 ? positionsMap.get(Position.GOALKEEPER) : "Puntuación del equipo",
+          table.getRowCount() + colIndex - 2,
           0
         );
       }
@@ -287,31 +287,47 @@ public class ResultsController extends Controller<ResultsView> {
    * left-aligned.
    */
   private void overrideTableFormat() {
-    view.getTable().setDefaultRenderer(
-        Object.class,
-        new DefaultTableCellRenderer() {
-          @Override
-          public Component getTableCellRendererComponent(JTable myTable, Object value,
-                                                         boolean isSelected, boolean hasFocus,
-                                                         int row, int column) {
-            JComponent c = (JComponent) super.getTableCellRendererComponent(myTable, value, isSelected, hasFocus, row, column);
+    view.getTable()
+        .setDefaultRenderer(
+          Object.class,
+          new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable myTable, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+              JComponent c = (JComponent) super.getTableCellRendererComponent(myTable, value, isSelected, hasFocus, row, column);
 
-            boolean mixBySkill = CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS && row == view.getTable()
-                                                                                                               .getRowCount() - 1;
+              boolean mixBySkill = CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS && row == view.getTable()
+                                                                                                                 .getRowCount() - 1;
 
-            c.setOpaque(false);
-            c.setBorder(new EmptyBorder(Constants.INSETS_GENERAL));
+              c.setOpaque(false);
+              c.setBorder(new EmptyBorder(Constants.INSETS_GENERAL));
 
-            if (row == 0) {
-              c.setBackground(Constants.COLOR_GREEN_DARK);
-              c.setForeground(Color.WHITE);
+              if (row == 0) {
+                c.setBackground(Constants.COLOR_GREEN_DARK);
+                c.setForeground(Color.WHITE);
 
-              ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
 
-              return c;
-            }
+                return c;
+              }
 
-            if (column == 0) {
+              if (column == 0) {
+                if (mixBySkill) {
+                  c.setBackground(Constants.COLOR_GREEN_MEDIUM);
+                  c.setForeground(Color.WHITE);
+
+                  ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+
+                  return c;
+                }
+
+                c.setBackground(Constants.COLOR_GREEN_DARK);
+                c.setForeground(Color.WHITE);
+
+                ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
+
+                return c;
+              }
+
               if (mixBySkill) {
                 c.setBackground(Constants.COLOR_GREEN_MEDIUM);
                 c.setForeground(Color.WHITE);
@@ -321,60 +337,43 @@ public class ResultsController extends Controller<ResultsView> {
                 return c;
               }
 
-              c.setBackground(Constants.COLOR_GREEN_DARK);
-              c.setForeground(Color.WHITE);
+              Player playerOnCell = CommonFunctions.retrieveOptional(CommonFields.getPlayersSets()
+                                                                                 .values()
+                                                                                 .stream()
+                                                                                 .flatMap(List::stream)
+                                                                                 .filter(player -> player.getName() == value)
+                                                                                 .findFirst());
+
+              c.setBackground(playerOnCell.getAnchorageNumber() != 0 ? Constants.COLORS_ANCHORAGES
+                                                                                .get(playerOnCell.getAnchorageNumber() - 1)
+                                                                     : Constants.COLOR_GREEN_LIGHT_WHITE);
+              c.setForeground(Color.BLACK);
 
               ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
 
               return c;
             }
 
-            if (mixBySkill) {
-              c.setBackground(Constants.COLOR_GREEN_MEDIUM);
-              c.setForeground(Color.WHITE);
+            @Override
+            protected void paintComponent(Graphics g) {
+              Graphics2D g2 = (Graphics2D) g.create();
 
-              ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+              g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+              g2.setColor(getBackground());
+              g2.fillRoundRect(
+                0,
+                0,
+                (getWidth() - 1),
+                (getHeight() - 1),
+                Constants.ROUNDED_BORDER_ARC_TABLE_CELLS,
+                Constants.ROUNDED_BORDER_ARC_TABLE_CELLS
+              );
 
-              return c;
+              super.paintComponent(g2);
+
+              g2.dispose();
             }
-
-            Player playerOnCell = CommonFunctions.retrieveOptional(CommonFields.getPlayersSets()
-                                                                               .values()
-                                                                               .stream()
-                                                                               .flatMap(List::stream)
-                                                                               .filter(player -> player.getName() == value)
-                                                                               .findFirst());
-
-            c.setBackground(playerOnCell.getAnchorageNumber() != 0 ? Constants.COLORS_ANCHORAGES
-                                                                              .get(playerOnCell.getAnchorageNumber() - 1)
-                                                                   : Constants.COLOR_GREEN_LIGHT_WHITE);
-            c.setForeground(Color.BLACK);
-
-            ((DefaultTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
-
-            return c;
           }
-
-          @Override
-          protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g.create();
-
-            g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-            g2.setColor(getBackground());
-            g2.fillRoundRect(
-              0,
-              0,
-              (getWidth() - 1),
-              (getHeight() - 1),
-              Constants.ROUNDED_BORDER_ARC_TABLE_CELLS,
-              Constants.ROUNDED_BORDER_ARC_TABLE_CELLS
-            );
-
-            super.paintComponent(g2);
-
-            g2.dispose();
-          }
-        }
-    );
+        );
   }
 }
