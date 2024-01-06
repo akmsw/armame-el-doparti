@@ -51,19 +51,16 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    */
   public void updateCheckboxesText() {
     for (Position position : Position.values()) {
-      int positionSetSize = CommonFields.getPlayersSets()
-                                        .get(position)
-                                        .size();
-
-      for (int checkboxIndex = 0; checkboxIndex < positionSetSize; checkboxIndex++) {
-        view.getCheckboxesMap()
-            .get(position)
-            .get(checkboxIndex)
-            .setText(CommonFields.getPlayersSets()
-                                 .get(position)
-                                 .get(checkboxIndex)
-                                 .getName());
-      }
+      IntStream.range(0, CommonFields.getPlayersSets()
+                                                    .get(position)
+                                                    .size())
+               .forEach(checkboxIndex -> view.getCheckboxesMap()
+                                             .get(position)
+                                             .get(checkboxIndex)
+                                             .setText(CommonFields.getPlayersSets()
+                                                                  .get(position)
+                                                                  .get(checkboxIndex)
+                                                                  .getName()));
     }
 
     view.pack();
@@ -147,11 +144,9 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
   public void deleteAnchorageButtonEvent(Component parentComponent) {
-    String[] optionsDelete = new String[anchoragesAmount];
-
-    for (int anchorageNumber = 0; anchorageNumber < anchoragesAmount; anchorageNumber++) {
-      optionsDelete[anchorageNumber] = Integer.toString(anchorageNumber + 1);
-    }
+    String[] optionsDelete = IntStream.rangeClosed(1, anchoragesAmount)
+                                      .mapToObj(Integer::toString)
+                                      .toArray(String[]::new);
 
     int anchorageToDelete = JOptionPane.showOptionDialog(
       parentComponent,
@@ -267,16 +262,20 @@ public class AnchoragesController extends Controller<AnchoragesView> {
         .setText("");
 
     IntStream.range(0, anchoragesAmount)
-             .forEach(i -> {
+             .forEach(anchorageNumber -> {
                view.getTextArea()
-                   .append("ANCLAJE " + (i + 1) + System.lineSeparator());
+                   .append("ANCLAJE " + (anchorageNumber + 1) + System.lineSeparator());
 
                List<Player> anchoredPlayers = CommonFields.getPlayersSets()
                                                           .entrySet()
                                                           .stream()
-                                                          .flatMap(playersSet -> playersSet.getValue()
-                                                                                           .stream()
-                                                                                           .filter(player -> player.getAnchorageNumber() == (i + 1)))
+                                                          .flatMap(
+                                                            playersSet -> playersSet.getValue()
+                                                                                    .stream()
+                                                                                    .filter(
+                                                                                      player -> player.getAnchorageNumber() == (anchorageNumber + 1)
+                                                                                    )
+                                                          )
                                                           .sorted(Comparator.comparing(player -> player.getPosition()
                                                                                                        .ordinal()))
                                                           .toList();
@@ -286,7 +285,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                      .append((anchoredPlayers.indexOf(player) + 1) + ". " + player.getName() + System.lineSeparator());
                }
 
-               if ((i + 1) != anchoragesAmount) {
+               if ((anchorageNumber + 1) != anchoragesAmount) {
                  view.getTextArea()
                      .append(System.lineSeparator());
                }
@@ -387,13 +386,12 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                       player.setAnchored(false);
 
                       CommonFunctions.retrieveOptional(
-                          view.getCheckboxesMap()
-                              .values()
-                              .stream()
-                              .flatMap(List::stream)
-                              .filter(checkbox -> checkbox.getText()
-                                                          .equals(player.getName()))
-                              .findFirst()
+                        view.getCheckboxesMap()
+                            .get(player.getPosition())
+                            .stream()
+                            .filter(checkbox -> checkbox.getText()
+                                                        .equals(player.getName()))
+                            .findFirst()
                       ).setVisible(true);
 
                       anchoredPlayersAmount--;
