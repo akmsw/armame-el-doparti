@@ -90,13 +90,13 @@ public class SkillPointsInputView extends View {
                                                                              .get(position)), SwingConstants.CENTER),
                       CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
 
-      List<Player> currentSet = new ArrayList<>(CommonFields.getPlayersSets()
+      List<Player> playersSet = new ArrayList<>(CommonFields.getPlayersSets()
                                                             .get(position));
 
-      currentSet.sort(Comparator.comparing(player -> player.getPosition()
+      playersSet.sort(Comparator.comparing(player -> player.getPosition()
                                                            .ordinal()));
 
-      for (Player player : currentSet) {
+      for (Player player : playersSet) {
         spinnersMap.put(player, new CustomSpinner(new SpinnerNumberModel(Constants.SKILL_INI,
                                                                          Constants.SKILL_MIN,
                                                                          Constants.SKILL_MAX,
@@ -105,7 +105,7 @@ public class SkillPointsInputView extends View {
         labelsMap.put(spinnersMap.get(player), new JLabel(player.getName()));
 
         masterPanel.add(labelsMap.get(spinnersMap.get(player)), Constants.MIG_LAYOUT_PUSHX);
-        masterPanel.add(spinnersMap.get(player), currentSet.indexOf(player) % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
+        masterPanel.add(spinnersMap.get(player), playersSet.indexOf(player) % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
       }
     }
   }
