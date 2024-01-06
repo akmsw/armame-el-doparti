@@ -1,15 +1,12 @@
 package armameeldoparti.controllers;
 
-import armameeldoparti.models.Player;
+import java.util.Arrays;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
 import armameeldoparti.utils.common.CommonFunctions;
 import armameeldoparti.utils.common.Constants;
 import armameeldoparti.views.SkillPointsInputView;
-import java.util.Map;
-import javax.swing.JLabel;
-import javax.swing.JSpinner;
 
 /**
  * Skill points input view controller class.
@@ -73,16 +70,13 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    * Updates the players name labels.
    */
   public void updateNameLabels() {
-    Map<JSpinner, JLabel> labelsMap = view.getLabelsMap();
-    Map<Player, JSpinner> spinnersMap = view.getSpinnersMap();
-
-    for (Position position : Position.values()) {
-      for (Player player : CommonFields.getPlayersSets()
-                                       .get(position)) {
-        labelsMap.get(spinnersMap.get(player))
-                 .setText(player.getName());
-      }
-    }
+    Arrays.asList(Position.values())
+          .forEach(position -> CommonFields.getPlayersSets()
+                                           .get(position)
+                                           .forEach(player -> view.getLabelsMap()
+                                                                  .get(view.getSpinnersMap()
+                                                                           .get(player))
+                                                                  .setText(player.getName())));
 
     view.pack();
   }
@@ -103,10 +97,8 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
   protected void setUpListeners() {
     view.getBackButton()
         .addActionListener(e -> backButtonEvent());
-
     view.getFinishButton()
         .addActionListener(e -> finishButtonEvent());
-
     view.getResetSkillPointsButton()
         .addActionListener(e -> resetSkillPointsButtonEvent());
   }
