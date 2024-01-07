@@ -2,7 +2,7 @@ Cuando apretés el botón 'Comenzar' en el menú principal, se va a abrir una ve
 
 Empezando por la izquierda, tenés un menú desplegable que muestra las diferentes posiciones de los jugadores. Si le hacés click a la flecha vas a ver que el menú se despliega y vas a poder elegir alguna posición.
 
-Si probás elegir diferentes posiciones, vas a ver que justo abajo del menú desplegable van cambiando unos campos de texto en blanco. Esos campos son espacios vacíos para que vos los llenes con los nombres de los jugadores que van a jugar en esa posición.
+Si probás elegir diferentes posiciones, vas a ver que justo abajo del menú desplegable van cambiando unos campos de texto en blanco. Esos campos son espacios vacíos para que los llenes con los nombres de los jugadores que van a jugar en esa posición.
 
 Por ejemplo, si elegís 'Arqueros' vas a tener dos campos de texto vacíos donde vas a tener que escribir los nombres de los arqueros que se van a repartir, un nombre en cada casilla.
 
@@ -10,13 +10,17 @@ Recordá que los nombres sólo pueden tener, como mucho, 10 letras de la A a la 
 
 A medida que vayas ingresando los nombres, vas a ver que a la derecha, en el espacio de texto vacío más grande, van apareciendo los nombres de los jugadores que ya ingresaste. Esto es para que vayas viendo en tiempo real cuántos jugadores ya cargaste.
 
-Abajo de ese espacio de texto más grande, tenés dos botones y una casilla de selección.
+Si te equivocaste cargando el nombre de algún jugador, podés reescribirlo en su casilla correspondiente y se va a actualizar automáticamente todo lo que lo utilice.
 
-El botón 'Distribuir' se va a habilitar sólo cuando los 14 jugadores hayan sido ingresados correctamente.
+Siguiendo en la izquierda, vas a ver dos casillas de selección bajo el título "Distribución". Estas casillas seleccionan el método de distribución que se va a aplicar a los jugadores ingresados para armar los equipos. Son mutuamente excluyentes, por lo que si elegís una y después hacés click en la otra, la que elegiste primero se va a deseleccionar automáticamente.
+
+Bajo estas casillas de selección, hay otra casilla similar con el texto "Anclar jugadores". Podés tildarla cuando quieras. Esto va a servir para más adelante.
+
+A la derecha, y abajo del espacio de texto más grande que muestra los nombres de los jugadores ingresados, tenés dos botones y una casilla de selección.
+
+El botón 'Distribuir' se va a habilitar sólo cuando los 14 jugadores hayan sido ingresados correctamente y se haya elegido algún método de distribución.
 
 El botón 'Atrás' está siempre habilitado y te va a volver al menú principal (si volvés, todo lo que hayas ingresado se va a perder, así que ojo).
-
-Podés tildar la casilla 'Anclar jugadores' cuando quieras. Esto va a servir para más adelante.
 
 Cuando hayas ingresado todos los nombres de los jugadores y aprietes el botón 'Distribuir', vas a ver un mensaje que te va a preguntar cómo querés distribuir los jugadores. Acá podés elegir si repartirlos de manera aleatoria o por puntuaciones.
 

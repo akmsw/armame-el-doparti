@@ -15,9 +15,9 @@ Arqueros
 
 El resto de casillas contiene los nombres de los jugadores, repartidos aleatoriamente.
 
-Si no hiciste ningún anclaje, todas las casillas con nombres de jugadores van a tener fondo blanco y letras negras, y vas a ver que los dos equipos se armaron de manera aleatoria.
+Si no hiciste ningún anclaje, todas las casillas con nombres de jugadores van a tener fondo verde claro y letras negras, y vas a ver que los dos equipos se armaron de manera aleatoria.
 
-Si hiciste al menos un anclaje, todos los jugadores del mismo anclaje van a aparecer en sus casillas con un color de fondo. Cada anclaje tiene su propio color de fondo para diferenciarlos entre sí.
+Si hiciste al menos un anclaje, todos los jugadores de un mismo anclaje van a aparecer en sus casillas con un color de fondo. Cada anclaje tiene su propio color de fondo para diferenciarlos entre sí.
 
 Abajo de esta tabla vas a ver el botón 'Redistribuir' que vuelve a armar los equipos de manera aleatoria, teniendo en cuenta si hiciste anclajes o no.
 
