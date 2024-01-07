@@ -33,12 +33,12 @@ import net.miginfocom.swing.MigLayout;
  */
 public class AnchoragesView extends View {
 
-  // ---------------------------------------- Private constants ---------------------------------
+  // --------------------------------------------------------------- Private constants ---------------------------------------------------------------
 
   private static final int TEXT_AREA_ROWS = 10;
   private static final int TEXT_AREA_COLUMNS = 9;
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private JButton backButton;
   private JButton clearAnchoragesButton;
@@ -61,7 +61,7 @@ public class AnchoragesView extends View {
    */
   private Map<Position, List<JCheckBox>> checkboxesMap;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the anchorages view.
@@ -87,7 +87,7 @@ public class AnchoragesView extends View {
     initializeInterface();
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void initializeInterface() {
@@ -125,7 +125,7 @@ public class AnchoragesView extends View {
     rightPanel.add(clearAnchoragesButton, Constants.MIG_LAYOUT_GROW);
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ------------------------------------------------------------------------
 
   /**
    * Adds the players checkboxes and their position labels.
@@ -175,7 +175,7 @@ public class AnchoragesView extends View {
                                                                                                 Constants.MIG_LAYOUT_PUSHX)));
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public JButton getBackButton() {
     return backButton;
@@ -225,7 +225,7 @@ public class AnchoragesView extends View {
     return checkboxesMap;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;

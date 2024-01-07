@@ -21,14 +21,14 @@ import net.miginfocom.layout.CC;
  */
 public class MainMenuView extends View {
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   JButton startButton;
   JButton helpButton;
   JButton contactButton;
   JButton issuesButton;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the main menu view.
@@ -38,7 +38,7 @@ public class MainMenuView extends View {
     initializeInterface();
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void initializeInterface() {
@@ -62,7 +62,7 @@ public class MainMenuView extends View {
     masterPanel.add(issuesButton, new CC().width("50%"));
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Adds the background image and labels to the main menu view.
@@ -111,7 +111,7 @@ public class MainMenuView extends View {
     masterPanel.add(label, constraints);
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public JButton getStartButton() {
     return startButton;
@@ -129,7 +129,7 @@ public class MainMenuView extends View {
     return issuesButton;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public void setStartButton(JButton startButton) {
     this.startButton = startButton;

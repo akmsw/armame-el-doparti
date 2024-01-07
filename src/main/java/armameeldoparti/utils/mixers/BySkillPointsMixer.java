@@ -26,7 +26,7 @@ import java.util.stream.IntStream;
  */
 public class BySkillPointsMixer implements PlayersMixer {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the by-skill-points players distributor.
@@ -35,21 +35,20 @@ public class BySkillPointsMixer implements PlayersMixer {
     // Body not needed
   }
 
-  // ---------------------------------------- Public methods ----------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   /**
    * Distributes the players by their skill points without considering anchorages.
    *
-   * <p>The players of each position are ordered based on their score, from highest to lowest. The teams are then ordered based on
-   * the sum of their players scores so far, from lowest to highest.
+   * <p>The players of each position are ordered based on their score, from highest to lowest. The teams are then ordered based on the sum of their
+   * players scores so far, from lowest to highest.
    *
-   * <p>If the number of players to distribute is 2, the team with less skill points is assigned the player with the highest skill
-   * points, and the team with more skill points is assigned the player with the lowest skill points.
+   * <p>If the number of players to distribute is 2, the team with less skill points is assigned the player with the highest skill points, and the
+   * team with more skill points is assigned the player with the lowest skill points.
    *
-   * <p>If the number of players to distribute is 4, two subgroups are made with the players at the list ends, from the outside to
-   * the inside. These subsets are then ordered based on their skill points, from highest to lowest. The team with less skill
-   * points is assigned the set of players with more skill points. The team with more skill points is assigned the set of players
-   * with the lowest skill points.
+   * <p>If the number of players to distribute is 4, two subgroups are made with the players at the list ends, from the outside to the inside. These
+   * subsets are then ordered based on their skill points, from highest to lowest. The team with less skill points is assigned the set of players with
+   * more skill points. The team with more skill points is assigned the set of players with the lowest skill points.
    *
    * @param teams Teams where to distribute the players.
    *
@@ -86,11 +85,11 @@ public class BySkillPointsMixer implements PlayersMixer {
   /**
    * Distributes the players by their skill points considering anchorages.
    *
-   * <p>First, the anchored players are grouped in different lists by their anchorage number, and they are distributed as fair as
-   * possible starting with the sets with most anchored players in order to avoid inconsistencies.
+   * <p>First, the anchored players are grouped in different lists by their anchorage number, and they are distributed as fair as possible starting
+   * with the sets with most anchored players in order to avoid inconsistencies.
    *
-   * <p>Then, the players that are not anchored are distributed between the teams as fair as possible based on their skill points.
-   * They will be added to a team only if the players per position or the players per team amounts are not exceeded.
+   * <p>Then, the players that are not anchored are distributed between the teams as fair as possible based on their skill points. They will be added
+   * to a team only if the players per position or the players per team amounts are not exceeded.
    *
    * @param teams Teams where to distribute the players.
    *
@@ -158,7 +157,7 @@ public class BySkillPointsMixer implements PlayersMixer {
     return teams;
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Performs the subsets distribution in sets with 4+ players as explained in {@link #withoutAnchorages(List)}.

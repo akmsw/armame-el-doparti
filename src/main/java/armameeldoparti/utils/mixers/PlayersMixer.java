@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface PlayersMixer {
 
-  // ---------------------------------------- Public abstract methods ---------------------------
+  // --------------------------------------------------------------- Public abstract methods ---------------------------------------------------------
 
   /**
    * Distributes the players without considering anchorages.

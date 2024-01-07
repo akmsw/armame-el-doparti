@@ -35,7 +35,7 @@ import javax.swing.SwingUtilities;
  */
 public final class CommonFunctions {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Empty, private constructor.
@@ -44,7 +44,7 @@ public final class CommonFunctions {
     // Body not needed
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   /**
    * Exits the program with the corresponding error message and error code according to the occurred exception.
@@ -215,8 +215,8 @@ public final class CommonFunctions {
   }
 
   /**
-   * Checks if an optional that should not be null has a value present. If so, that value is retrieved. If the optional has no
-   * value, then the program exits with a fatal internal error code.
+   * Checks if an optional that should not be null has a value present. If so, that value is retrieved. If the optional has no value, then the program
+   * exits with a fatal internal error code.
    *
    * @param <T>      Generic optional type.
    * @param optional The optional to be checked.

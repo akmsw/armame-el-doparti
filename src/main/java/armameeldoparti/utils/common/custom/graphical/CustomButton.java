@@ -19,11 +19,11 @@ import javax.swing.JButton;
  */
 public class CustomButton extends JButton {
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private int arc;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds a basic rounded button using the established program aesthetics.
@@ -37,14 +37,14 @@ public class CustomButton extends JButton {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   @Override
   public Insets getInsets() {
     return Constants.INSETS_GENERAL;
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -68,7 +68,7 @@ public class CustomButton extends JButton {
     super.paintComponent(g);
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Configures the graphical properties of the button in order to fit the program aesthetics.
@@ -80,13 +80,13 @@ public class CustomButton extends JButton {
     setBorderPainted(false);
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public int getArc() {
     return arc;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   private void setArc(int arc) {
     this.arc = arc;

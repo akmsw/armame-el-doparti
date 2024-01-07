@@ -29,7 +29,7 @@ import javax.swing.JPanel;
  */
 public class NamesInputController extends Controller<NamesInputView> {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the names input view controller.
@@ -42,7 +42,7 @@ public class NamesInputController extends Controller<NamesInputView> {
     setUpInitialState();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   /**
    * Resets the combobox to the initial state and gives it the view focus.
@@ -55,8 +55,8 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Resets the controlled view to its default values, turns the anchorages flags to false, makes the controlled view invisible
-   * and shows the main menu view.
+   * Resets the controlled view to its default values, turns the anchorages flags to false, makes the controlled view invisible and shows the main
+   * menu view.
    */
   public void backButtonEvent() {
     resetView();
@@ -68,8 +68,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Asks the user for the players distribution method, makes the controlled view invisible and shows the corresponding following
-   * view.
+   * Asks the user for the players distribution method, makes the controlled view invisible and shows the corresponding following view.
    *
    * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
@@ -100,12 +99,10 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Validates the user input with a regular expression that checks if the string contains only latin characters from A to Z
-   * including Ñ, uppercase or lowercase, with or without accent mark, with or without spaces. If the input is not valid or
-   * already exists, the program asks for a new input.
+   * Validates the user input with a regular expression that checks if the string contains only latin characters from A to Z including Ñ, uppercase or
+   * lowercase, with or without accent mark, with or without spaces. If the input is not valid or already exists, the program asks for a new input.
    *
-   * <p>If the input is valid, it will be applied as a player name in the players set corresponding to the combobox selected
-   * option.
+   * <p>If the input is valid, it will be applied as a player name in the players set corresponding to the combobox selected option.
    *
    * @param playerIndex The index of the player which name will be the text filed input.
    * @param playersSet  The set of players corresponding to the selected combobox option.
@@ -145,21 +142,20 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Since there can be only one distribution method at a time: if one radio button is selected, the other is unselected
-   * automatically. Then, if the conditions are met, the mix button is enabled.
+   * Since there can be only one distribution method at a time: if one radio button is selected, the other is unselected automatically. Then, if the
+   * conditions are met, the mix button is enabled.
    *
    * @param e Radio button click event.
    */
   public void radioButtonEvent(ItemEvent e) {
     if (e.getStateChange() == ItemEvent.SELECTED) {
-      (e.getSource() == view.getRadioButtonRandom() ? view.getRadioButtonBySkillPoints()
-                                                    : view.getRadioButtonRandom()).setSelected(false);
+      (e.getSource() == view.getRadioButtonRandom() ? view.getRadioButtonBySkillPoints() : view.getRadioButtonRandom()).setSelected(false);
     }
 
     validateMixButtonEnable();
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void resetView() {
@@ -256,7 +252,7 @@ public class NamesInputController extends Controller<NamesInputView> {
     view.setVisible(true);
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * The mix button is enabled only when every condition needed to distribute the players is met.

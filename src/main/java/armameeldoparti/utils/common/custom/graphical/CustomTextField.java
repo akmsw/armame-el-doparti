@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  */
 public class CustomTextField extends JTextField {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds a basic text field using the established program aesthetics.
@@ -28,14 +28,14 @@ public class CustomTextField extends JTextField {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   @Override
   public Insets getInsets() {
     return Constants.INSETS_GENERAL;
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -75,7 +75,7 @@ public class CustomTextField extends JTextField {
     g2.dispose();
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Configures the graphical properties for the text field in order to fit the program aesthetics.

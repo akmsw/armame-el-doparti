@@ -26,7 +26,7 @@ import javax.swing.text.DefaultCaret;
  */
 public class CustomSpinner extends JSpinner {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds a basic spinner that fits the established program aesthetics.
@@ -38,7 +38,7 @@ public class CustomSpinner extends JSpinner {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Configures the graphical properties of the spinner in order to fit the program aesthetics.

@@ -24,16 +24,16 @@ import javax.swing.JTextArea;
  */
 public class HelpController extends Controller<HelpView> {
 
-  // ---------------------------------------- Private constants ---------------------------------
+  // --------------------------------------------------------------- Private constants ---------------------------------------------------------------
 
   private static final int TOTAL_HELP_PAGES = Constants.MAP_HELP_PAGES_FILES
                                                        .size();
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private int currentPageNumber;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the help view controller.
@@ -46,7 +46,7 @@ public class HelpController extends Controller<HelpView> {
     setUpInitialState();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   /**
    * Resets the page to the beginning, makes the controlled view invisible and shows the main menu view.
@@ -127,7 +127,7 @@ public class HelpController extends Controller<HelpView> {
     }
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void resetView() {
@@ -155,7 +155,7 @@ public class HelpController extends Controller<HelpView> {
         .addActionListener(e -> backButtonEvent());
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Updates the reading progress label text.
@@ -175,13 +175,13 @@ public class HelpController extends Controller<HelpView> {
         .setEnabled(true);
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public int getCurrentPageNumber() {
     return currentPageNumber;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public void setCurrentPageNumber(int currentPageNumber) {
     this.currentPageNumber = currentPageNumber;

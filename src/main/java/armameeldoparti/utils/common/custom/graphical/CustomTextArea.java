@@ -7,8 +7,8 @@ import javax.swing.JTextArea;
 /**
  * Custom text area class.
  *
- * <p>This class is used to instantiate a custom text area that fits the overall program aesthetics. It is supposed to be used
- * along with a CustomScrollPane to ensure its correct display.
+ * <p>This class is used to instantiate a custom text area that fits the overall program aesthetics. It is supposed to be used along with a
+ * CustomScrollPane to ensure its correct display.
  *
  * @author Bonino, Francisco Ignacio.
  *
@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
  */
 public class CustomTextArea extends JTextArea {
 
-  // ---------------------------------------- Constructors --------------------------------------
+  // --------------------------------------------------------------- Constructors --------------------------------------------------------------------
 
   /**
    * Builds a basic text area using the established program aesthetics.
@@ -39,14 +39,14 @@ public class CustomTextArea extends JTextArea {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   @Override
   public Insets getInsets() {
     return Constants.INSETS_GENERAL;
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // --------------------------------------------------------------- Private methods -----------------------------------
 
   /**
    * Configures the graphical properties for the text area in order to fit the program aesthetics.

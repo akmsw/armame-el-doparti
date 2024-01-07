@@ -34,14 +34,12 @@ public class CustomArrowButton extends BasicArrowButton {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   @Override
   public Insets getInsets() {
     return Constants.INSETS_GENERAL;
   }
-
-  // ---------------------------------------- Public methods ------------------------------------
 
   @Override
   public void paint(Graphics g) {
@@ -141,7 +139,7 @@ public class CustomArrowButton extends BasicArrowButton {
     }
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Configures the graphical properties of the arrow button in order to fit the program aesthetics.

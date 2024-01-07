@@ -25,7 +25,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
  */
 public class CustomScrollPane extends JScrollPane {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds a basic scroll pane using the established program aesthetics.
@@ -37,7 +37,7 @@ public class CustomScrollPane extends JScrollPane {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void paintBorder(Graphics g) {
@@ -56,7 +56,7 @@ public class CustomScrollPane extends JScrollPane {
     g2.dispose();
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Configures the graphical properties of the scroll pane in order to fit the program aesthetics.

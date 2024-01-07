@@ -25,7 +25,7 @@ import javax.swing.table.TableCellRenderer;
  */
 public class CustomTable extends JTable {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds a basic table using the established program aesthetics.
@@ -38,7 +38,7 @@ public class CustomTable extends JTable {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   /**
    * Adjusts the cells size to fit the biggest content shown in the table.
@@ -73,7 +73,7 @@ public class CustomTable extends JTable {
     }
   }
 
-  // ---------------------------------------- Private methods ------------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Configures the graphical properties for the table in order to fit the program aesthetics.
@@ -85,9 +85,7 @@ public class CustomTable extends JTable {
         Object.class,
         new DefaultTableCellRenderer() {
           @Override
-          public Component getTableCellRendererComponent(JTable table, Object value,
-                                                         boolean isSelected, boolean hasFocus,
-                                                         int row, int column) {
+          public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
             if (comp instanceof JComponent) {

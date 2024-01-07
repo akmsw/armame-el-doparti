@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public final class CommonFields {
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private static int distribution;
 
@@ -33,7 +33,7 @@ public final class CommonFields {
   private static Map<Position, String> positionsMap;
   private static Map<ProgramView, Controller<? extends View>> controllerMap;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Empty, private constructor.
@@ -42,7 +42,7 @@ public final class CommonFields {
     // Body not needed
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public static int getDistribution() {
     return distribution;
@@ -76,7 +76,7 @@ public final class CommonFields {
     return controllerMap;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public static void setDistribution(int distribution) {
     CommonFields.distribution = distribution;

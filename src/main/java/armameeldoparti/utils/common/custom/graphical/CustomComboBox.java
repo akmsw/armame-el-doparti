@@ -31,7 +31,7 @@ import javax.swing.plaf.basic.ComboPopup;
  */
 public class CustomComboBox<E> extends JComboBox<E> {
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds a basic combobox using the established program aesthetics.
@@ -43,14 +43,14 @@ public class CustomComboBox<E> extends JComboBox<E> {
     setUpGraphicalProperties();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   @Override
   public Insets getInsets() {
     return Constants.INSETS_COMBOBOX;
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -88,7 +88,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
     g2.dispose();
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Configures the graphical properties for the combobox in order to fit the program aesthetics.
@@ -164,8 +164,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
 
   private static class CustomListCellRenderer extends DefaultListCellRenderer {
     @Override
-    public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                  boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
       JLabel renderer = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
       Color fillColor = isSelected ? Constants.COLOR_GREEN_DARK_MEDIUM : list.getBackground();

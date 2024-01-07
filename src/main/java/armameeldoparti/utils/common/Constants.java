@@ -22,7 +22,7 @@ import javax.swing.ImageIcon;
  */
 public final class Constants {
 
-  // ---------------------------------------- Private constants ---------------------------------
+  // --------------------------------------------------------------- Private constants ---------------------------------------------------------------
 
   private static final int EXIT_CODE_ERROR_BROWSER = -1;
   private static final int EXIT_CODE_ERROR_GUI = -2;
@@ -92,7 +92,7 @@ public final class Constants {
   private static final String TITLE_HELP_PAGE_7 = "Distribución por puntuaciones";
   private static final String TITLE_HELP_PAGE_8 = "Sugerencias, reportes y contacto";
 
-  // ---------------------------------------- Public constants ----------------------------------
+  // ---------------------------------------------------------------- Public constants ---------------------------------------------------------------
 
   public static final int INDEX_HELP_PAGE_FILENAME = 1;
   public static final int INDEX_HELP_PAGE_TITLE = 0;
@@ -194,10 +194,7 @@ public final class Constants {
   public static final ImageIcon ICON_RB_E_US_P = CommonFunctions.createImageIcon(FILENAME_ICON_RB_ENABLED_UNSELECTED_PRESSED);
   public static final ImageIcon ICON_RB_E_US_UF = CommonFunctions.createImageIcon(FILENAME_ICON_RB_ENABLED_UNSELECTED_UNFOCUSED);
   public static final ImageIcon ICON_MAIN = CommonFunctions.createImageIcon(FILENAME_ICON_MAIN);
-  public static final ImageIcon ICON_DIALOG = CommonFunctions.scaleImageIcon(ICON_MAIN,
-                                                                             ICON_SCALE,
-                                                                             ICON_SCALE,
-                                                                             Image.SCALE_SMOOTH);
+  public static final ImageIcon ICON_DIALOG = CommonFunctions.scaleImageIcon(ICON_MAIN, ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH);
 
   public static final Insets INSETS_COMBOBOX = new Insets(Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
                                                           Constants.ROUNDED_BORDER_INSETS_COMBOBOX,
@@ -278,7 +275,7 @@ public final class Constants {
     RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
   );
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Empty, private constructor.

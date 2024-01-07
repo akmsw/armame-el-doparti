@@ -24,12 +24,12 @@ import net.miginfocom.layout.CC;
  */
 public class HelpView extends View {
 
-  // ---------------------------------------- Private constants ---------------------------------
+  // --------------------------------------------------------------- Private constants ---------------------------------------------------------------
 
   private static final int TEXT_AREA_ROWS = 20;
   private static final int TEXT_AREA_COLUMNS = 30;
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private JButton previousPageButton;
   private JButton nextPageButton;
@@ -42,7 +42,7 @@ public class HelpView extends View {
 
   private JTextArea textArea;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the help view.
@@ -52,7 +52,7 @@ public class HelpView extends View {
     initializeInterface();
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void initializeInterface() {
@@ -78,7 +78,7 @@ public class HelpView extends View {
                                                                           Constants.MIG_LAYOUT_SPAN));
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Adds the text field where to display the current page title.
@@ -107,7 +107,7 @@ public class HelpView extends View {
     masterPanel.add(pagesCounter, Constants.MIG_LAYOUT_GROWX);
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public JButton getPreviousPageButton() {
     return previousPageButton;
@@ -137,7 +137,7 @@ public class HelpView extends View {
     return textArea;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public void setPreviousPageButton(JButton previousPageButton) {
     this.previousPageButton = previousPageButton;

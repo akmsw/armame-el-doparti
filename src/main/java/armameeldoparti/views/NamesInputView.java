@@ -40,12 +40,12 @@ import net.miginfocom.swing.MigLayout;
  */
 public class NamesInputView extends View {
 
-  // ---------------------------------------- Private constants ---------------------------------
+  // --------------------------------------------------------------- Private constants ---------------------------------------------------------------
 
   private static final int TEXT_AREA_ROWS = 14;
   private static final int TEXT_AREA_COLUMNS = 9;
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private JButton mixButton;
   private JButton backButton;
@@ -66,7 +66,7 @@ public class NamesInputView extends View {
 
   private Map<Position, List<JTextField>> textFieldsMap;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the names input view.
@@ -83,7 +83,7 @@ public class NamesInputView extends View {
     initializeInterface();
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void initializeInterface() {
@@ -113,7 +113,7 @@ public class NamesInputView extends View {
     rightPanel.add(backButton, Constants.MIG_LAYOUT_GROW);
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Adds the combobox.
@@ -171,17 +171,16 @@ public class NamesInputView extends View {
   /**
    * Adds the radio buttons to choose the players distribution method.
    *
-   * <p>When using lambda expressions, the event handler is called whenever the event is triggered. This means that the controller
-   * is retrieved only when the radio buttons are clicked, avoiding null-reference problems.
+   * <p>When using lambda expressions, the event handler is called whenever the event is triggered. This means that the controller is retrieved only
+   * when the radio buttons are clicked, avoiding null-reference problems.
    *
-   * <p>When using a method reference (::radioButtonEvent), a radioButtonEvent method reference is created when the view is being
-   * built. This means that the controller should be retrieved when the method reference is created, and it could be before any
-   * radio button click event is triggered, meaning it could potentially cause null-reference problems since the view must be
-   * fully created before the controller can be created. This method reference causes a cyclic dependency between the view and the
-   * controller.
+   * <p>When using a method reference ({@code ::radioButtonEvent}), a radioButtonEvent method reference is created when the view is being built. This
+   * means that the controller should be retrieved when the method reference is created, and it could be before any radio button click event is
+   * triggered, meaning it could potentially cause null-reference problems since the view must be fully created before the controller can be created.
+   * This method reference causes a cyclic dependency between the view and the controller.
    *
-   * <p>The event handler could be written in this class, but for the sake of the MVC design pattern good practices, the
-   * controller should be the responsible for events handling.
+   * <p>The event handler could be written in this class, but for the sake of the MVC design pattern good practices, the controller should be the
+   * responsible for events handling.
    */
   private void addRadioButtons() {
     radioButtonRandom = new CustomRadioButton("Aleatoria");
@@ -195,7 +194,7 @@ public class NamesInputView extends View {
                         CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_PUSHX));
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public JButton getBackButton() {
     return backButton;
@@ -245,7 +244,7 @@ public class NamesInputView extends View {
     return textFieldsMap;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;

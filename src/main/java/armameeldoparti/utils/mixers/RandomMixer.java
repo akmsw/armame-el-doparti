@@ -25,14 +25,14 @@ import java.util.function.Predicate;
  */
 public class RandomMixer implements PlayersMixer {
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private int randomTeam1;
   private int randomTeam2;
 
   private Random randomGenerator;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the random distributor.
@@ -41,7 +41,7 @@ public class RandomMixer implements PlayersMixer {
     randomGenerator = new Random();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   /**
    * Distributes the players randomly without considering anchorages.
@@ -94,12 +94,10 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Distributes the players randomly considering anchorages.
    *
-   * <p>First, the anchored players are grouped in different lists by their anchorage number, and they are distributed randomly
-   * starting with the sets with most anchored players in order to avoid inconsistencies. If a set of anchored players cannot be
-   * added to one team, it will be added to the other.
-   *
-   * <p>Then, the players that are not anchored are distributed randomly. They will be added to a team only if the players per
-   * position or the players per team amounts are not exceeded.
+   * <p>First, the anchored players are grouped in different lists by their anchorage number, and they are distributed randomly starting with the sets
+   * with most anchored players in order to avoid inconsistencies. If a set of anchored players cannot be added to one team, it will be added to the
+   * other. Then, the players that are not anchored are distributed randomly. They will be added to a team only if the players per position or the
+   * players per team amounts are not exceeded.
    *
    * @param teams Teams where to distribute the players.
    *
@@ -151,7 +149,7 @@ public class RandomMixer implements PlayersMixer {
     return teams;
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Checks which team a given player can be added to.
@@ -159,8 +157,8 @@ public class RandomMixer implements PlayersMixer {
    * @param teams               The possible teams where to add the player.
    * @param validationPredicate The predicate that will validate if the player can be added to a team, or not.
    *
-   * @return The only available team index, a random team index if the player can be added in every team, or -1 if there's no
-   *         available team for the player.
+   * @return The only available team index, a random team index if the player can be added in every team, or -1 if there's no available team for the
+   *         player.
    */
   private int getAvailableTeam(List<Team> teams, Predicate<Team> validationPredicate) {
     shuffleTeamNumbers(teams.size());
@@ -208,9 +206,9 @@ public class RandomMixer implements PlayersMixer {
   /**
    * Checks if a set of anchored players can be added to a team.
    *
-   * <p>First, checks if any of the positions of the anchored players in the destination team is already complete. If not, checks
-   * if adding them does not exceed the number of players allowed per position per team. This is done in order to avoid more than
-   * half of the registered players of the same position remaining on the same team.
+   * <p>First, checks if any of the positions of the anchored players in the destination team is already complete. If not, checks if adding them does
+   * not exceed the number of players allowed per position per team. This is done in order to avoid more than half of the registered players of the
+   * same position remaining on the same team.
    *
    * @param team            Team where the anchored players should be added.
    * @param anchoredPlayers List containing the players with the same anchorage number.
@@ -234,14 +232,12 @@ public class RandomMixer implements PlayersMixer {
   }
 
   /**
-   * Checks if the amount of anchored players to be added to a team would exceed the maximum allowed amount of players per team in
-   * any position set.
+   * Checks if the amount of anchored players to be added to a team would exceed the maximum allowed amount of players per team in any position set.
    *
    * @param team            Team to check if the anchored players can be added.
    * @param anchoredPlayers Anchored players to check.
    *
-   * @return If the amount of anchored players to be added to a team would exceed the maximum allowed amount of players per team
-   *         in any position set.
+   * @return If the amount of anchored players to be added to a team would exceed the maximum allowed amount of players per team in any position set.
    */
   private boolean anchorageOverflowsAnyPositionSet(Team team, List<Player> anchoredPlayers) {
     return anchoredPlayers.stream()
@@ -250,15 +246,15 @@ public class RandomMixer implements PlayersMixer {
   }
 
   /**
-   * Checks if the amount of anchored players to be added to a position set in a team would exceed the maximum allowed amount of
-   * players per team for that particular position.
+   * Checks if the amount of anchored players to be added to a position set in a team would exceed the maximum allowed amount of players per team for
+   * that particular position.
    *
    * @param team            Team to check if the anchored players can be added.
    * @param anchoredPlayers Anchored players to check.
    * @param position        Anchored players position.
    *
-   * @return If the amount of anchored players to be added to a position set in a team would exceed the maximum allowed amount of
-   *         players per team for that particular position.
+   * @return If the amount of anchored players to be added to a position set in a team would exceed the maximum allowed amount of players per team for
+   *         that particular position.
    */
   private boolean anchorageOverflowsPositionSet(Team team, List<Player> anchoredPlayers, Position position) {
     return team.getTeamPlayers()

@@ -18,14 +18,14 @@ import javax.swing.JTable;
  */
 public class ResultsView extends View {
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private JButton backButton;
   private JButton remixButton;
 
   private JTable table;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds an empty results view.
@@ -37,7 +37,7 @@ public class ResultsView extends View {
     remixButton = new CustomButton("Redistribuir", Constants.ROUNDED_BORDER_ARC_GENERAL);
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   @Override
   public void initializeInterface() {
@@ -48,7 +48,7 @@ public class ResultsView extends View {
     add(masterPanel);
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void addButtons() {
@@ -59,7 +59,7 @@ public class ResultsView extends View {
     masterPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Updates and returns the frame title based on the chosen distribution and the anchorages option.
@@ -90,7 +90,7 @@ public class ResultsView extends View {
                                                                      Constants.MIG_LAYOUT_CENTER));
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public JButton getBackButton() {
     return backButton;
@@ -104,7 +104,7 @@ public class ResultsView extends View {
     return table;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;

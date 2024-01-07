@@ -17,13 +17,13 @@ import net.miginfocom.swing.MigLayout;
  */
 public abstract class View extends JFrame {
 
-  // ---------------------------------------- Protected fields ----------------------------------
+  // --------------------------------------------------------------- Protected fields ----------------------------------------------------------------
 
   protected String frameTitle;
 
   protected JPanel masterPanel;
 
-  // ---------------------------------------- Protected constructor -----------------------------
+  // --------------------------------------------------------------- Protected constructor -----------------------------------------------------------
 
   /**
    * Basic view constructor.
@@ -41,7 +41,7 @@ public abstract class View extends JFrame {
                           .getImage());
   }
 
-  // ---------------------------------------- Abstract protected methods ------------------------
+  // ---------------------------------------------------------- Abstract protected methods -----------------------------------------------------------
 
   /**
    * Initializes the view interface.
@@ -53,7 +53,7 @@ public abstract class View extends JFrame {
    */
   protected abstract void addButtons();
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public String getFrameTitle() {
     return frameTitle;
@@ -63,7 +63,7 @@ public abstract class View extends JFrame {
     return masterPanel;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public void setFrameTitle(String frameTitle) {
     this.frameTitle = frameTitle;

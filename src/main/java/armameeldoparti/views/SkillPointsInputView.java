@@ -30,7 +30,7 @@ import javax.swing.SwingConstants;
  */
 public class SkillPointsInputView extends View {
 
-  // ---------------------------------------- Private fields ------------------------------------
+  // ---------------------------------------------------------------- Private fields -----------------------------------------------------------------
 
   private JButton backButton;
   private JButton finishButton;
@@ -39,7 +39,7 @@ public class SkillPointsInputView extends View {
   private transient Map<JSpinner, JLabel> labelsMap;
   private transient Map<Player, JSpinner> spinnersMap;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the skill points input view.
@@ -53,7 +53,7 @@ public class SkillPointsInputView extends View {
     initializeInterface();
   }
 
-  // ---------------------------------------- Public methods ------------------------------------
+  // ---------------------------------------------------------------- Public methods -----------------------------------------------------------------
 
   @Override
   public void initializeInterface() {
@@ -63,7 +63,7 @@ public class SkillPointsInputView extends View {
     pack();
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void addButtons() {
@@ -79,7 +79,7 @@ public class SkillPointsInputView extends View {
                                                                           Constants.MIG_LAYOUT_SPAN));
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Adds the spinners to their corresponding panel.
@@ -110,7 +110,7 @@ public class SkillPointsInputView extends View {
     }
   }
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   public JButton getBackButton() {
     return backButton;
@@ -132,7 +132,7 @@ public class SkillPointsInputView extends View {
     return spinnersMap;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;

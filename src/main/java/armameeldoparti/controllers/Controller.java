@@ -16,11 +16,11 @@ import java.awt.Rectangle;
  */
 public abstract class Controller<T extends View> {
 
-  // ---------------------------------------- Protected fields ----------------------------------
+  // --------------------------------------------------------------- Protected fields ----------------------------------------------------------------
 
   protected T view;
 
-  // ---------------------------------------- Constructor ---------------------------------------
+  // --------------------------------------------------------------- Constructor ---------------------------------------------------------------------
 
   /**
    * Builds the view controller.
@@ -31,7 +31,7 @@ public abstract class Controller<T extends View> {
     setView(view);
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   /**
    * Centers the controlled view on the current active monitor.
@@ -65,7 +65,7 @@ public abstract class Controller<T extends View> {
     view.setVisible(true);
   }
 
-  // ---------------------------------------- Abstract protected methods ------------------------
+  // ---------------------------------------------------------- Abstract protected methods -----------------------------------------------------------
 
   /**
    * Resets the controlled view to its default values.
@@ -82,13 +82,13 @@ public abstract class Controller<T extends View> {
    */
   protected abstract void setUpListeners();
 
-  // ---------------------------------------- Getters -------------------------------------------
+  // -------------------------------------------------------------------- Getters --------------------------------------------------------------------
 
   protected T getView() {
     return view;
   }
 
-  // ---------------------------------------- Setters -------------------------------------------
+  // -------------------------------------------------------------------- Setters --------------------------------------------------------------------
 
   protected void setView(T view) {
     this.view = view;

@@ -18,7 +18,7 @@ import javax.swing.JSeparator;
  */
 public class CustomSeparator extends JSeparator {
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void paintComponent(Graphics g) {

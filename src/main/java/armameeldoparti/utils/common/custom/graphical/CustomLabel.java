@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
  */
 public class CustomLabel extends JLabel {
 
-  // ---------------------------------------- Constructors --------------------------------------
+  // --------------------------------------------------------------- Constructors --------------------------------------------------------------------
 
   /**
    * Builds a basic label using the established program aesthetics.
@@ -32,7 +32,7 @@ public class CustomLabel extends JLabel {
     setUpGraphicalProperties(alignment);
   }
 
-  // ---------------------------------------- Protected methods ---------------------------------
+  // --------------------------------------------------------------- Protected methods ---------------------------------------------------------------
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -72,7 +72,7 @@ public class CustomLabel extends JLabel {
     g2.dispose();
   }
 
-  // ---------------------------------------- Private methods -----------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Configures the graphical properties of the label in order to fit the program aesthetics.
