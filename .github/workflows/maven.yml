@@ -9,10 +9,7 @@ on:
 
 jobs:
   build:
-
-    # Verificar que corra en Ubuntu es suficiente.
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest # Verificar que corra en Ubuntu es suficiente.
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 16+
