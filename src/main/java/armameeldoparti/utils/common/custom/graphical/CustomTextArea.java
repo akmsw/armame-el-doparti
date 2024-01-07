@@ -7,14 +7,16 @@ import javax.swing.JTextArea;
 /**
  * Custom text area class.
  *
- * <p>This class is used to instantiate a custom text area that fits the overall program aesthetics. It is supposed to be used along with a
- * CustomScrollPane to ensure its correct display.
+ * <p>This class is used to instantiate a custom text area that fits the overall program aesthetics. It is supposed to be used along with a custom
+ * scroll pane to ensure its correct display.
  *
  * @author Bonino, Francisco Ignacio.
  *
  * @version 0.0.1
  *
  * @since 3.0
+ *
+ * @see armameeldoparti.utils.common.custom.graphical.CustomScrollPane
  */
 public class CustomTextArea extends JTextArea {
 
@@ -46,7 +48,7 @@ public class CustomTextArea extends JTextArea {
     return Constants.INSETS_GENERAL;
   }
 
-  // --------------------------------------------------------------- Private methods -----------------------------------
+  // --------------------------------------------------------------- Private methods -----------------------------------------------------------------
 
   /**
    * Configures the graphical properties for the text area in order to fit the program aesthetics.

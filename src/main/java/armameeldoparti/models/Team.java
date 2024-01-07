@@ -49,9 +49,7 @@ public class Team {
   }
 
   /**
-   * Gets the amount of players in this team.
-   *
-   * @return The amount of players in this team.
+   * @return The amount of players in the team.
    */
   public int getPlayersCount() {
     return teamPlayers.values()
@@ -61,8 +59,6 @@ public class Team {
   }
 
   /**
-   * Gets the team skill points accumulated so far.
-   *
    * @return The team skill points accumulated so far.
    */
   public int getTeamSkill() {
@@ -78,7 +74,7 @@ public class Team {
    *
    * @param position The position of the set to check.
    *
-   * @return Whether the position set in the team is full.
+   * @return Whether the specified position set in the team is full.
    */
   public boolean isPositionFull(Position position) {
     return teamPlayers.get(position)

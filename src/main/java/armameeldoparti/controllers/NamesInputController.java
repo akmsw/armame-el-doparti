@@ -216,8 +216,7 @@ public class NamesInputController extends Controller<NamesInputView> {
                                  textField.getText());
                 } catch (IllegalArgumentException | InvalidNameException ex) {
                   CommonFunctions.showErrorMessage(
-                      ex instanceof IllegalArgumentException ? Constants.MSG_ERROR_INVALID_STRING
-                                                             : Constants.MSG_ERROR_INVALID_NAME,
+                      ex instanceof IllegalArgumentException ? Constants.MSG_ERROR_INVALID_STRING : Constants.MSG_ERROR_INVALID_NAME,
                       CommonFunctions.getComponentFromEvent(e)
                   );
 
@@ -389,8 +388,6 @@ public class NamesInputController extends Controller<NamesInputView> {
    * @return Whether the given name is valid.
    */
   private boolean validName(String name) {
-    return !name.isBlank()
-           && name.length() <= Constants.MAX_NAME_LEN
-           && !alreadyExists(name);
+    return !name.isBlank() && name.length() <= Constants.MAX_NAME_LEN && !alreadyExists(name);
   }
 }

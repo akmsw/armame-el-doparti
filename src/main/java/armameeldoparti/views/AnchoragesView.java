@@ -125,18 +125,17 @@ public class AnchoragesView extends View {
     rightPanel.add(clearAnchoragesButton, Constants.MIG_LAYOUT_GROW);
   }
 
-  // ---------------------------------------------------------------- Private methods ------------------------------------------------------------------------
+  // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
 
   /**
    * Adds the players checkboxes and their position labels.
    */
   private void addCheckBoxes() {
-    Map<Position, String> positionsMap = CommonFields.getPositionsMap();
-
     CommonFields.getPlayersSets()
                 .forEach((position, playersSet) -> {
                   fillCheckboxesSet(playersSet, checkboxesMap.get(position));
-                  addCheckboxesSet(checkboxesMap.get(position), CommonFunctions.capitalize(positionsMap.get(position)));
+                  addCheckboxesSet(checkboxesMap.get(position), CommonFunctions.capitalize(CommonFields.getPositionsMap()
+                                                                                                       .get(position)));
                 });
   }
 

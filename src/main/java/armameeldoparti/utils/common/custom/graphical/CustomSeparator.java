@@ -25,13 +25,6 @@ public class CustomSeparator extends JSeparator {
     Graphics2D g2 = (Graphics2D) g;
 
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-    g2.fillRoundRect(
-      0,
-      getHeight() / 2,
-      getWidth(),
-      5,
-      Constants.ROUNDED_BORDER_ARC_SEPARATOR,
-      Constants.ROUNDED_BORDER_ARC_SEPARATOR
-    );
+    g2.fillRoundRect(0, getHeight() / 2, getWidth(), 5, Constants.ROUNDED_BORDER_ARC_SEPARATOR, Constants.ROUNDED_BORDER_ARC_SEPARATOR);
   }
 }

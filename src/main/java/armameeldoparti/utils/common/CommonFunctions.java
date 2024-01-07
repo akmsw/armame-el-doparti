@@ -67,13 +67,7 @@ public final class CommonFunctions {
    * @param parentComponent Graphical component where the dialogs associated with the event should be displayed.
    */
   public static void showErrorMessage(String errorMessage, Component parentComponent) {
-    JOptionPane.showMessageDialog(
-      parentComponent,
-      errorMessage,
-      Constants.ERROR_MESSAGE_TITLE,
-      JOptionPane.ERROR_MESSAGE,
-      null
-    );
+    JOptionPane.showMessageDialog(parentComponent, errorMessage, Constants.ERROR_MESSAGE_TITLE, JOptionPane.ERROR_MESSAGE, null);
   }
 
   /**
@@ -136,11 +130,10 @@ public final class CommonFunctions {
    * @return The given string with the first letter uppercase and the rest lowercase.
    */
   public static String capitalize(String input) {
-    return input.isBlank() ? input
-                           : input.substring(0, 1)
-                                  .toUpperCase()
-                             + input.substring(1)
-                                    .toLowerCase();
+    return input.isBlank() ? input : input.substring(0, 1)
+                                          .toUpperCase()
+                                     + input.substring(1)
+                                            .toLowerCase();
   }
 
   /**

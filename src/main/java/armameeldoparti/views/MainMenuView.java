@@ -69,18 +69,9 @@ public class MainMenuView extends View {
    */
   private void addBackground() {
     addBackgroundImage();
-    addBackgroundLabel(Constants.SIZE_FONT_TITLE_LABEL,
-                       Constants.PROGRAM_TITLE,
-                       Constants.MIG_LAYOUT_ALIGN_CENTER,
-                       Constants.COLOR_GREEN_DARK);
-    addBackgroundLabel(Constants.SIZE_FONT_AUTHOR_LABEL,
-                       Constants.PROGRAM_AUTHOR,
-                       Constants.MIG_LAYOUT_ALIGN_CENTER,
-                       Color.WHITE);
-    addBackgroundLabel(Constants.SIZE_FONT_VERSION_LABEL,
-                       Constants.PROGRAM_VERSION,
-                       Constants.MIG_LAYOUT_ALIGN_RIGHT,
-                       Constants.COLOR_GREEN_DARK);
+    addBackgroundLabel(Constants.SIZE_FONT_TITLE_LABEL, Constants.PROGRAM_TITLE, Constants.MIG_LAYOUT_ALIGN_CENTER, Constants.COLOR_GREEN_DARK);
+    addBackgroundLabel(Constants.SIZE_FONT_AUTHOR_LABEL, Constants.PROGRAM_AUTHOR, Constants.MIG_LAYOUT_ALIGN_CENTER, Color.WHITE);
+    addBackgroundLabel(Constants.SIZE_FONT_VERSION_LABEL, Constants.PROGRAM_VERSION, Constants.MIG_LAYOUT_ALIGN_RIGHT, Constants.COLOR_GREEN_DARK);
   }
 
   /**

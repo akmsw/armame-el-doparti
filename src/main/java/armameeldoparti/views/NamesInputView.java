@@ -87,8 +87,7 @@ public class NamesInputView extends View {
 
   @Override
   protected void initializeInterface() {
-    leftPanel.add(leftTopPanel, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWY,
-                                                                          Constants.MIG_LAYOUT_PUSHY));
+    leftPanel.add(leftTopPanel, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWY, Constants.MIG_LAYOUT_PUSHY));
     leftPanel.add(leftBottomPanel, Constants.MIG_LAYOUT_SOUTH);
 
     masterPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
@@ -190,8 +189,7 @@ public class NamesInputView extends View {
                         CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_PUSHX));
     leftBottomPanel.add(radioButtonRandom);
     leftBottomPanel.add(radioButtonBySkillPoints);
-    leftBottomPanel.add(new CustomSeparator(),
-                        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_PUSHX));
+    leftBottomPanel.add(new CustomSeparator(), CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_PUSHX));
   }
 
   // -------------------------------------------------------------------- Getters --------------------------------------------------------------------

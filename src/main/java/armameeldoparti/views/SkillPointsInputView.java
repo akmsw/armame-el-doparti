@@ -71,12 +71,9 @@ public class SkillPointsInputView extends View {
     finishButton = new CustomButton("Finalizar", Constants.ROUNDED_BORDER_ARC_GENERAL);
     resetSkillPointsButton = new CustomButton("Reiniciar puntuaciones", Constants.ROUNDED_BORDER_ARC_GENERAL);
 
-    masterPanel.add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
-                                                                            Constants.MIG_LAYOUT_SPAN));
-    masterPanel.add(resetSkillPointsButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
-                                                                                      Constants.MIG_LAYOUT_SPAN));
-    masterPanel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW,
-                                                                          Constants.MIG_LAYOUT_SPAN));
+    masterPanel.add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+    masterPanel.add(resetSkillPointsButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+    masterPanel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
   }
 
   // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------

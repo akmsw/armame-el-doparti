@@ -27,7 +27,7 @@ public class CustomArrowButton extends BasicArrowButton {
   /**
    * Builds a basic arrow button pointing up or down, using the established program aesthetics.
    *
-   * @param orientation The text to display on the button.
+   * @param orientation The arrow button orientation.
    */
   public CustomArrowButton(int orientation) {
     super(orientation);

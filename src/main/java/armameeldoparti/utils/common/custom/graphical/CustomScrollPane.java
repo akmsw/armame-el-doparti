@@ -45,14 +45,7 @@ public class CustomScrollPane extends JScrollPane {
 
     g2.setRenderingHints(Constants.MAP_RENDERING_HINTS);
     g2.setColor(Constants.COLOR_GREEN_LIGHT_WHITE);
-    g2.fillRoundRect(
-      0,
-      0,
-      (getWidth() - 1),
-      (getHeight() - 1),
-      Constants.ROUNDED_BORDER_ARC_GENERAL,
-      Constants.ROUNDED_BORDER_ARC_GENERAL
-    );
+    g2.fillRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
     g2.dispose();
   }
 

@@ -132,7 +132,9 @@ public class ResultsController extends Controller<ResultsView> {
   /**
    * Fills the table with the distribution results.
    *
-   * <p>The table cells are filled trusting the positions order in the first column (same order as the positions enum).
+   * <p>The table cells are filled trusting the positions order in the first column (same order as the Position enum).
+   *
+   * @see armameeldoparti.models.Position
    */
   public void updateTable() {
     var wrapper = new Object() {
@@ -248,11 +250,7 @@ public class ResultsController extends Controller<ResultsView> {
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
       for (int colIndex = 0; colIndex < teams.size(); colIndex++) {
-        table.setValueAt(
-          colIndex == 0 ? positionsMap.get(Position.GOALKEEPER) : "Puntuación del equipo",
-          table.getRowCount() + colIndex - 2,
-          0
-        );
+        table.setValueAt(colIndex == 0 ? positionsMap.get(Position.GOALKEEPER) : "Puntuación del equipo", table.getRowCount() + colIndex - 2, 0);
       }
     } else {
       table.setValueAt(positionsMap.get(Position.GOALKEEPER), table.getRowCount() - 1, 0);

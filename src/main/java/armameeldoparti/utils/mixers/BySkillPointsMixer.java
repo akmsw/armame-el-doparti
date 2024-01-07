@@ -171,8 +171,8 @@ public class BySkillPointsMixer implements PlayersMixer {
 
     int currentPositionPlayersPerTeam = playersSet.size() / 2;
 
-    for (int i = 0; i < currentPositionPlayersPerTeam; i++) {
-      playersSubsets.add(Arrays.asList(playersSet.get(i), playersSet.get(playersSet.size() - 1 - i)));
+    for (int playerIndex = 0; playerIndex < currentPositionPlayersPerTeam; playerIndex++) {
+      playersSubsets.add(Arrays.asList(playersSet.get(playerIndex), playersSet.get(playersSet.size() - 1 - playerIndex)));
     }
 
     // Subsets sorted lowest to highest

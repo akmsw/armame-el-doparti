@@ -74,8 +74,7 @@ public class HelpView extends View {
                                                 .split());
     masterPanel.add(nextPageButton, new CC().width("50%")
                                             .wrap());
-    masterPanel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX,
-                                                                          Constants.MIG_LAYOUT_SPAN));
+    masterPanel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_SPAN));
   }
 
   // ---------------------------------------------------------------- Private methods ----------------------------------------------------------------
