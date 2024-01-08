@@ -10,7 +10,6 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 
 /**
  * Custom table class.
@@ -44,30 +43,23 @@ public class CustomTable extends JTable {
    * Adjusts the cells size to fit the biggest content shown in the table.
    */
   public void adjustCells() {
-    int totalColumns = getColumnCount();
-    int totalRows = getRowCount();
     int maxCellWidth = 0;
     int maxCellHeight = 0;
 
-    for (int row = 0; row < totalRows; row++) {
-      for (int column = 0; column < totalColumns; column++) {
-        TableCellRenderer cellRenderer = getCellRenderer(row, column);
+    for (int row = 0; row < getRowCount(); row++) {
+      for (int column = 0; column < getColumnCount(); column++) {
+        Component cellComponent = prepareRenderer(getCellRenderer(row, column), row, column);
 
-        Component cellComponent = prepareRenderer(cellRenderer, row, column);
-
-        int cellWidth = cellComponent.getPreferredSize().width + getIntercellSpacing().width;
-        int cellHeight = cellComponent.getPreferredSize().height + getIntercellSpacing().width;
-
-        maxCellWidth = Math.max(maxCellWidth, cellWidth);
-        maxCellHeight = Math.max(maxCellHeight, cellHeight);
+        maxCellWidth = Math.max(maxCellWidth, cellComponent.getPreferredSize().width + getIntercellSpacing().width);
+        maxCellHeight = Math.max(maxCellHeight, cellComponent.getPreferredSize().height + getIntercellSpacing().height);
       }
     }
 
-    for (int row = 0; row < totalRows; row++) {
+    for (int row = 0; row < getRowCount(); row++) {
       setRowHeight(row, maxCellHeight);
     }
 
-    for (int column = 0; column < totalColumns; column++) {
+    for (int column = 0; column < getColumnCount(); column++) {
       getColumnModel().getColumn(column)
                       .setPreferredWidth(maxCellWidth);
     }

@@ -97,12 +97,10 @@ public class BySkillPointsMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    List<List<Player>> anchoredPlayers = CommonFunctions.getAnchoredPlayers();
-
-    for (List<Player> anchoredPlayersSet : anchoredPlayers) {
+    for (List<Player> anchorage : CommonFunctions.getAnchoredPlayers()) {
       teams.sort(comparingInt(Team::getTeamSkill));
 
-      for (Player player : anchoredPlayersSet) {
+      for (Player player : anchorage) {
         player.setTeamNumber(teams.get(0)
                                   .getTeamNumber());
 
@@ -123,16 +121,16 @@ public class BySkillPointsMixer implements PlayersMixer {
 
     remainingPlayers.sort(comparingInt(List::size));
 
-    for (List<Player> playersSet : remainingPlayers) {
-      playersSet.sort(comparingInt(Player::getSkillPoints).reversed());
+    for (List<Player> players : remainingPlayers) {
+      players.sort(comparingInt(Player::getSkillPoints).reversed());
 
-      if (playersSet.size() == 4) {
+      if (players.size() == 4) {
         teams.sort(comparingInt(Team::getTeamSkill));
 
-        distributeSubsets(teams, playersSet, playersSet.get(0)
+        distributeSubsets(teams, players, players.get(0)
                                                        .getPosition());
       } else {
-        for (Player player : playersSet) {
+        for (Player player : players) {
           teams.sort(comparingInt(Team::getTeamSkill));
 
           int teamNumber = 0;
@@ -169,9 +167,7 @@ public class BySkillPointsMixer implements PlayersMixer {
   private void distributeSubsets(List<Team> teams, List<Player> playersSet, Position position) {
     List<List<Player>> playersSubsets = new ArrayList<>();
 
-    int currentPositionPlayersPerTeam = playersSet.size() / 2;
-
-    for (int playerIndex = 0; playerIndex < currentPositionPlayersPerTeam; playerIndex++) {
+    for (int playerIndex = 0; playerIndex < playersSet.size() / 2; playerIndex++) {
       playersSubsets.add(Arrays.asList(playersSet.get(playerIndex), playersSet.get(playersSet.size() - 1 - playerIndex)));
     }
 

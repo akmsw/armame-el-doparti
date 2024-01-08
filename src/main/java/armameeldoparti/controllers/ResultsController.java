@@ -233,24 +233,24 @@ public class ResultsController extends Controller<ResultsView> {
       table.setValueAt("EQUIPO " + (teamIndex + 1), 0, teamIndex + 1);
     }
 
-    for (int rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+    for (int row = 1; row < rowCount; row++) {
       table.setValueAt(
         positionsMap.get(
-          switch (rowIndex) {
+          switch (row) {
             case 1 -> Position.CENTRAL_DEFENDER;
             case 2, 3 -> Position.LATERAL_DEFENDER;
             case 4, 5 -> Position.MIDFIELDER;
             default -> Position.FORWARD;
           }
         ),
-        rowIndex,
+        row,
         0
       );
     }
 
     if (CommonFields.getDistribution() == Constants.MIX_BY_SKILL_POINTS) {
-      for (int colIndex = 0; colIndex < teams.size(); colIndex++) {
-        table.setValueAt(colIndex == 0 ? positionsMap.get(Position.GOALKEEPER) : "Puntuación del equipo", table.getRowCount() + colIndex - 2, 0);
+      for (int column = 0; column < teams.size(); column++) {
+        table.setValueAt(column == 0 ? positionsMap.get(Position.GOALKEEPER) : "Puntuación del equipo", table.getRowCount() + column - 2, 0);
       }
     } else {
       table.setValueAt(positionsMap.get(Position.GOALKEEPER), table.getRowCount() - 1, 0);

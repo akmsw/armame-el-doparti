@@ -262,23 +262,19 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                view.getTextArea()
                    .append("ANCLAJE " + (anchorageNumber + 1) + System.lineSeparator());
 
-               List<Player> anchoredPlayers = CommonFields.getPlayersSets()
-                                                          .entrySet()
-                                                          .stream()
-                                                          .flatMap(
-                                                            playersSet -> playersSet.getValue()
-                                                                                    .stream()
-                                                                                    .filter(
-                                                                                      player -> player.getAnchorageNumber() == (anchorageNumber + 1)
-                                                                                    )
-                                                          )
-                                                          .sorted(Comparator.comparing(player -> player.getPosition()
-                                                                                                       .ordinal()))
-                                                          .toList();
+               List<Player> anchorage = CommonFields.getPlayersSets()
+                                                    .entrySet()
+                                                    .stream()
+                                                    .flatMap(players -> players.getValue()
+                                                                               .stream()
+                                                                               .filter(player -> player.getAnchorageNumber() == anchorageNumber + 1))
+                                                    .sorted(Comparator.comparing(player -> player.getPosition()
+                                                                                                 .ordinal()))
+                                                    .toList();
 
-               for (Player player : anchoredPlayers) {
+               for (Player player : anchorage) {
                  view.getTextArea()
-                     .append((anchoredPlayers.indexOf(player) + 1) + ". " + player.getName() + System.lineSeparator());
+                     .append((anchorage.indexOf(player) + 1) + ". " + player.getName() + System.lineSeparator());
                }
 
                if ((anchorageNumber + 1) != anchoragesAmount) {
@@ -341,7 +337,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * Deletes a specific anchorage.
    *
-   * <p>The players that have the specified anchorage, now will have anchorage number 0. If the anchorage number to delete is not the last one, then
+   * <p>The players that have the specified anchorage now will have anchorage number 0. If the anchorage number to delete is not the last one, then
    * the remaining players (from {@code anchorageToDelete + 1} to {@code anchoragesAmount}) will have their anchorage number decreased by 1.
    *
    * @param anchorageToDelete Anchorage number to delete.

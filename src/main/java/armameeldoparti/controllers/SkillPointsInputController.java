@@ -1,6 +1,5 @@
 package armameeldoparti.controllers;
 
-import java.util.Arrays;
 import armameeldoparti.models.Position;
 import armameeldoparti.models.ProgramView;
 import armameeldoparti.utils.common.CommonFields;
@@ -70,13 +69,14 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    * Updates the players name labels.
    */
   public void updateNameLabels() {
-    Arrays.asList(Position.values())
-          .forEach(position -> CommonFields.getPlayersSets()
-                                           .get(position)
-                                           .forEach(player -> view.getLabelsMap()
-                                                                  .get(view.getSpinnersMap()
-                                                                           .get(player))
-                                                                  .setText(player.getName())));
+    for (Position position : Position.values()) {
+      CommonFields.getPlayersSets()
+                  .get(position)
+                  .forEach(player -> view.getLabelsMap()
+                                         .get(view.getSpinnersMap()
+                                                  .get(player))
+                                         .setText(player.getName()));
+    }
 
     view.pack();
   }

@@ -10,7 +10,6 @@ import armameeldoparti.utils.common.Constants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
 
@@ -56,36 +55,38 @@ public class RandomMixer implements PlayersMixer {
   public List<Team> withoutAnchorages(List<Team> teams) {
     shuffleTeamNumbers(teams.size());
 
-    Map<Position, List<Player>> playersSets = CommonFields.getPlayersSets();
-    Map<Position, List<Player>> randomTeam1PlayersMap = teams.get(randomTeam1)
-                                                             .getTeamPlayers();
-    Map<Position, List<Player>> randomTeam2PlayersMap = teams.get(randomTeam2)
-                                                             .getTeamPlayers();
-
     for (Position position : Position.values()) {
-      List<Player> playersAtPosition = new ArrayList<>(playersSets.get(position));
+      List<Player> playersAtPosition = new ArrayList<>(CommonFields.getPlayersSets()
+                                                                   .get(position));
 
       Collections.shuffle(playersAtPosition);
 
-      randomTeam1PlayersMap.get(position)
-                           .addAll(playersAtPosition.subList(0, playersAtPosition.size() / teams.size()));
+      teams.get(randomTeam1)
+           .getTeamPlayers()
+           .get(position)
+           .addAll(playersAtPosition.subList(0, playersAtPosition.size() / teams.size()));
     }
 
-    randomTeam1PlayersMap.values()
-                         .stream()
-                         .flatMap(List::stream)
-                         .forEach(player -> player.setTeamNumber(randomTeam1 + 1));
+    teams.get(randomTeam1)
+         .getTeamPlayers()
+         .values()
+         .stream()
+         .flatMap(List::stream)
+         .forEach(player -> player.setTeamNumber(randomTeam1 + 1));
 
-    playersSets.values()
-               .stream()
-               .flatMap(List::stream)
-               .filter(player -> player.getTeamNumber() == 0)
-               .forEach(player -> {
-                 randomTeam2PlayersMap.get(player.getPosition())
-                                      .add(player);
+    CommonFields.getPlayersSets()
+                .values()
+                .stream()
+                .flatMap(List::stream)
+                .filter(player -> player.getTeamNumber() == 0)
+                .forEach(player -> {
+                  teams.get(randomTeam2)
+                       .getTeamPlayers()
+                       .get(player.getPosition())
+                       .add(player);
 
-                 player.setTeamNumber(randomTeam2 + 1);
-               });
+                  player.setTeamNumber(randomTeam2 + 1);
+                });
 
     return teams;
   }
@@ -104,23 +105,20 @@ public class RandomMixer implements PlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    List<List<Player>> anchorages = CommonFunctions.getAnchoredPlayers();
-
-    for (List<Player> anchorage : anchorages) {
+    for (List<Player> anchorage : CommonFunctions.getAnchoredPlayers()) {
       int teamNumber = getAvailableTeam(teams, team -> anchorageCanBeAdded(team, anchorage));
 
       if (teamNumber == -1) {
         CommonFunctions.exitProgram(Error.ERROR_INTERNAL);
       }
 
-      Map<Position, List<Player>> randomTeamPlayersMap = teams.get(teamNumber)
-                                                              .getTeamPlayers();
-
       for (Player player : anchorage) {
         player.setTeamNumber(teamNumber + 1);
 
-        randomTeamPlayersMap.get(player.getPosition())
-                            .add(player);
+        teams.get(teamNumber)
+             .getTeamPlayers()
+             .get(player.getPosition())
+             .add(player);
       }
     }
 
