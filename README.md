@@ -2,8 +2,8 @@
 
 ![portada](./src/main/res/img/readme/cover.png)
 
-[![buildBadge](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop)](https://github.com/akmsw/armame-el-doparti/actions/workflows/maven.yml)
-[![issuesBadge](https://img.shields.io/github/issues/akmsw/armame-el-doparti.svg?logo=github)](https://github.com/akmsw/armame-el-doparti/issues)
+[![buildBadge](https://github.com/xinaras/armame-el-doparti/actions/workflows/maven.yml/badge.svg?branch=develop)](https://github.com/xinaras/armame-el-doparti/actions/workflows/maven.yml)
+[![issuesBadge](https://img.shields.io/github/issues/xinaras/armame-el-doparti.svg?logo=github)](https://github.com/xinaras/armame-el-doparti/issues)
 
 [![openJDKTargetBadge](https://img.shields.io/badge/jdk-23%2B-red?logo=openjdk)](https://openjdk.org/projects/jdk/)
 [![operatingSystemBadge](https://img.shields.io/badge/os-cross--platform-blueviolet?logo=windows-terminal)](https://en.wikipedia.org/wiki/Cross-platform_software)
@@ -51,7 +51,7 @@
     <h2 style="display:inline-block; border-bottom:none">📥 Descarga</h2>
   </summary>
 
-  Podés consultar el historial de versiones estables y betas en la sección [releases](https://github.com/akmsw/armame-el-doparti/releases) de este proyecto.
+  Podés consultar el historial de versiones estables y betas en la sección [releases](https://github.com/xinaras/armame-el-doparti/releases) de este proyecto.
 </details>
 
 ---
@@ -77,7 +77,7 @@
     <h2 style="display:inline-block; border-bottom:none">🛠️ Compilación manual y ejecución</h2>
   </summary>
 
-  Para compilar manualmente el programa, asumiendo que instalaste correctamente tanto los requisitos generales como los requisitos para compilación manual, tenés que [descargar el proyecto en formato ZIP](https://github.com/akmsw/armame-el-doparti/archive/refs/heads/develop.zip), extraer el archivo y, dentro de la carpeta extraída, ejecutar Apache Maven haciendo uso del archivo `pom.xml` mediante la terminal, con el siguiente comando:
+  Para compilar manualmente el programa, asumiendo que instalaste correctamente tanto los requisitos generales como los requisitos para compilación manual, tenés que [descargar el proyecto en formato ZIP](https://github.com/xinaras/armame-el-doparti/archive/refs/heads/develop.zip), extraer el archivo y, dentro de la carpeta extraída, ejecutar Apache Maven haciendo uso del archivo `pom.xml` mediante la terminal, con el siguiente comando:
   ```bash
   mvn package --file pom.xml
   ```
@@ -184,7 +184,7 @@
     <h2 style="display:inline-block; border-bottom:none">⚠️ Reportes y sugerencias</h2>
   </summary>
 
-  Si el programa presenta algún error que debería ser reportado para arreglarlo, si se te ocurrió alguna nueva funcionalidad para agregar al programa, o si opinás que algo podría ser modificado, la sección de [issues](https://github.com/akmsw/armame-el-doparti/issues) está abierta para que hagas estos reportes y/o sugerencias. Es necesario tener una cuenta en GitHub para abrir un nuevo reporte en el repositorio. Para poder trabajar en eso lo más rápidamente posible, te proveo unas plantillas para cada caso donde te pido toda la información que necesito.
+  Si el programa presenta algún error que debería ser reportado para arreglarlo, si se te ocurrió alguna nueva funcionalidad para agregar al programa, o si opinás que algo podría ser modificado, la sección de [issues](https://github.com/xinaras/armame-el-doparti/issues) está abierta para que hagas estos reportes y/o sugerencias. Es necesario tener una cuenta en GitHub para abrir un nuevo reporte en el repositorio. Para poder trabajar en eso lo más rápidamente posible, te proveo unas plantillas para cada caso donde te pido toda la información que necesito.
 </details>
 
 ---
@@ -194,7 +194,7 @@
     <h2 style="display:inline-block; border-bottom:none">🔜 Próximamente</h2>
   </summary>
 
-  Si querés estar al tanto de qué cambios están planeados para las próximas versiones, [acá](https://github.com/akmsw/armame-el-doparti/projects?query=is%3Aopen?type=new&query=is:open%20sort:title-asc) vas a poder ver los detalles y metas planificadas.
+  Si querés estar al tanto de qué cambios están planeados para las próximas versiones, [acá](https://github.com/xinaras/armame-el-doparti/projects?query=is%3Aopen?type=new&query=is:open%20sort:title-asc) vas a poder ver los detalles y metas planificadas.
 </details>
 
 ---

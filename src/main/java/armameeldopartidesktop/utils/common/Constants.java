@@ -83,7 +83,7 @@ public final class Constants {
   private static final String MSG_ERROR_FILES = "ERROR DE LECTURA DE ARCHIVOS INTERNOS";
   private static final String MSG_ERROR_GUI = "ERROR DE INTERFAZ GRÁFICA";
   private static final String MSG_ERROR_INTERNAL = "ERROR FATAL INTERNO";
-  private static final String PROGRAM_AUTHOR_GITHUB_USERNAME = "akmsw";
+  private static final String PROGRAM_AUTHOR_GITHUB_USERNAME = "xinaras";
   private static final String TITLE_HELP_PAGE_1 = "Introducción";
   private static final String TITLE_HELP_PAGE_2 = "Criterios establecidos";
   private static final String TITLE_HELP_PAGE_3 = "Jugadores";

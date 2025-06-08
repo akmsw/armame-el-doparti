@@ -3,7 +3,7 @@ name: Reporte de bug
 about: Creá un reporte de bug para mejorar el programa
 title: "[BUG]"
 labels: bug
-assignees: akmsw
+assignees: xinaras
 
 ---
 

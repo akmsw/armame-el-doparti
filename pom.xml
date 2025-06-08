@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              https://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>akmsw</groupId>
+  <groupId>xinaras</groupId>
   <artifactId>armameeldoparti</artifactId>
   <version>3.0.0</version>
 
