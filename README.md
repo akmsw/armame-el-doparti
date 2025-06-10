@@ -41,7 +41,7 @@
 
   ### 🪶 Apache Maven
   - #### Versión recomendada
-      🟢 [Apache Maven 3.9.9](https://maven.apache.org/download.cgi) *(o más reciente)*
+      🟢 [Apache Maven 3.9.10](https://maven.apache.org/download.cgi) *(o más reciente)*
 </details>
 
 ---
