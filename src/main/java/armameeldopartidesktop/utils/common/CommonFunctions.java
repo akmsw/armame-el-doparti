@@ -5,16 +5,12 @@ import java.awt.Desktop;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;

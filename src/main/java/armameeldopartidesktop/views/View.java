@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import armameeldopartidesktop.utils.common.Constants;
+
 import net.miginfocom.swing.MigLayout;
 
 /**

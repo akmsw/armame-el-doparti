@@ -1,9 +1,7 @@
 package armameeldopartidesktop.utils.common;
 
 import java.awt.GraphicsDevice;
-
 import java.awt.geom.RoundRectangle2D;
-
 import java.util.List;
 import java.util.Map;
 

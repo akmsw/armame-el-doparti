@@ -2,9 +2,7 @@ package armameeldopartidesktop.utils.common.custom.graphical.ui;
 
 import javax.swing.JComponent;
 import javax.swing.JTextArea;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicTextAreaUI;
 
 import armameeldopartidesktop.utils.common.Constants;

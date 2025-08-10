@@ -16,7 +16,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JToolTip;
 import javax.swing.SwingUtilities;
-
 import javax.swing.border.EmptyBorder;
 
 import armameeldopartidesktop.models.enums.Error;

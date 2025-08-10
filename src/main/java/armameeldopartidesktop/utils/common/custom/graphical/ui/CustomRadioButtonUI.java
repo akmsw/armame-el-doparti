@@ -2,9 +2,7 @@ package armameeldopartidesktop.utils.common.custom.graphical.ui;
 
 import javax.swing.JComponent;
 import javax.swing.JRadioButton;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicRadioButtonUI;
 
 import armameeldopartidesktop.utils.common.Constants;

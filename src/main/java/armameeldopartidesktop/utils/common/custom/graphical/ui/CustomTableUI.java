@@ -8,13 +8,9 @@ import java.awt.Graphics2D;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicTableUI;
-
 import javax.swing.table.DefaultTableCellRenderer;
 
 import armameeldopartidesktop.utils.common.Constants;

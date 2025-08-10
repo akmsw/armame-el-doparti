@@ -10,6 +10,7 @@ import armameeldopartidesktop.utils.common.Constants;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
+
 import net.miginfocom.layout.CC;
 
 /**

@@ -27,6 +27,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomComboBox;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomTextField;
+
 import net.miginfocom.swing.MigLayout;
 
 /**

@@ -1,9 +1,7 @@
 package armameeldopartidesktop.controllers;
 
 import java.awt.Component;
-
 import java.awt.event.ItemEvent;
-
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -12,7 +10,6 @@ import java.util.regex.Pattern;
 
 import javax.naming.InvalidNameException;
 import javax.naming.LimitExceededException;
-
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

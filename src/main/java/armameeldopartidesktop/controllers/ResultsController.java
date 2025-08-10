@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,9 +11,7 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.table.DefaultTableCellRenderer;
 
 import armameeldopartidesktop.models.Player;

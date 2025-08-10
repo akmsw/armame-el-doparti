@@ -10,13 +10,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.SwingConstants;
-
 import javax.swing.border.AbstractBorder;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicSpinnerUI;
-
 import javax.swing.text.DefaultCaret;
 
 import armameeldopartidesktop.utils.common.Constants;

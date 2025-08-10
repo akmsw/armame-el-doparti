@@ -2,9 +2,7 @@ package armameeldopartidesktop.utils.common.custom.graphical.ui;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicCheckBoxUI;
 
 import armameeldopartidesktop.utils.common.Constants;

@@ -7,7 +7,6 @@ import java.awt.Insets;
 import java.awt.Polygon;
 
 import javax.swing.SwingConstants;
-
 import javax.swing.plaf.basic.BasicArrowButton;
 
 import armameeldopartidesktop.models.enums.Error;
