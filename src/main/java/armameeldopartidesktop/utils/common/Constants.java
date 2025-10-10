@@ -189,6 +189,7 @@ public final class Constants {
   public static final String    POSITION_LATERAL_DEFENDERS                    = "DEFENSORES LATERALES";
   public static final String    POSITION_MIDFIELDERS                          = "MEDIOCAMPISTAS";
   public static final String    PROGRAM_TITLE                                 = "armame el doparti";
+  public static final String    REPOSITORY_TITLE                              = PROGRAM_TITLE + " desktop";
   public static final String    PROGRAM_VERSION                               = "v3.0.0";
   public static final String    PROGRAM_AUTHOR                                = "@" + PROGRAM_AUTHOR_GITHUB_USERNAME;
   public static final String    REGEX_NUMERIC_STRING                          = "\\d+$";
@@ -210,7 +211,7 @@ public final class Constants {
   public static final String    TITLE_VIEW_SKILL_POINTS_INPUT                 = "Ingreso de puntuaciones";
   public static final String    TOOLTIP_MSG_PROGRAM_VERSION                   = "Versión del programa";
   public static final String    URL_CONTACT                                   = "https://github.com/" + PROGRAM_AUTHOR_GITHUB_USERNAME;
-  public static final String    URL_ISSUES                                    = URL_CONTACT + "/" + PROGRAM_TITLE.replace(" ", "-") + "/issues";
+  public static final String    URL_ISSUES                                    = URL_CONTACT + "/" + REPOSITORY_TITLE.replace(" ", "-") + "/issues";
 
   public static final Color     COLOR_GREEN_DARK                              = Color.decode(HEX_CODE_GREEN_DARK);
   public static final Color     COLOR_GREEN_DARK_MEDIUM                       = Color.decode(HEX_CODE_GREEN_DARK_MEDIUM);
