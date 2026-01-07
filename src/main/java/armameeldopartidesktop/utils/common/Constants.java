@@ -109,7 +109,7 @@ public final class Constants {
   public static final int       PLAYERS_TOTAL                                 = PLAYERS_PER_TEAM * 2;
   public static final int       MAX_NAME_LEN                                  = 10;
   public static final int       MAX_ANCHORAGE_SIZE                            = PLAYERS_PER_TEAM - 1;
-  public static final int       MAX_TOTAL_ANCHORED_PLAYERS                    = 2 * MAX_ANCHORAGE_SIZE;
+  public static final int       MAX_TOTAL_ANCHORED_PLAYERS                    = MAX_ANCHORAGE_SIZE * 2;
   public static final int       MIN_ANCHORAGE_SIZE                            = 2;
   public static final int       PLAYER_NO_ANCHORAGE_ASSIGNED                  = 0;
   public static final int       PLAYER_NO_SKILL_POINTS_ASSIGNED               = 0;
