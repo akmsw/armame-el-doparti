@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
@@ -280,14 +281,18 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    * Toggles the buttons and checkboxes states.
    */
   private void toggleButtons() {
-    view.getAnchorageButtons().forEach(button -> button.setEnabled(false));
+    for (JButton button : view.getAnchorageButtons()) {
+      button.setEnabled(false);
+    }
 
     if (anchoragesCount == 1) {
       view.getFinishButton().setEnabled(true);
       view.getDeleteLastAnchorageButton().setEnabled(true);
       view.getClearAnchoragesButton().setEnabled(true);
     } else if (anchoragesCount > 1) {
-      view.getAnchorageButtons().forEach(button -> button.setEnabled(true));
+      for (JButton button : view.getAnchorageButtons()) {
+        button.setEnabled(true);
+      }
     }
 
     if (Constants.MAX_TOTAL_ANCHORED_PLAYERS - anchoredPlayersCount < 2) {
@@ -450,9 +455,11 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
     for (Team team : teams) {
       if (!anchoragesConflictExists(team, anchorage)) {
-        anchorage.forEach(player -> team.getTeamPlayers()
-                                        .get(player.getPosition())
-                                        .add(player));
+        for (Player player : anchorage) {
+          team.getTeamPlayers()
+              .get(player.getPosition())
+              .add(player);
+        }
 
         if (validAnchoragesCombination(recursiveVerificationIndex + 1, teams)) {
           return true;

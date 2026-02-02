@@ -50,34 +50,31 @@ public class RandomMixer extends BasicPlayersMixer {
     for (Position position : Position.values()) {
       List<Player> playersAtPosition = new ArrayList<>(CommonFields.getPlayersSets().get(position));
 
+      int setHalf = playersAtPosition.size() / teams.size();
+
       Collections.shuffle(playersAtPosition);
+
+      List<Player> firstGroup  = playersAtPosition.subList(0, setHalf);
+      List<Player> secondGroup = playersAtPosition.subList(setHalf, playersAtPosition.size());
+
+      for (Player player : firstGroup) {
+        player.setTeamNumber(randomTeam1 + 1);
+      }
+
+      for (Player player : secondGroup) {
+        player.setTeamNumber(randomTeam2 + 1);
+      }
 
       teams.get(randomTeam1)
            .getTeamPlayers()
            .get(position)
-           .addAll(playersAtPosition.subList(0, playersAtPosition.size() / teams.size()));
+           .addAll(firstGroup);
+
+      teams.get(randomTeam2)
+           .getTeamPlayers()
+           .get(position)
+           .addAll(secondGroup);
     }
-
-    teams.get(randomTeam1)
-         .getTeamPlayers()
-         .values()
-         .stream()
-         .flatMap(List::stream)
-         .forEach(player -> player.setTeamNumber(randomTeam1 + 1));
-
-    CommonFields.getPlayersSets()
-                .values()
-                .stream()
-                .flatMap(List::stream)
-                .filter(player -> player.getTeamNumber() == Constants.PLAYER_NO_TEAM_ASSIGNED)
-                .forEach(player -> {
-                  teams.get(randomTeam2)
-                       .getTeamPlayers()
-                       .get(player.getPosition())
-                       .add(player);
-
-                  player.setTeamNumber(randomTeam2 + 1);
-                });
 
     return teams;
   }

@@ -2,6 +2,7 @@ package armameeldopartidesktop.controllers;
 
 import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.models.enums.ProgramView;
+import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
@@ -65,11 +66,11 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   public void updateNameLabels() {
     for (Position position : Position.values()) {
-      CommonFields.getPlayersSets()
-                  .get(position)
-                  .forEach(player -> view.getLabelsMap()
-                                         .get(view.getSpinnersMap().get(player))
-                                         .setText(player.getName()));
+      for (Player player : CommonFields.getPlayersSets().get(position)) {
+        view.getLabelsMap()
+            .get(view.getSpinnersMap().get(player))
+            .setText(player.getName());
+      }
     }
 
     view.pack();

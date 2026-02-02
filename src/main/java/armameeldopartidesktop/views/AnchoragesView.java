@@ -155,7 +155,9 @@ public class AnchoragesView extends View {
    * @param cbSet      Check boxes set to fill.
    */
   private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
-    playersSet.forEach(player -> cbSet.add(new JCheckBox(player.getName())));
+    for (Player player : playersSet) {
+      cbSet.add(new JCheckBox(player.getName()));
+    }
   }
 
   /**
@@ -167,7 +169,9 @@ public class AnchoragesView extends View {
   private void addCheckboxesSet(List<JCheckBox> cbSet, String labelText) {
     leftPanel.add(new CustomLabel(labelText, null, SwingConstants.CENTER), CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_SPAN));
 
-    cbSet.forEach(checkbox -> leftPanel.add(checkbox, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_ALIGN_LEFT, Constants.MIG_LAYOUT_PUSHX)));
+    for (JCheckBox jCheckBox : cbSet) {
+      leftPanel.add(jCheckBox, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_ALIGN_LEFT, Constants.MIG_LAYOUT_PUSHX));
+    }
   }
 
   // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

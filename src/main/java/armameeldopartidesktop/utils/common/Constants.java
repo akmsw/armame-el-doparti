@@ -36,36 +36,39 @@ public final class Constants {
 
   private static final String   FILE_EXTENSION_HELP                           = ".hlp";
   private static final String   FILE_EXTENSION_PDA                            = ".pda";
-  private static final String   FILENAME_HELP_PAGE_1                          = "helpIntro" + FILE_EXTENSION_HELP;
-  private static final String   FILENAME_HELP_PAGE_2                          = "helpCriteria" + FILE_EXTENSION_HELP;
-  private static final String   FILENAME_HELP_PAGE_3                          = "helpNames" + FILE_EXTENSION_HELP;
-  private static final String   FILENAME_HELP_PAGE_4                          = "helpAnchorages" + FILE_EXTENSION_HELP;
-  private static final String   FILENAME_HELP_PAGE_5                          = "helpScores" + FILE_EXTENSION_HELP;
-  private static final String   FILENAME_HELP_PAGE_6                          = "helpRandomMix" + FILE_EXTENSION_HELP;
+  private static final String   FILE_EXTENSION_PNG                            = ".png";
+  private static final String   FILE_EXTENSION_TTF                            = ".ttf";
+  private static final String   FILE_EXTENSION_TXT                            = ".txt";
+  private static final String   FILENAME_HELP_PAGE_1                          = "helpIntro"            + FILE_EXTENSION_HELP;
+  private static final String   FILENAME_HELP_PAGE_2                          = "helpCriteria"         + FILE_EXTENSION_HELP;
+  private static final String   FILENAME_HELP_PAGE_3                          = "helpNames"            + FILE_EXTENSION_HELP;
+  private static final String   FILENAME_HELP_PAGE_4                          = "helpAnchorages"       + FILE_EXTENSION_HELP;
+  private static final String   FILENAME_HELP_PAGE_5                          = "helpScores"           + FILE_EXTENSION_HELP;
+  private static final String   FILENAME_HELP_PAGE_6                          = "helpRandomMix"        + FILE_EXTENSION_HELP;
   private static final String   FILENAME_HELP_PAGE_7                          = "helpBySkillPointsMix" + FILE_EXTENSION_HELP;
-  private static final String   FILENAME_HELP_PAGE_8                          = "helpContact" + FILE_EXTENSION_HELP;
-  private static final String   FILENAME_ICON_CB_DISABLED_SELECTED            = "cb_d_s.png";
-  private static final String   FILENAME_ICON_CB_DISABLED_UNSELECTED          = "cb_d_us.png";
-  private static final String   FILENAME_ICON_CB_ENABLED_SELECTED_FOCUSED     = "cb_e_s_f.png";
-  private static final String   FILENAME_ICON_CB_ENABLED_SELECTED_PRESSED     = "cb_e_s_p.png";
-  private static final String   FILENAME_ICON_CB_ENABLED_SELECTED_UNFOCUSED   = "cb_e_s_uf.png";
-  private static final String   FILENAME_ICON_CB_ENABLED_UNSELECTED_FOCUSED   = "cb_e_us_f.png";
-  private static final String   FILENAME_ICON_CB_ENABLED_UNSELECTED_PRESSED   = "cb_e_us_p.png";
-  private static final String   FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED = "cb_e_us_uf.png";
-  private static final String   FILENAME_ICON_OP_ERROR                        = "op_e.png";
-  private static final String   FILENAME_ICON_OP_INFORMATION                  = "op_i.png";
-  private static final String   FILENAME_ICON_OP_QUESTION                     = "op_q.png";
-  private static final String   FILENAME_ICON_OP_WARNING                      = "op_w.png";
-  private static final String   FILENAME_ICON_RB_DISABLED_SELECTED            = "rb_d_s.png";
-  private static final String   FILENAME_ICON_RB_DISABLED_UNSELECTED          = "rb_d_us.png";
-  private static final String   FILENAME_ICON_RB_ENABLED_SELECTED_FOCUSED     = "rb_e_s_f.png";
-  private static final String   FILENAME_ICON_RB_ENABLED_SELECTED_PRESSED     = "rb_e_s_p.png";
-  private static final String   FILENAME_ICON_RB_ENABLED_SELECTED_UNFOCUSED   = "rb_e_s_uf.png";
-  private static final String   FILENAME_ICON_RB_ENABLED_UNSELECTED_FOCUSED   = "rb_e_us_f.png";
-  private static final String   FILENAME_ICON_RB_ENABLED_UNSELECTED_PRESSED   = "rb_e_us_p.png";
-  private static final String   FILENAME_ICON_RB_ENABLED_UNSELECTED_UNFOCUSED = "rb_e_us_uf.png";
-  private static final String   FILENAME_ICON_MAIN                            = "main_icon.png";
-  private static final String   FILENAME_IMAGE_BACKGROUND                     = "bg.png";
+  private static final String   FILENAME_HELP_PAGE_8                          = "helpContact"          + FILE_EXTENSION_HELP;
+  private static final String   FILENAME_ICON_CB_DISABLED_SELECTED            = "cb_d_s"               + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_CB_DISABLED_UNSELECTED          = "cb_d_us"              + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_CB_ENABLED_SELECTED_FOCUSED     = "cb_e_s_f"             + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_CB_ENABLED_SELECTED_PRESSED     = "cb_e_s_p"             + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_CB_ENABLED_SELECTED_UNFOCUSED   = "cb_e_s_uf"            + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_CB_ENABLED_UNSELECTED_FOCUSED   = "cb_e_us_f"            + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_CB_ENABLED_UNSELECTED_PRESSED   = "cb_e_us_p"            + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_CB_ENABLED_UNSELECTED_UNFOCUSED = "cb_e_us_uf"           + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_OP_ERROR                        = "op_e"                 + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_OP_INFORMATION                  = "op_i"                 + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_OP_QUESTION                     = "op_q"                 + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_OP_WARNING                      = "op_w"                 + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_RB_DISABLED_SELECTED            = "rb_d_s"               + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_RB_DISABLED_UNSELECTED          = "rb_d_us"              + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_RB_ENABLED_SELECTED_FOCUSED     = "rb_e_s_f"             + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_RB_ENABLED_SELECTED_PRESSED     = "rb_e_s_p"             + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_RB_ENABLED_SELECTED_UNFOCUSED   = "rb_e_s_uf"            + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_RB_ENABLED_UNSELECTED_FOCUSED   = "rb_e_us_f"            + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_RB_ENABLED_UNSELECTED_PRESSED   = "rb_e_us_p"            + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_RB_ENABLED_UNSELECTED_UNFOCUSED = "rb_e_us_uf"           + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_ICON_MAIN                            = "main_icon"            + FILE_EXTENSION_PNG;
+  private static final String   FILENAME_IMAGE_BACKGROUND                     = "bg"                   + FILE_EXTENSION_PNG;
   private static final String   HEX_CODE_GREEN_DARK                           = "#29474a";
   private static final String   HEX_CODE_GREEN_DARK_MEDIUM                    = "#4b6560";
   private static final String   HEX_CODE_GREEN_MEDIUM                         = "#6d8276";
@@ -141,14 +144,14 @@ public final class Constants {
   public static final float     SIZE_FONT_DEFAULT                             = 18f;
 
   public static final String    DATE_FORMAT                                   = "yyyy-MM-dd HH:mm:ss";
-  public static final String    FILENAME_ERROR_REPORT                         = "errorReport.txt";
-  public static final String    FILENAME_FONT                                 = "comfortaa.ttf";
-  public static final String    FILENAME_PDA                                  = "dist" + FILE_EXTENSION_PDA;
+  public static final String    FILENAME_ERROR_REPORT                         = "errorReport" + FILE_EXTENSION_TXT;
+  public static final String    FILENAME_FONT                                 = "comfortaa"   + FILE_EXTENSION_TTF;
+  public static final String    FILENAME_PDA                                  = "dist"        + FILE_EXTENSION_PDA;
   public static final String    MIG_LAYOUT_CENTER                             = "center";
   public static final String    MIG_LAYOUT_EAST                               = "east";
   public static final String    MIG_LAYOUT_GROW                               = "grow";
-  public static final String    MIG_LAYOUT_GROWX                              = MIG_LAYOUT_GROW + "x";
-  public static final String    MIG_LAYOUT_GROWY                              = MIG_LAYOUT_GROW + "y";
+  public static final String    MIG_LAYOUT_GROWX                              = MIG_LAYOUT_GROW  + "x";
+  public static final String    MIG_LAYOUT_GROWY                              = MIG_LAYOUT_GROW  + "y";
   public static final String    MIG_LAYOUT_ALIGN_CENTER                       = MIG_LAYOUT_ALIGN + " center";
   public static final String    MIG_LAYOUT_ALIGN_LEFT                         = MIG_LAYOUT_ALIGN + " left";
   public static final String    MIG_LAYOUT_ALIGN_RIGHT                        = MIG_LAYOUT_ALIGN + " right";
@@ -280,18 +283,18 @@ public final class Constants {
   public static final Map<Position, String> MAP_POSITIONS = Map.of(
     Position.CENTRAL_DEFENDER, POSITION_CENTRAL_DEFENDERS,
     Position.LATERAL_DEFENDER, POSITION_LATERAL_DEFENDERS,
-    Position.MIDFIELDER, POSITION_MIDFIELDERS,
-    Position.FORWARD, POSITION_FORWARDS,
-    Position.GOALKEEPER, POSITION_GOALKEEPERS
+    Position.MIDFIELDER      , POSITION_MIDFIELDERS,
+    Position.FORWARD         , POSITION_FORWARDS,
+    Position.GOALKEEPER      , POSITION_GOALKEEPERS
   );
 
   /**
    * Map of errors and their corresponding exit code.
    */
   public static final Map<Error, Integer> MAP_ERROR_CODE = Map.of(
-    Error.ERROR_BROWSER, EXIT_CODE_ERROR_BROWSER,
-    Error.ERROR_FILES, EXIT_CODE_ERROR_FILES,
-    Error.ERROR_GUI, EXIT_CODE_ERROR_GUI,
+    Error.ERROR_BROWSER , EXIT_CODE_ERROR_BROWSER,
+    Error.ERROR_FILES   , EXIT_CODE_ERROR_FILES,
+    Error.ERROR_GUI     , EXIT_CODE_ERROR_GUI,
     Error.ERROR_INTERNAL, EXIT_CODE_ERROR_INTERNAL
   );
 
@@ -299,9 +302,9 @@ public final class Constants {
    * Map of errors and their corresponding error message to display.
    */
   public static final Map<Error, String> MAP_ERROR_MESSAGE = Map.of(
-    Error.ERROR_BROWSER, MSG_ERROR_BROWSER,
-    Error.ERROR_FILES, MSG_ERROR_FILES,
-    Error.ERROR_GUI, MSG_ERROR_GUI,
+    Error.ERROR_BROWSER , MSG_ERROR_BROWSER,
+    Error.ERROR_FILES   , MSG_ERROR_FILES,
+    Error.ERROR_GUI     , MSG_ERROR_GUI,
     Error.ERROR_INTERNAL, MSG_ERROR_INTERNAL
   );
 
@@ -323,8 +326,8 @@ public final class Constants {
    * Map of rendering hints used to paint custom components.
    */
   public static final Map<RenderingHints.Key, Object> MAP_RENDERING_HINTS = Map.of(
-    RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON,
-    RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY,
+    RenderingHints.KEY_ANTIALIASING  , RenderingHints.VALUE_ANTIALIAS_ON,
+    RenderingHints.KEY_RENDERING     , RenderingHints.VALUE_RENDER_QUALITY,
     RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE
   );
 
