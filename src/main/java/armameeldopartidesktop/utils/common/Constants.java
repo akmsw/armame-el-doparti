@@ -198,7 +198,7 @@ public final class Constants {
   public static final String    REGEX_PDA_DATA_RETRIEVE                       = "[CLMFG].+>.+";
   public static final String    REGEX_PLAYERS_COUNT                           = "(?!(?<=" + PLAYERS_PER_TEAM + ")\\d).";
   public static final String    REGEX_SPECIAL_CHARACTERS                      = ".*[^a-z\sA-ZÁÉÍÓÚáéíóúñÑ\\d]+.*";
-  public static final String    REPOSITORY_NAME                               = PROGRAM_TITLE + " desktop";
+  public static final String    REPOSITORY_NAME                               = (PROGRAM_TITLE + " desktop").replace(" ", "-");
   public static final String    TEXT_BUTTON_DIALOG_CANCEL                     = "Cancelar";
   public static final String    TEXT_BUTTON_DIALOG_NO                         = "No";
   public static final String    TEXT_BUTTON_DIALOG_OK                         = "Aceptar";
@@ -209,12 +209,13 @@ public final class Constants {
   public static final String    TITLE_MESSAGE_WARNING                         = "¡Advertencia!";
   public static final String    TITLE_VIEW_ANCHORAGES                         = "Anclaje de jugadores";
   public static final String    TITLE_VIEW_HELP                               = "Ayuda";
-  public static final String    TITLE_VIEW_MAIN_MENU                          = CommonFunctions.capitalize(Constants.PROGRAM_TITLE) + " " + Constants.PROGRAM_VERSION;
+  public static final String    TITLE_VIEW_MAIN_MENU                          = CommonFunctions.capitalize(PROGRAM_TITLE) + " " + PROGRAM_VERSION;
   public static final String    TITLE_VIEW_NAMES_INPUT                        = "Ingreso de jugadores";
   public static final String    TITLE_VIEW_SKILL_POINTS_INPUT                 = "Ingreso de puntuaciones";
   public static final String    TOOLTIP_MSG_PROGRAM_VERSION                   = "Versión del programa";
   public static final String    URL_CONTACT                                   = "https://github.com/" + PROGRAM_AUTHOR_GITHUB_USERNAME;
-  public static final String    URL_ISSUES                                    = URL_CONTACT + "/" + REPOSITORY_NAME.replace(" ", "-") + "/issues";
+  public static final String    URL_REPOSITORY                                = URL_CONTACT + "/" + REPOSITORY_NAME;
+  public static final String    URL_ISSUES                                    = URL_REPOSITORY + "/issues";
 
   public static final Color     COLOR_GREEN_DARK                              = Color.decode(HEX_CODE_GREEN_DARK);
   public static final Color     COLOR_GREEN_DARK_MEDIUM                       = Color.decode(HEX_CODE_GREEN_DARK_MEDIUM);
