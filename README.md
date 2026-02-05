@@ -29,7 +29,7 @@
   - #### Versión mínima
       🟡 [Java 23](https://jdk.java.net/23/)
   - #### Versión recomendada
-      🟢 [Java 24](https://jdk.java.net/24/) *(o más reciente)*
+      🟢 [Java 25](https://jdk.java.net/25/) *(o más reciente)*
 </details>
 
 ---
