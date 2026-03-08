@@ -74,7 +74,7 @@ public final class Main {
    *
    * @param args Program arguments (not used).
    */
-  public static void main(String[] args) {
+  public static void main(String [] args) {
     CommonFields.setActiveMonitor(GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()); // Establishes the main monitor as the active monitor by default
     CommonFields.setAnchoragesEnabled(false);
     CommonFields.setControllersMap(new EnumMap<>(ProgramView.class));
@@ -183,22 +183,13 @@ public final class Main {
       GraphicsEnvironment.getLocalGraphicsEnvironment()
                          .registerFont(programFont);
 
-      setProgramFont(programFont);
+      UIManager.getDefaults()
+               .keySet()
+               .stream()
+               .filter(key -> UIManager.get(key) instanceof FontUIResource)
+               .forEach(key -> UIManager.put(key, programFont));
     } catch (IOException | FontFormatException exception) {
       CommonFunctions.exitProgram(Error.ERROR_GUI, exception);
     }
-  }
-
-  /**
-   * Sets the program font.
-   *
-   * @param font Font to use.
-   */
-  private static void setProgramFont(Font font) {
-    UIManager.getDefaults()
-             .keySet()
-             .stream()
-             .filter(key -> UIManager.get(key) instanceof FontUIResource)
-             .forEach(key -> UIManager.put(key, font));
   }
 }
