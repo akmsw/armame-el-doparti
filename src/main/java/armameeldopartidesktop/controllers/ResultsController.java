@@ -31,7 +31,7 @@ import armameeldopartidesktop.views.ResultsView;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -134,7 +134,7 @@ public class ResultsController extends Controller<ResultsView> {
    */
   public void updateTableData() {
     int column = 1;
-    int row = 1;
+    int row    = 1;
 
     for (Team team : teams) {
       for (Position position : Position.values()) {
@@ -329,7 +329,7 @@ public class ResultsController extends Controller<ResultsView> {
                                                                                  .filter(player -> player.getName() == value)
                                                                                  .findFirst());
 
-              component.setBackground(playerOnCell.isAnchored() ? Constants.COLORS_ANCHORAGES.get(playerOnCell.getAnchorageNumber() - 1) : Constants.COLOR_GREEN_LIGHT_WHITE);
+              component.setBackground(playerOnCell.isAnchored() ? Constants.COLORS_ANCHORAGES.get(playerOnCell.getAnchorageId() - 1) : Constants.COLOR_GREEN_LIGHT_WHITE);
               component.setForeground(Color.BLACK);
 
               ((DefaultTableCellRenderer) component).setHorizontalAlignment(SwingConstants.LEFT);

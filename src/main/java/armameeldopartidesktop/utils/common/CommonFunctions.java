@@ -38,7 +38,7 @@ import armameeldopartidesktop.views.View;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -136,21 +136,21 @@ public final class CommonFunctions {
     switch (dialogMessageType) {
       case JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE -> {
         dialogTitle = Constants.TITLE_MESSAGE_INFORMATION;
-        dialogIcon = Constants.ICON_DIALOG_INFORMATION;
+        dialogIcon  = Constants.ICON_DIALOG_INFORMATION;
       }
       case JOptionPane.WARNING_MESSAGE -> {
         dialogTitle = Constants.TITLE_MESSAGE_WARNING;
-        dialogIcon = Constants.ICON_DIALOG_WARNING;
+        dialogIcon  = Constants.ICON_DIALOG_WARNING;
       }
       case JOptionPane.ERROR_MESSAGE -> {
         dialogTitle = Constants.TITLE_MESSAGE_ERROR;
-        dialogIcon = Constants.ICON_DIALOG_ERROR;
+        dialogIcon  = Constants.ICON_DIALOG_ERROR;
       }
       case JOptionPane.QUESTION_MESSAGE -> {
         dialogTitle = Constants.TITLE_MESSAGE_QUESTION;
-        dialogIcon = Constants.ICON_DIALOG_QUESTION;
+        dialogIcon  = Constants.ICON_DIALOG_QUESTION;
       }
-      default -> CommonFunctions.exitProgram(Error.ERROR_GUI, new IllegalStateException(Constants.MSG_ERROR_ILLEGAL_DIALOG_TYPE));
+      default -> CommonFunctions.exitProgram(Error.ERROR_GUI, new IllegalStateException(Constants.MSG_ERROR_DEBUG_INVALID_DIALOG_TYPE));
     }
 
     JOptionPane.showMessageDialog(parentComponent, dialogMessage, dialogTitle, dialogMessageType, dialogIcon);
@@ -338,7 +338,7 @@ public final class CommonFunctions {
                                        .stream()
                                        .flatMap(List::stream)
                                        .filter(Player::isAnchored)
-                                       .collect(Collectors.groupingBy(Player::getAnchorageNumber))
+                                       .collect(Collectors.groupingBy(Player::getAnchorageId))
                                        .values());
   }
 
@@ -352,7 +352,7 @@ public final class CommonFunctions {
    */
   public static <T> T retrieveOptional(Optional<T> optional) {
     if (!optional.isPresent()) {
-      exitProgram(Error.ERROR_INTERNAL, new IllegalArgumentException(Constants.MSG_ERROR_NO_OPTIONAL_CONTENT));
+      exitProgram(Error.ERROR_INTERNAL, new IllegalArgumentException(Constants.MSG_ERROR_DEBUG_NO_OPTIONAL_CONTENT));
     }
 
     return optional.get();

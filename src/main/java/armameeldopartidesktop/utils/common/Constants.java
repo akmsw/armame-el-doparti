@@ -19,7 +19,7 @@ import armameeldopartidesktop.models.enums.Position;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -165,15 +165,17 @@ public final class Constants {
   public static final String    MIG_LAYOUT_WEST                               = "west";
   public static final String    MIG_LAYOUT_WRAP                               = "wrap";
   public static final String    MIG_LAYOUT_WRAP_2                             = MIG_LAYOUT_WRAP + " 2";
-  public static final String    MSG_ERROR_ILLEGAL_DIALOG_TYPE                 = "Invalid dialog message type received.";
-  public static final String    MSG_ERROR_NAME_ALREADY_EXISTS                 = "El nombre del jugador no puede estar repetido";
-  public static final String    MSG_ERROR_NAME_INVALID                        = "El nombre del jugador no puede tener caracteres especiales";
-  public static final String    MSG_ERROR_NAME_LENGTH                         = "El nombre del jugador no puede" + System.lineSeparator() + "tener más de " + MAX_NAME_LEN + " caracteres";
-  public static final String    MSG_ERROR_NO_AVAILABLE_TEAM                   = "No available team for current players configuration.";
-  public static final String    MSG_ERROR_NO_OPTIONAL_CONTENT                 = "No available content to retrieve in Optional object.";
+  public static final String    MSG_ERROR_DEBUG_INVALID_ANCHORAGE_ID          = "Invalid anchorage ID to be set.";
+  public static final String    MSG_ERROR_DEBUG_INVALID_DIALOG_TYPE           = "Invalid dialog message type received.";
+  public static final String    MSG_ERROR_DEBUG_NO_AVAILABLE_TEAM             = "No available team for current players configuration.";
+  public static final String    MSG_ERROR_DEBUG_NO_OPTIONAL_CONTENT           = "No available content to retrieve in Optional object.";
+  public static final String    MSG_ERROR_DEBUG_PLAYER_NOT_IN_ANCHORAGE       = "The specified player does not exists in the current anchorage.";
   public static final String    MSG_ERROR_NULL_GUI_RESOURCE                   = "Error en obtención de recursos gráficos";
   public static final String    MSG_ERROR_STRING_BLANK                        = "El nombre del jugador no puede estar vacío";
   public static final String    MSG_ERROR_STRING_NUMERIC                      = "El nombre del jugador debe tener" + System.lineSeparator() + "al menos una letra de la A a la Z";
+  public static final String    MSG_ERROR_NAME_ALREADY_EXISTS                 = "El nombre del jugador no puede estar repetido";
+  public static final String    MSG_ERROR_NAME_INVALID                        = "El nombre del jugador no puede tener caracteres especiales";
+  public static final String    MSG_ERROR_NAME_LENGTH                         = "El nombre del jugador no puede" + System.lineSeparator() + "tener más de " + MAX_NAME_LEN + " caracteres";
   public static final String    MSG_INFO_ANCHORAGES_NO_SELECTION              = "No hay jugadores seleccionados para anclar";
   public static final String    MSG_WARNING_ANCHORAGE_LOWER_LIMIT             = "No puede haber menos de " + MIN_ANCHORAGE_SIZE + " jugadores en un anclaje";
   public static final String    MSG_WARNING_ANCHORAGE_UPPER_LIMIT             = "No puede haber más de " + MAX_ANCHORAGE_SIZE + " jugadores en un mismo anclaje";
@@ -197,7 +199,7 @@ public final class Constants {
   public static final String    REGEX_NUMERIC_STRING                          = "\\d+$";
   public static final String    REGEX_PDA_DATA_RETRIEVE                       = "[CLMFG].+>.+";
   public static final String    REGEX_PLAYERS_COUNT                           = "(?!(?<=" + PLAYERS_PER_TEAM + ")\\d).";
-  public static final String    REGEX_SPECIAL_CHARACTERS                      = ".*[^a-z\sA-ZÁÉÍÓÚáéíóúñÑ\\d]+.*";
+  public static final String    REGEX_SPECIAL_CHARACTERS                      = ".*[^\\wñÑ\s\\d]+.*";
   public static final String    REPOSITORY_NAME                               = (PROGRAM_TITLE + " desktop").replace(" ", "-");
   public static final String    TEXT_BUTTON_DIALOG_CANCEL                     = "Cancelar";
   public static final String    TEXT_BUTTON_DIALOG_NO                         = "No";

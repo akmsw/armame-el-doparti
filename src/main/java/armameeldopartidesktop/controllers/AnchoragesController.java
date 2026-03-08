@@ -26,7 +26,7 @@ import armameeldopartidesktop.views.AnchoragesView;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -263,7 +263,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                                                     .stream()
                                                     .flatMap(players -> players.getValue()
                                                                                .stream()
-                                                                               .filter(player -> player.getAnchorageNumber() == anchorageNumber + 1))
+                                                                               .filter(player -> player.getAnchorageId() == anchorageNumber + 1))
                                                     .sorted(Comparator.comparing(player -> player.getPosition().ordinal()))
                                                     .toList();
 
@@ -360,10 +360,10 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                 .values()
                 .stream()
                 .flatMap(List::stream)
-                .filter(player -> player.getAnchorageNumber() == target)
+                .filter(player -> player.getAnchorageId() == target)
                 .forEach(
                   player -> {
-                    player.setAnchorageNumber(replacement);
+                    player.setAnchorageId(replacement);
 
                     if (replacement == Constants.PLAYER_NO_ANCHORAGE_ASSIGNED) {
                       CommonFunctions.retrieveOptional(view.getCheckboxesMap()
@@ -391,7 +391,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
                 .filter(player -> cbSet.stream()
                                        .filter(JCheckBox::isSelected)
                                        .anyMatch(checkbox -> checkbox.getText().equals(player.getName())))
-                .forEach(player -> player.setAnchorageNumber(anchoragesCount));
+                .forEach(player -> player.setAnchorageId(anchoragesCount));
 
     cbSet.stream()
          .filter(JCheckBox::isSelected)

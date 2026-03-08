@@ -17,7 +17,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -58,11 +58,11 @@ public class RandomMixer extends BasicPlayersMixer {
       List<Player> secondGroup = playersAtPosition.subList(setHalf, playersAtPosition.size());
 
       for (Player player : firstGroup) {
-        player.setTeamNumber(randomTeam1 + 1);
+        player.setTeamId(randomTeam1 + 1);
       }
 
       for (Player player : secondGroup) {
-        player.setTeamNumber(randomTeam2 + 1);
+        player.setTeamId(randomTeam2 + 1);
       }
 
       teams.get(randomTeam1)
@@ -114,7 +114,7 @@ public class RandomMixer extends BasicPlayersMixer {
         }
 
         for (Player player : anchorage) {
-          player.setTeamNumber(availableTeamNumber + 1);
+          player.setTeamId(availableTeamNumber + 1);
 
           teams.get(availableTeamNumber)
                .getTeamPlayers()
@@ -131,16 +131,16 @@ public class RandomMixer extends BasicPlayersMixer {
                 .values()
                 .stream()
                 .flatMap(List::stream)
-                .filter(player -> player.getTeamNumber() == Constants.PLAYER_NO_TEAM_ASSIGNED)
+                .filter(player -> player.getTeamId() == Constants.PLAYER_NO_TEAM_ASSIGNED)
                 .forEach(player -> {
                   int availableTeamNumber = getAvailableTeam(teams, team -> playerCanBeAdded(team, player));
 
                   // If there's no available team at this point, something went wrong
                   if (availableTeamNumber == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
-                    CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_NO_AVAILABLE_TEAM));
+                    CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_DEBUG_NO_AVAILABLE_TEAM));
                   }
 
-                  player.setTeamNumber(availableTeamNumber + 1);
+                  player.setTeamId(availableTeamNumber + 1);
 
                   teams.get(availableTeamNumber)
                        .getTeamPlayers()

@@ -22,7 +22,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -111,11 +111,11 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
        * current anchorage, then something went wrong.
        */
       if (availableTeamNumber == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
-        CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_NO_AVAILABLE_TEAM));
+        CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_DEBUG_NO_AVAILABLE_TEAM));
       }
 
       for (Player player : anchorage) {
-        player.setTeamNumber(teams.get(availableTeamNumber).getTeamNumber());
+        player.setTeamId(teams.get(availableTeamNumber).getTeamId());
 
         teams.get(availableTeamNumber)
              .getTeamPlayers()
@@ -128,7 +128,7 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
                                                                       .values()
                                                                       .stream()
                                                                       .flatMap(List::stream)
-                                                                      .filter(player -> player.getTeamNumber() == Constants.PLAYER_NO_TEAM_ASSIGNED)
+                                                                      .filter(player -> player.getTeamId() == Constants.PLAYER_NO_TEAM_ASSIGNED)
                                                                       .collect(Collectors.groupingBy(Player::getPosition))
                                                                       .values());
 
@@ -154,7 +154,7 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
           teamNumber = 1;
         }
 
-        player.setTeamNumber(teamNumber + 1);
+        player.setTeamId(teamNumber + 1);
 
         teams.get(teamNumber)
               .getTeamPlayers()
@@ -192,13 +192,13 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
                                                                    .reduce(0, Math::addExact)));
 
     for (Team team : teams) {
-      for (Player player : playersSubsets.get(team.getTeamNumber() - 1)) {
-        player.setTeamNumber(team.getTeamNumber());
+      for (Player player : playersSubsets.get(team.getTeamId() - 1)) {
+        player.setTeamId(team.getTeamId());
       }
 
       team.getTeamPlayers()
           .get(position)
-          .addAll(playersSubsets.get(team.getTeamNumber() - 1));
+          .addAll(playersSubsets.get(team.getTeamId() - 1));
     }
   }
 

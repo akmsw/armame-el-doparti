@@ -15,7 +15,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -23,7 +23,7 @@ public class Team {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  private int teamNumber;
+  private int teamId;
 
   private Map<Position, List<Player>> teamPlayers;
 
@@ -32,10 +32,10 @@ public class Team {
   /**
    * Builds a basic team with empty position sets.
    *
-   * @param teamNumber Integer identification for the team.
+   * @param teamId Integer identification for the team.
    */
-  public Team(int teamNumber) {
-    setTeamNumber(teamNumber);
+  public Team(int teamId) {
+    setTeamId(teamId);
     setTeamPlayers(new EnumMap<>(Position.class));
 
     for (Position position : Position.values()) {
@@ -52,7 +52,7 @@ public class Team {
     teamPlayers.values()
                .stream()
                .flatMap(List::stream)
-               .forEach(player -> player.setTeamNumber(Constants.PLAYER_NO_TEAM_ASSIGNED));
+               .forEach(player -> player.setTeamId(Constants.PLAYER_NO_TEAM_ASSIGNED));
 
     teamPlayers.values()
                .forEach(List::clear);
@@ -100,8 +100,8 @@ public class Team {
 
   // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  public int getTeamNumber() {
-    return teamNumber;
+  public int getTeamId() {
+    return teamId;
   }
 
   public Map<Position, List<Player>> getTeamPlayers() {
@@ -110,8 +110,8 @@ public class Team {
 
   // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  public void setTeamNumber(int teamNumber) {
-    this.teamNumber = teamNumber;
+  public void setTeamId(int teamId) {
+    this.teamId = teamId;
   }
 
   public void setTeamPlayers(Map<Position, List<Player>> teamPlayers) {
