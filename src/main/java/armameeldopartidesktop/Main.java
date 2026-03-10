@@ -115,9 +115,7 @@ public final class Main {
    */
   private static void setPlayersDistribution() {
     try (BufferedReader buffer = new BufferedReader(new InputStreamReader(Objects.requireNonNull(CommonFunctions.class.getClassLoader().getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA))))) {
-      List<String> filteredLines = buffer.lines()
-                                         .filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
-                                         .toList();
+      List<String> filteredLines = buffer.lines().filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE)).toList();
 
       for (int lineIndex = 0; lineIndex < filteredLines.size(); lineIndex++) {
         CommonFields.getPlayerLimitPerPosition().put(Position.values()[lineIndex], Integer.parseInt(filteredLines.get(lineIndex).replaceAll(Constants.REGEX_PLAYERS_COUNT, "")));
@@ -132,40 +130,44 @@ public final class Main {
    */
   private static void initializeControllersMap() {
     CommonFields.getControllersMap()
-                .putAll(Map.of(ProgramView.MAIN_MENU, new MainMenuController(new MainMenuView()),
-                               ProgramView.HELP, new HelpController(new HelpView()),
-                               ProgramView.NAMES_INPUT, new NamesInputController(new NamesInputView()),
-                               ProgramView.ANCHORAGES, new AnchoragesController(new AnchoragesView()),
-                               ProgramView.SKILL_POINTS, new SkillPointsInputController(new SkillPointsInputView()),
-                               ProgramView.RESULTS, new ResultsController(new ResultsView())));
+                .putAll(
+                  Map.of(
+                    ProgramView.MAIN_MENU   , new MainMenuController(new MainMenuView()),
+                    ProgramView.HELP        , new HelpController(new HelpView()),
+                    ProgramView.NAMES_INPUT , new NamesInputController(new NamesInputView()),
+                    ProgramView.ANCHORAGES  , new AnchoragesController(new AnchoragesView()),
+                    ProgramView.SKILL_POINTS, new SkillPointsInputController(new SkillPointsInputView()),
+                    ProgramView.RESULTS     , new ResultsController(new ResultsView())
+                  )
+                );
   }
 
   /**
    * Sets up the program's GUI properties.
    */
   private static void setUpGeneralGraphicalProperties() {
-    UIManager.put("CheckBoxUI", CustomCheckBoxUI.class.getName());
-    UIManager.put("ComboBox.background", Constants.COLOR_GREEN_MEDIUM);
-    UIManager.put("ComboBox.foreground", Color.WHITE);
-    UIManager.put("ComboBox.selectionBackground", Constants.COLOR_GREEN_MEDIUM);
-    UIManager.put("ComboBox.selectionForeground", Color.WHITE);
-    UIManager.put("OptionPaneUI", CustomOptionPaneUI.class.getName());
-    UIManager.put("OptionPane.cancelButtonText", Constants.TEXT_BUTTON_DIALOG_CANCEL);
-    UIManager.put("OptionPane.noButtonText", Constants.TEXT_BUTTON_DIALOG_NO);
-    UIManager.put("OptionPane.okButtonText", Constants.TEXT_BUTTON_DIALOG_OK);
-    UIManager.put("OptionPane.yesButtonText", Constants.TEXT_BUTTON_DIALOG_YES);
-    UIManager.put("OptionPane.errorIcon", Constants.ICON_DIALOG_ERROR);
-    UIManager.put("OptionPane.informationIcon", Constants.ICON_DIALOG_INFORMATION);
-    UIManager.put("OptionPane.questionIcon", Constants.ICON_DIALOG_QUESTION);
-    UIManager.put("OptionPane.warningIcon", Constants.ICON_DIALOG_WARNING);
-    UIManager.put("Panel.background", Constants.COLOR_GREEN_LIGHT);
-    UIManager.put("RadioButtonUI", CustomRadioButtonUI.class.getName());
-    UIManager.put("ScrollBarUI", CustomScrollBarUI.class.getName());
-    UIManager.put("SeparatorUI", CustomSeparatorUI.class.getName());
-    UIManager.put("SpinnerUI", CustomSpinnerUI.class.getName());
+    UIManager.put("CheckBoxUI"                   , CustomCheckBoxUI.class.getName());
+    UIManager.put("ComboBox.background"          , Constants.COLOR_GREEN_MEDIUM);
+    UIManager.put("ComboBox.foreground"          , Color.WHITE);
+    UIManager.put("ComboBox.selectionBackground" , Constants.COLOR_GREEN_MEDIUM);
+    UIManager.put("ComboBox.selectionForeground" , Color.WHITE);
+    UIManager.put("OptionPaneUI"                 , CustomOptionPaneUI.class.getName());
+    UIManager.put("OptionPane.cancelButtonText"  , Constants.TEXT_BUTTON_DIALOG_CANCEL);
+    UIManager.put("OptionPane.noButtonText"      , Constants.TEXT_BUTTON_DIALOG_NO);
+    UIManager.put("OptionPane.okButtonText"      , Constants.TEXT_BUTTON_DIALOG_OK);
+    UIManager.put("OptionPane.yesButtonText"     , Constants.TEXT_BUTTON_DIALOG_YES);
+    UIManager.put("OptionPane.errorIcon"         , Constants.ICON_DIALOG_ERROR);
+    UIManager.put("OptionPane.informationIcon"   , Constants.ICON_DIALOG_INFORMATION);
+    UIManager.put("OptionPane.questionIcon"      , Constants.ICON_DIALOG_QUESTION);
+    UIManager.put("OptionPane.warningIcon"       , Constants.ICON_DIALOG_WARNING);
+    UIManager.put("Panel.background"             , Constants.COLOR_GREEN_LIGHT);
+    UIManager.put("RadioButtonUI"                , CustomRadioButtonUI.class.getName());
+    UIManager.put("ScrollBarUI"                  , CustomScrollBarUI.class.getName());
+    UIManager.put("SeparatorUI"                  , CustomSeparatorUI.class.getName());
+    UIManager.put("SpinnerUI"                    , CustomSpinnerUI.class.getName());
     UIManager.put("FormattedTextField.background", Constants.COLOR_GREEN_LIGHT_WHITE);
-    UIManager.put("TableUI", CustomTableUI.class.getName());
-    UIManager.put("TextAreaUI", CustomTextAreaUI.class.getName());
+    UIManager.put("TableUI"                      , CustomTableUI.class.getName());
+    UIManager.put("TextAreaUI"                   , CustomTextAreaUI.class.getName());
     UIManager.put("TextField.selectionBackground", Constants.COLOR_GREEN_DARK_MEDIUM);
     UIManager.put("TextField.selectionForeground", Constants.COLOR_GREEN_LIGHT_WHITE);
 

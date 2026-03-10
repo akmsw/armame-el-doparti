@@ -230,11 +230,12 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   private void newAnchorage() {
     anchoragesCount++;
 
-    view.getCheckboxesMap()
-        .values()
-        .stream()
-        .filter(checkboxesSet -> checkboxesSet.stream().anyMatch(JCheckBox::isSelected))
-        .forEach(this::setAnchorages);
+    setAnchorages(view.getCheckboxesMap()
+                      .values()
+                      .stream()
+                      .flatMap(List::stream)
+                      .filter(JCheckBox::isSelected)
+                      .toList());
 
     anchoredPlayersCount = (int) CommonFields.getPlayersSets()
                                              .values()
@@ -386,11 +387,10 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    */
   private void setAnchorages(List<JCheckBox> cbSet) {
     CommonFields.getPlayersSets()
-                .get(CommonFunctions.getCorrespondingPosition(view.getCheckboxesMap(), cbSet))
+                .values()
                 .stream()
-                .filter(player -> cbSet.stream()
-                                       .filter(JCheckBox::isSelected)
-                                       .anyMatch(checkbox -> checkbox.getText().equals(player.getName())))
+                .flatMap(List::stream)
+                .filter(player -> cbSet.stream().anyMatch(checkbox -> checkbox.getText().equals(player.getName())))
                 .forEach(player -> player.setAnchorageId(anchoragesCount));
 
     cbSet.stream()
