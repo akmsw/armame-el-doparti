@@ -7,6 +7,7 @@ import java.awt.GraphicsEnvironment;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,7 @@ public final class Main {
    */
   public static void main(String [] args) {
     CommonFields.setActiveMonitor(GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()); // Establishes the main monitor as the active monitor by default
+    CommonFields.setAnchorages(new ArrayList<>());
     CommonFields.setAnchoragesEnabled(false);
     CommonFields.setControllersMap(new EnumMap<>(ProgramView.class));
     CommonFields.setPlayerLimitPerPosition(new EnumMap<>(Position.class));

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import armameeldopartidesktop.controllers.Controller;
+import armameeldopartidesktop.models.Anchorage;
 import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.models.enums.Distribution;
 import armameeldopartidesktop.models.enums.Position;
@@ -32,6 +33,8 @@ public final class CommonFields {
   private static GraphicsDevice activeMonitor;
 
   private static RoundRectangle2D tooltipRectangle;
+
+  private static List<Anchorage> anchorages;
 
   private static Map<Position, Integer> playerLimitPerPosition;
   private static Map<Position, List<Player>> playersSets;
@@ -62,6 +65,10 @@ public final class CommonFields {
 
   public static RoundRectangle2D getTooltipRectangle() {
     return tooltipRectangle;
+  }
+
+  public static List<Anchorage> getAnchorages() {
+    return anchorages;
   }
 
   public static Map<Position, Integer> getPlayerLimitPerPosition() {
@@ -96,6 +103,10 @@ public final class CommonFields {
 
   public static void setTooltipRectangle(RoundRectangle2D tooltipRectangle) {
     CommonFields.tooltipRectangle = tooltipRectangle;
+  }
+
+  public static void setAnchorages(List<Anchorage> anchorages) {
+    CommonFields.anchorages = anchorages;
   }
 
   public static void setPlayerLimitPerPosition(Map<Position, Integer> playerLimitPerPosition) {

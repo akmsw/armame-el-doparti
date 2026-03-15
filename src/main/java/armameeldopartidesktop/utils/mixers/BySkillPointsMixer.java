@@ -68,7 +68,7 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
       if (playersSet.size() == 2) {
         for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
           teams.get(teamIndex)
-               .getTeamPlayers()
+               .getPlayers()
                .get(position)
                .add(playersSet.get(teamIndex));
         }
@@ -118,7 +118,7 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
         player.setTeamId(teams.get(availableTeamNumber).getTeamId());
 
         teams.get(availableTeamNumber)
-             .getTeamPlayers()
+             .getPlayers()
              .get(player.getPosition())
              .add(player);
       }
@@ -157,7 +157,7 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
         player.setTeamId(teamNumber + 1);
 
         teams.get(teamNumber)
-              .getTeamPlayers()
+              .getPlayers()
               .get(player.getPosition())
               .add(player);
       }
@@ -196,7 +196,7 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
         player.setTeamId(team.getTeamId());
       }
 
-      team.getTeamPlayers()
+      team.getPlayers()
           .get(position)
           .addAll(playersSubsets.get(team.getTeamId() - 1));
     }
@@ -219,8 +219,8 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
     int currentSkillDifference = CommonFunctions.getTeamsSkillDifference(teams);
 
     for (Position position : Position.values()) {
-      List<Player> team1Players = teams.get(0).getTeamPlayers().get(position);
-      List<Player> team2Players = teams.get(1).getTeamPlayers().get(position);
+      List<Player> team1Players = teams.get(0).getPlayers().get(position);
+      List<Player> team2Players = teams.get(1).getPlayers().get(position);
 
       for (Player playerTeam1 : team1Players.stream().filter(player -> !player.isAnchored()).toList()) {
         int playerTeam1Index = team1Players.indexOf(playerTeam1);

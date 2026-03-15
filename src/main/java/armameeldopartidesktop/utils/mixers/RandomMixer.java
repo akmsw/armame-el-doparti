@@ -66,12 +66,12 @@ public class RandomMixer extends BasicPlayersMixer {
       }
 
       teams.get(randomTeam1)
-           .getTeamPlayers()
+           .getPlayers()
            .get(position)
            .addAll(firstGroup);
 
       teams.get(randomTeam2)
-           .getTeamPlayers()
+           .getPlayers()
            .get(position)
            .addAll(secondGroup);
     }
@@ -117,7 +117,7 @@ public class RandomMixer extends BasicPlayersMixer {
           player.setTeamId(availableTeamNumber + 1);
 
           teams.get(availableTeamNumber)
-               .getTeamPlayers()
+               .getPlayers()
                .get(player.getPosition())
                .add(player);
         }
@@ -143,7 +143,7 @@ public class RandomMixer extends BasicPlayersMixer {
                   player.setTeamId(availableTeamNumber + 1);
 
                   teams.get(availableTeamNumber)
-                       .getTeamPlayers()
+                       .getPlayers()
                        .get(player.getPosition())
                        .add(player);
                 });

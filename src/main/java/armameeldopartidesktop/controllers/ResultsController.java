@@ -138,7 +138,7 @@ public class ResultsController extends Controller<ResultsView> {
 
     for (Team team : teams) {
       for (Position position : Position.values()) {
-        for (Player player : team.getTeamPlayers().get(position)) {
+        for (Player player : team.getPlayers().get(position)) {
           table.setValueAt(player.getName(), row++, column);
         }
       }
@@ -150,7 +150,7 @@ public class ResultsController extends Controller<ResultsView> {
     if (CommonFields.getDistribution() == Distribution.MIX_BY_SKILL_POINTS) {
       for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
         table.setValueAt(teams.get(teamIndex)
-                              .getTeamPlayers()
+                              .getPlayers()
                               .values()
                               .stream()
                               .flatMap(List::stream)

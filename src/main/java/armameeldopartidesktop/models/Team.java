@@ -25,7 +25,7 @@ public class Team {
 
   private int teamId;
 
-  private Map<Position, List<Player>> teamPlayers;
+  private Map<Position, List<Player>> players;
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -36,10 +36,10 @@ public class Team {
    */
   public Team(int teamId) {
     setTeamId(teamId);
-    setTeamPlayers(new EnumMap<>(Position.class));
+    setPlayers(new EnumMap<>(Position.class));
 
     for (Position position : Position.values()) {
-      teamPlayers.put(position, new ArrayList<>());
+      players.put(position, new ArrayList<>());
     }
   }
 
@@ -49,12 +49,12 @@ public class Team {
    * Clears all players sets in the team.
    */
   public void clear() {
-    teamPlayers.values()
+    players.values()
                .stream()
                .flatMap(List::stream)
                .forEach(player -> player.setTeamId(Constants.PLAYER_NO_TEAM_ASSIGNED));
 
-    teamPlayers.values()
+    players.values()
                .forEach(List::clear);
   }
 
@@ -64,38 +64,38 @@ public class Team {
    * @return Whether the specified position set in the team is full.
    */
   public boolean isPositionFull(Position position) {
-    return teamPlayers.get(position).size() == CommonFields.getPlayerLimitPerPosition().get(position);
+    return players.get(position).size() == CommonFields.getPlayerLimitPerPosition().get(position);
   }
 
   /**
    * @return The number of players in the team.
    */
   public int getPlayersCount() {
-    return teamPlayers.values()
-                      .stream()
-                      .mapToInt(List::size)
-                      .sum();
+    return players.values()
+                  .stream()
+                  .mapToInt(List::size)
+                  .sum();
   }
 
   /**
    * @return The team skill points accumulated so far.
    */
   public int getTeamSkill() {
-    return teamPlayers.values()
-                      .stream()
-                      .flatMap(List::stream)
-                      .mapToInt(Player::getSkillPoints)
-                      .sum();
+    return players.values()
+                  .stream()
+                  .flatMap(List::stream)
+                  .mapToInt(Player::getSkillPoints)
+                  .sum();
   }
 
   /**
    * @return The number of players per position in the team.
    */
   public Map<Position, Integer> getPlayersCountPerPosition() {
-    return teamPlayers.values()
-                      .stream()
-                      .flatMap(List::stream)
-                      .collect(Collectors.toMap(Player::getPosition, _ -> 1, Integer::sum, () -> new EnumMap<>(Position.class)));
+    return players.values()
+                  .stream()
+                  .flatMap(List::stream)
+                  .collect(Collectors.toMap(Player::getPosition, _ -> 1, Integer::sum, () -> new EnumMap<>(Position.class)));
   }
 
   // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -104,8 +104,8 @@ public class Team {
     return teamId;
   }
 
-  public Map<Position, List<Player>> getTeamPlayers() {
-    return teamPlayers;
+  public Map<Position, List<Player>> getPlayers() {
+    return players;
   }
 
   // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ public class Team {
     this.teamId = teamId;
   }
 
-  public void setTeamPlayers(Map<Position, List<Player>> teamPlayers) {
-    this.teamPlayers = teamPlayers;
+  public void setPlayers(Map<Position, List<Player>> teamPlayers) {
+    this.players = teamPlayers;
   }
 }

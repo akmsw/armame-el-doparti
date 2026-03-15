@@ -135,6 +135,6 @@ public abstract class BasicPlayersMixer implements PlayersMixer {
    *         particular position.
    */
   private boolean anchorageOverflowsPositionSet(Team team, List<Player> anchorage, Position position) {
-    return (team.getTeamPlayers().get(position).size() + anchorage.stream().filter(player -> player.getPosition() == position).count()) > CommonFields.getPlayerLimitPerPosition().get(position);
+    return (team.getPlayers().get(position).size() + anchorage.stream().filter(player -> player.getPosition() == position).count()) > CommonFields.getPlayerLimitPerPosition().get(position);
   }
 }
