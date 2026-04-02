@@ -9,11 +9,11 @@ import armameeldopartidesktop.models.Team;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
-public interface PlayersMixer {
+public interface Mixer {
 
   // ---------- Abstract public methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

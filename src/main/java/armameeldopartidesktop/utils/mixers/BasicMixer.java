@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
+import armameeldopartidesktop.models.Anchorage;
 import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.models.Team;
 import armameeldopartidesktop.models.enums.Position;
@@ -15,11 +16,11 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
-public abstract class BasicPlayersMixer implements PlayersMixer {
+public abstract class BasicMixer implements Mixer {
 
   // ---------- Protected fields --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -31,9 +32,9 @@ public abstract class BasicPlayersMixer implements PlayersMixer {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds an abstract players distributor.
+   * Builds an abstract basic players distributor.
    */
-  protected BasicPlayersMixer() {
+  protected BasicMixer() {
     randomGenerator = new Random();
   }
 
@@ -71,7 +72,7 @@ public abstract class BasicPlayersMixer implements PlayersMixer {
    *
    * @return Whether a set of anchored players can be added to a team.
    */
-  protected boolean anchorageCanBeAdded(Team team, List<Player> anchorage) {
+  protected boolean anchorageCanBeAdded(Team team, Anchorage anchorage) {
     return !(anchorageOverflowsTeamSize(team, anchorage) || anchorageOverflowsAnyPositionSet(team, anchorage));
   }
 
@@ -81,9 +82,9 @@ public abstract class BasicPlayersMixer implements PlayersMixer {
    * @param teams               The possible teams where to add the player.
    * @param validationPredicate The predicate that will validate if the player can be added to a team, or not.
    *
-   * @return The only available team index, a random team index if the player can be added in every team, or -1 if there's no available team for the player.
+   * @return The only available team ID, a random team ID if the player can be added in every team, or -1 if there's no available team for the player.
    */
-  protected int getAvailableTeam(List<Team> teams, Predicate<Team> validationPredicate) {
+  protected int getAvailableTeamId(List<Team> teams, Predicate<Team> validationPredicate) {
     shuffleTeamNumbers(teams.size());
 
     boolean isRandomTeam1Available = validationPredicate.test(teams.get(randomTeam1));
@@ -112,8 +113,8 @@ public abstract class BasicPlayersMixer implements PlayersMixer {
    *
    * @return Whether the number of anchored players to be added to a team would exceed the limit of players per team.
    */
-  private boolean anchorageOverflowsTeamSize(Team team, List<Player> anchorage) {
-    return team.getPlayersCount() + anchorage.size() > Constants.PLAYERS_PER_TEAM;
+  private boolean anchorageOverflowsTeamSize(Team team, Anchorage anchorage) {
+    return team.getPlayersCount() + anchorage.getPlayers().size() > Constants.PLAYERS_PER_TEAM;
   }
 
   /**
@@ -122,8 +123,8 @@ public abstract class BasicPlayersMixer implements PlayersMixer {
    *
    * @return Whether the number of anchored players to be added to a team would exceed the limit of players per team in any position set.
    */
-  private boolean anchorageOverflowsAnyPositionSet(Team team, List<Player> anchorage) {
-    return anchorage.stream().anyMatch(player -> team.isPositionFull(player.getPosition()) || anchorageOverflowsPositionSet(team, anchorage, player.getPosition()));
+  private boolean anchorageOverflowsAnyPositionSet(Team team, Anchorage anchorage) {
+    return anchorage.getPlayers().stream().anyMatch(player -> team.isPositionFull(player.getPosition()) || anchorageOverflowsPositionSet(team, anchorage, player.getPosition()));
   }
 
   /**
@@ -134,7 +135,7 @@ public abstract class BasicPlayersMixer implements PlayersMixer {
    * @return Whether the number of anchored players to be added to a position set in a team would exceed the limit of players per team for that
    *         particular position.
    */
-  private boolean anchorageOverflowsPositionSet(Team team, List<Player> anchorage, Position position) {
-    return (team.getPlayers().get(position).size() + anchorage.stream().filter(player -> player.getPosition() == position).count()) > CommonFields.getPlayerLimitPerPosition().get(position);
+  private boolean anchorageOverflowsPositionSet(Team team, Anchorage anchorage, Position position) {
+    return (team.getPlayers().get(position).size() + anchorage.getPlayers().stream().filter(player -> player.getPosition() == position).count()) > CommonFields.getPlayerLimitPerPosition().get(position);
   }
 }

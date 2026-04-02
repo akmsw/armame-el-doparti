@@ -19,7 +19,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Set up Maven version
-      uses: stCarolas/setup-maven@v5
+      uses: stCarolas/setup-maven@v5.1
       with:
         maven-version: 3.9.14
     - name: Build with Maven

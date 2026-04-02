@@ -326,10 +326,17 @@ public class ResultsController extends Controller<ResultsView> {
                                                                                  .values()
                                                                                  .stream()
                                                                                  .flatMap(List::stream)
-                                                                                 .filter(player -> player.getName() == value)
+                                                                                 .filter(player -> player.getName().equals(value))
                                                                                  .findFirst());
 
-              component.setBackground(playerOnCell.isAnchored() ? Constants.COLORS_ANCHORAGES.get(playerOnCell.getAnchorageId() - 1) : Constants.COLOR_GREEN_LIGHT_WHITE);
+              int anchorageIndex = CommonFields.getAnchorages()
+                                               .stream()
+                                               .filter(anchorage -> anchorage.getPlayers().contains(playerOnCell))
+                                               .findFirst()
+                                               .map(CommonFields.getAnchorages()::indexOf)
+                                               .orElse(Constants.PLAYER_NO_ANCHORAGE_ASSIGNED);
+
+              component.setBackground(anchorageIndex == Constants.PLAYER_NO_ANCHORAGE_ASSIGNED ? Constants.COLOR_GREEN_LIGHT_WHITE : Constants.COLORS_ANCHORAGES.get(anchorageIndex));
               component.setForeground(Color.BLACK);
 
               ((DefaultTableCellRenderer) component).setHorizontalAlignment(SwingConstants.LEFT);
@@ -355,7 +362,7 @@ public class ResultsController extends Controller<ResultsView> {
    * Adjusts the cells size to fit the biggest content shown in the table.
    */
   private void adjustTableCells() {
-    int maxCellWidth = 0;
+    int maxCellWidth  = 0;
     int maxCellHeight = 0;
 
     for (int row = 0; row < table.getRowCount(); row++) {
@@ -364,15 +371,11 @@ public class ResultsController extends Controller<ResultsView> {
 
         maxCellWidth = Math.max(maxCellWidth, (cellComponent.getPreferredSize().width + table.getIntercellSpacing().width));
         maxCellHeight = Math.max(maxCellHeight, (cellComponent.getPreferredSize().height + table.getIntercellSpacing().height));
+
+        table.getColumnModel().getColumn(column).setPreferredWidth(maxCellWidth);
       }
-    }
 
-    for (int row = 0; row < table.getRowCount(); row++) {
       table.setRowHeight(row, maxCellHeight);
-    }
-
-    for (int column = 0; column < table.getColumnCount(); column++) {
-      table.getColumnModel().getColumn(column).setPreferredWidth(maxCellWidth);
     }
   }
 }

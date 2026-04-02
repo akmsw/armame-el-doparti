@@ -8,22 +8,19 @@ import java.util.stream.Collectors;
 
 import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.CommonFields;
-import armameeldopartidesktop.utils.common.Constants;
 
 /**
  * Team class.
  *
  * @since 3.0.0
  *
- * @version 1.0.1
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
 public class Team {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  private int teamId;
 
   private Map<Position, List<Player>> players;
 
@@ -35,7 +32,6 @@ public class Team {
    * @param teamId Integer identification for the team.
    */
   public Team(int teamId) {
-    setTeamId(teamId);
     setPlayers(new EnumMap<>(Position.class));
 
     for (Position position : Position.values()) {
@@ -49,13 +45,9 @@ public class Team {
    * Clears all players sets in the team.
    */
   public void clear() {
-    players.values()
-               .stream()
-               .flatMap(List::stream)
-               .forEach(player -> player.setTeamId(Constants.PLAYER_NO_TEAM_ASSIGNED));
-
-    players.values()
-               .forEach(List::clear);
+    for (List<Player> playersList : players.values()) {
+      playersList.clear();
+    }
   }
 
   /**
@@ -100,19 +92,11 @@ public class Team {
 
   // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  public int getTeamId() {
-    return teamId;
-  }
-
   public Map<Position, List<Player>> getPlayers() {
     return players;
   }
 
   // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  public void setTeamId(int teamId) {
-    this.teamId = teamId;
-  }
 
   public void setPlayers(Map<Position, List<Player>> teamPlayers) {
     this.players = teamPlayers;

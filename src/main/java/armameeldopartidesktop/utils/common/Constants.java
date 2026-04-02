@@ -114,7 +114,7 @@ public final class Constants {
   public static final int       MAX_ANCHORAGE_SIZE                            = PLAYERS_PER_TEAM - 1;
   public static final int       MAX_TOTAL_ANCHORED_PLAYERS                    = MAX_ANCHORAGE_SIZE * 2;
   public static final int       MIN_ANCHORAGE_SIZE                            = 2;
-  public static final int       PLAYER_NO_ANCHORAGE_ASSIGNED                  = 0;
+  public static final int       PLAYER_NO_ANCHORAGE_ASSIGNED                  = -1;
   public static final int       PLAYER_NO_SKILL_POINTS_ASSIGNED               = 0;
   public static final int       PLAYER_NO_TEAM_ASSIGNED                       = 0;
   public static final int       ROUNDED_BORDER_ARC_BUTTON_DIALOG              = 15;
@@ -165,7 +165,9 @@ public final class Constants {
   public static final String    MIG_LAYOUT_WEST                               = "west";
   public static final String    MIG_LAYOUT_WRAP                               = "wrap";
   public static final String    MIG_LAYOUT_WRAP_2                             = MIG_LAYOUT_WRAP + " 2";
+  public static final String    MSG_ERROR_DEBUG_ANCHORAGE_NOT_FOUND           = "The specified anchorage does not exist.";
   public static final String    MSG_ERROR_DEBUG_INVALID_ANCHORAGE_ID          = "Invalid anchorage ID to be set.";
+  public static final String    MSG_ERROR_DEBUG_INVALID_ANCHORAGE_SIZE        = "Invalid number of players to add to an anchorage.";
   public static final String    MSG_ERROR_DEBUG_INVALID_DIALOG_TYPE           = "Invalid dialog message type received.";
   public static final String    MSG_ERROR_DEBUG_NO_AVAILABLE_TEAM             = "No available team for current players configuration.";
   public static final String    MSG_ERROR_DEBUG_NO_OPTIONAL_CONTENT           = "No available content to retrieve in Optional object.";

@@ -11,14 +11,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -192,8 +190,16 @@ public final class CommonFunctions {
   }
 
   /**
-   * Checks if the skill points of the given teams are equal.
-   *
+   * @return The total count of anchored players.
+   */
+  public static int getPlayersAnchoredCount() {
+    return CommonFields.getAnchorages()
+                       .stream()
+                       .mapToInt(anchorage -> anchorage.getPlayers().size())
+                       .sum();
+  }
+
+  /**
    * @param teams Teams to check if their skill points are equal.
    *
    * @return Whether the skill points of the given teams are equal.
@@ -325,21 +331,6 @@ public final class CommonFunctions {
   @SuppressWarnings("java:S1452")
   public static Controller<? extends View> getController(ProgramView view) {
     return CommonFields.getControllersMap().get(view);
-  }
-
-  /**
-   * Gets a list containing the anchored players grouped by their anchorage number.
-   *
-   * @return A list containing the anchored players grouped by their anchorage number.
-  */
-  public static List<List<Player>> getAnchorages() {
-    return new ArrayList<>(CommonFields.getPlayersSets()
-                                       .values()
-                                       .stream()
-                                       .flatMap(List::stream)
-                                       .filter(Player::isAnchored)
-                                       .collect(Collectors.groupingBy(Player::getAnchorageId))
-                                       .values());
   }
 
   /**
