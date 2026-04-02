@@ -65,11 +65,11 @@ public class BySkillPointsMixer extends BasicMixer {
       teams.sort(comparingInt(Team::getTeamSkill));                     // Teams sorted lowest to highest
 
       if (playersSet.size() == 2) {
-        for (int teamId = 0; teamId < teams.size(); teamId++) {
-          teams.get(teamId)
+        for (int teamIdx = 0; teamIdx < Constants.TEAMS_TOTAL; teamIdx++) {
+          teams.get(teamIdx)
                .getPlayers()
                .get(position)
-               .add(playersSet.get(teamId));
+               .add(playersSet.get(teamIdx));
         }
       } else {
         distributeSubsets(teams, playersSet, position);
@@ -101,7 +101,7 @@ public class BySkillPointsMixer extends BasicMixer {
     for (Anchorage anchorage : CommonFields.getAnchorages()) {
       teams.sort(comparingInt(Team::getTeamSkill));
 
-      int availableTeamNumber = getAvailableTeamId(teams, team -> anchorageCanBeAdded(team, anchorage));
+      int availableTeamNumber = getAvailableTeamIdx(teams, team -> anchorageCanBeAdded(team, anchorage));
 
       /*
        * At this point, the anchorages are guaranteed to be possible to distribute by {@link armameeldoparti.controllers.AnchoragesController}. Therefore, if at this point we can't find any available team to add the
@@ -179,7 +179,7 @@ public class BySkillPointsMixer extends BasicMixer {
   private void distributeSubsets(List<Team> teams, List<Player> playersSet, Position position) {
     List<List<Player>> playersSubsets = new ArrayList<>();
 
-    int halfSetSize = playersSet.size() / teams.size();
+    int halfSetSize = playersSet.size() / Constants.TEAMS_TOTAL;
 
     for (int playerIndex = 0; playerIndex < halfSetSize; playerIndex++) {
       playersSubsets.add(Arrays.asList(playersSet.get(playerIndex), playersSet.get(playersSet.size() - playerIndex - 1)));
@@ -190,11 +190,11 @@ public class BySkillPointsMixer extends BasicMixer {
                                                                    .mapToInt(Player::getSkillPoints)
                                                                    .reduce(0, Math::addExact)));
 
-    for (int teamId = 0; teamId < teams.size(); teamId++) {
-      teams.get(teamId)
+    for (int teamIdx = 0; teamIdx < Constants.TEAMS_TOTAL; teamIdx++) {
+      teams.get(teamIdx)
            .getPlayers()
            .get(position)
-           .addAll(playersSubsets.get(teamId));
+           .addAll(playersSubsets.get(teamIdx));
     }
   }
 

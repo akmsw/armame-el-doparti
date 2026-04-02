@@ -105,18 +105,19 @@ public final class Constants {
 
   // ---------- Public constants --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  public static final int       DELAY_TOOLTIP_DISMISS                         = 5000;
+  public static final int       DELAY_TOOLTIP_INITIAL                         = 300;
   public static final int       ERROR_CODE_NO_AVAILABLE_TEAM                  = -1;
   public static final int       INDEX_HELP_PAGE_FILENAME                      = 1;
   public static final int       INDEX_HELP_PAGE_TITLE                         = 0;
   public static final int       PLAYERS_PER_TEAM                              = 7;
   public static final int       PLAYERS_TOTAL                                 = PLAYERS_PER_TEAM * 2;
-  public static final int       MAX_NAME_LEN                                  = 10;
   public static final int       MAX_ANCHORAGE_SIZE                            = PLAYERS_PER_TEAM - 1;
+  public static final int       MAX_NAME_LEN                                  = 10;
   public static final int       MAX_TOTAL_ANCHORED_PLAYERS                    = MAX_ANCHORAGE_SIZE * 2;
   public static final int       MIN_ANCHORAGE_SIZE                            = 2;
   public static final int       PLAYER_NO_ANCHORAGE_ASSIGNED                  = -1;
   public static final int       PLAYER_NO_SKILL_POINTS_ASSIGNED               = 0;
-  public static final int       PLAYER_NO_TEAM_ASSIGNED                       = 0;
   public static final int       ROUNDED_BORDER_ARC_BUTTON_DIALOG              = 15;
   public static final int       ROUNDED_BORDER_ARC_COMBOBOX_SELECTOR          = 10;
   public static final int       ROUNDED_BORDER_ARC_GENERAL                    = 30;
@@ -138,8 +139,7 @@ public final class Constants {
   public static final int       SKILL_MIN                                     = 1;
   public static final int       SKILL_STEP                                    = 1;
   public static final int       STROKE_BUTTON_ARROW                           = 5;
-  public static final int       DELAY_TOOLTIP_DISMISS                         = 5000;
-  public static final int       DELAY_TOOLTIP_INITIAL                         = 300;
+  public static final int       TEAMS_TOTAL                                   = 2;
 
   public static final float     SIZE_FONT_DEFAULT                             = 18f;
 

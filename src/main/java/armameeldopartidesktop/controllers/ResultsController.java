@@ -68,8 +68,8 @@ public class ResultsController extends Controller<ResultsView> {
 
     randomMixer = new RandomMixer();
 
-    team1 = new Team(1);
-    team2 = new Team(2);
+    team1 = new Team();
+    team2 = new Team();
 
     teams = new ArrayList<>();
 
@@ -148,7 +148,7 @@ public class ResultsController extends Controller<ResultsView> {
     }
 
     if (CommonFields.getDistribution() == Distribution.MIX_BY_SKILL_POINTS) {
-      for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
+      for (int teamIndex = 0; teamIndex < Constants.TEAMS_TOTAL; teamIndex++) {
         table.setValueAt(teams.get(teamIndex)
                               .getPlayers()
                               .values()
@@ -224,7 +224,7 @@ public class ResultsController extends Controller<ResultsView> {
   private void fillTableHeaders() {
     int rowCount = table.getRowCount() - 1;
 
-    for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
+    for (int teamIndex = 0; teamIndex < Constants.TEAMS_TOTAL; teamIndex++) {
       table.setValueAt("EQUIPO " + (teamIndex + 1), 0, teamIndex + 1);
     }
 
@@ -244,7 +244,7 @@ public class ResultsController extends Controller<ResultsView> {
     }
 
     if (CommonFields.getDistribution() == Distribution.MIX_BY_SKILL_POINTS) {
-      for (int column = 0; column < teams.size(); column++) {
+      for (int column = 0; column < Constants.TEAMS_TOTAL; column++) {
         table.setValueAt(column == 0 ? Constants.MAP_POSITIONS.get(Position.GOALKEEPER) : "Puntuación del equipo", table.getRowCount() + column - 2, 0);
       }
 

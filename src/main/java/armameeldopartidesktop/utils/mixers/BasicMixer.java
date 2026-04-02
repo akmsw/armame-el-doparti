@@ -24,8 +24,8 @@ public abstract class BasicMixer implements Mixer {
 
   // ---------- Protected fields --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  protected int randomTeam1;
-  protected int randomTeam2;
+  protected int randomTeam1Idx;
+  protected int randomTeam2Idx;
 
   protected Random randomGenerator;
 
@@ -41,13 +41,11 @@ public abstract class BasicMixer implements Mixer {
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Randomly shuffles the team numbers.
-   *
-   * @param range Upper limit (exclusive) for the random number generator.
+   * Randomly shuffles the team indexes.
    */
-  protected void shuffleTeamNumbers(int range) {
-    randomTeam1 = randomGenerator.nextInt(range);
-    randomTeam2 = 1 - randomTeam1;
+  protected void shuffleTeamIdxs() {
+    randomTeam1Idx = randomGenerator.nextInt(Constants.TEAMS_TOTAL);
+    randomTeam2Idx = 1 - randomTeam1Idx;
   }
 
     /**
@@ -82,24 +80,24 @@ public abstract class BasicMixer implements Mixer {
    * @param teams               The possible teams where to add the player.
    * @param validationPredicate The predicate that will validate if the player can be added to a team, or not.
    *
-   * @return The only available team ID, a random team ID if the player can be added in every team, or -1 if there's no available team for the player.
+   * @return The only available team index, a random team index if the player can be added in every team, or {@code Constants.ERROR_CODE_NO_AVAILABLE_TEAM} if there's no available team for the player.
    */
-  protected int getAvailableTeamId(List<Team> teams, Predicate<Team> validationPredicate) {
-    shuffleTeamNumbers(teams.size());
+  protected int getAvailableTeamIdx(List<Team> teams, Predicate<Team> validationPredicate) {
+    shuffleTeamIdxs();
 
-    boolean isRandomTeam1Available = validationPredicate.test(teams.get(randomTeam1));
-    boolean isRandomTeam2Available = validationPredicate.test(teams.get(randomTeam2));
+    boolean isRandomTeam1Available = validationPredicate.test(teams.get(randomTeam1Idx));
+    boolean isRandomTeam2Available = validationPredicate.test(teams.get(randomTeam2Idx));
 
     if (isRandomTeam1Available && isRandomTeam2Available) {
-      return randomGenerator.nextInt(teams.size());
+      return randomGenerator.nextInt(Constants.TEAMS_TOTAL);
     }
 
     if (isRandomTeam1Available) {
-      return randomTeam1;
+      return randomTeam1Idx;
     }
 
     if (isRandomTeam2Available) {
-      return randomTeam2;
+      return randomTeam2Idx;
     }
 
     return Constants.ERROR_CODE_NO_AVAILABLE_TEAM;

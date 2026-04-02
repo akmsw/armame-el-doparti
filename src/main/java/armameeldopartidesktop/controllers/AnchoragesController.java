@@ -108,7 +108,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    * @param parentComponent Graphical component where the dialog windows associated with the event should be displayed.
    */
   private void finishButtonEvent(Component parentComponent) {
-    if (!validAnchoragesCombination(0, Arrays.asList(new Team(0), new Team(1)))) {
+    if (!validAnchoragesCombination(0, Arrays.asList(new Team(), new Team()))) {
       CommonFunctions.showMessageDialog(parentComponent, Constants.MSG_WARNING_ANCHORAGES_CONFLICTS, JOptionPane.WARNING_MESSAGE);
 
       return;

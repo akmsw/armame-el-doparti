@@ -28,10 +28,8 @@ public class Team {
 
   /**
    * Builds a basic team with empty position sets.
-   *
-   * @param teamId Integer identification for the team.
    */
-  public Team(int teamId) {
+  public Team() {
     setPlayers(new EnumMap<>(Position.class));
 
     for (Position position : Position.values()) {
