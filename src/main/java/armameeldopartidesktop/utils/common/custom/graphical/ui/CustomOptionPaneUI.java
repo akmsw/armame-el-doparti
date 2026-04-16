@@ -62,35 +62,35 @@ public class CustomOptionPaneUI extends BasicOptionPaneUI {
    *
    * <p>A minimum button size is forced in order to ensure that the buttons showing only anchorages numbers have the same size, since the font used is not monospaced for user readability matters.
    *
-   * @param container    A container for the buttons.
-   * @param buttons      An array with the strings for each button of the dialog.
-   * @param initialIndex An initial index used for validation.
+   * @param container      A container for the buttons.
+   * @param buttonsStrings An array with the strings for each button of the dialog.
+   * @param initialIndex   An initial index used for validation, inherited from parent class method signature.
    *
    * @see #getButtonsForMessageType(int)
    */
   @Override
-  protected void addButtonComponents(Container container, Object[] buttons, int initialIndex) {
-    if ((buttons == null) || (buttons.length <= 0)) {
+  protected void addButtonComponents(Container container, Object[] buttonsStrings, int initialIndex) {
+    if ((buttonsStrings == null) || (buttonsStrings.length <= 0)) {
       return;
     }
 
-    if (Arrays.asList(buttons).stream().noneMatch(String.class::isInstance)) {
-      buttons = getButtonsForMessageType(optionPane.getMessageType());
-    }
+    int buttonsCount = buttonsStrings.length;
 
-    final int buttonsNumber = buttons.length;
+    if (Arrays.asList(buttonsStrings).stream().noneMatch(String.class::isInstance)) {
+      buttonsStrings = getButtonsForMessageType(optionPane.getMessageType());
+    }
 
     JPanel buttonPanel = new JPanel();
 
     buttonPanel.setLayout(new MigLayout());
     buttonPanel.setOpaque(false);
 
-    for (Object buttonText : buttons) {
+    for (Object buttonText : buttonsStrings) {
       CustomButton customButton = new CustomButton((String) buttonText, Constants.ROUNDED_BORDER_ARC_BUTTON_DIALOG);
 
       customButton.setMinimumSize(new Dimension(Constants.SIZE_BUTTON_DIALOG_MIN_WIDTH, Constants.SIZE_BUTTON_DIALOG_MIN_HEIGHT));
       customButton.addActionListener(_ -> {
-        if (initialIndex >= 0 && initialIndex < buttonsNumber) {
+        if (initialIndex >= 0 && initialIndex < buttonsCount) {
           ((JOptionPane) SwingUtilities.getAncestorOfClass(JOptionPane.class, container)).setValue(buttonText);
         }
       });
