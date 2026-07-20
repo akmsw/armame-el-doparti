@@ -301,7 +301,6 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
     // Restore the default state of the checkboxes associated with the players of the deleted anchorage
     targetAnchorage.getPlayers()
-                   .stream()
                    .forEach(player -> CommonFunctions.retrieveOptional(view.getCheckboxesMap()
                                                                            .get(player.getPosition())
                                                                            .stream()

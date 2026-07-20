@@ -65,13 +65,10 @@ public class ResultsController extends Controller<ResultsView> {
     super(resultsView);
 
     bySkillPointsMixer = new BySkillPointsMixer();
-
-    randomMixer = new RandomMixer();
-
-    team1 = new Team();
-    team2 = new Team();
-
-    teams = new ArrayList<>();
+    randomMixer        = new RandomMixer();
+    team1              = new Team();
+    team2              = new Team();
+    teams              = new ArrayList<>();
 
     setUpListeners();
   }
@@ -232,10 +229,10 @@ public class ResultsController extends Controller<ResultsView> {
       table.setValueAt(
         Constants.MAP_POSITIONS.get(
           switch (row) {
-            case 1 -> Position.CENTRAL_DEFENDER;
+            case 1    -> Position.CENTRAL_DEFENDER;
             case 2, 3 -> Position.LATERAL_DEFENDER;
             case 4, 5 -> Position.MIDFIELDER;
-            default -> Position.FORWARD;
+            default   -> Position.FORWARD;
           }
         ),
         row,
