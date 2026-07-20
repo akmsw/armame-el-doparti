@@ -1,6 +1,6 @@
 name: build
 
-# La acción se va a correr ante un 'push' o 'pull request' en la rama 'develop'.
+# La acción se va a correr ante un 'push' o 'pull request' en cualquier rama con cambios.
 on:
   push:
     branches: [ "**" ]
