@@ -184,16 +184,20 @@ public class AnchoragesView extends View {
     return backButton;
   }
 
-  public JButton getClearAnchoragesButton() {
-    return clearAnchoragesButton;
+  public JButton getEditAnchorageButton() {
+    return editAnchorageButton;
+  }
+
+  public JButton getDeleteLastAnchorageButton() {
+    return deleteLastAnchorageButton;
   }
 
   public JButton getDeleteAnchorageButton() {
     return deleteAnchorageButton;
   }
 
-  public JButton getDeleteLastAnchorageButton() {
-    return deleteLastAnchorageButton;
+  public JButton getClearAnchoragesButton() {
+    return clearAnchoragesButton;
   }
 
   public JButton getFinishButton() {
@@ -238,16 +242,16 @@ public class AnchoragesView extends View {
     this.editAnchorageButton = editAnchorageButton;
   }
 
-  public void setClearAnchoragesButton(JButton clearAnchoragesButton) {
-    this.clearAnchoragesButton = clearAnchoragesButton;
+  public void setDeleteLastAnchorageButton(JButton deleteLastAnchorageButton) {
+    this.deleteLastAnchorageButton = deleteLastAnchorageButton;
   }
 
   public void setDeleteAnchorageButton(JButton deleteAnchorageButton) {
     this.deleteAnchorageButton = deleteAnchorageButton;
   }
 
-  public void setDeleteLastAnchorageButton(JButton deleteLastAnchorageButton) {
-    this.deleteLastAnchorageButton = deleteLastAnchorageButton;
+  public void setClearAnchoragesButton(JButton clearAnchoragesButton) {
+    this.clearAnchoragesButton = clearAnchoragesButton;
   }
 
   public void setFinishButton(JButton finishButton) {

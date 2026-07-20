@@ -94,8 +94,9 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   protected void setUpListeners() {
     view.getFinishButton().addActionListener(event -> finishButtonEvent(CommonFunctions.getComponentFromEvent(event)));
     view.getNewAnchorageButton().addActionListener(event -> newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(event)));
-    view.getDeleteAnchorageButton().addActionListener(event -> deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(event)));
+    view.getEditAnchorageButton().addActionListener(_ -> editAnchorage());
     view.getDeleteLastAnchorageButton().addActionListener(_ -> deleteAnchorage(CommonFields.getAnchorages().size() - 1));
+    view.getDeleteAnchorageButton().addActionListener(event -> deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(event)));
     view.getClearAnchoragesButton().addActionListener(_ -> resetView());
     view.getBackButton().addActionListener(_ -> backButtonEvent());
   }
@@ -125,6 +126,86 @@ public class AnchoragesController extends Controller<AnchoragesView> {
         .forEach(checkbox -> checkbox.setSelected(false));
 
     CommonFunctions.getController((CommonFields.getDistribution() == Distribution.MIX_BY_SKILL_POINTS) ? ProgramView.SKILL_POINTS : ProgramView.RESULTS).showView();
+  }
+
+  /**
+   * Makes the controlled view invisible, deletes every anchorage made, resets the controlled view to its default state and shows the names input view.
+   */
+  private void backButtonEvent() {
+    hideView();
+    resetView();
+
+    CommonFunctions.getController(ProgramView.NAMES_INPUT).showView();
+  }
+
+  /**
+   * Updates the text displayed in the read-only text area.
+   *
+   * <p>The order in which the players are displayed in this text area corresponds to the order of the Position enum.
+   *
+   * @see armameeldopartidesktop.models.enums.Position
+   */
+  private void updateTextArea() {
+    view.getTextArea().setText(null);
+
+    for (int anchorageIdx = 0; anchorageIdx < CommonFields.getAnchorages().size(); anchorageIdx++) {
+      view.getTextArea().append("ANCLAJE " + (anchorageIdx + 1) + System.lineSeparator());
+
+      List<Player> anchoredPlayers = CommonFields.getAnchorages()
+                                                 .get(anchorageIdx)
+                                                 .getPlayers()
+                                                 .stream()
+                                                 .sorted(Comparator.comparing(player -> player.getPosition().ordinal()))
+                                                 .toList();
+
+      for (Player player : anchoredPlayers) {
+        view.getTextArea().append((anchoredPlayers.indexOf(player) + 1) + " - " + player.getName() + System.lineSeparator());
+      }
+
+      if ((anchorageIdx + 1) != CommonFields.getAnchorages().size()) {
+        view.getTextArea().append(System.lineSeparator());
+      }
+    }
+  }
+
+  /**
+   * Toggles the buttons and checkboxes states.
+   */
+  private void toggleButtons() {
+    for (JButton button : view.getAnchorageButtons()) {
+      button.setEnabled(false);
+    }
+
+    if (!CommonFields.getAnchorages().isEmpty()) {
+      view.getFinishButton().setEnabled(true);
+      view.getDeleteLastAnchorageButton().setEnabled(true);
+      view.getClearAnchoragesButton().setEnabled(true);
+      view.getEditAnchorageButton().setEnabled(true);
+      view.getEditAnchorageButton().setEnabled(true);
+
+      for (JButton button : view.getAnchorageButtons()) {
+        button.setEnabled(true);
+      }
+    }
+
+    if (Constants.MAX_TOTAL_ANCHORED_PLAYERS - CommonFunctions.getPlayersAnchoredCount() < Constants.MIN_ANCHORAGE_SIZE) {
+      view.getNewAnchorageButton().setEnabled(false);
+      view.getCheckboxesMap()
+          .values()
+          .stream()
+          .flatMap(List::stream)
+          .forEach(checkbox -> checkbox.setEnabled(!checkbox.isEnabled()));
+
+      return;
+    }
+
+    view.getNewAnchorageButton().setEnabled(true);
+    view.getCheckboxesMap()
+        .values()
+        .stream()
+        .flatMap(List::stream)
+        .filter(checkbox -> !checkbox.isEnabled() && !checkbox.isSelected())
+        .forEach(checkbox -> checkbox.setEnabled(true));
   }
 
   /**
@@ -205,95 +286,6 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * Makes the controlled view invisible, deletes every anchorage made, resets the controlled view to its default state and shows the names input view.
-   */
-  private void backButtonEvent() {
-    hideView();
-    resetView();
-
-    CommonFunctions.getController(ProgramView.NAMES_INPUT).showView();
-  }
-
-  /**
-   * Updates the text displayed in the read-only text area.
-   *
-   * <p>The order in which the players are displayed in this text area corresponds to the order of the Position enum.
-   *
-   * @see armameeldopartidesktop.models.enums.Position
-   */
-  private void updateTextArea() {
-    view.getTextArea().setText(null);
-
-    for (int anchorageIdx = 0; anchorageIdx < CommonFields.getAnchorages().size(); anchorageIdx++) {
-      view.getTextArea().append("ANCLAJE " + (anchorageIdx + 1) + System.lineSeparator());
-
-      List<Player> anchoredPlayers = CommonFields.getAnchorages()
-                                                 .get(anchorageIdx)
-                                                 .getPlayers()
-                                                 .stream()
-                                                 .sorted(Comparator.comparing(player -> player.getPosition().ordinal()))
-                                                 .toList();
-
-      for (Player player : anchoredPlayers) {
-        view.getTextArea().append((anchoredPlayers.indexOf(player) + 1) + " - " + player.getName() + System.lineSeparator());
-      }
-
-      if ((anchorageIdx + 1) != CommonFields.getAnchorages().size()) {
-        view.getTextArea().append(System.lineSeparator());
-      }
-    }
-  }
-
-  /**
-   * Toggles the buttons and checkboxes states.
-   */
-  private void toggleButtons() {
-    for (JButton button : view.getAnchorageButtons()) {
-      button.setEnabled(false);
-    }
-
-    if (CommonFields.getAnchorages().size() == 1) {
-      view.getFinishButton().setEnabled(true);
-      view.getDeleteLastAnchorageButton().setEnabled(true);
-      view.getClearAnchoragesButton().setEnabled(true);
-    } else if (CommonFields.getAnchorages().size() > 1) {
-      for (JButton button : view.getAnchorageButtons()) {
-        button.setEnabled(true);
-      }
-    }
-
-    if (Constants.MAX_TOTAL_ANCHORED_PLAYERS - CommonFunctions.getPlayersAnchoredCount() < Constants.MIN_ANCHORAGE_SIZE) {
-      view.getNewAnchorageButton().setEnabled(false);
-      view.getCheckboxesMap()
-          .values()
-          .stream()
-          .flatMap(List::stream)
-          .forEach(checkbox -> checkbox.setEnabled(!checkbox.isEnabled()));
-
-      return;
-    }
-
-    view.getNewAnchorageButton().setEnabled(true);
-    view.getCheckboxesMap()
-        .values()
-        .stream()
-        .flatMap(List::stream)
-        .filter(checkbox -> !checkbox.isEnabled() && !checkbox.isSelected())
-        .forEach(checkbox -> checkbox.setEnabled(true));
-  }
-
-  /**
-   * Clears the anchorages made, if any.
-   *
-   * @see #deleteAnchorage(int)
-   */
-  private void clearAnchorages() {
-    while (!CommonFields.getAnchorages().isEmpty()) {
-      deleteAnchorage(CommonFields.getAnchorages().size() - 1);
-    }
-  }
-
-  /**
    * @param targetAnchorageIdx Anchorage index to delete.
    */
   private void deleteAnchorage(int targetAnchorageIdx) {
@@ -314,6 +306,29 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     toggleButtons();
 
     view.pack();
+  }
+
+  /**
+   * Clears the anchorages made, if any.
+   *
+   * @see #deleteAnchorage(int)
+   */
+  private void clearAnchorages() {
+    while (!CommonFields.getAnchorages().isEmpty()) {
+      deleteAnchorage(CommonFields.getAnchorages().size() - 1);
+    }
+  }
+
+  private void editAnchorage() {
+    String [] optionsEdit = IntStream.rangeClosed(1, CommonFields.getAnchorages().size())
+                                     .mapToObj(Integer::toString)
+                                     .toArray(String[]::new);
+
+    int anchorageToEdit = CommonFunctions.showOptionDialog(view, "Seleccione qué anclaje desea editar", optionsEdit);
+
+    if (anchorageToEdit != JOptionPane.CLOSED_OPTION) {
+      // todo
+    }
   }
 
   /**
