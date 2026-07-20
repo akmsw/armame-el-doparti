@@ -3,9 +3,9 @@ name: build
 # La acción se va a correr ante un 'push' o 'pull request' en la rama 'develop'.
 on:
   push:
-    branches: [ "19-allow-the-user-to-edit-existing-anchorages" ]
+    branches: [ "**" ]
   pull_request:
-    branches: [ "19-allow-the-user-to-edit-existing-anchorages" ]
+    branches: [ "**" ]
 
 jobs:
   build:
