@@ -42,9 +42,10 @@ public class AnchoragesView extends View {
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   private JButton backButton;
-  private JButton clearAnchoragesButton;
-  private JButton deleteAnchorageButton;
+  private JButton editAnchorageButton;
   private JButton deleteLastAnchorageButton;
+  private JButton deleteAnchorageButton;
+  private JButton clearAnchoragesButton;
   private JButton finishButton;
   private JButton newAnchorageButton;
 
@@ -96,24 +97,27 @@ public class AnchoragesView extends View {
   @Override
   protected void addButtons() {
     setBackButton(new CustomButton("Atrás"));
-    setClearAnchoragesButton(new CustomButton("Limpiar anclajes"));
-    setDeleteAnchorageButton(new CustomButton("Borrar un anclaje"));
+    setEditAnchorageButton(new CustomButton("Editar un anclaje"));
     setDeleteLastAnchorageButton(new CustomButton("Borrar último anclaje"));
+    setDeleteAnchorageButton(new CustomButton("Borrar un anclaje"));
+    setClearAnchoragesButton(new CustomButton("Limpiar anclajes"));
     setFinishButton(new CustomButton("Finalizar"));
     setNewAnchorageButton(new CustomButton("Anclar"));
 
     anchorageButtons.add(finishButton);
     anchorageButtons.add(newAnchorageButton);
-    anchorageButtons.add(deleteAnchorageButton);
+    anchorageButtons.add(editAnchorageButton);
     anchorageButtons.add(deleteLastAnchorageButton);
+    anchorageButtons.add(deleteAnchorageButton);
     anchorageButtons.add(clearAnchoragesButton);
 
     leftPanel.add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_SPAN));
     leftPanel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_SPAN));
 
     rightPanel.add(newAnchorageButton, Constants.MIG_LAYOUT_GROW);
-    rightPanel.add(deleteAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(editAnchorageButton, Constants.MIG_LAYOUT_GROW);
     rightPanel.add(deleteLastAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(deleteAnchorageButton, Constants.MIG_LAYOUT_GROW);
     rightPanel.add(clearAnchoragesButton, Constants.MIG_LAYOUT_GROW);
   }
 
@@ -228,6 +232,10 @@ public class AnchoragesView extends View {
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;
+  }
+
+  public void setEditAnchorageButton(JButton editAnchorageButton) {
+    this.editAnchorageButton = editAnchorageButton;
   }
 
   public void setClearAnchoragesButton(JButton clearAnchoragesButton) {
