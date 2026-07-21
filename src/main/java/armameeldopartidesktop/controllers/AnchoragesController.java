@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -274,11 +273,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    * @param parentComponent Graphical component where the dialog windows associated with the event should be displayed.
    */
   private void deleteAnchorageButtonEvent(Component parentComponent) {
-    String [] optionsDelete = IntStream.rangeClosed(1, CommonFields.getAnchorages().size())
-                                       .mapToObj(Integer::toString)
-                                       .toArray(String[]::new);
-
-    int anchorageToDelete = CommonFunctions.showOptionDialog(parentComponent, "Seleccione qué anclaje desea borrar", optionsDelete);
+    int anchorageToDelete = CommonFunctions.showOptionDialog(parentComponent, "Seleccione qué anclaje desea borrar", CommonFunctions.getAnchoragesAsOptions());
 
     if (anchorageToDelete != JOptionPane.CLOSED_OPTION) {
       deleteAnchorage(anchorageToDelete);
@@ -320,11 +315,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   private void editAnchorage() {
-    String [] optionsEdit = IntStream.rangeClosed(1, CommonFields.getAnchorages().size())
-                                     .mapToObj(Integer::toString)
-                                     .toArray(String[]::new);
-
-    int anchorageToEdit = CommonFunctions.showOptionDialog(view, "Seleccione qué anclaje desea editar", optionsEdit);
+    int anchorageToEdit = CommonFunctions.showOptionDialog(view, "Seleccione qué anclaje desea editar", CommonFunctions.getAnchoragesAsOptions());
 
     if (anchorageToEdit != JOptionPane.CLOSED_OPTION) {
       // todo

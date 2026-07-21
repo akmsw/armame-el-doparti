@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -70,7 +72,7 @@ public final class CommonFunctions {
       int playersCount = 0;
 
       dumpFile.write("-------------- ERROR REPORT --------------" + System.lineSeparator().repeat(2));
-      dumpFile.write("Report time: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)) + System.lineSeparator());
+      dumpFile.write("Report time: " + LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)) + System.lineSeparator());
       dumpFile.write("Error type: " + error + System.lineSeparator());
       dumpFile.write("Distribution type: " + CommonFields.getDistribution() + System.lineSeparator());
       dumpFile.write("Anchorages enabled: " + CommonFields.isAnchoragesEnabled() + System.lineSeparator().repeat(2));
@@ -317,6 +319,17 @@ public final class CommonFunctions {
    */
   public static ImageIcon scaleImageIcon(ImageIcon icon, int width, int height, int hints) {
     return new ImageIcon(icon.getImage().getScaledInstance(width, height, hints));
+  }
+
+  /**
+   * Gets the anchorages as an array of strings to be used as options in a dialog window.
+   *
+   * @return The anchorages as an array of strings.
+   */
+  public static String [] getAnchoragesAsOptions() {
+    return IntStream.rangeClosed(1, CommonFields.getAnchorages().size())
+                    .mapToObj(Integer::toString)
+                    .toArray(String[]::new);
   }
 
   /**
