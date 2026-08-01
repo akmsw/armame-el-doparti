@@ -2,7 +2,9 @@ package armameeldopartidesktop.utils.common;
 
 import java.awt.Component;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.io.FileWriter;
@@ -23,6 +25,7 @@ import java.util.stream.IntStream;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import armameeldopartidesktop.controllers.Controller;
@@ -38,7 +41,7 @@ import armameeldopartidesktop.views.View;
  *
  * @since 3.0.0
  *
- * @version 1.0.1
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -248,6 +251,80 @@ public final class CommonFunctions {
     } catch (IOException | URISyntaxException exception) {
       CommonFunctions.exitProgram(Error.ERROR_BROWSER, exception);
     }
+  }
+
+  /**
+   * Displays the requested view in the main frame.
+   *
+   * @param view View to display.
+   */
+  public static void showView(View view) {
+    JPanel viewsContainer = CommonFields.getViewsContainer();
+
+    if (view.getParent() != null) {
+      view.getParent().remove(view);
+    }
+
+    viewsContainer.removeAll();
+    viewsContainer.add(view, view.getClass().getName());
+
+    CommonFields.getViewsLayout().show(viewsContainer, view.getClass().getName());
+
+    view.setVisible(true);
+
+    CommonFields.getMainFrame().setTitle(view.getViewTitle());
+
+    resizeMainFrameToView(view);
+
+    CommonFields.getMainFrame().setVisible(true);
+
+    viewsContainer.revalidate();
+    viewsContainer.repaint();
+  }
+
+  /**
+   * Resizes the main frame to fit the current view dimensions.
+   *
+   * @param view Currently displayed view.
+   */
+  private static void resizeMainFrameToView(View view) {
+    SwingUtilities.invokeLater(() -> {
+      view.revalidate();
+      view.doLayout();
+
+      view.getMainPanel().revalidate();
+      view.getMainPanel().doLayout();
+
+      Dimension viewDimension = view.getPreferredSize();
+
+      Insets frameInsets = CommonFields.getMainFrame().getInsets();
+
+      if (viewDimension.width <= 0 || viewDimension.height <= 0) {
+        viewDimension = view.getMainPanel().getPreferredSize();
+      }
+
+      view.setPreferredSize(viewDimension);
+
+      if (CommonFields.getViewsContainer() != null) {
+        CommonFields.getViewsContainer().setPreferredSize(viewDimension);
+        CommonFields.getViewsContainer().setSize(viewDimension);
+        CommonFields.getViewsContainer().revalidate();
+        CommonFields.getViewsContainer().doLayout();
+      }
+
+      Dimension frameSize = new Dimension(
+        Math.max(viewDimension.width  + frameInsets.left + frameInsets.right , 1),
+        Math.max(viewDimension.height + frameInsets.top  + frameInsets.bottom, 1)
+      );
+
+      CommonFields.getMainFrame().setPreferredSize(frameSize);
+      CommonFields.getMainFrame().setSize(frameSize);
+      CommonFields.getMainFrame().setMinimumSize(new Dimension(1, 1));
+      CommonFields.getMainFrame().setMaximumSize(null);
+      CommonFields.getMainFrame().setLocationRelativeTo(null);
+      CommonFields.getMainFrame().revalidate();
+      CommonFields.getMainFrame().repaint();
+    });
   }
 
   /**

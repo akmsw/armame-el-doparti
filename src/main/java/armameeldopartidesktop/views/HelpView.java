@@ -18,7 +18,7 @@ import net.miginfocom.layout.CC;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -61,8 +61,8 @@ public class HelpView extends View {
     addTextArea();
     addReadingProgressLabel();
     addButtons();
-    add(masterPanel);
-    pack();
+    add(mainPanel);
+    refreshView();
   }
 
   @Override
@@ -71,9 +71,9 @@ public class HelpView extends View {
     setNextPageButton(new CustomButton("Siguiente"));
     setBackButton(new CustomButton("Volver al menú principal"));
 
-    masterPanel.add(previousPageButton, new CC().width("50%").split());
-    masterPanel.add(nextPageButton, new CC().width("50%").wrap());
-    masterPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
+    mainPanel.add(previousPageButton, new CC().width("50%").split());
+    mainPanel.add(nextPageButton, new CC().width("50%").wrap());
+    mainPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ public class HelpView extends View {
   private void addPageTitleLabel() {
     setPageTitleLabel(new CustomLabel(null, null, SwingConstants.CENTER));
 
-    masterPanel.add(pageTitleLabel, Constants.MIG_LAYOUT_GROWX);
+    mainPanel.add(pageTitleLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -94,7 +94,7 @@ public class HelpView extends View {
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
     setScrollPane(new CustomScrollPane(textArea));
 
-    masterPanel.add(scrollPane);
+    mainPanel.add(scrollPane, Constants.MIG_LAYOUT_GROW);
   }
 
   /**
@@ -103,10 +103,10 @@ public class HelpView extends View {
   private void addReadingProgressLabel() {
     setReadingProgressLabel(new CustomLabel(null, null, SwingConstants.CENTER));
 
-    masterPanel.add(readingProgressLabel, Constants.MIG_LAYOUT_GROWX);
+    mainPanel.add(readingProgressLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public JButton getPreviousPageButton() {
     return previousPageButton;
@@ -136,7 +136,7 @@ public class HelpView extends View {
     return textArea;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public void setPreviousPageButton(JButton previousPageButton) {
     this.previousPageButton = previousPageButton;

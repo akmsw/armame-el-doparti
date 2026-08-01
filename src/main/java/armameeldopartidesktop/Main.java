@@ -1,5 +1,6 @@
 package armameeldopartidesktop;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -15,9 +16,12 @@ import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.IntStream;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 
 import armameeldopartidesktop.controllers.AnchoragesController;
@@ -53,7 +57,7 @@ import armameeldopartidesktop.views.SkillPointsInputView;
  *
  * @since 1.0.0
  *
- * @version 3.0.0
+ * @version 3.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -86,6 +90,20 @@ public final class Main {
     setUpGeneralGraphicalProperties();
     setPlayersDistribution();
     initializePlayersSetsMap();
+
+    JFrame mainFrame = new JFrame(Constants.TITLE_VIEW_MAIN_MENU);
+
+    JPanel masterPanel = new JPanel(new CardLayout());
+
+    mainFrame.setContentPane(masterPanel);
+    mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    mainFrame.setResizable(false);
+    mainFrame.setIconImage(Constants.ICON_MAIN_SCALED.getImage());
+
+    CommonFields.setMainFrame(mainFrame);
+    CommonFields.setMasterPanel(masterPanel);
+    CommonFields.setViewsLayout((CardLayout) masterPanel.getLayout());
+
     initializeControllersMap();
 
     SwingUtilities.invokeLater(((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))::showView);

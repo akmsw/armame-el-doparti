@@ -11,7 +11,7 @@ import armameeldopartidesktop.views.View;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -42,7 +42,11 @@ public abstract class Controller<T extends View> {
                                                 .getDefaultConfiguration()
                                                 .getBounds();
 
-    view.setLocation((((activeMonitorBounds.width - view.getWidth()) / 2) + activeMonitorBounds.x), (((activeMonitorBounds.height - view.getHeight()) / 2) + activeMonitorBounds.y));
+    CommonFields.getMainFrame()
+                .setLocation(
+                  (((activeMonitorBounds.width  - CommonFields.getMainFrame().getWidth())  / 2) + activeMonitorBounds.x),
+                  (((activeMonitorBounds.height - CommonFields.getMainFrame().getHeight()) / 2) + activeMonitorBounds.y)
+                );
   }
 
   /**
@@ -60,7 +64,7 @@ public abstract class Controller<T extends View> {
   protected void showView() {
     centerView();
 
-    view.setVisible(true);
+    CommonFunctions.showView(view);
   }
 
   // ---------- Abstract protected methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,13 +84,13 @@ public abstract class Controller<T extends View> {
    */
   protected abstract void setUpListeners();
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Protected getters -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   protected T getView() {
     return view;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Protected setters -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   protected void setView(T view) {
     this.view = view;

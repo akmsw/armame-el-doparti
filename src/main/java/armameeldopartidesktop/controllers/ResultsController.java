@@ -31,7 +31,7 @@ import armameeldopartidesktop.views.ResultsView;
  *
  * @since 3.0.0
  *
- * @version 1.0.1
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -91,7 +91,7 @@ public class ResultsController extends Controller<ResultsView> {
     updateTableData();
     adjustTableCells();
 
-    view.pack();
+    view.refreshView();
   }
 
   /**
@@ -188,7 +188,7 @@ public class ResultsController extends Controller<ResultsView> {
     setUpView();
     centerView();
 
-    view.setVisible(true);
+    CommonFunctions.showView(view);
   }
 
   /**
@@ -196,8 +196,6 @@ public class ResultsController extends Controller<ResultsView> {
    */
   @Override
   protected void resetView() {
-    view.dispose();
-
     setView(new ResultsView());
     setUpListeners();
   }

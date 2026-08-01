@@ -1,9 +1,13 @@
 package armameeldopartidesktop.utils.common;
 
+import java.awt.CardLayout;
 import java.awt.GraphicsDevice;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import armameeldopartidesktop.controllers.Controller;
 import armameeldopartidesktop.models.Anchorage;
@@ -18,7 +22,7 @@ import armameeldopartidesktop.views.View;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -33,6 +37,12 @@ public final class CommonFields {
   private static GraphicsDevice activeMonitor;
 
   private static RoundRectangle2D tooltipRectangle;
+
+  private static JFrame mainFrame;
+
+  private static JPanel viewsContainer;
+
+  private static CardLayout viewsLayout;
 
   private static List<Anchorage> anchorages;
 
@@ -49,7 +59,7 @@ public final class CommonFields {
     // Body not needed
   }
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public static boolean isAnchoragesEnabled() {
     return anchoragesEnabled;
@@ -65,6 +75,18 @@ public final class CommonFields {
 
   public static RoundRectangle2D getTooltipRectangle() {
     return tooltipRectangle;
+  }
+
+  public static JFrame getMainFrame() {
+    return mainFrame;
+  }
+
+  public static JPanel getViewsContainer() {
+    return viewsContainer;
+  }
+
+  public static CardLayout getViewsLayout() {
+    return viewsLayout;
   }
 
   public static List<Anchorage> getAnchorages() {
@@ -83,7 +105,7 @@ public final class CommonFields {
     return controllersMap;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public static void setAnchoragesEnabled(boolean anchoragesEnabled) {
     CommonFields.anchoragesEnabled = anchoragesEnabled;
@@ -99,6 +121,18 @@ public final class CommonFields {
 
   public static void setTooltipRectangle(RoundRectangle2D tooltipRectangle) {
     CommonFields.tooltipRectangle = tooltipRectangle;
+  }
+
+  public static void setMainFrame(JFrame mainFrame) {
+    CommonFields.mainFrame = mainFrame;
+  }
+
+  public static void setMasterPanel(JPanel viewsContainer) {
+    CommonFields.viewsContainer = viewsContainer;
+  }
+
+  public static void setViewsLayout(CardLayout cardLayout) {
+    CommonFields.viewsLayout = cardLayout;
   }
 
   public static void setAnchorages(List<Anchorage> anchorages) {
