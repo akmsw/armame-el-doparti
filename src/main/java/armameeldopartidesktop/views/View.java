@@ -1,10 +1,6 @@
 package armameeldopartidesktop.views;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
-import armameeldopartidesktop.utils.common.Constants;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -13,30 +9,40 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 2.0.0
  *
  * @author Bonino, Francisco Ignacio.
  */
-public abstract class View extends JFrame {
+public abstract class View extends JPanel {
+
+  // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  private String viewTitle;
 
   // ---------- Protected fields --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  protected JPanel masterPanel;
+  protected JPanel mainPanel;
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Basic view constructor.
    *
-   * @param frameTitle                   The frame title.
-   * @param masterPanelLayoutConstraints The layout constraints for the view's master panel.
+   * @param viewTitle                 The frame title.
+   * @param mainPanelLayoutConstraints The layout constraints for the view's master panel.
    */
-  protected View(String frameTitle, String masterPanelLayoutConstraints) {
-    setMasterPanel(new JPanel(new MigLayout(masterPanelLayoutConstraints)));
-    setResizable(false);
-    setTitle(frameTitle);
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Constants.ICON_MAIN_SCALED.getImage());
+  protected View(String viewTitle, String mainPanelLayoutConstraints) {
+    setViewTitle(viewTitle);
+    setLayout(new MigLayout());
+    setMainPanel(new JPanel(new MigLayout(mainPanelLayoutConstraints)));
+    setOpaque(true);
+  }
+
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  public void refreshView() {
+    revalidate();
+    repaint();
   }
 
   // ---------- Abstract protected methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,15 +57,23 @@ public abstract class View extends JFrame {
    */
   protected abstract void addButtons();
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  public JPanel getMasterPanel() {
-    return masterPanel;
+  public JPanel getMainPanel() {
+    return mainPanel;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  public String getViewTitle() {
+    return viewTitle;
+  }
 
-  public void setMasterPanel(JPanel masterPanel) {
-    this.masterPanel = masterPanel;
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  public void setViewTitle(String viewTitle) {
+    this.viewTitle = viewTitle;
+  }
+
+  public void setMainPanel(JPanel mainPanel) {
+    this.mainPanel = mainPanel;
   }
 }

@@ -13,7 +13,7 @@ import armameeldopartidesktop.views.SkillPointsInputView;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -73,7 +73,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
       }
     }
 
-    view.pack();
+    view.refreshView();
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
     centerView();
     updateNameLabels();
 
-    view.setVisible(true);
+    CommonFunctions.showView(view);
   }
 
   @Override

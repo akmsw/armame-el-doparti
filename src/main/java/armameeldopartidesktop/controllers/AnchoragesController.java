@@ -27,7 +27,7 @@ import armameeldopartidesktop.views.AnchoragesView;
  *
  * @since 3.0.0
  *
- * @version 1.0.1
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -65,7 +65,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
       }
     }
 
-    view.pack();
+    view.refreshView();
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -313,7 +313,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     updateTextArea();
     toggleButtons();
 
-    view.pack();
+    view.refreshView();
   }
 
   /**

@@ -14,7 +14,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -43,10 +43,12 @@ public class ResultsView extends View {
 
   @Override
   public void initializeInterface() {
-    setTitle(getUpdatedFrameTitle());
+    CommonFields.getMainFrame().setTitle(getUpdatedFrameTitle());
+
     addTable();
     addButtons();
-    add(masterPanel);
+    add(mainPanel);
+    refreshView();
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,10 +56,10 @@ public class ResultsView extends View {
   @Override
   protected void addButtons() {
     if (CommonFields.getDistribution() == Distribution.MIX_RANDOM) {
-      masterPanel.add(remixButton, Constants.MIG_LAYOUT_GROWX);
+      mainPanel.add(remixButton, Constants.MIG_LAYOUT_GROWX);
     }
 
-    masterPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
+    mainPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,10 +75,10 @@ public class ResultsView extends View {
    * Adds the results table in the view panel.
    */
   private void addTable() {
-    masterPanel.add(table, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH, Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN, Constants.MIG_LAYOUT_CENTER));
+    mainPanel.add(table, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH, Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN, Constants.MIG_LAYOUT_CENTER));
   }
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public JButton getBackButton() {
     return backButton;
@@ -90,7 +92,7 @@ public class ResultsView extends View {
     return table;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;
