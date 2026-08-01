@@ -27,7 +27,7 @@ import armameeldopartidesktop.views.NamesInputView;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -233,7 +233,7 @@ public class NamesInputController extends Controller<NamesInputView> {
     centerView();
     resetComboBox();
 
-    view.setVisible(true);
+    CommonFunctions.showView(view);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

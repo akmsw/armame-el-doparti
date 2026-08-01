@@ -28,7 +28,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -83,14 +83,14 @@ public class AnchoragesView extends View {
 
   @Override
   protected void initializeInterface() {
-    masterPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    masterPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
+    mainPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    mainPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
 
     addCheckBoxes();
     addTextArea();
     addButtons();
-    add(masterPanel);
-    pack();
+    add(mainPanel);
+    refreshView();
   }
 
   @Override
@@ -174,7 +174,7 @@ public class AnchoragesView extends View {
     }
   }
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public JButton getBackButton() {
     return backButton;
@@ -224,7 +224,7 @@ public class AnchoragesView extends View {
     return checkboxesMap;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;

@@ -17,7 +17,7 @@ import net.miginfocom.layout.CC;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -47,8 +47,8 @@ public class MainMenuView extends View {
   protected void initializeInterface() {
     addBackground();
     addButtons();
-    add(masterPanel);
-    pack();
+    add(mainPanel);
+    refreshView();
   }
 
   @Override
@@ -58,10 +58,10 @@ public class MainMenuView extends View {
     setContactButton(new CustomButton("Contacto"));
     setIssuesButton(new CustomButton("Reportes y sugerencias"));
 
-    masterPanel.add(startButton, Constants.MIG_LAYOUT_GROWX);
-    masterPanel.add(helpButton, Constants.MIG_LAYOUT_GROWX);
-    masterPanel.add(contactButton, new CC().width("50%").split());
-    masterPanel.add(issuesButton, new CC().width("50%"));
+    mainPanel.add(startButton, Constants.MIG_LAYOUT_GROWX);
+    mainPanel.add(helpButton, Constants.MIG_LAYOUT_GROWX);
+    mainPanel.add(contactButton, new CC().width("50%").split());
+    mainPanel.add(issuesButton, new CC().width("50%"));
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ public class MainMenuView extends View {
    * Adds the background image to the panel.
    */
   private void addBackgroundImage() {
-    masterPanel.add(new JLabel(null, Constants.ICON_BACKGROUND, SwingConstants.CENTER), Constants.MIG_LAYOUT_GROWX);
+    mainPanel.add(new JLabel(null, Constants.ICON_BACKGROUND, SwingConstants.CENTER), Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -94,10 +94,10 @@ public class MainMenuView extends View {
    * @param fontSize        The font size for the label text.
    */
   private void addLabel(String text, String tooltipText, String constraints, Color backgroundColor, Color foregroundColor, int fontSize) {
-    masterPanel.add(new CustomLabel(text.toLowerCase(), tooltipText, backgroundColor, foregroundColor, SwingConstants.CENTER, fontSize), constraints);
+    mainPanel.add(new CustomLabel(text.toLowerCase(), tooltipText, backgroundColor, foregroundColor, SwingConstants.CENTER, fontSize), constraints);
   }
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public JButton getStartButton() {
     return startButton;
@@ -115,7 +115,7 @@ public class MainMenuView extends View {
     return issuesButton;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public void setStartButton(JButton startButton) {
     this.startButton = startButton;

@@ -35,7 +35,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 3.0.0
  *
- * @version 3.0.0
+ * @version 3.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -96,8 +96,8 @@ public class NamesInputView extends View {
     leftPanel.add(leftTopPanel, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWY, Constants.MIG_LAYOUT_PUSHY));
     leftPanel.add(leftBottomPanel, Constants.MIG_LAYOUT_SOUTH);
 
-    masterPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    masterPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
+    mainPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    mainPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
 
     addComboBox();
     addTextFields();
@@ -106,8 +106,8 @@ public class NamesInputView extends View {
     addAnchoragesCheckbox();
     addTextArea();
     addButtons();
-    add(masterPanel);
-    pack();
+    add(mainPanel);
+    refreshView();
   }
 
   @Override
@@ -203,7 +203,7 @@ public class NamesInputView extends View {
     rightPanel.add(scrollPane, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH, Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
   }
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public JButton getBackButton() {
     return backButton;
@@ -265,7 +265,7 @@ public class NamesInputView extends View {
     return textFieldsMap;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;
