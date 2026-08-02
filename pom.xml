@@ -49,7 +49,7 @@
         </configuration>
       </plugin>
 
-      <!-- To ensure certain conditions are met before building the project -->
+      <!-- To make sure certain conditions are met before building the project -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
