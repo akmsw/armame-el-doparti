@@ -95,7 +95,6 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     view.getFinishButton().addActionListener(event -> finishButtonEvent(CommonFunctions.getComponentFromEvent(event)));
     view.getNewAnchorageButton().addActionListener(event -> newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(event)));
     view.getEditAnchorageButton().addActionListener(_ -> editAnchorage());
-    view.getDeleteLastAnchorageButton().addActionListener(_ -> deleteAnchorage(CommonFields.getAnchorages().size() - 1));
     view.getDeleteAnchorageButton().addActionListener(event -> deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(event)));
     view.getClearAnchoragesButton().addActionListener(_ -> resetView());
     view.getBackButton().addActionListener(_ -> backButtonEvent());
@@ -178,7 +177,6 @@ public class AnchoragesController extends Controller<AnchoragesView> {
 
     if (!CommonFields.getAnchorages().isEmpty()) {
       view.getFinishButton().setEnabled(true);
-      view.getDeleteLastAnchorageButton().setEnabled(true);
       view.getClearAnchoragesButton().setEnabled(true);
       view.getEditAnchorageButton().setEnabled(true);
       view.getEditAnchorageButton().setEnabled(true);
