@@ -175,7 +175,7 @@ public class NamesInputView extends View {
    */
   private void addRadioButtons() {
     setRandomRadioButton(new JRadioButton("Aleatoria"));
-    setBySkillPointsRadioButton(new JRadioButton("Por puntajes"));
+    setBySkillPointsRadioButton(new JRadioButton("Por puntuaciones"));
     setDistributionLabel(new CustomLabel("Distribución", null, SwingConstants.CENTER));
 
     leftBottomPanel.add(distributionLabel, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_PUSHX));

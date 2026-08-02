@@ -43,8 +43,7 @@ public class ResultsView extends View {
 
   @Override
   public void initializeInterface() {
-    CommonFields.getMainFrame().setTitle(getUpdatedFrameTitle());
-
+    setTitle(getUpdatedFrameTitle());
     addTable();
     addButtons();
     refreshView();
