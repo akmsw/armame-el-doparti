@@ -216,31 +216,6 @@ public final class CommonFunctions {
   }
 
   /**
-   * Determines the monitor on which the majority of the main frame is displayed and sets it as the active monitor.
-   */
-  public static void updateActiveMonitor() {
-    CommonFields.setActiveMonitor(
-      retrieveOptional(
-        Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
-              .filter(screen -> !screen.getDefaultConfiguration()
-                                       .getBounds()
-                                       .intersection(CommonFields.getMainFrame().getBounds())
-                                       .isEmpty())
-              .max(Comparator.comparingDouble(
-                  screen -> {
-                    Rectangle intersection = screen.getDefaultConfiguration()
-                                                   .getBounds()
-                                                   .intersection(CommonFields.getMainFrame().getBounds());
-
-                    return intersection.getWidth() * intersection.getHeight();
-                  }
-                )
-              )
-      )
-    );
-  }
-
-  /**
    * Opens a new tab in the default web browser with the specified URL.
    *
    * @param url Destination URL.
@@ -291,32 +266,21 @@ public final class CommonFunctions {
 
       view.setPreferredSize(viewDimension);
 
-      if (mainPanel != null) {
-        mainPanel.setPreferredSize(viewDimension);
-        mainPanel.setSize(viewDimension);
-        mainPanel.revalidate();
-        mainPanel.doLayout();
-      }
+      mainPanel.setPreferredSize(viewDimension);
+      mainPanel.setSize(viewDimension);
+      mainPanel.revalidate();
+      mainPanel.doLayout();
 
-      Dimension frameSize = new Dimension(
-                              viewDimension.width + frameInsets.left + frameInsets.right,
-                              viewDimension.height + frameInsets.top + frameInsets.bottom
-                            );
+      Dimension frameDimension = new Dimension(
+                                   viewDimension.width + frameInsets.left + frameInsets.right,
+                                   viewDimension.height + frameInsets.top + frameInsets.bottom
+                                 );
 
-      mainFrame.setPreferredSize(frameSize);
-      mainFrame.setSize(frameSize);
+      mainFrame.setPreferredSize(frameDimension);
+      mainFrame.setSize(frameDimension);
 
-      updateActiveMonitor();
+      centerFrame();
 
-      Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
-                                                  .getDefaultConfiguration()
-                                                  .getBounds();
-
-      // Center the main frame on the active monitor
-      mainFrame.setLocation(
-                  (((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
-                  (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y)
-                );
       mainFrame.revalidate();
       mainFrame.repaint();
     });
@@ -452,5 +416,50 @@ public final class CommonFunctions {
                                .filter(entry -> entry.getValue().equals(search))
                                .map(Map.Entry::getKey)
                                .findFirst());
+  }
+
+  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Determines the monitor on which the majority of the main frame is displayed and sets it as the active monitor.
+   */
+  private static void updateActiveMonitor() {
+    CommonFields.setActiveMonitor(
+      retrieveOptional(
+        Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
+              .filter(screen -> !screen.getDefaultConfiguration()
+                                       .getBounds()
+                                       .intersection(CommonFields.getMainFrame().getBounds())
+                                       .isEmpty())
+              .max(Comparator.comparingDouble(
+                  screen -> {
+                    Rectangle intersection = screen.getDefaultConfiguration()
+                                                   .getBounds()
+                                                   .intersection(CommonFields.getMainFrame().getBounds());
+
+                    return intersection.getWidth() * intersection.getHeight();
+                  }
+                )
+              )
+      )
+    );
+  }
+
+  /**
+   * Centers the program frame on the active monitor.
+   */
+  private static void centerFrame() {
+    JFrame mainFrame = CommonFields.getMainFrame();
+
+    updateActiveMonitor();
+
+    Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
+                                                .getDefaultConfiguration()
+                                                .getBounds();
+
+    mainFrame.setLocation(
+                (((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
+                (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y)
+              );
   }
 }
