@@ -43,7 +43,7 @@ public class NamesInputView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  private static final int TEXT_AREA_ROWS = 14;
+  private static final int TEXT_AREA_ROWS    = 14;
   private static final int TEXT_AREA_COLUMNS = 13;
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -96,8 +96,8 @@ public class NamesInputView extends View {
     leftPanel.add(leftTopPanel, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWY, Constants.MIG_LAYOUT_PUSHY));
     leftPanel.add(leftBottomPanel, Constants.MIG_LAYOUT_SOUTH);
 
-    mainPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    mainPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
+    panel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    panel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
 
     addComboBox();
     addTextFields();
@@ -106,7 +106,7 @@ public class NamesInputView extends View {
     addAnchoragesCheckbox();
     addTextArea();
     addButtons();
-    add(mainPanel);
+    add(panel);
     refreshView();
   }
 

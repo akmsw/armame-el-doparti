@@ -17,24 +17,24 @@ public abstract class View extends JPanel {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  private String viewTitle;
+  private String title;
 
   // ---------- Protected fields --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  protected JPanel mainPanel;
+  protected JPanel panel;
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Basic view constructor.
    *
-   * @param viewTitle                 The frame title.
-   * @param mainPanelLayoutConstraints The layout constraints for the view's master panel.
+   * @param title                  The frame title.
+   * @param panelLayoutConstraints The layout constraints for the view's main panel.
    */
-  protected View(String viewTitle, String mainPanelLayoutConstraints) {
-    setViewTitle(viewTitle);
+  protected View(String title, String panelLayoutConstraints) {
+    setTitle(title);
     setLayout(new MigLayout());
-    setMainPanel(new JPanel(new MigLayout(mainPanelLayoutConstraints)));
+    setPanel(new JPanel(new MigLayout(panelLayoutConstraints)));
     setOpaque(true);
   }
 
@@ -59,21 +59,21 @@ public abstract class View extends JPanel {
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  public JPanel getMainPanel() {
-    return mainPanel;
+  public JPanel getPanel() {
+    return panel;
   }
 
-  public String getViewTitle() {
-    return viewTitle;
+  public String getTitle() {
+    return title;
   }
 
   // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  public void setViewTitle(String viewTitle) {
-    this.viewTitle = viewTitle;
+  public void setTitle(String title) {
+    this.title = title;
   }
 
-  public void setMainPanel(JPanel mainPanel) {
-    this.mainPanel = mainPanel;
+  public void setPanel(JPanel panel) {
+    this.panel = panel;
   }
 }

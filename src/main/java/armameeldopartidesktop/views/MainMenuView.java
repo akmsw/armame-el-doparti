@@ -47,7 +47,7 @@ public class MainMenuView extends View {
   protected void initializeInterface() {
     addBackground();
     addButtons();
-    add(mainPanel);
+    add(panel);
     refreshView();
   }
 
@@ -58,10 +58,10 @@ public class MainMenuView extends View {
     setContactButton(new CustomButton("Contacto"));
     setIssuesButton(new CustomButton("Reportes y sugerencias"));
 
-    mainPanel.add(startButton, Constants.MIG_LAYOUT_GROWX);
-    mainPanel.add(helpButton, Constants.MIG_LAYOUT_GROWX);
-    mainPanel.add(contactButton, new CC().width("50%").split());
-    mainPanel.add(issuesButton, new CC().width("50%"));
+    panel.add(startButton, Constants.MIG_LAYOUT_GROWX);
+    panel.add(helpButton, Constants.MIG_LAYOUT_GROWX);
+    panel.add(contactButton, new CC().width("50%").split());
+    panel.add(issuesButton, new CC().width("50%"));
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ public class MainMenuView extends View {
    * Adds the background image to the panel.
    */
   private void addBackgroundImage() {
-    mainPanel.add(new JLabel(null, Constants.ICON_BACKGROUND, SwingConstants.CENTER), Constants.MIG_LAYOUT_GROWX);
+    panel.add(new JLabel(null, Constants.ICON_BACKGROUND, SwingConstants.CENTER), Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -94,7 +94,7 @@ public class MainMenuView extends View {
    * @param fontSize        The font size for the label text.
    */
   private void addLabel(String text, String tooltipText, String constraints, Color backgroundColor, Color foregroundColor, int fontSize) {
-    mainPanel.add(new CustomLabel(text.toLowerCase(), tooltipText, backgroundColor, foregroundColor, SwingConstants.CENTER, fontSize), constraints);
+    panel.add(new CustomLabel(text.toLowerCase(), tooltipText, backgroundColor, foregroundColor, SwingConstants.CENTER, fontSize), constraints);
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

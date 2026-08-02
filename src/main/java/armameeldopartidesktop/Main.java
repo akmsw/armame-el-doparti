@@ -93,16 +93,15 @@ public final class Main {
 
     JFrame mainFrame = new JFrame(Constants.TITLE_VIEW_MAIN_MENU);
 
-    JPanel masterPanel = new JPanel(new CardLayout());
+    JPanel mainPanel = new JPanel(new CardLayout());
 
-    mainFrame.setContentPane(masterPanel);
+    mainFrame.setContentPane(mainPanel);
     mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     mainFrame.setResizable(false);
     mainFrame.setIconImage(Constants.ICON_MAIN_SCALED.getImage());
 
     CommonFields.setMainFrame(mainFrame);
-    CommonFields.setMasterPanel(masterPanel);
-    CommonFields.setViewsLayout((CardLayout) masterPanel.getLayout());
+    CommonFields.setMainPanel(mainPanel);
 
     initializeControllersMap();
 

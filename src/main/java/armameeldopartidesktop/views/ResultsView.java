@@ -47,7 +47,7 @@ public class ResultsView extends View {
 
     addTable();
     addButtons();
-    add(mainPanel);
+    add(panel);
     refreshView();
   }
 
@@ -56,10 +56,10 @@ public class ResultsView extends View {
   @Override
   protected void addButtons() {
     if (CommonFields.getDistribution() == Distribution.MIX_RANDOM) {
-      mainPanel.add(remixButton, Constants.MIG_LAYOUT_GROWX);
+      panel.add(remixButton, Constants.MIG_LAYOUT_GROWX);
     }
 
-    mainPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
+    panel.add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ public class ResultsView extends View {
    * Adds the results table in the view panel.
    */
   private void addTable() {
-    mainPanel.add(table, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH, Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN, Constants.MIG_LAYOUT_CENTER));
+    panel.add(table, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH, Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN, Constants.MIG_LAYOUT_CENTER));
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

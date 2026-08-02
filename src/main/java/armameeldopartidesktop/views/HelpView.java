@@ -26,7 +26,7 @@ public class HelpView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  private static final int TEXT_AREA_ROWS = 20;
+  private static final int TEXT_AREA_ROWS    = 20;
   private static final int TEXT_AREA_COLUMNS = 30;
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ public class HelpView extends View {
     addTextArea();
     addReadingProgressLabel();
     addButtons();
-    add(mainPanel);
+    add(panel);
     refreshView();
   }
 
@@ -71,9 +71,9 @@ public class HelpView extends View {
     setNextPageButton(new CustomButton("Siguiente"));
     setBackButton(new CustomButton("Volver al menú principal"));
 
-    mainPanel.add(previousPageButton, new CC().width("50%").split());
-    mainPanel.add(nextPageButton, new CC().width("50%").wrap());
-    mainPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
+    panel.add(previousPageButton, new CC().width("50%").split());
+    panel.add(nextPageButton, new CC().width("50%").wrap());
+    panel.add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ public class HelpView extends View {
   private void addPageTitleLabel() {
     setPageTitleLabel(new CustomLabel(null, null, SwingConstants.CENTER));
 
-    mainPanel.add(pageTitleLabel, Constants.MIG_LAYOUT_GROWX);
+    panel.add(pageTitleLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -94,7 +94,7 @@ public class HelpView extends View {
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
     setScrollPane(new CustomScrollPane(textArea));
 
-    mainPanel.add(scrollPane, Constants.MIG_LAYOUT_GROW);
+    panel.add(scrollPane, Constants.MIG_LAYOUT_GROW);
   }
 
   /**
@@ -103,7 +103,7 @@ public class HelpView extends View {
   private void addReadingProgressLabel() {
     setReadingProgressLabel(new CustomLabel(null, null, SwingConstants.CENTER));
 
-    mainPanel.add(readingProgressLabel, Constants.MIG_LAYOUT_GROWX);
+    panel.add(readingProgressLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

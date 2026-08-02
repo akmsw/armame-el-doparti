@@ -36,7 +36,7 @@ public class AnchoragesView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  private static final int TEXT_AREA_ROWS = 10;
+  private static final int TEXT_AREA_ROWS    = 10;
   private static final int TEXT_AREA_COLUMNS = 12;
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,13 +84,13 @@ public class AnchoragesView extends View {
 
   @Override
   protected void initializeInterface() {
-    mainPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    mainPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
+    panel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    panel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
 
     addCheckBoxes();
     addTextArea();
     addButtons();
-    add(mainPanel);
+    add(panel);
     refreshView();
   }
 

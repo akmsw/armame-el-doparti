@@ -1,6 +1,5 @@
 package armameeldopartidesktop.utils.common;
 
-import java.awt.CardLayout;
 import java.awt.GraphicsDevice;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
@@ -40,9 +39,7 @@ public final class CommonFields {
 
   private static JFrame mainFrame;
 
-  private static JPanel viewsContainer;
-
-  private static CardLayout viewsLayout;
+  private static JPanel mainPanel;
 
   private static List<Anchorage> anchorages;
 
@@ -81,12 +78,8 @@ public final class CommonFields {
     return mainFrame;
   }
 
-  public static JPanel getViewsContainer() {
-    return viewsContainer;
-  }
-
-  public static CardLayout getViewsLayout() {
-    return viewsLayout;
+  public static JPanel getMainPanel() {
+    return mainPanel;
   }
 
   public static List<Anchorage> getAnchorages() {
@@ -127,12 +120,8 @@ public final class CommonFields {
     CommonFields.mainFrame = mainFrame;
   }
 
-  public static void setMasterPanel(JPanel viewsContainer) {
-    CommonFields.viewsContainer = viewsContainer;
-  }
-
-  public static void setViewsLayout(CardLayout cardLayout) {
-    CommonFields.viewsLayout = cardLayout;
+  public static void setMainPanel(JPanel mainPanel) {
+    CommonFields.mainPanel = mainPanel;
   }
 
   public static void setAnchorages(List<Anchorage> anchorages) {
