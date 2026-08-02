@@ -254,6 +254,8 @@ public final class CommonFunctions {
     /*
       Resize the main frame to fit the current view dimensions, then identify the screen
       where the main frame is currently displayed and center the main frame on it.
+
+      The screen identification is done by checking which screen has the largest intersection with the main frame bounds.
     */
     SwingUtilities.invokeLater(
       () -> {
@@ -282,27 +284,23 @@ public final class CommonFunctions {
         mainFrame.setSize(frameDimension);
 
         Rectangle activeMonitorBounds = retrieveOptional(
-                                          Arrays.stream(
-                                            GraphicsEnvironment.getLocalGraphicsEnvironment()
-                                                               .getScreenDevices()
-                                          ).filter(
-                                            screen -> !screen.getDefaultConfiguration()
-                                                             .getBounds()
-                                                             .intersection(mainFrame.getBounds())
-                                                             .isEmpty()
-                                          ).max(
-                                            Comparator.comparingDouble(
-                                              screen -> {
-                                                Rectangle intersection = screen.getDefaultConfiguration()
-                                                                               .getBounds()
-                                                                               .intersection(mainFrame.getBounds());
+                                          Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
+                                                .filter(screen -> !screen.getDefaultConfiguration()
+                                                                         .getBounds()
+                                                                         .intersection(mainFrame.getBounds())
+                                                                         .isEmpty())
+                                                .max(
+                                                  Comparator.comparingDouble(
+                                                    screen -> {
+                                                      Rectangle intersection = screen.getDefaultConfiguration()
+                                                                                     .getBounds()
+                                                                                     .intersection(mainFrame.getBounds());
 
-                                                return intersection.getWidth() * intersection.getHeight();
-                                              }
-                                            )
-                                          )
-                                        ).getDefaultConfiguration()
-                                         .getBounds();
+                                                      return (intersection.getWidth() * intersection.getHeight());
+                                                    }
+                                                  )
+                                                )
+                                        ).getDefaultConfiguration().getBounds();
 
         mainFrame.setLocation((((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
                               (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y));
@@ -323,7 +321,7 @@ public final class CommonFunctions {
    * @return The graphical component associated to the action event.
    */
   public static Component getComponentFromEvent(ActionEvent event) {
-    return event == null ? null : SwingUtilities.windowForComponent((Component) event.getSource());
+    return (event == null ? null : SwingUtilities.windowForComponent((Component) event.getSource()));
   }
 
   /**
@@ -345,7 +343,7 @@ public final class CommonFunctions {
    * @return The given string with the first letter uppercase and the rest lowercase.
    */
   public static String capitalize(String input) {
-    return input.isBlank() ? input : (input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase());
+    return (input.isBlank() ? input : (input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase()));
   }
 
   /**

@@ -43,7 +43,6 @@ public class AnchoragesView extends View {
 
   private JButton backButton;
   private JButton editAnchorageButton;
-  private JButton deleteLastAnchorageButton;
   private JButton deleteAnchorageButton;
   private JButton clearAnchoragesButton;
   private JButton finishButton;
@@ -97,7 +96,6 @@ public class AnchoragesView extends View {
   protected void addButtons() {
     setBackButton(new CustomButton("Atrás"));
     setEditAnchorageButton(new CustomButton("Editar un anclaje"));
-    setDeleteLastAnchorageButton(new CustomButton("Borrar último anclaje"));
     setDeleteAnchorageButton(new CustomButton("Borrar un anclaje"));
     setClearAnchoragesButton(new CustomButton("Limpiar anclajes"));
     setFinishButton(new CustomButton("Finalizar"));
@@ -106,7 +104,6 @@ public class AnchoragesView extends View {
     anchorageButtons.add(finishButton);
     anchorageButtons.add(newAnchorageButton);
     anchorageButtons.add(editAnchorageButton);
-    anchorageButtons.add(deleteLastAnchorageButton);
     anchorageButtons.add(deleteAnchorageButton);
     anchorageButtons.add(clearAnchoragesButton);
 
@@ -115,7 +112,6 @@ public class AnchoragesView extends View {
 
     rightPanel.add(newAnchorageButton, Constants.MIG_LAYOUT_GROW);
     rightPanel.add(editAnchorageButton, Constants.MIG_LAYOUT_GROW);
-    rightPanel.add(deleteLastAnchorageButton, Constants.MIG_LAYOUT_GROW);
     rightPanel.add(deleteAnchorageButton, Constants.MIG_LAYOUT_GROW);
     rightPanel.add(clearAnchoragesButton, Constants.MIG_LAYOUT_GROW);
   }
@@ -187,10 +183,6 @@ public class AnchoragesView extends View {
     return editAnchorageButton;
   }
 
-  public JButton getDeleteLastAnchorageButton() {
-    return deleteLastAnchorageButton;
-  }
-
   public JButton getDeleteAnchorageButton() {
     return deleteAnchorageButton;
   }
@@ -239,10 +231,6 @@ public class AnchoragesView extends View {
 
   public void setEditAnchorageButton(JButton editAnchorageButton) {
     this.editAnchorageButton = editAnchorageButton;
-  }
-
-  public void setDeleteLastAnchorageButton(JButton deleteLastAnchorageButton) {
-    this.deleteLastAnchorageButton = deleteLastAnchorageButton;
   }
 
   public void setDeleteAnchorageButton(JButton deleteAnchorageButton) {
