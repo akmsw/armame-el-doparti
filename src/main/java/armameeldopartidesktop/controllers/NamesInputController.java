@@ -230,7 +230,6 @@ public class NamesInputController extends Controller<NamesInputView> {
   @Override
   protected void showView() {
     updateTextFields(Objects.requireNonNull(view.getComboBox().getSelectedItem(), Constants.MSG_ERROR_NULL_GUI_RESOURCE).toString());
-    centerView();
     resetComboBox();
 
     CommonFunctions.showView(view);

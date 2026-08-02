@@ -80,7 +80,6 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
 
   @Override
   protected void showView() {
-    centerView();
     updateNameLabels();
 
     CommonFunctions.showView(view);

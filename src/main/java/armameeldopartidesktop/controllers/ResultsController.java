@@ -186,7 +186,6 @@ public class ResultsController extends Controller<ResultsView> {
   @Override
   protected void showView() {
     setUpView();
-    centerView();
 
     CommonFunctions.showView(view);
   }

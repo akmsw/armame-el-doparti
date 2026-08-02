@@ -217,22 +217,20 @@ public final class CommonFunctions {
 
   /**
    * Determines the monitor on which the majority of the given view is displayed and sets it as the active monitor.
-   *
-   * @param view Reference view from which the active monitor will be determined.
    */
-  public static void updateActiveMonitorFromView(View view) {
+  public static void updateActiveMonitor() {
     CommonFields.setActiveMonitor(
       retrieveOptional(
         Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
               .filter(screen -> !screen.getDefaultConfiguration()
                                        .getBounds()
-                                       .intersection(view.getBounds())
+                                       .intersection(CommonFields.getMainFrame().getBounds())
                                        .isEmpty())
               .max(Comparator.comparingDouble(
                   screen -> {
                     Rectangle intersection = screen.getDefaultConfiguration()
                                                    .getBounds()
-                                                   .intersection(view.getBounds());
+                                                   .intersection(CommonFields.getMainFrame().getBounds());
 
                     return intersection.getWidth() * intersection.getHeight();
                   }
@@ -306,15 +304,24 @@ public final class CommonFunctions {
       }
 
       Dimension frameSize = new Dimension(
-        Math.max(viewDimension.width  + frameInsets.left + frameInsets.right , 1),
-        Math.max(viewDimension.height + frameInsets.top  + frameInsets.bottom, 1)
+        Math.max(viewDimension.width + frameInsets.left + frameInsets.right, 1),
+        Math.max(viewDimension.height + frameInsets.top + frameInsets.bottom, 1)
       );
 
       mainFrame.setPreferredSize(frameSize);
       mainFrame.setSize(frameSize);
-      mainFrame.setMinimumSize(new Dimension(1, 1));
-      mainFrame.setMaximumSize(null);
-      mainFrame.setLocationRelativeTo(null);
+
+      // Center the main frame on the active monitor
+      CommonFunctions.updateActiveMonitor();
+
+      Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
+                                                  .getDefaultConfiguration()
+                                                  .getBounds();
+
+      mainFrame.setLocation(
+                  (((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
+                  (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y)
+                );
       mainFrame.revalidate();
       mainFrame.repaint();
     });

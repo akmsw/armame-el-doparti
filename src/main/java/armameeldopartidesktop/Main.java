@@ -2,6 +2,7 @@ package armameeldopartidesktop;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -99,6 +100,8 @@ public final class Main {
     mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     mainFrame.setResizable(false);
     mainFrame.setIconImage(Constants.ICON_MAIN_SCALED.getImage());
+    mainFrame.setMinimumSize(new Dimension(1, 1));
+    mainFrame.setMaximumSize(null);
 
     CommonFields.setMainFrame(mainFrame);
     CommonFields.setMainPanel(mainPanel);
