@@ -24,8 +24,8 @@ public abstract class BasicMixer implements Mixer {
 
   // ---------- Protected fields --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  protected int randomTeam1Idx;
-  protected int randomTeam2Idx;
+  protected int randomTeam1Index;
+  protected int randomTeam2Index;
 
   protected Random randomGenerator;
 
@@ -43,9 +43,9 @@ public abstract class BasicMixer implements Mixer {
   /**
    * Randomly shuffles the team indexes.
    */
-  protected void shuffleTeamIdxs() {
-    randomTeam1Idx = randomGenerator.nextInt(Constants.TEAMS_TOTAL);
-    randomTeam2Idx = 1 - randomTeam1Idx;
+  protected void shuffleTeamIndexes() {
+    randomTeam1Index = randomGenerator.nextInt(Constants.TEAMS_TOTAL);
+    randomTeam2Index = 1 - randomTeam1Index;
   }
 
     /**
@@ -83,21 +83,21 @@ public abstract class BasicMixer implements Mixer {
    * @return The only available team index, a random team index if the player can be added in every team, or {@code Constants.ERROR_CODE_NO_AVAILABLE_TEAM} if there's no available team for the player.
    */
   protected int getAvailableTeamIdx(List<Team> teams, Predicate<Team> validationPredicate) {
-    shuffleTeamIdxs();
+    shuffleTeamIndexes();
 
-    boolean isRandomTeam1Available = validationPredicate.test(teams.get(randomTeam1Idx));
-    boolean isRandomTeam2Available = validationPredicate.test(teams.get(randomTeam2Idx));
+    boolean isRandomTeam1Available = validationPredicate.test(teams.get(randomTeam1Index));
+    boolean isRandomTeam2Available = validationPredicate.test(teams.get(randomTeam2Index));
 
     if (isRandomTeam1Available && isRandomTeam2Available) {
       return randomGenerator.nextInt(Constants.TEAMS_TOTAL);
     }
 
     if (isRandomTeam1Available) {
-      return randomTeam1Idx;
+      return randomTeam1Index;
     }
 
     if (isRandomTeam2Available) {
-      return randomTeam2Idx;
+      return randomTeam2Index;
     }
 
     return Constants.ERROR_CODE_NO_AVAILABLE_TEAM;

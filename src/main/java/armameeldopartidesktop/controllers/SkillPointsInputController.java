@@ -28,6 +28,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   public SkillPointsInputController(SkillPointsInputView skillPointsInputView) {
     super(skillPointsInputView);
+
     setUpListeners();
   }
 

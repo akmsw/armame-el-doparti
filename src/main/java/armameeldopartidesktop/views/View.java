@@ -19,27 +19,25 @@ public abstract class View extends JPanel {
 
   private String title;
 
-  // ---------- Protected fields --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  protected JPanel panel;
-
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Basic view constructor.
    *
-   * @param title                  The frame title.
-   * @param panelLayoutConstraints The layout constraints for the view's main panel.
+   * @param title             The view title.
+   * @param layoutConstraints The view layout constraints.
    */
-  protected View(String title, String panelLayoutConstraints) {
+  protected View(String title, String layoutConstraints) {
     setTitle(title);
-    setLayout(new MigLayout());
-    setPanel(new JPanel(new MigLayout(panelLayoutConstraints)));
+    setLayout(new MigLayout(layoutConstraints));
     setOpaque(true);
   }
 
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  /**
+   * Refreshes the view to reflect any changes.
+   */
   public void refreshView() {
     revalidate();
     repaint();
@@ -48,20 +46,18 @@ public abstract class View extends JPanel {
   // ---------- Abstract protected methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Initializes the view interface.
+   * Initializes the view's interface.
+   *
+   * <p>All the components of the view should be added to the view in this method.
    */
   protected abstract void initializeInterface();
 
   /**
-   * Adds the buttons to their corresponding panel.
+   * Adds the buttons.
    */
   protected abstract void addButtons();
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  public JPanel getPanel() {
-    return panel;
-  }
 
   public String getTitle() {
     return title;
@@ -71,9 +67,5 @@ public abstract class View extends JPanel {
 
   public void setTitle(String title) {
     this.title = title;
-  }
-
-  public void setPanel(JPanel panel) {
-    this.panel = panel;
   }
 }

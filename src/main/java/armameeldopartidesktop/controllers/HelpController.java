@@ -44,6 +44,7 @@ public class HelpController extends Controller<HelpView> {
    */
   public HelpController(HelpView helpView) {
     super(helpView);
+
     setUpListeners();
     setUpInitialState();
   }

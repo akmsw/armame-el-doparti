@@ -10,7 +10,7 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.CommonFields;
 
 /**
- * Team class.
+ * Class that represents a team of players, organized by position.
  *
  * @since 3.0.0
  *

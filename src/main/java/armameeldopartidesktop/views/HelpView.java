@@ -61,7 +61,6 @@ public class HelpView extends View {
     addTextArea();
     addReadingProgressLabel();
     addButtons();
-    add(panel);
     refreshView();
   }
 
@@ -71,9 +70,9 @@ public class HelpView extends View {
     setNextPageButton(new CustomButton("Siguiente"));
     setBackButton(new CustomButton("Volver al menú principal"));
 
-    panel.add(previousPageButton, new CC().width("50%").split());
-    panel.add(nextPageButton, new CC().width("50%").wrap());
-    panel.add(backButton, Constants.MIG_LAYOUT_GROWX);
+    add(previousPageButton, new CC().width("50%").split());
+    add(nextPageButton, new CC().width("50%").wrap());
+    add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +83,7 @@ public class HelpView extends View {
   private void addPageTitleLabel() {
     setPageTitleLabel(new CustomLabel(null, null, SwingConstants.CENTER));
 
-    panel.add(pageTitleLabel, Constants.MIG_LAYOUT_GROWX);
+    add(pageTitleLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -94,7 +93,7 @@ public class HelpView extends View {
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
     setScrollPane(new CustomScrollPane(textArea));
 
-    panel.add(scrollPane, Constants.MIG_LAYOUT_GROW);
+    add(scrollPane, Constants.MIG_LAYOUT_GROW);
   }
 
   /**
@@ -103,7 +102,7 @@ public class HelpView extends View {
   private void addReadingProgressLabel() {
     setReadingProgressLabel(new CustomLabel(null, null, SwingConstants.CENTER));
 
-    panel.add(readingProgressLabel, Constants.MIG_LAYOUT_GROWX);
+    add(readingProgressLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

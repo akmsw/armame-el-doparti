@@ -59,7 +59,7 @@ public class AnchoragesView extends View {
   private List<JButton> anchorageButtons;
 
   /**
-   * Map that associates each checkboxes list with its corresponding position.
+   * Map that associates each position with a checkboxes list.
    */
   private Map<Position, List<JCheckBox>> checkboxesMap;
 
@@ -84,13 +84,12 @@ public class AnchoragesView extends View {
 
   @Override
   protected void initializeInterface() {
-    panel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    panel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
+    add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    add(rightPanel, Constants.MIG_LAYOUT_EAST);
 
     addCheckBoxes();
     addTextArea();
     addButtons();
-    add(panel);
     refreshView();
   }
 
@@ -135,7 +134,7 @@ public class AnchoragesView extends View {
   }
 
   /**
-   * Adds the players checkboxes and their position labels.
+   * Adds the checkboxes and their position labels.
    */
   private void addCheckBoxes() {
     CommonFields.getPlayersSets()
@@ -165,7 +164,7 @@ public class AnchoragesView extends View {
   }
 
   /**
-   * Adds the checkboxes to the view with a label that specifies the corresponding position.
+   * Adds the checkboxes with a label that specifies the corresponding position.
    *
    * @param cbSet     Check boxes to add.
    * @param labelText Label text.

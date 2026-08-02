@@ -47,7 +47,7 @@ public class RandomMixer extends BasicMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    shuffleTeamIdxs();
+    shuffleTeamIndexes();
 
     for (Position position : Position.values()) {
       List<Player> playersAtPosition = new ArrayList<>(CommonFields.getPlayersSets().get(position));
@@ -56,12 +56,12 @@ public class RandomMixer extends BasicMixer {
 
       Collections.shuffle(playersAtPosition);
 
-      teams.get(randomTeam1Idx)
+      teams.get(randomTeam1Index)
            .getPlayers()
            .get(position)
            .addAll(playersAtPosition.subList(0, halfSetSize));
 
-      teams.get(randomTeam2Idx)
+      teams.get(randomTeam2Index)
            .getPlayers()
            .get(position)
            .addAll(playersAtPosition.subList(halfSetSize, playersAtPosition.size()));

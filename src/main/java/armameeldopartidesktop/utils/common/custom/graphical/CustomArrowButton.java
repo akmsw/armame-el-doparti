@@ -33,6 +33,7 @@ public class CustomArrowButton extends BasicArrowButton {
    */
   public CustomArrowButton(int orientation) {
     super(orientation);
+
     setUpGraphicalProperties();
   }
 

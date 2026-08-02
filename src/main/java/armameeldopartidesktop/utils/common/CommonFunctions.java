@@ -52,7 +52,7 @@ public final class CommonFunctions {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Empty, private constructor.
+   * Empty, private constructor to prevent instantiation.
    */
   private CommonFunctions() {
     // Body not needed
@@ -155,7 +155,7 @@ public final class CommonFunctions {
         dialogTitle = Constants.TITLE_MESSAGE_QUESTION;
         dialogIcon  = Constants.ICON_DIALOG_QUESTION;
       }
-      default -> CommonFunctions.exitProgram(Error.ERROR_GUI, new IllegalStateException(Constants.MSG_ERROR_DEBUG_INVALID_DIALOG_TYPE));
+      default -> exitProgram(Error.ERROR_GUI, new IllegalStateException(Constants.MSG_ERROR_DEBUG_INVALID_DIALOG_TYPE));
     }
 
     JOptionPane.showMessageDialog(parentComponent, dialogMessage, dialogTitle, dialogMessageType, dialogIcon);
@@ -216,7 +216,7 @@ public final class CommonFunctions {
   }
 
   /**
-   * Determines the monitor on which the majority of the given view is displayed and sets it as the active monitor.
+   * Determines the monitor on which the majority of the main frame is displayed and sets it as the active monitor.
    */
   public static void updateActiveMonitor() {
     CommonFields.setActiveMonitor(
@@ -249,7 +249,7 @@ public final class CommonFunctions {
     try {
       Desktop.getDesktop().browse(new URI(url));
     } catch (IOException | URISyntaxException exception) {
-      CommonFunctions.exitProgram(Error.ERROR_BROWSER, exception);
+      exitProgram(Error.ERROR_BROWSER, exception);
     }
   }
 
@@ -278,20 +278,15 @@ public final class CommonFunctions {
 
     // Resize the main frame to fit the current view dimensions
     SwingUtilities.invokeLater(() -> {
-      JPanel viewPanel = view.getPanel();
-
       view.revalidate();
       view.doLayout();
-
-      viewPanel.revalidate();
-      viewPanel.doLayout();
 
       Dimension viewDimension = view.getPreferredSize();
 
       Insets frameInsets = mainFrame.getInsets();
 
       if (viewDimension.width <= 0 || viewDimension.height <= 0) {
-        viewDimension = viewPanel.getPreferredSize();
+        viewDimension = view.getPreferredSize();
       }
 
       view.setPreferredSize(viewDimension);
@@ -311,13 +306,13 @@ public final class CommonFunctions {
       mainFrame.setPreferredSize(frameSize);
       mainFrame.setSize(frameSize);
 
-      // Center the main frame on the active monitor
-      CommonFunctions.updateActiveMonitor();
+      updateActiveMonitor();
 
       Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
                                                   .getDefaultConfiguration()
                                                   .getBounds();
 
+      // Center the main frame on the active monitor
       mainFrame.setLocation(
                   (((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
                   (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y)

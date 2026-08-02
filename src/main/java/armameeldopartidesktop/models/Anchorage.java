@@ -7,7 +7,7 @@ import armameeldopartidesktop.utils.common.Constants;
 import armameeldopartidesktop.models.enums.Error;
 
 /**
- * Anchorage class.
+ * Class that represents an anchorage of players.
  *
  * @since 3.1.0
  *

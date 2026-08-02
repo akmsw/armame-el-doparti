@@ -1,7 +1,7 @@
 package armameeldopartidesktop.models.enums;
 
 /**
- * Possible program views.
+ * Enum that lists all the program views.
  *
  * @since 3.0.0
  *

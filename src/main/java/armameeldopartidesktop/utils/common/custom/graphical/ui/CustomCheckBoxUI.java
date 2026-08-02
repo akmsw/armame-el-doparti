@@ -21,6 +21,8 @@ public class CustomCheckBoxUI extends BasicCheckBoxUI {
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom checkbox UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom checkbox UI.

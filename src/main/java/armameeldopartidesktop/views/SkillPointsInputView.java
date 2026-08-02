@@ -59,7 +59,6 @@ public class SkillPointsInputView extends View {
   public void initializeInterface() {
     addSpinners();
     addButtons();
-    add(panel);
     refreshView();
   }
 
@@ -71,20 +70,22 @@ public class SkillPointsInputView extends View {
     setFinishButton(new CustomButton("Finalizar"));
     setResetSkillPointsButton(new CustomButton("Reiniciar puntuaciones"));
 
-    panel.add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
-    panel.add(resetSkillPointsButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
-    panel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+    add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+    add(resetSkillPointsButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+    add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Adds the spinners to their corresponding panel.
+   * Adds the spinners.
    */
   private void addSpinners() {
     for (Position position : Position.values()) {
-      panel.add(new CustomLabel(CommonFunctions.capitalize(Constants.MAP_POSITIONS.get(position)), null, SwingConstants.CENTER),
-                CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+      add(
+        new CustomLabel(CommonFunctions.capitalize(Constants.MAP_POSITIONS.get(position)), null, SwingConstants.CENTER),
+        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN)
+      );
 
       List<Player> players = new ArrayList<>(CommonFields.getPlayersSets().get(position));
 
@@ -95,8 +96,8 @@ public class SkillPointsInputView extends View {
 
         labelsMap.put(spinnersMap.get(player), new JLabel(player.getName()));
 
-        panel.add(labelsMap.get(spinnersMap.get(player)), Constants.MIG_LAYOUT_PUSHX);
-        panel.add(spinnersMap.get(player), players.indexOf(player) % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
+        add(labelsMap.get(spinnersMap.get(player)), Constants.MIG_LAYOUT_PUSHX);
+        add(spinnersMap.get(player), players.indexOf(player) % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
       }
     }
   }

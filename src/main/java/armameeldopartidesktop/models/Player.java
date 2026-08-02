@@ -4,7 +4,7 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.Constants;
 
 /**
- * Player class.
+ * Class that represents a player.
  *
  * @since 1.0.0
  *

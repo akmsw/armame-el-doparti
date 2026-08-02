@@ -33,6 +33,7 @@ public class CustomButton extends JButton {
    */
   public CustomButton(String text) {
     super(text);
+
     setArc(Constants.ROUNDED_BORDER_ARC_GENERAL);
     setUpGraphicalProperties();
   }
@@ -45,6 +46,7 @@ public class CustomButton extends JButton {
    */
   public CustomButton(String text, int arc) {
     super(text);
+
     setArc(arc);
     setUpGraphicalProperties();
   }

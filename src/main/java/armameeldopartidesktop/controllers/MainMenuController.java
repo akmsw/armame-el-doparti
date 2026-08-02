@@ -25,6 +25,7 @@ public class MainMenuController extends Controller<MainMenuView> {
    */
   public MainMenuController(MainMenuView mainMenuView) {
     super(mainMenuView);
+
     setUpListeners();
   }
 

@@ -30,6 +30,7 @@ public class CustomScrollPane extends JScrollPane {
    */
   public CustomScrollPane(JTextArea textArea) {
     super(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
     setUpGraphicalProperties();
   }
 

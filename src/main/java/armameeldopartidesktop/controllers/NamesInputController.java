@@ -42,6 +42,7 @@ public class NamesInputController extends Controller<NamesInputView> {
    */
   public NamesInputController(NamesInputView namesInputView) {
     super(namesInputView);
+
     setUpListeners();
     setUpInitialState();
   }

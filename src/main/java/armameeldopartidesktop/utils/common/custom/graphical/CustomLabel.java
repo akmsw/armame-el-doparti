@@ -33,6 +33,7 @@ public class CustomLabel extends JLabel {
    */
   public CustomLabel(String text, String tooltipText, int alignment) {
     super(text);
+
     setHorizontalAlignment(alignment);
     setBackground(Constants.COLOR_GREEN_MEDIUM_LIGHT);
     setFont(new Font(getFont().getName(), Font.PLAIN, (int) Constants.SIZE_FONT_DEFAULT));
@@ -52,6 +53,7 @@ public class CustomLabel extends JLabel {
    */
   public CustomLabel(String text, String tooltipText, Color backgroundColor, Color foregroundColor, int alignment, int fontSize) {
     super(text);
+
     setHorizontalAlignment(alignment);
     setBackground(backgroundColor);
     setForeground(foregroundColor);

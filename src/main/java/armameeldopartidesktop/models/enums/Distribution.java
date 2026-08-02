@@ -1,7 +1,7 @@
 package armameeldopartidesktop.models.enums;
 
 /**
- * Possible distribution strategies.
+ * Enum that lists all the possible player distribution methods.
  *
  * @since 3.0.0
  *

@@ -31,6 +31,8 @@ public class CustomOptionPaneUI extends BasicOptionPaneUI {
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom option pane UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom option pane UI.

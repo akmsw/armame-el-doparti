@@ -26,7 +26,9 @@ public class CustomScrollBarUI extends BasicScrollBarUI {
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * The "java:S1172" warning is suppressed since the argument is intentionally unused.
+   * Creates a new custom scrollbar UI that fits the overall program aesthetics.
+   *
+   * <p>The "java:S1172" warning is suppressed since the argument is intentionally unused.
    *
    * @param component Component to which to apply the custom UI.
    *

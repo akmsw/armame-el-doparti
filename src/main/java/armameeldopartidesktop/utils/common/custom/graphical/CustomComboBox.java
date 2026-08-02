@@ -39,6 +39,7 @@ public class CustomComboBox<E> extends JComboBox<E> {
    */
   public CustomComboBox(E[] items) {
     super(items);
+
     setUpGraphicalProperties();
   }
 

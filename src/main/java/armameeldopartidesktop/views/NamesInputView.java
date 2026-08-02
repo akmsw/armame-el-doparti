@@ -71,6 +71,9 @@ public class NamesInputView extends View {
 
   private JTextArea textArea;
 
+  /**
+   * Map that associates each position with a list of text fields where to enter the player names.
+   */
   private Map<Position, List<JTextField>> textFieldsMap;
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -93,12 +96,7 @@ public class NamesInputView extends View {
 
   @Override
   protected void initializeInterface() {
-    leftPanel.add(leftTopPanel, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWY, Constants.MIG_LAYOUT_PUSHY));
-    leftPanel.add(leftBottomPanel, Constants.MIG_LAYOUT_SOUTH);
-
-    panel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    panel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
-
+    addSubPanels();
     addComboBox();
     addTextFields();
     addRadioButtons();
@@ -106,7 +104,6 @@ public class NamesInputView extends View {
     addAnchoragesCheckbox();
     addTextArea();
     addButtons();
-    add(panel);
     refreshView();
   }
 
@@ -122,6 +119,17 @@ public class NamesInputView extends View {
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Adds the sub-panels.
+   */
+  private void addSubPanels() {
+    leftPanel.add(leftTopPanel, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWY, Constants.MIG_LAYOUT_PUSHY));
+    leftPanel.add(leftBottomPanel, Constants.MIG_LAYOUT_SOUTH);
+
+    add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    add(rightPanel, Constants.MIG_LAYOUT_EAST);
+  }
+
+  /**
    * Initializes the text fields map.
    */
   private void initializeTextFieldsMap() {
@@ -133,7 +141,7 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Adds the combobox.
+   * Adds the combo box for position selection.
    */
   private void addComboBox() {
     setComboBox(new CustomComboBox<>(Constants.OPTIONS_POSITIONS_COMBOBOX.toArray(new String[0])));
@@ -142,7 +150,7 @@ public class NamesInputView extends View {
   }
 
   /**
-   * Builds, stores and configures each position text fields.
+   * Adds the text fields where player names will be entered.
    */
   private void addTextFields() {
     for (Position position : Position.values()) {
@@ -159,9 +167,9 @@ public class NamesInputView extends View {
    * <p>When using lambda expressions, the event handler is called whenever the event is triggered. This means that the controller is retrieved only when the radio buttons are clicked, avoiding null-reference
    * problems.
    *
-   * <p>When using a method reference ({@code ::radioButtonEvent}), a radioButtonEvent method reference is created when the view is being built. This means that the controller should be retrieved when the method
-   * reference is created, and it could be before any radio button click event is triggered, meaning it could potentially cause null-reference problems since the view must be fully created before the controller can
-   * be created. This method reference causes a cyclic dependency between the view and the controller.
+   * <p>When using a method reference, a {@code radioButtonEvent} method reference is created when the view is being built. This means that the controller should be retrieved when the method reference is created,
+   * and it could be before any radio button click event is triggered, meaning it could potentially cause null-reference problems since the view must be fully created before the controller can be created.
+   * This method reference causes a cyclic dependency between the view and the controller.
    *
    * <p>The event handler could be written in this class, but for the sake of the MVC design pattern good practices, the controller should be the responsible for events handling.
    */

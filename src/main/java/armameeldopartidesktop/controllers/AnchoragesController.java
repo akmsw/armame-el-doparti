@@ -41,6 +41,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
    */
   public AnchoragesController(AnchoragesView anchoragesView) {
     super(anchoragesView);
+
     setUpListeners();
     setUpInitialState();
     toggleButtons();
