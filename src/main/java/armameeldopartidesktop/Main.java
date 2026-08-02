@@ -81,7 +81,6 @@ public final class Main {
    * @param args Program arguments (not used).
    */
   public static void main(String [] args) {
-    CommonFields.setActiveMonitor(GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()); // Sets the main monitor as the active monitor by default
     CommonFields.setAnchorages(new ArrayList<>());
     CommonFields.setAnchoragesEnabled(false);
     CommonFields.setControllersMap(new EnumMap<>(ProgramView.class));

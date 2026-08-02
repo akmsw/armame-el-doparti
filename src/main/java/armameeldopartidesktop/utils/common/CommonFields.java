@@ -1,6 +1,5 @@
 package armameeldopartidesktop.utils.common;
 
-import java.awt.GraphicsDevice;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +32,6 @@ public final class CommonFields {
 
   private static Distribution distribution;
 
-  private static GraphicsDevice activeMonitor;
-
   private static RoundRectangle2D tooltipRectangle;
 
   private static JFrame mainFrame;
@@ -64,10 +61,6 @@ public final class CommonFields {
 
   public static Distribution getDistribution() {
     return distribution;
-  }
-
-  public static GraphicsDevice getActiveMonitor() {
-    return activeMonitor;
   }
 
   public static RoundRectangle2D getTooltipRectangle() {
@@ -106,10 +99,6 @@ public final class CommonFields {
 
   public static void setDistribution(Distribution distribution) {
     CommonFields.distribution = distribution;
-  }
-
-  public static void setActiveMonitor(GraphicsDevice activeMonitor) {
-    CommonFields.activeMonitor = activeMonitor;
   }
 
   public static void setTooltipRectangle(RoundRectangle2D tooltipRectangle) {
