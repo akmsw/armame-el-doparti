@@ -275,10 +275,8 @@ public final class CommonFunctions {
         mainPanel.revalidate();
         mainPanel.doLayout();
 
-        Dimension frameDimension = new Dimension(
-                                    viewDimension.width + frameInsets.left + frameInsets.right,
-                                    viewDimension.height + frameInsets.top + frameInsets.bottom
-                                  );
+        Dimension frameDimension = new Dimension(viewDimension.width + frameInsets.left + frameInsets.right,
+                                                 viewDimension.height + frameInsets.top + frameInsets.bottom);
 
         mainFrame.setPreferredSize(frameDimension);
         mainFrame.setSize(frameDimension);
