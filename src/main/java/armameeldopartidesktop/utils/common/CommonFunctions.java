@@ -284,25 +284,25 @@ public final class CommonFunctions {
         Rectangle activeMonitorBounds = retrieveOptional(
                                           Arrays.stream(
                                             GraphicsEnvironment.getLocalGraphicsEnvironment()
-                                                              .getScreenDevices()
+                                                               .getScreenDevices()
                                           ).filter(
                                             screen -> !screen.getDefaultConfiguration()
-                                                            .getBounds()
-                                                            .intersection(mainFrame.getBounds())
-                                                            .isEmpty()
+                                                             .getBounds()
+                                                             .intersection(mainFrame.getBounds())
+                                                             .isEmpty()
                                           ).max(
                                             Comparator.comparingDouble(
                                               screen -> {
                                                 Rectangle intersection = screen.getDefaultConfiguration()
-                                                                              .getBounds()
-                                                                              .intersection(mainFrame.getBounds());
+                                                                               .getBounds()
+                                                                               .intersection(mainFrame.getBounds());
 
                                                 return intersection.getWidth() * intersection.getHeight();
                                               }
                                             )
                                           )
                                         ).getDefaultConfiguration()
-                                        .getBounds();
+                                         .getBounds();
 
         mainFrame.setLocation((((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
                               (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y));
