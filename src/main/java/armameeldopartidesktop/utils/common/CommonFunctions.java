@@ -279,8 +279,32 @@ public final class CommonFunctions {
       mainFrame.setPreferredSize(frameDimension);
       mainFrame.setSize(frameDimension);
 
-      centerFrame();
+      // Get the monitor where the main frame is currently displayed and center the main frame on it
+      Rectangle activeMonitorBounds = retrieveOptional(
+                                        Arrays.stream(
+                                          GraphicsEnvironment.getLocalGraphicsEnvironment()
+                                                             .getScreenDevices()
+                                        ).filter(
+                                          screen -> !screen.getDefaultConfiguration()
+                                                           .getBounds()
+                                                           .intersection(mainFrame.getBounds())
+                                                           .isEmpty()
+                                        ).max(
+                                          Comparator.comparingDouble(
+                                            screen -> {
+                                              Rectangle intersection = screen.getDefaultConfiguration()
+                                                                             .getBounds()
+                                                                             .intersection(mainFrame.getBounds());
 
+                                              return intersection.getWidth() * intersection.getHeight();
+                                            }
+                                          )
+                                        )
+                                      ).getDefaultConfiguration()
+                                       .getBounds();
+
+      mainFrame.setLocation((((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
+                            (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y));
       mainFrame.revalidate();
       mainFrame.repaint();
     });
@@ -416,50 +440,5 @@ public final class CommonFunctions {
                                .filter(entry -> entry.getValue().equals(search))
                                .map(Map.Entry::getKey)
                                .findFirst());
-  }
-
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Determines the monitor on which the majority of the main frame is displayed and sets it as the active monitor.
-   */
-  private static void updateActiveMonitor() {
-    CommonFields.setActiveMonitor(
-      retrieveOptional(
-        Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
-              .filter(screen -> !screen.getDefaultConfiguration()
-                                       .getBounds()
-                                       .intersection(CommonFields.getMainFrame().getBounds())
-                                       .isEmpty())
-              .max(Comparator.comparingDouble(
-                  screen -> {
-                    Rectangle intersection = screen.getDefaultConfiguration()
-                                                   .getBounds()
-                                                   .intersection(CommonFields.getMainFrame().getBounds());
-
-                    return intersection.getWidth() * intersection.getHeight();
-                  }
-                )
-              )
-      )
-    );
-  }
-
-  /**
-   * Centers the program frame on the active monitor.
-   */
-  private static void centerFrame() {
-    JFrame mainFrame = CommonFields.getMainFrame();
-
-    updateActiveMonitor();
-
-    Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
-                                                .getDefaultConfiguration()
-                                                .getBounds();
-
-    mainFrame.setLocation(
-                (((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
-                (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y)
-              );
   }
 }
