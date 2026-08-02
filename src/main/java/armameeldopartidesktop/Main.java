@@ -102,6 +102,7 @@ public final class Main {
     mainFrame.setIconImage(Constants.ICON_MAIN_SCALED.getImage());
     mainFrame.setMinimumSize(new Dimension(1, 1));
     mainFrame.setMaximumSize(null);
+    mainFrame.setVisible(true);
 
     CommonFields.setMainFrame(mainFrame);
     CommonFields.setMainPanel(mainPanel);

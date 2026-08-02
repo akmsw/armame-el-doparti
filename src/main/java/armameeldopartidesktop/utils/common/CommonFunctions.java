@@ -304,9 +304,9 @@ public final class CommonFunctions {
       }
 
       Dimension frameSize = new Dimension(
-        Math.max(viewDimension.width + frameInsets.left + frameInsets.right, 1),
-        Math.max(viewDimension.height + frameInsets.top + frameInsets.bottom, 1)
-      );
+                              viewDimension.width + frameInsets.left + frameInsets.right,
+                              viewDimension.height + frameInsets.top + frameInsets.bottom
+                            );
 
       mainFrame.setPreferredSize(frameSize);
       mainFrame.setSize(frameSize);
@@ -325,8 +325,6 @@ public final class CommonFunctions {
       mainFrame.revalidate();
       mainFrame.repaint();
     });
-
-    mainFrame.setVisible(true);
 
     mainPanel.revalidate();
     mainPanel.repaint();
