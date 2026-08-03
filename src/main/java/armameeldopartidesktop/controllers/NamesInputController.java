@@ -86,20 +86,23 @@ public class NamesInputController extends Controller<NamesInputView> {
     if (CommonFields.isAnchoragesEnabled()) {
       ((AnchoragesController) CommonFunctions.getController(ProgramView.ANCHORAGES)).updateCheckboxesText();
 
-      CommonFunctions.getController(ProgramView.ANCHORAGES).showView();
+      CommonFunctions.getController(ProgramView.ANCHORAGES)
+                     .showView();
 
       return;
     }
 
     // Random distribution without anchorages
     if (CommonFields.getDistribution() == Distribution.MIX_RANDOM) {
-      CommonFunctions.getController(ProgramView.RESULTS).showView();
+      CommonFunctions.getController(ProgramView.RESULTS)
+                     .showView();
 
       return;
     }
 
     // By skill points distribution without anchorages
-    CommonFunctions.getController(ProgramView.SKILL_POINTS).showView();
+    CommonFunctions.getController(ProgramView.SKILL_POINTS)
+                   .showView();
   }
 
   /**
@@ -110,7 +113,8 @@ public class NamesInputController extends Controller<NamesInputView> {
    * @param text        The user input.
    */
   public void textFieldEvent(int playerIndex, List<Player> playersSet, String text) {
-    playersSet.get(playerIndex).setName(text);
+    playersSet.get(playerIndex)
+              .setName(text);
 
     updateTextArea();
     validateMixButtonEnable();
@@ -171,25 +175,31 @@ public class NamesInputController extends Controller<NamesInputView> {
     view.getComboBox().addActionListener(event -> comboBoxEvent((String) Objects.requireNonNull(((JComboBox<?>) event.getSource()).getSelectedItem())));
     view.getAnchoragesCheckbox().addActionListener(_ -> CommonFields.setAnchoragesEnabled(!CommonFields.isAnchoragesEnabled()));
     view.getTextFieldsMap()
-        .forEach((player, textFieldsSet) ->
-          textFieldsSet.forEach(textField ->
-            textField.addActionListener(event -> {
-                String text = textField.getText().trim();
+        .forEach(
+          (player, textFieldsSet) ->
+            textFieldsSet.forEach(
+              textField ->
+                textField.addActionListener(
+                  event -> {
+                    String playerName = textField.getText()
+                                                 .trim();
 
-                try {
-                  validateUserInput(text);
-                  textFieldEvent(textFieldsSet.indexOf(textField), CommonFields.getPlayersSets().get(player), text.toUpperCase());
-                } catch (IllegalArgumentException | LimitExceededException | InvalidNameException exception) {
-                  CommonFunctions.showMessageDialog(CommonFunctions.getComponentFromEvent(event), exception.getMessage(), JOptionPane.INFORMATION_MESSAGE);
+                    try {
+                      validateUserInput(playerName);
+                      textFieldEvent(textFieldsSet.indexOf(textField), CommonFields.getPlayersSets().get(player), playerName.toUpperCase());
+                    } catch (IllegalArgumentException | LimitExceededException | InvalidNameException exception) {
+                      CommonFunctions.showMessageDialog(CommonFunctions.getComponentFromEvent(event), exception.getMessage(), JOptionPane.INFORMATION_MESSAGE);
 
-                  textField.setText(CommonFields.getPlayersSets()
-                                                .get(player)
-                                                .get(textFieldsSet.indexOf(textField))
-                                                .getName());
-                }
-              }
+                      textField.setText(
+                        CommonFields.getPlayersSets()
+                                    .get(player)
+                                    .get(textFieldsSet.indexOf(textField))
+                                    .getName()
+                      );
+                    }
+                  }
+                )
             )
-          )
         );
   }
 
