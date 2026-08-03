@@ -83,7 +83,7 @@ public class MainMenuView extends View {
   }
 
   /**
-   * Creates a basic customizable label.
+   * Adds a customizable label.
    *
    * @param text            The label text.
    * @param tooltipText     The label tooltip text.

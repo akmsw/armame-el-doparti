@@ -65,11 +65,11 @@ public class BySkillPointsMixer extends BasicMixer {
       teams.sort(comparingInt(Team::getTeamSkill));                     // Teams sorted lowest to highest
 
       if (playersSet.size() == 2) {
-        for (int teamIdx = 0; teamIdx < Constants.TEAMS_TOTAL; teamIdx++) {
-          teams.get(teamIdx)
+        for (int teamNumber = 0; teamNumber < Constants.TEAMS_TOTAL; teamNumber++) {
+          teams.get(teamNumber)
                .getPlayers()
                .get(position)
-               .add(playersSet.get(teamIdx));
+               .add(playersSet.get(teamNumber));
         }
       } else {
         distributeSubsets(teams, playersSet, position);
@@ -101,7 +101,7 @@ public class BySkillPointsMixer extends BasicMixer {
     for (Anchorage anchorage : CommonFields.getAnchorages()) {
       teams.sort(comparingInt(Team::getTeamSkill));
 
-      int availableTeamNumber = getAvailableTeamIdx(teams, team -> anchorageCanBeAdded(team, anchorage));
+      int availableTeamNumber = getAvailableTeamNumber(teams, team -> anchorageCanBeAdded(team, anchorage));
 
       /*
        * At this point, the anchorages are guaranteed to be possible to distribute by {@link armameeldoparti.controllers.AnchoragesController}. Therefore, if at this point we can't find any available team to add the
@@ -190,11 +190,11 @@ public class BySkillPointsMixer extends BasicMixer {
                                                                    .mapToInt(Player::getSkillPoints)
                                                                    .reduce(0, Math::addExact)));
 
-    for (int teamIdx = 0; teamIdx < Constants.TEAMS_TOTAL; teamIdx++) {
-      teams.get(teamIdx)
+    for (int teamNumber = 0; teamNumber < Constants.TEAMS_TOTAL; teamNumber++) {
+      teams.get(teamNumber)
            .getPlayers()
            .get(position)
-           .addAll(playersSubsets.get(teamIdx));
+           .addAll(playersSubsets.get(teamNumber));
     }
   }
 
@@ -213,7 +213,7 @@ public class BySkillPointsMixer extends BasicMixer {
    *
    * @param teams Teams where to check the players swaps.
    */
-    @SuppressWarnings("java:S3776")
+  @SuppressWarnings("java:S3776")
   private void checkPlayersSwap(List<Team> teams) {
     List<Player> anchoredPlayers = CommonFields.getAnchorages()
                                                .stream()

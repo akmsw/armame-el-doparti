@@ -18,7 +18,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomButton extends JButton {
+public class CustomButton extends JButton implements CustomComponent {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ public class CustomButton extends JButton {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds a basic rounded button using the established program aesthetics.
+   * Builds a custom button that fits the overall program aesthetics.
    *
    * @param text The text to display on the button.
    */
@@ -39,7 +39,7 @@ public class CustomButton extends JButton {
   }
 
   /**
-   * Builds a basic rounded button using the established program aesthetics.
+   * Builds a custom button that fits the overall program aesthetics.
    *
    * @param text The text to display on the button.
    * @param arc  The round borders arc.
@@ -52,6 +52,15 @@ public class CustomButton extends JButton {
   }
 
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  @Override
+  public void setUpGraphicalProperties() {
+    setBackground(Constants.COLOR_GREEN_DARK);
+    setForeground(Color.WHITE);
+    setContentAreaFilled(false);
+    setFocusPainted(false);
+    setBorderPainted(false);
+  }
 
   @Override
   public Insets getInsets() {
@@ -77,19 +86,6 @@ public class CustomButton extends JButton {
     graphics2d.dispose();
 
     super.paintComponent(graphics);
-  }
-
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Configures the graphical properties of the button in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setBackground(Constants.COLOR_GREEN_DARK);
-    setForeground(Color.WHITE);
-    setContentAreaFilled(false);
-    setFocusPainted(false);
-    setBorderPainted(false);
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

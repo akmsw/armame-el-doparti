@@ -47,7 +47,7 @@ public final class CommonFields {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Empty, private constructor.
+   * Empty, private constructor to prevent instantiation.
    */
   private CommonFields() {
     // Body not needed

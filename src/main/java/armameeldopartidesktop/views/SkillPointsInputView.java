@@ -97,7 +97,7 @@ public class SkillPointsInputView extends View {
         labelsMap.put(spinnersMap.get(player), new JLabel(player.getName()));
 
         add(labelsMap.get(spinnersMap.get(player)), Constants.MIG_LAYOUT_PUSHX);
-        add(spinnersMap.get(player), players.indexOf(player) % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
+        add(spinnersMap.get(player), (((players.indexOf(player) % 2) != 0) ? Constants.MIG_LAYOUT_WRAP : null));
       }
     }
   }

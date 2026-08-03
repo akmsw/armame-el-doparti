@@ -5,6 +5,7 @@ import java.awt.event.ItemEvent;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -50,7 +51,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Resets the combobox to the initial state and gives it the view focus.
+   * Resets the combo box to the initial state and gives it the view focus.
    */
   public void resetComboBox() {
     JComboBox<String> comboBox = view.getComboBox();
@@ -105,7 +106,7 @@ public class NamesInputController extends Controller<NamesInputView> {
    * Applies the user input as the name of the player associated to the text field.
    *
    * @param playerIndex The index of the player which name will be the text field input.
-   * @param playersSet  The set of players corresponding to the selected combobox option.
+   * @param playersSet  The set of players corresponding to the selected combo box option.
    * @param text        The user input.
    */
   public void textFieldEvent(int playerIndex, List<Player> playersSet, String text) {
@@ -116,43 +117,12 @@ public class NamesInputController extends Controller<NamesInputView> {
   }
 
   /**
-   * Validates the user input given that it cannot be blank, contain only numbers, have more than {@code Constants.MAX_NAME_LEN} characters or be repeated.
+   * Updates the shown text field according to the selected combo box position.
    *
-   * @param string The string to validate.
-   *
-   * @throws LimitExceededException   When the input exceeds the maximum number of characters allowed.
-   * @throws IllegalArgumentException When the input contains special characters.
-   * @throws InvalidNameException     When the input is an already existing name.
+   * @param position The selected position from the combo box.
    */
-  private void validateUserInput(String string) throws IllegalArgumentException, InvalidNameException, LimitExceededException {
-    if (string.isBlank()) {
-      throw new IllegalArgumentException(Constants.MSG_ERROR_STRING_BLANK);
-    }
-
-    if (isNumericString(string.replace("\s", ""))) {
-      throw new IllegalArgumentException(Constants.MSG_ERROR_STRING_NUMERIC);
-    }
-
-    if (containsSpecialCharacters(string)) {
-      throw new IllegalArgumentException(Constants.MSG_ERROR_NAME_INVALID);
-    }
-
-    if (string.length() > Constants.MAX_NAME_LEN) {
-      throw new LimitExceededException(Constants.MSG_ERROR_NAME_LENGTH);
-    }
-
-    if (alreadyExists(string)) {
-      throw new InvalidNameException(Constants.MSG_ERROR_NAME_ALREADY_EXISTS);
-    }
-  }
-
-  /**
-   * Updates the shown text field according to the selected combobox option.
-   *
-   * @param selectedOption Combobox selected option.
-   */
-  public void comboBoxEvent(String selectedOption) {
-    updateTextFields(selectedOption);
+  public void comboBoxEvent(String position) {
+    updateTextFields(position);
   }
 
   /**
@@ -226,7 +196,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * Makes the controlled view visible.
    *
-   * <p>Updates the view state according to the combobox initial state, and makes it visible.
+   * <p>Updates the view state according to the combo box initial state, and makes it visible.
    */
   @Override
   protected void showView() {
@@ -239,13 +209,44 @@ public class NamesInputController extends Controller<NamesInputView> {
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Validates the user input given that it cannot be blank, contain only numbers, have more than {@code Constants.MAX_NAME_LEN} characters or be repeated.
+   *
+   * @param string The string to validate.
+   *
+   * @throws LimitExceededException   When the input exceeds the maximum number of characters allowed.
+   * @throws IllegalArgumentException When the input contains special characters.
+   * @throws InvalidNameException     When the input is an already existing name.
+   */
+  private void validateUserInput(String string) throws IllegalArgumentException, InvalidNameException, LimitExceededException {
+    if (string.isBlank()) {
+      throw new IllegalArgumentException(Constants.MSG_ERROR_STRING_BLANK);
+    }
+
+    if (isNumericString(string.replace("\s", ""))) {
+      throw new IllegalArgumentException(Constants.MSG_ERROR_STRING_NUMERIC);
+    }
+
+    if (containsSpecialCharacters(string)) {
+      throw new IllegalArgumentException(Constants.MSG_ERROR_NAME_INVALID);
+    }
+
+    if (string.length() > Constants.MAX_NAME_LEN) {
+      throw new LimitExceededException(Constants.MSG_ERROR_NAME_LENGTH);
+    }
+
+    if (alreadyExists(string)) {
+      throw new InvalidNameException(Constants.MSG_ERROR_NAME_ALREADY_EXISTS);
+    }
+  }
+
+  /**
    * The mix button is enabled only when every condition needed to distribute the players is met.
    *
-   * @see #readyToDistribute()
+   * @see #isReadyToDistribute()
    */
   private void validateMixButtonEnable() {
     view.getMixButton()
-        .setEnabled(readyToDistribute());
+        .setEnabled(isReadyToDistribute());
   }
 
   /**
@@ -269,27 +270,31 @@ public class NamesInputController extends Controller<NamesInputView> {
                                        .toList();
 
     for (int playerIndex = 0; playerIndex < players.size(); playerIndex++) {
-      view.getTextArea().append((playerIndex + 1) + " - " + players.get(playerIndex).getName() + (playerIndex < (Constants.PLAYERS_TOTAL - 1) ? System.lineSeparator() : ""));
+      view.getTextArea().append((playerIndex + 1) + " - " + players.get(playerIndex).getName() + ((playerIndex < (Constants.PLAYERS_TOTAL - 1)) ? System.lineSeparator() : ""));
     }
   }
 
   /**
-   * Toggles the text fields visibility.
+   * Toggles the text fields visibility based on the selected position.
    *
-   * @param selectedOption Combobox selected option.
+   * @param position The selected position from the combo box.
    */
-  private void updateTextFields(String selectedOption) {
+  private void updateTextFields(String position) {
     JPanel leftTopPanel = view.getLeftTopPanel();
 
-    // Removes the text fields from the view's top left panel
     view.getTextFieldsMap()
         .values()
         .stream()
         .flatMap(Collection::stream)
         .filter(textField -> textField.getParent() == leftTopPanel)
         .forEach(leftTopPanel::remove);
+
     view.getTextFieldsMap()
-        .get(CommonFunctions.getCorrespondingPosition(Constants.MAP_POSITIONS, selectedOption.toUpperCase()))
+        .get(CommonFunctions.retrieveOptional(Constants.MAP_POSITIONS.entrySet()
+                                                                     .stream()
+                                                                     .filter(entry -> entry.getValue().equals(position.toUpperCase()))
+                                                                     .map(Map.Entry::getKey)
+                                                                     .findFirst()))
         .forEach(textField -> leftTopPanel.add(textField, Constants.MIG_LAYOUT_GROWX));
 
     leftTopPanel.revalidate();
@@ -333,7 +338,7 @@ public class NamesInputController extends Controller<NamesInputView> {
    *
    * @return Whether every condition needed to distribute the players is met.
    */
-  private boolean readyToDistribute() {
+  private boolean isReadyToDistribute() {
     return !alreadyExists(Constants.PLAYER_NO_NAME_ASSIGNED) && distributionMethodHasBeenChosen();
   }
 

@@ -17,18 +17,23 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomTextField extends JTextField {
+public class CustomTextField extends JTextField implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds a basic text field using the established program aesthetics.
+   * Builds a custom text field that fits the overall program aesthetics.
    */
   public CustomTextField() {
     setUpGraphicalProperties();
   }
 
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  @Override
+  public void setUpGraphicalProperties() {
+    setOpaque(false);
+  }
 
   @Override
   public Insets getInsets() {
@@ -59,14 +64,5 @@ public class CustomTextField extends JTextField {
     graphics2d.setColor(getBackground());
     graphics2d.drawRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
     graphics2d.dispose();
-  }
-
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Configures the graphical properties for the text field in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setOpaque(false);
   }
 }

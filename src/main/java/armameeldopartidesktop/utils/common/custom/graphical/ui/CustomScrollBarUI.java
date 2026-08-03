@@ -23,7 +23,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomArrowButton;
  */
 public class CustomScrollBarUI extends BasicScrollBarUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom scrollbar UI that fits the overall program aesthetics.

@@ -142,12 +142,16 @@ public class HelpController extends Controller<HelpView> {
     try (
       BufferedReader reader = new BufferedReader(
                                 new InputStreamReader(
-                                  Objects.requireNonNull(HelpController.class
-                                                                       .getClassLoader()
-                                                                       .getResourceAsStream(Constants.PATH_HELP_DOCS + Constants.MAP_HELP_PAGES_FILES
-                                                                                                                                .get(currentPageNumber)
-                                                                                                                                .get(Constants.INDEX_HELP_PAGE_FILENAME)),
-                                                         Constants.MSG_ERROR_NULL_GUI_RESOURCE),
+                                  Objects.requireNonNull(
+                                    HelpController.class
+                                                  .getClassLoader()
+                                                  .getResourceAsStream(
+                                                    Constants.PATH_HELP_DOCS + Constants.MAP_HELP_PAGES_FILES
+                                                                                        .get(currentPageNumber)
+                                                                                        .get(Constants.INDEX_HELP_PAGE_FILENAME)
+                                                  ),
+                                    Constants.MSG_ERROR_NULL_GUI_RESOURCE
+                                  ),
                                   StandardCharsets.UTF_8
                                 )
                               )

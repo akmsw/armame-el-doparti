@@ -18,7 +18,7 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public class CustomTextAreaUI extends BasicTextAreaUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom text area UI that fits the overall program aesthetics.
