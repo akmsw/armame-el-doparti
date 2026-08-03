@@ -47,9 +47,9 @@ public class Player {
    */
   @Override
   public String toString() {
-    return "Position: " + getPosition().toString() + System.lineSeparator()
-           + "\t\tName: " + getName() + System.lineSeparator()
-           + "\t\tSkill points: " + getSkillPoints() + System.lineSeparator();
+    return ("Position: " + getPosition().toString() + System.lineSeparator()
+            + "\t\tName: " + getName() + System.lineSeparator()
+            + "\t\tSkill points: " + getSkillPoints() + System.lineSeparator());
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

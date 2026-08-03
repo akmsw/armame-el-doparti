@@ -24,8 +24,8 @@ public abstract class BasicMixer implements Mixer {
 
   // ---------- Protected fields --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  protected int randomTeam1Index;
-  protected int randomTeam2Index;
+  protected int randomTeam1Number;
+  protected int randomTeam2Number;
 
   protected Random randomGenerator;
 
@@ -44,8 +44,8 @@ public abstract class BasicMixer implements Mixer {
    * Randomly shuffles the team indexes.
    */
   protected void shuffleTeamIndexes() {
-    randomTeam1Index = randomGenerator.nextInt(Constants.TEAMS_TOTAL);
-    randomTeam2Index = 1 - randomTeam1Index;
+    randomTeam1Number = randomGenerator.nextInt(Constants.TEAMS_TOTAL);
+    randomTeam2Number = 1 - randomTeam1Number;
   }
 
     /**
@@ -82,22 +82,22 @@ public abstract class BasicMixer implements Mixer {
    *
    * @return The only available team index, a random team index if the player can be added in every team, or {@code Constants.ERROR_CODE_NO_AVAILABLE_TEAM} if there's no available team for the player.
    */
-  protected int getAvailableTeamIdx(List<Team> teams, Predicate<Team> validationPredicate) {
+  protected int getAvailableTeamNumber(List<Team> teams, Predicate<Team> validationPredicate) {
     shuffleTeamIndexes();
 
-    boolean isRandomTeam1Available = validationPredicate.test(teams.get(randomTeam1Index));
-    boolean isRandomTeam2Available = validationPredicate.test(teams.get(randomTeam2Index));
+    boolean isRandomTeam1Available = validationPredicate.test(teams.get(randomTeam1Number));
+    boolean isRandomTeam2Available = validationPredicate.test(teams.get(randomTeam2Number));
 
     if (isRandomTeam1Available && isRandomTeam2Available) {
       return randomGenerator.nextInt(Constants.TEAMS_TOTAL);
     }
 
     if (isRandomTeam1Available) {
-      return randomTeam1Index;
+      return randomTeam1Number;
     }
 
     if (isRandomTeam2Available) {
-      return randomTeam2Index;
+      return randomTeam2Number;
     }
 
     return Constants.ERROR_CODE_NO_AVAILABLE_TEAM;
@@ -112,7 +112,7 @@ public abstract class BasicMixer implements Mixer {
    * @return Whether the number of anchored players to be added to a team would exceed the limit of players per team.
    */
   private boolean anchorageOverflowsTeamSize(Team team, Anchorage anchorage) {
-    return team.getPlayersCount() + anchorage.getPlayers().size() > Constants.PLAYERS_PER_TEAM;
+    return ((team.getPlayersCount() + anchorage.getPlayers().size()) > Constants.PLAYERS_PER_TEAM);
   }
 
   /**
@@ -122,7 +122,7 @@ public abstract class BasicMixer implements Mixer {
    * @return Whether the number of anchored players to be added to a team would exceed the limit of players per team in any position set.
    */
   private boolean anchorageOverflowsAnyPositionSet(Team team, Anchorage anchorage) {
-    return anchorage.getPlayers().stream().anyMatch(player -> team.isPositionFull(player.getPosition()) || anchorageOverflowsPositionSet(team, anchorage, player.getPosition()));
+    return (anchorage.getPlayers().stream().anyMatch(player -> team.isPositionFull(player.getPosition()) || anchorageOverflowsPositionSet(team, anchorage, player.getPosition())));
   }
 
   /**
@@ -134,6 +134,6 @@ public abstract class BasicMixer implements Mixer {
    *         particular position.
    */
   private boolean anchorageOverflowsPositionSet(Team team, Anchorage anchorage, Position position) {
-    return (team.getPlayers().get(position).size() + anchorage.getPlayers().stream().filter(player -> player.getPosition() == position).count()) > CommonFields.getPlayerLimitPerPosition().get(position);
+    return ((team.getPlayers().get(position).size() + anchorage.getPlayers().stream().filter(player -> player.getPosition() == position).count()) > CommonFields.getPlayerLimitPerPosition().get(position));
   }
 }

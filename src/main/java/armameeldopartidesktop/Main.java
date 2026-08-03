@@ -137,7 +137,9 @@ public final class Main {
    */
   private static void setPlayersDistribution() {
     try (BufferedReader buffer = new BufferedReader(new InputStreamReader(Objects.requireNonNull(CommonFunctions.class.getClassLoader().getResourceAsStream(Constants.PATH_DOCS + Constants.FILENAME_PDA))))) {
-      List<String> filteredLines = buffer.lines().filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE)).toList();
+      List<String> filteredLines = buffer.lines()
+                                         .filter(line -> line.matches(Constants.REGEX_PDA_DATA_RETRIEVE))
+                                         .toList();
 
       for (int lineIndex = 0; lineIndex < filteredLines.size(); lineIndex++) {
         CommonFields.getPlayerLimitPerPosition().put(Position.values()[lineIndex], Integer.parseInt(filteredLines.get(lineIndex).replaceAll(Constants.REGEX_PLAYERS_COUNT, "")));

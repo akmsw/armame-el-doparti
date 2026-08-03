@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -34,7 +33,6 @@ import armameeldopartidesktop.controllers.Controller;
 import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.models.Team;
 import armameeldopartidesktop.models.enums.Error;
-import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.models.enums.ProgramView;
 import armameeldopartidesktop.views.View;
 
@@ -58,7 +56,7 @@ public final class CommonFunctions {
     // Body not needed
   }
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Generates an error report with the current overall program context and stack trace.
@@ -173,16 +171,14 @@ public final class CommonFunctions {
    * @see JOptionPane#showOptionDialog(Component, Object, String, int, int, Icon, Object[], Object)
    */
   public static int showOptionDialog(Component parentComponent, String dialogMessage, Object[] dialogOptions) {
-    return JOptionPane.showOptionDialog(
-      parentComponent,
-      dialogMessage,
-      Constants.TITLE_MESSAGE_QUESTION,
-      JOptionPane.OK_CANCEL_OPTION,
-      JOptionPane.QUESTION_MESSAGE,
-      Constants.ICON_DIALOG_QUESTION,
-      dialogOptions,
-      dialogOptions[0]
-    );
+    return JOptionPane.showOptionDialog(parentComponent,
+                                        dialogMessage,
+                                        Constants.TITLE_MESSAGE_QUESTION,
+                                        JOptionPane.OK_CANCEL_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        Constants.ICON_DIALOG_QUESTION,
+                                        dialogOptions,
+                                        dialogOptions[0]);
   }
 
   /**
@@ -252,8 +248,7 @@ public final class CommonFunctions {
     mainFrame.setTitle(view.getTitle());
 
     /*
-      Resize the main frame to fit the current view dimensions, then identify the screen
-      where the main frame is currently displayed and center the main frame on it.
+      Resize the main frame to fit the current view dimensions, identify the currently active screen and center the main frame on it.
 
       The screen identification is done by checking which screen has the largest intersection with the main frame bounds.
     */
@@ -266,7 +261,7 @@ public final class CommonFunctions {
 
         Insets frameInsets = mainFrame.getInsets();
 
-        if (viewDimension.width <= 0 || viewDimension.height <= 0) {
+        if ((viewDimension.width <= 0) || (viewDimension.height <= 0)) {
           viewDimension = view.getPreferredSize();
         }
 
@@ -283,27 +278,27 @@ public final class CommonFunctions {
         mainFrame.setPreferredSize(frameDimension);
         mainFrame.setSize(frameDimension);
 
-        Rectangle activeMonitorBounds = retrieveOptional(
-                                          Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
-                                                .filter(screen -> !screen.getDefaultConfiguration()
-                                                                         .getBounds()
-                                                                         .intersection(mainFrame.getBounds())
-                                                                         .isEmpty())
-                                                .max(
-                                                  Comparator.comparingDouble(
-                                                    screen -> {
-                                                      Rectangle intersection = screen.getDefaultConfiguration()
-                                                                                     .getBounds()
-                                                                                     .intersection(mainFrame.getBounds());
+        Rectangle activeScreenBounds = retrieveOptional(
+                                         Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
+                                               .filter(screen -> !screen.getDefaultConfiguration()
+                                                                        .getBounds()
+                                                                        .intersection(mainFrame.getBounds())
+                                                                        .isEmpty())
+                                               .max(
+                                                 Comparator.comparingDouble(
+                                                   screen -> {
+                                                     Rectangle intersection = screen.getDefaultConfiguration()
+                                                                                    .getBounds()
+                                                                                    .intersection(mainFrame.getBounds());
 
-                                                      return (intersection.getWidth() * intersection.getHeight());
-                                                    }
-                                                  )
-                                                )
-                                        ).getDefaultConfiguration().getBounds();
+                                                     return (intersection.getWidth() * intersection.getHeight());
+                                                   }
+                                                 )
+                                               )
+                                       ).getDefaultConfiguration().getBounds();
 
-        mainFrame.setLocation((((activeMonitorBounds.width - mainFrame.getWidth()) / 2) + activeMonitorBounds.x),
-                              (((activeMonitorBounds.height - mainFrame.getHeight()) / 2) + activeMonitorBounds.y));
+        mainFrame.setLocation((((activeScreenBounds.width - mainFrame.getWidth()) / 2) + activeScreenBounds.x),
+                              (((activeScreenBounds.height - mainFrame.getHeight()) / 2) + activeScreenBounds.y));
         mainFrame.revalidate();
         mainFrame.repaint();
       }
@@ -321,7 +316,7 @@ public final class CommonFunctions {
    * @return The graphical component associated to the action event.
    */
   public static Component getComponentFromEvent(ActionEvent event) {
-    return (event == null ? null : SwingUtilities.windowForComponent((Component) event.getSource()));
+    return ((event == null) ? null : SwingUtilities.windowForComponent((Component) event.getSource()));
   }
 
   /**
@@ -423,22 +418,5 @@ public final class CommonFunctions {
     }
 
     return optional.get();
-  }
-
-  /**
-   * Gets the search-corresponding position in a generic map received.
-   *
-   * @param <T>    Generic value type.
-   * @param map    Generic map with positions as keys.
-   * @param search Value to search in the map.
-   *
-   * @return The search-corresponding position.
-   */
-  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T search) {
-    return retrieveOptional(map.entrySet()
-                               .stream()
-                               .filter(entry -> entry.getValue().equals(search))
-                               .map(Map.Entry::getKey)
-                               .findFirst());
   }
 }

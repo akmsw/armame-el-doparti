@@ -83,9 +83,7 @@ public class AnchoragesView extends View {
 
   @Override
   protected void initializeInterface() {
-    add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    add(rightPanel, Constants.MIG_LAYOUT_EAST);
-
+    addSubPanels();
     addCheckBoxes();
     addTextArea();
     addButtons();
@@ -119,6 +117,14 @@ public class AnchoragesView extends View {
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Adds the sub-panels to the view.
+   */
+  private void addSubPanels() {
+    add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    add(rightPanel, Constants.MIG_LAYOUT_EAST);
+  }
+
+  /**
    * Initializes the checkboxes map.
    */
   private void initializeCheckBoxesMap() {
@@ -134,10 +140,12 @@ public class AnchoragesView extends View {
    */
   private void addCheckBoxes() {
     CommonFields.getPlayersSets()
-                .forEach((position, playersSet) -> {
-                  fillCheckboxesSet(playersSet, checkboxesMap.get(position));
-                  addCheckboxesSet(checkboxesMap.get(position), CommonFunctions.capitalize(Constants.MAP_POSITIONS.get(position)));
-                });
+                .forEach(
+                  (position, playersSet) -> {
+                    fillCheckboxesSet(playersSet, checkboxesMap.get(position));
+                    addCheckboxesSet(checkboxesMap.get(position), CommonFunctions.capitalize(Constants.MAP_POSITIONS.get(position)));
+                  }
+                );
   }
 
   /**
@@ -150,26 +158,26 @@ public class AnchoragesView extends View {
   /**
    * Fills the checkboxes sets.
    *
-   * @param playersSet Players sets from where to obtain the names.
-   * @param cbSet      Check boxes set to fill.
+   * @param playersSet    Players sets from where to obtain the names.
+   * @param checkBoxesSet Checkboxes set to fill.
    */
-  private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
+  private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> checkBoxesSet) {
     for (Player player : playersSet) {
-      cbSet.add(new JCheckBox(player.getName()));
+      checkBoxesSet.add(new JCheckBox(player.getName()));
     }
   }
 
   /**
    * Adds the checkboxes with a label that specifies the corresponding position.
    *
-   * @param cbSet     Check boxes to add.
-   * @param labelText Label text.
+   * @param checkBoxesSet Checkboxes to add.
+   * @param labelText     Label text.
    */
-  private void addCheckboxesSet(List<JCheckBox> cbSet, String labelText) {
+  private void addCheckboxesSet(List<JCheckBox> checkBoxesSet, String labelText) {
     leftPanel.add(new CustomLabel(labelText, null, SwingConstants.CENTER), CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_SPAN));
 
-    for (JCheckBox jCheckBox : cbSet) {
-      leftPanel.add(jCheckBox, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_ALIGN_LEFT, Constants.MIG_LAYOUT_PUSHX));
+    for (JCheckBox checkBox : checkBoxesSet) {
+      leftPanel.add(checkBox, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_ALIGN_LEFT, Constants.MIG_LAYOUT_PUSHX));
     }
   }
 

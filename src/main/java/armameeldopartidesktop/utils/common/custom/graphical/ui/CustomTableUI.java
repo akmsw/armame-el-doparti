@@ -26,7 +26,7 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public class CustomTableUI extends BasicTableUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom table UI that fits the overall program aesthetics.

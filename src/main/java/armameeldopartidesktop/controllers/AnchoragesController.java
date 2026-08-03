@@ -147,11 +147,11 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   private void updateTextArea() {
     view.getTextArea().setText(null);
 
-    for (int anchorageIdx = 0; anchorageIdx < CommonFields.getAnchorages().size(); anchorageIdx++) {
-      view.getTextArea().append("ANCLAJE " + (anchorageIdx + 1) + System.lineSeparator());
+    for (int anchorageNumber = 0; anchorageNumber < CommonFields.getAnchorages().size(); anchorageNumber++) {
+      view.getTextArea().append("ANCLAJE " + (anchorageNumber + 1) + System.lineSeparator());
 
       List<Player> anchoredPlayers = CommonFields.getAnchorages()
-                                                 .get(anchorageIdx)
+                                                 .get(anchorageNumber)
                                                  .getPlayers()
                                                  .stream()
                                                  .sorted(Comparator.comparing(player -> player.getPosition().ordinal()))
@@ -161,7 +161,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
         view.getTextArea().append((anchoredPlayers.indexOf(player) + 1) + " - " + player.getName() + System.lineSeparator());
       }
 
-      if ((anchorageIdx + 1) != CommonFields.getAnchorages().size()) {
+      if ((anchorageNumber + 1) != CommonFields.getAnchorages().size()) {
         view.getTextArea().append(System.lineSeparator());
       }
     }
@@ -280,21 +280,27 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   }
 
   /**
-   * @param targetAnchorageIdx Anchorage index to delete.
+   * Deletes the anchorage with the given ordinal identifier, restoring the default state of the checkboxes associated with the players in the deleted anchorage, updating the text area and the state of the buttons.
+   *
+   * @param targetAnchorageNumber Ordinal identifier of the anchorage to delete.
    */
-  private void deleteAnchorage(int targetAnchorageIdx) {
-    Anchorage targetAnchorage = CommonFields.getAnchorages().get(targetAnchorageIdx);
+  private void deleteAnchorage(int targetAnchorageNumber) {
+    Anchorage targetAnchorage = CommonFields.getAnchorages()
+                                            .get(targetAnchorageNumber);
 
-    // Restore the default state of the checkboxes associated with the players of the deleted anchorage
     targetAnchorage.getPlayers()
-                   .forEach(player -> CommonFunctions.retrieveOptional(view.getCheckboxesMap()
-                                                                           .get(player.getPosition())
-                                                                           .stream()
-                                                                           .filter(checkbox -> checkbox.getText().equals(player.getName()))
-                                                                           .findFirst())
-                                                     .setVisible(true));
+                   .forEach(
+                     player -> CommonFunctions.retrieveOptional(view.getCheckboxesMap()
+                                                                    .get(player.getPosition())
+                                                                    .stream()
+                                                                    .filter(checkbox -> checkbox.getText()
+                                                                                                .equals(player.getName()))
+                                                                    .findFirst())
+                                              .setVisible(true)
+                   );
 
-    CommonFields.getAnchorages().remove(targetAnchorage);
+    CommonFields.getAnchorages()
+                .remove(targetAnchorage);
 
     updateTextArea();
     toggleButtons();

@@ -54,7 +54,7 @@ public class Team {
    * @return Whether the specified position set in the team is full.
    */
   public boolean isPositionFull(Position position) {
-    return players.get(position).size() == CommonFields.getPlayerLimitPerPosition().get(position);
+    return (players.get(position).size() == CommonFields.getPlayerLimitPerPosition().get(position));
   }
 
   /**

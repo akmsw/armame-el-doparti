@@ -29,7 +29,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomArrowButton;
  */
 public class CustomSpinnerUI extends BasicSpinnerUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom spinner UI that fits the overall program aesthetics.
@@ -85,6 +85,8 @@ public class CustomSpinnerUI extends BasicSpinnerUI {
 
     return new CustomSpinnerUI();
   }
+
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   @Override
   public void paint(Graphics graphics, JComponent component) {

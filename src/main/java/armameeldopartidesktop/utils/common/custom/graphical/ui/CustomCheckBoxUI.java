@@ -18,7 +18,7 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public class CustomCheckBoxUI extends BasicCheckBoxUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom checkbox UI that fits the overall program aesthetics.

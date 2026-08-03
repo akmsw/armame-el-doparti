@@ -20,12 +20,12 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomLabel extends JLabel {
+public class CustomLabel extends JLabel implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds a basic label using the established program aesthetics.
+   * Builds a custom label that fits the overall program aesthetics.
    *
    * @param text        The label text.
    * @param tooltipText The label tooltip text
@@ -42,7 +42,7 @@ public class CustomLabel extends JLabel {
   }
 
   /**
-   * Builds a basic label using the established program aesthetics.
+   * Builds a custom label that fits the overall program aesthetics.
    *
    * @param text            The label text.
    * @param tooltipText     The label tooltip text
@@ -62,6 +62,14 @@ public class CustomLabel extends JLabel {
     setUpGraphicalProperties();
   }
 
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  @Override
+  public void setUpGraphicalProperties() {
+    setOpaque(false);
+    setBorder(new EmptyBorder(Constants.INSETS_LABEL));
+  }
+
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   @Override
@@ -79,15 +87,5 @@ public class CustomLabel extends JLabel {
   @Override
   public JToolTip createToolTip() {
     return new CustomToolTip(this);
-  }
-
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Configures the graphical properties of the label in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setOpaque(false);
-    setBorder(new EmptyBorder(Constants.INSETS_LABEL));
   }
 }
