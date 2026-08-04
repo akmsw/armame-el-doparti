@@ -25,6 +25,7 @@ public class MainMenuController extends Controller<MainMenuView> {
    */
   public MainMenuController(MainMenuView mainMenuView) {
     super(mainMenuView);
+
     setUpListeners();
   }
 
@@ -39,11 +40,10 @@ public class MainMenuController extends Controller<MainMenuView> {
    * Makes the controlled view invisible and shows the help view.
    */
   public void helpButtonEvent() {
-    HelpController controller = (HelpController) CommonFunctions.getController(ProgramView.HELP);
-
     hideView();
 
-    controller.showView();
+    CommonFunctions.getController(ProgramView.HELP)
+                   .showView();
   }
 
   /**
@@ -52,7 +52,8 @@ public class MainMenuController extends Controller<MainMenuView> {
   public void startButtonEvent() {
     hideView();
 
-    CommonFunctions.getController(ProgramView.NAMES_INPUT).showView();
+    CommonFunctions.getController(ProgramView.NAMES_INPUT)
+                   .showView();
   }
 
   /**

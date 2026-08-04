@@ -263,7 +263,7 @@ public final class Constants {
   public static final Insets    INSETS_TOOLTIP                                = new Insets(ROUNDED_BORDER_INSETS_TOOLTIP, ROUNDED_BORDER_INSETS_TOOLTIP, ROUNDED_BORDER_INSETS_TOOLTIP, ROUNDED_BORDER_INSETS_TOOLTIP);
 
   /**
-   * Positions to show in the names input view combobox.
+   * Positions to show in the names input view combo box.
    */
   public static final List<String> OPTIONS_POSITIONS_COMBOBOX = Collections.unmodifiableList(
     Arrays.asList(CommonFunctions.capitalize(POSITION_CENTRAL_DEFENDERS),
@@ -339,7 +339,7 @@ public final class Constants {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Empty, private, unused constructor.
+   * Empty, private constructor to prevent instantiation.
    */
   private Constants() {
     // Body not needed

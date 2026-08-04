@@ -20,9 +20,11 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public class CustomSeparatorUI extends SeparatorUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom separator UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom separator UI.
@@ -33,6 +35,8 @@ public class CustomSeparatorUI extends SeparatorUI {
 
     return new CustomSeparatorUI();
   }
+
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   @Override
   public void paint(Graphics graphics, JComponent component) {

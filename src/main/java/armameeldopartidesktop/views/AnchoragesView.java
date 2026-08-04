@@ -36,15 +36,15 @@ public class AnchoragesView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  private static final int TEXT_AREA_ROWS = 10;
+  private static final int TEXT_AREA_ROWS    = 10;
   private static final int TEXT_AREA_COLUMNS = 12;
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   private JButton backButton;
-  private JButton clearAnchoragesButton;
+  private JButton editAnchorageButton;
   private JButton deleteAnchorageButton;
-  private JButton deleteLastAnchorageButton;
+  private JButton clearAnchoragesButton;
   private JButton finishButton;
   private JButton newAnchorageButton;
 
@@ -58,7 +58,7 @@ public class AnchoragesView extends View {
   private List<JButton> anchorageButtons;
 
   /**
-   * Map that associates each checkboxes list with its corresponding position.
+   * Map that associates each position with a checkboxes list.
    */
   private Map<Position, List<JCheckBox>> checkboxesMap;
 
@@ -83,41 +83,46 @@ public class AnchoragesView extends View {
 
   @Override
   protected void initializeInterface() {
-    mainPanel.add(leftPanel, Constants.MIG_LAYOUT_WEST);
-    mainPanel.add(rightPanel, Constants.MIG_LAYOUT_EAST);
-
+    addSubPanels();
     addCheckBoxes();
     addTextArea();
     addButtons();
-    add(mainPanel);
     refreshView();
   }
 
   @Override
   protected void addButtons() {
     setBackButton(new CustomButton("Atrás"));
-    setClearAnchoragesButton(new CustomButton("Limpiar anclajes"));
+    setEditAnchorageButton(new CustomButton("Editar un anclaje"));
     setDeleteAnchorageButton(new CustomButton("Borrar un anclaje"));
-    setDeleteLastAnchorageButton(new CustomButton("Borrar último anclaje"));
+    setClearAnchoragesButton(new CustomButton("Limpiar anclajes"));
     setFinishButton(new CustomButton("Finalizar"));
     setNewAnchorageButton(new CustomButton("Anclar"));
 
     anchorageButtons.add(finishButton);
     anchorageButtons.add(newAnchorageButton);
+    anchorageButtons.add(editAnchorageButton);
     anchorageButtons.add(deleteAnchorageButton);
-    anchorageButtons.add(deleteLastAnchorageButton);
     anchorageButtons.add(clearAnchoragesButton);
 
     leftPanel.add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_SPAN));
     leftPanel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_SPAN));
 
     rightPanel.add(newAnchorageButton, Constants.MIG_LAYOUT_GROW);
+    rightPanel.add(editAnchorageButton, Constants.MIG_LAYOUT_GROW);
     rightPanel.add(deleteAnchorageButton, Constants.MIG_LAYOUT_GROW);
-    rightPanel.add(deleteLastAnchorageButton, Constants.MIG_LAYOUT_GROW);
     rightPanel.add(clearAnchoragesButton, Constants.MIG_LAYOUT_GROW);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Adds the sub-panels to the view.
+   */
+  private void addSubPanels() {
+    add(leftPanel, Constants.MIG_LAYOUT_WEST);
+    add(rightPanel, Constants.MIG_LAYOUT_EAST);
+  }
 
   /**
    * Initializes the checkboxes map.
@@ -131,14 +136,16 @@ public class AnchoragesView extends View {
   }
 
   /**
-   * Adds the players checkboxes and their position labels.
+   * Adds the checkboxes and their position labels.
    */
   private void addCheckBoxes() {
     CommonFields.getPlayersSets()
-                .forEach((position, playersSet) -> {
-                  fillCheckboxesSet(playersSet, checkboxesMap.get(position));
-                  addCheckboxesSet(checkboxesMap.get(position), CommonFunctions.capitalize(Constants.MAP_POSITIONS.get(position)));
-                });
+                .forEach(
+                  (position, playersSet) -> {
+                    fillCheckboxesSet(playersSet, checkboxesMap.get(position));
+                    addCheckboxesSet(checkboxesMap.get(position), CommonFunctions.capitalize(Constants.MAP_POSITIONS.get(position)));
+                  }
+                );
   }
 
   /**
@@ -151,26 +158,26 @@ public class AnchoragesView extends View {
   /**
    * Fills the checkboxes sets.
    *
-   * @param playersSet Players sets from where to obtain the names.
-   * @param cbSet      Check boxes set to fill.
+   * @param playersSet    Players sets from where to obtain the names.
+   * @param checkBoxesSet Checkboxes set to fill.
    */
-  private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> cbSet) {
+  private void fillCheckboxesSet(List<Player> playersSet, List<JCheckBox> checkBoxesSet) {
     for (Player player : playersSet) {
-      cbSet.add(new JCheckBox(player.getName()));
+      checkBoxesSet.add(new JCheckBox(player.getName()));
     }
   }
 
   /**
-   * Adds the checkboxes to the view with a label that specifies the corresponding position.
+   * Adds the checkboxes with a label that specifies the corresponding position.
    *
-   * @param cbSet     Check boxes to add.
-   * @param labelText Label text.
+   * @param checkBoxesSet Checkboxes to add.
+   * @param labelText     Label text.
    */
-  private void addCheckboxesSet(List<JCheckBox> cbSet, String labelText) {
+  private void addCheckboxesSet(List<JCheckBox> checkBoxesSet, String labelText) {
     leftPanel.add(new CustomLabel(labelText, null, SwingConstants.CENTER), CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROWX, Constants.MIG_LAYOUT_SPAN));
 
-    for (JCheckBox jCheckBox : cbSet) {
-      leftPanel.add(jCheckBox, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_ALIGN_LEFT, Constants.MIG_LAYOUT_PUSHX));
+    for (JCheckBox checkBox : checkBoxesSet) {
+      leftPanel.add(checkBox, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_ALIGN_LEFT, Constants.MIG_LAYOUT_PUSHX));
     }
   }
 
@@ -180,16 +187,16 @@ public class AnchoragesView extends View {
     return backButton;
   }
 
-  public JButton getClearAnchoragesButton() {
-    return clearAnchoragesButton;
+  public JButton getEditAnchorageButton() {
+    return editAnchorageButton;
   }
 
   public JButton getDeleteAnchorageButton() {
     return deleteAnchorageButton;
   }
 
-  public JButton getDeleteLastAnchorageButton() {
-    return deleteLastAnchorageButton;
+  public JButton getClearAnchoragesButton() {
+    return clearAnchoragesButton;
   }
 
   public JButton getFinishButton() {
@@ -230,16 +237,16 @@ public class AnchoragesView extends View {
     this.backButton = backButton;
   }
 
-  public void setClearAnchoragesButton(JButton clearAnchoragesButton) {
-    this.clearAnchoragesButton = clearAnchoragesButton;
+  public void setEditAnchorageButton(JButton editAnchorageButton) {
+    this.editAnchorageButton = editAnchorageButton;
   }
 
   public void setDeleteAnchorageButton(JButton deleteAnchorageButton) {
     this.deleteAnchorageButton = deleteAnchorageButton;
   }
 
-  public void setDeleteLastAnchorageButton(JButton deleteLastAnchorageButton) {
-    this.deleteLastAnchorageButton = deleteLastAnchorageButton;
+  public void setClearAnchoragesButton(JButton clearAnchoragesButton) {
+    this.clearAnchoragesButton = clearAnchoragesButton;
   }
 
   public void setFinishButton(JButton finishButton) {

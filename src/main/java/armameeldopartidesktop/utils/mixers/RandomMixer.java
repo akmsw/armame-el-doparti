@@ -47,7 +47,7 @@ public class RandomMixer extends BasicMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    shuffleTeamIdxs();
+    shuffleTeamNumbers();
 
     for (Position position : Position.values()) {
       List<Player> playersAtPosition = new ArrayList<>(CommonFields.getPlayersSets().get(position));
@@ -56,12 +56,12 @@ public class RandomMixer extends BasicMixer {
 
       Collections.shuffle(playersAtPosition);
 
-      teams.get(randomTeam1Idx)
+      teams.get(randomTeamNumbers.get(0))
            .getPlayers()
            .get(position)
            .addAll(playersAtPosition.subList(0, halfSetSize));
 
-      teams.get(randomTeam2Idx)
+      teams.get(randomTeamNumbers.get(1))
            .getPlayers()
            .get(position)
            .addAll(playersAtPosition.subList(halfSetSize, playersAtPosition.size()));
@@ -94,9 +94,9 @@ public class RandomMixer extends BasicMixer {
       Collections.shuffle(anchorages);
 
       for (Anchorage anchorage : anchorages) {
-        int availableTeamIdx = getAvailableTeamIdx(teams, team -> anchorageCanBeAdded(team, anchorage));
+        int availableTeamNumber = getAvailableTeamNumber(teams, team -> anchorageCanBeAdded(team, anchorage));
 
-        if (availableTeamIdx == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
+        if (availableTeamNumber == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
           teams.forEach(Team::clear);
 
           successfulDistribution = false;
@@ -105,7 +105,7 @@ public class RandomMixer extends BasicMixer {
         }
 
         for (Player player : anchorage.getPlayers()) {
-          teams.get(availableTeamIdx)
+          teams.get(availableTeamNumber)
                .getPlayers()
                .get(player.getPosition())
                .add(player);
@@ -125,19 +125,21 @@ public class RandomMixer extends BasicMixer {
                                         .flatMap(List::stream)
                                         .collect(Collectors.toSet())
                                         .contains(player))
-                .forEach(player -> {
-                  int availableTeamIdx = getAvailableTeamIdx(teams, team -> playerCanBeAdded(team, player));
+                .forEach(
+                  player -> {
+                    int availableTeamNumber = getAvailableTeamNumber(teams, team -> playerCanBeAdded(team, player));
 
-                  // If there's no available team at this point, something went wrong
-                  if (availableTeamIdx == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
-                    CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_DEBUG_NO_AVAILABLE_TEAM));
+                    // If there's no available team at this point, something went wrong
+                    if (availableTeamNumber == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
+                      CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_DEBUG_NO_AVAILABLE_TEAM));
+                    }
+
+                    teams.get(availableTeamNumber)
+                         .getPlayers()
+                         .get(player.getPosition())
+                         .add(player);
                   }
-
-                  teams.get(availableTeamIdx)
-                       .getPlayers()
-                       .get(player.getPosition())
-                       .add(player);
-                });
+                );
 
     return teams;
   }

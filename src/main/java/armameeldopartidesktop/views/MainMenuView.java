@@ -47,7 +47,6 @@ public class MainMenuView extends View {
   protected void initializeInterface() {
     addBackground();
     addButtons();
-    add(mainPanel);
     refreshView();
   }
 
@@ -58,16 +57,16 @@ public class MainMenuView extends View {
     setContactButton(new CustomButton("Contacto"));
     setIssuesButton(new CustomButton("Reportes y sugerencias"));
 
-    mainPanel.add(startButton, Constants.MIG_LAYOUT_GROWX);
-    mainPanel.add(helpButton, Constants.MIG_LAYOUT_GROWX);
-    mainPanel.add(contactButton, new CC().width("50%").split());
-    mainPanel.add(issuesButton, new CC().width("50%"));
+    add(startButton, Constants.MIG_LAYOUT_GROWX);
+    add(helpButton, Constants.MIG_LAYOUT_GROWX);
+    add(contactButton, new CC().width("50%").split());
+    add(issuesButton, new CC().width("50%"));
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Adds the background image and labels to the main menu view.
+   * Adds the background image and labels.
    */
   private void addBackground() {
     addBackgroundImage();
@@ -77,14 +76,14 @@ public class MainMenuView extends View {
   }
 
   /**
-   * Adds the background image to the panel.
+   * Adds the background image.
    */
   private void addBackgroundImage() {
-    mainPanel.add(new JLabel(null, Constants.ICON_BACKGROUND, SwingConstants.CENTER), Constants.MIG_LAYOUT_GROWX);
+    add(new JLabel(null, Constants.ICON_BACKGROUND, SwingConstants.CENTER), Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
-   * Creates a basic label for the main menu view.
+   * Adds a customizable label.
    *
    * @param text            The label text.
    * @param tooltipText     The label tooltip text.
@@ -94,7 +93,7 @@ public class MainMenuView extends View {
    * @param fontSize        The font size for the label text.
    */
   private void addLabel(String text, String tooltipText, String constraints, Color backgroundColor, Color foregroundColor, int fontSize) {
-    mainPanel.add(new CustomLabel(text.toLowerCase(), tooltipText, backgroundColor, foregroundColor, SwingConstants.CENTER, fontSize), constraints);
+    add(new CustomLabel(text.toLowerCase(), tooltipText, backgroundColor, foregroundColor, SwingConstants.CENTER, fontSize), constraints);
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

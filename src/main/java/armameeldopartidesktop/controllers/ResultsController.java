@@ -81,7 +81,7 @@ public class ResultsController extends Controller<ResultsView> {
   private void setUpView() {
     teams = (CommonFields.getDistribution() == Distribution.MIX_RANDOM ? randomMix(Arrays.asList(team1, team2)) : bySkillPointsMix(Arrays.asList(team1, team2)));
 
-    view.setTable(new JTable(Constants.PLAYERS_PER_TEAM + (CommonFields.getDistribution() == Distribution.MIX_RANDOM ? 1 : 2), TABLE_COLUMNS));
+    view.setTable(new JTable((Constants.PLAYERS_PER_TEAM + ((CommonFields.getDistribution() == Distribution.MIX_RANDOM) ? 1 : 2)), TABLE_COLUMNS));
     view.initializeInterface();
 
     table = view.getTable();
@@ -105,7 +105,7 @@ public class ResultsController extends Controller<ResultsView> {
     ProgramView previousView = ProgramView.SKILL_POINTS;
 
     if (CommonFields.getDistribution() == Distribution.MIX_RANDOM) {
-      previousView = CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT;
+      previousView = (CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT);
     }
 
     CommonFunctions.getController(previousView).showView();
@@ -145,8 +145,8 @@ public class ResultsController extends Controller<ResultsView> {
     }
 
     if (CommonFields.getDistribution() == Distribution.MIX_BY_SKILL_POINTS) {
-      for (int teamIndex = 0; teamIndex < Constants.TEAMS_TOTAL; teamIndex++) {
-        table.setValueAt(teams.get(teamIndex)
+      for (int teamNumber = 0; teamNumber < Constants.TEAMS_TOTAL; teamNumber++) {
+        table.setValueAt(teams.get(teamNumber)
                               .getPlayers()
                               .values()
                               .stream()
@@ -154,7 +154,7 @@ public class ResultsController extends Controller<ResultsView> {
                               .mapToInt(Player::getSkillPoints)
                               .reduce(0, Math::addExact),
                          table.getRowCount() - 1,
-                         teamIndex + 1);
+                         teamNumber + 1);
       }
     }
   }
@@ -167,7 +167,7 @@ public class ResultsController extends Controller<ResultsView> {
    * @return The updated teams with the players distributed.
    */
   public List<Team> randomMix(List<Team> teams) {
-    return CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams) : randomMixer.withoutAnchorages(teams);
+    return (CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams) : randomMixer.withoutAnchorages(teams));
   }
 
   /**
@@ -178,7 +178,7 @@ public class ResultsController extends Controller<ResultsView> {
    * @return The updated teams with the players distributed.
    */
   public List<Team> bySkillPointsMix(List<Team> teams) {
-    return CommonFields.isAnchoragesEnabled() ? bySkillPointsMixer.withAnchorages(teams) : bySkillPointsMixer.withoutAnchorages(teams);
+    return (CommonFields.isAnchoragesEnabled() ? bySkillPointsMixer.withAnchorages(teams) : bySkillPointsMixer.withoutAnchorages(teams));
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -186,7 +186,6 @@ public class ResultsController extends Controller<ResultsView> {
   @Override
   protected void showView() {
     setUpView();
-    centerView();
 
     CommonFunctions.showView(view);
   }
@@ -364,7 +363,7 @@ public class ResultsController extends Controller<ResultsView> {
       for (int column = 0; column < table.getColumnCount(); column++) {
         Component cellComponent = table.prepareRenderer(table.getCellRenderer(row, column), row, column);
 
-        maxCellWidth = Math.max(maxCellWidth, (cellComponent.getPreferredSize().width + table.getIntercellSpacing().width));
+        maxCellWidth  = Math.max(maxCellWidth, (cellComponent.getPreferredSize().width + table.getIntercellSpacing().width));
         maxCellHeight = Math.max(maxCellHeight, (cellComponent.getPreferredSize().height + table.getIntercellSpacing().height));
 
         table.getColumnModel().getColumn(column).setPreferredWidth(maxCellWidth);

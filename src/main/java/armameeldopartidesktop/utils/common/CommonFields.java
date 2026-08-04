@@ -1,7 +1,5 @@
 package armameeldopartidesktop.utils.common;
 
-import java.awt.CardLayout;
-import java.awt.GraphicsDevice;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import java.util.Map;
@@ -34,15 +32,11 @@ public final class CommonFields {
 
   private static Distribution distribution;
 
-  private static GraphicsDevice activeMonitor;
-
   private static RoundRectangle2D tooltipRectangle;
 
   private static JFrame mainFrame;
 
-  private static JPanel viewsContainer;
-
-  private static CardLayout viewsLayout;
+  private static JPanel mainPanel;
 
   private static List<Anchorage> anchorages;
 
@@ -53,7 +47,7 @@ public final class CommonFields {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Empty, private constructor.
+   * Empty, private constructor to prevent instantiation.
    */
   private CommonFields() {
     // Body not needed
@@ -69,10 +63,6 @@ public final class CommonFields {
     return distribution;
   }
 
-  public static GraphicsDevice getActiveMonitor() {
-    return activeMonitor;
-  }
-
   public static RoundRectangle2D getTooltipRectangle() {
     return tooltipRectangle;
   }
@@ -81,12 +71,8 @@ public final class CommonFields {
     return mainFrame;
   }
 
-  public static JPanel getViewsContainer() {
-    return viewsContainer;
-  }
-
-  public static CardLayout getViewsLayout() {
-    return viewsLayout;
+  public static JPanel getMainPanel() {
+    return mainPanel;
   }
 
   public static List<Anchorage> getAnchorages() {
@@ -115,10 +101,6 @@ public final class CommonFields {
     CommonFields.distribution = distribution;
   }
 
-  public static void setActiveMonitor(GraphicsDevice activeMonitor) {
-    CommonFields.activeMonitor = activeMonitor;
-  }
-
   public static void setTooltipRectangle(RoundRectangle2D tooltipRectangle) {
     CommonFields.tooltipRectangle = tooltipRectangle;
   }
@@ -127,12 +109,8 @@ public final class CommonFields {
     CommonFields.mainFrame = mainFrame;
   }
 
-  public static void setMasterPanel(JPanel viewsContainer) {
-    CommonFields.viewsContainer = viewsContainer;
-  }
-
-  public static void setViewsLayout(CardLayout cardLayout) {
-    CommonFields.viewsLayout = cardLayout;
+  public static void setMainPanel(JPanel mainPanel) {
+    CommonFields.mainPanel = mainPanel;
   }
 
   public static void setAnchorages(List<Anchorage> anchorages) {

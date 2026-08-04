@@ -23,10 +23,12 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomArrowButton;
  */
 public class CustomScrollBarUI extends BasicScrollBarUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * The "java:S1172" warning is suppressed since the argument is intentionally unused.
+   * Creates a new custom scrollbar UI that fits the overall program aesthetics.
+   *
+   * <p>The "java:S1172" warning is suppressed since the argument is intentionally unused.
    *
    * @param component Component to which to apply the custom UI.
    *

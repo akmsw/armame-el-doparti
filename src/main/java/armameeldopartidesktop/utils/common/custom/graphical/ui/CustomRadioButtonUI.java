@@ -18,9 +18,11 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public class CustomRadioButtonUI extends BasicRadioButtonUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom radio button UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom radio button UI.

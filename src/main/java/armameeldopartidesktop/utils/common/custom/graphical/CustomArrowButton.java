@@ -22,25 +22,29 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomArrowButton extends BasicArrowButton {
+public class CustomArrowButton extends BasicArrowButton implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds a basic arrow button pointing up or down, using the established program aesthetics.
+   * Builds a custom arrow button that fits the overall program aesthetics.
    *
    * @param orientation The arrow button orientation.
    */
   public CustomArrowButton(int orientation) {
     super(orientation);
+
     setUpGraphicalProperties();
   }
 
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   @Override
-  public Insets getInsets() {
-    return Constants.INSETS_GENERAL;
+  public void setUpGraphicalProperties() {
+    setContentAreaFilled(false);
+    setFocusPainted(false);
+    setBorderPainted(false);
+    setBackground(Constants.COLOR_GREEN_DARK);
   }
 
   @Override
@@ -139,15 +143,8 @@ public class CustomArrowButton extends BasicArrowButton {
     }
   }
 
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Configures the graphical properties of the arrow button in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setContentAreaFilled(false);
-    setFocusPainted(false);
-    setBorderPainted(false);
-    setBackground(Constants.COLOR_GREEN_DARK);
+  @Override
+  public Insets getInsets() {
+    return Constants.INSETS_GENERAL;
   }
 }

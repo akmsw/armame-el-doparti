@@ -1,5 +1,6 @@
 package armameeldopartidesktop.utils.common;
 
+import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -17,12 +18,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -31,7 +33,6 @@ import armameeldopartidesktop.controllers.Controller;
 import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.models.Team;
 import armameeldopartidesktop.models.enums.Error;
-import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.models.enums.ProgramView;
 import armameeldopartidesktop.views.View;
 
@@ -49,13 +50,13 @@ public final class CommonFunctions {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Empty, private constructor.
+   * Empty, private constructor to prevent instantiation.
    */
   private CommonFunctions() {
     // Body not needed
   }
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Generates an error report with the current overall program context and stack trace.
@@ -152,7 +153,7 @@ public final class CommonFunctions {
         dialogTitle = Constants.TITLE_MESSAGE_QUESTION;
         dialogIcon  = Constants.ICON_DIALOG_QUESTION;
       }
-      default -> CommonFunctions.exitProgram(Error.ERROR_GUI, new IllegalStateException(Constants.MSG_ERROR_DEBUG_INVALID_DIALOG_TYPE));
+      default -> exitProgram(Error.ERROR_GUI, new IllegalStateException(Constants.MSG_ERROR_DEBUG_INVALID_DIALOG_TYPE));
     }
 
     JOptionPane.showMessageDialog(parentComponent, dialogMessage, dialogTitle, dialogMessageType, dialogIcon);
@@ -170,16 +171,14 @@ public final class CommonFunctions {
    * @see JOptionPane#showOptionDialog(Component, Object, String, int, int, Icon, Object[], Object)
    */
   public static int showOptionDialog(Component parentComponent, String dialogMessage, Object[] dialogOptions) {
-    return JOptionPane.showOptionDialog(
-      parentComponent,
-      dialogMessage,
-      Constants.TITLE_MESSAGE_QUESTION,
-      JOptionPane.OK_CANCEL_OPTION,
-      JOptionPane.QUESTION_MESSAGE,
-      Constants.ICON_DIALOG_QUESTION,
-      dialogOptions,
-      dialogOptions[0]
-    );
+    return JOptionPane.showOptionDialog(parentComponent,
+                                        dialogMessage,
+                                        Constants.TITLE_MESSAGE_QUESTION,
+                                        JOptionPane.OK_CANCEL_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        Constants.ICON_DIALOG_QUESTION,
+                                        dialogOptions,
+                                        dialogOptions[0]);
   }
 
   /**
@@ -213,33 +212,6 @@ public final class CommonFunctions {
   }
 
   /**
-   * Determines the monitor on which the majority of the given view is displayed and sets it as the active monitor.
-   *
-   * @param view Reference view from which the active monitor will be determined.
-   */
-  public static void updateActiveMonitorFromView(View view) {
-    CommonFields.setActiveMonitor(
-      retrieveOptional(
-        Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
-              .filter(screen -> !screen.getDefaultConfiguration()
-                                       .getBounds()
-                                       .intersection(view.getBounds())
-                                       .isEmpty())
-              .max(Comparator.comparingDouble(
-                  screen -> {
-                    Rectangle intersection = screen.getDefaultConfiguration()
-                                                   .getBounds()
-                                                   .intersection(view.getBounds());
-
-                    return intersection.getWidth() * intersection.getHeight();
-                  }
-                )
-              )
-      )
-    );
-  }
-
-  /**
    * Opens a new tab in the default web browser with the specified URL.
    *
    * @param url Destination URL.
@@ -248,7 +220,7 @@ public final class CommonFunctions {
     try {
       Desktop.getDesktop().browse(new URI(url));
     } catch (IOException | URISyntaxException exception) {
-      CommonFunctions.exitProgram(Error.ERROR_BROWSER, exception);
+      exitProgram(Error.ERROR_BROWSER, exception);
     }
   }
 
@@ -258,72 +230,82 @@ public final class CommonFunctions {
    * @param view View to display.
    */
   public static void showView(View view) {
-    JPanel viewsContainer = CommonFields.getViewsContainer();
+    JFrame mainFrame = CommonFields.getMainFrame();
+
+    JPanel mainPanel = CommonFields.getMainPanel();
 
     if (view.getParent() != null) {
       view.getParent().remove(view);
     }
 
-    viewsContainer.removeAll();
-    viewsContainer.add(view, view.getClass().getName());
+    mainPanel.removeAll();
+    mainPanel.add(view, view.getClass().getName());
 
-    CommonFields.getViewsLayout().show(viewsContainer, view.getClass().getName());
+    ((CardLayout) mainPanel.getLayout()).show(mainPanel, view.getClass().getName());
 
     view.setVisible(true);
 
-    CommonFields.getMainFrame().setTitle(view.getViewTitle());
+    mainFrame.setTitle(view.getTitle());
 
-    resizeMainFrameToView(view);
+    /*
+      Resize the main frame to fit the current view dimensions, identify the currently active screen and center the main frame on it.
 
-    CommonFields.getMainFrame().setVisible(true);
+      The screen identification is done by checking which screen has the largest intersection with the main frame bounds.
+    */
+    SwingUtilities.invokeLater(
+      () -> {
+        view.revalidate();
+        view.doLayout();
 
-    viewsContainer.revalidate();
-    viewsContainer.repaint();
-  }
+        Dimension viewDimension = view.getPreferredSize();
 
-  /**
-   * Resizes the main frame to fit the current view dimensions.
-   *
-   * @param view Currently displayed view.
-   */
-  private static void resizeMainFrameToView(View view) {
-    SwingUtilities.invokeLater(() -> {
-      view.revalidate();
-      view.doLayout();
+        Insets frameInsets = mainFrame.getInsets();
 
-      view.getMainPanel().revalidate();
-      view.getMainPanel().doLayout();
+        if ((viewDimension.width <= 0) || (viewDimension.height <= 0)) {
+          viewDimension = view.getPreferredSize();
+        }
 
-      Dimension viewDimension = view.getPreferredSize();
+        view.setPreferredSize(viewDimension);
 
-      Insets frameInsets = CommonFields.getMainFrame().getInsets();
+        mainPanel.setPreferredSize(viewDimension);
+        mainPanel.setSize(viewDimension);
+        mainPanel.revalidate();
+        mainPanel.doLayout();
 
-      if (viewDimension.width <= 0 || viewDimension.height <= 0) {
-        viewDimension = view.getMainPanel().getPreferredSize();
+        Dimension frameDimension = new Dimension(viewDimension.width + frameInsets.left + frameInsets.right,
+                                                 viewDimension.height + frameInsets.top + frameInsets.bottom);
+
+        mainFrame.setPreferredSize(frameDimension);
+        mainFrame.setSize(frameDimension);
+
+        Rectangle activeScreenBounds = retrieveOptional(
+                                         Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
+                                               .filter(screen -> !screen.getDefaultConfiguration()
+                                                                        .getBounds()
+                                                                        .intersection(mainFrame.getBounds())
+                                                                        .isEmpty())
+                                               .max(
+                                                 Comparator.comparingDouble(
+                                                   screen -> {
+                                                     Rectangle intersection = screen.getDefaultConfiguration()
+                                                                                    .getBounds()
+                                                                                    .intersection(mainFrame.getBounds());
+
+                                                     return (intersection.getWidth() * intersection.getHeight());
+                                                   }
+                                                 )
+                                               )
+                                       ).getDefaultConfiguration().getBounds();
+
+        mainFrame.setLocation((((activeScreenBounds.width - mainFrame.getWidth()) / 2) + activeScreenBounds.x),
+                              (((activeScreenBounds.height - mainFrame.getHeight()) / 2) + activeScreenBounds.y));
+        mainFrame.revalidate();
+        mainFrame.repaint();
       }
+    );
 
-      view.setPreferredSize(viewDimension);
-
-      if (CommonFields.getViewsContainer() != null) {
-        CommonFields.getViewsContainer().setPreferredSize(viewDimension);
-        CommonFields.getViewsContainer().setSize(viewDimension);
-        CommonFields.getViewsContainer().revalidate();
-        CommonFields.getViewsContainer().doLayout();
-      }
-
-      Dimension frameSize = new Dimension(
-        Math.max(viewDimension.width  + frameInsets.left + frameInsets.right , 1),
-        Math.max(viewDimension.height + frameInsets.top  + frameInsets.bottom, 1)
-      );
-
-      CommonFields.getMainFrame().setPreferredSize(frameSize);
-      CommonFields.getMainFrame().setSize(frameSize);
-      CommonFields.getMainFrame().setMinimumSize(new Dimension(1, 1));
-      CommonFields.getMainFrame().setMaximumSize(null);
-      CommonFields.getMainFrame().setLocationRelativeTo(null);
-      CommonFields.getMainFrame().revalidate();
-      CommonFields.getMainFrame().repaint();
-    });
+    mainPanel.revalidate();
+    mainPanel.repaint();
   }
 
   /**
@@ -334,7 +316,7 @@ public final class CommonFunctions {
    * @return The graphical component associated to the action event.
    */
   public static Component getComponentFromEvent(ActionEvent event) {
-    return event == null ? null : SwingUtilities.windowForComponent((Component) event.getSource());
+    return ((event == null) ? null : SwingUtilities.windowForComponent((Component) event.getSource()));
   }
 
   /**
@@ -356,7 +338,7 @@ public final class CommonFunctions {
    * @return The given string with the first letter uppercase and the rest lowercase.
    */
   public static String capitalize(String input) {
-    return input.isBlank() ? input : (input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase());
+    return (input.isBlank() ? input : (input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase()));
   }
 
   /**
@@ -398,6 +380,17 @@ public final class CommonFunctions {
   }
 
   /**
+   * Gets the anchorages as an array of strings to be used as options in a dialog window.
+   *
+   * @return The anchorages as an array of strings.
+   */
+  public static String [] getAnchoragesAsOptions() {
+    return IntStream.rangeClosed(1, CommonFields.getAnchorages().size())
+                    .mapToObj(Integer::toString)
+                    .toArray(String[]::new);
+  }
+
+  /**
    * Gets the corresponding controller to the requested view.
    *
    * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime the type of the controlled view.
@@ -425,22 +418,5 @@ public final class CommonFunctions {
     }
 
     return optional.get();
-  }
-
-  /**
-   * Gets the search-corresponding position in a generic map received.
-   *
-   * @param <T>    Generic value type.
-   * @param map    Generic map with positions as keys.
-   * @param search Value to search in the map.
-   *
-   * @return The search-corresponding position.
-   */
-  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T search) {
-    return retrieveOptional(map.entrySet()
-                               .stream()
-                               .filter(entry -> entry.getValue().equals(search))
-                               .map(Map.Entry::getKey)
-                               .findFirst());
   }
 }

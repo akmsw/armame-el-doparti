@@ -28,9 +28,11 @@ import net.miginfocom.swing.MigLayout;
  */
 public class CustomOptionPaneUI extends BasicOptionPaneUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom option pane UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom option pane UI.
@@ -40,6 +42,8 @@ public class CustomOptionPaneUI extends BasicOptionPaneUI {
 
     return new CustomOptionPaneUI();
   }
+
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   @Override
   public void installUI(JComponent component) {
@@ -89,11 +93,13 @@ public class CustomOptionPaneUI extends BasicOptionPaneUI {
       CustomButton customButton = new CustomButton((String) buttonText, Constants.ROUNDED_BORDER_ARC_BUTTON_DIALOG);
 
       customButton.setMinimumSize(new Dimension(Constants.SIZE_BUTTON_DIALOG_MIN_WIDTH, Constants.SIZE_BUTTON_DIALOG_MIN_HEIGHT));
-      customButton.addActionListener(_ -> {
-        if (initialIndex >= 0 && initialIndex < buttonsCount) {
-          ((JOptionPane) SwingUtilities.getAncestorOfClass(JOptionPane.class, container)).setValue(buttonText);
+      customButton.addActionListener(
+        _ -> {
+          if (initialIndex >= 0 && initialIndex < buttonsCount) {
+            ((JOptionPane) SwingUtilities.getAncestorOfClass(JOptionPane.class, container)).setValue(buttonText);
+          }
         }
-      });
+      );
 
       buttonPanel.add(customButton);
     }

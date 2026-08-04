@@ -29,8 +29,8 @@ public class ResultsView extends View {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  /**
-   * Builds an empty results view.
+/**
+   * Builds the results view.
    */
   public ResultsView() {
     super(getUpdatedFrameTitle(), Constants.MIG_LAYOUT_WRAP);
@@ -43,11 +43,9 @@ public class ResultsView extends View {
 
   @Override
   public void initializeInterface() {
-    CommonFields.getMainFrame().setTitle(getUpdatedFrameTitle());
-
+    setTitle(getUpdatedFrameTitle());
     addTable();
     addButtons();
-    add(mainPanel);
     refreshView();
   }
 
@@ -56,26 +54,26 @@ public class ResultsView extends View {
   @Override
   protected void addButtons() {
     if (CommonFields.getDistribution() == Distribution.MIX_RANDOM) {
-      mainPanel.add(remixButton, Constants.MIG_LAYOUT_GROWX);
+      add(remixButton, Constants.MIG_LAYOUT_GROWX);
     }
 
-    mainPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
+    add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * @return The updated frame title based on the chosen distribution and the anchorages option.
+   * @return The updated frame title based on the current distribution method and anchorages enablement.
    */
   private static String getUpdatedFrameTitle() {
-    return String.join(" - ", (CommonFields.getDistribution() == Distribution.MIX_RANDOM) ? "Aleatorio" : "Por puntuaciones", CommonFields.isAnchoragesEnabled() ? "Con anclajes" : "Sin anclajes");
+    return String.join(" - ", ((CommonFields.getDistribution() == Distribution.MIX_RANDOM) ? "Aleatorio" : "Por puntuaciones"), (CommonFields.isAnchoragesEnabled() ? "Con anclajes" : "Sin anclajes"));
   }
 
   /**
-   * Adds the results table in the view panel.
+   * Adds the results table.
    */
   private void addTable() {
-    mainPanel.add(table, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH, Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN, Constants.MIG_LAYOUT_CENTER));
+    add(table, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH, Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN, Constants.MIG_LAYOUT_CENTER));
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

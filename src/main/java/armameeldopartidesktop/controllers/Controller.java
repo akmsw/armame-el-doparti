@@ -1,8 +1,5 @@
 package armameeldopartidesktop.controllers;
 
-import java.awt.Rectangle;
-
-import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.views.View;
 
@@ -35,35 +32,16 @@ public abstract class Controller<T extends View> {
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Centers the controlled view on the current active monitor.
-   */
-  protected final void centerView() {
-    Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
-                                                .getDefaultConfiguration()
-                                                .getBounds();
-
-    CommonFields.getMainFrame()
-                .setLocation(
-                  (((activeMonitorBounds.width  - CommonFields.getMainFrame().getWidth())  / 2) + activeMonitorBounds.x),
-                  (((activeMonitorBounds.height - CommonFields.getMainFrame().getHeight()) / 2) + activeMonitorBounds.y)
-                );
-  }
-
-  /**
    * Makes the controlled view invisible.
    */
   protected final void hideView() {
     view.setVisible(false);
-
-    CommonFunctions.updateActiveMonitorFromView(view);
   }
 
   /**
    * Makes the controlled view visible.
    */
   protected void showView() {
-    centerView();
-
     CommonFunctions.showView(view);
   }
 

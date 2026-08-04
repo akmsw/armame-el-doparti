@@ -1,7 +1,7 @@
 package armameeldopartidesktop.models.enums;
 
 /**
- * Possible error codes.
+ * Enum that lists all the possible error types in the program.
  *
  * @since 3.0.0
  *

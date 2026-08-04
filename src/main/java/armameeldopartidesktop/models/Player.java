@@ -4,7 +4,7 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.Constants;
 
 /**
- * Player class.
+ * Class that represents a player.
  *
  * @since 1.0.0
  *
@@ -47,9 +47,9 @@ public class Player {
    */
   @Override
   public String toString() {
-    return "Position: " + getPosition().toString() + System.lineSeparator()
-           + "\t\tName: " + getName() + System.lineSeparator()
-           + "\t\tSkill points: " + getSkillPoints() + System.lineSeparator();
+    return ("Position: " + getPosition().toString() + System.lineSeparator()
+            + "\t\tName: " + getName() + System.lineSeparator()
+            + "\t\tSkill points: " + getSkillPoints() + System.lineSeparator());
   }
 
   // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -20,12 +20,12 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomLabel extends JLabel {
+public class CustomLabel extends JLabel implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds a basic label using the established program aesthetics.
+   * Builds a custom label that fits the overall program aesthetics.
    *
    * @param text        The label text.
    * @param tooltipText The label tooltip text
@@ -33,6 +33,7 @@ public class CustomLabel extends JLabel {
    */
   public CustomLabel(String text, String tooltipText, int alignment) {
     super(text);
+
     setHorizontalAlignment(alignment);
     setBackground(Constants.COLOR_GREEN_MEDIUM_LIGHT);
     setFont(new Font(getFont().getName(), Font.PLAIN, (int) Constants.SIZE_FONT_DEFAULT));
@@ -41,7 +42,7 @@ public class CustomLabel extends JLabel {
   }
 
   /**
-   * Builds a basic label using the established program aesthetics.
+   * Builds a custom label that fits the overall program aesthetics.
    *
    * @param text            The label text.
    * @param tooltipText     The label tooltip text
@@ -52,12 +53,21 @@ public class CustomLabel extends JLabel {
    */
   public CustomLabel(String text, String tooltipText, Color backgroundColor, Color foregroundColor, int alignment, int fontSize) {
     super(text);
+
     setHorizontalAlignment(alignment);
     setBackground(backgroundColor);
     setForeground(foregroundColor);
     setFont(new Font(getFont().getName(), Font.PLAIN, fontSize));
     setToolTipText(tooltipText);
     setUpGraphicalProperties();
+  }
+
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  @Override
+  public void setUpGraphicalProperties() {
+    setOpaque(false);
+    setBorder(new EmptyBorder(Constants.INSETS_LABEL));
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,15 +87,5 @@ public class CustomLabel extends JLabel {
   @Override
   public JToolTip createToolTip() {
     return new CustomToolTip(this);
-  }
-
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Configures the graphical properties of the label in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setOpaque(false);
-    setBorder(new EmptyBorder(Constants.INSETS_LABEL));
   }
 }

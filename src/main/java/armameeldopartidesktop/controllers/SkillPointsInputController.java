@@ -28,6 +28,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   public SkillPointsInputController(SkillPointsInputView skillPointsInputView) {
     super(skillPointsInputView);
+
     setUpListeners();
   }
 
@@ -80,7 +81,6 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
 
   @Override
   protected void showView() {
-    centerView();
     updateNameLabels();
 
     CommonFunctions.showView(view);
@@ -110,9 +110,11 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   private void resetSkillPoints() {
     view.getSpinnersMap()
-        .forEach((player, spinner) -> {
-          player.setSkillPoints(Constants.PLAYER_NO_SKILL_POINTS_ASSIGNED);
-          spinner.setValue(Constants.SKILL_MIN);
-        });
+        .forEach(
+          (player, spinner) -> {
+            player.setSkillPoints(Constants.PLAYER_NO_SKILL_POINTS_ASSIGNED);
+            spinner.setValue(Constants.SKILL_MIN);
+          }
+        );
   }
 }

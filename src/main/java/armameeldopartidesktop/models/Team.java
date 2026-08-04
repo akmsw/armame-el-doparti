@@ -10,7 +10,7 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.CommonFields;
 
 /**
- * Team class.
+ * Class that represents a team of players, organized by position.
  *
  * @since 3.0.0
  *
@@ -54,7 +54,7 @@ public class Team {
    * @return Whether the specified position set in the team is full.
    */
   public boolean isPositionFull(Position position) {
-    return players.get(position).size() == CommonFields.getPlayerLimitPerPosition().get(position);
+    return (players.get(position).size() == CommonFields.getPlayerLimitPerPosition().get(position));
   }
 
   /**
