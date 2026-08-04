@@ -196,7 +196,7 @@ public final class Constants {
   public static final String    POSITION_LATERAL_DEFENDERS                    = "DEFENSORES LATERALES";
   public static final String    POSITION_MIDFIELDERS                          = "MEDIOCAMPISTAS";
   public static final String    PROGRAM_TITLE                                 = "armame el doparti";
-  public static final String    PROGRAM_VERSION                               = "v3.0.0";
+  public static final String    PROGRAM_VERSION                               = "v3.1.0";
   public static final String    PROGRAM_AUTHOR                                = "@" + PROGRAM_AUTHOR_GITHUB_USERNAME;
   public static final String    REGEX_NUMERIC_STRING                          = "\\d+$";
   public static final String    REGEX_PDA_DATA_RETRIEVE                       = "[CLMFG].+>.+";

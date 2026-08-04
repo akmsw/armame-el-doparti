@@ -1,4 +1,4 @@
-# ⚽ Armame el doparti [![versionBadge](https://img.shields.io/badge/version-3.0.0-blue)]()
+# ⚽ Armame el doparti [![versionBadge](https://img.shields.io/badge/version-3.1.0-blue)]()
 
 ![portada](./src/main/res/img/readme/cover.png)
 
@@ -66,7 +66,7 @@
   Si estás en Windows podés descargar el archivo `.exe` y abrirlo directamente con *doble click* también, ignorando el archivo `.jar`.\
   Una alternativa es abrir una terminal dentro de la carpeta contenedora del archivo y ejecutar el comando:
   ```bash
-  java -jar armameeldoparti-3.0.0.jar
+  java -jar armameeldoparti-3.1.0.jar
   ```
 </details>
 
@@ -87,7 +87,7 @@
   ```
   Esto va a crear una carpeta llamada `target` a la cual tenés que entrar. Ahí va a estar el archivo ejecutable en formato `.jar`. Para correr el programa se le puede hacer doble click o ejecutar, mediante la terminal, el comando indicado anteriormente:
   ```bash
-  java -jar armameeldoparti-3.0.0.jar
+  java -jar armameeldoparti-3.1.0.jar
   ```
 </details>
 
