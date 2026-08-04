@@ -94,7 +94,6 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   protected void setUpListeners() {
     view.getFinishButton().addActionListener(event -> finishButtonEvent(CommonFunctions.getComponentFromEvent(event)));
     view.getNewAnchorageButton().addActionListener(event -> newAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(event)));
-    view.getEditAnchorageButton().addActionListener(_ -> editAnchorage());
     view.getDeleteAnchorageButton().addActionListener(event -> deleteAnchorageButtonEvent(CommonFunctions.getComponentFromEvent(event)));
     view.getClearAnchoragesButton().addActionListener(_ -> resetView());
     view.getBackButton().addActionListener(_ -> backButtonEvent());
@@ -178,8 +177,6 @@ public class AnchoragesController extends Controller<AnchoragesView> {
     if (!CommonFields.getAnchorages().isEmpty()) {
       view.getFinishButton().setEnabled(true);
       view.getClearAnchoragesButton().setEnabled(true);
-      view.getEditAnchorageButton().setEnabled(true);
-      view.getEditAnchorageButton().setEnabled(true);
 
       for (JButton button : view.getAnchorageButtons()) {
         button.setEnabled(true);
@@ -316,14 +313,6 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   private void clearAnchorages() {
     while (!CommonFields.getAnchorages().isEmpty()) {
       deleteAnchorage(CommonFields.getAnchorages().size() - 1);
-    }
-  }
-
-  private void editAnchorage() {
-    int anchorageToEdit = CommonFunctions.showOptionDialog(view, "Seleccione qué anclaje desea editar", CommonFunctions.getAnchoragesAsOptions());
-
-    if (anchorageToEdit != JOptionPane.CLOSED_OPTION) {
-      // todo
     }
   }
 
