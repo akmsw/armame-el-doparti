@@ -10,6 +10,7 @@ import armameeldopartidesktop.utils.common.Constants;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
+
 import net.miginfocom.layout.CC;
 
 /**
@@ -17,7 +18,7 @@ import net.miginfocom.layout.CC;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -25,7 +26,7 @@ public class HelpView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  private static final int TEXT_AREA_ROWS = 20;
+  private static final int TEXT_AREA_ROWS    = 20;
   private static final int TEXT_AREA_COLUMNS = 30;
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,8 +61,7 @@ public class HelpView extends View {
     addTextArea();
     addReadingProgressLabel();
     addButtons();
-    add(masterPanel);
-    pack();
+    refreshView();
   }
 
   @Override
@@ -70,9 +70,9 @@ public class HelpView extends View {
     setNextPageButton(new CustomButton("Siguiente"));
     setBackButton(new CustomButton("Volver al menú principal"));
 
-    masterPanel.add(previousPageButton, new CC().width("50%").split());
-    masterPanel.add(nextPageButton, new CC().width("50%").wrap());
-    masterPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);
+    add(previousPageButton, new CC().width("50%").split());
+    add(nextPageButton, new CC().width("50%").wrap());
+    add(backButton, Constants.MIG_LAYOUT_GROWX);
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ public class HelpView extends View {
   private void addPageTitleLabel() {
     setPageTitleLabel(new CustomLabel(null, null, SwingConstants.CENTER));
 
-    masterPanel.add(pageTitleLabel, Constants.MIG_LAYOUT_GROWX);
+    add(pageTitleLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
   /**
@@ -93,7 +93,7 @@ public class HelpView extends View {
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
     setScrollPane(new CustomScrollPane(textArea));
 
-    masterPanel.add(scrollPane);
+    add(scrollPane, Constants.MIG_LAYOUT_GROW);
   }
 
   /**
@@ -102,10 +102,10 @@ public class HelpView extends View {
   private void addReadingProgressLabel() {
     setReadingProgressLabel(new CustomLabel(null, null, SwingConstants.CENTER));
 
-    masterPanel.add(readingProgressLabel, Constants.MIG_LAYOUT_GROWX);
+    add(readingProgressLabel, Constants.MIG_LAYOUT_GROWX);
   }
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public JButton getPreviousPageButton() {
     return previousPageButton;
@@ -135,7 +135,7 @@ public class HelpView extends View {
     return textArea;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public void setPreviousPageButton(JButton previousPageButton) {
     this.previousPageButton = previousPageButton;

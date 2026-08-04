@@ -2,9 +2,7 @@ package armameeldopartidesktop.utils.common.custom.graphical.ui;
 
 import javax.swing.JComponent;
 import javax.swing.JTextArea;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicTextAreaUI;
 
 import armameeldopartidesktop.utils.common.Constants;
@@ -20,9 +18,11 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public class CustomTextAreaUI extends BasicTextAreaUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom text area UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom text area UI.

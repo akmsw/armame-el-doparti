@@ -18,7 +18,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomButton extends JButton {
+public class CustomButton extends JButton implements CustomComponent {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -27,29 +27,40 @@ public class CustomButton extends JButton {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds a basic rounded button using the established program aesthetics.
+   * Builds a custom button that fits the overall program aesthetics.
    *
    * @param text The text to display on the button.
    */
   public CustomButton(String text) {
     super(text);
+
     setArc(Constants.ROUNDED_BORDER_ARC_GENERAL);
     setUpGraphicalProperties();
   }
 
   /**
-   * Builds a basic rounded button using the established program aesthetics.
+   * Builds a custom button that fits the overall program aesthetics.
    *
    * @param text The text to display on the button.
    * @param arc  The round borders arc.
    */
   public CustomButton(String text, int arc) {
     super(text);
+
     setArc(arc);
     setUpGraphicalProperties();
   }
 
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  @Override
+  public void setUpGraphicalProperties() {
+    setBackground(Constants.COLOR_GREEN_DARK);
+    setForeground(Color.WHITE);
+    setContentAreaFilled(false);
+    setFocusPainted(false);
+    setBorderPainted(false);
+  }
 
   @Override
   public Insets getInsets() {
@@ -77,26 +88,13 @@ public class CustomButton extends JButton {
     super.paintComponent(graphics);
   }
 
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Configures the graphical properties of the button in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setBackground(Constants.COLOR_GREEN_DARK);
-    setForeground(Color.WHITE);
-    setContentAreaFilled(false);
-    setFocusPainted(false);
-    setBorderPainted(false);
-  }
-
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public int getArc() {
     return arc;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Private setters ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   private void setArc(int arc) {
     this.arc = arc;

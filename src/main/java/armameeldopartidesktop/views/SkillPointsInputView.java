@@ -25,7 +25,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -59,8 +59,7 @@ public class SkillPointsInputView extends View {
   public void initializeInterface() {
     addSpinners();
     addButtons();
-    add(masterPanel);
-    pack();
+    refreshView();
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,20 +70,22 @@ public class SkillPointsInputView extends View {
     setFinishButton(new CustomButton("Finalizar"));
     setResetSkillPointsButton(new CustomButton("Reiniciar puntuaciones"));
 
-    masterPanel.add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
-    masterPanel.add(resetSkillPointsButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
-    masterPanel.add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+    add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+    add(resetSkillPointsButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+    add(backButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Adds the spinners to their corresponding panel.
+   * Adds the spinners.
    */
   private void addSpinners() {
     for (Position position : Position.values()) {
-      masterPanel.add(new CustomLabel(CommonFunctions.capitalize(Constants.MAP_POSITIONS.get(position)), null, SwingConstants.CENTER),
-                      CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
+      add(
+        new CustomLabel(CommonFunctions.capitalize(Constants.MAP_POSITIONS.get(position)), null, SwingConstants.CENTER),
+        CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN)
+      );
 
       List<Player> players = new ArrayList<>(CommonFields.getPlayersSets().get(position));
 
@@ -95,13 +96,13 @@ public class SkillPointsInputView extends View {
 
         labelsMap.put(spinnersMap.get(player), new JLabel(player.getName()));
 
-        masterPanel.add(labelsMap.get(spinnersMap.get(player)), Constants.MIG_LAYOUT_PUSHX);
-        masterPanel.add(spinnersMap.get(player), players.indexOf(player) % 2 != 0 ? Constants.MIG_LAYOUT_WRAP : null);
+        add(labelsMap.get(spinnersMap.get(player)), Constants.MIG_LAYOUT_PUSHX);
+        add(spinnersMap.get(player), (((players.indexOf(player) % 2) != 0) ? Constants.MIG_LAYOUT_WRAP : null));
       }
     }
   }
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public JButton getBackButton() {
     return backButton;
@@ -123,7 +124,7 @@ public class SkillPointsInputView extends View {
     return spinnersMap;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public void setBackButton(JButton backButton) {
     this.backButton = backButton;

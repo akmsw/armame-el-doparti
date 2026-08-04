@@ -3,7 +3,7 @@ name: Sugerencias, modificaciones
 about: Sugerí una nueva funcionalidad o una modificación al programa
 title: "[ENH]"
 labels: enhancement
-assignees: akmsw
+assignees: xinaras
 
 ---
 

@@ -1,8 +1,5 @@
 package armameeldopartidesktop.controllers;
 
-import java.awt.Rectangle;
-
-import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.views.View;
 
@@ -11,7 +8,7 @@ import armameeldopartidesktop.views.View;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -35,32 +32,17 @@ public abstract class Controller<T extends View> {
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Centers the controlled view on the current active monitor.
-   */
-  protected final void centerView() {
-    Rectangle activeMonitorBounds = CommonFields.getActiveMonitor()
-                                                .getDefaultConfiguration()
-                                                .getBounds();
-
-    view.setLocation((((activeMonitorBounds.width - view.getWidth()) / 2) + activeMonitorBounds.x), (((activeMonitorBounds.height - view.getHeight()) / 2) + activeMonitorBounds.y));
-  }
-
-  /**
    * Makes the controlled view invisible.
    */
   protected final void hideView() {
     view.setVisible(false);
-
-    CommonFunctions.updateActiveMonitorFromView(view);
   }
 
   /**
    * Makes the controlled view visible.
    */
   protected void showView() {
-    centerView();
-
-    view.setVisible(true);
+    CommonFunctions.showView(view);
   }
 
   // ---------- Abstract protected methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,13 +62,13 @@ public abstract class Controller<T extends View> {
    */
   protected abstract void setUpListeners();
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Protected getters -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   protected T getView() {
     return view;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Protected setters -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   protected void setView(T view) {
     this.view = view;

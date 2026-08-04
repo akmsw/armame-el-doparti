@@ -10,13 +10,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.SwingConstants;
-
 import javax.swing.border.AbstractBorder;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicSpinnerUI;
-
 import javax.swing.text.DefaultCaret;
 
 import armameeldopartidesktop.utils.common.Constants;
@@ -33,9 +29,11 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomArrowButton;
  */
 public class CustomSpinnerUI extends BasicSpinnerUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom spinner UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom spinner UI.
@@ -87,6 +85,8 @@ public class CustomSpinnerUI extends BasicSpinnerUI {
 
     return new CustomSpinnerUI();
   }
+
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   @Override
   public void paint(Graphics graphics, JComponent component) {

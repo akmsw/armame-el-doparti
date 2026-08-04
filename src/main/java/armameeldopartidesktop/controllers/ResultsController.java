@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,9 +11,7 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.table.DefaultTableCellRenderer;
 
 import armameeldopartidesktop.models.Player;
@@ -34,7 +31,7 @@ import armameeldopartidesktop.views.ResultsView;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -68,13 +65,10 @@ public class ResultsController extends Controller<ResultsView> {
     super(resultsView);
 
     bySkillPointsMixer = new BySkillPointsMixer();
-
-    randomMixer = new RandomMixer();
-
-    team1 = new Team(1);
-    team2 = new Team(2);
-
-    teams = new ArrayList<>();
+    randomMixer        = new RandomMixer();
+    team1              = new Team();
+    team2              = new Team();
+    teams              = new ArrayList<>();
 
     setUpListeners();
   }
@@ -87,7 +81,7 @@ public class ResultsController extends Controller<ResultsView> {
   private void setUpView() {
     teams = (CommonFields.getDistribution() == Distribution.MIX_RANDOM ? randomMix(Arrays.asList(team1, team2)) : bySkillPointsMix(Arrays.asList(team1, team2)));
 
-    view.setTable(new JTable(Constants.PLAYERS_PER_TEAM + (CommonFields.getDistribution() == Distribution.MIX_RANDOM ? 1 : 2), TABLE_COLUMNS));
+    view.setTable(new JTable((Constants.PLAYERS_PER_TEAM + ((CommonFields.getDistribution() == Distribution.MIX_RANDOM) ? 1 : 2)), TABLE_COLUMNS));
     view.initializeInterface();
 
     table = view.getTable();
@@ -97,7 +91,7 @@ public class ResultsController extends Controller<ResultsView> {
     updateTableData();
     adjustTableCells();
 
-    view.pack();
+    view.refreshView();
   }
 
   /**
@@ -111,7 +105,7 @@ public class ResultsController extends Controller<ResultsView> {
     ProgramView previousView = ProgramView.SKILL_POINTS;
 
     if (CommonFields.getDistribution() == Distribution.MIX_RANDOM) {
-      previousView = CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT;
+      previousView = (CommonFields.isAnchoragesEnabled() ? ProgramView.ANCHORAGES : ProgramView.NAMES_INPUT);
     }
 
     CommonFunctions.getController(previousView).showView();
@@ -137,11 +131,11 @@ public class ResultsController extends Controller<ResultsView> {
    */
   public void updateTableData() {
     int column = 1;
-    int row = 1;
+    int row    = 1;
 
     for (Team team : teams) {
       for (Position position : Position.values()) {
-        for (Player player : team.getTeamPlayers().get(position)) {
+        for (Player player : team.getPlayers().get(position)) {
           table.setValueAt(player.getName(), row++, column);
         }
       }
@@ -151,16 +145,16 @@ public class ResultsController extends Controller<ResultsView> {
     }
 
     if (CommonFields.getDistribution() == Distribution.MIX_BY_SKILL_POINTS) {
-      for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
-        table.setValueAt(teams.get(teamIndex)
-                              .getTeamPlayers()
+      for (int teamNumber = 0; teamNumber < Constants.TEAMS_TOTAL; teamNumber++) {
+        table.setValueAt(teams.get(teamNumber)
+                              .getPlayers()
                               .values()
                               .stream()
                               .flatMap(List::stream)
                               .mapToInt(Player::getSkillPoints)
                               .reduce(0, Math::addExact),
                          table.getRowCount() - 1,
-                         teamIndex + 1);
+                         teamNumber + 1);
       }
     }
   }
@@ -173,7 +167,7 @@ public class ResultsController extends Controller<ResultsView> {
    * @return The updated teams with the players distributed.
    */
   public List<Team> randomMix(List<Team> teams) {
-    return CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams) : randomMixer.withoutAnchorages(teams);
+    return (CommonFields.isAnchoragesEnabled() ? randomMixer.withAnchorages(teams) : randomMixer.withoutAnchorages(teams));
   }
 
   /**
@@ -184,7 +178,7 @@ public class ResultsController extends Controller<ResultsView> {
    * @return The updated teams with the players distributed.
    */
   public List<Team> bySkillPointsMix(List<Team> teams) {
-    return CommonFields.isAnchoragesEnabled() ? bySkillPointsMixer.withAnchorages(teams) : bySkillPointsMixer.withoutAnchorages(teams);
+    return (CommonFields.isAnchoragesEnabled() ? bySkillPointsMixer.withAnchorages(teams) : bySkillPointsMixer.withoutAnchorages(teams));
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -192,9 +186,8 @@ public class ResultsController extends Controller<ResultsView> {
   @Override
   protected void showView() {
     setUpView();
-    centerView();
 
-    view.setVisible(true);
+    CommonFunctions.showView(view);
   }
 
   /**
@@ -202,8 +195,6 @@ public class ResultsController extends Controller<ResultsView> {
    */
   @Override
   protected void resetView() {
-    view.dispose();
-
     setView(new ResultsView());
     setUpListeners();
   }
@@ -227,7 +218,7 @@ public class ResultsController extends Controller<ResultsView> {
   private void fillTableHeaders() {
     int rowCount = table.getRowCount() - 1;
 
-    for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
+    for (int teamIndex = 0; teamIndex < Constants.TEAMS_TOTAL; teamIndex++) {
       table.setValueAt("EQUIPO " + (teamIndex + 1), 0, teamIndex + 1);
     }
 
@@ -235,10 +226,10 @@ public class ResultsController extends Controller<ResultsView> {
       table.setValueAt(
         Constants.MAP_POSITIONS.get(
           switch (row) {
-            case 1 -> Position.CENTRAL_DEFENDER;
+            case 1    -> Position.CENTRAL_DEFENDER;
             case 2, 3 -> Position.LATERAL_DEFENDER;
             case 4, 5 -> Position.MIDFIELDER;
-            default -> Position.FORWARD;
+            default   -> Position.FORWARD;
           }
         ),
         row,
@@ -247,7 +238,7 @@ public class ResultsController extends Controller<ResultsView> {
     }
 
     if (CommonFields.getDistribution() == Distribution.MIX_BY_SKILL_POINTS) {
-      for (int column = 0; column < teams.size(); column++) {
+      for (int column = 0; column < Constants.TEAMS_TOTAL; column++) {
         table.setValueAt(column == 0 ? Constants.MAP_POSITIONS.get(Position.GOALKEEPER) : "Puntuación del equipo", table.getRowCount() + column - 2, 0);
       }
 
@@ -329,10 +320,17 @@ public class ResultsController extends Controller<ResultsView> {
                                                                                  .values()
                                                                                  .stream()
                                                                                  .flatMap(List::stream)
-                                                                                 .filter(player -> player.getName() == value)
+                                                                                 .filter(player -> player.getName().equals(value))
                                                                                  .findFirst());
 
-              component.setBackground(playerOnCell.isAnchored() ? Constants.COLORS_ANCHORAGES.get(playerOnCell.getAnchorageNumber() - 1) : Constants.COLOR_GREEN_LIGHT_WHITE);
+              int anchorageIndex = CommonFields.getAnchorages()
+                                               .stream()
+                                               .filter(anchorage -> anchorage.getPlayers().contains(playerOnCell))
+                                               .findFirst()
+                                               .map(CommonFields.getAnchorages()::indexOf)
+                                               .orElse(Constants.PLAYER_NO_ANCHORAGE_ASSIGNED);
+
+              component.setBackground(anchorageIndex == Constants.PLAYER_NO_ANCHORAGE_ASSIGNED ? Constants.COLOR_GREEN_LIGHT_WHITE : Constants.COLORS_ANCHORAGES.get(anchorageIndex));
               component.setForeground(Color.BLACK);
 
               ((DefaultTableCellRenderer) component).setHorizontalAlignment(SwingConstants.LEFT);
@@ -358,24 +356,20 @@ public class ResultsController extends Controller<ResultsView> {
    * Adjusts the cells size to fit the biggest content shown in the table.
    */
   private void adjustTableCells() {
-    int maxCellWidth = 0;
+    int maxCellWidth  = 0;
     int maxCellHeight = 0;
 
     for (int row = 0; row < table.getRowCount(); row++) {
       for (int column = 0; column < table.getColumnCount(); column++) {
         Component cellComponent = table.prepareRenderer(table.getCellRenderer(row, column), row, column);
 
-        maxCellWidth = Math.max(maxCellWidth, (cellComponent.getPreferredSize().width + table.getIntercellSpacing().width));
+        maxCellWidth  = Math.max(maxCellWidth, (cellComponent.getPreferredSize().width + table.getIntercellSpacing().width));
         maxCellHeight = Math.max(maxCellHeight, (cellComponent.getPreferredSize().height + table.getIntercellSpacing().height));
+
+        table.getColumnModel().getColumn(column).setPreferredWidth(maxCellWidth);
       }
-    }
 
-    for (int row = 0; row < table.getRowCount(); row++) {
       table.setRowHeight(row, maxCellHeight);
-    }
-
-    for (int column = 0; column < table.getColumnCount(); column++) {
-      table.getColumnModel().getColumn(column).setPreferredWidth(maxCellWidth);
     }
   }
 }

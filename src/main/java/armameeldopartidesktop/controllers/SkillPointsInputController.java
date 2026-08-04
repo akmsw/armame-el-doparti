@@ -2,6 +2,7 @@ package armameeldopartidesktop.controllers;
 
 import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.models.enums.ProgramView;
+import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
@@ -12,7 +13,7 @@ import armameeldopartidesktop.views.SkillPointsInputView;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -27,6 +28,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   public SkillPointsInputController(SkillPointsInputView skillPointsInputView) {
     super(skillPointsInputView);
+
     setUpListeners();
   }
 
@@ -65,24 +67,23 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   public void updateNameLabels() {
     for (Position position : Position.values()) {
-      CommonFields.getPlayersSets()
-                  .get(position)
-                  .forEach(player -> view.getLabelsMap()
-                                         .get(view.getSpinnersMap().get(player))
-                                         .setText(player.getName()));
+      for (Player player : CommonFields.getPlayersSets().get(position)) {
+        view.getLabelsMap()
+            .get(view.getSpinnersMap().get(player))
+            .setText(player.getName());
+      }
     }
 
-    view.pack();
+    view.refreshView();
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   @Override
   protected void showView() {
-    centerView();
     updateNameLabels();
 
-    view.setVisible(true);
+    CommonFunctions.showView(view);
   }
 
   @Override
@@ -109,9 +110,11 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
    */
   private void resetSkillPoints() {
     view.getSpinnersMap()
-        .forEach((player, spinner) -> {
-          player.setSkillPoints(Constants.PLAYER_NO_SKILL_POINTS_ASSIGNED);
-          spinner.setValue(Constants.SKILL_MIN);
-        });
+        .forEach(
+          (player, spinner) -> {
+            player.setSkillPoints(Constants.PLAYER_NO_SKILL_POINTS_ASSIGNED);
+            spinner.setValue(Constants.SKILL_MIN);
+          }
+        );
   }
 }

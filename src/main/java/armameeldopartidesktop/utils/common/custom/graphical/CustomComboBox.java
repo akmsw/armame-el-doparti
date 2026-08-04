@@ -12,9 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
-
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
@@ -22,7 +20,7 @@ import javax.swing.plaf.basic.ComboPopup;
 import armameeldopartidesktop.utils.common.Constants;
 
 /**
- * A custom combobox that fits the overall program aesthetics.
+ * A custom combo box that fits the overall program aesthetics.
  *
  * @since 3.0.0
  *
@@ -30,57 +28,25 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomComboBox<E> extends JComboBox<E> {
+public class CustomComboBox<E> extends JComboBox<E> implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds a basic combobox using the established program aesthetics.
+   * Builds a custom combo box that fits the overall program aesthetics.
    *
-   * @param items Items array used in the combobox.
+   * @param items Items array used in the combo box.
    */
   public CustomComboBox(E[] items) {
     super(items);
+
     setUpGraphicalProperties();
   }
 
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   @Override
-  public Insets getInsets() {
-    return Constants.INSETS_COMBOBOX;
-  }
-
-  // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  @Override
-  protected void paintComponent(Graphics graphics) {
-    Graphics2D graphics2d = (Graphics2D) graphics.create();
-
-    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-    graphics2d.setColor(getBackground());
-    graphics2d.fillRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
-    graphics2d.dispose();
-
-    super.paintComponent(graphics);
-  }
-
-  @Override
-  protected void paintBorder(Graphics graphics) {
-    Graphics2D graphics2d = (Graphics2D) graphics.create();
-
-    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-    graphics2d.setColor(getBackground());
-    graphics2d.drawRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
-    graphics2d.dispose();
-  }
-
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Configures the graphical properties for the combobox in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
+  public void setUpGraphicalProperties() {
     setOpaque(false);
     setUI(
       new BasicComboBoxUI() {
@@ -128,6 +94,37 @@ public class CustomComboBox<E> extends JComboBox<E> {
       }
     );
   }
+
+  @Override
+  public Insets getInsets() {
+    return Constants.INSETS_COMBOBOX;
+  }
+
+  // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  @Override
+  protected void paintComponent(Graphics graphics) {
+    Graphics2D graphics2d = (Graphics2D) graphics.create();
+
+    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+    graphics2d.setColor(getBackground());
+    graphics2d.fillRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+    graphics2d.dispose();
+
+    super.paintComponent(graphics);
+  }
+
+  @Override
+  protected void paintBorder(Graphics graphics) {
+    Graphics2D graphics2d = (Graphics2D) graphics.create();
+
+    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+    graphics2d.setColor(getBackground());
+    graphics2d.drawRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+    graphics2d.dispose();
+  }
+
+  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   private static class CustomListCellRenderer extends DefaultListCellRenderer {
     @Override

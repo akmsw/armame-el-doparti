@@ -3,7 +3,9 @@ package armameeldopartidesktop.utils.mixers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import armameeldopartidesktop.models.Anchorage;
 import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.models.Team;
 import armameeldopartidesktop.models.enums.Error;
@@ -17,11 +19,11 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class RandomMixer extends BasicPlayersMixer {
+public class RandomMixer extends BasicMixer {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +39,7 @@ public class RandomMixer extends BasicPlayersMixer {
   /**
    * Distributes the players randomly without considering anchorages.
    *
-   * <p>Half of the players of each players-set are randomly assigned a team number. The rest of the players are assigned to the opposing team number.
+   * <p>Half of the players of each players-set are randomly assigned to a team. The rest of the players are assigned to the opposing team.
    *
    * @param teams Teams where to distribute the players.
    *
@@ -45,39 +47,25 @@ public class RandomMixer extends BasicPlayersMixer {
    */
   @Override
   public List<Team> withoutAnchorages(List<Team> teams) {
-    shuffleTeamNumbers(teams.size());
+    shuffleTeamNumbers();
 
     for (Position position : Position.values()) {
       List<Player> playersAtPosition = new ArrayList<>(CommonFields.getPlayersSets().get(position));
 
+      int halfSetSize = playersAtPosition.size() / Constants.TEAMS_TOTAL;
+
       Collections.shuffle(playersAtPosition);
 
-      teams.get(randomTeam1)
-           .getTeamPlayers()
+      teams.get(randomTeamNumbers.get(0))
+           .getPlayers()
            .get(position)
-           .addAll(playersAtPosition.subList(0, playersAtPosition.size() / teams.size()));
+           .addAll(playersAtPosition.subList(0, halfSetSize));
+
+      teams.get(randomTeamNumbers.get(1))
+           .getPlayers()
+           .get(position)
+           .addAll(playersAtPosition.subList(halfSetSize, playersAtPosition.size()));
     }
-
-    teams.get(randomTeam1)
-         .getTeamPlayers()
-         .values()
-         .stream()
-         .flatMap(List::stream)
-         .forEach(player -> player.setTeamNumber(randomTeam1 + 1));
-
-    CommonFields.getPlayersSets()
-                .values()
-                .stream()
-                .flatMap(List::stream)
-                .filter(player -> player.getTeamNumber() == Constants.PLAYER_NO_TEAM_ASSIGNED)
-                .forEach(player -> {
-                  teams.get(randomTeam2)
-                       .getTeamPlayers()
-                       .get(player.getPosition())
-                       .add(player);
-
-                  player.setTeamNumber(randomTeam2 + 1);
-                });
 
     return teams;
   }
@@ -100,13 +88,13 @@ public class RandomMixer extends BasicPlayersMixer {
   public List<Team> withAnchorages(List<Team> teams) {
     boolean successfulDistribution = false;
 
-    List<List<Player>> anchorages = CommonFunctions.getAnchorages();
+    List<Anchorage> anchorages = CommonFields.getAnchorages();
 
     while (!successfulDistribution) {
       Collections.shuffle(anchorages);
 
-      for (List<Player> anchorage : anchorages) {
-        int availableTeamNumber = getAvailableTeam(teams, team -> anchorageCanBeAdded(team, anchorage));
+      for (Anchorage anchorage : anchorages) {
+        int availableTeamNumber = getAvailableTeamNumber(teams, team -> anchorageCanBeAdded(team, anchorage));
 
         if (availableTeamNumber == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
           teams.forEach(Team::clear);
@@ -116,11 +104,9 @@ public class RandomMixer extends BasicPlayersMixer {
           break;
         }
 
-        for (Player player : anchorage) {
-          player.setTeamNumber(availableTeamNumber + 1);
-
+        for (Player player : anchorage.getPlayers()) {
           teams.get(availableTeamNumber)
-               .getTeamPlayers()
+               .getPlayers()
                .get(player.getPosition())
                .add(player);
         }
@@ -134,22 +120,26 @@ public class RandomMixer extends BasicPlayersMixer {
                 .values()
                 .stream()
                 .flatMap(List::stream)
-                .filter(player -> player.getTeamNumber() == Constants.PLAYER_NO_TEAM_ASSIGNED)
-                .forEach(player -> {
-                  int availableTeamNumber = getAvailableTeam(teams, team -> playerCanBeAdded(team, player));
+                .filter(player -> !teams.stream()
+                                        .flatMap(team -> team.getPlayers().values().stream())
+                                        .flatMap(List::stream)
+                                        .collect(Collectors.toSet())
+                                        .contains(player))
+                .forEach(
+                  player -> {
+                    int availableTeamNumber = getAvailableTeamNumber(teams, team -> playerCanBeAdded(team, player));
 
-                  // If there's no available team at this point, something went wrong
-                  if (availableTeamNumber == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
-                    CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_NO_AVAILABLE_TEAM));
+                    // If there's no available team at this point, something went wrong
+                    if (availableTeamNumber == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
+                      CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_DEBUG_NO_AVAILABLE_TEAM));
+                    }
+
+                    teams.get(availableTeamNumber)
+                         .getPlayers()
+                         .get(player.getPosition())
+                         .add(player);
                   }
-
-                  player.setTeamNumber(availableTeamNumber + 1);
-
-                  teams.get(availableTeamNumber)
-                       .getTeamPlayers()
-                       .get(player.getPosition())
-                       .add(player);
-                });
+                );
 
     return teams;
   }

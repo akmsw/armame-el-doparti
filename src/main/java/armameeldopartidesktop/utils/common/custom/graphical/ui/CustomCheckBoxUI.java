@@ -2,9 +2,7 @@ package armameeldopartidesktop.utils.common.custom.graphical.ui;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicCheckBoxUI;
 
 import armameeldopartidesktop.utils.common.Constants;
@@ -20,9 +18,11 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public class CustomCheckBoxUI extends BasicCheckBoxUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom checkbox UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom checkbox UI.

@@ -1,39 +1,38 @@
 package armameeldopartidesktop.utils.common;
 
+import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import armameeldopartidesktop.controllers.Controller;
 import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.models.Team;
 import armameeldopartidesktop.models.enums.Error;
-import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.models.enums.ProgramView;
 import armameeldopartidesktop.views.View;
 
@@ -42,7 +41,7 @@ import armameeldopartidesktop.views.View;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -51,13 +50,13 @@ public final class CommonFunctions {
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Empty, private constructor.
+   * Empty, private constructor to prevent instantiation.
    */
   private CommonFunctions() {
     // Body not needed
   }
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Generates an error report with the current overall program context and stack trace.
@@ -76,14 +75,14 @@ public final class CommonFunctions {
       int playersCount = 0;
 
       dumpFile.write("-------------- ERROR REPORT --------------" + System.lineSeparator().repeat(2));
-      dumpFile.write("Report time: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)) + System.lineSeparator());
+      dumpFile.write("Report time: " + LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)) + System.lineSeparator());
       dumpFile.write("Error type: " + error + System.lineSeparator());
       dumpFile.write("Distribution type: " + CommonFields.getDistribution() + System.lineSeparator());
       dumpFile.write("Anchorages enabled: " + CommonFields.isAnchoragesEnabled() + System.lineSeparator().repeat(2));
       dumpFile.write("Player limit per position:" + System.lineSeparator());
       dumpFile.write("\t" + CommonFields.getPlayerLimitPerPosition().entrySet().toString() + System.lineSeparator().repeat(2));
       dumpFile.write("Positions map:" + System.lineSeparator());
-      dumpFile.write("\t" + Constants.MAP_POSITIONS.entrySet().toString() + System.lineSeparator() .repeat(2));
+      dumpFile.write("\t" + Constants.MAP_POSITIONS.entrySet().toString() + System.lineSeparator().repeat(2));
       dumpFile.write("Controllers map:" + System.lineSeparator());
       dumpFile.write("\t" + CommonFields.getControllersMap().entrySet().toString() + System.lineSeparator().repeat(2));
       dumpFile.write("Players:" + System.lineSeparator().repeat(2));
@@ -140,21 +139,21 @@ public final class CommonFunctions {
     switch (dialogMessageType) {
       case JOptionPane.INFORMATION_MESSAGE, JOptionPane.PLAIN_MESSAGE -> {
         dialogTitle = Constants.TITLE_MESSAGE_INFORMATION;
-        dialogIcon = Constants.ICON_DIALOG_INFORMATION;
+        dialogIcon  = Constants.ICON_DIALOG_INFORMATION;
       }
       case JOptionPane.WARNING_MESSAGE -> {
         dialogTitle = Constants.TITLE_MESSAGE_WARNING;
-        dialogIcon = Constants.ICON_DIALOG_WARNING;
+        dialogIcon  = Constants.ICON_DIALOG_WARNING;
       }
       case JOptionPane.ERROR_MESSAGE -> {
         dialogTitle = Constants.TITLE_MESSAGE_ERROR;
-        dialogIcon = Constants.ICON_DIALOG_ERROR;
+        dialogIcon  = Constants.ICON_DIALOG_ERROR;
       }
       case JOptionPane.QUESTION_MESSAGE -> {
         dialogTitle = Constants.TITLE_MESSAGE_QUESTION;
-        dialogIcon = Constants.ICON_DIALOG_QUESTION;
+        dialogIcon  = Constants.ICON_DIALOG_QUESTION;
       }
-      default -> CommonFunctions.exitProgram(Error.ERROR_GUI, new IllegalStateException(Constants.MSG_ERROR_ILLEGAL_DIALOG_TYPE));
+      default -> exitProgram(Error.ERROR_GUI, new IllegalStateException(Constants.MSG_ERROR_DEBUG_INVALID_DIALOG_TYPE));
     }
 
     JOptionPane.showMessageDialog(parentComponent, dialogMessage, dialogTitle, dialogMessageType, dialogIcon);
@@ -172,16 +171,14 @@ public final class CommonFunctions {
    * @see JOptionPane#showOptionDialog(Component, Object, String, int, int, Icon, Object[], Object)
    */
   public static int showOptionDialog(Component parentComponent, String dialogMessage, Object[] dialogOptions) {
-    return JOptionPane.showOptionDialog(
-      parentComponent,
-      dialogMessage,
-      Constants.TITLE_MESSAGE_QUESTION,
-      JOptionPane.OK_CANCEL_OPTION,
-      JOptionPane.QUESTION_MESSAGE,
-      Constants.ICON_DIALOG_QUESTION,
-      dialogOptions,
-      dialogOptions[0]
-    );
+    return JOptionPane.showOptionDialog(parentComponent,
+                                        dialogMessage,
+                                        Constants.TITLE_MESSAGE_QUESTION,
+                                        JOptionPane.OK_CANCEL_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        Constants.ICON_DIALOG_QUESTION,
+                                        dialogOptions,
+                                        dialogOptions[0]);
   }
 
   /**
@@ -196,41 +193,22 @@ public final class CommonFunctions {
   }
 
   /**
-   * Checks if the skill points of the given teams are equal.
-   *
+   * @return The total count of anchored players.
+   */
+  public static int getPlayersAnchoredCount() {
+    return CommonFields.getAnchorages()
+                       .stream()
+                       .mapToInt(anchorage -> anchorage.getPlayers().size())
+                       .sum();
+  }
+
+  /**
    * @param teams Teams to check if their skill points are equal.
    *
    * @return Whether the skill points of the given teams are equal.
    */
   public static boolean teamsSkillPointsAreEqual(List<Team> teams) {
     return getTeamsSkillDifference(teams) == 0;
-  }
-
-  /**
-   * Determines the monitor on which the majority of the given view is displayed and sets it as the active monitor.
-   *
-   * @param view Reference view from which the active monitor will be determined.
-   */
-  public static void updateActiveMonitorFromView(View view) {
-    CommonFields.setActiveMonitor(
-      retrieveOptional(
-        Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
-              .filter(screen -> !screen.getDefaultConfiguration()
-                                       .getBounds()
-                                       .intersection(view.getBounds())
-                                       .isEmpty())
-              .max(Comparator.comparingDouble(
-                  screen -> {
-                    Rectangle intersection = screen.getDefaultConfiguration()
-                                                   .getBounds()
-                                                   .intersection(view.getBounds());
-
-                    return intersection.getWidth() * intersection.getHeight();
-                  }
-                )
-              )
-      )
-    );
   }
 
   /**
@@ -242,8 +220,92 @@ public final class CommonFunctions {
     try {
       Desktop.getDesktop().browse(new URI(url));
     } catch (IOException | URISyntaxException exception) {
-      CommonFunctions.exitProgram(Error.ERROR_BROWSER, exception);
+      exitProgram(Error.ERROR_BROWSER, exception);
     }
+  }
+
+  /**
+   * Displays the requested view in the main frame.
+   *
+   * @param view View to display.
+   */
+  public static void showView(View view) {
+    JFrame mainFrame = CommonFields.getMainFrame();
+
+    JPanel mainPanel = CommonFields.getMainPanel();
+
+    if (view.getParent() != null) {
+      view.getParent().remove(view);
+    }
+
+    mainPanel.removeAll();
+    mainPanel.add(view, view.getClass().getName());
+
+    ((CardLayout) mainPanel.getLayout()).show(mainPanel, view.getClass().getName());
+
+    view.setVisible(true);
+
+    mainFrame.setTitle(view.getTitle());
+
+    /*
+      Resize the main frame to fit the current view dimensions, identify the currently active screen and center the main frame on it.
+
+      The screen identification is done by checking which screen has the largest intersection with the main frame bounds.
+    */
+    SwingUtilities.invokeLater(
+      () -> {
+        view.revalidate();
+        view.doLayout();
+
+        Dimension viewDimension = view.getPreferredSize();
+
+        Insets frameInsets = mainFrame.getInsets();
+
+        if ((viewDimension.width <= 0) || (viewDimension.height <= 0)) {
+          viewDimension = view.getPreferredSize();
+        }
+
+        view.setPreferredSize(viewDimension);
+
+        mainPanel.setPreferredSize(viewDimension);
+        mainPanel.setSize(viewDimension);
+        mainPanel.revalidate();
+        mainPanel.doLayout();
+
+        Dimension frameDimension = new Dimension(viewDimension.width + frameInsets.left + frameInsets.right,
+                                                 viewDimension.height + frameInsets.top + frameInsets.bottom);
+
+        mainFrame.setPreferredSize(frameDimension);
+        mainFrame.setSize(frameDimension);
+
+        Rectangle activeScreenBounds = retrieveOptional(
+                                         Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
+                                               .filter(screen -> !screen.getDefaultConfiguration()
+                                                                        .getBounds()
+                                                                        .intersection(mainFrame.getBounds())
+                                                                        .isEmpty())
+                                               .max(
+                                                 Comparator.comparingDouble(
+                                                   screen -> {
+                                                     Rectangle intersection = screen.getDefaultConfiguration()
+                                                                                    .getBounds()
+                                                                                    .intersection(mainFrame.getBounds());
+
+                                                     return (intersection.getWidth() * intersection.getHeight());
+                                                   }
+                                                 )
+                                               )
+                                       ).getDefaultConfiguration().getBounds();
+
+        mainFrame.setLocation((((activeScreenBounds.width - mainFrame.getWidth()) / 2) + activeScreenBounds.x),
+                              (((activeScreenBounds.height - mainFrame.getHeight()) / 2) + activeScreenBounds.y));
+        mainFrame.revalidate();
+        mainFrame.repaint();
+      }
+    );
+
+    mainPanel.revalidate();
+    mainPanel.repaint();
   }
 
   /**
@@ -254,7 +316,7 @@ public final class CommonFunctions {
    * @return The graphical component associated to the action event.
    */
   public static Component getComponentFromEvent(ActionEvent event) {
-    return event == null ? null : SwingUtilities.windowForComponent((Component) event.getSource());
+    return ((event == null) ? null : SwingUtilities.windowForComponent((Component) event.getSource()));
   }
 
   /**
@@ -276,7 +338,7 @@ public final class CommonFunctions {
    * @return The given string with the first letter uppercase and the rest lowercase.
    */
   public static String capitalize(String input) {
-    return input.isBlank() ? input : (input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase());
+    return (input.isBlank() ? input : (input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase()));
   }
 
   /**
@@ -318,6 +380,17 @@ public final class CommonFunctions {
   }
 
   /**
+   * Gets the anchorages as an array of strings to be used as options in a dialog window.
+   *
+   * @return The anchorages as an array of strings.
+   */
+  public static String [] getAnchoragesAsOptions() {
+    return IntStream.rangeClosed(1, CommonFields.getAnchorages().size())
+                    .mapToObj(Integer::toString)
+                    .toArray(String[]::new);
+  }
+
+  /**
    * Gets the corresponding controller to the requested view.
    *
    * <p>The "java:S1452" warning is suppressed since the Java compiler can't know at runtime the type of the controlled view.
@@ -332,21 +405,6 @@ public final class CommonFunctions {
   }
 
   /**
-   * Gets a list containing the anchored players grouped by their anchorage number.
-   *
-   * @return A list containing the anchored players grouped by their anchorage number.
-  */
-  public static List<List<Player>> getAnchorages() {
-    return new ArrayList<>(CommonFields.getPlayersSets()
-                                       .values()
-                                       .stream()
-                                       .flatMap(List::stream)
-                                       .filter(Player::isAnchored)
-                                       .collect(Collectors.groupingBy(Player::getAnchorageNumber))
-                                       .values());
-  }
-
-  /**
    * Checks if an optional that should not be null has a value present. If so, that value is retrieved. If the optional has no value, then the program exits with a fatal internal error code.
    *
    * @param <T>      Generic optional type.
@@ -356,26 +414,9 @@ public final class CommonFunctions {
    */
   public static <T> T retrieveOptional(Optional<T> optional) {
     if (!optional.isPresent()) {
-      exitProgram(Error.ERROR_INTERNAL, new IllegalArgumentException(Constants.MSG_ERROR_NO_OPTIONAL_CONTENT));
+      exitProgram(Error.ERROR_INTERNAL, new IllegalArgumentException(Constants.MSG_ERROR_DEBUG_NO_OPTIONAL_CONTENT));
     }
 
     return optional.get();
-  }
-
-  /**
-   * Gets the search-corresponding position in a generic map received.
-   *
-   * @param <T>    Generic value type.
-   * @param map    Generic map with positions as keys.
-   * @param search Value to search in the map.
-   *
-   * @return The search-corresponding position.
-   */
-  public static <T> Position getCorrespondingPosition(Map<Position, T> map, T search) {
-    return retrieveOptional(map.entrySet()
-                               .stream()
-                               .filter(entry -> entry.getValue().equals(search))
-                               .map(Map.Entry::getKey)
-                               .findFirst());
   }
 }

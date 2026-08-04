@@ -4,11 +4,11 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.Constants;
 
 /**
- * Player class.
+ * Class that represents a player.
  *
  * @since 1.0.0
  *
- * @version 3.0.0
+ * @version 3.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -16,9 +16,7 @@ public class Player {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  private int anchorageNumber;
   private int skillPoints;
-  private int teamNumber;
 
   private String name;
 
@@ -35,8 +33,6 @@ public class Player {
   public Player(String name, Position position) {
     setName(name);
     setPosition(position);
-    setTeamNumber(Constants.PLAYER_NO_TEAM_ASSIGNED);
-    setAnchorageNumber(Constants.PLAYER_NO_ANCHORAGE_ASSIGNED);
     setSkillPoints(Constants.PLAYER_NO_SKILL_POINTS_ASSIGNED);
   }
 
@@ -51,31 +47,15 @@ public class Player {
    */
   @Override
   public String toString() {
-    return "Position: " + getPosition().toString() + System.lineSeparator()
-           + "\t\tName: " + getName() + System.lineSeparator()
-           + "\t\tAnchorage number: " + getAnchorageNumber() + System.lineSeparator()
-           + "\t\tSkill points: " + getSkillPoints() + System.lineSeparator()
-           + "\t\tTeam number: " + getTeamNumber() + System.lineSeparator();
+    return ("Position: " + getPosition().toString() + System.lineSeparator()
+            + "\t\tName: " + getName() + System.lineSeparator()
+            + "\t\tSkill points: " + getSkillPoints() + System.lineSeparator());
   }
 
-  /**
-   * @return Whether the player has an anchoraged assigned or not.
-   */
-  public boolean isAnchored() {
-    return anchorageNumber != Constants.PLAYER_NO_ANCHORAGE_ASSIGNED;
-  }
-
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  public int getAnchorageNumber() {
-    return anchorageNumber;
-  }
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public int getSkillPoints() {
     return skillPoints;
-  }
-
-  public int getTeamNumber() {
-    return teamNumber;
   }
 
   public String getName() {
@@ -86,18 +66,10 @@ public class Player {
     return position;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  public void setAnchorageNumber(int anchorageNumber) {
-    this.anchorageNumber = anchorageNumber;
-  }
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   public void setSkillPoints(int skillPoints) {
     this.skillPoints = skillPoints;
-  }
-
-  public void setTeamNumber(int teamNumber) {
-    this.teamNumber = teamNumber;
   }
 
   public void setName(String name) {

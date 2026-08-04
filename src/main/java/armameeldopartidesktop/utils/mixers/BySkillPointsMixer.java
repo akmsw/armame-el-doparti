@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import java.util.stream.Collectors;
 
+import armameeldopartidesktop.models.Anchorage;
 import armameeldopartidesktop.models.Player;
 import armameeldopartidesktop.models.Team;
 import armameeldopartidesktop.models.enums.Error;
@@ -22,11 +22,11 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class BySkillPointsMixer extends BasicPlayersMixer {
+public class BySkillPointsMixer extends BasicMixer {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -62,21 +62,18 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
       List<Player> playersSet = new ArrayList<>(playersMap.get(position));
 
       playersSet.sort(comparingInt(Player::getSkillPoints).reversed()); // Players sorted highest to lowest
-
-      teams.sort(comparingInt(Team::getTeamSkill)); // Teams sorted lowest to highest
+      teams.sort(comparingInt(Team::getTeamSkill));                     // Teams sorted lowest to highest
 
       if (playersSet.size() == 2) {
-        for (int teamIndex = 0; teamIndex < teams.size(); teamIndex++) {
-          teams.get(teamIndex)
-               .getTeamPlayers()
+        for (int teamNumber = 0; teamNumber < Constants.TEAMS_TOTAL; teamNumber++) {
+          teams.get(teamNumber)
+               .getPlayers()
                .get(position)
-               .add(playersSet.get(teamIndex));
+               .add(playersSet.get(teamNumber));
         }
-
-        continue;
+      } else {
+        distributeSubsets(teams, playersSet, position);
       }
-
-      distributeSubsets(teams, playersSet, position);
     }
 
     if (!CommonFunctions.teamsSkillPointsAreEqual(teams)) {
@@ -101,24 +98,22 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
    */
   @Override
   public List<Team> withAnchorages(List<Team> teams) {
-    for (List<Player> anchorage : CommonFunctions.getAnchorages()) {
+    for (Anchorage anchorage : CommonFields.getAnchorages()) {
       teams.sort(comparingInt(Team::getTeamSkill));
 
-      int availableTeamNumber = getAvailableTeam(teams, team -> anchorageCanBeAdded(team, anchorage));
+      int availableTeamNumber = getAvailableTeamNumber(teams, team -> anchorageCanBeAdded(team, anchorage));
 
       /*
        * At this point, the anchorages are guaranteed to be possible to distribute by {@link armameeldoparti.controllers.AnchoragesController}. Therefore, if at this point we can't find any available team to add the
        * current anchorage, then something went wrong.
        */
       if (availableTeamNumber == Constants.ERROR_CODE_NO_AVAILABLE_TEAM) {
-        CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_NO_AVAILABLE_TEAM));
+        CommonFunctions.exitProgram(Error.ERROR_INTERNAL, new IllegalStateException(Constants.MSG_ERROR_DEBUG_NO_AVAILABLE_TEAM));
       }
 
-      for (Player player : anchorage) {
-        player.setTeamNumber(teams.get(availableTeamNumber).getTeamNumber());
-
+      for (Player player : anchorage.getPlayers()) {
         teams.get(availableTeamNumber)
-             .getTeamPlayers()
+             .getPlayers()
              .get(player.getPosition())
              .add(player);
       }
@@ -128,7 +123,11 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
                                                                       .values()
                                                                       .stream()
                                                                       .flatMap(List::stream)
-                                                                      .filter(player -> player.getTeamNumber() == Constants.PLAYER_NO_TEAM_ASSIGNED)
+                                                                      .filter(player -> !teams.stream()
+                                                                                              .flatMap(team -> team.getPlayers().values().stream())
+                                                                                              .flatMap(List::stream)
+                                                                                              .collect(Collectors.toSet())
+                                                                                              .contains(player))
                                                                       .collect(Collectors.groupingBy(Player::getPosition))
                                                                       .values());
 
@@ -154,10 +153,8 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
           teamNumber = 1;
         }
 
-        player.setTeamNumber(teamNumber + 1);
-
         teams.get(teamNumber)
-              .getTeamPlayers()
+              .getPlayers()
               .get(player.getPosition())
               .add(player);
       }
@@ -175,15 +172,17 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
   /**
    * Performs the subsets distribution in sets with 4+ players as explained in {@link #withoutAnchorages(List)}.
    *
-   * @param teams      Teams where to distribute the players.
-   * @param playersSet Current working players set.
+   * @param teams      Teams where to distribute the players, already sorted lowest to highest.
+   * @param playersSet Current working players set, already sorted highest to lowest.
    * @param position   Current working players position.
    */
   private void distributeSubsets(List<Team> teams, List<Player> playersSet, Position position) {
     List<List<Player>> playersSubsets = new ArrayList<>();
 
-    for (int playerIndex = 0; playerIndex < (playersSet.size() / 2); playerIndex++) {
-      playersSubsets.add(Arrays.asList(playersSet.get(playerIndex), playersSet.get(playersSet.size() - 1 - playerIndex)));
+    int halfSetSize = playersSet.size() / Constants.TEAMS_TOTAL;
+
+    for (int playerIndex = 0; playerIndex < halfSetSize; playerIndex++) {
+      playersSubsets.add(Arrays.asList(playersSet.get(playerIndex), playersSet.get(playersSet.size() - playerIndex - 1)));
     }
 
     // Subsets sorted lowest to highest
@@ -191,14 +190,11 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
                                                                    .mapToInt(Player::getSkillPoints)
                                                                    .reduce(0, Math::addExact)));
 
-    for (Team team : teams) {
-      for (Player player : playersSubsets.get(team.getTeamNumber() - 1)) {
-        player.setTeamNumber(team.getTeamNumber());
-      }
-
-      team.getTeamPlayers()
-          .get(position)
-          .addAll(playersSubsets.get(team.getTeamNumber() - 1));
+    for (int teamNumber = 0; teamNumber < Constants.TEAMS_TOTAL; teamNumber++) {
+      teams.get(teamNumber)
+           .getPlayers()
+           .get(position)
+           .addAll(playersSubsets.get(teamNumber));
     }
   }
 
@@ -209,27 +205,42 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
    *
    * <p>If the new skill difference is 0, the method returns (the best distribution has been found).
    *
-   * <p>If the new skill difference is greater than or equal to the current skill difference, the players are swapped back.
+   * <p>If the new skill difference is greater than or equal to the current skill difference, the swap is reverted.
    *
-   * <p>If the new skill difference is less than the current skill difference, the current skill difference is updated and it continues trying to find a better distribution.
+   * <p>If the new skill difference is less than the current skill difference, the swap is kept and it continues trying to find a better distribution.
+   *
+   * <p>The "java:S3776" warning is suppressed since this method is already as simple as possible while keeping a good performance.
    *
    * @param teams Teams where to check the players swaps.
    */
+  @SuppressWarnings("java:S3776")
   private void checkPlayersSwap(List<Team> teams) {
+    List<Player> anchoredPlayers = CommonFields.getAnchorages()
+                                               .stream()
+                                               .flatMap(anchorage -> anchorage.getPlayers().stream())
+                                               .toList();
+
     int currentSkillDifference = CommonFunctions.getTeamsSkillDifference(teams);
 
     for (Position position : Position.values()) {
-      List<Player> team1Players = teams.get(0).getTeamPlayers().get(position);
-      List<Player> team2Players = teams.get(1).getTeamPlayers().get(position);
+      List<Player> team1PlayersInPosition            = teams.get(0).getPlayers().get(position);
+      List<Player> team1PlayersNonAnchoredInPosition = team1PlayersInPosition.stream().filter(player -> !anchoredPlayers.contains(player)).toList();
 
-      for (Player playerTeam1 : team1Players.stream().filter(player -> !player.isAnchored()).toList()) {
-        int playerTeam1Index = team1Players.indexOf(playerTeam1);
+      List<Player> team2PlayersInPosition            = teams.get(1).getPlayers().get(position);
+      List<Player> team2PlayersNonAnchoredInPosition = team2PlayersInPosition.stream().filter(player -> !anchoredPlayers.contains(player)).toList();
 
-        for (Player playerTeam2 : team2Players.stream().filter(player -> !player.isAnchored()).toList()) {
-          int playerTeam2Index = team2Players.indexOf(playerTeam2);
+      if (team1PlayersNonAnchoredInPosition.isEmpty() || team2PlayersNonAnchoredInPosition.isEmpty()) {
+        continue;
+      }
 
-          team1Players.set(playerTeam1Index, playerTeam2);
-          team2Players.set(playerTeam2Index, playerTeam1);
+      for (Player playerTeam1 : team1PlayersNonAnchoredInPosition) {
+        int playerTeam1Index = team1PlayersInPosition.indexOf(playerTeam1);
+
+        for (Player playerTeam2 : team2PlayersNonAnchoredInPosition) {
+          int playerTeam2Index = team2PlayersInPosition.indexOf(playerTeam2);
+
+          team1PlayersInPosition.set(playerTeam1Index, playerTeam2);
+          team2PlayersInPosition.set(playerTeam2Index, playerTeam1);
 
           int newSkillDifference = CommonFunctions.getTeamsSkillDifference(teams);
 
@@ -238,8 +249,8 @@ public class BySkillPointsMixer extends BasicPlayersMixer {
           }
 
           if (newSkillDifference >= currentSkillDifference) {
-            team1Players.set(playerTeam1Index, playerTeam1);
-            team2Players.set(playerTeam2Index, playerTeam2);
+            team1PlayersInPosition.set(playerTeam1Index, playerTeam1);
+            team2PlayersInPosition.set(playerTeam2Index, playerTeam2);
 
             continue;
           }

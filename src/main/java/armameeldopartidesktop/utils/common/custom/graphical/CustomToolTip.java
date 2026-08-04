@@ -16,7 +16,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JToolTip;
 import javax.swing.SwingUtilities;
-
 import javax.swing.border.EmptyBorder;
 
 import armameeldopartidesktop.models.enums.Error;
@@ -33,12 +32,12 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomToolTip extends JToolTip {
+public class CustomToolTip extends JToolTip implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Builds a basic tooltip using the established program aesthetics.
+   * Builds a custom tooltip that fits the overall program aesthetics.
    *
    * @param component The component that will contain the tooltip.
    */
@@ -59,16 +58,6 @@ public class CustomToolTip extends JToolTip {
     setUpGraphicalProperties();
   }
 
-  // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * Configures the graphical properties for the tooltip in order to fit the program aesthetics.
-   */
-  private void setUpGraphicalProperties() {
-    setOpaque(false);
-    setBorder(new EmptyBorder(Constants.INSETS_TOOLTIP));
-  }
-
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
@@ -80,7 +69,7 @@ public class CustomToolTip extends JToolTip {
 
     Window window = SwingUtilities.windowForComponent(this);
 
-    if (window != null && !(window instanceof JFrame)) {
+    if ((window != null) && !(window instanceof JFrame)) {
       Component parent = getParent();
 
       if (parent instanceof JComponent parentComponent) {
@@ -134,5 +123,11 @@ public class CustomToolTip extends JToolTip {
     Insets insets = getInsets();
 
     return new Dimension((fontMetric.stringWidth(getTipText()) + insets.left + insets.right), (fontMetric.getHeight() + insets.top + insets.bottom));
+  }
+
+  @Override
+  public void setUpGraphicalProperties() {
+    setOpaque(false);
+    setBorder(new EmptyBorder(Constants.INSETS_TOOLTIP));
   }
 }

@@ -1,10 +1,7 @@
 package armameeldopartidesktop.views;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
-import armameeldopartidesktop.utils.common.Constants;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -12,53 +9,63 @@ import net.miginfocom.swing.MigLayout;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 2.0.0
  *
  * @author Bonino, Francisco Ignacio.
  */
-public abstract class View extends JFrame {
+public abstract class View extends JPanel {
 
-  // ---------- Protected fields --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  protected JPanel masterPanel;
+  private String title;
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Basic view constructor.
    *
-   * @param frameTitle                   The frame title.
-   * @param masterPanelLayoutConstraints The layout constraints for the view's master panel.
+   * @param title             The view title.
+   * @param layoutConstraints The view layout constraints.
    */
-  protected View(String frameTitle, String masterPanelLayoutConstraints) {
-    setMasterPanel(new JPanel(new MigLayout(masterPanelLayoutConstraints)));
-    setResizable(false);
-    setTitle(frameTitle);
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setIconImage(Constants.ICON_MAIN_SCALED.getImage());
+  protected View(String title, String layoutConstraints) {
+    setTitle(title);
+    setLayout(new MigLayout(layoutConstraints));
+    setOpaque(true);
+  }
+
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Refreshes the view to reflect any changes.
+   */
+  public void refreshView() {
+    revalidate();
+    repaint();
   }
 
   // ---------- Abstract protected methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Initializes the view interface.
+   * Initializes the view's interface.
+   *
+   * <p>All the components of the view should be added to the view in this method.
    */
   protected abstract void initializeInterface();
 
   /**
-   * Adds the buttons to their corresponding panel.
+   * Adds the buttons.
    */
   protected abstract void addButtons();
 
-  // ---------- Getters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public getters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  public JPanel getMasterPanel() {
-    return masterPanel;
+  public String getTitle() {
+    return title;
   }
 
-  // ---------- Setters -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public setters ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  public void setMasterPanel(JPanel masterPanel) {
-    this.masterPanel = masterPanel;
+  public void setTitle(String title) {
+    this.title = title;
   }
 }

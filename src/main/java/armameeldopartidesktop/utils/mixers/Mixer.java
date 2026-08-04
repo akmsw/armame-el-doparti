@@ -5,17 +5,17 @@ import java.util.List;
 import armameeldopartidesktop.models.Team;
 
 /**
- * Interface that specifies the players distribution methods.
+ * An interface that specifies the possible player distribution methods.
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
-public interface PlayersMixer {
+public interface Mixer {
 
-  // ---------- Abstract public methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Distributes the players without considering anchorages.

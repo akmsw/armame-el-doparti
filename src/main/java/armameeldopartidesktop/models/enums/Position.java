@@ -1,7 +1,7 @@
 package armameeldopartidesktop.models.enums;
 
 /**
- * Possible player positions.
+ * Enum that lists all the possible positions of a player in a team.
  *
  * @since 1.0.0
  *

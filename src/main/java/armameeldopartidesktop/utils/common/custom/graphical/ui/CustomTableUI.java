@@ -8,13 +8,9 @@ import java.awt.Graphics2D;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.plaf.ComponentUI;
-
 import javax.swing.plaf.basic.BasicTableUI;
-
 import javax.swing.table.DefaultTableCellRenderer;
 
 import armameeldopartidesktop.utils.common.Constants;
@@ -30,9 +26,11 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public class CustomTableUI extends BasicTableUI {
 
-  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Creates a new custom table UI that fits the overall program aesthetics.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom table UI.
