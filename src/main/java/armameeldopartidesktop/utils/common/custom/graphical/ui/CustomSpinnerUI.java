@@ -61,8 +61,14 @@ public class CustomSpinnerUI extends BasicSpinnerUI {
       }
     );
 
-    JFormattedTextField spinnerTextField = ((DefaultEditor) spinner.getEditor()).getTextField();
+    JComponent editor = spinner.getEditor();
 
+    JFormattedTextField spinnerTextField = ((DefaultEditor) editor).getTextField();
+
+    editor.setOpaque(false);
+
+    spinnerTextField.setOpaque(false);
+    spinnerTextField.setBorder(null);
     spinnerTextField.setEditable(false);
     spinnerTextField.setCaret(
       new DefaultCaret() {
