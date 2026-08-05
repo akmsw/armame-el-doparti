@@ -23,7 +23,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomArrowButton;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
@@ -61,8 +61,14 @@ public class CustomSpinnerUI extends BasicSpinnerUI {
       }
     );
 
-    JFormattedTextField spinnerTextField = ((DefaultEditor) spinner.getEditor()).getTextField();
+    JComponent editor = spinner.getEditor();
 
+    JFormattedTextField spinnerTextField = ((DefaultEditor) editor).getTextField();
+
+    editor.setOpaque(false);
+
+    spinnerTextField.setOpaque(false);
+    spinnerTextField.setBorder(null);
     spinnerTextField.setEditable(false);
     spinnerTextField.setCaret(
       new DefaultCaret() {
