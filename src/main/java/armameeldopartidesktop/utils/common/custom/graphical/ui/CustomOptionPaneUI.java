@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.util.Arrays;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -14,7 +15,6 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -90,7 +90,9 @@ public class CustomOptionPaneUI extends BasicOptionPaneUI {
     buttonPanel.setOpaque(false);
 
     for (Object buttonText : buttonsStrings) {
-      CustomButton customButton = new CustomButton((String) buttonText, Constants.ROUNDED_BORDER_ARC_BUTTON_DIALOG);
+      JButton customButton = new JButton((String) buttonText);
+
+      CustomButtonUI.setArc(customButton, Constants.ROUNDED_BORDER_ARC_BUTTON_DIALOG);
 
       customButton.setMinimumSize(new Dimension(Constants.SIZE_BUTTON_DIALOG_MIN_WIDTH, Constants.SIZE_BUTTON_DIALOG_MIN_HEIGHT));
       customButton.addActionListener(

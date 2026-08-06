@@ -17,7 +17,6 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
 
@@ -91,11 +90,11 @@ public class AnchoragesView extends View {
 
   @Override
   protected void addButtons() {
-    setBackButton(new CustomButton("Atrás"));
-    setDeleteAnchorageButton(new CustomButton("Borrar un anclaje"));
-    setClearAnchoragesButton(new CustomButton("Limpiar anclajes"));
-    setFinishButton(new CustomButton("Finalizar"));
-    setNewAnchorageButton(new CustomButton("Anclar"));
+    setBackButton(new JButton("Atrás"));
+    setDeleteAnchorageButton(new JButton("Borrar un anclaje"));
+    setClearAnchoragesButton(new JButton("Limpiar anclajes"));
+    setFinishButton(new JButton("Finalizar"));
+    setNewAnchorageButton(new JButton("Anclar"));
 
     anchorageButtons.add(finishButton);
     anchorageButtons.add(newAnchorageButton);

@@ -7,7 +7,6 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
 
@@ -66,9 +65,9 @@ public class HelpView extends View {
 
   @Override
   protected void addButtons() {
-    setPreviousPageButton(new CustomButton("Anterior"));
-    setNextPageButton(new CustomButton("Siguiente"));
-    setBackButton(new CustomButton("Volver al menú principal"));
+    setPreviousPageButton(new JButton("Anterior"));
+    setNextPageButton(new JButton("Siguiente"));
+    setBackButton(new JButton("Volver al menú principal"));
 
     add(previousPageButton, new CC().width("50%").split());
     add(nextPageButton, new CC().width("50%").wrap());

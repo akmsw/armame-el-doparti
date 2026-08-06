@@ -7,7 +7,6 @@ import armameeldopartidesktop.models.enums.Distribution;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 
 /**
  * Results view class.
@@ -35,8 +34,8 @@ public class ResultsView extends View {
   public ResultsView() {
     super(getUpdatedFrameTitle(), Constants.MIG_LAYOUT_WRAP);
 
-    setBackButton(new CustomButton("Atrás"));
-    setRemixButton(new CustomButton("Redistribuir"));
+    setBackButton(new JButton("Atrás"));
+    setRemixButton(new JButton("Redistribuir"));
   }
 
   // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

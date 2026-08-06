@@ -22,7 +22,6 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomComboBox;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
@@ -109,8 +108,8 @@ public class NamesInputView extends View {
 
   @Override
   protected void addButtons() {
-    setMixButton(new CustomButton("Distribuir"));
-    setBackButton(new CustomButton("Atrás"));
+    setMixButton(new JButton("Distribuir"));
+    setBackButton(new JButton("Atrás"));
 
     rightPanel.add(mixButton, Constants.MIG_LAYOUT_GROWX);
     rightPanel.add(backButton, Constants.MIG_LAYOUT_GROWX);

@@ -38,6 +38,7 @@ import armameeldopartidesktop.models.enums.ProgramView;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomButtonUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomCheckBoxUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomOptionPaneUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomRadioButtonUI;
@@ -170,6 +171,7 @@ public final class Main {
    * Sets up the general graphical properties of the program.
    */
   private static void setUpGeneralGraphicalProperties() {
+    UIManager.put("ButtonUI"                     , CustomButtonUI.class.getName());
     UIManager.put("CheckBoxUI"                   , CustomCheckBoxUI.class.getName());
     UIManager.put("ComboBox.background"          , Constants.COLOR_GREEN_MEDIUM);
     UIManager.put("ComboBox.foreground"          , Color.WHITE);
