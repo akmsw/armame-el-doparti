@@ -24,7 +24,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomTableUI extends BasicTableUI {
+public final class CustomTableUI extends BasicTableUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

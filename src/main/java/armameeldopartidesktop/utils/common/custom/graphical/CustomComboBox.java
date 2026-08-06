@@ -28,7 +28,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomComboBox<E> extends JComboBox<E> implements CustomComponent {
+public final class CustomComboBox<E> extends JComboBox<E> implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

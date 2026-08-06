@@ -26,7 +26,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomOptionPaneUI extends BasicOptionPaneUI {
+public final class CustomOptionPaneUI extends BasicOptionPaneUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

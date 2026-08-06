@@ -32,7 +32,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomToolTip extends JToolTip implements CustomComponent {
+public final class CustomToolTip extends JToolTip implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

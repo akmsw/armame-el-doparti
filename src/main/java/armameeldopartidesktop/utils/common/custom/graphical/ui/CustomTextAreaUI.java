@@ -16,7 +16,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomTextAreaUI extends BasicTextAreaUI {
+public final class CustomTextAreaUI extends BasicTextAreaUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -35,7 +35,7 @@ import armameeldopartidesktop.views.ResultsView;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class ResultsController extends Controller<ResultsView> {
+public final class ResultsController extends Controller<ResultsView> {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

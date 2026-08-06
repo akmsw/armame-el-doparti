@@ -25,7 +25,7 @@ import armameeldopartidesktop.views.HelpView;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class HelpController extends Controller<HelpView> {
+public final class HelpController extends Controller<HelpView> {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

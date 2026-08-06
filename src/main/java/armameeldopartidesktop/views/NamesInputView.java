@@ -38,7 +38,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class NamesInputView extends View {
+public final class NamesInputView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -18,7 +18,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomSeparatorUI extends SeparatorUI {
+public final class CustomSeparatorUI extends SeparatorUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

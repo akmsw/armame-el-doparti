@@ -30,7 +30,7 @@ import armameeldopartidesktop.views.AnchoragesView;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class AnchoragesController extends Controller<AnchoragesView> {
+public final class AnchoragesController extends Controller<AnchoragesView> {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

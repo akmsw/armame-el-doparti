@@ -22,7 +22,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomArrowButton extends BasicArrowButton implements CustomComponent {
+public final class CustomArrowButton extends BasicArrowButton implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

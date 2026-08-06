@@ -26,7 +26,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class BySkillPointsMixer extends BasicMixer {
+public final class BySkillPointsMixer extends BasicMixer {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -27,7 +27,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomArrowButton;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomSpinnerUI extends BasicSpinnerUI {
+public final class CustomSpinnerUI extends BasicSpinnerUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

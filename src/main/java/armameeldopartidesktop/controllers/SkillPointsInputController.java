@@ -17,7 +17,7 @@ import armameeldopartidesktop.views.SkillPointsInputView;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class SkillPointsInputController extends Controller<SkillPointsInputView> {
+public final class SkillPointsInputController extends Controller<SkillPointsInputView> {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

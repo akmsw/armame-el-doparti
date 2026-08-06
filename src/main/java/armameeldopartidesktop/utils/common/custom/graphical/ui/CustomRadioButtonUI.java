@@ -16,7 +16,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomRadioButtonUI extends BasicRadioButtonUI {
+public final class CustomRadioButtonUI extends BasicRadioButtonUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -28,7 +28,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class SkillPointsInputView extends View {
+public final class SkillPointsInputView extends View {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

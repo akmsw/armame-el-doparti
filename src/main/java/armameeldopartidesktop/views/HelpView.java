@@ -21,7 +21,7 @@ import net.miginfocom.layout.CC;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class HelpView extends View {
+public final class HelpView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

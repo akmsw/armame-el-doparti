@@ -31,7 +31,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class AnchoragesView extends View {
+public final class AnchoragesView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

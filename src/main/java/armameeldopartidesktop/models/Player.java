@@ -12,7 +12,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class Player {
+public final class Player {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

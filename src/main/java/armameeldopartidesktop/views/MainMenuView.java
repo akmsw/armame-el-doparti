@@ -20,7 +20,7 @@ import net.miginfocom.layout.CC;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class MainMenuView extends View {
+public final class MainMenuView extends View {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

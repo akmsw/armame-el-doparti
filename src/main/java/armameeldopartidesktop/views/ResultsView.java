@@ -17,7 +17,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class ResultsView extends View {
+public final class ResultsView extends View {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

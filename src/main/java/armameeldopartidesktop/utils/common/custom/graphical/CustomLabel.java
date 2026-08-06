@@ -20,7 +20,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomLabel extends JLabel implements CustomComponent {
+public final class CustomLabel extends JLabel implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

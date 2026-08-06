@@ -16,7 +16,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomCheckBoxUI extends BasicCheckBoxUI {
+public final class CustomCheckBoxUI extends BasicCheckBoxUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

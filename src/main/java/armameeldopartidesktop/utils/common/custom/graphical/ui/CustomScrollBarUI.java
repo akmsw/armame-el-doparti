@@ -21,7 +21,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomArrowButton;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomScrollBarUI extends BasicScrollBarUI {
+public final class CustomScrollBarUI extends BasicScrollBarUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

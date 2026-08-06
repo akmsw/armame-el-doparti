@@ -17,7 +17,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomTextField extends JTextField implements CustomComponent {
+public final class CustomTextField extends JTextField implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

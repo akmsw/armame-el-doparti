@@ -19,7 +19,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomScrollPane extends JScrollPane implements CustomComponent {
+public final class CustomScrollPane extends JScrollPane implements CustomComponent {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
