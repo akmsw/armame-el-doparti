@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.SeparatorUI;
+import javax.swing.plaf.basic.BasicSeparatorUI;
 
 import armameeldopartidesktop.utils.common.Constants;
 
@@ -18,7 +18,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public final class CustomSeparatorUI extends SeparatorUI {
+public final class CustomSeparatorUI extends BasicSeparatorUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
