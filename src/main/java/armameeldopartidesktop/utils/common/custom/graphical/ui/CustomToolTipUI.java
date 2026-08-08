@@ -2,6 +2,7 @@ package armameeldopartidesktop.utils.common.custom.graphical.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -60,11 +61,26 @@ public final class CustomToolTipUI extends BasicToolTipUI {
       graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
       graphics2d.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
       graphics2d.fillRoundRect(0, 0, component.getWidth(), component.getHeight(), Constants.ROUNDED_BORDER_ARC_TOOLTIP, Constants.ROUNDED_BORDER_ARC_TOOLTIP);
+
+      JToolTip toolTip = (JToolTip) component;
+
+      String text = toolTip.getTipText();
+
+      if ((text != null) && !text.isBlank()) {
+        graphics2d.setFont(component.getFont());
+
+        FontMetrics fontMetrics = graphics2d.getFontMetrics();
+
+        int textWidth = fontMetrics.stringWidth(text);
+        int textX     = (component.getWidth() - textWidth) / 2;
+        int textY     = ((component.getHeight() - fontMetrics.getHeight()) / 2) + fontMetrics.getAscent();
+
+        graphics2d.setColor(component.getForeground());
+        graphics2d.drawString(text, textX, textY);
+      }
     } finally {
       graphics2d.dispose();
     }
-
-    super.paint(graphics, component);
   }
 
   @Override
