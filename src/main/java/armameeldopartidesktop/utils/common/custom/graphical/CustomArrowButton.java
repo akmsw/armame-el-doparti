@@ -51,12 +51,12 @@ public final class CustomArrowButton extends BasicArrowButton implements CustomC
   public void paint(Graphics graphics) {
     try {
       int buttonHeight = getHeight();
-      int buttonWidth = getWidth();
+      int buttonWidth  = getWidth();
 
       double buttonHeight25 = buttonHeight * 0.25;
       double buttonHeight75 = buttonHeight * 0.75;
-      double buttonWidth25 = buttonWidth * 0.25;
-      double buttonWidth75 = buttonWidth * 0.75;
+      double buttonWidth25  = buttonWidth * 0.25;
+      double buttonWidth75  = buttonWidth * 0.75;
 
       int[] pointsX;
       int[] pointsY;
