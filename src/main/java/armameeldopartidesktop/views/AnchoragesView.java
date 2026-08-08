@@ -18,7 +18,6 @@ import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -71,7 +70,7 @@ public final class AnchoragesView extends View {
     setLeftPanel(new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP_2)));
     setRightPanel(new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP)));
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
-    setScrollPane(new CustomScrollPane(textArea));
+    setScrollPane(new JScrollPane(textArea));
     setAnchorageButtons(new ArrayList<>());
     initializeCheckBoxesMap();
     initializeInterface();

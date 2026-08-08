@@ -22,10 +22,7 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomComboBox;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomTextField;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -143,7 +140,7 @@ public final class NamesInputView extends View {
    * Adds the combo box for position selection.
    */
   private void addComboBox() {
-    setComboBox(new CustomComboBox<>(Constants.OPTIONS_POSITIONS_COMBOBOX.toArray(new String[0])));
+    setComboBox(new JComboBox<>(Constants.OPTIONS_POSITIONS_COMBOBOX.toArray(new String[0])));
 
     leftTopPanel.add(comboBox, Constants.MIG_LAYOUT_GROWX);
   }
@@ -155,7 +152,7 @@ public final class NamesInputView extends View {
     for (Position position : Position.values()) {
       textFieldsMap.get(position)
                    .addAll(IntStream.range(0, (CommonFields.getPlayerLimitPerPosition().get(position) * 2))
-                                    .mapToObj(_ -> new CustomTextField())
+                                    .mapToObj(_ -> new JTextField())
                                     .toList());
     }
   }
@@ -205,7 +202,7 @@ public final class NamesInputView extends View {
    */
   private void addTextArea() {
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
-    setScrollPane(new CustomScrollPane(textArea));
+    setScrollPane(new JScrollPane(textArea));
 
     rightPanel.add(scrollPane, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_PUSH, Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
   }

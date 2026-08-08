@@ -40,13 +40,16 @@ import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomButtonUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomCheckBoxUI;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomComboBoxUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomOptionPaneUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomRadioButtonUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomScrollBarUI;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomScrollPaneUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomSeparatorUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomSpinnerUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTableUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTextAreaUI;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTextFieldUI;
 import armameeldopartidesktop.views.AnchoragesView;
 import armameeldopartidesktop.views.HelpView;
 import armameeldopartidesktop.views.MainMenuView;
@@ -173,6 +176,7 @@ public final class Main {
   private static void setUpGeneralGraphicalProperties() {
     UIManager.put("ButtonUI"                     , CustomButtonUI.class.getName());
     UIManager.put("CheckBoxUI"                   , CustomCheckBoxUI.class.getName());
+    UIManager.put("ComboBoxUI"                   , CustomComboBoxUI.class.getName());
     UIManager.put("ComboBox.background"          , Constants.COLOR_GREEN_MEDIUM);
     UIManager.put("ComboBox.foreground"          , Color.WHITE);
     UIManager.put("ComboBox.selectionBackground" , Constants.COLOR_GREEN_MEDIUM);
@@ -189,11 +193,13 @@ public final class Main {
     UIManager.put("Panel.background"             , Constants.COLOR_GREEN_LIGHT);
     UIManager.put("RadioButtonUI"                , CustomRadioButtonUI.class.getName());
     UIManager.put("ScrollBarUI"                  , CustomScrollBarUI.class.getName());
+    UIManager.put("ScrollPaneUI"                 , CustomScrollPaneUI.class.getName());
     UIManager.put("SeparatorUI"                  , CustomSeparatorUI.class.getName());
     UIManager.put("SpinnerUI"                    , CustomSpinnerUI.class.getName());
     UIManager.put("FormattedTextField.background", Constants.COLOR_GREEN_LIGHT_WHITE);
     UIManager.put("TableUI"                      , CustomTableUI.class.getName());
     UIManager.put("TextAreaUI"                   , CustomTextAreaUI.class.getName());
+    UIManager.put("TextFieldUI"                    , CustomTextFieldUI.class.getName());
     UIManager.put("TextField.selectionBackground", Constants.COLOR_GREEN_DARK_MEDIUM);
     UIManager.put("TextField.selectionForeground", Constants.COLOR_GREEN_LIGHT_WHITE);
 

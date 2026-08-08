@@ -8,7 +8,6 @@ import javax.swing.SwingConstants;
 
 import armameeldopartidesktop.utils.common.Constants;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
 
 import net.miginfocom.layout.CC;
 
@@ -90,7 +89,7 @@ public final class HelpView extends View {
    */
   private void addTextArea() {
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
-    setScrollPane(new CustomScrollPane(textArea));
+    setScrollPane(new JScrollPane(textArea));
 
     add(scrollPane, Constants.MIG_LAYOUT_GROW);
   }
