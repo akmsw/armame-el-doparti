@@ -200,7 +200,7 @@ public final class Main {
     UIManager.put("FormattedTextField.background", Constants.COLOR_GREEN_LIGHT_WHITE);
     UIManager.put("TableUI"                      , CustomTableUI.class.getName());
     UIManager.put("TextAreaUI"                   , CustomTextAreaUI.class.getName());
-    UIManager.put("TextFieldUI"                    , CustomTextFieldUI.class.getName());
+    UIManager.put("TextFieldUI"                  , CustomTextFieldUI.class.getName());
     UIManager.put("TextField.selectionBackground", Constants.COLOR_GREEN_DARK_MEDIUM);
     UIManager.put("TextField.selectionForeground", Constants.COLOR_GREEN_LIGHT_WHITE);
     UIManager.put("ToolTipUI"                    , CustomToolTipUI.class.getName());
