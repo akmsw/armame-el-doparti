@@ -50,6 +50,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomSpinnerUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTableUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTextAreaUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTextFieldUI;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomToolTipUI;
 import armameeldopartidesktop.views.AnchoragesView;
 import armameeldopartidesktop.views.HelpView;
 import armameeldopartidesktop.views.MainMenuView;
@@ -202,6 +203,7 @@ public final class Main {
     UIManager.put("TextFieldUI"                    , CustomTextFieldUI.class.getName());
     UIManager.put("TextField.selectionBackground", Constants.COLOR_GREEN_DARK_MEDIUM);
     UIManager.put("TextField.selectionForeground", Constants.COLOR_GREEN_LIGHT_WHITE);
+    UIManager.put("ToolTipUI"                    , CustomToolTipUI.class.getName());
 
     ToolTipManager.sharedInstance().setInitialDelay(Constants.DELAY_TOOLTIP_INITIAL);
     ToolTipManager.sharedInstance().setDismissDelay(Constants.DELAY_TOOLTIP_DISMISS);

@@ -86,6 +86,6 @@ public final class CustomLabel extends JLabel implements CustomComponent {
 
   @Override
   public JToolTip createToolTip() {
-    return new CustomToolTip(this);
+    return new CustomToolTip();
   }
 }
