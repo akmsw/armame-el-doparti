@@ -48,7 +48,7 @@ public abstract class View extends JPanel {
   /**
    * Initializes the view's graphical interface.
    *
-   * <p>All the components of the view should be added to the view in this method.
+   * <p>All the graphical components should be added to the view in this method.
    */
   protected abstract void initializeInterface();
 
