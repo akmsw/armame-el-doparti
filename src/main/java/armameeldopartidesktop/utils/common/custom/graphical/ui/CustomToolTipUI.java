@@ -29,7 +29,7 @@ public final class CustomToolTipUI extends BasicToolTipUI {
   // ---------- Public static methods -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Creates a new custom tooltip UI.
+   * Creates a new custom tooltip UI that fits the overall program aesthetics.
    *
    * <p>The "java:S1172" warning is suppressed since the argument is intentionally unused.
    *

@@ -36,7 +36,7 @@ public final class CustomComboBoxUI extends BasicComboBoxUI {
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Creates a new custom combo box UI.
+   * Creates a new custom combo box UI that fits the overall program aesthetics.
    *
    * <p>The "java:S1172" warning is suppressed since the argument is intentionally unused.
    *
