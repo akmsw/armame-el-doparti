@@ -45,5 +45,7 @@ public final class CustomSeparatorUI extends BasicSeparatorUI {
     graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
     graphics2d.fillRoundRect(0, (component.getHeight() / 2), component.getWidth(), 5, Constants.ROUNDED_BORDER_ARC_SEPARATOR, Constants.ROUNDED_BORDER_ARC_SEPARATOR);
     graphics2d.dispose();
+
+    super.paint(graphics, component);
   }
 }

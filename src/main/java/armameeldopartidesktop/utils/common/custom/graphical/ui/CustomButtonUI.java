@@ -62,17 +62,14 @@ public final class CustomButtonUI extends BasicButtonUI {
     button.setBorderPainted(false);
     button.setOpaque(false);
     button.setRolloverEnabled(true);
-
-    if (!(button.getBorder() instanceof EmptyBorder)) {
-      button.setBorder(
-        new EmptyBorder(
-          Constants.INSETS_GENERAL.top,
-          Constants.INSETS_GENERAL.left,
-          Constants.INSETS_GENERAL.bottom,
-          Constants.INSETS_GENERAL.right
-        )
-      );
-    }
+    button.setBorder(
+      new EmptyBorder(
+        Constants.INSETS_GENERAL.top,
+        Constants.INSETS_GENERAL.left,
+        Constants.INSETS_GENERAL.bottom,
+        Constants.INSETS_GENERAL.right
+      )
+    );
 
     setArc(button, Constants.ROUNDED_BORDER_ARC_GENERAL);
   }
@@ -83,25 +80,21 @@ public final class CustomButtonUI extends BasicButtonUI {
 
     Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-    try {
-      int arc = getArc(button);
+    int arc = getArc(button);
 
-      graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-
-      if (!button.isEnabled()) {
-        graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
-      } else if (button.getModel().isPressed()) {
-        graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
-      } else if (button.getModel().isRollover()) {
-        graphics2d.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
-      } else {
-        graphics2d.setColor(button.getBackground());
-      }
-
-      graphics2d.fill(new RoundRectangle2D.Double(0, 0, ((double) component.getWidth()) - 1, ((double) component.getHeight()) - 1, arc, arc));
-    } finally {
-      graphics2d.dispose();
+    if (!button.isEnabled()) {
+      graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
+    } else if (button.getModel().isPressed()) {
+      graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
+    } else if (button.getModel().isRollover()) {
+      graphics2d.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
+    } else {
+      graphics2d.setColor(button.getBackground());
     }
+
+    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+    graphics2d.fill(new RoundRectangle2D.Double(0, 0, ((double) component.getWidth()) - 1, ((double) component.getHeight()) - 1, arc, arc));
+    graphics2d.dispose();
 
     super.paint(graphics, component);
   }
@@ -110,19 +103,16 @@ public final class CustomButtonUI extends BasicButtonUI {
   protected void paintText(Graphics graphics, AbstractButton button, Rectangle textRect, String text) {
     Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-    try {
-      FontMetrics fontMetrics = graphics2d.getFontMetrics();
+    FontMetrics fontMetrics = graphics2d.getFontMetrics();
 
-      graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-      graphics2d.setColor(button.isEnabled() ? button.getForeground() : Constants.COLOR_GREEN_LIGHT);
-      graphics2d.drawString(text, textRect.x, (textRect.y + fontMetrics.getAscent()));
-    } finally {
-      graphics2d.dispose();
-    }
+    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+    graphics2d.setColor(button.isEnabled() ? button.getForeground() : Constants.COLOR_GREEN_LIGHT);
+    graphics2d.drawString(text, textRect.x, (textRect.y + fontMetrics.getAscent()));
+    graphics2d.dispose();
   }
 
   @Override
-  protected void paintFocus(Graphics graphics, AbstractButton button, Rectangle viewRect, Rectangle textRect, Rectangle iconRect){
+  protected void paintFocus(Graphics graphics, AbstractButton button, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
     // Intentionally left empty.
   }
 

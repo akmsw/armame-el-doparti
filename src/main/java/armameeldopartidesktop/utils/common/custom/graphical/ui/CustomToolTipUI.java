@@ -57,30 +57,27 @@ public final class CustomToolTipUI extends BasicToolTipUI {
   public void paint(Graphics graphics, JComponent component) {
     Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-    try {
-      graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-      graphics2d.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
-      graphics2d.fillRoundRect(0, 0, component.getWidth(), component.getHeight(), Constants.ROUNDED_BORDER_ARC_TOOLTIP, Constants.ROUNDED_BORDER_ARC_TOOLTIP);
+    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+    graphics2d.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
+    graphics2d.fillRoundRect(0, 0, component.getWidth(), component.getHeight(), Constants.ROUNDED_BORDER_ARC_TOOLTIP, Constants.ROUNDED_BORDER_ARC_TOOLTIP);
 
-      JToolTip toolTip = (JToolTip) component;
+    String text = ((JToolTip) component).getTipText();
 
-      String text = toolTip.getTipText();
+    if ((text != null) && !text.isBlank()) {
+      graphics2d.setFont(component.getFont());
 
-      if ((text != null) && !text.isBlank()) {
-        graphics2d.setFont(component.getFont());
+      FontMetrics fontMetrics = graphics2d.getFontMetrics();
 
-        FontMetrics fontMetrics = graphics2d.getFontMetrics();
+      int textX = (component.getWidth()   - fontMetrics.stringWidth(text)) / 2;
+      int textY = ((component.getHeight() - fontMetrics.getHeight()      ) / 2) + fontMetrics.getAscent();
 
-        int textWidth = fontMetrics.stringWidth(text);
-        int textX     = (component.getWidth() - textWidth) / 2;
-        int textY     = ((component.getHeight() - fontMetrics.getHeight()) / 2) + fontMetrics.getAscent();
-
-        graphics2d.setColor(component.getForeground());
-        graphics2d.drawString(text, textX, textY);
-      }
-    } finally {
-      graphics2d.dispose();
+      graphics2d.setColor(component.getForeground());
+      graphics2d.drawString(text, textX, textY);
     }
+
+    graphics2d.dispose();
+
+    super.paint(graphics, component);
   }
 
   @Override
@@ -102,8 +99,8 @@ public final class CustomToolTipUI extends BasicToolTipUI {
                               .getHeight();
 
     return new Dimension(
-      textWidth + insets.left + insets.right,
-      textHeight + insets.top + insets.bottom
+      textWidth  + insets.left + insets.right,
+      textHeight + insets.top  + insets.bottom
     );
   }
 }

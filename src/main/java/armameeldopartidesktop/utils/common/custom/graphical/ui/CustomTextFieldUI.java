@@ -56,14 +56,11 @@ public final class CustomTextFieldUI extends BasicTextFieldUI {
 
     Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-    try {
-      graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-      graphics2d.setColor(textField.getBackground());
-      graphics2d.fillRoundRect(0, 0, textField.getWidth() - 1, textField.getHeight() - 1, Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
-      graphics2d.drawRoundRect(0, 0, textField.getWidth() - 1, textField.getHeight() - 1, Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
-    } finally {
-      graphics2d.dispose();
-    }
+    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+    graphics2d.setColor(textField.getBackground());
+    graphics2d.fillRoundRect(0, 0, textField.getWidth() - 1, textField.getHeight() - 1, Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+    graphics2d.drawRoundRect(0, 0, textField.getWidth() - 1, textField.getHeight() - 1, Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+    graphics2d.dispose();
 
     super.paintSafely(graphics);
   }
