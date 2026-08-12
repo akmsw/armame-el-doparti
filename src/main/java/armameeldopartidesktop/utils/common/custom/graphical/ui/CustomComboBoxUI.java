@@ -107,8 +107,6 @@ public final class CustomComboBoxUI extends BasicComboBoxUI {
 
       @Override
       protected void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-
         Graphics2D graphics2d = (Graphics2D) graphics.create();
 
         graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
