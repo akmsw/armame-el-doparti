@@ -115,6 +115,8 @@ public final class CustomComboBoxUI extends BasicComboBoxUI {
         graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
         graphics2d.fillRoundRect(0, 0, getWidth(), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
         graphics2d.dispose();
+
+        super.paintComponent(graphics);
       }
     };
   }
