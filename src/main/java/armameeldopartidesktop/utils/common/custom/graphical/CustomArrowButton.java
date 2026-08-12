@@ -55,21 +55,21 @@ public final class CustomArrowButton extends BasicArrowButton implements CustomC
 
       double buttonHeight25 = buttonHeight * 0.25;
       double buttonHeight75 = buttonHeight * 0.75;
-      double buttonWidth25  = buttonWidth * 0.25;
-      double buttonWidth75  = buttonWidth * 0.75;
+      double buttonWidth25  = buttonWidth  * 0.25;
+      double buttonWidth75  = buttonWidth  * 0.75;
 
-      int[] pointsX;
-      int[] pointsY;
+      int [] pointsX;
+      int [] pointsY;
 
       switch (getDirection()) {
         case SwingConstants.NORTH -> {
-          pointsX = new int[] {
+          pointsX = new int [] {
             buttonWidth / 2,
             (int) buttonWidth75,
             (int) buttonWidth25
           };
 
-          pointsY = new int[] {
+          pointsY = new int [] {
             (int) buttonHeight25,
             (int) buttonHeight75,
             (int) buttonHeight75
@@ -77,13 +77,13 @@ public final class CustomArrowButton extends BasicArrowButton implements CustomC
         }
 
         case SwingConstants.SOUTH -> {
-          pointsX = new int[] {
+          pointsX = new int [] {
             buttonWidth / 2,
             (int) buttonWidth75,
             (int) buttonWidth25
           };
 
-          pointsY = new int[] {
+          pointsY = new int [] {
             (int) buttonHeight75,
             (int) buttonHeight25,
             (int) buttonHeight25
@@ -91,13 +91,13 @@ public final class CustomArrowButton extends BasicArrowButton implements CustomC
         }
 
         case SwingConstants.EAST -> {
-          pointsX = new int[] {
+          pointsX = new int [] {
             (int) buttonWidth75,
             (int) buttonWidth25,
             (int) buttonWidth25
           };
 
-          pointsY = new int[] {
+          pointsY = new int [] {
             buttonHeight / 2,
             (int) buttonHeight75,
             (int) buttonHeight25
@@ -105,13 +105,13 @@ public final class CustomArrowButton extends BasicArrowButton implements CustomC
         }
 
         case SwingConstants.WEST -> {
-          pointsX = new int[] {
+          pointsX = new int [] {
             (int) buttonWidth25,
             (int) buttonWidth75,
             (int) buttonWidth75
           };
 
-          pointsY = new int[] {
+          pointsY = new int [] {
             buttonHeight / 2,
             (int) buttonHeight25,
             (int) buttonHeight75
