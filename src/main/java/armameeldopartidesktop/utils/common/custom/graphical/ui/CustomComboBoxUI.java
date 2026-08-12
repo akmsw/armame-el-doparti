@@ -65,16 +65,13 @@ public final class CustomComboBoxUI extends BasicComboBoxUI {
   public void paint(Graphics graphics, JComponent component) {
     Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-    try {
-      graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-      graphics2d.setColor(component.getBackground());
-      graphics2d.fillRoundRect(0, 0, component.getWidth() - 1, component.getHeight() - 1, Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
-      graphics2d.drawRoundRect(0, 0, component.getWidth() - 1, component.getHeight() - 1, Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+    graphics2d.setColor(component.getBackground());
+    graphics2d.fillRoundRect(0, 0, component.getWidth() - 1, component.getHeight() - 1, Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+    graphics2d.drawRoundRect(0, 0, component.getWidth() - 1, component.getHeight() - 1, Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+    graphics2d.dispose();
 
-      super.paint(graphics2d, component);
-    } finally {
-      graphics2d.dispose();
-    }
+    super.paint(graphics, component);
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -102,26 +99,20 @@ public final class CustomComboBoxUI extends BasicComboBoxUI {
       protected void paintBorder(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-        try {
-          graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-          graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
-          graphics2d.drawRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
-        } finally {
-          graphics2d.dispose();
-        }
+        graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+        graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
+        graphics2d.drawRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+        graphics2d.dispose();
       }
 
       @Override
       protected void paintComponent(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-        try {
-          graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-          graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
-          graphics2d.fillRoundRect(0, 0, getWidth(), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
-        } finally {
-          graphics2d.dispose();
-        }
+        graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+        graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM);
+        graphics2d.fillRoundRect(0, 0, getWidth(), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+        graphics2d.dispose();
 
         super.paintComponent(graphics);
       }
@@ -148,13 +139,10 @@ public final class CustomComboBoxUI extends BasicComboBoxUI {
     protected void paintComponent(Graphics graphics) {
       Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-      try {
-        graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-        graphics2d.setColor(getBackground());
-        graphics2d.fillRoundRect(0, 0, getWidth(), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_COMBOBOX_SELECTOR, Constants.ROUNDED_BORDER_ARC_COMBOBOX_SELECTOR);
-      } finally {
-        graphics2d.dispose();
-      }
+      graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+      graphics2d.setColor(getBackground());
+      graphics2d.fillRoundRect(0, 0, getWidth(), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_COMBOBOX_SELECTOR, Constants.ROUNDED_BORDER_ARC_COMBOBOX_SELECTOR);
+      graphics2d.dispose();
 
       super.paintComponent(graphics);
     }

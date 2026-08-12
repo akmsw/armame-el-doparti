@@ -121,17 +121,17 @@ public final class CustomArrowButton extends BasicArrowButton implements CustomC
         default -> throw new IllegalArgumentException();
       }
 
-      if (getModel().isPressed()) {
-        graphics.setColor(Constants.COLOR_GREEN_MEDIUM_LIGHT);
-      } else if (getModel().isRollover()) {
-        graphics.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
-      } else {
-        graphics.setColor(isEnabled() ? getBackground() : Constants.COLOR_GREEN_MEDIUM);
-      }
-
       Polygon triangle = new Polygon(pointsX, pointsY, 3);
 
       Graphics2D graphics2d = (Graphics2D) graphics.create();
+
+      if (getModel().isPressed()) {
+        graphics2d.setColor(Constants.COLOR_GREEN_MEDIUM_LIGHT);
+      } else if (getModel().isRollover()) {
+        graphics2d.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
+      } else {
+        graphics2d.setColor(isEnabled() ? getBackground() : Constants.COLOR_GREEN_MEDIUM);
+      }
 
       graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
       graphics2d.setStroke(new BasicStroke(Constants.STROKE_BUTTON_ARROW, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));

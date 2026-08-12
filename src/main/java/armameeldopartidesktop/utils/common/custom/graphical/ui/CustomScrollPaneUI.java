@@ -43,12 +43,9 @@ public final class CustomScrollPaneUI extends BasicScrollPaneUI {
     JScrollPane scrollPane = (JScrollPane) component;
 
     scrollPane.setOpaque(false);
-
     scrollPane.setBorder(new EmptyBorder(Constants.INSETS_GENERAL));
-
     scrollPane.getViewport()
               .setBackground(Constants.COLOR_GREEN_LIGHT_WHITE);
-
     scrollPane.getVerticalScrollBar()
               .setOpaque(false);
   }
@@ -57,15 +54,11 @@ public final class CustomScrollPaneUI extends BasicScrollPaneUI {
   public void paint(Graphics graphics, JComponent component) {
     Graphics2D graphics2d = (Graphics2D) graphics.create();
 
-    try {
-      graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-      graphics2d.setColor(Constants.COLOR_GREEN_LIGHT_WHITE);
+    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+    graphics2d.setColor(Constants.COLOR_GREEN_LIGHT_WHITE);
+    graphics2d.fillRoundRect(0, 0, (component.getWidth() - 1), (component.getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
+    graphics2d.dispose();
 
-      graphics2d.fillRoundRect(0, 0, (component.getWidth() - 1), (component.getHeight() - 1), Constants.ROUNDED_BORDER_ARC_GENERAL, Constants.ROUNDED_BORDER_ARC_GENERAL);
-
-      super.paint(graphics2d, component);
-    } finally {
-      graphics2d.dispose();
-    }
+    super.paint(graphics, component);
   }
 }

@@ -116,7 +116,7 @@ public final class CustomOptionPaneUI extends BasicOptionPaneUI {
    *
    * @return An array with the strings for each button to be placed in the dialog based on the message type.
    */
-  private Object[] getButtonsForMessageType(int messageType) {
+  private Object [] getButtonsForMessageType(int messageType) {
     return switch (messageType) {
       case JOptionPane.QUESTION_MESSAGE -> new Object[] { UIManager.getString("OptionPane.yesButtonText"), UIManager.getString("OptionPane.noButtonText") };
       default -> new Object[] { UIManager.getString("OptionPane.okButtonText") };

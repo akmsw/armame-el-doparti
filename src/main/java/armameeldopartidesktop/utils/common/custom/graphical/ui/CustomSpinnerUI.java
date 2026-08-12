@@ -101,6 +101,8 @@ public final class CustomSpinnerUI extends BasicSpinnerUI {
     graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
     graphics2d.fillRoundRect(0, 0, component.getWidth(), component.getHeight(), Constants.ROUNDED_BORDER_ARC_SPINNER, Constants.ROUNDED_BORDER_ARC_SPINNER);
     graphics2d.dispose();
+
+    super.paint(graphics, component);
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

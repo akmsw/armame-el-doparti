@@ -88,6 +88,9 @@ public final class CustomTableUI extends BasicTableUI {
           graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
           graphics2d.setColor(getBackground());
           graphics2d.fillRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_TABLE_CELLS, Constants.ROUNDED_BORDER_ARC_TABLE_CELLS);
+          graphics2d.dispose();
+
+          super.paintComponent(graphics);
         }
       }
     );
