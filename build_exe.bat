@@ -8,4 +8,4 @@ jpackage ^
   --type app-image ^
   --icon ".\src\main\res\img\icons\main_icon.ico"
 
-pause
+if %errorlevel% neq 0 pause
