@@ -69,7 +69,7 @@ public final class CustomToolTipUI extends BasicToolTipUI {
       FontMetrics fontMetrics = graphics2d.getFontMetrics();
 
       int textX = (component.getWidth()   - fontMetrics.stringWidth(text)) / 2;
-      int textY = ((component.getHeight() - fontMetrics.getHeight()      ) / 2) + fontMetrics.getAscent();
+      int textY = ((component.getHeight() - fontMetrics.getHeight()      ) / 2) + fontMetrics.getMaxAscent();
 
       graphics2d.setColor(component.getForeground());
       graphics2d.drawString(text, textX, textY);
