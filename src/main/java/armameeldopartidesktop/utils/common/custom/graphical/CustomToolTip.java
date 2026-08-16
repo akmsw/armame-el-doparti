@@ -1,6 +1,5 @@
 package armameeldopartidesktop.utils.common.custom.graphical;
 
-import java.awt.Color;
 import java.awt.Insets;
 import java.awt.Window;
 
@@ -28,7 +27,7 @@ public final class CustomToolTip extends JToolTip {
     Window window = SwingUtilities.windowForComponent(this);
 
     if ((window != null) && !(window instanceof JFrame)) {
-      window.setBackground(new Color(0, 0, 0, 0));
+      window.setBackground(Constants.COLOR_TRANSPARENT);
     }
   }
 
