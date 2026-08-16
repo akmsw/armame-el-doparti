@@ -76,8 +76,6 @@ public final class CustomToolTipUI extends BasicToolTipUI {
     }
 
     graphics2d.dispose();
-
-    super.paint(graphics, component);
   }
 
   @Override
