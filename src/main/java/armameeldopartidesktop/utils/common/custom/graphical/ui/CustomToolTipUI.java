@@ -55,27 +55,25 @@ public final class CustomToolTipUI extends BasicToolTipUI {
 
   @Override
   public void paint(Graphics graphics, JComponent component) {
-    Graphics2D graphics2d = (Graphics2D) graphics.create();
-
-    graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
-    graphics2d.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
-    graphics2d.fillRoundRect(0, 0, component.getWidth(), component.getHeight(), Constants.ROUNDED_BORDER_ARC_TOOLTIP, Constants.ROUNDED_BORDER_ARC_TOOLTIP);
-
     String text = ((JToolTip) component).getTipText();
 
     if ((text != null) && !text.isBlank()) {
+      Graphics2D graphics2d = (Graphics2D) graphics.create();
+
+      graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
+      graphics2d.setColor(Constants.COLOR_GREEN_DARK_MEDIUM);
+      graphics2d.fillRoundRect(0, 0, component.getWidth(), component.getHeight(), Constants.ROUNDED_BORDER_ARC_TOOLTIP, Constants.ROUNDED_BORDER_ARC_TOOLTIP);
       graphics2d.setFont(component.getFont());
 
       FontMetrics fontMetrics = graphics2d.getFontMetrics();
 
       int textX = (component.getWidth()   - fontMetrics.stringWidth(text)) / 2;
-      int textY = ((component.getHeight() - fontMetrics.getHeight()      ) / 2) + fontMetrics.getAscent();
+      int textY = ((component.getHeight() - fontMetrics.getHeight()      ) / 2) + fontMetrics.getMaxAscent();
 
       graphics2d.setColor(component.getForeground());
       graphics2d.drawString(text, textX, textY);
+      graphics2d.dispose();
     }
-
-    graphics2d.dispose();
   }
 
   @Override
