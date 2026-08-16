@@ -73,7 +73,7 @@ public final class CustomOptionPaneUI extends BasicOptionPaneUI {
    * @see #getButtonsForMessageType(int)
    */
   @Override
-  protected void addButtonComponents(Container container, Object[] buttonsStrings, int initialIndex) {
+  protected void addButtonComponents(Container container, Object [] buttonsStrings, int initialIndex) {
     if ((buttonsStrings == null) || (buttonsStrings.length <= 0)) {
       return;
     }
@@ -118,8 +118,8 @@ public final class CustomOptionPaneUI extends BasicOptionPaneUI {
    */
   private Object [] getButtonsForMessageType(int messageType) {
     return switch (messageType) {
-      case JOptionPane.QUESTION_MESSAGE -> new Object[] { UIManager.getString("OptionPane.yesButtonText"), UIManager.getString("OptionPane.noButtonText") };
-      default -> new Object[] { UIManager.getString("OptionPane.okButtonText") };
+      case JOptionPane.QUESTION_MESSAGE -> new Object [] { UIManager.getString("OptionPane.yesButtonText"), UIManager.getString("OptionPane.noButtonText") };
+      default -> new Object [] { UIManager.getString("OptionPane.okButtonText") };
     };
   }
 }

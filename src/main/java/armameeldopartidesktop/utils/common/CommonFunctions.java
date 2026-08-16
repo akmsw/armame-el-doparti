@@ -168,9 +168,9 @@ public final class CommonFunctions {
    *
    * @return The integer indicating the option chosen by the user.
    *
-   * @see JOptionPane#showOptionDialog(Component, Object, String, int, int, Icon, Object[], Object)
+   * @see JOptionPane#showOptionDialog(Component, Object, String, int, int, Icon, Object [], Object)
    */
-  public static int showOptionDialog(Component parentComponent, String dialogMessage, Object[] dialogOptions) {
+  public static int showOptionDialog(Component parentComponent, String dialogMessage, Object [] dialogOptions) {
     return JOptionPane.showOptionDialog(parentComponent,
                                         dialogMessage,
                                         Constants.TITLE_MESSAGE_QUESTION,
