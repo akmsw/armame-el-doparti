@@ -43,7 +43,7 @@ public final class Player {
    *
    * @return A string representation of a Player object.
    *
-   * @see armameeldopartidesktop.utils.common.CommonFunctions#generateErrorReport(armameeldopartidesktop.models.enums.Error, Exception)
+   * @see armameeldopartidesktop.utils.common.CommonFunctions#generateErrorReport
    */
   @Override
   public String toString() {
