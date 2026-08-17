@@ -27,7 +27,7 @@ import armameeldopartidesktop.utils.common.Constants;
  */
 public final class CustomButtonUI extends BasicButtonUI {
 
-  // ---------- Constants ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   private static final String CLIENT_PROPERTY_ARC = "arc";
 
@@ -37,12 +37,13 @@ public final class CustomButtonUI extends BasicButtonUI {
    * Creates a new custom button UI that fits the overall program aesthetics.
    *
    * <p>The "java:S1172" warning is suppressed since the argument is intentionally unused.
+   * <p>The "java:S9149" warning is suppressed since this method hides the parent implementation for createUI.
    *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom button UI.
    */
-  @SuppressWarnings("java:S1172")
+  @SuppressWarnings({"java:S1172", "java:S9149"})
   public static ComponentUI createUI(JComponent component) {
     return new CustomButtonUI();
   }
