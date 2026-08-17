@@ -308,7 +308,7 @@ public final class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * Clears the anchorages made, if any.
    *
-   * @see #deleteAnchorage(int)
+   * @see #deleteAnchorage
    */
   private void clearAnchorages() {
     while (!CommonFields.getAnchorages().isEmpty()) {

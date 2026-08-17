@@ -73,7 +73,7 @@ public final class CustomOptionPaneUI extends BasicOptionPaneUI {
    * @param buttonsStrings An array with the strings for each button of the dialog.
    * @param initialIndex   An initial index used for validation, inherited from parent class method signature.
    *
-   * @see #getButtonsForMessageType(int)
+   * @see #getButtonsForMessageType
    */
   @Override
   protected void addButtonComponents(Container container, Object [] buttonsStrings, int initialIndex) {

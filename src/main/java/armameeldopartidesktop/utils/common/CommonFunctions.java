@@ -168,7 +168,7 @@ public final class CommonFunctions {
    *
    * @return The integer indicating the option chosen by the user.
    *
-   * @see JOptionPane#showOptionDialog(Component, Object, String, int, int, Icon, Object [], Object)
+   * @see JOptionPane#showOptionDialog
    */
   public static int showOptionDialog(Component parentComponent, String dialogMessage, Object [] dialogOptions) {
     return JOptionPane.showOptionDialog(parentComponent,
@@ -359,7 +359,7 @@ public final class CommonFunctions {
    *
    * @return The ImageIcon of the specified file.
    *
-   * @see #createImage(String)
+   * @see #createImage
    */
   public static ImageIcon createImageIcon(String iconFileName) {
     return createImage(Constants.PATH_ICO + iconFileName);

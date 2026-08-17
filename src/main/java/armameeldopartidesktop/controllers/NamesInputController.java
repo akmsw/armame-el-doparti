@@ -249,7 +249,7 @@ public final class NamesInputController extends Controller<NamesInputView> {
   /**
    * The mix button is enabled only when every condition needed to distribute the players is met.
    *
-   * @see #isReadyToDistribute()
+   * @see #isReadyToDistribute
    */
   private void validateMixButtonEnable() {
     view.getMixButton()
