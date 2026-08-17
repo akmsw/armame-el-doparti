@@ -18,7 +18,14 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public final class CustomToolTip extends JToolTip {
+public final class CustomToolTip extends JToolTip implements CustomComponent {
+
+  // ---------- Public methods ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  @Override
+  public void setUpGraphicalProperties() {
+    // Intentionally left empty.
+  }
 
   @Override
   public void addNotify() {
