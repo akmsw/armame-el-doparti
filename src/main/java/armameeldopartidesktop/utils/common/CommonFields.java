@@ -39,6 +39,7 @@ public final class CommonFields {
 
   private static Map<Position, Integer> playerLimitPerPosition;
   private static Map<Position, List<Player>> playersSets;
+  private static Map<ProgramView, View> viewsMap;
   private static Map<ProgramView, Controller<? extends View>> controllersMap;
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -78,6 +79,10 @@ public final class CommonFields {
 
   public static Map<Position, List<Player>> getPlayersSets() {
     return playersSets;
+  }
+
+  public static Map<ProgramView, View> getViewsMap() {
+    return viewsMap;
   }
 
   public static Map<ProgramView, Controller<? extends View>> getControllersMap() {
