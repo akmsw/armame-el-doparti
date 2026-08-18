@@ -210,7 +210,7 @@ public final class NamesInputController extends Controller<NamesInputView> {
     updateTextFields(Objects.requireNonNull(view.getComboBox().getSelectedItem(), Constants.MSG_ERROR_NULL_GUI_RESOURCE).toString());
     resetComboBox();
 
-    CommonFunctions.showView(view);
+    super.showView();
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

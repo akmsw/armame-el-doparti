@@ -83,7 +83,7 @@ public final class SkillPointsInputController extends Controller<SkillPointsInpu
   protected void showView() {
     updateNameLabels();
 
-    CommonFunctions.showView(view);
+    super.showView();
   }
 
   @Override

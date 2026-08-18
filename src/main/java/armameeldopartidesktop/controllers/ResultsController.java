@@ -187,7 +187,7 @@ public final class ResultsController extends Controller<ResultsView> {
   protected void showView() {
     setUpView();
 
-    CommonFunctions.showView(view);
+    super.showView();
   }
 
   /**
