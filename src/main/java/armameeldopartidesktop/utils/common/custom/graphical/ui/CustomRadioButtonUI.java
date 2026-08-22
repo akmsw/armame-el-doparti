@@ -16,17 +16,20 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomRadioButtonUI extends BasicRadioButtonUI {
+public final class CustomRadioButtonUI extends BasicRadioButtonUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom radio button UI that fits the overall program aesthetics.
    *
+   * <p>The "java:S9149" warning is suppressed since this method hides the parent implementation for createUI.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom radio button UI.
    */
+  @SuppressWarnings("java:S9149")
   public static ComponentUI createUI(JComponent component) {
     JRadioButton radioButton = (JRadioButton) component;
 

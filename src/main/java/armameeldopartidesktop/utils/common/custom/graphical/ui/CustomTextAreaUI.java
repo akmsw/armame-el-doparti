@@ -16,17 +16,20 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomTextAreaUI extends BasicTextAreaUI {
+public final class CustomTextAreaUI extends BasicTextAreaUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom text area UI that fits the overall program aesthetics.
    *
+   * <p>The "java:S9149" warning is suppressed since this method hides the parent implementation for createUI.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom text area UI.
    */
+  @SuppressWarnings("java:S9149")
   public static ComponentUI createUI(JComponent component) {
     JTextArea textArea = (JTextArea) component;
 

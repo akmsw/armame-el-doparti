@@ -2,7 +2,6 @@ package armameeldopartidesktop;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -38,14 +37,19 @@ import armameeldopartidesktop.models.enums.ProgramView;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomButtonUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomCheckBoxUI;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomComboBoxUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomOptionPaneUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomRadioButtonUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomScrollBarUI;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomScrollPaneUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomSeparatorUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomSpinnerUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTableUI;
 import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTextAreaUI;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomTextFieldUI;
+import armameeldopartidesktop.utils.common.custom.graphical.ui.CustomToolTipUI;
 import armameeldopartidesktop.views.AnchoragesView;
 import armameeldopartidesktop.views.HelpView;
 import armameeldopartidesktop.views.MainMenuView;
@@ -87,10 +91,6 @@ public final class Main {
     CommonFields.setPlayerLimitPerPosition(new EnumMap<>(Position.class));
     CommonFields.setPlayersSets(new TreeMap<>());
 
-    setUpGeneralGraphicalProperties();
-    setPlayersDistribution();
-    initializePlayersSetsMap();
-
     JFrame mainFrame = new JFrame(Constants.TITLE_VIEW_MAIN_MENU);
 
     JPanel mainPanel = new JPanel(new CardLayout());
@@ -99,14 +99,16 @@ public final class Main {
     mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     mainFrame.setResizable(false);
     mainFrame.setIconImage(Constants.ICON_MAIN_SCALED.getImage());
-    mainFrame.setMinimumSize(new Dimension(1, 1));
-    mainFrame.setMaximumSize(null);
-    mainFrame.setVisible(true);
 
     CommonFields.setMainFrame(mainFrame);
     CommonFields.setMainPanel(mainPanel);
 
+    setUpGeneralGraphicalProperties();
+    setPlayersDistribution();
+    initializePlayersSetsMap();
     initializeControllersMap();
+
+    mainFrame.setVisible(true);
 
     SwingUtilities.invokeLater(((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))::showView);
   }
@@ -153,15 +155,31 @@ public final class Main {
    * Creates the controllers and assigns their corresponding view to control.
    */
   private static void initializeControllersMap() {
+    MainMenuView         mainMenuView         = new MainMenuView();
+    HelpView             helpView             = new HelpView();
+    NamesInputView       namesInputView       = new NamesInputView();
+    AnchoragesView       anchoragesView       = new AnchoragesView();
+    SkillPointsInputView skillPointsInputView = new SkillPointsInputView();
+    ResultsView          resultsView          = new ResultsView();
+
+    JPanel mainPanel = CommonFields.getMainPanel();
+
+    mainPanel.add(mainMenuView        , mainMenuView.getClass().getName());
+    mainPanel.add(helpView            , helpView.getClass().getName());
+    mainPanel.add(namesInputView      , namesInputView.getClass().getName());
+    mainPanel.add(anchoragesView      , anchoragesView.getClass().getName());
+    mainPanel.add(skillPointsInputView, skillPointsInputView.getClass().getName());
+    mainPanel.add(resultsView         , resultsView.getClass().getName());
+
     CommonFields.getControllersMap()
                 .putAll(
                   Map.of(
-                    ProgramView.MAIN_MENU   , new MainMenuController(new MainMenuView()),
-                    ProgramView.HELP        , new HelpController(new HelpView()),
-                    ProgramView.NAMES_INPUT , new NamesInputController(new NamesInputView()),
-                    ProgramView.ANCHORAGES  , new AnchoragesController(new AnchoragesView()),
-                    ProgramView.SKILL_POINTS, new SkillPointsInputController(new SkillPointsInputView()),
-                    ProgramView.RESULTS     , new ResultsController(new ResultsView())
+                    ProgramView.MAIN_MENU   , new MainMenuController(mainMenuView),
+                    ProgramView.HELP        , new HelpController(helpView),
+                    ProgramView.NAMES_INPUT , new NamesInputController(namesInputView),
+                    ProgramView.ANCHORAGES  , new AnchoragesController(anchoragesView),
+                    ProgramView.SKILL_POINTS, new SkillPointsInputController(skillPointsInputView),
+                    ProgramView.RESULTS     , new ResultsController(resultsView)
                   )
                 );
   }
@@ -170,7 +188,9 @@ public final class Main {
    * Sets up the general graphical properties of the program.
    */
   private static void setUpGeneralGraphicalProperties() {
+    UIManager.put("ButtonUI"                     , CustomButtonUI.class.getName());
     UIManager.put("CheckBoxUI"                   , CustomCheckBoxUI.class.getName());
+    UIManager.put("ComboBoxUI"                   , CustomComboBoxUI.class.getName());
     UIManager.put("ComboBox.background"          , Constants.COLOR_GREEN_MEDIUM);
     UIManager.put("ComboBox.foreground"          , Color.WHITE);
     UIManager.put("ComboBox.selectionBackground" , Constants.COLOR_GREEN_MEDIUM);
@@ -187,13 +207,16 @@ public final class Main {
     UIManager.put("Panel.background"             , Constants.COLOR_GREEN_LIGHT);
     UIManager.put("RadioButtonUI"                , CustomRadioButtonUI.class.getName());
     UIManager.put("ScrollBarUI"                  , CustomScrollBarUI.class.getName());
+    UIManager.put("ScrollPaneUI"                 , CustomScrollPaneUI.class.getName());
     UIManager.put("SeparatorUI"                  , CustomSeparatorUI.class.getName());
     UIManager.put("SpinnerUI"                    , CustomSpinnerUI.class.getName());
     UIManager.put("FormattedTextField.background", Constants.COLOR_GREEN_LIGHT_WHITE);
     UIManager.put("TableUI"                      , CustomTableUI.class.getName());
     UIManager.put("TextAreaUI"                   , CustomTextAreaUI.class.getName());
+    UIManager.put("TextFieldUI"                  , CustomTextFieldUI.class.getName());
     UIManager.put("TextField.selectionBackground", Constants.COLOR_GREEN_DARK_MEDIUM);
     UIManager.put("TextField.selectionForeground", Constants.COLOR_GREEN_LIGHT_WHITE);
+    UIManager.put("ToolTipUI"                    , CustomToolTipUI.class.getName());
 
     ToolTipManager.sharedInstance().setInitialDelay(Constants.DELAY_TOOLTIP_INITIAL);
     ToolTipManager.sharedInstance().setDismissDelay(Constants.DELAY_TOOLTIP_DISMISS);

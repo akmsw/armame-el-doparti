@@ -168,9 +168,9 @@ public final class CommonFunctions {
    *
    * @return The integer indicating the option chosen by the user.
    *
-   * @see JOptionPane#showOptionDialog(Component, Object, String, int, int, Icon, Object[], Object)
+   * @see JOptionPane#showOptionDialog
    */
-  public static int showOptionDialog(Component parentComponent, String dialogMessage, Object[] dialogOptions) {
+  public static int showOptionDialog(Component parentComponent, String dialogMessage, Object [] dialogOptions) {
     return JOptionPane.showOptionDialog(parentComponent,
                                         dialogMessage,
                                         Constants.TITLE_MESSAGE_QUESTION,
@@ -228,84 +228,30 @@ public final class CommonFunctions {
    * Displays the requested view in the main frame.
    *
    * @param view View to display.
+   *
+   * @see #centerFrameOnActiveScreen
    */
   public static void showView(View view) {
     JFrame mainFrame = CommonFields.getMainFrame();
 
     JPanel mainPanel = CommonFields.getMainPanel();
 
-    if (view.getParent() != null) {
-      view.getParent().remove(view);
-    }
+    Insets frameInsets = mainFrame.getInsets();
 
-    mainPanel.removeAll();
-    mainPanel.add(view, view.getClass().getName());
+    Dimension viewDimension  = view.getPreferredSize();
+    Dimension frameDimension = new Dimension(viewDimension.width  + frameInsets.left + frameInsets.right,
+                                             viewDimension.height + frameInsets.top  + frameInsets.bottom);
 
-    ((CardLayout) mainPanel.getLayout()).show(mainPanel, view.getClass().getName());
+    view.setPreferredSize(viewDimension);
 
-    view.setVisible(true);
+    mainPanel.setSize(viewDimension);
 
     mainFrame.setTitle(view.getTitle());
+    mainFrame.setSize(frameDimension);
 
-    /*
-      Resize the main frame to fit the current view dimensions, identify the currently active screen and center the main frame on it.
+    centerFrameOnActiveScreen();
 
-      The screen identification is done by checking which screen has the largest intersection with the main frame bounds.
-    */
-    SwingUtilities.invokeLater(
-      () -> {
-        view.revalidate();
-        view.doLayout();
-
-        Dimension viewDimension = view.getPreferredSize();
-
-        Insets frameInsets = mainFrame.getInsets();
-
-        if ((viewDimension.width <= 0) || (viewDimension.height <= 0)) {
-          viewDimension = view.getPreferredSize();
-        }
-
-        view.setPreferredSize(viewDimension);
-
-        mainPanel.setPreferredSize(viewDimension);
-        mainPanel.setSize(viewDimension);
-        mainPanel.revalidate();
-        mainPanel.doLayout();
-
-        Dimension frameDimension = new Dimension(viewDimension.width + frameInsets.left + frameInsets.right,
-                                                 viewDimension.height + frameInsets.top + frameInsets.bottom);
-
-        mainFrame.setPreferredSize(frameDimension);
-        mainFrame.setSize(frameDimension);
-
-        Rectangle activeScreenBounds = retrieveOptional(
-                                         Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
-                                               .filter(screen -> !screen.getDefaultConfiguration()
-                                                                        .getBounds()
-                                                                        .intersection(mainFrame.getBounds())
-                                                                        .isEmpty())
-                                               .max(
-                                                 Comparator.comparingDouble(
-                                                   screen -> {
-                                                     Rectangle intersection = screen.getDefaultConfiguration()
-                                                                                    .getBounds()
-                                                                                    .intersection(mainFrame.getBounds());
-
-                                                     return (intersection.getWidth() * intersection.getHeight());
-                                                   }
-                                                 )
-                                               )
-                                       ).getDefaultConfiguration().getBounds();
-
-        mainFrame.setLocation((((activeScreenBounds.width - mainFrame.getWidth()) / 2) + activeScreenBounds.x),
-                              (((activeScreenBounds.height - mainFrame.getHeight()) / 2) + activeScreenBounds.y));
-        mainFrame.revalidate();
-        mainFrame.repaint();
-      }
-    );
-
-    mainPanel.revalidate();
-    mainPanel.repaint();
+    ((CardLayout) mainPanel.getLayout()).show(mainPanel, view.getClass().getName());
   }
 
   /**
@@ -359,7 +305,7 @@ public final class CommonFunctions {
    *
    * @return The ImageIcon of the specified file.
    *
-   * @see #createImage(String)
+   * @see #createImage
    */
   public static ImageIcon createImageIcon(String iconFileName) {
     return createImage(Constants.PATH_ICO + iconFileName);
@@ -418,5 +364,36 @@ public final class CommonFunctions {
     }
 
     return optional.get();
+  }
+
+  // ---------- Private static methods --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Centers the main frame on the currently active screen. The screen identification is done by checking which screen has the largest intersection with the main frame bounds.
+   */
+  private static void centerFrameOnActiveScreen() {
+    JFrame mainFrame = CommonFields.getMainFrame();
+
+    Rectangle activeScreenBounds = retrieveOptional(
+                                      Arrays.stream(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
+                                            .filter(screen -> !screen.getDefaultConfiguration()
+                                                                     .getBounds()
+                                                                     .intersection(mainFrame.getBounds())
+                                                                     .isEmpty())
+                                            .max(
+                                              Comparator.comparingDouble(
+                                                screen -> {
+                                                  Rectangle intersection = screen.getDefaultConfiguration()
+                                                                                 .getBounds()
+                                                                                 .intersection(mainFrame.getBounds());
+
+                                                  return (intersection.getWidth() * intersection.getHeight());
+                                                }
+                                              )
+                                            )
+                                    ).getDefaultConfiguration().getBounds();
+
+    mainFrame.setLocation((((activeScreenBounds.width  - mainFrame.getWidth())  / 2) + activeScreenBounds.x),
+                          (((activeScreenBounds.height - mainFrame.getHeight()) / 2) + activeScreenBounds.y));
   }
 }

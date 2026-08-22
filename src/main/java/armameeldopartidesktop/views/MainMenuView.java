@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
 
 import net.miginfocom.layout.CC;
@@ -21,7 +20,7 @@ import net.miginfocom.layout.CC;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class MainMenuView extends View {
+public final class MainMenuView extends View {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -52,10 +51,10 @@ public class MainMenuView extends View {
 
   @Override
   protected void addButtons() {
-    setStartButton(new CustomButton("Comenzar"));
-    setHelpButton(new CustomButton("Ayuda"));
-    setContactButton(new CustomButton("Contacto"));
-    setIssuesButton(new CustomButton("Reportes y sugerencias"));
+    setStartButton(new JButton("Comenzar"));
+    setHelpButton(new JButton("Ayuda"));
+    setContactButton(new JButton("Contacto"));
+    setIssuesButton(new JButton("Reportes y sugerencias"));
 
     add(startButton, Constants.MIG_LAYOUT_GROWX);
     add(helpButton, Constants.MIG_LAYOUT_GROWX);

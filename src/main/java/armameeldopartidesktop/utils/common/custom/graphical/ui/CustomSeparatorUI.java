@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.SeparatorUI;
+import javax.swing.plaf.basic.BasicSeparatorUI;
 
 import armameeldopartidesktop.utils.common.Constants;
 
@@ -18,17 +18,20 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomSeparatorUI extends SeparatorUI {
+public final class CustomSeparatorUI extends BasicSeparatorUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom separator UI that fits the overall program aesthetics.
    *
+   * <p>The "java:S9149" warning is suppressed since this method hides the parent implementation for createUI.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom separator UI.
    */
+  @SuppressWarnings("java:S9149")
   public static ComponentUI createUI(JComponent component) {
     component.setBackground(Constants.COLOR_GREEN_LIGHT);
     component.setForeground(Constants.COLOR_GREEN_MEDIUM);
@@ -45,5 +48,7 @@ public class CustomSeparatorUI extends SeparatorUI {
     graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
     graphics2d.fillRoundRect(0, (component.getHeight() / 2), component.getWidth(), 5, Constants.ROUNDED_BORDER_ARC_SEPARATOR, Constants.ROUNDED_BORDER_ARC_SEPARATOR);
     graphics2d.dispose();
+
+    super.paint(graphics, component);
   }
 }

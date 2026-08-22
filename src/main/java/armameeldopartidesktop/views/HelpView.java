@@ -7,9 +7,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
 
 import net.miginfocom.layout.CC;
 
@@ -22,7 +20,7 @@ import net.miginfocom.layout.CC;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class HelpView extends View {
+public final class HelpView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -66,9 +64,9 @@ public class HelpView extends View {
 
   @Override
   protected void addButtons() {
-    setPreviousPageButton(new CustomButton("Anterior"));
-    setNextPageButton(new CustomButton("Siguiente"));
-    setBackButton(new CustomButton("Volver al menú principal"));
+    setPreviousPageButton(new JButton("Anterior"));
+    setNextPageButton(new JButton("Siguiente"));
+    setBackButton(new JButton("Volver al menú principal"));
 
     add(previousPageButton, new CC().width("50%").split());
     add(nextPageButton, new CC().width("50%").wrap());
@@ -91,7 +89,7 @@ public class HelpView extends View {
    */
   private void addTextArea() {
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
-    setScrollPane(new CustomScrollPane(textArea));
+    setScrollPane(new JScrollPane(textArea));
 
     add(scrollPane, Constants.MIG_LAYOUT_GROW);
   }

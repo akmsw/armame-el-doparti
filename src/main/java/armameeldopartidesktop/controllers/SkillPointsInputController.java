@@ -17,7 +17,7 @@ import armameeldopartidesktop.views.SkillPointsInputView;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class SkillPointsInputController extends Controller<SkillPointsInputView> {
+public final class SkillPointsInputController extends Controller<SkillPointsInputView> {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -83,7 +83,7 @@ public class SkillPointsInputController extends Controller<SkillPointsInputView>
   protected void showView() {
     updateNameLabels();
 
-    CommonFunctions.showView(view);
+    super.showView();
   }
 
   @Override

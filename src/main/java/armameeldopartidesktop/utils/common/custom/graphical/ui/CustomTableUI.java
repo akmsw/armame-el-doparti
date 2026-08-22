@@ -24,17 +24,20 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomTableUI extends BasicTableUI {
+public final class CustomTableUI extends BasicTableUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom table UI that fits the overall program aesthetics.
    *
+   * <p>The "java:S9149" warning is suppressed since this method hides the parent implementation for createUI.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom table UI.
    */
+  @SuppressWarnings("java:S9149")
   public static ComponentUI createUI(JComponent component) {
     JTable table = (JTable) component;
 
@@ -83,11 +86,14 @@ public class CustomTableUI extends BasicTableUI {
 
         @Override
         protected void paintComponent(Graphics graphics) {
+          super.paintComponent(graphics);
+
           Graphics2D graphics2d = (Graphics2D) graphics.create();
 
           graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
           graphics2d.setColor(getBackground());
           graphics2d.fillRoundRect(0, 0, (getWidth() - 1), (getHeight() - 1), Constants.ROUNDED_BORDER_ARC_TABLE_CELLS, Constants.ROUNDED_BORDER_ARC_TABLE_CELLS);
+          graphics2d.dispose();
         }
       }
     );

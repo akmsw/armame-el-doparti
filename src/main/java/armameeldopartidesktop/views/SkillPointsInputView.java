@@ -17,7 +17,6 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
 
 /**
@@ -29,7 +28,7 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class SkillPointsInputView extends View {
+public final class SkillPointsInputView extends View {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -66,9 +65,9 @@ public class SkillPointsInputView extends View {
 
   @Override
   protected void addButtons() {
-    setBackButton(new CustomButton("Atrás"));
-    setFinishButton(new CustomButton("Finalizar"));
-    setResetSkillPointsButton(new CustomButton("Reiniciar puntuaciones"));
+    setBackButton(new JButton("Atrás"));
+    setFinishButton(new JButton("Finalizar"));
+    setResetSkillPointsButton(new JButton("Reiniciar puntuaciones"));
 
     add(finishButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));
     add(resetSkillPointsButton, CommonFunctions.buildMigLayoutConstraints(Constants.MIG_LAYOUT_GROW, Constants.MIG_LAYOUT_SPAN));

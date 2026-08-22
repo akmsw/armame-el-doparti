@@ -30,7 +30,7 @@ import armameeldopartidesktop.views.AnchoragesView;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class AnchoragesController extends Controller<AnchoragesView> {
+public final class AnchoragesController extends Controller<AnchoragesView> {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -308,7 +308,7 @@ public class AnchoragesController extends Controller<AnchoragesView> {
   /**
    * Clears the anchorages made, if any.
    *
-   * @see #deleteAnchorage(int)
+   * @see #deleteAnchorage
    */
   private void clearAnchorages() {
     while (!CommonFields.getAnchorages().isEmpty()) {

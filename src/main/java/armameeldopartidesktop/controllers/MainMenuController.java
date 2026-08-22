@@ -14,7 +14,7 @@ import armameeldopartidesktop.views.MainMenuView;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class MainMenuController extends Controller<MainMenuView> {
+public final class MainMenuController extends Controller<MainMenuView> {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

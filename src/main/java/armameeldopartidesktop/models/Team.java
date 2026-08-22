@@ -18,7 +18,7 @@ import armameeldopartidesktop.utils.common.CommonFields;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class Team {
+public final class Team {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

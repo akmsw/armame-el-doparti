@@ -1,6 +1,5 @@
 package armameeldopartidesktop.controllers;
 
-import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.util.Collection;
 import java.util.Comparator;
@@ -32,7 +31,7 @@ import armameeldopartidesktop.views.NamesInputView;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class NamesInputController extends Controller<NamesInputView> {
+public final class NamesInputController extends Controller<NamesInputView> {
 
   // ---------- Constructor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -74,10 +73,8 @@ public class NamesInputController extends Controller<NamesInputView> {
 
   /**
    * Asks the user for the players distribution method, makes the controlled view invisible and shows the corresponding following view.
-   *
-   * @param parentComponent Graphical component where the dialog windows associated with the event should be displayed.
    */
-  public void mixButtonEvent(Component parentComponent) {
+  public void mixButtonEvent() {
     hideView();
 
     CommonFields.setDistribution(view.getRandomRadioButton().isSelected() ? Distribution.MIX_RANDOM : Distribution.MIX_BY_SKILL_POINTS);
@@ -168,7 +165,7 @@ public class NamesInputController extends Controller<NamesInputView> {
 
   @Override
   protected void setUpListeners() {
-    view.getMixButton().addActionListener(_ -> mixButtonEvent(view));
+    view.getMixButton().addActionListener(_ -> mixButtonEvent());
     view.getBackButton().addActionListener(_ -> backButtonEvent());
     view.getRandomRadioButton().addItemListener(this::radioButtonEvent);
     view.getBySkillPointsRadioButton().addItemListener(this::radioButtonEvent);
@@ -213,7 +210,7 @@ public class NamesInputController extends Controller<NamesInputView> {
     updateTextFields(Objects.requireNonNull(view.getComboBox().getSelectedItem(), Constants.MSG_ERROR_NULL_GUI_RESOURCE).toString());
     resetComboBox();
 
-    CommonFunctions.showView(view);
+    super.showView();
   }
 
   // ---------- Private methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -252,7 +249,7 @@ public class NamesInputController extends Controller<NamesInputView> {
   /**
    * The mix button is enabled only when every condition needed to distribute the players is met.
    *
-   * @see #isReadyToDistribute()
+   * @see #isReadyToDistribute
    */
   private void validateMixButtonEnable() {
     view.getMixButton()

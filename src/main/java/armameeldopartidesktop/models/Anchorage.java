@@ -15,7 +15,7 @@ import armameeldopartidesktop.models.enums.Error;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class Anchorage {
+public final class Anchorage {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

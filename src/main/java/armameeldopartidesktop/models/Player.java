@@ -12,7 +12,7 @@ import armameeldopartidesktop.utils.common.Constants;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class Player {
+public final class Player {
 
   // ---------- Private fields ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ public class Player {
    *
    * @return A string representation of a Player object.
    *
-   * @see armameeldopartidesktop.utils.common.CommonFunctions#generateErrorReport(armameeldopartidesktop.models.enums.Error)
+   * @see armameeldopartidesktop.utils.common.CommonFunctions#generateErrorReport
    */
   @Override
   public String toString() {

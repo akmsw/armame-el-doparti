@@ -17,9 +17,7 @@ import armameeldopartidesktop.models.enums.Position;
 import armameeldopartidesktop.utils.common.CommonFields;
 import armameeldopartidesktop.utils.common.CommonFunctions;
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import armameeldopartidesktop.utils.common.custom.graphical.CustomLabel;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -32,7 +30,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class AnchoragesView extends View {
+public final class AnchoragesView extends View {
 
   // ---------- Private constants -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -72,7 +70,7 @@ public class AnchoragesView extends View {
     setLeftPanel(new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP_2)));
     setRightPanel(new JPanel(new MigLayout(Constants.MIG_LAYOUT_WRAP)));
     setTextArea(new JTextArea(TEXT_AREA_ROWS, TEXT_AREA_COLUMNS));
-    setScrollPane(new CustomScrollPane(textArea));
+    setScrollPane(new JScrollPane(textArea));
     setAnchorageButtons(new ArrayList<>());
     initializeCheckBoxesMap();
     initializeInterface();
@@ -91,11 +89,11 @@ public class AnchoragesView extends View {
 
   @Override
   protected void addButtons() {
-    setBackButton(new CustomButton("Atrás"));
-    setDeleteAnchorageButton(new CustomButton("Borrar un anclaje"));
-    setClearAnchoragesButton(new CustomButton("Limpiar anclajes"));
-    setFinishButton(new CustomButton("Finalizar"));
-    setNewAnchorageButton(new CustomButton("Anclar"));
+    setBackButton(new JButton("Atrás"));
+    setDeleteAnchorageButton(new JButton("Borrar un anclaje"));
+    setClearAnchoragesButton(new JButton("Limpiar anclajes"));
+    setFinishButton(new JButton("Finalizar"));
+    setNewAnchorageButton(new JButton("Anclar"));
 
     anchorageButtons.add(finishButton);
     anchorageButtons.add(newAnchorageButton);

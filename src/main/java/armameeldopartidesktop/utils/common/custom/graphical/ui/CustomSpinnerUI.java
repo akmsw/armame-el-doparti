@@ -23,21 +23,24 @@ import armameeldopartidesktop.utils.common.custom.graphical.CustomArrowButton;
  *
  * @since 3.0.0
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomSpinnerUI extends BasicSpinnerUI {
+public final class CustomSpinnerUI extends BasicSpinnerUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom spinner UI that fits the overall program aesthetics.
    *
+   * <p>The "java:S9149" warning is suppressed since this method hides the parent implementation for createUI.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom spinner UI.
    */
+  @SuppressWarnings("java:S9149")
   public static ComponentUI createUI(JComponent component) {
     JSpinner spinner = (JSpinner) component;
 
@@ -61,8 +64,14 @@ public class CustomSpinnerUI extends BasicSpinnerUI {
       }
     );
 
-    JFormattedTextField spinnerTextField = ((DefaultEditor) spinner.getEditor()).getTextField();
+    JComponent editor = spinner.getEditor();
 
+    JFormattedTextField spinnerTextField = ((DefaultEditor) editor).getTextField();
+
+    editor.setOpaque(false);
+
+    spinnerTextField.setOpaque(false);
+    spinnerTextField.setBorder(null);
     spinnerTextField.setEditable(false);
     spinnerTextField.setCaret(
       new DefaultCaret() {
@@ -95,6 +104,8 @@ public class CustomSpinnerUI extends BasicSpinnerUI {
     graphics2d.setRenderingHints(Constants.MAP_RENDERING_HINTS);
     graphics2d.fillRoundRect(0, 0, component.getWidth(), component.getHeight(), Constants.ROUNDED_BORDER_ARC_SPINNER, Constants.ROUNDED_BORDER_ARC_SPINNER);
     graphics2d.dispose();
+
+    super.paint(graphics, component);
   }
 
   // ---------- Protected methods -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

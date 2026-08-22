@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.util.Arrays;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -14,7 +15,6 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 import armameeldopartidesktop.utils.common.Constants;
-import armameeldopartidesktop.utils.common.custom.graphical.CustomButton;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -26,17 +26,20 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Bonino, Francisco Ignacio.
  */
-public class CustomOptionPaneUI extends BasicOptionPaneUI {
+public final class CustomOptionPaneUI extends BasicOptionPaneUI {
 
   // ---------- Public static methods ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   /**
    * Creates a new custom option pane UI that fits the overall program aesthetics.
    *
+   * <p>The "java:S9149" warning is suppressed since this method hides the parent implementation for createUI.
+   *
    * @param component Component to which to apply the custom UI.
    *
    * @return A new custom option pane UI.
    */
+  @SuppressWarnings("java:S9149")
   public static ComponentUI createUI(JComponent component) {
     component.setBackground(Constants.COLOR_GREEN_LIGHT);
 
@@ -70,10 +73,10 @@ public class CustomOptionPaneUI extends BasicOptionPaneUI {
    * @param buttonsStrings An array with the strings for each button of the dialog.
    * @param initialIndex   An initial index used for validation, inherited from parent class method signature.
    *
-   * @see #getButtonsForMessageType(int)
+   * @see #getButtonsForMessageType
    */
   @Override
-  protected void addButtonComponents(Container container, Object[] buttonsStrings, int initialIndex) {
+  protected void addButtonComponents(Container container, Object [] buttonsStrings, int initialIndex) {
     if ((buttonsStrings == null) || (buttonsStrings.length <= 0)) {
       return;
     }
@@ -90,7 +93,9 @@ public class CustomOptionPaneUI extends BasicOptionPaneUI {
     buttonPanel.setOpaque(false);
 
     for (Object buttonText : buttonsStrings) {
-      CustomButton customButton = new CustomButton((String) buttonText, Constants.ROUNDED_BORDER_ARC_BUTTON_DIALOG);
+      JButton customButton = new JButton((String) buttonText);
+
+      CustomButtonUI.setArc(customButton, Constants.ROUNDED_BORDER_ARC_BUTTON_DIALOG);
 
       customButton.setMinimumSize(new Dimension(Constants.SIZE_BUTTON_DIALOG_MIN_WIDTH, Constants.SIZE_BUTTON_DIALOG_MIN_HEIGHT));
       customButton.addActionListener(
@@ -114,10 +119,10 @@ public class CustomOptionPaneUI extends BasicOptionPaneUI {
    *
    * @return An array with the strings for each button to be placed in the dialog based on the message type.
    */
-  private Object[] getButtonsForMessageType(int messageType) {
+  private Object [] getButtonsForMessageType(int messageType) {
     return switch (messageType) {
-      case JOptionPane.QUESTION_MESSAGE -> new Object[] { UIManager.getString("OptionPane.yesButtonText"), UIManager.getString("OptionPane.noButtonText") };
-      default -> new Object[] { UIManager.getString("OptionPane.okButtonText") };
+      case JOptionPane.QUESTION_MESSAGE -> new Object [] { UIManager.getString("OptionPane.yesButtonText"), UIManager.getString("OptionPane.noButtonText") };
+      default -> new Object [] { UIManager.getString("OptionPane.okButtonText") };
     };
   }
 }
