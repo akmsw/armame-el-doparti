@@ -239,21 +239,19 @@ public final class CommonFunctions {
     Insets frameInsets = mainFrame.getInsets();
 
     Dimension viewDimension  = view.getPreferredSize();
-    Dimension frameDimension = new Dimension(viewDimension.width + frameInsets.left + frameInsets.right,
-                                             viewDimension.height + frameInsets.top + frameInsets.bottom);
+    Dimension frameDimension = new Dimension(viewDimension.width  + frameInsets.left + frameInsets.right,
+                                             viewDimension.height + frameInsets.top  + frameInsets.bottom);
 
     view.setPreferredSize(viewDimension);
 
-    mainPanel.setPreferredSize(viewDimension);
     mainPanel.setSize(viewDimension);
 
-    ((CardLayout) mainPanel.getLayout()).show(mainPanel, view.getClass().getName());
-
     mainFrame.setTitle(view.getTitle());
-    mainFrame.setPreferredSize(frameDimension);
     mainFrame.setSize(frameDimension);
 
     centerFrameOnActiveScreen();
+
+    ((CardLayout) mainPanel.getLayout()).show(mainPanel, view.getClass().getName());
   }
 
   /**

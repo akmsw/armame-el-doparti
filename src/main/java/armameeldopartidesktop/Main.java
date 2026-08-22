@@ -2,7 +2,6 @@ package armameeldopartidesktop;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -92,10 +91,6 @@ public final class Main {
     CommonFields.setPlayerLimitPerPosition(new EnumMap<>(Position.class));
     CommonFields.setPlayersSets(new TreeMap<>());
 
-    setUpGeneralGraphicalProperties();
-    setPlayersDistribution();
-    initializePlayersSetsMap();
-
     JFrame mainFrame = new JFrame(Constants.TITLE_VIEW_MAIN_MENU);
 
     JPanel mainPanel = new JPanel(new CardLayout());
@@ -104,14 +99,16 @@ public final class Main {
     mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     mainFrame.setResizable(false);
     mainFrame.setIconImage(Constants.ICON_MAIN_SCALED.getImage());
-    mainFrame.setMinimumSize(new Dimension(1, 1));
-    mainFrame.setMaximumSize(null);
-    mainFrame.setVisible(true);
 
     CommonFields.setMainFrame(mainFrame);
     CommonFields.setMainPanel(mainPanel);
 
+    setUpGeneralGraphicalProperties();
+    setPlayersDistribution();
+    initializePlayersSetsMap();
     initializeControllersMap();
+
+    mainFrame.setVisible(true);
 
     SwingUtilities.invokeLater(((MainMenuController) CommonFunctions.getController(ProgramView.MAIN_MENU))::showView);
   }
@@ -158,15 +155,31 @@ public final class Main {
    * Creates the controllers and assigns their corresponding view to control.
    */
   private static void initializeControllersMap() {
+    MainMenuView         mainMenuView         = new MainMenuView();
+    HelpView             helpView             = new HelpView();
+    NamesInputView       namesInputView       = new NamesInputView();
+    AnchoragesView       anchoragesView       = new AnchoragesView();
+    SkillPointsInputView skillPointsInputView = new SkillPointsInputView();
+    ResultsView          resultsView          = new ResultsView();
+
+    JPanel mainPanel = CommonFields.getMainPanel();
+
+    mainPanel.add(mainMenuView        , mainMenuView.getClass().getName());
+    mainPanel.add(helpView            , helpView.getClass().getName());
+    mainPanel.add(namesInputView      , namesInputView.getClass().getName());
+    mainPanel.add(anchoragesView      , anchoragesView.getClass().getName());
+    mainPanel.add(skillPointsInputView, skillPointsInputView.getClass().getName());
+    mainPanel.add(resultsView         , resultsView.getClass().getName());
+
     CommonFields.getControllersMap()
                 .putAll(
                   Map.of(
-                    ProgramView.MAIN_MENU   , new MainMenuController(new MainMenuView()),
-                    ProgramView.HELP        , new HelpController(new HelpView()),
-                    ProgramView.NAMES_INPUT , new NamesInputController(new NamesInputView()),
-                    ProgramView.ANCHORAGES  , new AnchoragesController(new AnchoragesView()),
-                    ProgramView.SKILL_POINTS, new SkillPointsInputController(new SkillPointsInputView()),
-                    ProgramView.RESULTS     , new ResultsController(new ResultsView())
+                    ProgramView.MAIN_MENU   , new MainMenuController(mainMenuView),
+                    ProgramView.HELP        , new HelpController(helpView),
+                    ProgramView.NAMES_INPUT , new NamesInputController(namesInputView),
+                    ProgramView.ANCHORAGES  , new AnchoragesController(anchoragesView),
+                    ProgramView.SKILL_POINTS, new SkillPointsInputController(skillPointsInputView),
+                    ProgramView.RESULTS     , new ResultsController(resultsView)
                   )
                 );
   }
